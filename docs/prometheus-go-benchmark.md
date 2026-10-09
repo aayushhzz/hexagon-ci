@@ -1,6 +1,6 @@
 # Prometheus Go call-graph rebuild (2026-10-09)
 
-This is a benchmark and source-level spot check of the experimental Go adapter in this worktree. It is not a measurement of a type-checked Go analyzer or of runtime test coverage.
+This is a historical benchmark and source-level spot check of the experimental Go adapter before the native Go CLI migration. Its commands and timings describe the archived Python orchestrator plus Go AST helper, not the current CLI. It is not a measurement of a type-checked Go analyzer or of runtime test coverage.
 
 ## Input and reproducibility
 
@@ -11,8 +11,8 @@ This is a benchmark and source-level spot check of the experimental Go adapter i
 From this worktree, the measured prebuilt-helper invocation was:
 
 ```sh
-go build -o /tmp/callgraph-go-PO8VYh/go-ast-helper test_call_graph/go_source/main.go
-python3 -m test_call_graph /tmp/callgraph-go-PO8VYh/prometheus \
+go build -o /tmp/callgraph-go-PO8VYh/go-ast-helper python/test_call_graph/go_source/main.go
+PYTHONPATH=python python3 -m test_call_graph /tmp/callgraph-go-PO8VYh/prometheus \
   --language go --go-helper /tmp/callgraph-go-PO8VYh/go-ast-helper \
   --output /tmp/callgraph-go-PO8VYh/prometheus-graph.json
 ```
@@ -57,3 +57,11 @@ The graph now records the effective Go build context, analyzer hash, an `analysi
 One updated Prometheus rebuild took **14.01 seconds**, producing 2,074 test graphs, 9,786 function nodes, 17,876 resolved edges, and 86,370 unresolved calls. Selected-file metadata lists 696 parsed Go files out of 736 discovered. The expanded reachability repeated more facts per test and wrote **205,735,525 bytes** of plain JSON. A compressed `.json.gz` rebuild took **16.33 seconds** and wrote **10,456,895 bytes**; gzip preserves the graph schema and is deterministic for fixed input. These are single local measurements after code changes, not controlled performance comparisons with the earlier versions.
 
 After finalizing the effective-`GOFLAGS` guard, two more compressed rebuilds took **14.86 and 14.79 seconds** and wrote **10,456,884 bytes** each. Both files had SHA-256 `74722d815c8de7e8ba2a927825eef4ccbe09a9c96d0b84b7467727e05ec9a8d7`. The input Prometheus repository was still parsed with the local Go 1.24.3 helper despite its Go 1.26.7 module declaration; the full Go test suite was not executed, so no claim of all-build-context or runtime correctness follows from this benchmark.
+
+## Function-level test planning update (2026-10-10)
+
+Graph format version 3 stores a stable source hash on each function and a per-source-file fingerprint with function declarations removed. This lets `plan_file_changes` detect a function body edit even when its outgoing call edges stay identical, while detecting changed constants, imports, module files, and other file-level inputs separately. It compares current and previous snapshots and selects current test roots that reach changed functions in either snapshot; output ordering is stable.
+
+Selective planning is limited to Go snapshots with matching analyzer/build context, recognized test roots in both snapshots, and changed-file inputs that account for the graph delta. Tests whose reachable views contain unresolved calls are included conservatively. The planner falls back to the full suite for older/missing snapshots, changed non-function inputs, package initialization or variable initializers, bodyless declarations, `linkname`/`export` directives, `TestMain`, unsupported Example/Benchmark/Fuzz roots, or Python graphs whose framework fixtures and import-time behavior are not modeled. This remains a conservative source analysis, not a runtime proof. The builder returns a plan and does not execute tests; its consumer must honor `run_full_suite`.
+
+The new fixture changes one function body without changing any graph edge and verifies that its direct and transitive test ancestors are selected while another test in the same file is excluded. Existing constant-only and deleted-file fixtures verify full-suite fallback. These checks validate the planner contract on controlled fixtures; they do not establish completeness for an arbitrary repository.
