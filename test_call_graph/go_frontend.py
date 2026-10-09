@@ -73,10 +73,24 @@ class GoFrontend:
             analyzer.update(path.read_bytes())
         context = data["build_context"]
         context["analyzer_sha256"] = analyzer.hexdigest()
+        context["selection_unsafe_reasons"] = data.get("selection_unsafe_reasons", [])
+        source_files = {
+            item["path"]: item["non_function_hash"]
+            for item in data.get("source_files", [])
+        }
+        for path, content in sources.items():
+            if path not in source_files:
+                # Unselected build variants and module metadata cannot be
+                # safely decomposed into function-only changes here.
+                source_files[path] = hashlib.sha256(content).hexdigest()
         return GraphFacts(
             nodes=[Node(**node) for node in data["nodes"]],
             edges=[Edge(**edge) for edge in data["edges"]],
             unresolved_calls=[UnresolvedCall(**call) for call in data["unresolved_calls"]],
             analysis_context=context,
             files=data["files"],
+            source_files=[
+                {"path": path, "non_function_hash": digest}
+                for path, digest in sorted(source_files.items())
+            ],
         )

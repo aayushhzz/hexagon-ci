@@ -1,7 +1,7 @@
 """Language-independent facts consumed by the graph builder."""
 
 from dataclasses import dataclass, field
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 
 @dataclass(frozen=True)
@@ -11,6 +11,7 @@ class Node:
     qualname: str
     line: int
     is_test: bool
+    source_hash: Optional[str] = None
 
 
 @dataclass(frozen=True)
@@ -36,3 +37,4 @@ class GraphFacts:
     unresolved_calls: List[UnresolvedCall]
     analysis_context: Dict[str, object] = field(default_factory=dict)
     files: List[dict] = field(default_factory=list)
+    source_files: List[dict] = field(default_factory=list)

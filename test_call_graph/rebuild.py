@@ -47,6 +47,7 @@ def _graph_from_facts(facts: GraphFacts, fingerprint: str, file_count: int, lang
             "qualname": node.qualname,
             "line": node.line,
             "is_test": node.is_test,
+            "source_hash": node.source_hash,
         }
 
     callsites: Dict[Tuple[str, str], list] = defaultdict(list)
@@ -101,7 +102,7 @@ def _graph_from_facts(facts: GraphFacts, fingerprint: str, file_count: int, lang
         }
 
     return {
-        "format_version": 2,
+        "format_version": 3,
         "language": language,
         "source_fingerprint": fingerprint,
         "analysis_context": facts.analysis_context,
@@ -110,6 +111,7 @@ def _graph_from_facts(facts: GraphFacts, fingerprint: str, file_count: int, lang
         ).encode("utf-8")).hexdigest(),
         "file_count": file_count,
         "files": sorted(facts.files, key=lambda file: file["path"]),
+        "source_files": sorted(facts.source_files, key=lambda file: file["path"]),
         "nodes": [nodes[node_id] for node_id in sorted(nodes)],
         "edges": edges,
         "unresolved_calls": unresolved,
