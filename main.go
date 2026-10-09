@@ -7,6 +7,8 @@ import (
 	"io"
 	"os"
 	"strings"
+
+	"github.com/aayushhzz/hexagon-ci/hexagon"
 )
 
 func main() {
@@ -53,7 +55,7 @@ func runGraphCommand(args []string, stdout io.Writer) error {
 	if output == "" {
 		return fmt.Errorf("--output is required")
 	}
-	graph, err := RebuildToFile(positionals[0], output, splitTags(options.one("go-tags")))
+	graph, err := hexagon.RebuildToFile(positionals[0], output, splitTags(options.one("go-tags")))
 	if err != nil {
 		return err
 	}
@@ -74,23 +76,23 @@ func runPlanCommand(args []string, stdout io.Writer) error {
 	for i := range changed {
 		changed[i] = strings.TrimSpace(changed[i])
 	}
-	current, err := ReadGraph(positionals[0])
+	current, err := hexagon.ReadGraph(positionals[0])
 	if err != nil {
 		return err
 	}
-	var previous *Graph
+	var previous *hexagon.Graph
 	if filename := options.one("previous-graph"); filename != "" {
-		previous, err = ReadGraph(filename)
+		previous, err = hexagon.ReadGraph(filename)
 		if err != nil {
 			return err
 		}
 	}
-	plan, err := PlanFileChanges(current, changed, previous)
+	plan, err := hexagon.PlanFileChanges(current, changed, previous)
 	if err != nil {
 		return err
 	}
 	if output := options.one("output"); output != "" {
-		if err := WritePlan(output, plan); err != nil {
+		if err := hexagon.WritePlan(output, plan); err != nil {
 			return err
 		}
 		_, err = fmt.Fprintf(stdout, "Planned %d candidate tests; full suite required\n", len(plan.CandidateTests))
@@ -113,11 +115,11 @@ func runTestCommand(ctx context.Context, args []string, stdout, stderr io.Writer
 	if planPath == "" {
 		return fmt.Errorf("--plan is required")
 	}
-	plan, err := ReadPlan(planPath)
+	plan, err := hexagon.ReadPlan(planPath)
 	if err != nil {
 		return err
 	}
-	return RunTests(ctx, positionals[0], plan, stdout, stderr)
+	return hexagon.RunTests(ctx, positionals[0], plan, stdout, stderr)
 }
 
 type optionValues map[string][]string

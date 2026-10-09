@@ -2,6 +2,20 @@
 
 Hexagon CI is a Go CLI for building per-test source graphs, reporting tests that may be affected by file changes, and running Go tests. The graph and plan formats retain the existing graph v2 contract. The former Python implementation and its tests are preserved under [`python/`](python/) as a runnable reference.
 
+The reusable Go API lives in `github.com/aayushhzz/hexagon-ci/hexagon`; the root CLI delegates to this package. Go integrations can build graphs and plans directly:
+
+```go
+import "github.com/aayushhzz/hexagon-ci/hexagon"
+
+func plan(repository string, changedFiles []string, previous *hexagon.Graph) (*hexagon.ImpactPlan, error) {
+	graph, err := hexagon.BuildGraph(repository, nil)
+	if err != nil {
+		return nil, err
+	}
+	return hexagon.PlanFileChanges(graph, changedFiles, previous)
+}
+```
+
 Build the CLI and rebuild a Go repository graph:
 
 ```sh
