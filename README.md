@@ -34,7 +34,7 @@ print(plan.candidate_tests)
 print(plan.run_full_suite)  # true means the consumer must run the complete suite
 ```
 
-Given base and head graph files plus a newline-separated changed-path file, the planner CLI emits a JSON object containing a `tests` array and a comma-separated `tests_csv` value. It can also append the same result to a GitHub Actions step summary:
+Given base and head graph files plus a newline-separated changed-path file, the planner CLI emits a versioned JSON plan grouped by repository-relative test file. It can also append the same maps to a GitHub Actions step summary:
 
 ```sh
 python3 -m test_call_graph.plan_cli \
@@ -44,9 +44,11 @@ python3 -m test_call_graph.plan_cli \
   --summary-file /tmp/test-impact-summary.md
 ```
 
-The `tests` array is the selected set only when `run_full_suite` is false. When it is true, the array is diagnostic and the full suite must run. The `CI` workflow builds both snapshots for every pull request, displays the JSON and comma-separated IDs in the `Test impact plan` job summary, and runs the repository's full unittest suite. Python plans currently require the full-suite fallback.
+The plan contains `tests_to_run` and `tests_to_skip` objects whose keys are test-file paths and whose values are arrays of test names. `candidate_tests_by_file` preserves the analyzer's affected-test candidates for diagnosis. When `run_full_suite` is true, every recognized test root is placed under `tests_to_run`, `tests_to_skip` is empty, and consumers must execute the full suite. The `CI` workflow builds base and head snapshots for each pull request, publishes this JSON as the `test-impact-plan` artifact, and displays both maps in the Actions summary. Its unit-test job downloads the artifact and passes it to `test_call_graph.plan_runner`.
 
-For Go, a selective plan is allowed only when both snapshots use format version 3 and the same analyzer/build context, the supplied changed paths account for the graph delta, and non-function source fingerprints are unchanged. Test roots with unresolved reachable calls are included conservatively. Changes to non-function inputs, package initialization or variable initialization, bodyless declarations, `linkname`/`export` directives, `TestMain`, unsupported Go test roots, or changes without a prior snapshot fall back to the full suite. Python currently always falls back because framework fixtures and import-time execution are not modeled. The older file/package candidate analysis remains available in fallback plans, including reverse repository-local Go imports for dependencies with no function node. This builder emits plans but does not execute tests; any consumer must honor `run_full_suite` and run `candidate_tests` only when it is false.
+The runner currently executes selective Python `unittest` plans only. Before selecting cases, it verifies that every discovered unittest appears exactly once across the run and skip maps and that each file and test name can safely resolve. Missing, malformed, unsafe, incomplete, unsupported, or full-suite plans all execute the full suite. Run it locally with `python3 -m test_call_graph.plan_runner --root /path/to/repository --plan /path/to/test-impact-plan.json`. Python graph selection currently requires the full-suite fallback because framework fixtures and import-time execution are not modeled; the JSON still shows the recognized test roots grouped by file, while the separate candidate map remains diagnostic.
+
+For Go, a selective plan is allowed only when both snapshots use format version 3 and the same analyzer/build context, the supplied changed paths account for the graph delta, and non-function source fingerprints are unchanged. Test roots with unresolved reachable calls are included conservatively. Changes to non-function inputs, package initialization or variable initialization, bodyless declarations, `linkname`/`export` directives, `TestMain`, unsupported Go test roots, or changes without a prior snapshot fall back to the full suite. Python currently always falls back because framework fixtures and import-time execution are not modeled. The older file/package candidate analysis remains available in fallback plans, including reverse repository-local Go imports for dependencies with no function node. The planner emits plans; consumers must honor `run_full_suite` and execute the full suite whenever it is true.
 
 See [the Prometheus benchmark and sanity audit](docs/prometheus-go-benchmark.md) for observed edges, deterministic rebuilds, and concrete missed-dependency cases.
 

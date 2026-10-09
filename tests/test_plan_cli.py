@@ -18,7 +18,7 @@ class PlanCliTests(unittest.TestCase):
         self.changed = self.root / "changed.txt"
         self.summary = self.root / "summary.md"
 
-    def test_outputs_sorted_test_array_csv_and_selective_summary(self):
+    def test_outputs_file_keyed_run_and_skip_maps_and_selective_summary(self):
         self.previous.write_text(json.dumps(self.graph("before")), encoding="utf-8")
         self.current.write_text(json.dumps(self.graph("after")), encoding="utf-8")
         self.changed.write_text("lib.go\n", encoding="utf-8")
@@ -34,11 +34,17 @@ class PlanCliTests(unittest.TestCase):
 
         report = json.loads(stdout.getvalue())
         self.assertEqual(result, 0)
+        self.assertEqual(report["schema_version"], 1)
+        self.assertEqual(report["language"], "go")
         self.assertFalse(report["run_full_suite"])
-        self.assertEqual(report["tests"], ["app_test.go::TestAffected"])
-        self.assertEqual(report["tests_csv"], "app_test.go::TestAffected")
-        self.assertIn("Selected test roots", self.summary.read_text(encoding="utf-8"))
-        self.assertIn("app_test.go::TestAffected", self.summary.read_text(encoding="utf-8"))
+        self.assertEqual(report["tests_to_run"], {"app_test.go": ["TestAffected"]})
+        self.assertEqual(report["tests_to_skip"], {"app_test.go": ["TestUnrelated"]})
+        self.assertEqual(report["candidate_tests_by_file"], {"app_test.go": ["TestAffected"]})
+        summary = self.summary.read_text(encoding="utf-8")
+        self.assertIn("Tests to run by file", summary)
+        self.assertIn("Tests to skip by file", summary)
+        self.assertIn("TestAffected", summary)
+        self.assertIn("TestUnrelated", summary)
 
     def test_full_suite_fallback_is_explicit_in_machine_and_markdown_reports(self):
         self.current.write_text(json.dumps(self.graph("after")), encoding="utf-8")
@@ -57,8 +63,16 @@ class PlanCliTests(unittest.TestCase):
         self.assertEqual(result, 0)
         self.assertTrue(report["run_full_suite"])
         self.assertIn("full suite required", summary.lower())
-        self.assertIn("diagnostic only", summary.lower())
-        self.assertIn("app_test.go::TestAffected", report["tests"])
+        self.assertIn("do not skip tests", summary.lower())
+        self.assertEqual(
+            report["tests_to_run"],
+            {"app_test.go": ["TestAffected", "TestUnrelated"]},
+        )
+        self.assertEqual(report["tests_to_skip"], {})
+        self.assertEqual(
+            report["candidate_tests_by_file"],
+            {"app_test.go": ["TestAffected", "TestUnrelated"]},
+        )
 
     @staticmethod
     def graph(function_hash):
