@@ -1,4 +1,4 @@
-package main
+package hexagon
 
 import (
 	"bytes"
@@ -17,7 +17,7 @@ import (
 	"strings"
 	"time"
 
-	"example.com/hexagon-ci/internal/gosource"
+	"github.com/aayushhzz/hexagon-ci/hexagon/internal/gosource"
 )
 
 //go:embed graph.go planner.go internal/gosource/analyzer.go
