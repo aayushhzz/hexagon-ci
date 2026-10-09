@@ -29,3 +29,42 @@ jobs:
 
       - name: Run test suite
         run: python -m unittest discover -s tests -v
+
+  impact-plan:
+    if: github.event_name == 'pull_request'
+    name: Test impact plan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pull request head and history
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build base and head graphs and report test IDs
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          base_dir="$RUNNER_TEMP/impact-base"
+          base_graph="$RUNNER_TEMP/base-graph.json"
+          head_graph="$RUNNER_TEMP/head-graph.json"
+          changed_files="$RUNNER_TEMP/changed-files.txt"
+
+          git worktree add --detach "$base_dir" "$BASE_SHA"
+          python -m test_call_graph "$base_dir" --output "$base_graph"
+          python -m test_call_graph "$GITHUB_WORKSPACE" --output "$head_graph"
+          git diff --name-only --no-renames "$BASE_SHA...$HEAD_SHA" > "$changed_files"
+
+          python -m test_call_graph.plan_cli \
+            --current-graph "$head_graph" \
+            --previous-graph "$base_graph" \
+            --changed-files "$changed_files" \
+            --summary-file "$GITHUB_STEP_SUMMARY" \
+            > "$RUNNER_TEMP/test-impact-plan.json"
+          cat "$RUNNER_TEMP/test-impact-plan.json"
