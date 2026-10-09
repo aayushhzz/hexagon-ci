@@ -31,6 +31,7 @@ jobs:
 
       - name: Download the pull request test plan
         if: needs.impact-plan.result == 'success'
+        continue-on-error: true
         uses: actions/download-artifact@v4
         with:
           name: test-impact-plan
