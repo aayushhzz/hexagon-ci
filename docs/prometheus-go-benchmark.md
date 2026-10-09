@@ -1,6 +1,6 @@
 # Prometheus Go call-graph rebuild (2026-10-09)
 
-This is a benchmark and source-level spot check of the experimental Go adapter in this worktree. It is not a measurement of a type-checked Go analyzer or of runtime test coverage.
+This is a historical benchmark and source-level spot check of the experimental Go adapter before the native Go CLI migration. Its commands and timings describe the archived Python orchestrator plus Go AST helper, not the current CLI. It is not a measurement of a type-checked Go analyzer or of runtime test coverage.
 
 ## Input and reproducibility
 
@@ -11,8 +11,8 @@ This is a benchmark and source-level spot check of the experimental Go adapter i
 From this worktree, the measured prebuilt-helper invocation was:
 
 ```sh
-go build -o /tmp/callgraph-go-PO8VYh/go-ast-helper test_call_graph/go_source/main.go
-python3 -m test_call_graph /tmp/callgraph-go-PO8VYh/prometheus \
+go build -o /tmp/callgraph-go-PO8VYh/go-ast-helper python/test_call_graph/go_source/main.go
+PYTHONPATH=python python3 -m test_call_graph /tmp/callgraph-go-PO8VYh/prometheus \
   --language go --go-helper /tmp/callgraph-go-PO8VYh/go-ast-helper \
   --output /tmp/callgraph-go-PO8VYh/prometheus-graph.json
 ```

@@ -11,175 +11,35 @@ permissions:
 
 jobs:
   tests:
-    name: Unit tests
+    name: Go tests and Python reference parity
     runs-on: ubuntu-latest
-    needs: impact-plan
-    if: always()
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: "1.24.x"
+          cache-dependency-path: go.mod
 
-      - name: Download the pull request test plan
-        if: needs.impact-plan.result == 'success'
-        continue-on-error: true
-        uses: actions/download-artifact@v4
-        with:
-          name: test-impact-plan
-          path: ${{ runner.temp }}/test-impact-plan
-
-      - name: Run tests from the validated plan (full-suite fallback)
-        run: >-
-          python -m test_call_graph.plan_runner
-          --root "$GITHUB_WORKSPACE"
-          --plan "$RUNNER_TEMP/test-impact-plan/test-impact-plan.json"
-          --summary-file "$GITHUB_STEP_SUMMARY"
-
-  impact-plan:
-    if: github.event_name == 'pull_request'
-    name: Test impact plan
-    runs-on: ubuntu-latest
-    env:
-      CGO_ENABLED: "1"
-    outputs:
-      language: ${{ steps.plan-metadata.outputs.language }}
-      go_version: ${{ steps.plan-metadata.outputs.go_version }}
-      cgo_enabled: ${{ steps.plan-metadata.outputs.cgo_enabled }}
-    steps:
-      - name: Check out pull request head and history
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: 0
-
-      - name: Set up Python
+      - name: Set up Python for reference parity
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: "1.24.x"
+      - name: Run Go tests and Python parity checks
+        run: go test ./...
 
-      - name: Build base and head graphs and report file-keyed test plan
-        id: build-plan
-        continue-on-error: true
+      - name: Vet Go code
+        run: go vet ./...
+
+      - name: Run archived Python reference tests
         env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: |
-          base_dir="$RUNNER_TEMP/impact-base"
-          base_graph="$RUNNER_TEMP/base-graph.json"
-          head_graph="$RUNNER_TEMP/head-graph.json"
-          changed_files="$RUNNER_TEMP/changed-files.txt"
+          PYTHONPATH: python
+        run: python -m unittest discover -s python/tests -v
 
-          git worktree add --detach "$base_dir" "$BASE_SHA"
-          python -m test_call_graph "$base_dir" --output "$base_graph"
-          python -m test_call_graph "$GITHUB_WORKSPACE" --output "$head_graph"
-          git diff --name-only --no-renames "$BASE_SHA...$HEAD_SHA" > "$changed_files"
-
-          python -m test_call_graph.plan_cli \
-            --current-graph "$head_graph" \
-            --previous-graph "$base_graph" \
-            --changed-files "$changed_files" \
-            --summary-file "$GITHUB_STEP_SUMMARY" \
-            > "$RUNNER_TEMP/test-impact-plan.json"
-          cat "$RUNNER_TEMP/test-impact-plan.json"
-
-      - name: Write full-suite plan if graph planning failed
-        if: steps.build-plan.outcome == 'failure'
-        run: |
-          language=python
-          if [ -f go.mod ]; then language=go; fi
-          python - "$RUNNER_TEMP/test-impact-plan.json" "$language" <<'PY'
-          import json
-          import sys
-          from pathlib import Path
-
-          path = Path(sys.argv[1])
-          plan = {
-              "schema_version": 1,
-              "language": sys.argv[2],
-              "analysis_context": {},
-              "all_tests_by_file": {},
-              "tests_to_run": {},
-              "tests_to_skip": {},
-              "candidate_tests_by_file": {},
-              "changed_functions": [],
-              "run_full_suite": True,
-              "reason": "Graph planning failed; execute the full suite",
-          }
-          path.write_text(json.dumps(plan), encoding="utf-8")
-          PY
-          {
-            echo "## Test impact plan fallback"
-            echo
-            echo "Graph planning failed. The test runner will execute the full suite."
-          } >> "$GITHUB_STEP_SUMMARY"
-
-      - name: Expose plan execution metadata
-        id: plan-metadata
-        if: always()
+      - name: Run archived graph v2 reference tests
         env:
-          PLAN_PATH: ${{ runner.temp }}/test-impact-plan.json
-        run: |
-          python - <<'PY' >> "$GITHUB_OUTPUT"
-          import json
-          import os
-          import re
-          from pathlib import Path
-
-          try:
-              plan = json.loads(Path(os.environ["PLAN_PATH"]).read_text(encoding="utf-8"))
-          except (OSError, ValueError):
-              plan = {}
-          if not isinstance(plan, dict):
-              plan = {}
-          language = plan.get("language")
-          if language not in ("go", "python"):
-              language = "go" if Path("go.mod").is_file() else "python"
-          context = plan.get("analysis_context") or {}
-          if not isinstance(context, dict):
-              context = {}
-          go_version = context.get("go_version", "")
-          if not isinstance(go_version, str):
-              go_version = ""
-          if go_version.startswith("go"):
-              go_version = go_version[2:]
-          if not re.fullmatch(r"\d+\.\d+(?:\.\d+)?", go_version):
-              go_version = "1.24.x"
-          cgo_enabled = context.get("cgo_enabled")
-          cgo_enabled = "1" if cgo_enabled is not False else "0"
-          print(f"language={language}")
-          print(f"go_version={go_version}")
-          print(f"cgo_enabled={cgo_enabled}")
-          PY
-
-      - name: Upload the machine-readable test plan
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-impact-plan
-          path: ${{ runner.temp }}/test-impact-plan.json
-          if-no-files-found: error
-
-  scoped-go-tests:
-    name: Scoped Go tests
-    needs: impact-plan
-    if: always() && needs.impact-plan.outputs.language == 'go'
-    uses: ./.github/workflows/scoped-tests.yml
-    with:
-      plan_artifact: test-impact-plan
-      checkout_ref: ${{ github.event.pull_request.head.sha }}
-      go_version: ${{ needs.impact-plan.outputs.go_version }}
-      cgo_enabled: ${{ needs.impact-plan.outputs.cgo_enabled }}
+          PYTHONPATH: python/graph_v2_reference
+        run: python -m unittest discover -s python/graph_v2_reference/tests -v
