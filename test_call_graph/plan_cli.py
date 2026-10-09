@@ -45,6 +45,8 @@ def _report(plan, graph: dict) -> dict:
     return {
         "schema_version": 1,
         "language": graph.get("language"),
+        "analysis_context": graph.get("analysis_context", {}),
+        "all_tests_by_file": _group_tests(graph, all_roots),
         "tests_to_run": _group_tests(graph, tests_to_run),
         "tests_to_skip": _group_tests(graph, tests_to_skip),
         "candidate_tests_by_file": _group_tests(graph, selected),

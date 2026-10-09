@@ -48,6 +48,12 @@ jobs:
     if: github.event_name == 'pull_request'
     name: Test impact plan
     runs-on: ubuntu-latest
+    env:
+      CGO_ENABLED: "1"
+    outputs:
+      language: ${{ steps.plan-metadata.outputs.language }}
+      go_version: ${{ steps.plan-metadata.outputs.go_version }}
+      cgo_enabled: ${{ steps.plan-metadata.outputs.cgo_enabled }}
     steps:
       - name: Check out pull request head and history
         uses: actions/checkout@v4
@@ -59,6 +65,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.x"
 
       - name: Build base and head graphs and report file-keyed test plan
         id: build-plan
@@ -88,23 +99,71 @@ jobs:
       - name: Write full-suite plan if graph planning failed
         if: steps.build-plan.outcome == 'failure'
         run: |
-          cat > "$RUNNER_TEMP/test-impact-plan.json" <<'JSON'
-          {
-            "schema_version": 1,
-            "language": "python",
-            "tests_to_run": {},
-            "tests_to_skip": {},
-            "candidate_tests_by_file": {},
-            "changed_functions": [],
-            "run_full_suite": true,
-            "reason": "Graph planning failed; execute the full suite"
+          language=python
+          if [ -f go.mod ]; then language=go; fi
+          python - "$RUNNER_TEMP/test-impact-plan.json" "$language" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          path = Path(sys.argv[1])
+          plan = {
+              "schema_version": 1,
+              "language": sys.argv[2],
+              "analysis_context": {},
+              "all_tests_by_file": {},
+              "tests_to_run": {},
+              "tests_to_skip": {},
+              "candidate_tests_by_file": {},
+              "changed_functions": [],
+              "run_full_suite": True,
+              "reason": "Graph planning failed; execute the full suite",
           }
-          JSON
+          path.write_text(json.dumps(plan), encoding="utf-8")
+          PY
           {
             echo "## Test impact plan fallback"
             echo
             echo "Graph planning failed. The test runner will execute the full suite."
           } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Expose plan execution metadata
+        id: plan-metadata
+        if: always()
+        env:
+          PLAN_PATH: ${{ runner.temp }}/test-impact-plan.json
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          import os
+          import re
+          from pathlib import Path
+
+          try:
+              plan = json.loads(Path(os.environ["PLAN_PATH"]).read_text(encoding="utf-8"))
+          except (OSError, ValueError):
+              plan = {}
+          if not isinstance(plan, dict):
+              plan = {}
+          language = plan.get("language")
+          if language not in ("go", "python"):
+              language = "go" if Path("go.mod").is_file() else "python"
+          context = plan.get("analysis_context") or {}
+          if not isinstance(context, dict):
+              context = {}
+          go_version = context.get("go_version", "")
+          if not isinstance(go_version, str):
+              go_version = ""
+          if go_version.startswith("go"):
+              go_version = go_version[2:]
+          if not re.fullmatch(r"\d+\.\d+(?:\.\d+)?", go_version):
+              go_version = "1.24.x"
+          cgo_enabled = context.get("cgo_enabled")
+          cgo_enabled = "1" if cgo_enabled is not False else "0"
+          print(f"language={language}")
+          print(f"go_version={go_version}")
+          print(f"cgo_enabled={cgo_enabled}")
+          PY
 
       - name: Upload the machine-readable test plan
         if: always()
@@ -113,3 +172,14 @@ jobs:
           name: test-impact-plan
           path: ${{ runner.temp }}/test-impact-plan.json
           if-no-files-found: error
+
+  scoped-go-tests:
+    name: Scoped Go tests
+    needs: impact-plan
+    if: always() && needs.impact-plan.outputs.language == 'go'
+    uses: ./.github/workflows/scoped-tests.yml
+    with:
+      plan_artifact: test-impact-plan
+      checkout_ref: ${{ github.event.pull_request.head.sha }}
+      go_version: ${{ needs.impact-plan.outputs.go_version }}
+      cgo_enabled: ${{ needs.impact-plan.outputs.cgo_enabled }}
