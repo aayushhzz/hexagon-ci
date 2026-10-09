@@ -36,9 +36,23 @@ class PlanCliTests(unittest.TestCase):
         self.assertEqual(result, 0)
         self.assertEqual(report["schema_version"], 1)
         self.assertEqual(report["language"], "go")
+        self.assertEqual(
+            report["analysis_context"],
+            {
+                "goos": "linux",
+                "goarch": "amd64",
+                "go_version": "go1.24.3",
+                "cgo_enabled": True,
+                "build_tags": ["integration"],
+            },
+        )
         self.assertFalse(report["run_full_suite"])
         self.assertEqual(report["tests_to_run"], {"app_test.go": ["TestAffected"]})
         self.assertEqual(report["tests_to_skip"], {"app_test.go": ["TestUnrelated"]})
+        self.assertEqual(
+            report["all_tests_by_file"],
+            {"app_test.go": ["TestAffected", "TestUnrelated"]},
+        )
         self.assertEqual(report["candidate_tests_by_file"], {"app_test.go": ["TestAffected"]})
         summary = self.summary.read_text(encoding="utf-8")
         self.assertIn("Tests to run by file", summary)
@@ -70,6 +84,10 @@ class PlanCliTests(unittest.TestCase):
         )
         self.assertEqual(report["tests_to_skip"], {})
         self.assertEqual(
+            report["all_tests_by_file"],
+            {"app_test.go": ["TestAffected", "TestUnrelated"]},
+        )
+        self.assertEqual(
             report["candidate_tests_by_file"],
             {"app_test.go": ["TestAffected", "TestUnrelated"]},
         )
@@ -82,7 +100,13 @@ class PlanCliTests(unittest.TestCase):
             "format_version": 3,
             "language": "go",
             "source_fingerprint": "snapshot-" + function_hash,
-            "analysis_context": {},
+            "analysis_context": {
+                "goos": "linux",
+                "goarch": "amd64",
+                "go_version": "go1.24.3",
+                "cgo_enabled": True,
+                "build_tags": ["integration"],
+            },
             "files": [
                 {"path": "lib.go", "package": "example", "imports": []},
                 {"path": "app_test.go", "package": "example", "imports": []},
