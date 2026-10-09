@@ -411,6 +411,98 @@ class GoRebuildTests(unittest.TestCase):
         self.assertEqual(plan.candidate_tests, ("app/app_test.go::TestFlow",))
         self.assertTrue(plan.run_full_suite)
 
+    def test_changed_function_selects_only_transitive_test_ancestors(self):
+        self.write(
+            "app/app.go",
+            "package app\n"
+            "func Changed() int { return 1 }\n"
+            "func FirstLayer() int { return Changed() }\n"
+            "func SecondLayer() int { return FirstLayer() }\n"
+            "func Other() int { return 2 }\n",
+        )
+        self.write(
+            "app/app_test.go",
+            'package app\nimport "testing"\n'
+            "func TestTransitive(t *testing.T) { SecondLayer() }\n"
+            "func TestDirect(t *testing.T) { Changed() }\n"
+            "func TestUnrelated(t *testing.T) { Other() }\n",
+        )
+        before = build_graph(self.root, self.frontend)
+        before_edges = set(self.edges(before, "app/app_test.go::TestTransitive"))
+
+        self.write("app/app.go", "package app\nfunc Changed() int { return 9 }\nfunc FirstLayer() int { return Changed() }\nfunc SecondLayer() int { return FirstLayer() }\nfunc Other() int { return 2 }\n")
+        after = build_graph(self.root, self.frontend)
+        self.assertEqual(before_edges, set(self.edges(after, "app/app_test.go::TestTransitive")))
+
+        plan = plan_file_changes(after, ["app/app.go"], previous_graph=before)
+        self.assertEqual(
+            plan.candidate_tests,
+            ("app/app_test.go::TestDirect", "app/app_test.go::TestTransitive"),
+        )
+        self.assertEqual(plan.changed_functions, ("app/app.go::Changed",))
+        self.assertFalse(plan.run_full_suite)
+        self.assertEqual(
+            plan,
+            plan_file_changes(after, ["app/app.go"], previous_graph=before),
+        )
+
+    def test_missing_test_roots_falls_back_to_full_suite(self):
+        self.write("app/app.go", "package app\nfunc Changed() int { return 1 }\n")
+        before = build_graph(self.root, self.frontend)
+        self.write("app/app.go", "package app\nfunc Changed() int { return 2 }\n")
+        after = build_graph(self.root, self.frontend)
+
+        plan = plan_file_changes(after, ["app/app.go"], previous_graph=before)
+
+        self.assertTrue(plan.run_full_suite)
+        self.assertIn("No recognized Go test roots", plan.reason)
+
+    def test_bodyless_external_declaration_falls_back_to_full_suite(self):
+        self.write(
+            "app/app.go",
+            "package app\nfunc Changed() int { return 1 }\nfunc External() int\n",
+        )
+        self.write(
+            "app/app_test.go",
+            'package app\nimport "testing"\nfunc TestUnrelated(t *testing.T) {}\n',
+        )
+        before = build_graph(self.root, self.frontend)
+        self.write(
+            "app/app.go",
+            "package app\nfunc Changed() int { return 2 }\nfunc External() int\n",
+        )
+        after = build_graph(self.root, self.frontend)
+
+        plan = plan_file_changes(after, ["app/app.go"], previous_graph=before)
+
+        self.assertTrue(plan.run_full_suite)
+        self.assertIn("bodyless", plan.reason)
+
+    def test_go_linkname_directive_falls_back_to_full_suite(self):
+        self.write(
+            "app/app.go",
+            "package app\nfunc Changed() int { return 1 }\n"
+            "//go:linkname Linked example.com/other.Linked\n"
+            "func Linked() int { return Changed() }\n",
+        )
+        self.write(
+            "app/app_test.go",
+            'package app\nimport "testing"\nfunc TestUnrelated(t *testing.T) {}\n',
+        )
+        before = build_graph(self.root, self.frontend)
+        self.write(
+            "app/app.go",
+            "package app\nfunc Changed() int { return 2 }\n"
+            "//go:linkname Linked example.com/other.Linked\n"
+            "func Linked() int { return Changed() }\n",
+        )
+        after = build_graph(self.root, self.frontend)
+
+        plan = plan_file_changes(after, ["app/app.go"], previous_graph=before)
+
+        self.assertTrue(plan.run_full_suite)
+        self.assertIn("linkname/export", plan.reason)
+
     @staticmethod
     def edges(graph, root):
         return {(edge["caller"], edge["callee"]) for edge in graph["tests"][root]["edges"]}

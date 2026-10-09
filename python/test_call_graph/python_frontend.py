@@ -1,6 +1,7 @@
 """A deliberately conservative Python frontend for direct source calls."""
 
 import ast
+import hashlib
 import os
 from dataclasses import dataclass
 from pathlib import Path
@@ -91,6 +92,9 @@ class _Visitor(ast.NodeVisitor):
                 qualname=qualname,
                 line=node.lineno,
                 is_test=name.startswith("test_") and not self.functions,
+                source_hash=hashlib.sha256(
+                    ast.dump(node, annotate_fields=True, include_attributes=False).encode("utf-8")
+                ).hexdigest(),
             ),
             module=self.module,
             function_scopes=tuple(self.functions),
@@ -243,4 +247,18 @@ class PythonFrontend:
                     edges.append(Edge(call.caller, target, path, call.line))
                 else:
                     unresolved.append(UnresolvedCall(call.caller, call.expression, path, call.line))
-        return GraphFacts([symbol.node for symbol in by_id.values()], edges, unresolved)
+        return GraphFacts(
+            [symbol.node for symbol in by_id.values()], edges, unresolved,
+            analysis_context={
+                "selection_unsafe_reasons": [
+                    "Python framework fixtures and import-time execution are not modeled"
+                ]
+            },
+            source_files=[
+                {
+                    "path": path,
+                    "non_function_hash": hashlib.sha256(content).hexdigest(),
+                }
+                for path, content in sorted(sources.items())
+            ],
+        )

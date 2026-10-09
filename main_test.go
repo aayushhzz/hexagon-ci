@@ -285,7 +285,7 @@ func legacyPythonGraph(t *testing.T, repository string, tags []string) *Graph {
 	}
 	cmd := exec.Command("python3", args...)
 	cmd.Dir = workspace
-	cmd.Env = append(os.Environ(), "PYTHONPATH="+filepath.Join(workspace, "python"), "PATH="+filepath.Join(runtime.GOROOT(), "bin")+":"+os.Getenv("PATH"))
+	cmd.Env = append(os.Environ(), "PYTHONPATH="+filepath.Join(workspace, "python", "graph_v2_reference"), "PATH="+filepath.Join(runtime.GOROOT(), "bin")+":"+os.Getenv("PATH"))
 	if result, err := cmd.CombinedOutput(); err != nil {
 		t.Fatalf("archived Python graph command failed: %v\n%s", err, result)
 	}
@@ -325,7 +325,7 @@ func legacyPythonPlan(t *testing.T, current, previous *Graph, changed []string) 
 		"print(json.dumps({'candidate_tests':plan.candidate_tests,'run_full_suite':plan.run_full_suite,'reason':plan.reason}))"
 	cmd := exec.Command("python3", "-c", program, currentPath, previousPath, mustJSON(t, changed))
 	cmd.Dir = workspace
-	cmd.Env = append(os.Environ(), "PYTHONPATH="+filepath.Join(workspace, "python"))
+	cmd.Env = append(os.Environ(), "PYTHONPATH="+filepath.Join(workspace, "python", "graph_v2_reference"))
 	result, err := cmd.CombinedOutput()
 	if err != nil {
 		t.Fatalf("archived Python selector failed: %v\n%s", err, result)

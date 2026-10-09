@@ -39,6 +39,8 @@ PYTHONPATH=python python3 -m test_call_graph /path/to/repository --language go -
 PYTHONPATH=python python3 -m unittest discover -s python/tests -v
 ```
 
+The archived planner and runner from the earlier Python implementation remain under `python/test_call_graph` and `python/tests`. The graph v2 Python reference used for native-Go parity checks is under `python/graph_v2_reference`.
+
 Run the Go suite and static checks with:
 
 ```sh

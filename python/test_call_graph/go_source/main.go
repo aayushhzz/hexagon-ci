@@ -3,6 +3,8 @@ package main
 
 import (
 	"bytes"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"go/ast"
@@ -28,11 +30,12 @@ type input struct {
 }
 
 type node struct {
-	ID       string `json:"id"`
-	Path     string `json:"path"`
-	Qualname string `json:"qualname"`
-	Line     int    `json:"line"`
-	IsTest   bool   `json:"is_test"`
+	ID         string `json:"id"`
+	Path       string `json:"path"`
+	Qualname   string `json:"qualname"`
+	Line       int    `json:"line"`
+	IsTest     bool   `json:"is_test"`
+	SourceHash string `json:"source_hash"`
 }
 
 type edge struct {
@@ -54,7 +57,14 @@ type output struct {
 	Edges           []edge           `json:"edges"`
 	UnresolvedCalls []unresolvedCall `json:"unresolved_calls"`
 	Files           []fileFact       `json:"files"`
+	SourceFiles     []sourceFileFact `json:"source_files"`
+	SelectionUnsafe []string         `json:"selection_unsafe_reasons"`
 	BuildContext    buildContext     `json:"build_context"`
+}
+
+type sourceFileFact struct {
+	Path            string `json:"path"`
+	NonFunctionHash string `json:"non_function_hash"`
 }
 
 type fileFact struct {
@@ -459,7 +469,10 @@ func (r resolver) resolve(expr ast.Expr, fn function) string {
 }
 
 func build(sources map[string][]byte, root string, tags []string) (output, error) {
-	result := output{Nodes: []node{}, Edges: []edge{}, UnresolvedCalls: []unresolvedCall{}, Files: []fileFact{}}
+	result := output{
+		Nodes: []node{}, Edges: []edge{}, UnresolvedCalls: []unresolvedCall{}, Files: []fileFact{},
+		SourceFiles: []sourceFileFact{}, SelectionUnsafe: []string{},
+	}
 	context := gobuild.Default
 	context.BuildTags = append([]string{}, tags...)
 	sort.Strings(context.BuildTags)
@@ -470,6 +483,7 @@ func build(sources map[string][]byte, root string, tags []string) (output, error
 	}
 	fset := token.NewFileSet()
 	files := []sourceFile{}
+	unsafeReasons := make(map[string]bool)
 	packages := make(map[string]map[string]bool)
 	types := make(map[string]map[string]bool)
 	paths := make([]string, 0, len(sources))
@@ -494,12 +508,23 @@ func build(sources map[string][]byte, root string, tags []string) (output, error
 				continue
 			}
 		}
-		file, err := parser.ParseFile(fset, filename, sources[filename], parser.AllErrors)
+		file, err := parser.ParseFile(fset, filename, sources[filename], parser.AllErrors|parser.ParseComments)
 		if err != nil {
 			return result, fmt.Errorf("parse %s: %w", filename, err)
 		}
+		for _, comments := range file.Comments {
+			for _, comment := range comments.List {
+				text := strings.TrimSpace(comment.Text)
+				if strings.HasPrefix(text, "//go:linkname") || strings.HasPrefix(text, "//export ") {
+					unsafeReasons["Go linkname/export directives can add unmodeled callers"] = true
+				}
+			}
+		}
 		pkg := packageKey(filename, file.Name.Name)
 		files = append(files, sourceFile{filename, pkg, importsFor(file), file})
+		result.SourceFiles = append(result.SourceFiles, sourceFileFact{
+			Path: filename, NonFunctionHash: nonFunctionHash(fset, file, sources[filename]),
+		})
 		dir := path.Dir(filename)
 		if packages[dir] == nil {
 			packages[dir] = make(map[string]bool)
@@ -512,6 +537,13 @@ func build(sources map[string][]byte, root string, tags []string) (output, error
 			general, ok := decl.(*ast.GenDecl)
 			if !ok {
 				continue
+			}
+			if general.Tok == token.VAR {
+				for _, spec := range general.Specs {
+					if values, ok := spec.(*ast.ValueSpec); ok && len(values.Values) > 0 {
+						unsafeReasons["package-level variable initialization is not connected to test roots"] = true
+					}
+				}
 			}
 			for _, spec := range general.Specs {
 				if typ, ok := spec.(*ast.TypeSpec); ok {
@@ -549,6 +581,9 @@ func build(sources map[string][]byte, root string, tags []string) (output, error
 			if !ok {
 				continue
 			}
+			if fn.Body == nil {
+				unsafeReasons["bodyless function declarations can hide assembly or external calls"] = true
+			}
 			receiverType, receiverVar := receiver(fn)
 			qualname := fn.Name.Name
 			if receiverType != "" {
@@ -563,7 +598,8 @@ func build(sources map[string][]byte, root string, tags []string) (output, error
 			item := node{
 				ID: id, Path: file.Path,
 				Qualname: qualname, Line: fset.Position(fn.Pos()).Line,
-				IsTest: isTest(fn, file.Path, file.Imports),
+				IsTest:     isTest(fn, file.Path, file.Imports),
+				SourceHash: functionHash(fset, fn, sources[file.Path]),
 			}
 			result.Nodes = append(result.Nodes, item)
 			index[file.Package+"|"+qualname] = append(index[file.Package+"|"+qualname], item.ID)
@@ -573,6 +609,10 @@ func build(sources map[string][]byte, root string, tags []string) (output, error
 			})
 		}
 	}
+	for reason := range unsafeReasons {
+		result.SelectionUnsafe = append(result.SelectionUnsafe, reason)
+	}
+	sort.Strings(result.SelectionUnsafe)
 
 	r := resolver{index: index, packages: packages, types: types, module: module, returns: make(map[string]typeRef)}
 	for _, fn := range functions {
@@ -607,6 +647,53 @@ func build(sources map[string][]byte, root string, tags []string) (output, error
 		})
 	}
 	return result, nil
+}
+
+func functionHash(fset *token.FileSet, decl *ast.FuncDecl, source []byte) string {
+	start := decl.Pos()
+	if decl.Doc != nil && decl.Doc.Pos() < start {
+		start = decl.Doc.Pos()
+	}
+	begin := fset.Position(start).Offset
+	end := fset.Position(decl.End()).Offset
+	if begin < 0 || end < begin || end > len(source) {
+		return ""
+	}
+	digest := sha256.Sum256(source[begin:end])
+	return hex.EncodeToString(digest[:])
+}
+
+func nonFunctionHash(fset *token.FileSet, file *ast.File, source []byte) string {
+	type sourceRange struct{ start, end int }
+	ranges := []sourceRange{}
+	for _, decl := range file.Decls {
+		fn, ok := decl.(*ast.FuncDecl)
+		if !ok {
+			continue
+		}
+		start := fn.Pos()
+		if fn.Doc != nil && fn.Doc.Pos() < start {
+			start = fn.Doc.Pos()
+		}
+		ranges = append(ranges, sourceRange{
+			start: fset.Position(start).Offset,
+			end:   fset.Position(fn.End()).Offset,
+		})
+	}
+	sort.Slice(ranges, func(i, j int) bool { return ranges[i].start < ranges[j].start })
+	var residual bytes.Buffer
+	cursor := 0
+	for _, current := range ranges {
+		if current.start < cursor || current.start < 0 || current.end < current.start || current.end > len(source) {
+			continue
+		}
+		residual.Write(source[cursor:current.start])
+		cursor = current.end
+	}
+	residual.Write(source[cursor:])
+	normalized := strings.Join(strings.Fields(residual.String()), " ")
+	digest := sha256.Sum256([]byte(normalized))
+	return hex.EncodeToString(digest[:])
 }
 
 func main() {
