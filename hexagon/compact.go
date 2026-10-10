@@ -12,8 +12,10 @@ import (
 	"time"
 )
 
-const compactFormatVersion = 1
-const compactMagic = "HGC\x01"
+const compactFormatVersion = 2
+const legacyCompactFormatVersion = 1
+const compactMagic = "HGC\x02"
+const legacyCompactMagic = "HGC\x01"
 
 // CompactGraph stores global call facts once and uses sorted function IDs for
 // each test's reachability. It carries the same source and analysis identity as
@@ -105,6 +107,9 @@ func RebuildCompactToFile(repository, output string, tags []string) (*CompactGra
 
 // WriteCompactGraph writes magic, a gzip stream, and one versioned gob value.
 func WriteCompactGraph(filename string, graph *CompactGraph) error {
+	if graph == nil || graph.FormatVersion != compactFormatVersion {
+		return errors.New("only the current compact graph version can be written")
+	}
 	if err := graph.validate(); err != nil {
 		return err
 	}
@@ -150,7 +155,16 @@ func ReadCompactGraph(filename string) (*CompactGraph, error) {
 	}
 	defer file.Close()
 	header := make([]byte, len(compactMagic))
-	if _, err := io.ReadFull(file, header); err != nil || string(header) != compactMagic {
+	if _, err := io.ReadFull(file, header); err != nil {
+		return nil, fmt.Errorf("not a supported compact graph: %s", filename)
+	}
+	wantVersion := 0
+	switch string(header) {
+	case compactMagic:
+		wantVersion = compactFormatVersion
+	case legacyCompactMagic:
+		wantVersion = legacyCompactFormatVersion
+	default:
 		return nil, fmt.Errorf("not a supported compact graph: %s", filename)
 	}
 	reader, err := gzip.NewReader(file)
@@ -170,6 +184,9 @@ func ReadCompactGraph(filename string) (*CompactGraph, error) {
 	graph.normalizeEmptySlices()
 	if err := graph.validate(); err != nil {
 		return nil, err
+	}
+	if graph.FormatVersion != wantVersion {
+		return nil, fmt.Errorf("compact graph header/payload version mismatch: header=%d payload=%d", wantVersion, graph.FormatVersion)
 	}
 	return &graph, nil
 }
@@ -201,7 +218,7 @@ func (graph *CompactGraph) normalizeEmptySlices() {
 }
 
 func (graph *CompactGraph) validate() error {
-	if graph == nil || graph.FormatVersion != compactFormatVersion || graph.Language != "go" {
+	if graph == nil || (graph.FormatVersion != compactFormatVersion && graph.FormatVersion != legacyCompactFormatVersion) || graph.Language != "go" {
 		return errors.New("unsupported compact graph version or language")
 	}
 	if uint64(len(graph.Nodes)) > uint64(^uint32(0)) {

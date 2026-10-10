@@ -27,6 +27,11 @@ func TestBuildGraphMatchesArchivedPythonGraphV2(t *testing.T) {
 		t.Fatalf("BuildGraph() error = %v", err)
 	}
 	want := legacyPythonGraph(t, root, nil)
+	// The archived v2 reference predates source end lines. Compare its graph
+	// facts while the dedicated span round-trip test checks the added metadata.
+	for i := range got.Nodes {
+		got.Nodes[i].EndLine = 0
+	}
 	got.AnalysisFingerprint = ""
 	want.AnalysisFingerprint = ""
 	got.AnalysisContext.AnalyzerSHA256 = ""
@@ -69,6 +74,9 @@ func TestBuildTagsSelectMatchingDefinitionAndRemainInGraphContext(t *testing.T) 
 		t.Fatalf("alternate-tag edges = %v", got)
 	}
 	want := legacyPythonGraph(t, root, []string{"alt"})
+	for i := range altGraph.Nodes {
+		altGraph.Nodes[i].EndLine = 0
+	}
 	altGraph.AnalysisFingerprint = ""
 	want.AnalysisFingerprint = ""
 	altGraph.AnalysisContext.AnalyzerSHA256 = ""

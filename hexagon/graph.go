@@ -51,7 +51,8 @@ type GraphNode struct {
 	ID       string `json:"id"`
 	Path     string `json:"path"`
 	Qualname string `json:"qualname"`
-	Line     int    `json:"line"`
+	Line     int    `json:"line"` // 1-based function start line.
+	EndLine  int    `json:"end_line,omitempty"`
 	IsTest   bool   `json:"is_test"`
 }
 

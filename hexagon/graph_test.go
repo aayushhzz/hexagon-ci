@@ -31,6 +31,55 @@ func TestAnalyzedRepositoryRejectsChangesBeforePublication(t *testing.T) {
 	}
 }
 
+func TestFunctionLineSpansRoundTripThroughGraphFormats(t *testing.T) {
+	root := t.TempDir()
+	if err := os.WriteFile(filepath.Join(root, "go.mod"), []byte("module example.com/spans\n\ngo 1.24.0\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	source := "package spans\nfunc MultiLine() {\n\t_ = 1\n}\nfunc SingleLine() {}\n"
+	if err := os.WriteFile(filepath.Join(root, "functions.go"), []byte(source), 0o644); err != nil {
+		t.Fatal(err)
+	}
+
+	assertSpans := func(nodes []GraphNode) {
+		t.Helper()
+		byID := make(map[string]GraphNode, len(nodes))
+		for _, node := range nodes {
+			byID[node.ID] = node
+		}
+		if got := byID["functions.go::MultiLine"]; got.Line != 2 || got.EndLine != 4 {
+			t.Errorf("MultiLine span = [%d,%d], want [2,4]", got.Line, got.EndLine)
+		}
+		if got := byID["functions.go::SingleLine"]; got.Line != 5 || got.EndLine != 5 {
+			t.Errorf("SingleLine span = [%d,%d], want [5,5]", got.Line, got.EndLine)
+		}
+	}
+
+	namedPath := filepath.Join(root, "graph.json")
+	graph, err := RebuildToFile(root, namedPath, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	assertSpans(graph.Nodes)
+	namedFromDisk, err := ReadGraph(namedPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	assertSpans(namedFromDisk.Nodes)
+
+	compactPath := filepath.Join(root, "graph.hgc.gz")
+	compact, err := RebuildCompactToFile(root, compactPath, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	assertSpans(compact.Nodes)
+	compactFromDisk, err := ReadCompactGraph(compactPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	assertSpans(compactFromDisk.Nodes)
+}
+
 func TestStreamedGraphJSONPreservesV2Bytes(t *testing.T) {
 	for _, roots := range []int{0, 1, 2} {
 		graph := &Graph{

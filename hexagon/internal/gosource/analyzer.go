@@ -26,6 +26,7 @@ type node struct {
 	Path     string `json:"path"`
 	Qualname string `json:"qualname"`
 	Line     int    `json:"line"`
+	EndLine  int    `json:"end_line,omitempty"`
 	IsTest   bool   `json:"is_test"`
 }
 
@@ -556,7 +557,7 @@ func build(sources map[string][]byte, root string, tags []string) (output, error
 			}
 			item := node{
 				ID: id, Path: file.Path,
-				Qualname: qualname, Line: fset.Position(fn.Pos()).Line,
+				Qualname: qualname, Line: fset.Position(fn.Pos()).Line, EndLine: fset.Position(fn.End()).Line,
 				IsTest: isTest(fn, file.Path, file.Imports),
 			}
 			result.Nodes = append(result.Nodes, item)

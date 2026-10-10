@@ -2,6 +2,8 @@ package hexagon
 
 import (
 	"bytes"
+	"compress/gzip"
+	"encoding/gob"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -66,5 +68,62 @@ func TestCompactGraphRejectsCorruptMembershipAndPreservesPreviousSnapshot(t *tes
 	}
 	if _, err := ReadCompactGraph(wrongMagic); err == nil {
 		t.Fatal("incorrect magic was accepted")
+	}
+}
+
+func TestReadLegacyCompactGraphWithoutFunctionSpans(t *testing.T) {
+	type legacyNode struct {
+		ID       string
+		Path     string
+		Qualname string
+		Line     int
+		IsTest   bool
+	}
+	type legacyGraph struct {
+		FormatVersion       int
+		Language            string
+		SourceFingerprint   string
+		AnalysisContext     BuildContext
+		AnalysisFingerprint string
+		FileCount           int
+		Files               []FileMetadata
+		Nodes               []legacyNode
+		Edges               []CompactEdge
+		Unresolved          []CompactCall
+		Tests               []CompactTest
+	}
+	path := filepath.Join(t.TempDir(), "legacy.hgc.gz")
+	file, err := os.Create(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := file.Write([]byte("HGC\x01")); err != nil {
+		t.Fatal(err)
+	}
+	writer := gzip.NewWriter(file)
+	legacy := legacyGraph{
+		FormatVersion: 1, Language: "go", SourceFingerprint: "legacy",
+		Files: []FileMetadata{}, Nodes: []legacyNode{{ID: "legacy.go::Function", Path: "legacy.go", Line: 2}},
+		Edges: []CompactEdge{}, Unresolved: []CompactCall{}, Tests: []CompactTest{},
+	}
+	if err := gob.NewEncoder(writer).Encode(legacy); err != nil {
+		t.Fatal(err)
+	}
+	if err := writer.Close(); err != nil {
+		t.Fatal(err)
+	}
+	if err := file.Close(); err != nil {
+		t.Fatal(err)
+	}
+
+	got, err := ReadCompactGraph(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got.FormatVersion != 1 || got.Nodes[0].EndLine != 0 {
+		t.Fatalf("legacy graph = version %d, end line %d; want version 1 with no end line", got.FormatVersion, got.Nodes[0].EndLine)
+	}
+	if _, err := NewCompactIndex(got); err != nil {
+		t.Fatalf("legacy graph should remain readable: %v", err)
 	}
 }
