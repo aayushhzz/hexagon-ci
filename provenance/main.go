@@ -12,17 +12,18 @@ import (
 
 func main() {
 	var (
-		dir      = flag.String("dir", ".", "target module directory to analyze")
-		patterns = flag.String("patterns", "./internal/service/...", "comma-separated package patterns")
-		ifacePkg = flag.String("iface-pkg", "github.com/devrev/janus-client/api", "server interface package path")
-		ifaceNm  = flag.String("iface", "JanusServer", "server interface name")
-		implPkg  = flag.String("impl-pkg", "github.com/devrev/janus/internal/service", "concrete server package path")
-		implNm   = flag.String("impl", "Janus", "concrete server type name")
-		only     = flag.String("only", "", "comma-separated RPC names to analyze (default: all)")
-		out      = flag.String("out", "", "output file (default: stdout)")
-		cover    = flag.String("cover", "", "lifejacket testcases dir: emit coverage report instead of raw provenance")
-		opMap    = flag.String("op-map", "", "operation->RPC overrides, e.g. AccountsCreate=CreateAccount,DevOrgsGet=GetDevOrg")
-		alias    = flag.String("field-alias", "", "HTTP->RPC field renames, e.g. Artifacts=ArtifactIds,SchemaFragmentIds=CustomSchemaFragmentIds")
+		dir        = flag.String("dir", ".", "target module directory to analyze")
+		patterns   = flag.String("patterns", "./internal/service/...", "comma-separated package patterns")
+		ifacePkg   = flag.String("iface-pkg", "github.com/devrev/janus-client/api", "server interface package path")
+		ifaceNm    = flag.String("iface", "JanusServer", "server interface name")
+		implPkg    = flag.String("impl-pkg", "github.com/devrev/janus/internal/service", "concrete server package path")
+		implNm     = flag.String("impl", "Janus", "concrete server type name")
+		only       = flag.String("only", "", "comma-separated RPC names to analyze (default: all)")
+		out        = flag.String("out", "", "output file (default: stdout)")
+		cover      = flag.String("cover", "", "lifejacket testcases dir: emit coverage report instead of raw provenance")
+		opMap      = flag.String("op-map", "", "operation->RPC overrides, e.g. AccountsCreate=CreateAccount,DevOrgsGet=GetDevOrg")
+		alias      = flag.String("field-alias", "", "HTTP->RPC field renames, e.g. Artifacts=ArtifactIds,SchemaFragmentIds=CustomSchemaFragmentIds")
+		statusSpec = flag.String("status-spec", "", "generated oapi-codegen client.go for documented HTTP statuses (auto-located under -cover if empty)")
 	)
 	flag.Parse()
 
@@ -56,6 +57,17 @@ func main() {
 		if err != nil {
 			fail(err)
 		}
+		specPath := *statusSpec
+		if specPath == "" {
+			specPath = locateStatusSpec(absCover)
+		}
+		var statusMap map[string][]int
+		if specPath != "" {
+			statusMap, err = parseStatusSpec(specPath)
+			if err != nil {
+				fail(err)
+			}
+		}
 		ops, err := extractLifejacket(absCover)
 		if err != nil {
 			fail(err)
@@ -85,12 +97,12 @@ func main() {
 		}
 		reports := make([]CoverageReport, 0, len(results))
 		for _, p := range results {
-			reports = append(reports, buildCoverage(p, byRPC[p.RPC], byRPCOp[p.RPC], aliases))
+			reports = append(reports, buildCoverage(p, byRPC[p.RPC], byRPCOp[p.RPC], aliases, statusMap))
 		}
 		payload = map[string]any{
-			"service":   *implNm,
-			"rpcs":      len(reports),
-			"coverage":  reports,
+			"service":  *implNm,
+			"rpcs":     len(reports),
+			"coverage": reports,
 		}
 	} else {
 		payload = map[string]any{

@@ -13,16 +13,17 @@ import (
 
 // Coverage mapping (Goal A): intersect per-RPC provenance with lifejacket test
 // facts. Everything here is syntactic and deterministic. We never claim runtime
-// branch coverage; we report which request fields and validation-branch inputs
+// branch coverage. We report which request fields and validation-branch inputs
 // the tests actually exercise, and which the RPC reads but no test touches.
 
 // testFact is one Ginkgo It block that issues a request.
 type testFact struct {
-	Name   string   `json:"name"`
-	File   string   `json:"file"`
-	Labels []string `json:"labels"`
-	Fields []string `json:"fields_set"`
-	Status []int    `json:"statuses"`
+	Name    string   `json:"name"`
+	File    string   `json:"file"`
+	Labels  []string `json:"labels"`
+	Fields  []string `json:"fields_set"`
+	Status  []int    `json:"statuses"`
+	Success bool     `json:"asserts_success"`
 }
 
 // opFacts aggregates all tests that call one API operation.
@@ -31,19 +32,29 @@ type opFacts struct {
 	Tests     []testFact
 	fieldsSet map[string]map[string]bool // leaf field name -> set of test names
 	statuses  map[int]bool
+	success   bool // some test asserted a non-error (success) response
 }
 
 // CoverageReport is the per-RPC coverage result emitted as JSON.
 type CoverageReport struct {
-	RPC              string         `json:"rpc"`
-	Operation        string         `json:"operation"`
-	Tests            int            `json:"tests"`
-	StatusesAsserted []int          `json:"statuses_asserted"`
-	Fields           FieldCoverage  `json:"fields"`
-	Branches         BranchCoverage `json:"branches"`
-	Anomalies        Anomalies      `json:"anomalies"`
-	TestFacts        []testFact     `json:"test_facts"`
-	Unmapped         bool           `json:"unmapped,omitempty"`
+	RPC       string         `json:"rpc"`
+	Operation string         `json:"operation"`
+	Tests     int            `json:"tests"`
+	Status    StatusCoverage `json:"status"`
+	Fields    FieldCoverage  `json:"fields"`
+	Branches  BranchCoverage `json:"branches"`
+	Anomalies Anomalies      `json:"anomalies"`
+	TestFacts []testFact     `json:"test_facts"`
+	Unmapped  bool           `json:"unmapped,omitempty"`
+}
+
+// StatusCoverage compares documented HTTP statuses (from the generated client
+// spec) against those the tests assert.
+type StatusCoverage struct {
+	Documented  []int   `json:"documented"`
+	Asserted    []int   `json:"asserted"`
+	Missing     []int   `json:"missing"`
+	CoveragePct float64 `json:"coverage_pct"`
 }
 
 type FieldCoverage struct {
@@ -128,7 +139,7 @@ func collectTests(f *ast.File, file string, ops map[string]*opFacts) {
 		if body == nil {
 			return true
 		}
-		op, fields, statuses := scanItBody(body)
+		op, fields, statuses, success := scanItBody(body)
 		if op == "" {
 			return true // not a request-issuing test
 		}
@@ -137,7 +148,10 @@ func collectTests(f *ast.File, file string, ops map[string]*opFacts) {
 			of = &opFacts{Operation: op, fieldsSet: map[string]map[string]bool{}, statuses: map[int]bool{}}
 			ops[op] = of
 		}
-		tf := testFact{Name: name, File: file, Labels: labels, Fields: sortedUniq(fields), Status: sortedUniqInt(statuses)}
+		if success {
+			of.success = true
+		}
+		tf := testFact{Name: name, File: file, Labels: labels, Fields: sortedUniq(fields), Status: sortedUniqInt(statuses), Success: success}
 		of.Tests = append(of.Tests, tf)
 		for _, fld := range fields {
 			leaf := strings.ToLower(fld)
@@ -153,8 +167,8 @@ func collectTests(f *ast.File, file string, ops map[string]*opFacts) {
 	})
 }
 
-// scanItBody extracts the operation called, request fields set, and asserted statuses.
-func scanItBody(body *ast.FuncLit) (op string, fields []string, statuses []int) {
+// scanItBody extracts the operation called, request fields set, asserted statuses, and success assertions.
+func scanItBody(body *ast.FuncLit) (op string, fields []string, statuses []int, success bool) {
 	hasStatus := false
 	sawBeNil := false
 	ast.Inspect(body, func(n ast.Node) bool {
@@ -189,19 +203,15 @@ func scanItBody(body *ast.FuncLit) (op string, fields []string, statuses []int) 
 		}
 		return true
 	})
-	// Explicit StatusCode assertions win; otherwise a BeNil() error assertion is
-	// a success path (treated as 200).
+	// Explicit StatusCode assertions win, otherwise no status is recorded.
 	if !hasStatus {
 		statuses = nil
-		if sawBeNil {
-			statuses = []int{200}
-		}
 	}
-	return op, fields, statuses
+	return op, fields, statuses, sawBeNil
 }
 
 // buildCoverage intersects provenance for one RPC with aggregated op facts.
-func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]string) CoverageReport {
+func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]string, statusSpec map[string][]int) CoverageReport {
 	rep := CoverageReport{RPC: p.RPC, Operation: op}
 	leaves := leafReadPaths(p)
 	rep.Fields.LeafFieldsReadByRPC = len(leaves)
@@ -210,11 +220,22 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 		rep.Unmapped = true
 		rep.Fields.Gaps = leaves
 		rep.Branches.Gaps = append([]Branch{}, p.Branches...)
+		documented := statusSpec[op]
+		rep.Status = statusCoverage(documented, map[int]bool{})
 		return rep
 	}
 	rep.Tests = len(of.Tests)
 	rep.TestFacts = of.Tests
-	rep.StatusesAsserted = sortedKeysInt(of.statuses)
+	asserted := map[int]bool{}
+	for status := range of.statuses {
+		asserted[status] = true
+	}
+	if of.success {
+		for _, status := range successCodes(statusSpec[op]) {
+			asserted[status] = true
+		}
+	}
+	rep.Status = statusCoverage(statusSpec[op], asserted)
 	rep.Fields.ExercisedByTests = len(of.fieldsSet)
 
 	// Normalized index of test-set fields: canonical name -> original -> tests.
@@ -281,6 +302,24 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 		return rep.Anomalies.UnmatchedTestFields[i].Field < rep.Anomalies.UnmatchedTestFields[j].Field
 	})
 	return rep
+}
+
+func statusCoverage(documented []int, assertedSet map[int]bool) StatusCoverage {
+	missing := make([]int, 0)
+	covered := 0
+	for _, status := range documented {
+		if assertedSet[status] {
+			covered++
+		} else {
+			missing = append(missing, status)
+		}
+	}
+	return StatusCoverage{
+		Documented:  documented,
+		Asserted:    sortedKeysInt(assertedSet),
+		Missing:     missing,
+		CoveragePct: pct(covered, len(documented)),
+	}
 }
 
 type fieldMatch struct {
@@ -398,6 +437,9 @@ func mergeOpFacts(dst, src *opFacts) {
 	}
 	for s := range src.statuses {
 		dst.statuses[s] = true
+	}
+	if src.success {
+		dst.success = true
 	}
 }
 
