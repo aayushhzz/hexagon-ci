@@ -38,3 +38,21 @@ The candidate list includes tests in the changed file's package and reverse repo
 See [the Prometheus benchmark and sanity audit](docs/prometheus-go-benchmark.md) for observed edges, deterministic rebuilds, and concrete missed-dependency cases.
 
 Run the focused tests with `python3 -m unittest discover -s tests -v`.
+
+## Per-RPC provenance and coverage (Go)
+
+`provenance/` is a separate, deterministic analyzer that extracts per-RPC
+request-field provenance (inputs, branches, DB/RPC sinks, error exits) from a Go
+backend service via typed SSA, then intersects it with lifejacket Ginkgo tests to
+report field/branch coverage percentages, gaps, and HTTP-vs-RPC field anomalies.
+
+```sh
+cd provenance
+# provenance only
+go run . -dir /Users/devrev/janus -only GetDevOrg,CreateAccount
+# coverage vs lifejacket
+go run . -dir /Users/devrev/janus -only CreateAccount \
+  -cover /Users/devrev/lifejacket/testcases/api/v2_internal/accounts
+```
+
+Full run guide: [docs/running.md](docs/running.md). Design: [docs/rpc-provenance-coverage-design.md](docs/rpc-provenance-coverage-design.md).
