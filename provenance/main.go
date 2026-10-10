@@ -23,6 +23,7 @@ func main() {
 		out        = flag.String("out", "", "output file (default: stdout)")
 		cover      = flag.String("cover", "", "lifejacket testcases dir: emit coverage report instead of raw provenance")
 		opMap      = flag.String("op-map", "", "operation->RPC overrides, e.g. AccountsCreate=CreateAccount,DevOrgsGet=GetDevOrg")
+		opMapFile  = flag.String("op-map-file", "opmap.json", "reviewed operation->RPC map JSON (by_operation); missing file ignored")
 		alias      = flag.String("field-alias", "", "HTTP->RPC field renames, e.g. Artifacts=ArtifactIds,SchemaFragmentIds=CustomSchemaFragmentIds")
 		fieldMap   = flag.String("field-map", "fieldmap.json", "field-map JSON file (HTTP->RPC field names); missing file is ignored")
 		scaffold   = flag.String("emit-fieldmap-scaffold", "", "write a field-map scaffold from anomalies to this path and exit coverage")
@@ -92,6 +93,12 @@ func main() {
 			fail(err)
 		}
 		overrides := parseOverrides(*opMap)
+		fileOverrides, oerr := loadOpMap(*opMapFile)
+		if oerr != nil {
+			fail(oerr)
+		}
+		// Reviewed file map is the base; inline -op-map wins per entry.
+		overrides = mergeStringMaps(fileOverrides, overrides)
 		aliases := parseOverrides(*alias)
 		fm, _, ferr := loadFieldMap(*fieldMap)
 		if ferr != nil {
@@ -102,10 +109,18 @@ func main() {
 		for _, p := range results {
 			rpcSet[p.RPC] = true
 		}
-		// Index op facts by the RPC they map to, merging ops that map to the same RPC.
+		// Index op facts by the RPC they map to, merging ops that map to the same
+		// RPC. Iterate operations in sorted order for deterministic merge order and
+		// operation labels.
 		byRPC := map[string]*opFacts{}
 		byRPCOp := map[string]string{}
-		for op, of := range ops {
+		opNames := make([]string, 0, len(ops))
+		for op := range ops {
+			opNames = append(opNames, op)
+		}
+		sort.Strings(opNames)
+		for _, op := range opNames {
+			of := ops[op]
 			rpc := mapOpToRPC(op, overrides, rpcSet)
 			if rpc == "" {
 				continue
