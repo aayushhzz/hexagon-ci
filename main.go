@@ -55,7 +55,16 @@ func runGraphCommand(args []string, stdout io.Writer) error {
 	if output == "" {
 		return fmt.Errorf("--output is required")
 	}
-	graph, err := hexagon.RebuildToFile(positionals[0], output, splitTags(options.one("go-tags")))
+	tags := splitTags(options.one("go-tags"))
+	if strings.HasSuffix(output, ".hgc.gz") {
+		graph, err := hexagon.RebuildCompactToFile(positionals[0], output, tags)
+		if err != nil {
+			return err
+		}
+		_, err = fmt.Fprintf(stdout, "Rebuilt %d test graphs from %d Go files\n", len(graph.Tests), graph.FileCount)
+		return err
+	}
+	graph, err := hexagon.RebuildToFile(positionals[0], output, tags)
 	if err != nil {
 		return err
 	}
@@ -76,18 +85,7 @@ func runPlanCommand(args []string, stdout io.Writer) error {
 	for i := range changed {
 		changed[i] = strings.TrimSpace(changed[i])
 	}
-	current, err := hexagon.ReadGraph(positionals[0])
-	if err != nil {
-		return err
-	}
-	var previous *hexagon.Graph
-	if filename := options.one("previous-graph"); filename != "" {
-		previous, err = hexagon.ReadGraph(filename)
-		if err != nil {
-			return err
-		}
-	}
-	plan, err := hexagon.PlanFileChanges(current, changed, previous)
+	plan, err := hexagon.PlanGraphFiles(positionals[0], changed, options.one("previous-graph"))
 	if err != nil {
 		return err
 	}
@@ -171,6 +169,6 @@ func splitTags(value string) []string {
 	return strings.Split(value, ",")
 }
 
-const usageText = "usage: hexagon-ci graph <repo> --output graph.json [--go-tags tags] | hexagon-ci plan <graph> --changed-file path [--previous-graph graph.json] [--output plan.json] | hexagon-ci test <repo> --plan plan.json"
+const usageText = "usage: hexagon-ci graph <repo> --output graph.json|graph.json.gz|graph.hgc.gz [--go-tags tags] | hexagon-ci plan <graph> --changed-file path [--previous-graph graph] [--output plan.json] | hexagon-ci test <repo> --plan plan.json"
 
 func usageError() error { return fmt.Errorf("%s", usageText) }
