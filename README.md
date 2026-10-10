@@ -16,7 +16,25 @@ func plan(repository string, changedFiles []string, previous *hexagon.Graph) (*h
 }
 ```
 
-For function-level change impact, callers can pass structured Git hunk data to `PlanDiff` (or compact snapshots to `PlanCompactDiff`). The planner maps old and new ranges to inclusive function spans, walks reverse caller edges to test roots, and returns sorted unique candidates. Raw unified-diff parsing stays in the CI adapter at `cmd/ci-impact`; the library accepts `ParsedDiff`. Plans still set `run_full_suite=true`.
+For function-level impact, callers can pass parsed structured hunks to `PlanDiff` or `PlanCompactDiff`. These return the existing `ImpactPlan`, map changed lines to functions, walk reverse caller edges to test roots, and preserve the full-suite fallback whenever mapping or graph completeness is uncertain. Raw unified-diff parsing stays outside the library. `RunCandidateTests` is an explicit diagnostic path; ordinary `RunTests` continues to honor the full-suite safety flag.
+
+The function-oriented `PlanGitDiff` and `PlanGitDiffCompact` APIs accept old/new paths with 1-based inclusive changed-line ranges. They return `FunctionDiffPlan`: `TestRoots` lists affected tests, while `FunctionsToRun` gives the trace of changed functions, callers, and test roots. Unmappable ranges, missing base graphs, and unresolved calls set `RunFullSuite` and broaden the candidate roots to every current test.
+
+This library API does not change the existing file-based `plan` command.
+
+```go
+plan, err := hexagon.PlanGitDiff(headGraph, gitDiff, baseGraph)
+if err != nil {
+	return err
+}
+if plan.RunFullSuite {
+	// Keep the safe full-suite fallback; the candidate roots remain diagnostic.
+}
+for _, testRoot := range plan.TestRoots {
+	// Each value is a graph function ID such as "pkg/service_test.go::TestUpdate".
+	_ = testRoot
+}
+```
 
 Build the CLI and rebuild a Go repository graph:
 
