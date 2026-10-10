@@ -23,6 +23,8 @@ func main() {
 		cover      = flag.String("cover", "", "lifejacket testcases dir: emit coverage report instead of raw provenance")
 		opMap      = flag.String("op-map", "", "operation->RPC overrides, e.g. AccountsCreate=CreateAccount,DevOrgsGet=GetDevOrg")
 		alias      = flag.String("field-alias", "", "HTTP->RPC field renames, e.g. Artifacts=ArtifactIds,SchemaFragmentIds=CustomSchemaFragmentIds")
+		fieldMap   = flag.String("field-map", "fieldmap.json", "field-map JSON file (HTTP->RPC field names); missing file is ignored")
+		scaffold   = flag.String("emit-fieldmap-scaffold", "", "write a field-map scaffold from anomalies to this path and exit coverage")
 		statusSpec = flag.String("status-spec", "", "generated oapi-codegen client.go for documented HTTP statuses (auto-located under -cover if empty)")
 	)
 	flag.Parse()
@@ -74,6 +76,10 @@ func main() {
 		}
 		overrides := parseOverrides(*opMap)
 		aliases := parseOverrides(*alias)
+		fm, _, ferr := loadFieldMap(*fieldMap)
+		if ferr != nil {
+			fail(ferr)
+		}
 		// Set of real RPC names for set-aware op->RPC mapping.
 		rpcSet := map[string]bool{}
 		for _, p := range results {
@@ -97,7 +103,15 @@ func main() {
 		}
 		reports := make([]CoverageReport, 0, len(results))
 		for _, p := range results {
-			reports = append(reports, buildCoverage(p, byRPC[p.RPC], byRPCOp[p.RPC], aliases, statusMap))
+			eff := effectiveAliases(fm, p.RPC, aliases)
+			reports = append(reports, buildCoverage(p, byRPC[p.RPC], byRPCOp[p.RPC], eff, statusMap))
+		}
+		if *scaffold != "" {
+			if err := writeScaffold(*scaffold, reports); err != nil {
+				fail(err)
+			}
+			fmt.Fprintf(os.Stderr, "wrote field-map scaffold to %s\n", *scaffold)
+			return
 		}
 		payload = map[string]any{
 			"service":  *implNm,

@@ -247,16 +247,17 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 		}
 		normFields[c][leaf] = tests
 	}
-	// Alias map keyed by canonical test-field name -> canonical RPC leaf name.
-	canonAlias := map[string]string{}
+	// Alias fragments: canonical test-field name -> canonical path components of
+	// the mapped RPC field. A value may be a dotted path (e.g.
+	// AccountIdentifier.AccountDon) that credits any leaf beneath it.
+	aliasFrags := map[string][]string{}
 	for k, v := range aliases {
-		canonAlias[canon(k)] = canon(v)
+		aliasFrags[canon(k)] = canonComponents(v)
 	}
 
 	// Field coverage over RPC leaf paths.
 	for _, path := range leaves {
-		leaf := canon(lastComponent(path))
-		if tests, ok := matchField(leaf, normFields, canonAlias); ok {
+		if tests, ok := matchPath(path, normFields, aliasFrags); ok {
 			rep.Fields.Covered = append(rep.Fields.Covered, CoveredField{Path: path, Match: tests.kind, ByTests: tests.tests})
 		} else {
 			rep.Fields.Gaps = append(rep.Fields.Gaps, path)
@@ -266,12 +267,8 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 	rep.Fields.CoveragePct = pct(rep.Fields.CoveredCount, rep.Fields.LeafFieldsReadByRPC)
 
 	// Branch coverage.
-	leafCanon := map[string]bool{}
-	for _, path := range leaves {
-		leafCanon[canon(lastComponent(path))] = true
-	}
 	for _, b := range p.Branches {
-		if branchInputsExercised(b, normFields, canonAlias) {
+		if branchInputsExercised(b, normFields, aliasFrags) {
 			rep.Branches.InputExercised++
 		} else {
 			rep.Branches.Gaps = append(rep.Branches.Gaps, b)
@@ -290,10 +287,8 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 		if _, ok := rpcLeaves[c]; ok {
 			continue
 		}
-		if tgt, ok := canonAlias[c]; ok {
-			if _, ok := rpcLeaves[tgt]; ok {
-				continue
-			}
+		if frag, ok := aliasFrags[c]; ok && aliasMatchesAnyLeaf(frag, leaves) {
+			continue
 		}
 		rep.Anomalies.UnmatchedTestFields = append(rep.Anomalies.UnmatchedTestFields,
 			UnmatchedField{Field: leaf, Suggestion: fuzzySuggest(c, rpcLeaves)})
@@ -327,19 +322,61 @@ type fieldMatch struct {
 	tests []string
 }
 
-// matchField resolves an RPC leaf against test-set fields: exact-normalized, then alias.
-func matchField(leaf string, normFields map[string]map[string]map[string]bool, canonAlias map[string]string) (fieldMatch, bool) {
-	if byOrig, ok := normFields[leaf]; ok {
+// matchPath resolves an RPC leaf path against test-set fields: exact match on
+// the leaf name, then any alias whose mapped path fragment occurs in the path.
+func matchPath(path string, normFields map[string]map[string]map[string]bool, aliasFrags map[string][]string) (fieldMatch, bool) {
+	if byOrig, ok := normFields[canon(lastComponent(path))]; ok {
 		return fieldMatch{kind: "exact", tests: mergeTests(byOrig)}, true
 	}
-	for testCanon, tgt := range canonAlias {
-		if tgt == leaf {
-			if byOrig, ok := normFields[testCanon]; ok {
-				return fieldMatch{kind: "alias", tests: mergeTests(byOrig)}, true
-			}
+	comps := canonComponents(path)
+	for testCanon, frag := range aliasFrags {
+		if byOrig, ok := normFields[testCanon]; ok && hasFragment(comps, frag) {
+			return fieldMatch{kind: "alias", tests: mergeTests(byOrig)}, true
 		}
 	}
 	return fieldMatch{}, false
+}
+
+// aliasMatchesAnyLeaf reports whether an alias fragment occurs in any leaf path.
+func aliasMatchesAnyLeaf(frag []string, leaves []string) bool {
+	for _, path := range leaves {
+		if hasFragment(canonComponents(path), frag) {
+			return true
+		}
+	}
+	return false
+}
+
+// canonComponents splits a dotted path and canonicalizes each component.
+func canonComponents(path string) []string {
+	parts := strings.Split(path, ".")
+	out := make([]string, 0, len(parts))
+	for _, p := range parts {
+		if c := canon(p); c != "" {
+			out = append(out, c)
+		}
+	}
+	return out
+}
+
+// hasFragment reports whether frag occurs as a contiguous subsequence of comps.
+func hasFragment(comps, frag []string) bool {
+	if len(frag) == 0 || len(frag) > len(comps) {
+		return false
+	}
+	for i := 0; i+len(frag) <= len(comps); i++ {
+		match := true
+		for j := range frag {
+			if comps[i+j] != frag[j] {
+				match = false
+				break
+			}
+		}
+		if match {
+			return true
+		}
+	}
+	return false
 }
 
 func mergeTests(byOrig map[string]map[string]bool) []string {
@@ -352,12 +389,12 @@ func mergeTests(byOrig map[string]map[string]bool) []string {
 	return sortedKeys(seen)
 }
 
-func branchInputsExercised(b Branch, normFields map[string]map[string]map[string]bool, canonAlias map[string]string) bool {
+func branchInputsExercised(b Branch, normFields map[string]map[string]map[string]bool, aliasFrags map[string][]string) bool {
 	if len(b.PredicatePaths) == 0 {
 		return false
 	}
 	for _, pth := range b.PredicatePaths {
-		if _, ok := matchField(canon(lastComponent(pth)), normFields, canonAlias); !ok {
+		if _, ok := matchPath(pth, normFields, aliasFrags); !ok {
 			return false
 		}
 	}
@@ -555,7 +592,13 @@ func callName(e ast.Expr) string {
 
 func isRequestBodyType(e ast.Expr) bool {
 	sel, ok := e.(*ast.SelectorExpr)
-	return ok && strings.HasSuffix(sel.Sel.Name, "RequestBody")
+	if !ok {
+		return false
+	}
+	// JSON bodies (<Op>JSONRequestBody / <Op>Request) and query/path params
+	// (<Op>Params) both carry request fields a test sets.
+	n := sel.Sel.Name
+	return strings.HasSuffix(n, "RequestBody") || strings.HasSuffix(n, "Request") || strings.HasSuffix(n, "Params")
 }
 
 func compositeKeys(c *ast.CompositeLit) []string {
