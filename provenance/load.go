@@ -19,6 +19,18 @@ type loaded struct {
 // load type-checks the target module at dir and builds SSA. Dependencies are
 // loaded as types-only (export data); only initial packages get SSA bodies.
 func load(dir string, patterns []string) (*loaded, error) {
+	return loadMode(dir, patterns, false)
+}
+
+// loadTolerant is load that does not bail when some packages fail to
+// type-check (e.g. a cgo command elsewhere in the module). SSA is built
+// per-package so a broken package is skipped instead of aborting the run.
+// Used by the discovery modes, which only need the clean server/handler packages.
+func loadTolerant(dir string, patterns []string) (*loaded, error) {
+	return loadMode(dir, patterns, true)
+}
+
+func loadMode(dir string, patterns []string, tolerant bool) (*loaded, error) {
 	cfg := &packages.Config{
 		Mode: packages.NeedName | packages.NeedFiles | packages.NeedCompiledGoFiles |
 			packages.NeedImports | packages.NeedDeps | packages.NeedTypes |
@@ -30,12 +42,19 @@ func load(dir string, patterns []string) (*loaded, error) {
 	if err != nil {
 		return nil, fmt.Errorf("packages.Load: %w", err)
 	}
-	if packages.PrintErrors(initial) > 0 {
+	if !tolerant && packages.PrintErrors(initial) > 0 {
 		return nil, fmt.Errorf("packages contained errors (see above)")
 	}
 
-	prog, _ := ssautil.AllPackages(initial, ssa.InstantiateGenerics)
-	prog.Build()
+	var prog *ssa.Program
+	if tolerant {
+		// Create SSA for every package but build each independently, recovering
+		// from any package whose incomplete types make the builder panic.
+		prog = buildTolerant(initial)
+	} else {
+		prog, _ = ssautil.AllPackages(initial, ssa.InstantiateGenerics)
+		prog.Build()
+	}
 
 	l := &loaded{
 		prog:     prog,
@@ -53,6 +72,50 @@ func load(dir string, patterns []string) (*loaded, error) {
 		}
 	}
 	return l, nil
+}
+
+// buildTolerant creates and builds SSA packages one by one, skipping any that
+// fail, so a single broken package does not abort discovery.
+func buildTolerant(initial []*packages.Package) *ssa.Program {
+	prog := ssa.NewProgram(initial[0].Fset, ssa.InstantiateGenerics)
+	created := map[*types.Package]bool{}
+	packages.Visit(initial, nil, func(p *packages.Package) {
+		if p.Types == nil || p.IllTyped || created[p.Types] {
+			return
+		}
+		if p.TypesInfo == nil || len(p.Syntax) == 0 {
+			// Dependency without syntax: create from types only (no bodies).
+			func() {
+				defer func() { _ = recover() }()
+				prog.CreatePackage(p.Types, nil, nil, true)
+				created[p.Types] = true
+			}()
+			return
+		}
+		func() {
+			defer func() { _ = recover() }()
+			prog.CreatePackage(p.Types, p.Syntax, p.TypesInfo, true)
+			created[p.Types] = true
+		}()
+	})
+	for _, sp := range prog.AllPackages() {
+		func() {
+			defer func() { _ = recover() }()
+			sp.Build()
+		}()
+	}
+	return prog
+}
+
+// modulePath returns the main module's import path, used to tell the module's
+// own packages apart from dependencies.
+func (l *loaded) modulePath() string {
+	for _, p := range l.pkgs {
+		if p.Module != nil && p.Module.Main && p.Module.Path != "" {
+			return p.Module.Path
+		}
+	}
+	return ""
 }
 
 // lookupType finds a named type by package path and name.

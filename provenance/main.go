@@ -29,6 +29,12 @@ func main() {
 		scaffold   = flag.String("emit-fieldmap-scaffold", "", "write a field-map scaffold from anomalies to this path and exit coverage")
 		statusSpec = flag.String("status-spec", "", "generated oapi-codegen client.go for documented HTTP statuses (auto-located under -cover if empty)")
 		timing     = flag.Bool("timing", false, "print phase timings (load+ssa, enumerate, analyze) to stderr")
+
+		discover     = flag.Bool("discover", false, "auto-detect gRPC server interface/impl specs in -dir and emit services.json entries")
+		gatewayMap   = flag.Bool("gateway-map", false, "derive an operation->RPC map from the gateway in -dir for -backend-pkgs")
+		backendPkgs  = flag.String("backend-pkgs", "", "comma-separated backend client package paths (for -gateway-map)")
+		rpcWhitelist = flag.String("rpc-whitelist", "", "comma-separated valid backend RPC names to keep (for -gateway-map)")
+		service      = flag.String("service", "", "service name to stamp into -gateway-map output")
 	)
 	flag.Parse()
 
@@ -42,6 +48,34 @@ func main() {
 	if err != nil {
 		fail(err)
 	}
+
+	// Discovery modes load the whole module (./...) and exit early. They let a
+	// service be onboarded with no hand-written interface/impl config or opmap.
+	if *discover || *gatewayMap {
+		l, err := loadTolerant(absDir, []string{"./..."})
+		if err != nil {
+			fail(err)
+		}
+		if *discover {
+			ds := l.discoverServers(l.modulePath())
+			if *out != "" {
+				emit(*out, map[string]any{"services": ds})
+			} else {
+				fmt.Print(discoverFmt(ds))
+			}
+			return
+		}
+		m := l.buildGatewayMap(*service, splitCSV(*backendPkgs), splitCSV(*rpcWhitelist))
+		if *out != "" {
+			emit(*out, m)
+		} else {
+			enc := json.NewEncoder(os.Stdout)
+			enc.SetIndent("", "  ")
+			_ = enc.Encode(m)
+		}
+		return
+	}
+
 	tLoad := time.Now()
 	l, err := load(absDir, splitCSV(*patterns))
 	if err != nil {
@@ -189,6 +223,18 @@ func parseOverrides(s string) map[string]string {
 		}
 	}
 	return m
+}
+
+// emit marshals v as indented JSON to path.
+func emit(path string, v any) {
+	b, err := json.MarshalIndent(v, "", "  ")
+	if err != nil {
+		fail(err)
+	}
+	if err := os.WriteFile(path, append(b, '\n'), 0o644); err != nil {
+		fail(err)
+	}
+	fmt.Fprintf(os.Stderr, "wrote %s\n", path)
 }
 
 func fail(err error) {

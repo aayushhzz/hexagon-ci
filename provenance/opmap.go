@@ -17,6 +17,13 @@ type opMapFile struct {
 	Unresolved json.RawMessage `json:"unresolved"`
 }
 
+// opMapOut is the emitted operation->RPC map (same shape loadOpMap reads).
+type opMapOut struct {
+	Service     string            `json:"service"`
+	ByOperation map[string]string `json:"by_operation"`
+	Unresolved  []string          `json:"unresolved"`
+}
+
 // loadOpMap reads by_operation from an op-map JSON file. A missing file yields
 // an empty map and no error, so the flag can default to a path.
 func loadOpMap(path string) (map[string]string, error) {
