@@ -114,11 +114,11 @@ print('mapped %d/%d, aggregate field cov %.1f%%'%(len(m),len(c),100*tc/tl))"
   gateway surface, or operation names the verb+resource derivation does not
   cover). The op->RPC derivation is RPC-set-aware and tries both singular and
   plural resource forms (janus uses `CreateAccount` but `ListAccounts`).
-- Low field coverage on identifier RPCs (Get/Delete/Count) is expected and
-  informative: their proto request is a structured identifier (e.g.
+- Identifier RPCs (Get/Delete/Count) take a structured identifier (e.g.
   `GetAccountRequest.AccountIdentifier.AccountDon`) while the HTTP test sets a
-  flat `Id`. That mismatch shows up in `anomalies.unmatched_test_fields`; add an
-  alias (`-field-alias Id=AccountDon`) once the intended mapping is confirmed.
+  flat `Id`. Map it once in `fieldmap.json`
+  (`"Id": "AccountIdentifier.AccountDon"`) and the whole subtree counts; until
+  then it shows under `anomalies.unmatched_test_fields`.
 - Create/Update RPCs that stuff the body into a DB object only *read*/validate a
   few fields directly (the rest flow to the DB sink via container taint), so the
   leaf-read denominator reflects validated fields, not every stored field.
@@ -134,8 +134,11 @@ print('mapped %d/%d, aggregate field cov %.1f%%'%(len(m),len(c),100*tc/tl))"
 | `-only` | all | comma-separated RPC names |
 | `-out` | stdout | output file |
 | `-cover` | off | lifejacket testcases dir -> coverage mode |
+| `-status-spec` | auto under `-cover` | generated oapi-codegen `client.go` for documented HTTP statuses |
 | `-op-map` | derived | operation->RPC overrides, e.g. `AccountsCreate=CreateAccount` |
-| `-field-alias` | none | HTTP->RPC field renames (see anomalies below) |
+| `-field-map` | `fieldmap.json` | reviewable HTTP->RPC field map file (missing file ignored) |
+| `-field-alias` | none | inline HTTP->RPC field renames (quick form of the map) |
+| `-emit-fieldmap-scaffold` | off | write a field-map scaffold from anomalies and exit |
 
 For a non-janus service, point the interface/impl flags at that server type.
 
@@ -153,8 +156,11 @@ Per RPC the report contains:
   actionable list for adding tests.
 - `branches.coverage_pct` / `input_exercised` / `total` and `branches.gaps[]`
   validation branches whose gating request fields no test sets.
-- `statuses_asserted` HTTP statuses tests assert (`BeNil()` success -> 200).
-- `test_facts[]` each test's name, file, labels, fields set, statuses.
+- `status.documented` / `asserted` / `missing` / `coverage_pct` HTTP statuses
+  documented for the operation (from the generated client spec) vs those the
+  tests assert. `missing` is the actionable list (e.g. an untested `403`).
+- `test_facts[]` each test's name, file, labels, fields set, statuses, and
+  `asserts_success`.
 
 This is static reachability intersected with test *inputs*, not executed-branch
 coverage: setting a field proves the input is present, not that both branch
@@ -175,17 +181,49 @@ Each unmatched field includes `fuzzy_suggestions` (RPC paths that look related b
 shared stem or substring) to help resolve it. A field that maps to nothing (e.g.
 a body field the RPC ignores) is reported with no suggestion.
 
-Resolve confirmed renames with `-field-alias` so they count as covered:
+### Resolving mappings (human-in-loop)
 
-```sh
-go run . -dir /Users/devrev/janus -only CreateAccount \
-  -cover /Users/devrev/lifejacket/testcases/api/v2_internal/accounts \
-  -field-alias "Artifacts=ArtifactIds,SchemaFragmentIds=CustomSchemaFragmentIds"
+Confirmed mappings live in a reviewable file, `provenance/fieldmap.json`, loaded
+by default (`-field-map`):
+
+```json
+{
+  "global": { "Artifacts": "ArtifactIds" },
+  "by_rpc": { "GetAccount": { "Id": "AccountIdentifier.AccountDon" } }
+}
 ```
 
-Review the anomaly list whenever adding a service or operation: an empty list
-means the leaf mapping held; a populated list is where the HTTP and RPC contracts
-diverge and need an alias (or indicate dead request fields).
+- Keys are HTTP body field names, values are RPC field names, matched
+  case/style-insensitively.
+- A value may be a dotted **path fragment**: `Id -> AccountIdentifier.AccountDon`
+  credits every RPC leaf beneath that subtree (the gateway parses the flat `id`
+  into a structured DON).
+- `global` applies to every RPC; `by_rpc` overrides/adds per RPC; `-field-alias`
+  on the CLI overrides both for quick experiments.
+
+To bootstrap the file for a new service/operation, emit a scaffold from the
+anomalies and review it:
+
+```sh
+go run . -dir /Users/devrev/janus -cover /Users/devrev/lifejacket/testcases \
+  -emit-fieldmap-scaffold /tmp/scaffold.json
+```
+
+The scaffold has a `by_rpc` block pre-filled with a best-guess leaf per unmatched
+field and a `_review` block listing all fuzzy suggestions. Confirm the guesses,
+delete `_review`, and save as `fieldmap.json`. An empty anomaly list means the
+leaf mapping held and no entry is needed.
+
+## HTTP statuses come from the generated spec
+
+The documented status universe per operation (200/201 success plus
+400/401/403/404/409/413/429/500/503, etc.) is parsed from the generated
+oapi-codegen client (`gen/v2_internal/client.go`), auto-located under `-cover` or
+set with `-status-spec`. The report shows `documented` vs `asserted` and the
+`missing` codes, so an untested `403`/`404` is visible. Test success assertions
+(`Expect(err).To(BeNil())`) resolve to the operation's documented 2xx code (201
+for creates), not a hardcoded 200.
+
 
 ## Determinism
 
