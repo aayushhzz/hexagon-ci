@@ -43,7 +43,9 @@ type planningSnapshot struct {
 	context           BuildContext
 	files             []FileMetadata
 	nodes             []GraphNode
+	edges             []GraphEdge
 	roots             []string
+	unresolvedCalls   int
 	forEachNode       func(string, func(string) bool) error
 }
 
@@ -54,7 +56,8 @@ func snapshotFromNamed(graph *Graph) *planningSnapshot {
 	}
 	return &planningSnapshot{
 		sourceFingerprint: graph.SourceFingerprint, context: graph.AnalysisContext,
-		files: graph.Files, nodes: graph.Nodes, roots: roots,
+		files: graph.Files, nodes: graph.Nodes, edges: graph.Edges, roots: roots,
+		unresolvedCalls: len(graph.UnresolvedCalls),
 		forEachNode: func(root string, visit func(string) bool) error {
 			for _, node := range graph.Tests[root].Nodes {
 				if !visit(node) {
@@ -75,9 +78,14 @@ func snapshotFromCompact(graph *CompactGraph) (*planningSnapshot, error) {
 	for _, test := range graph.Tests {
 		roots = append(roots, graph.Nodes[test.Root].ID)
 	}
+	edges := make([]GraphEdge, 0, len(graph.Edges))
+	for _, edge := range graph.Edges {
+		edges = append(edges, GraphEdge{Caller: graph.Nodes[edge.Caller].ID, Callee: graph.Nodes[edge.Callee].ID})
+	}
 	return &planningSnapshot{
 		sourceFingerprint: graph.SourceFingerprint, context: graph.AnalysisContext,
-		files: graph.Files, nodes: graph.Nodes, roots: roots,
+		files: graph.Files, nodes: graph.Nodes, edges: edges, roots: roots,
+		unresolvedCalls: len(graph.Unresolved),
 		forEachNode: func(root string, visit func(string) bool) error {
 			return index.forEachTestNode(root, func(id uint32) bool { return visit(graph.Nodes[id].ID) })
 		},

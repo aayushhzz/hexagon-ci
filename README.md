@@ -16,6 +16,24 @@ func plan(repository string, changedFiles []string, previous *hexagon.Graph) (*h
 }
 ```
 
+For function-level planning, parse Git hunk metadata at the caller and pass structured old/new paths with 1-based inclusive changed-line ranges to `PlanGitDiff`. The result's `TestRoots` are the unique test functions to execute; `FunctionsToRun` is the unique trace containing changed functions, caller functions, and those test roots. Compact graphs are supported by `PlanGitDiffCompact`. When a changed line cannot be mapped, a base graph is missing for old lines, or unresolved calls make the graph incomplete, `RunFullSuite` is set, `Reason` explains why, and `TestRoots` broadens to every current test root.
+
+This library API does not change the existing file-based `plan` command or test runner.
+
+```go
+plan, err := hexagon.PlanGitDiff(headGraph, gitDiff, baseGraph)
+if err != nil {
+	return err
+}
+if plan.RunFullSuite {
+	// Keep the safe full-suite fallback; the candidate roots remain diagnostic.
+}
+for _, testRoot := range plan.TestRoots {
+	// Each value is a graph function ID such as "pkg/service_test.go::TestUpdate".
+	_ = testRoot
+}
+```
+
 Build the CLI and rebuild a Go repository graph:
 
 ```sh
