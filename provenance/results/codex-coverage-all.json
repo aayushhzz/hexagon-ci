@@ -87,7 +87,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -182,7 +185,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -328,7 +334,10 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 1,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -494,7 +503,17 @@
         "datastore_calls": [],
         "service_count": 2,
         "call_count": 7,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 1,
+        "deps_result_checked_by_test": 0,
+        "response_links": [
+          {
+            "dep": "jobstore:CreateJob",
+            "path": "out.JobId",
+            "checked_by": null,
+            "checked": false
+          }
+        ]
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -538,7 +557,10 @@
           "statuses": [
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Should successfully convert conversation to ticket",
@@ -559,7 +581,12 @@
           "statuses": [
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Conversation",
+            "Conversation.Id",
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -709,7 +736,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -1393,7 +1423,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -2275,7 +2308,29 @@
         "datastore_calls": [],
         "service_count": 2,
         "call_count": 4,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 3,
+        "deps_result_checked_by_test": 0,
+        "response_links": [
+          {
+            "dep": "schemaregistry:GetAggregatedSchema",
+            "path": "out.Total",
+            "checked_by": null,
+            "checked": false
+          },
+          {
+            "dep": "wisp:CountSearch",
+            "path": "out.Total",
+            "checked_by": null,
+            "checked": false
+          },
+          {
+            "dep": "wisp:Search",
+            "path": "out.Total",
+            "checked_by": null,
+            "checked": false
+          }
+        ]
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -2306,7 +2361,10 @@
           "statuses": [
             400
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Filter by wrong type",
@@ -2318,7 +2376,11 @@
           "statuses": [
             400
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Status",
+            "StatusCode"
+          ]
         },
         {
           "name": "IssuesCount",
@@ -2330,7 +2392,11 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Count",
+            "StatusCode"
+          ]
         },
         {
           "name": "TicketsCount",
@@ -2342,7 +2408,11 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Count",
+            "StatusCode"
+          ]
         },
         {
           "name": "OpportunitiesCount",
@@ -2354,7 +2424,11 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Count",
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -2656,7 +2730,10 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 1,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -4834,7 +4911,10 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 12,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -5057,7 +5137,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -5083,7 +5166,11 @@
             "Title"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Milestone",
+            "StatusCode"
+          ]
         },
         {
           "name": "Creates with all optional fields",
@@ -5100,7 +5187,11 @@
             "Title"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Milestone",
+            "StatusCode"
+          ]
         },
         {
           "name": "Fails without title",
@@ -5111,7 +5202,10 @@
             "Status"
           ],
           "statuses": null,
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Fails without parent",
@@ -5122,7 +5216,10 @@
             "Title"
           ],
           "statuses": null,
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Fails with invalid parent ID",
@@ -5134,7 +5231,10 @@
             "Title"
           ],
           "statuses": null,
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -5510,7 +5610,173 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 2,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 18,
+        "deps_result_checked_by_test": 18,
+        "response_links": [
+          {
+            "dep": "schemaregistry:GetCustomStage",
+            "path": "out.Project",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomState",
+            "path": "out.Project",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomStage",
+            "path": "out.Project.Description",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomState",
+            "path": "out.Project.Description",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomStage",
+            "path": "out.Project.DevOid",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomState",
+            "path": "out.Project.DevOid",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomStage",
+            "path": "out.Project.DisplayId",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomState",
+            "path": "out.Project.DisplayId",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomStage",
+            "path": "out.Project.IsDeleted",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomState",
+            "path": "out.Project.IsDeleted",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomStage",
+            "path": "out.Project.LastSystemModificationVersion",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomState",
+            "path": "out.Project.LastSystemModificationVersion",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomStage",
+            "path": "out.Project.Name",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomState",
+            "path": "out.Project.Name",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomStage",
+            "path": "out.Project.ObjectType",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomState",
+            "path": "out.Project.ObjectType",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomStage",
+            "path": "out.Project.ObjectVersion",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomState",
+            "path": "out.Project.ObjectVersion",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          }
+        ]
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -5543,7 +5809,11 @@
             "OwnedBy"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Project",
+            "StatusCode"
+          ]
         },
         {
           "name": "Rejects create without owned_by",
@@ -5554,7 +5824,10 @@
             "OwnedBy"
           ],
           "statuses": null,
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Rejects create with an invalid stage DON",
@@ -5566,7 +5839,10 @@
             "Stage"
           ],
           "statuses": null,
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Rejects a custom field with an unknown schema key",
@@ -5579,7 +5855,12 @@
             "OwnedBy"
           ],
           "statuses": null,
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "Project",
+            "Project.Id",
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -6339,7 +6620,10 @@
         ],
         "service_count": 1,
         "call_count": 1,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -6356,7 +6640,10 @@
           "statuses": [
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -12554,7 +12841,10 @@
         "datastore_calls": [],
         "service_count": 3,
         "call_count": 39,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -12612,7 +12902,16 @@
             200,
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "ExternalCommunicationChannel",
+            "ExternalCommunicationChannel.Id",
+            "Part",
+            "Part.ValueByDiscriminator",
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
         },
         {
           "name": "Assigns milestone on WorksCreate",
@@ -12625,7 +12924,12 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsIssue"
+          ]
         },
         {
           "name": "Fails WorksCreate with milestone from a different Enhancement",
@@ -12638,7 +12942,10 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "CreateTicket",
@@ -12655,7 +12962,12 @@
           "statuses": [
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
         },
         {
           "name": "Create with only required fields",
@@ -12672,7 +12984,13 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Part",
+            "Part.ValueByDiscriminator",
+            "Work",
+            "Work.AsIssue"
+          ]
         },
         {
           "name": "Without Applies To Part",
@@ -12687,7 +13005,10 @@
           "statuses": [
             400
           ],
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Without Owned By",
@@ -12702,7 +13023,12 @@
           "statuses": [
             201
           ],
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "Part",
+            "Part.AsProduct",
+            "StatusCode"
+          ]
         },
         {
           "name": "Without Title",
@@ -12717,7 +13043,12 @@
           "statuses": [
             400
           ],
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "Part",
+            "Part.AsProduct",
+            "StatusCode"
+          ]
         },
         {
           "name": "Without Type",
@@ -12732,7 +13063,12 @@
           "statuses": [
             400
           ],
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "Part",
+            "Part.AsProduct",
+            "StatusCode"
+          ]
         },
         {
           "name": "Create with only required fields",
@@ -12748,7 +13084,15 @@
           "statuses": [
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Part",
+            "Part.AsProduct",
+            "StatusCode",
+            "Work",
+            "Work.AsIssue",
+            "Work.Type"
+          ]
         },
         {
           "name": "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation",
@@ -12770,7 +13114,8 @@
             200,
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": null
         },
         {
           "name": "Create with only required fields",
@@ -12786,7 +13131,13 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Part",
+            "Part.ValueByDiscriminator",
+            "Work",
+            "Work.AsTicket"
+          ]
         },
         {
           "name": "Create with email source channel and channel",
@@ -12806,7 +13157,16 @@
           "statuses": [
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "ExternalCommunicationChannel",
+            "ExternalCommunicationChannel.Id",
+            "Part",
+            "Part.ValueByDiscriminator",
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
         },
         {
           "name": "sets space on create",
@@ -12826,7 +13186,8 @@
           "statuses": [
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": null
         },
         {
           "name": "WithOnlyRequiredFields",
@@ -12842,7 +13203,13 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Part",
+            "Part.ValueByDiscriminator",
+            "Work",
+            "Work.AsIssue"
+          ]
         },
         {
           "name": "PartsMissing",
@@ -12857,7 +13224,10 @@
           "statuses": [
             400
           ],
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "OwnedByMissing",
@@ -12872,7 +13242,12 @@
           "statuses": [
             400
           ],
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "Part",
+            "Part.AsProduct",
+            "StatusCode"
+          ]
         },
         {
           "name": "Title",
@@ -12887,7 +13262,12 @@
           "statuses": [
             400
           ],
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "Part",
+            "Part.AsProduct",
+            "StatusCode"
+          ]
         },
         {
           "name": "Type",
@@ -12902,7 +13282,12 @@
           "statuses": [
             400
           ],
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "Part",
+            "Part.AsProduct",
+            "StatusCode"
+          ]
         },
         {
           "name": "WithOnlyRequiredFields",
@@ -12918,7 +13303,15 @@
           "statuses": [
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Part",
+            "Part.AsProduct",
+            "StatusCode",
+            "Work",
+            "Work.AsIssue",
+            "Work.Type"
+          ]
         },
         {
           "name": "WithOnlyRequiredFields",
@@ -12932,7 +13325,13 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Part",
+            "Part.ValueByDiscriminator",
+            "Work",
+            "Work.AsTicket"
+          ]
         }
       ]
     },
@@ -13048,7 +13447,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -13209,7 +13611,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -13341,7 +13746,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -13355,7 +13763,10 @@
             "Id"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Returns 404 when deleting a non-existent milestone",
@@ -13365,7 +13776,10 @@
             "Id"
           ],
           "statuses": null,
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -13500,7 +13914,10 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 2,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -13514,7 +13931,10 @@
             "Id"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -13664,7 +14084,10 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 2,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -13810,7 +14233,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -14002,7 +14428,10 @@
         "datastore_calls": [],
         "service_count": 2,
         "call_count": 3,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -14020,7 +14449,10 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "DeleteTicket2",
@@ -14034,7 +14466,10 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "DeleteTicket3",
@@ -14048,7 +14483,10 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "DeleteTicket1",
@@ -14062,7 +14500,10 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Admin - Should be able to delete an issue",
@@ -14075,7 +14516,8 @@
             "Id"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": null
         },
         {
           "name": "Without ID",
@@ -14085,7 +14527,10 @@
           "statuses": [
             400
           ],
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Delete by id",
@@ -14095,7 +14540,8 @@
             "Id"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": null
         },
         {
           "name": "Delete without id",
@@ -14105,7 +14551,10 @@
           "statuses": [
             400
           ],
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "DefaultDelete",
@@ -14117,7 +14566,8 @@
             "Id"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": null
         },
         {
           "name": "DefaultDelete",
@@ -14129,7 +14579,8 @@
             "Id"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": null
         },
         {
           "name": "DefaultDelete",
@@ -14139,7 +14590,10 @@
           "statuses": [
             400
           ],
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -14263,7 +14717,10 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 2,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -14454,7 +14911,41 @@
         "datastore_calls": [],
         "service_count": 2,
         "call_count": 6,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 5,
+        "deps_result_checked_by_test": 0,
+        "response_links": [
+          {
+            "dep": "schemaregistry:GetUpgradeInstructionsV2",
+            "path": "out.Conversation",
+            "checked_by": null,
+            "checked": false
+          },
+          {
+            "dep": "schemaregistry:GetUpgradeInstructionsV2",
+            "path": "out.Conversation.DevOid",
+            "checked_by": null,
+            "checked": false
+          },
+          {
+            "dep": "schemaregistry:GetUpgradeInstructionsV2",
+            "path": "out.Conversation.DisplayId",
+            "checked_by": null,
+            "checked": false
+          },
+          {
+            "dep": "schemaregistry:GetUpgradeInstructionsV2",
+            "path": "out.Conversation.ObjectType",
+            "checked_by": null,
+            "checked": false
+          },
+          {
+            "dep": "schemaregistry:GetUpgradeInstructionsV2",
+            "path": "out.Conversation.ObjectVersion",
+            "checked_by": null,
+            "checked": false
+          }
+        ]
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -14473,7 +14964,10 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -14603,7 +15097,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -14617,7 +15114,10 @@
             "Id"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Gets an existing milestone with all fields matching creation",
@@ -14627,7 +15127,11 @@
             "Id"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Milestone",
+            "StatusCode"
+          ]
         },
         {
           "name": "Returns 404 for a non-existent ID",
@@ -14637,7 +15141,10 @@
             "Id"
           ],
           "statuses": null,
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Returns 404 after the milestone is deleted",
@@ -14647,7 +15154,10 @@
             "Id"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -14801,7 +15311,61 @@
         "datastore_calls": [],
         "service_count": 2,
         "call_count": 3,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 5,
+        "deps_result_checked_by_test": 5,
+        "response_links": [
+          {
+            "dep": "schemaregistry:GetUpgradeInstructionsV2",
+            "path": "out.Project",
+            "checked_by": [
+              "Gets an existing project with fields matching creation",
+              "Persists a custom field across Create → Get",
+              "Updates a custom field via ProjectsUpdate"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetUpgradeInstructionsV2",
+            "path": "out.Project.DevOid",
+            "checked_by": [
+              "Gets an existing project with fields matching creation",
+              "Persists a custom field across Create → Get",
+              "Updates a custom field via ProjectsUpdate"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetUpgradeInstructionsV2",
+            "path": "out.Project.DisplayId",
+            "checked_by": [
+              "Gets an existing project with fields matching creation",
+              "Persists a custom field across Create → Get",
+              "Updates a custom field via ProjectsUpdate"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetUpgradeInstructionsV2",
+            "path": "out.Project.ObjectType",
+            "checked_by": [
+              "Gets an existing project with fields matching creation",
+              "Persists a custom field across Create → Get",
+              "Updates a custom field via ProjectsUpdate"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetUpgradeInstructionsV2",
+            "path": "out.Project.ObjectVersion",
+            "checked_by": [
+              "Gets an existing project with fields matching creation",
+              "Persists a custom field across Create → Get",
+              "Updates a custom field via ProjectsUpdate"
+            ],
+            "checked": true
+          }
+        ]
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -14824,7 +15388,11 @@
             "Id"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Project",
+            "StatusCode"
+          ]
         },
         {
           "name": "Returns 404 for a non-existent project",
@@ -14834,7 +15402,10 @@
             "Id"
           ],
           "statuses": null,
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Persists a custom field across Create → Get",
@@ -14846,7 +15417,13 @@
             "OwnedBy"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Project",
+            "Project.CustomFields",
+            "Project.Id",
+            "StatusCode"
+          ]
         },
         {
           "name": "Updates a custom field via ProjectsUpdate",
@@ -14858,7 +15435,13 @@
             "OwnedBy"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Project",
+            "Project.CustomFields",
+            "Project.Id",
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -15037,7 +15620,10 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 1,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -15067,7 +15653,10 @@
             200,
             404
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Successfully retrieved vista group item",
@@ -15079,7 +15668,10 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Successfully moved items between vista groups",
@@ -15094,7 +15686,11 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "GetVistaGroup",
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -15299,7 +15895,10 @@
         "datastore_calls": [],
         "service_count": 2,
         "call_count": 3,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -15331,7 +15930,12 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsIssue"
+          ]
         },
         {
           "name": "CreateTicketPart1",
@@ -15349,7 +15953,12 @@
           "statuses": [
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
         },
         {
           "name": "CreateTicketPart2",
@@ -15367,7 +15976,12 @@
           "statuses": [
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
         },
         {
           "name": "CreateTicketPart3",
@@ -15385,7 +15999,12 @@
           "statuses": [
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
         },
         {
           "name": "CheckIfGroupIsAssignedLoopPart1",
@@ -15399,7 +16018,12 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
         },
         {
           "name": "CheckIfGroupIsAssignedLoopPart2",
@@ -15413,7 +16037,12 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
         },
         {
           "name": "CheckIfGroupIsAssignedLoopPart3",
@@ -15427,7 +16056,12 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
         },
         {
           "name": "CheckIfGroupIsAssigned",
@@ -15441,7 +16075,12 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
         },
         {
           "name": "CheckIfGroupIsAssignedLoop",
@@ -15455,7 +16094,12 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
         },
         {
           "name": "Admin - Should be able to get an issue",
@@ -15470,7 +16114,12 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsIssue"
+          ]
         },
         {
           "name": "Get by id",
@@ -15484,7 +16133,12 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
         },
         {
           "name": "DefaultGet",
@@ -15498,7 +16152,12 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsIssue"
+          ]
         },
         {
           "name": "DefaultGet",
@@ -15512,7 +16171,12 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
         },
         {
           "name": "Platform user should be able to perform all CRUD operations",
@@ -15527,7 +16191,10 @@
           "statuses": [
             404
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -18699,7 +19366,10 @@
         ],
         "service_count": 1,
         "call_count": 1,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -18725,7 +19395,14 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Groups",
+            "Groups.Conversations",
+            "Groups.Conversations.Stage",
+            "Groups.Conversations.Stage.Name",
+            "StatusCode"
+          ]
         },
         {
           "name": "Should throw error for invalid group by",
@@ -18740,7 +19417,10 @@
           "statuses": [
             400
           ],
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -18856,7 +19536,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -18976,7 +19659,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -20742,7 +21428,40 @@
         ],
         "service_count": 3,
         "call_count": 5,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 4,
+        "deps_result_checked_by_test": 1,
+        "response_links": [
+          {
+            "dep": "wisp:GroupSearch",
+            "path": "out.Groups",
+            "checked_by": [
+              "should create tickets and group by parts without sorting",
+              "should create tickets with multiple owners, group them, and verify group order",
+              "should create tickets, group by parts, and sort by created date",
+              "should groupby stage and verify tickets"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "wisp:GroupSearch",
+            "path": "out.IsLastPage",
+            "checked_by": null,
+            "checked": false
+          },
+          {
+            "dep": "wisp:GroupSearch",
+            "path": "out.NextCursor",
+            "checked_by": null,
+            "checked": false
+          },
+          {
+            "dep": "wisp:GroupSearch",
+            "path": "out.PrevCursor",
+            "checked_by": null,
+            "checked": false
+          }
+        ]
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -20821,7 +21540,10 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Groups"
+          ]
         },
         {
           "name": "should create tickets and group by parts without sorting",
@@ -20843,7 +21565,10 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Groups"
+          ]
         },
         {
           "name": "should create tickets, group by parts, and sort by created date",
@@ -20866,7 +21591,10 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Groups"
+          ]
         },
         {
           "name": "should create tickets with multiple owners, group them, and verify group order",
@@ -20887,7 +21615,11 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Groups",
+            "Works"
+          ]
         }
       ]
     },
@@ -21061,7 +21793,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -21239,7 +21974,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -21425,7 +22163,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -22200,7 +22941,10 @@
         ],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -25270,7 +26014,10 @@
         ],
         "service_count": 2,
         "call_count": 2,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -25309,7 +26056,11 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Count",
+            "StatusCode"
+          ]
         },
         {
           "name": "ConversationsCount",
@@ -25319,7 +26070,11 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Count",
+            "StatusCode"
+          ]
         },
         {
           "name": "should create conversations and group by members without sorting",
@@ -25332,7 +26087,11 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Conversations",
+            "StatusCode"
+          ]
         },
         {
           "name": "should create conversations, group by messages and sort by created date",
@@ -25347,7 +26106,12 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Conversations",
+            "Conversations.CreatedDate",
+            "StatusCode"
+          ]
         },
         {
           "name": "should create conversations with multiple titles, verify creation and listing",
@@ -25366,7 +26130,13 @@
             200,
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Conversation",
+            "Conversations",
+            "Id",
+            "StatusCode"
+          ]
         },
         {
           "name": "should create conversations with different valid parts, verify grouping",
@@ -25384,7 +26154,13 @@
             200,
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Conversation",
+            "Conversation.Id",
+            "Conversations",
+            "StatusCode"
+          ]
         },
         {
           "name": "Should be able to list all conversation object for DevUser",
@@ -25399,7 +26175,10 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Should throw error for invalid sort by key",
@@ -25415,7 +26194,10 @@
           "statuses": [
             400
           ],
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "should return lobbies",
@@ -25425,7 +26207,10 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "should return error",
@@ -25435,7 +26220,10 @@
           "statuses": [
             401
           ],
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -25551,7 +26339,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -25707,7 +26498,29 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 1,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 3,
+        "deps_result_checked_by_test": 0,
+        "response_links": [
+          {
+            "dep": "wisp:PrefixSearchV2",
+            "path": "out.NextCursor",
+            "checked_by": null,
+            "checked": false
+          },
+          {
+            "dep": "wisp:PrefixSearchV2",
+            "path": "out.PrevCursor",
+            "checked_by": null,
+            "checked": false
+          },
+          {
+            "dep": "wisp:PrefixSearchV2",
+            "path": "out.Projects",
+            "checked_by": null,
+            "checked": false
+          }
+        ]
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -26471,7 +27284,10 @@
         ],
         "service_count": 1,
         "call_count": 1,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -26487,7 +27303,10 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -28253,7 +29072,51 @@
         ],
         "service_count": 4,
         "call_count": 7,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 6,
+        "deps_result_checked_by_test": 2,
+        "response_links": [
+          {
+            "dep": "wisp:CoreSearchV2",
+            "path": "out.IsLastPage",
+            "checked_by": null,
+            "checked": false
+          },
+          {
+            "dep": "wisp:Search",
+            "path": "out.IsLastPage",
+            "checked_by": null,
+            "checked": false
+          },
+          {
+            "dep": "wisp:CoreSearchV2",
+            "path": "out.Total",
+            "checked_by": null,
+            "checked": false
+          },
+          {
+            "dep": "wisp:Search",
+            "path": "out.Total",
+            "checked_by": null,
+            "checked": false
+          },
+          {
+            "dep": "wisp:CoreSearchV2",
+            "path": "out.Works",
+            "checked_by": [
+              "WorksExport"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "wisp:Search",
+            "path": "out.Works",
+            "checked_by": [
+              "WorksExport"
+            ],
+            "checked": true
+          }
+        ]
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -28347,7 +29210,15 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Part",
+            "Part.ValueByDiscriminator",
+            "StatusCode",
+            "Work",
+            "Work.AsIssue",
+            "Works"
+          ]
         },
         {
           "name": "Applies To Part",
@@ -28359,7 +29230,11 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Part",
+            "Part.ValueByDiscriminator"
+          ]
         },
         {
           "name": "Limit and Pagination",
@@ -28371,7 +29246,10 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "NextCursor"
+          ]
         },
         {
           "name": "Filter by applies to part",
@@ -28383,7 +29261,11 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Part",
+            "Part.ValueByDiscriminator"
+          ]
         },
         {
           "name": "Filter by type ",
@@ -28395,7 +29277,10 @@
           "statuses": [
             200
           ],
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Filter by type with limit with pagination",
@@ -28409,7 +29294,10 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "NextCursor"
+          ]
         },
         {
           "name": "Filter by stages",
@@ -28421,7 +29309,8 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": null
         },
         {
           "name": "Invalid filter",
@@ -28436,7 +29325,10 @@
           "statuses": [
             400
           ],
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "ApplitiesToPart",
@@ -28448,7 +29340,11 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Part",
+            "Part.ValueByDiscriminator"
+          ]
         },
         {
           "name": "LimitCursorType",
@@ -28462,7 +29358,10 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "NextCursor"
+          ]
         },
         {
           "name": "WithLimit",
@@ -28473,7 +29372,10 @@
             "Limit"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "NextCursor"
+          ]
         },
         {
           "name": "lists issues filtered by space id",
@@ -28495,7 +29397,8 @@
             200,
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": null
         },
         {
           "name": "lists issues with space hierarchy include_children include_parents include_global",
@@ -28517,7 +29420,8 @@
             200,
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": null
         },
         {
           "name": "lists tickets filtered by space id",
@@ -28539,7 +29443,8 @@
             200,
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": null
         },
         {
           "name": "lists tickets with space hierarchy include_children include_parents include_global",
@@ -28561,7 +29466,8 @@
             200,
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": null
         }
       ]
     },
@@ -28669,7 +29575,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -28830,7 +29739,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -29105,7 +30017,10 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 2,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -29299,7 +30214,10 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 1,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -29566,7 +30484,10 @@
         "datastore_calls": [],
         "service_count": 3,
         "call_count": 4,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -29610,7 +30531,10 @@
             "MergeWith"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Merge same ticket",
@@ -29623,7 +30547,10 @@
           "statuses": [
             400
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Should successfully merge two tickets and verify merged ticket",
@@ -29644,7 +30571,10 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Should validate negative scenarios for ticket merging with different workspaces",
@@ -29665,7 +30595,10 @@
           "statuses": [
             400
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Should successfully merge tickets from different source channels",
@@ -29686,7 +30619,10 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -29899,7 +30835,10 @@
         "datastore_calls": [],
         "service_count": 3,
         "call_count": 4,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -30101,7 +31040,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -31716,7 +32658,10 @@
         ],
         "service_count": 1,
         "call_count": 1,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -33260,7 +34205,23 @@
         ],
         "service_count": 2,
         "call_count": 4,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 2,
+        "deps_result_checked_by_test": 0,
+        "response_links": [
+          {
+            "dep": "wisp:CoreSearchV2",
+            "path": "out.NextCursor",
+            "checked_by": null,
+            "checked": false
+          },
+          {
+            "dep": "wisp:CoreSearchV2",
+            "path": "out.Works",
+            "checked_by": null,
+            "checked": false
+          }
+        ]
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -33385,7 +34346,10 @@
         ],
         "service_count": 1,
         "call_count": 1,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -33678,7 +34642,10 @@
         "datastore_calls": [],
         "service_count": 2,
         "call_count": 3,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -35580,7 +36547,10 @@
         "datastore_calls": [],
         "service_count": 2,
         "call_count": 3,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -35620,7 +36590,8 @@
             200,
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": null
         },
         {
           "name": "Should verify complete conversation stage transition workflow",
@@ -35641,7 +36612,12 @@
             200,
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Conversation",
+            "Conversation.Id",
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -35792,7 +36768,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -35824,7 +36803,12 @@
             "Title"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Milestone",
+            "Milestone.Title",
+            "StatusCode"
+          ]
         },
         {
           "name": "Updates description",
@@ -35835,7 +36819,12 @@
             "Id"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Milestone",
+            "Milestone.Description",
+            "StatusCode"
+          ]
         },
         {
           "name": "Updates due_date",
@@ -35846,7 +36835,12 @@
             "Id"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Milestone",
+            "Milestone.DueDate",
+            "StatusCode"
+          ]
         },
         {
           "name": "Updates status through all transitions",
@@ -35857,7 +36851,13 @@
             "Status"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Milestone",
+            "Milestone.Status",
+            "Milestone.Status.Id",
+            "StatusCode"
+          ]
         },
         {
           "name": "Returns 404 for non-existent milestone",
@@ -35868,7 +36868,10 @@
             "Title"
           ],
           "statuses": null,
-          "asserts_success": false
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Returns 404 when updating a deleted milestone",
@@ -35879,7 +36882,10 @@
             "Title"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -36204,7 +37210,10 @@
         "datastore_calls": [],
         "service_count": 2,
         "call_count": 7,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -36231,7 +37240,10 @@
             "Stage"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "Returns 404 when updating a soft-deleted project",
@@ -36242,7 +37254,10 @@
             "Stage"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -36491,7 +37506,10 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 2,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -36513,7 +37531,10 @@
           "statuses": [
             200
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -43059,7 +44080,10 @@
         "datastore_calls": [],
         "service_count": 4,
         "call_count": 13,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -43117,7 +44141,17 @@
             200,
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "ExternalCommunicationChannel",
+            "ExternalCommunicationChannel.Id",
+            "Part",
+            "Part.AsProduct",
+            "StatusCode",
+            "Work",
+            "Work.AsTicket",
+            "Work.Type"
+          ]
         },
         {
           "name": "Assigns milestone on WorksUpdate",
@@ -43128,7 +44162,12 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsIssue"
+          ]
         },
         {
           "name": "Unassigns milestone via WorksUpdate with null",
@@ -43139,7 +44178,12 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsIssue"
+          ]
         },
         {
           "name": "Fails WorksUpdate with milestone from a different Enhancement",
@@ -43150,7 +44194,10 @@
             "Type"
           ],
           "statuses": null,
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         },
         {
           "name": "sets display_id_alias from space key on create and updates prefix when space changes",
@@ -43173,7 +44220,8 @@
             200,
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": null
         },
         {
           "name": "WorksUpdate rejects incompatible subtype or space changes",
@@ -43195,7 +44243,8 @@
           "statuses": [
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": null
         },
         {
           "name": "Update with only required fields",
@@ -43216,7 +44265,15 @@
             200,
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Part",
+            "Part.AsProduct",
+            "StatusCode",
+            "Work",
+            "Work.AsIssue",
+            "Work.Type"
+          ]
         },
         {
           "name": "WorksUpdate rejects incompatible subtype changes",
@@ -43238,7 +44295,8 @@
           "statuses": [
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": null
         },
         {
           "name": "Update with required fields",
@@ -43258,7 +44316,15 @@
             200,
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Part",
+            "Part.AsProduct",
+            "StatusCode",
+            "Work",
+            "Work.AsTicket",
+            "Work.Type"
+          ]
         }
       ]
     },
@@ -43521,7 +44587,10 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -44036,7 +45105,10 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 1,
-        "reached_by_test": false
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -44208,7 +45280,10 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 1,
-        "reached_by_test": true
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -44247,7 +45322,13 @@
             200,
             201
           ],
-          "asserts_success": true
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Conversation",
+            "Conversation.Id",
+            "StatusCode",
+            "Title"
+          ]
         }
       ]
     }

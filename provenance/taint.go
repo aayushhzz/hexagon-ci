@@ -144,6 +144,7 @@ func (l *loaded) analyze(ep entrypoint, dir string) *Provenance {
 		a.cur.InputPaths = append(a.cur.InputPaths, InputPath{Path: p, Kinds: ks})
 	}
 	sort.Slice(a.cur.InputPaths, func(i, j int) bool { return a.cur.InputPaths[i].Path < a.cur.InputPaths[j].Path })
+	l.analyzeOutput(ep, a.cur)
 	return a.cur
 }
 

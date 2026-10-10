@@ -14,6 +14,11 @@ type loaded struct {
 	prog     *ssa.Program
 	pkgs     map[string]*packages.Package // keyed by PkgPath
 	ssaByPkg map[string]*ssa.Package
+
+	// Output-provenance caches, shared across all RPCs of one program run.
+	outCache  map[string]map[int]depval // outSignature -> per-result dep paths
+	depMemo   map[string]int            // fn.String() -> 0 unknown, 1 yes, 2 no
+	outBudget int                       // shared step budget for the output pass
 }
 
 // load type-checks the target module at dir and builds SSA. Dependencies are

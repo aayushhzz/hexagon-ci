@@ -1750,7 +1750,19 @@
       "datastore_calls": [],
       "service_count": 0,
       "call_count": 0,
-      "reached_by_test": true
+      "reached_by_test": true,
+      "deps_result_used_in_response": 1,
+      "deps_result_checked_by_test": 1,
+      "response_links": [
+        {
+          "dep": "schemaregistry:GetAggregatedSchema",
+          "path": "out.Total",
+          "checked_by": [
+            "RevUsersCount"
+          ],
+          "checked": true
+        }
+      ]
     },
     "anomalies": {
       "unmatched_test_fields": null
@@ -1764,7 +1776,11 @@
         "statuses": [
           200
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Count",
+          "StatusCode"
+        ]
       }
     ]
   },

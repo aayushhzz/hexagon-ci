@@ -6,12 +6,19 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"runtime/debug"
 	"sort"
 	"strings"
 	"time"
 )
 
 func main() {
+	// Large services (e.g. codex) build a multi-GB SSA program. Favour more
+	// frequent GC to keep peak memory well below machine limits unless the user
+	// has set GOGC explicitly.
+	if os.Getenv("GOGC") == "" {
+		debug.SetGCPercent(40)
+	}
 	var (
 		dir        = flag.String("dir", ".", "target module directory to analyze")
 		patterns   = flag.String("patterns", "./internal/service/...", "comma-separated package patterns")
@@ -170,7 +177,8 @@ func main() {
 		reports := make([]CoverageReport, 0, len(results))
 		for _, p := range results {
 			eff := effectiveAliases(fm, p.RPC, aliases)
-			reports = append(reports, buildCoverage(p, byRPC[p.RPC], byRPCOp[p.RPC], eff, statusMap))
+			respEff := effectiveResponseAliases(fm, p.RPC)
+			reports = append(reports, buildCoverage(p, byRPC[p.RPC], byRPCOp[p.RPC], eff, respEff, statusMap))
 		}
 		if *scaffold != "" {
 			if err := writeScaffold(*scaffold, reports); err != nil {

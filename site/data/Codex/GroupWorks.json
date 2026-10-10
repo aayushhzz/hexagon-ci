@@ -1758,7 +1758,40 @@
       ],
       "service_count": 3,
       "call_count": 5,
-      "reached_by_test": true
+      "reached_by_test": true,
+      "deps_result_used_in_response": 4,
+      "deps_result_checked_by_test": 1,
+      "response_links": [
+        {
+          "dep": "wisp:GroupSearch",
+          "path": "out.Groups",
+          "checked_by": [
+            "should create tickets and group by parts without sorting",
+            "should create tickets with multiple owners, group them, and verify group order",
+            "should create tickets, group by parts, and sort by created date",
+            "should groupby stage and verify tickets"
+          ],
+          "checked": true
+        },
+        {
+          "dep": "wisp:GroupSearch",
+          "path": "out.IsLastPage",
+          "checked_by": null,
+          "checked": false
+        },
+        {
+          "dep": "wisp:GroupSearch",
+          "path": "out.NextCursor",
+          "checked_by": null,
+          "checked": false
+        },
+        {
+          "dep": "wisp:GroupSearch",
+          "path": "out.PrevCursor",
+          "checked_by": null,
+          "checked": false
+        }
+      ]
     },
     "anomalies": {
       "unmatched_test_fields": [
@@ -1837,7 +1870,10 @@
         "statuses": [
           200
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Groups"
+        ]
       },
       {
         "name": "should create tickets and group by parts without sorting",
@@ -1859,7 +1895,10 @@
         "statuses": [
           200
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Groups"
+        ]
       },
       {
         "name": "should create tickets, group by parts, and sort by created date",
@@ -1882,7 +1921,10 @@
         "statuses": [
           200
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Groups"
+        ]
       },
       {
         "name": "should create tickets with multiple owners, group them, and verify group order",
@@ -1903,7 +1945,11 @@
         "statuses": [
           200
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Groups",
+          "Works"
+        ]
       }
     ]
   },

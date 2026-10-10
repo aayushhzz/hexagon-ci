@@ -3062,7 +3062,10 @@
       ],
       "service_count": 2,
       "call_count": 2,
-      "reached_by_test": true
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
     },
     "anomalies": {
       "unmatched_test_fields": [
@@ -3101,7 +3104,11 @@
         "statuses": [
           200
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Count",
+          "StatusCode"
+        ]
       },
       {
         "name": "ConversationsCount",
@@ -3111,7 +3118,11 @@
         "statuses": [
           200
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Count",
+          "StatusCode"
+        ]
       },
       {
         "name": "should create conversations and group by members without sorting",
@@ -3124,7 +3135,11 @@
         "statuses": [
           200
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Conversations",
+          "StatusCode"
+        ]
       },
       {
         "name": "should create conversations, group by messages and sort by created date",
@@ -3139,7 +3154,12 @@
         "statuses": [
           200
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Conversations",
+          "Conversations.CreatedDate",
+          "StatusCode"
+        ]
       },
       {
         "name": "should create conversations with multiple titles, verify creation and listing",
@@ -3158,7 +3178,13 @@
           200,
           201
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversations",
+          "Id",
+          "StatusCode"
+        ]
       },
       {
         "name": "should create conversations with different valid parts, verify grouping",
@@ -3176,7 +3202,13 @@
           200,
           201
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversation.Id",
+          "Conversations",
+          "StatusCode"
+        ]
       },
       {
         "name": "Should be able to list all conversation object for DevUser",
@@ -3191,7 +3223,10 @@
         "statuses": [
           200
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
       },
       {
         "name": "Should throw error for invalid sort by key",
@@ -3207,7 +3242,10 @@
         "statuses": [
           400
         ],
-        "asserts_success": false
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
       },
       {
         "name": "should return lobbies",
@@ -3217,7 +3255,10 @@
         "statuses": [
           200
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
       },
       {
         "name": "should return error",
@@ -3227,7 +3268,10 @@
         "statuses": [
           401
         ],
-        "asserts_success": false
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
       }
     ]
   },

@@ -82,6 +82,7 @@ const HELP = {
   depth: "The same input field coverage, split by how deeply nested each field is, so a few important top-level fields are not lost among large optional sub-sections.",
   mapped: "Linked means a test could be matched to this endpoint. Not linked means no test matched (the endpoint is internal or admin, or its name could not be worked out). A not-linked endpoint shows 'Not measured' instead of a fake zero, and does not mean no tests exist for it.",
   deps: "Other services and the datastore this endpoint calls while handling the request. Input and branch coverage do not see these, so a read-or-enrich endpoint can look empty while its real work is here. 'Reached by a test' means a passing test calls this endpoint, so these calls run on that path. It does not prove the test checks what came back.",
+  verified: "When a service call's result is copied into a response field, we check whether a test actually asserts on that field. 'Used in response' is where the result lands (found by tracing the code). 'Checked by a test' means a test verifies that field, so the call's result is really being tested, not just triggered. Datastore reads are left out on purpose. Field names are matched proto-to-HTTP through a reviewed map, so a rename can still be missed.",
 };
 
 function setCrumbs(parts) {
@@ -146,6 +147,7 @@ async function viewServices(token) {
         ${mm("Branches reached", s.present_pct, "reached")}
         ${mm("Error paths tested", s.negative_pct, "errorPath")}
         ${mm("Response codes checked", s.status_pct, "status")}
+        ${s.dep_used ? mm("Dependency results checked", Math.round(100 * (s.dep_checked || 0) / s.dep_used), "status") : ""}
       </div>
     </a>`;
   }).join("");
@@ -226,6 +228,7 @@ async function viewService(svc, token) {
       ${stat("Normal paths tested", absentRes, `${t.absent_arm} / ${t.reachable_on_happy} branches`, "normalPath")}
       ${stat("Response codes checked", statusRes, `${t.status_asserted} / ${t.status_documented} documented`, "status")}
       ${stat("Calls other services", { kind: "value", text: String(t.dep_rpcs || 0) }, `${t.dep_rpcs_reached || 0} of ${t.dep_rpcs || 0} reached by a test`, "deps")}
+      ${stat("Dependency results checked", (t.dep_used ? fmtPct(t.dep_checked || 0, t.dep_used) : { kind: "unknown", text: "n/a" }), `${t.dep_checked || 0} of ${t.dep_used || 0} results in the response asserted`, "verified")}
       ${stat("Inputs missing from tests", { kind: "value", text: String(t.anomalies) }, "Request fields that did not line up with an input", "anomalies")}
     </div>
 
@@ -474,6 +477,10 @@ async function viewRpc(svc, rpc, token) {
   const depServiceRows = (dep.services || []).map((s) =>
     `<div class="kv"><span class="k">${esc(s.service)}</span><span class="v"><small>${esc((s.calls || []).join(", "))}</small></span></div>`
   ).join("");
+  const linkRows = (dep.response_links || []).map((l) =>
+    `<div class="kv"><span class="k"><small>${esc(l.path)} &larr; ${esc(l.dep)}</small></span>
+      <span class="v">${l.checked ? '<span class="status-state asserted"><span class="dot"></span>checked</span>' : '<span class="status-state missing"><span class="dot"></span>not checked</span>'}</span></div>`
+  ).join("");
   const depPanel = `
     <div class="panel">
       <h3>Dependencies ${help(HELP.deps)}</h3>
@@ -483,6 +490,16 @@ async function viewRpc(svc, rpc, token) {
         ${depServiceRows || '<div class="kv"><span class="k">(none)</span><span class="v"></span></div>'}
         <div class="kv"><span class="k">Datastore operations</span><span class="v"><small>${esc((dep.datastore_calls || []).join(", ")) || "none"}</small></span></div>
         <div class="kv"><span class="k">Reached by a passing test</span><span class="v">${dep.reached_by_test ? "yes" : "no"}</span></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Dependency results verified ${help(HELP.verified)}</h3>
+      <p class="panel-sub">Is a service call's result actually checked by a test, not just triggered?</p>
+      <div class="kv-list">
+        <div class="kv"><span class="k">Results used in the response</span><span class="v">${dep.deps_result_used_in_response || 0}</span></div>
+        <div class="kv"><span class="k">Of those, checked by a test</span>
+          <span class="v">${esc(fmtPct(dep.deps_result_checked_by_test || 0, dep.deps_result_used_in_response || 0, { unmapped }).text)} <small>${dep.deps_result_checked_by_test || 0}/${dep.deps_result_used_in_response || 0}</small></span></div>
+        ${linkRows || '<div class="kv"><span class="k"><small>No service result flows into the response.</small></span><span class="v"></span></div>'}
       </div>
     </div>`;
 

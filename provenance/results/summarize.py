@@ -55,6 +55,9 @@ def main():
         status_asserted_documented += len(set(asserted) & set(documented))
         anomalies_total += len((entry.get("anomalies") or {}).get("unmatched_test_fields") or [])
 
+    dep_used = sum((entry.get("dependencies") or {}).get("deps_result_used_in_response", 0) or 0 for entry in mapped)
+    dep_checked = sum((entry.get("dependencies") or {}).get("deps_result_checked_by_test", 0) or 0 for entry in mapped)
+
     lines = [
         "# Janus full-repo coverage summary",
         "",
@@ -72,6 +75,8 @@ def main():
         f"- All-branch negative-arm over mapped RPCs: **{fmt_pct(pct(branch_negative, branch_total))}** ({branch_negative}/{branch_total})",
         f"- Branch absent-arm (happy path) over reachable guards: **{fmt_pct(pct(branch_absent, branch_reachable))}** ({branch_absent}/{branch_reachable})",
         f"- Aggregate status coverage over mapped RPCs: **{fmt_pct(pct(status_asserted_documented, status_documented))}** ({status_asserted_documented}/{status_documented})",
+        f"- Dependency results flowing into the response over mapped RPCs: **{dep_used}**",
+        f"- Of those, checked by a test: **{fmt_pct(pct(dep_checked, dep_used))}** ({dep_checked}/{dep_used})",
         f"- Total field anomalies across mapped RPCs: **{anomalies_total}**",
         "",
         "## Mapped RPCs",

@@ -11,6 +11,10 @@ import (
 type FieldMap struct {
 	Global map[string]string            `json:"global"`
 	ByRPC  map[string]map[string]string `json:"by_rpc"`
+	// Response maps a proto response field name to the HTTP response field name
+	// tests assert, for response/output coverage. ResponseByRPC overrides per RPC.
+	Response      map[string]string            `json:"response"`
+	ResponseByRPC map[string]map[string]string `json:"response_by_rpc"`
 }
 
 // loadFieldMap reads a field map JSON file. A missing file is not an error.
@@ -43,6 +47,19 @@ func effectiveAliases(fm FieldMap, rpc string, cliAliases map[string]string) map
 	}
 	for key, value := range cliAliases {
 		aliases[key] = value
+	}
+	return aliases
+}
+
+// effectiveResponseAliases merges global and per-RPC proto->HTTP response field
+// renames, used by response/output coverage matching.
+func effectiveResponseAliases(fm FieldMap, rpc string) map[string]string {
+	aliases := make(map[string]string, len(fm.Response)+len(fm.ResponseByRPC[rpc]))
+	for key, value := range fm.Response {
+		aliases[canon(key)] = value
+	}
+	for key, value := range fm.ResponseByRPC[rpc] {
+		aliases[canon(key)] = value
 	}
 	return aliases
 }

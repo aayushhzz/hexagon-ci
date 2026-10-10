@@ -874,7 +874,29 @@
       "datastore_calls": [],
       "service_count": 2,
       "call_count": 4,
-      "reached_by_test": true
+      "reached_by_test": true,
+      "deps_result_used_in_response": 3,
+      "deps_result_checked_by_test": 0,
+      "response_links": [
+        {
+          "dep": "schemaregistry:GetAggregatedSchema",
+          "path": "out.Total",
+          "checked_by": null,
+          "checked": false
+        },
+        {
+          "dep": "wisp:CountSearch",
+          "path": "out.Total",
+          "checked_by": null,
+          "checked": false
+        },
+        {
+          "dep": "wisp:Search",
+          "path": "out.Total",
+          "checked_by": null,
+          "checked": false
+        }
+      ]
     },
     "anomalies": {
       "unmatched_test_fields": [
@@ -905,7 +927,10 @@
         "statuses": [
           400
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
       },
       {
         "name": "Filter by wrong type",
@@ -917,7 +942,11 @@
         "statuses": [
           400
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Status",
+          "StatusCode"
+        ]
       },
       {
         "name": "IssuesCount",
@@ -929,7 +958,11 @@
         "statuses": [
           200
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Count",
+          "StatusCode"
+        ]
       },
       {
         "name": "TicketsCount",
@@ -941,7 +974,11 @@
         "statuses": [
           200
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Count",
+          "StatusCode"
+        ]
       },
       {
         "name": "OpportunitiesCount",
@@ -953,7 +990,11 @@
         "statuses": [
           200
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Count",
+          "StatusCode"
+        ]
       }
     ]
   },

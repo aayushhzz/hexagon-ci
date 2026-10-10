@@ -110,6 +110,8 @@ def summary_row(entry):
         "gap_count": len(f.get("gaps") or []),
         "dep_services": (entry.get("dependencies") or {}).get("service_count", 0) or 0,
         "dep_reached": bool((entry.get("dependencies") or {}).get("reached_by_test", False)),
+        "dep_used": (entry.get("dependencies") or {}).get("deps_result_used_in_response", 0) or 0,
+        "dep_checked": (entry.get("dependencies") or {}).get("deps_result_checked_by_test", 0) or 0,
     }
 
 
@@ -132,6 +134,8 @@ def build_service(service, cov, prov):
     )
     dep_rpcs = [e for e in mapped if (e.get("dependencies") or {}).get("service_count", 0)]
     dep_reached = [e for e in dep_rpcs if (e.get("dependencies") or {}).get("reached_by_test")]
+    dep_used = sum((e.get("dependencies") or {}).get("deps_result_used_in_response", 0) or 0 for e in mapped)
+    dep_checked = sum((e.get("dependencies") or {}).get("deps_result_checked_by_test", 0) or 0 for e in mapped)
     totals = {
         "rpcs": len(entries),
         "mapped": len(mapped),
@@ -148,6 +152,8 @@ def build_service(service, cov, prov):
         "anomalies": anomalies_total,
         "dep_rpcs": len(dep_rpcs),
         "dep_rpcs_reached": len(dep_reached),
+        "dep_used": dep_used,
+        "dep_checked": dep_checked,
     }
     totals["field_pct"] = pct(totals["field_covered"], totals["field_total"])
     totals["present_pct"] = pct(totals["present_arm"], totals["branch_total"])
@@ -188,6 +194,9 @@ def build_service(service, cov, prov):
         "negative_pct": totals["negative_pct"],
         "status_pct": totals["status_pct"],
         "anomalies": totals["anomalies"],
+        "dep_rpcs": totals.get("dep_rpcs", 0),
+        "dep_used": totals.get("dep_used", 0),
+        "dep_checked": totals.get("dep_checked", 0),
     }
 
 

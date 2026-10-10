@@ -150,7 +150,61 @@
       "datastore_calls": [],
       "service_count": 2,
       "call_count": 3,
-      "reached_by_test": true
+      "reached_by_test": true,
+      "deps_result_used_in_response": 5,
+      "deps_result_checked_by_test": 5,
+      "response_links": [
+        {
+          "dep": "schemaregistry:GetUpgradeInstructionsV2",
+          "path": "out.Project",
+          "checked_by": [
+            "Gets an existing project with fields matching creation",
+            "Persists a custom field across Create \u2192 Get",
+            "Updates a custom field via ProjectsUpdate"
+          ],
+          "checked": true
+        },
+        {
+          "dep": "schemaregistry:GetUpgradeInstructionsV2",
+          "path": "out.Project.DevOid",
+          "checked_by": [
+            "Gets an existing project with fields matching creation",
+            "Persists a custom field across Create \u2192 Get",
+            "Updates a custom field via ProjectsUpdate"
+          ],
+          "checked": true
+        },
+        {
+          "dep": "schemaregistry:GetUpgradeInstructionsV2",
+          "path": "out.Project.DisplayId",
+          "checked_by": [
+            "Gets an existing project with fields matching creation",
+            "Persists a custom field across Create \u2192 Get",
+            "Updates a custom field via ProjectsUpdate"
+          ],
+          "checked": true
+        },
+        {
+          "dep": "schemaregistry:GetUpgradeInstructionsV2",
+          "path": "out.Project.ObjectType",
+          "checked_by": [
+            "Gets an existing project with fields matching creation",
+            "Persists a custom field across Create \u2192 Get",
+            "Updates a custom field via ProjectsUpdate"
+          ],
+          "checked": true
+        },
+        {
+          "dep": "schemaregistry:GetUpgradeInstructionsV2",
+          "path": "out.Project.ObjectVersion",
+          "checked_by": [
+            "Gets an existing project with fields matching creation",
+            "Persists a custom field across Create \u2192 Get",
+            "Updates a custom field via ProjectsUpdate"
+          ],
+          "checked": true
+        }
+      ]
     },
     "anomalies": {
       "unmatched_test_fields": [
@@ -173,7 +227,11 @@
           "Id"
         ],
         "statuses": null,
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Project",
+          "StatusCode"
+        ]
       },
       {
         "name": "Returns 404 for a non-existent project",
@@ -183,7 +241,10 @@
           "Id"
         ],
         "statuses": null,
-        "asserts_success": false
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
       },
       {
         "name": "Persists a custom field across Create \u2192 Get",
@@ -195,7 +256,13 @@
           "OwnedBy"
         ],
         "statuses": null,
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Project",
+          "Project.CustomFields",
+          "Project.Id",
+          "StatusCode"
+        ]
       },
       {
         "name": "Updates a custom field via ProjectsUpdate",
@@ -207,7 +274,13 @@
           "OwnedBy"
         ],
         "statuses": null,
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Project",
+          "Project.CustomFields",
+          "Project.Id",
+          "StatusCode"
+        ]
       }
     ]
   },

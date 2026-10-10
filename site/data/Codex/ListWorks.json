@@ -1762,7 +1762,51 @@
       ],
       "service_count": 4,
       "call_count": 7,
-      "reached_by_test": true
+      "reached_by_test": true,
+      "deps_result_used_in_response": 6,
+      "deps_result_checked_by_test": 2,
+      "response_links": [
+        {
+          "dep": "wisp:CoreSearchV2",
+          "path": "out.IsLastPage",
+          "checked_by": null,
+          "checked": false
+        },
+        {
+          "dep": "wisp:Search",
+          "path": "out.IsLastPage",
+          "checked_by": null,
+          "checked": false
+        },
+        {
+          "dep": "wisp:CoreSearchV2",
+          "path": "out.Total",
+          "checked_by": null,
+          "checked": false
+        },
+        {
+          "dep": "wisp:Search",
+          "path": "out.Total",
+          "checked_by": null,
+          "checked": false
+        },
+        {
+          "dep": "wisp:CoreSearchV2",
+          "path": "out.Works",
+          "checked_by": [
+            "WorksExport"
+          ],
+          "checked": true
+        },
+        {
+          "dep": "wisp:Search",
+          "path": "out.Works",
+          "checked_by": [
+            "WorksExport"
+          ],
+          "checked": true
+        }
+      ]
     },
     "anomalies": {
       "unmatched_test_fields": [
@@ -1856,7 +1900,15 @@
           "Type"
         ],
         "statuses": null,
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Part",
+          "Part.ValueByDiscriminator",
+          "StatusCode",
+          "Work",
+          "Work.AsIssue",
+          "Works"
+        ]
       },
       {
         "name": "Applies To Part",
@@ -1868,7 +1920,11 @@
           "Type"
         ],
         "statuses": null,
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Part",
+          "Part.ValueByDiscriminator"
+        ]
       },
       {
         "name": "Limit and Pagination",
@@ -1880,7 +1936,10 @@
           "Type"
         ],
         "statuses": null,
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "NextCursor"
+        ]
       },
       {
         "name": "Filter by applies to part",
@@ -1892,7 +1951,11 @@
           "Type"
         ],
         "statuses": null,
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Part",
+          "Part.ValueByDiscriminator"
+        ]
       },
       {
         "name": "Filter by type ",
@@ -1904,7 +1967,10 @@
         "statuses": [
           200
         ],
-        "asserts_success": false
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
       },
       {
         "name": "Filter by type with limit with pagination",
@@ -1918,7 +1984,10 @@
           "Type"
         ],
         "statuses": null,
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "NextCursor"
+        ]
       },
       {
         "name": "Filter by stages",
@@ -1930,7 +1999,8 @@
           "Type"
         ],
         "statuses": null,
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": null
       },
       {
         "name": "Invalid filter",
@@ -1945,7 +2015,10 @@
         "statuses": [
           400
         ],
-        "asserts_success": false
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
       },
       {
         "name": "ApplitiesToPart",
@@ -1957,7 +2030,11 @@
           "Type"
         ],
         "statuses": null,
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Part",
+          "Part.ValueByDiscriminator"
+        ]
       },
       {
         "name": "LimitCursorType",
@@ -1971,7 +2048,10 @@
           "Type"
         ],
         "statuses": null,
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "NextCursor"
+        ]
       },
       {
         "name": "WithLimit",
@@ -1982,7 +2062,10 @@
           "Limit"
         ],
         "statuses": null,
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "NextCursor"
+        ]
       },
       {
         "name": "lists issues filtered by space id",
@@ -2004,7 +2087,8 @@
           200,
           201
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": null
       },
       {
         "name": "lists issues with space hierarchy include_children include_parents include_global",
@@ -2026,7 +2110,8 @@
           200,
           201
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": null
       },
       {
         "name": "lists tickets filtered by space id",
@@ -2048,7 +2133,8 @@
           200,
           201
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": null
       },
       {
         "name": "lists tickets with space hierarchy include_children include_parents include_global",
@@ -2070,7 +2156,8 @@
           200,
           201
         ],
-        "asserts_success": true
+        "asserts_success": true,
+        "response_fields_asserted": null
       }
     ]
   },

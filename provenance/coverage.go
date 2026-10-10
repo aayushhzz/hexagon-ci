@@ -18,12 +18,13 @@ import (
 
 // testFact is one Ginkgo It block that issues a request.
 type testFact struct {
-	Name    string   `json:"name"`
-	File    string   `json:"file"`
-	Labels  []string `json:"labels"`
-	Fields  []string `json:"fields_set"`
-	Status  []int    `json:"statuses"`
-	Success bool     `json:"asserts_success"`
+	Name       string   `json:"name"`
+	File       string   `json:"file"`
+	Labels     []string `json:"labels"`
+	Fields     []string `json:"fields_set"`
+	Status     []int    `json:"statuses"`
+	Success    bool     `json:"asserts_success"`
+	RespFields []string `json:"response_fields_asserted"`
 }
 
 // opFacts aggregates all tests that call one API operation.
@@ -32,7 +33,8 @@ type opFacts struct {
 	Tests     []testFact
 	fieldsSet map[string]map[string]bool // leaf field name -> set of test names
 	statuses  map[int]bool
-	success   bool // some test asserted a non-error (success) response
+	success   bool                       // some test asserted a non-error (success) response
+	respPaths map[string]map[string]bool // canonical response path -> set of test names
 }
 
 // CoverageReport is the per-RPC coverage result emitted as JSON.
@@ -62,6 +64,21 @@ type DependencyCoverage struct {
 	ServiceCount   int          `json:"service_count"`
 	CallCount      int          `json:"call_count"`      // external service calls only
 	ReachedByTest  bool         `json:"reached_by_test"` // a passing test invoked this RPC
+	// Result verification over external dependencies whose result flows into the
+	// response (data enrichment). UsedInResponse counts dependency->response
+	// field links; ResultChecked counts those a test actually asserts.
+	UsedInResponse int            `json:"deps_result_used_in_response"`
+	ResultChecked  int            `json:"deps_result_checked_by_test"`
+	ResponseLinks  []ResponseLink `json:"response_links"`
+}
+
+// ResponseLink is one downstream dependency whose result lands in a response
+// field, and whether a linked test asserts on that field.
+type ResponseLink struct {
+	Dep       string   `json:"dep"`        // service:Method
+	Path      string   `json:"path"`       // response field path, e.g. out.Total
+	CheckedBy []string `json:"checked_by"` // tests asserting this path
+	Checked   bool     `json:"checked"`
 }
 
 // ServiceDep is one downstream service and the methods this RPC calls on it.
@@ -244,15 +261,16 @@ func collectTests(f *ast.File, file string, ops map[string]*opFacts) {
 		if op == "" {
 			return true // not a request-issuing test
 		}
+		respFields := scanResponseFields(body)
 		of := ops[op]
 		if of == nil {
-			of = &opFacts{Operation: op, fieldsSet: map[string]map[string]bool{}, statuses: map[int]bool{}}
+			of = &opFacts{Operation: op, fieldsSet: map[string]map[string]bool{}, statuses: map[int]bool{}, respPaths: map[string]map[string]bool{}}
 			ops[op] = of
 		}
 		if success {
 			of.success = true
 		}
-		tf := testFact{Name: name, File: file, Labels: labels, Fields: sortedUniq(fields), Status: sortedUniqInt(statuses), Success: success}
+		tf := testFact{Name: name, File: file, Labels: labels, Fields: sortedUniq(fields), Status: sortedUniqInt(statuses), Success: success, RespFields: sortedUniq(respFields)}
 		of.Tests = append(of.Tests, tf)
 		for _, fld := range fields {
 			leaf := strings.ToLower(fld)
@@ -260,6 +278,17 @@ func collectTests(f *ast.File, file string, ops map[string]*opFacts) {
 				of.fieldsSet[leaf] = map[string]bool{}
 			}
 			of.fieldsSet[leaf][name] = true
+		}
+		for _, rp := range respFields {
+			c := canonComponents(rp)
+			key := strings.Join(c, ".")
+			if key == "" {
+				continue
+			}
+			if of.respPaths[key] == nil {
+				of.respPaths[key] = map[string]bool{}
+			}
+			of.respPaths[key][name] = true
 		}
 		for _, s := range statuses {
 			of.statuses[s] = true
@@ -311,13 +340,90 @@ func scanItBody(body *ast.FuncLit) (op string, fields []string, statuses []int, 
 	return op, fields, statuses, sawBeNil
 }
 
+// scanResponseFields collects response field paths a test asserts on. The
+// response variable is MakeRequest's last argument (&resp); we then gather
+// selector chains rooted at it, e.g. resp.Accounts[0].DisplayName -> "Accounts.DisplayName".
+func scanResponseFields(body *ast.FuncLit) []string {
+	respVars := map[string]bool{}
+	ast.Inspect(body, func(n ast.Node) bool {
+		call, ok := n.(*ast.CallExpr)
+		if !ok || !(isSelName(call.Fun, "MakeRequest") || isIdent(call.Fun, "MakeRequest")) || len(call.Args) == 0 {
+			return true
+		}
+		if v := rootIdent(call.Args[len(call.Args)-1]); v != "" {
+			respVars[v] = true
+		}
+		return true
+	})
+	if len(respVars) == 0 {
+		return nil
+	}
+	var out []string
+	ast.Inspect(body, func(n ast.Node) bool {
+		sel, ok := n.(*ast.SelectorExpr)
+		if !ok {
+			return true
+		}
+		if fields, ok := rootedFields(sel, respVars); ok && len(fields) > 0 {
+			out = append(out, strings.Join(fields, "."))
+		}
+		return true
+	})
+	return out
+}
+
+// rootIdent extracts the identifier name from &x or x.
+func rootIdent(e ast.Expr) string {
+	switch x := e.(type) {
+	case *ast.UnaryExpr:
+		return rootIdent(x.X)
+	case *ast.ParenExpr:
+		return rootIdent(x.X)
+	case *ast.Ident:
+		return x.Name
+	}
+	return ""
+}
+
+// rootedFields returns the field path of a selector chain if it is rooted at a
+// response variable, dropping index/deref/paren steps.
+func rootedFields(e ast.Expr, roots map[string]bool) ([]string, bool) {
+	switch x := e.(type) {
+	case *ast.Ident:
+		if roots[x.Name] || nameLooksResponse(x.Name) {
+			return nil, true
+		}
+		return nil, false
+	case *ast.SelectorExpr:
+		f, ok := rootedFields(x.X, roots)
+		if !ok {
+			return nil, false
+		}
+		return append(f, x.Sel.Name), true
+	case *ast.IndexExpr:
+		return rootedFields(x.X, roots)
+	case *ast.StarExpr:
+		return rootedFields(x.X, roots)
+	case *ast.ParenExpr:
+		return rootedFields(x.X, roots)
+	}
+	return nil, false
+}
+
+// nameLooksResponse matches the lifejacket convention for response variables
+// (listAccountsResp, exportAccountsResp, devUsersListResp), so field accesses
+// are captured even when MakeRequest is wrapped in a test helper.
+func nameLooksResponse(name string) bool {
+	return strings.Contains(strings.ToLower(name), "resp")
+}
+
 // buildCoverage intersects provenance for one RPC with aggregated op facts.
-func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]string, statusSpec map[string][]int) CoverageReport {
+func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]string, responseAliases map[string]string, statusSpec map[string][]int) CoverageReport {
 	rep := CoverageReport{RPC: p.RPC, Operation: op}
 	leaves := leafReadPaths(p)
 	rep.Fields.LeafFieldsReadByRPC = len(leaves)
 	rep.Branches.Total = len(p.Branches)
-	rep.Dependencies = dependencyCoverage(p, of)
+	rep.Dependencies = dependencyCoverage(p, of, responseAliases)
 	if of == nil {
 		rep.Unmapped = true
 		rep.Fields.Gaps = leaves
@@ -767,7 +873,7 @@ func mergeOpFacts(dst, src *opFacts) {
 // of a deeper read path (the settable leaf fields), sorted and deduped.
 // dependencyCoverage summarises the downstream service and datastore calls an
 // RPC makes, derived from provenance sinks. of may be nil (no linked test).
-func dependencyCoverage(p *Provenance, of *opFacts) DependencyCoverage {
+func dependencyCoverage(p *Provenance, of *opFacts, responseAliases map[string]string) DependencyCoverage {
 	dc := DependencyCoverage{}
 	byService := map[string]map[string]bool{}
 	db := map[string]bool{}
@@ -795,7 +901,78 @@ func dependencyCoverage(p *Provenance, of *opFacts) DependencyCoverage {
 	dc.DatastoreCalls = sortedKeys(db)
 	dc.ServiceCount = len(dc.Services)
 	dc.ReachedByTest = of != nil && of.success
+
+	// Response links: dependency results that flow into response fields, and
+	// whether a linked test asserts on that field (field-precise verification).
+	var respPaths map[string]map[string]bool
+	if of != nil {
+		respPaths = of.respPaths
+	}
+	for _, op := range p.OutputPaths {
+		link := ResponseLink{Dep: op.Dep, Path: op.Path}
+		want := aliasApply(relComponents(op.Path), responseAliases)
+		for tp, tests := range respPaths {
+			if responsePathMatch(want, canonComponents(tp)) {
+				for t := range tests {
+					link.CheckedBy = append(link.CheckedBy, t)
+				}
+			}
+		}
+		if len(link.CheckedBy) > 0 {
+			link.CheckedBy = sortedUniq(link.CheckedBy)
+			link.Checked = true
+			dc.ResultChecked++
+		}
+		dc.UsedInResponse++
+		dc.ResponseLinks = append(dc.ResponseLinks, link)
+	}
 	return dc
+}
+
+// aliasApply renames each component through a canonical proto->HTTP response
+// rename map, so a test asserting the HTTP field name matches a dependency's
+// proto response field (e.g. proto "total" vs HTTP "count").
+func aliasApply(comps []string, aliases map[string]string) []string {
+	if len(aliases) == 0 {
+		return comps
+	}
+	out := make([]string, len(comps))
+	for i, c := range comps {
+		if r, ok := aliases[c]; ok {
+			out[i] = canon(r)
+		} else {
+			out[i] = c
+		}
+	}
+	return out
+}
+
+// relComponents canonicalizes a response path and drops the leading "out" root.
+func relComponents(path string) []string {
+	c := canonComponents(path)
+	if len(c) > 0 && c[0] == "out" {
+		c = c[1:]
+	}
+	return c
+}
+
+// responsePathMatch reports whether a test-asserted response path and a
+// dependency's response path refer to the same field or one contains the
+// other. An empty want (coarse "whole response") matches any assertion.
+func responsePathMatch(want, test []string) bool {
+	if len(want) == 0 {
+		return len(test) > 0
+	}
+	n := len(want)
+	if len(test) < n {
+		n = len(test)
+	}
+	for i := 0; i < n; i++ {
+		if want[i] != test[i] {
+			return false
+		}
+	}
+	return true
 }
 
 // serviceFromLocation derives a downstream service name from a sink source

@@ -229,6 +229,26 @@ RPC can look empty while its real behaviour is here.
   path. This is reachability only; it does not prove the test checks the
   returned data. Proving a downstream path executed needs a runtime trace.
 
+The report also answers a sharper question: when a dependency's result is
+*copied into the response*, does a test check it?
+
+- `deps_result_used_in_response` number of dependency-result -> response-field
+  links found by tracing values forward from each external call result to the
+  response message (field-precise). Datastore reads are excluded on purpose.
+- `deps_result_checked_by_test` of those, how many land in a response field a
+  linked test asserts on.
+- `response_links[]` each link: `dep` (service:Method), `path` (response field,
+  e.g. `out.Total`), `checked`, and `checked_by` (tests asserting that field).
+
+Response paths are validated against the real response proto type, so an
+impossible path (e.g. a sub-field of a scalar) is truncated to its valid
+prefix. Proto response field names are matched to the HTTP field names tests
+assert through the field map's `response` / `response_by_rpc` renames (for
+example proto `Total` vs HTTP `Count`), so a rename that is not in the map can
+still be missed. A link flowing into the response plus a matching assertion is
+strong evidence the dependency result is tested, but static analysis cannot
+prove the asserted value is correct at runtime.
+
 ### test_facts
 
 - `test_facts[]` each test's name, file, labels, `fields_set`, `statuses`, and
@@ -262,12 +282,16 @@ by default (`-field-map`):
 ```json
 {
   "global": { "Artifacts": "ArtifactIds" },
-  "by_rpc": { "GetAccount": { "Id": "AccountIdentifier.AccountDon" } }
+  "by_rpc": { "GetAccount": { "Id": "AccountIdentifier.AccountDon" } },
+  "response": { "Total": "Count" }
 }
 ```
 
 - Keys are HTTP body field names, values are RPC field names, matched
   case/style-insensitively.
+- `response` / `response_by_rpc` map a proto response field name to the HTTP
+  response field name tests assert, used by dependency-result verification
+  (for example proto `Total` is the HTTP `Count`).
 - A value may be a dotted **path fragment**: `Id -> AccountIdentifier.AccountDon`
   credits every RPC leaf beneath that subtree (the gateway parses the flat `id`
   into a structured DON).
