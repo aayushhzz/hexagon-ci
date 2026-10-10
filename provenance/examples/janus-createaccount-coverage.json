@@ -1,0 +1,698 @@
+{
+  "coverage": [
+    {
+      "rpc": "CreateAccount",
+      "operation": "AccountsCreate",
+      "tests": 5,
+      "statuses_asserted": [
+        200,
+        400
+      ],
+      "fields": {
+        "leaf_fields_read_by_rpc": 41,
+        "covered_count": 7,
+        "coverage_pct": 17.1,
+        "request_fields_set_by_tests": 7,
+        "covered": [
+          {
+            "path": "in.Account.Description",
+            "match": "exact",
+            "by_tests": [
+              "Create account"
+            ]
+          },
+          {
+            "path": "in.Account.DisplayName",
+            "match": "exact",
+            "by_tests": [
+              "Create account",
+              "Create account with empty fields",
+              "Create account with invalid fields",
+              "Create account with only required fields"
+            ]
+          },
+          {
+            "path": "in.Account.Domains",
+            "match": "exact",
+            "by_tests": [
+              "Create account"
+            ]
+          },
+          {
+            "path": "in.Account.ExternalRefs",
+            "match": "exact",
+            "by_tests": [
+              "Create account"
+            ]
+          },
+          {
+            "path": "in.Account.PhoneNumbers",
+            "match": "exact",
+            "by_tests": [
+              "Create account"
+            ]
+          },
+          {
+            "path": "in.Account.Tier",
+            "match": "exact",
+            "by_tests": [
+              "Create account",
+              "Create account with invalid fields"
+            ]
+          },
+          {
+            "path": "in.Account.Websites",
+            "match": "exact",
+            "by_tests": [
+              "Create account"
+            ]
+          }
+        ],
+        "gaps": [
+          "in.Account.ArtifactIds",
+          "in.Account.CustomFields.Fields",
+          "in.Account.CustomSchemaFragmentIds",
+          "in.Account.DevrevCopy.LastSyncedDate",
+          "in.Account.DevrevCopy.OriginId.Id",
+          "in.Account.DevrevCopy.OriginOrgId.Id",
+          "in.Account.EmployeeCount",
+          "in.Account.ExternalSourceData.ClosedDate",
+          "in.Account.ExternalSourceData.CreatedById.Id",
+          "in.Account.ExternalSourceData.CreatedDate",
+          "in.Account.ExternalSourceData.ModifiedById.Id",
+          "in.Account.ExternalSourceData.ModifiedDate",
+          "in.Account.Industry",
+          "in.Account.IngestionChannel",
+          "in.Account.LeadSource",
+          "in.Account.OwnedBy",
+          "in.Account.Revenue.Amount",
+          "in.Account.Revenue.Currency",
+          "in.Account.SharedWith",
+          "in.Account.Stage.Notes",
+          "in.Account.Stage.StageId.Id",
+          "in.Account.Stage.StageId.IsDeprecated",
+          "in.Account.Stage.StageId.IsStart",
+          "in.Account.StagedInfo.IsStaged",
+          "in.Account.StagedInfo.SyncInUnresolvedFields",
+          "in.Account.StagedInfo.SyncOutUnresolvedFields",
+          "in.Account.StagedInfo.UnresolvedFields",
+          "in.Account.SyncMetadata.SyncedByDevUsers",
+          "in.Account.Tags",
+          "in.Account.TotalRevenue",
+          "in.CustomSchemaSpec.TenantFragment",
+          "in.CustomSchemaSpec.ValidateRequiredFields",
+          "in.SkipStageTransitionValidation",
+          "in.UniqueDisplayNameSuffix"
+        ]
+      },
+      "branches": {
+        "total": 72,
+        "input_exercised": 10,
+        "coverage_pct": 13.9,
+        "gaps": [
+          {
+            "id": "b4",
+            "at": "internal/service/account_validations.go:391",
+            "cond": "in.Account.DisplayName|in.UniqueDisplayNameSuffix == nil",
+            "predicate_paths": [
+              "in.Account.DisplayName",
+              "in.UniqueDisplayNameSuffix"
+            ]
+          },
+          {
+            "id": "b5",
+            "at": "internal/service/account_validations.go:399",
+            "cond": "in.UniqueDisplayNameSuffix != nil",
+            "predicate_paths": [
+              "in.UniqueDisplayNameSuffix"
+            ]
+          },
+          {
+            "id": "b6",
+            "at": "",
+            "cond": "in",
+            "predicate_paths": [
+              "in"
+            ]
+          },
+          {
+            "id": "b8",
+            "at": "internal/service/common.go:794",
+            "cond": "in.Account.CustomFields == nil",
+            "predicate_paths": [
+              "in.Account.CustomFields"
+            ]
+          },
+          {
+            "id": "b9",
+            "at": "internal/service/common.go:813",
+            "cond": "in.CustomSchemaSpec.TenantFragment",
+            "predicate_paths": [
+              "in.CustomSchemaSpec.TenantFragment"
+            ]
+          },
+          {
+            "id": "b10",
+            "at": "internal/service/common.go:814",
+            "cond": "in.CustomSchemaSpec == nil",
+            "predicate_paths": [
+              "in.CustomSchemaSpec"
+            ]
+          },
+          {
+            "id": "b11",
+            "at": "internal/service/common.go:813",
+            "cond": "in.Account.CustomFields|in.Account.CustomSchemaFragmentIds",
+            "predicate_paths": [
+              "in.Account.CustomFields",
+              "in.Account.CustomSchemaFragmentIds"
+            ]
+          },
+          {
+            "id": "b12",
+            "at": "internal/collection/stage.gen.go:243",
+            "cond": "in.Account.Stage.StageId != nil",
+            "predicate_paths": [
+              "in.Account.Stage.StageId"
+            ]
+          },
+          {
+            "id": "b13",
+            "at": "/Users/devrev/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.1.darwin-arm64/src/regexp/regexp.go:888",
+            "cond": "in.Account.Revenue.Amount == nil",
+            "predicate_paths": [
+              "in.Account.Revenue.Amount"
+            ]
+          },
+          {
+            "id": "b14",
+            "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:282",
+            "cond": "in.Account.Revenue.Amount == \"\"",
+            "predicate_paths": [
+              "in.Account.Revenue.Amount"
+            ]
+          },
+          {
+            "id": "b15",
+            "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:294",
+            "cond": "in.Account.Revenue.Amount == \"NaN\"",
+            "predicate_paths": [
+              "in.Account.Revenue.Amount"
+            ]
+          },
+          {
+            "id": "b16",
+            "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:297",
+            "cond": "in.Account.Revenue.Amount == \"Inf\"",
+            "predicate_paths": [
+              "in.Account.Revenue.Amount"
+            ]
+          },
+          {
+            "id": "b17",
+            "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:294",
+            "cond": "in.Account.Revenue.Amount == \"nan\"",
+            "predicate_paths": [
+              "in.Account.Revenue.Amount"
+            ]
+          },
+          {
+            "id": "b18",
+            "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:297",
+            "cond": "in.Account.Revenue.Amount == \"inf\"",
+            "predicate_paths": [
+              "in.Account.Revenue.Amount"
+            ]
+          },
+          {
+            "id": "b19",
+            "at": "internal/collection/money.gen.go:189",
+            "cond": "in.Account.Revenue.Amount != nil",
+            "predicate_paths": [
+              "in.Account.Revenue.Amount"
+            ]
+          },
+          {
+            "id": "b20",
+            "at": "internal/collection/sync_metadata_lite.gen.go:194",
+            "cond": "in.Account.SyncMetadata.SyncedByDevUsers != nil",
+            "predicate_paths": [
+              "in.Account.SyncMetadata.SyncedByDevUsers"
+            ]
+          },
+          {
+            "id": "b21",
+            "at": "internal/collection/staged_info.gen.go:362",
+            "cond": "in.Account.StagedInfo.UnresolvedFields != nil",
+            "predicate_paths": [
+              "in.Account.StagedInfo.UnresolvedFields"
+            ]
+          },
+          {
+            "id": "b22",
+            "at": "internal/collection/staged_info.gen.go:368",
+            "cond": "in.Account.StagedInfo.SyncInUnresolvedFields != nil",
+            "predicate_paths": [
+              "in.Account.StagedInfo.SyncInUnresolvedFields"
+            ]
+          },
+          {
+            "id": "b23",
+            "at": "internal/collection/staged_info.gen.go:378",
+            "cond": "in.Account.StagedInfo.SyncOutUnresolvedFields != nil",
+            "predicate_paths": [
+              "in.Account.StagedInfo.SyncOutUnresolvedFields"
+            ]
+          },
+          {
+            "id": "b24",
+            "at": "internal/collection/external_source_data_comp.gen.go:290",
+            "cond": "in.Account.ExternalSourceData.CreatedDate != nil",
+            "predicate_paths": [
+              "in.Account.ExternalSourceData.CreatedDate"
+            ]
+          },
+          {
+            "id": "b25",
+            "at": "internal/collection/external_source_data_comp.gen.go:294",
+            "cond": "in.Account.ExternalSourceData.ModifiedDate != nil",
+            "predicate_paths": [
+              "in.Account.ExternalSourceData.ModifiedDate"
+            ]
+          },
+          {
+            "id": "b26",
+            "at": "internal/collection/external_source_data_comp.gen.go:298",
+            "cond": "in.Account.ExternalSourceData.ClosedDate != nil",
+            "predicate_paths": [
+              "in.Account.ExternalSourceData.ClosedDate"
+            ]
+          },
+          {
+            "id": "b27",
+            "at": "internal/collection/external_source_data_comp.gen.go:302",
+            "cond": "in.Account.ExternalSourceData.CreatedById != nil",
+            "predicate_paths": [
+              "in.Account.ExternalSourceData.CreatedById"
+            ]
+          },
+          {
+            "id": "b28",
+            "at": "internal/collection/external_source_data_comp.gen.go:310",
+            "cond": "in.Account.ExternalSourceData.ModifiedById != nil",
+            "predicate_paths": [
+              "in.Account.ExternalSourceData.ModifiedById"
+            ]
+          },
+          {
+            "id": "b29",
+            "at": "internal/collection/devrev_copy.gen.go:232",
+            "cond": "in.Account.DevrevCopy.OriginId != nil",
+            "predicate_paths": [
+              "in.Account.DevrevCopy.OriginId"
+            ]
+          },
+          {
+            "id": "b30",
+            "at": "internal/collection/devrev_copy.gen.go:240",
+            "cond": "in.Account.DevrevCopy.OriginOrgId != nil",
+            "predicate_paths": [
+              "in.Account.DevrevCopy.OriginOrgId"
+            ]
+          },
+          {
+            "id": "b31",
+            "at": "internal/collection/devrev_copy.gen.go:248",
+            "cond": "in.Account.DevrevCopy.LastSyncedDate != nil",
+            "predicate_paths": [
+              "in.Account.DevrevCopy.LastSyncedDate"
+            ]
+          },
+          {
+            "id": "b35",
+            "at": "/Users/devrev/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.1.darwin-arm64/src/slices/slices.go:98",
+            "cond": "in.Account.Industry == *t4",
+            "predicate_paths": [
+              "in.Account.Industry"
+            ]
+          },
+          {
+            "id": "b36",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:2238",
+            "cond": "in.Account.Industry == nil",
+            "predicate_paths": [
+              "in.Account.Industry"
+            ]
+          },
+          {
+            "id": "b37",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:2246",
+            "cond": "in.Account.Industry",
+            "predicate_paths": [
+              "in.Account.Industry"
+            ]
+          },
+          {
+            "id": "b38",
+            "at": "/Users/devrev/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.1.darwin-arm64/src/slices/slices.go:98",
+            "cond": "in.Account.LeadSource == *t4",
+            "predicate_paths": [
+              "in.Account.LeadSource"
+            ]
+          },
+          {
+            "id": "b39",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:2238",
+            "cond": "in.Account.LeadSource == nil",
+            "predicate_paths": [
+              "in.Account.LeadSource"
+            ]
+          },
+          {
+            "id": "b40",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:2246",
+            "cond": "in.Account.LeadSource",
+            "predicate_paths": [
+              "in.Account.LeadSource"
+            ]
+          },
+          {
+            "id": "b41",
+            "at": "internal/collection/account.gen.go:2228",
+            "cond": "in.Account.OwnedBy != nil",
+            "predicate_paths": [
+              "in.Account.OwnedBy"
+            ]
+          },
+          {
+            "id": "b43",
+            "at": "internal/collection/account.gen.go:2246",
+            "cond": "in.Account.Tags != nil",
+            "predicate_paths": [
+              "in.Account.Tags"
+            ]
+          },
+          {
+            "id": "b44",
+            "at": "internal/collection/account.gen.go:2256",
+            "cond": "in.Account.ArtifactIds != nil",
+            "predicate_paths": [
+              "in.Account.ArtifactIds"
+            ]
+          },
+          {
+            "id": "b46",
+            "at": "internal/collection/account.gen.go:2276",
+            "cond": "in.Account.Stage != nil",
+            "predicate_paths": [
+              "in.Account.Stage"
+            ]
+          },
+          {
+            "id": "b48",
+            "at": "internal/collection/account.gen.go:2297",
+            "cond": "in.Account.Revenue != nil",
+            "predicate_paths": [
+              "in.Account.Revenue"
+            ]
+          },
+          {
+            "id": "b49",
+            "at": "internal/collection/account.gen.go:2306",
+            "cond": "in.Account.SyncMetadata != nil",
+            "predicate_paths": [
+              "in.Account.SyncMetadata"
+            ]
+          },
+          {
+            "id": "b50",
+            "at": "internal/collection/account.gen.go:2313",
+            "cond": "in.Account.StagedInfo != nil",
+            "predicate_paths": [
+              "in.Account.StagedInfo"
+            ]
+          },
+          {
+            "id": "b51",
+            "at": "internal/collection/account.gen.go:2320",
+            "cond": "in.Account.ExternalSourceData != nil",
+            "predicate_paths": [
+              "in.Account.ExternalSourceData"
+            ]
+          },
+          {
+            "id": "b52",
+            "at": "internal/collection/account.gen.go:2327",
+            "cond": "in.Account.DevrevCopy != nil",
+            "predicate_paths": [
+              "in.Account.DevrevCopy"
+            ]
+          },
+          {
+            "id": "b53",
+            "at": "internal/collection/account.gen.go:2334",
+            "cond": "in.Account.SharedWith != nil",
+            "predicate_paths": [
+              "in.Account.SharedWith"
+            ]
+          },
+          {
+            "id": "b54",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:26",
+            "cond": "in.Account.Stage.StageId == nil",
+            "predicate_paths": [
+              "in.Account.Stage.StageId"
+            ]
+          },
+          {
+            "id": "b55",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:30",
+            "cond": "proto.Id).GetId() == in.Account.Stage.StageId.Id",
+            "predicate_paths": [
+              "in.Account.Stage.StageId.Id"
+            ]
+          },
+          {
+            "id": "b56",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:166",
+            "cond": "in.Account.Stage.StageId == nil",
+            "predicate_paths": [
+              "in.Account.Stage.StageId"
+            ]
+          },
+          {
+            "id": "b57",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:179",
+            "cond": "in.Account.Stage.StageId.IsStart",
+            "predicate_paths": [
+              "in.Account.Stage.StageId.IsStart"
+            ]
+          },
+          {
+            "id": "b58",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:193",
+            "cond": "proto.Id).GetId() == in.Account.Stage.StageId.Id",
+            "predicate_paths": [
+              "in.Account.Stage.StageId.Id"
+            ]
+          },
+          {
+            "id": "b59",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:200",
+            "cond": "in.Account.Stage.StageId.IsStart",
+            "predicate_paths": [
+              "in.Account.Stage.StageId.IsStart"
+            ]
+          },
+          {
+            "id": "b60",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:226",
+            "cond": "in.Account.Stage.StageId.IsDeprecated",
+            "predicate_paths": [
+              "in.Account.Stage.StageId.IsDeprecated"
+            ]
+          },
+          {
+            "id": "b61",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:239",
+            "cond": "proto.Id).GetId() == in.Account.Stage.StageId.Id",
+            "predicate_paths": [
+              "in.Account.Stage.StageId.Id"
+            ]
+          },
+          {
+            "id": "b62",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:593",
+            "cond": "in.Account.Stage.StageId.Id == nil",
+            "predicate_paths": [
+              "in.Account.Stage.StageId.Id"
+            ]
+          },
+          {
+            "id": "b63",
+            "at": "internal/service/common.go:590",
+            "cond": "in.Account.Stage.StageId == nil",
+            "predicate_paths": [
+              "in.Account.Stage.StageId"
+            ]
+          },
+          {
+            "id": "b64",
+            "at": "internal/service/common.go:623",
+            "cond": "in.Account.Stage != nil",
+            "predicate_paths": [
+              "in.Account.Stage"
+            ]
+          },
+          {
+            "id": "b65",
+            "at": "internal/service/common.go:631",
+            "cond": "in.Account.Stage != nil",
+            "predicate_paths": [
+              "in.Account.Stage"
+            ]
+          },
+          {
+            "id": "b66",
+            "at": "internal/service/common.go:631",
+            "cond": "in.Account.Stage.StageId == nil",
+            "predicate_paths": [
+              "in.Account.Stage.StageId"
+            ]
+          },
+          {
+            "id": "b67",
+            "at": "internal/service/common.go:652",
+            "cond": "in.Account.Stage == nil",
+            "predicate_paths": [
+              "in.Account.Stage"
+            ]
+          },
+          {
+            "id": "b68",
+            "at": "internal/service/common.go:614",
+            "cond": "in.SkipStageTransitionValidation",
+            "predicate_paths": [
+              "in.SkipStageTransitionValidation"
+            ]
+          },
+          {
+            "id": "b69",
+            "at": "internal/service/account.go:533",
+            "cond": "in.Account.Stage != nil",
+            "predicate_paths": [
+              "in.Account.Stage"
+            ]
+          },
+          {
+            "id": "b70",
+            "at": "internal/service/account.go:533",
+            "cond": "in.Account.Stage.Notes != nil",
+            "predicate_paths": [
+              "in.Account.Stage.Notes"
+            ]
+          },
+          {
+            "id": "b71",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:862",
+            "cond": "in.Account|in.Account.Description|in.Account.DevrevCopy|in.Account.DevrevCopy.OriginId.Id|in.Account.DevrevCopy.OriginOrgId.Id|in.Account.EmployeeCount|in.Account.ExternalSourceData|in.Account.ExternalSourceData.CreatedById.Id|in.Account.ExternalSourceData.ModifiedById.Id|in.Account.Industry|in.Account.LeadSource|in.Account.Revenue|in.Account.Revenue.Amount|in.Account.Revenue.Currency|in.Account.Stage|in.Account.Stage.Notes|in.Account.Stage.StageId.Id|in.Account.StagedInfo|in.Account.StagedInfo.IsStaged|in.Account.SyncMetadata|in.Account.Tier|in.Account.TotalRevenue != nil",
+            "predicate_paths": [
+              "in.Account"
+            ]
+          },
+          {
+            "id": "b72",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_fields.go:160",
+            "cond": "in.Account|in.Account.Description|in.Account.DevrevCopy|in.Account.DevrevCopy.OriginId.Id|in.Account.DevrevCopy.OriginOrgId.Id|in.Account.EmployeeCount|in.Account.ExternalSourceData|in.Account.ExternalSourceData.CreatedById.Id|in.Account.ExternalSourceData.ModifiedById.Id|in.Account.Industry|in.Account.LeadSource|in.Account.Revenue|in.Account.Revenue.Amount|in.Account.Revenue.Currency|in.Account.Stage|in.Account.Stage.Notes|in.Account.Stage.StageId.Id|in.Account.StagedInfo|in.Account.StagedInfo.IsStaged|in.Account.SyncMetadata|in.Account.Tier|in.Account.TotalRevenue != nil",
+            "predicate_paths": [
+              "in.Account"
+            ]
+          }
+        ]
+      },
+      "anomalies": {
+        "unmatched_test_fields": null
+      },
+      "test_facts": [
+        {
+          "name": "Create account",
+          "file": "accounts_create_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ACCOUNTS_CREATE"
+          ],
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Domains",
+            "ExternalRefs",
+            "PhoneNumbers",
+            "Tier",
+            "Websites"
+          ],
+          "statuses": [
+            200
+          ]
+        },
+        {
+          "name": "Create account with only required fields",
+          "file": "accounts_create_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ACCOUNTS_CREATE",
+            "GINKGO_PR_SANITY"
+          ],
+          "fields_set": [
+            "DisplayName"
+          ],
+          "statuses": [
+            200
+          ]
+        },
+        {
+          "name": "Create account with invalid fields",
+          "file": "accounts_create_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ACCOUNTS_CREATE"
+          ],
+          "fields_set": [
+            "DisplayName",
+            "Tier"
+          ],
+          "statuses": [
+            400
+          ]
+        },
+        {
+          "name": "Create account without required fields",
+          "file": "accounts_create_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ACCOUNTS_CREATE"
+          ],
+          "fields_set": null,
+          "statuses": [
+            400
+          ]
+        },
+        {
+          "name": "Create account with empty fields",
+          "file": "accounts_create_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ACCOUNTS_CREATE"
+          ],
+          "fields_set": [
+            "DisplayName"
+          ],
+          "statuses": [
+            400
+          ]
+        }
+      ]
+    }
+  ],
+  "rpcs": 1,
+  "service": "Janus"
+}
