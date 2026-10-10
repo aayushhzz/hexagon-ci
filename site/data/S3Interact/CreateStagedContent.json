@@ -1,0 +1,176 @@
+{
+  "service": "S3Interact",
+  "coverage": {
+    "rpc": "CreateStagedContent",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": null,
+      "asserted": [],
+      "missing": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 4,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 3,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.ConfigurationSet",
+        "in.FileEncoding",
+        "in.FileType",
+        "in.Headers.ContentDisposition"
+      ]
+    },
+    "branches": {
+      "total": 9,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 8,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "by_origin": {
+        "service": {
+          "total": 6,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "generated": {
+          "total": 2,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 1,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:599",
+          "cond": "in.Headers != nil",
+          "predicate_paths": [
+            "in.Headers"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:600",
+          "cond": "in.Headers != nil",
+          "predicate_paths": [
+            "in.Headers"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/configset/configset.go:338",
+          "cond": "in.ConfigurationSet == 0",
+          "predicate_paths": [
+            "in.ConfigurationSet"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "s3/buckets.go:49",
+          "cond": "in.ConfigurationSet == 0",
+          "predicate_paths": [
+            "in.ConfigurationSet"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "internal/server/staged_content.go:38",
+          "cond": "in != nil",
+          "predicate_paths": [
+            "in"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "internal/server/staged_content.go:119",
+          "cond": "in.ConfigurationSet == 0",
+          "predicate_paths": [
+            "in.ConfigurationSet"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "internal/server/staged_content.go:121",
+          "cond": "in.ConfigurationSet == 1",
+          "predicate_paths": [
+            "in.ConfigurationSet"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "internal/server/staged_content.go:123",
+          "cond": "in.ConfigurationSet == 14",
+          "predicate_paths": [
+            "in.ConfigurationSet"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "internal/server/staged_content.go:125",
+          "cond": "in.ConfigurationSet == 15",
+          "predicate_paths": [
+            "in.ConfigurationSet"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/s3interact/internal/server.S3Interact).CreateStagedContent",
+    "request_type": "api.CreateStagedContentRequest",
+    "response_type": "api.CreateStagedContentResponse",
+    "sinks": [],
+    "errors": [],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateStagedContent` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ConfigurationSet\n  - in.FileEncoding\n  - in.FileType\n  - in.Headers.ContentDisposition\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Headers != nil\n  - in.Headers != nil\n  - in.ConfigurationSet == 0\n  - in.ConfigurationSet == 0\n  - in != nil\n  - in.ConfigurationSet == 0\n  - in.ConfigurationSet == 1\n  - in.ConfigurationSet == 14\n  - in.ConfigurationSet == 15\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

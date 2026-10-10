@@ -1,0 +1,267 @@
+{
+  "service": "Codex",
+  "coverage": {
+    "rpc": "WorksSuggestInfo",
+    "operation": "WorksSuggestInfo",
+    "tests": 1,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200,
+        201
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 12.5
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 5,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 3,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 4,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.SourceId.Components",
+        "in.SourceId.Partition",
+        "in.SourceId.PartitionType",
+        "in.SourceId.ServiceType",
+        "in.WorkType"
+      ]
+    },
+    "branches": {
+      "total": 7,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 5,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 5,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "by_origin": {
+        "service": {
+          "total": 1,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "generated": {
+          "total": 2,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 2
+        },
+        "library": {
+          "total": 4,
+          "reachable_on_happy_path": 3,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 3
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
+          "cond": "in.SourceId == nil",
+          "predicate_paths": [
+            "in.SourceId"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
+          "cond": "in.SourceId.Partition != \"\"",
+          "predicate_paths": [
+            "in.SourceId.Partition"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1896",
+          "cond": "in.SourceId == nil",
+          "predicate_paths": [
+            "in.SourceId"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1903",
+          "cond": "in.SourceId|in.SourceId.Partition",
+          "predicate_paths": [
+            "in.SourceId"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/utils.go:659",
+          "cond": "in.SourceId|in.SourceId.Partition",
+          "predicate_paths": [
+            "in.SourceId"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:593",
+          "cond": "in.SourceId|in.SourceId.Partition == nil",
+          "predicate_paths": [
+            "in.SourceId"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "internal/serverv2/works_suggest_info.go:40",
+          "cond": "in != nil",
+          "predicate_paths": [
+            "in"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "messages",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "source",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "type",
+          "fuzzy_suggestions": [
+            "in.SourceId.PartitionType",
+            "in.SourceId.ServiceType",
+            "in.WorkType"
+          ]
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "WorksSuggestInfo",
+        "file": "api/v2_internal/work/suggest/suggest_works_test.go",
+        "labels": [
+          "INTERNAL_WORKS_SUGGEST_INFO",
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "Messages",
+          "Source",
+          "Type"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/codex/internal/serverv2.Codex).WorksSuggestInfo",
+    "request_type": "apiv2.WorksSuggestInfoRequest",
+    "response_type": "apiv2.WorksSuggestInfoResponse",
+    "sinks": [
+      {
+        "kind": "rpc",
+        "target": "QueryEntries",
+        "via_paths": [
+          "in.SourceId",
+          "in.SourceId.Partition"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/timeline-client@v0.0.0-20260708173206-c9dc9844ae0f/client/client.go:191"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:446",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertFormatNotSupported",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/convert.go:363",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertFormatNotSupported",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/convert.go:369",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertObjectTypeNotSupported",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/convert.go:400",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertObjectTypeNotSupported",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/convert.go:445",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertComponentsNotSupported",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/convert.go:480",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertComponentsNotSupported",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/convert.go:493",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertComponentsNotSupported",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/convert.go:490",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `WorksSuggestInfo` (HTTP operation `WorksSuggestInfo`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.SourceId.Components\n  - in.SourceId.Partition\n  - in.SourceId.PartitionType\n  - in.SourceId.ServiceType\n  - in.WorkType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.SourceId == nil\n  - in.SourceId.Partition != \"\"\n  - in.SourceId == nil\n  - in.SourceId|in.SourceId.Partition\n  - in.SourceId|in.SourceId.Partition\n  - in.SourceId|in.SourceId.Partition == nil\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `messages` -> suggestions []\n  - test field `source` -> suggestions []\n  - test field `type` -> suggestions ['in.SourceId.PartitionType', 'in.SourceId.ServiceType', 'in.WorkType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

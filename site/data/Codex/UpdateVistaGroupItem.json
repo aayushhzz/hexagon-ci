@@ -1,0 +1,340 @@
+{
+  "service": "Codex",
+  "coverage": {
+    "rpc": "UpdateVistaGroupItem",
+    "operation": "VistasGroupsUpdate",
+    "tests": 1,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 11.1
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 19,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 2,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 17,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.ActorId.Components",
+        "in.ActorId.Partition",
+        "in.ActorId.PartitionType",
+        "in.ActorId.ServiceType",
+        "in.AggregateErrors",
+        "in.DevOid.Components",
+        "in.DevOid.Partition",
+        "in.DevOid.PartitionType",
+        "in.DevOid.ServiceType",
+        "in.Id.Components",
+        "in.Id.Partition",
+        "in.Id.PartitionType",
+        "in.Id.ServiceType",
+        "in.VistaGroupItem.CustomView.TableColumns.Values",
+        "in.VistaGroupItem.EndDate",
+        "in.VistaGroupItem.Filter",
+        "in.VistaGroupItem.Parent",
+        "in.VistaGroupItem.StartDate",
+        "in.VistaGroupItem.State"
+      ]
+    },
+    "branches": {
+      "total": 18,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 3,
+      "present_arm_exercised": 1,
+      "present_arm_pct": 5.6,
+      "absent_arm_exercised": 2,
+      "absent_arm_pct": 66.7,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 5.6,
+      "by_origin": {
+        "service": {
+          "total": 12,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 6,
+          "reachable_on_happy_path": 3,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 16.7,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 2
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "internal/common/vista_validation.go:23",
+          "cond": "in.VistaGroupItem.Filter != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Filter"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
+          "cond": "in.DevOid == nil",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
+          "cond": "in.DevOid.Partition != \"\"",
+          "predicate_paths": [
+            "in.DevOid.Partition"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
+          "cond": "in.ActorId == nil",
+          "predicate_paths": [
+            "in.ActorId"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
+          "cond": "in.ActorId.Partition != \"\"",
+          "predicate_paths": [
+            "in.ActorId.Partition"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "internal/common/severity_converter.go:66",
+          "cond": "in.VistaGroupItem.Filter != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Filter"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "internal/common/severity_converter.go:40",
+          "cond": "in.VistaGroupItem.Filter != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Filter"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "internal/common/forecast_category_converter.go:34",
+          "cond": "in.VistaGroupItem.Filter == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Filter"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "internal/serverv2/update_vista_group_item.go:51",
+          "cond": "in.VistaGroupItem.StartDate == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.StartDate"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "internal/serverv2/update_vista_group_item.go:54",
+          "cond": "in.VistaGroupItem.StartDate != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.StartDate"
+          ]
+        },
+        {
+          "id": "b11",
+          "at": "internal/serverv2/update_vista_group_item.go:51",
+          "cond": "in.VistaGroupItem.EndDate != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.EndDate"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "internal/serverv2/update_vista_group_item.go:54",
+          "cond": "in.VistaGroupItem.EndDate == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.EndDate"
+          ]
+        },
+        {
+          "id": "b14",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
+          "cond": "in.Id.Partition != \"\"",
+          "predicate_paths": [
+            "in.Id.Partition"
+          ]
+        },
+        {
+          "id": "b15",
+          "at": "internal/serverv2/update_vista_group_item.go:229",
+          "cond": "in.VistaGroupItem.Parent != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Parent"
+          ]
+        },
+        {
+          "id": "b16",
+          "at": "internal/serverv2/update_vista_group_item.go:324",
+          "cond": "in != nil",
+          "predicate_paths": [
+            "in"
+          ]
+        },
+        {
+          "id": "b17",
+          "at": "internal/serverv2/update_vista_group_item.go:360",
+          "cond": "in.VistaGroupItem.StartDate != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.StartDate"
+          ]
+        },
+        {
+          "id": "b18",
+          "at": "internal/serverv2/update_vista_group_item.go:360",
+          "cond": "in.VistaGroupItem.EndDate != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.EndDate"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "name",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Successfully updated vista group item",
+        "file": "api/v2_internal/vista_groups/vistas_groups_update_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Name"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/codex/internal/serverv2.Codex).UpdateVistaGroupItem",
+    "request_type": "apiv2.UpdateVistaGroupItemRequest",
+    "response_type": "apiv2.UpdateVistaGroupItemResponse",
+    "sinks": [
+      {
+        "kind": "rpc",
+        "target": "TryLock",
+        "via_paths": [
+          "in.DevOid",
+          "in.Id"
+        ],
+        "at": "internal/serverv2/crud.go:334"
+      },
+      {
+        "kind": "dispatch",
+        "target": "Validate",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/serverv2/validator_wrapper.go:31"
+      },
+      {
+        "kind": "rpc",
+        "target": "TryLock",
+        "via_paths": [
+          "in.Id",
+          "in.Id.Partition"
+        ],
+        "at": "internal/serverv2/crud.go:224"
+      },
+      {
+        "kind": "rpc",
+        "target": "Remove",
+        "via_paths": [
+          "in.Id",
+          "in.Id.Partition"
+        ],
+        "at": "internal/serverv2/crud.go:230"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:446",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateVistaGroupItem` (HTTP operation `VistasGroupsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId.Components\n  - in.ActorId.Partition\n  - in.ActorId.PartitionType\n  - in.ActorId.ServiceType\n  - in.AggregateErrors\n  - in.DevOid.Components\n  - in.DevOid.Partition\n  - in.DevOid.PartitionType\n  - in.DevOid.ServiceType\n  - in.Id.Components\n  - in.Id.Partition\n  - in.Id.PartitionType\n  - in.Id.ServiceType\n  - in.VistaGroupItem.CustomView.TableColumns.Values\n  - in.VistaGroupItem.EndDate\n  - in.VistaGroupItem.Filter\n  - in.VistaGroupItem.Parent\n  - in.VistaGroupItem.StartDate\n  - in.VistaGroupItem.State\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.VistaGroupItem.Filter != nil\n  - in.DevOid == nil\n  - in.DevOid.Partition != \"\"\n  - in.ActorId == nil\n  - in.ActorId.Partition != \"\"\n  - in.VistaGroupItem.Filter != nil\n  - in.VistaGroupItem.Filter != nil\n  - in.VistaGroupItem.Filter == nil\n  - in.VistaGroupItem.StartDate == nil\n  - in.VistaGroupItem.StartDate != nil\n  - in.VistaGroupItem.EndDate != nil\n  - in.VistaGroupItem.EndDate == nil\n  - in.Id.Partition != \"\"\n  - in.VistaGroupItem.Parent != nil\n  - in != nil\n  - in.VistaGroupItem.StartDate != nil\n  - in.VistaGroupItem.EndDate != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n  - test field `name` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

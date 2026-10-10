@@ -1,0 +1,267 @@
+{
+  "service": "Codex",
+  "coverage": {
+    "rpc": "GetVistaGroupItem",
+    "operation": "VistasGroupsGet",
+    "tests": 3,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200,
+        404
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 22.2
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 9,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 4,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 8,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.DevOid.Components",
+        "in.DevOid.Partition",
+        "in.DevOid.PartitionType",
+        "in.DevOid.ServiceType",
+        "in.Id.Components",
+        "in.Id.Partition",
+        "in.Id.PartitionType",
+        "in.Id.ServiceType",
+        "in.UpdateCache"
+      ]
+    },
+    "branches": {
+      "total": 17,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 14,
+      "present_arm_exercised": 9,
+      "present_arm_pct": 52.9,
+      "absent_arm_exercised": 5,
+      "absent_arm_pct": 35.7,
+      "negative_arm_exercised": 9,
+      "negative_arm_pct": 52.9,
+      "both_arms_exercised": 0,
+      "coverage_pct": 52.9,
+      "by_origin": {
+        "service": {
+          "total": 6,
+          "reachable_on_happy_path": 5,
+          "present_arm_exercised": 3,
+          "present_arm_pct": 50,
+          "negative_arm_exercised": 3,
+          "negative_arm_pct": 50,
+          "absent_arm_exercised": 2
+        },
+        "generated": {
+          "total": 4,
+          "reachable_on_happy_path": 4,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 50,
+          "negative_arm_exercised": 2,
+          "negative_arm_pct": 50,
+          "absent_arm_exercised": 2
+        },
+        "library": {
+          "total": 7,
+          "reachable_on_happy_path": 5,
+          "present_arm_exercised": 4,
+          "present_arm_pct": 57.1,
+          "negative_arm_exercised": 4,
+          "negative_arm_pct": 57.1,
+          "absent_arm_exercised": 1
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
+          "cond": "in.DevOid == nil",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
+          "cond": "in.DevOid.Partition != \"\"",
+          "predicate_paths": [
+            "in.DevOid.Partition"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
+          "cond": "in.Id.Partition != \"\"",
+          "predicate_paths": [
+            "in.Id.Partition"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:951",
+          "cond": "in.DevOid == nil",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:958",
+          "cond": "in.DevOid|in.DevOid.Partition",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "internal/serverv2/get_vista_group_item.go:20",
+          "cond": "in.DevOid == nil",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "internal/serverv2/get_vista_group_item.go:23",
+          "cond": "in != nil",
+          "predicate_paths": [
+            "in"
+          ]
+        },
+        {
+          "id": "b17",
+          "at": "internal/serverv2/get_vista_group_item.go:65",
+          "cond": "in.UpdateCache",
+          "predicate_paths": [
+            "in.UpdateCache"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "items",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "source",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "target",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Successfully deleted vista group item",
+        "file": "api/v2_internal/vista_groups/vistas_groups_delete_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200,
+          404
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "Successfully retrieved vista group item",
+        "file": "api/v2_internal/vista_groups/vistas_groups_get_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "Successfully moved items between vista groups",
+        "file": "api/v2_internal/vista_groups/vistas_groups_move_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Items",
+          "Source",
+          "Target"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/codex/internal/serverv2.Codex).GetVistaGroupItem",
+    "request_type": "apiv2.GetVistaGroupItemRequest",
+    "response_type": "apiv2.GetVistaGroupItemResponse",
+    "sinks": [
+      {
+        "kind": "rpc",
+        "target": "TryLock",
+        "via_paths": [
+          "in.Id",
+          "in.Id.Partition"
+        ],
+        "at": "internal/serverv2/crud.go:334"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:446",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetVistaGroupItem` (HTTP operation `VistasGroupsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid.Components\n  - in.DevOid.Partition\n  - in.DevOid.PartitionType\n  - in.DevOid.ServiceType\n  - in.Id.Components\n  - in.Id.Partition\n  - in.Id.PartitionType\n  - in.Id.ServiceType\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid.Partition != \"\"\n  - in.Id.Partition != \"\"\n  - in.DevOid == nil\n  - in.DevOid|in.DevOid.Partition\n  - in.DevOid == nil\n  - in != nil\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n  - test field `items` -> suggestions []\n  - test field `source` -> suggestions []\n  - test field `target` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

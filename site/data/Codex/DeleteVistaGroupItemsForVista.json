@@ -1,0 +1,184 @@
+{
+  "service": "Codex",
+  "coverage": {
+    "rpc": "DeleteVistaGroupItemsForVista",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": null,
+      "asserted": [],
+      "missing": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 12,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 12,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.ActorId.Components",
+        "in.ActorId.Partition",
+        "in.ActorId.PartitionType",
+        "in.ActorId.ServiceType",
+        "in.DevOid.Components",
+        "in.DevOid.Partition",
+        "in.DevOid.PartitionType",
+        "in.DevOid.ServiceType",
+        "in.ParentId.Components",
+        "in.ParentId.Partition",
+        "in.ParentId.PartitionType",
+        "in.ParentId.ServiceType"
+      ]
+    },
+    "branches": {
+      "total": 9,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 6,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "by_origin": {
+        "service": {
+          "total": 3,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 6,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "internal/serverv2/delete_vista_group_items_for_vista.go:29",
+          "cond": "in.DevOid == nil",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "internal/serverv2/delete_vista_group_items_for_vista.go:32",
+          "cond": "in.ActorId == nil",
+          "predicate_paths": [
+            "in.ActorId"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/serverv2/delete_vista_group_items_for_vista.go:35",
+          "cond": "in.ParentId == nil",
+          "predicate_paths": [
+            "in.ParentId"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
+          "cond": "in.DevOid == nil",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
+          "cond": "in.DevOid.Partition != \"\"",
+          "predicate_paths": [
+            "in.DevOid.Partition"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
+          "cond": "in.ActorId == nil",
+          "predicate_paths": [
+            "in.ActorId"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
+          "cond": "in.ActorId.Partition != \"\"",
+          "predicate_paths": [
+            "in.ActorId.Partition"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
+          "cond": "in.ParentId == nil",
+          "predicate_paths": [
+            "in.ParentId"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
+          "cond": "in.ParentId.Partition != \"\"",
+          "predicate_paths": [
+            "in.ParentId.Partition"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/codex/internal/serverv2.Codex).DeleteVistaGroupItemsForVista",
+    "request_type": "apiv2.DeleteVistaGroupItemsForVistaRequest",
+    "response_type": "apiv2.DeleteVistaGroupItemsForVistaResponse",
+    "sinks": [],
+    "errors": [],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteVistaGroupItemsForVista` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId.Components\n  - in.ActorId.Partition\n  - in.ActorId.PartitionType\n  - in.ActorId.ServiceType\n  - in.DevOid.Components\n  - in.DevOid.Partition\n  - in.DevOid.PartitionType\n  - in.DevOid.ServiceType\n  - in.ParentId.Components\n  - in.ParentId.Partition\n  - in.ParentId.PartitionType\n  - in.ParentId.ServiceType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.ActorId == nil\n  - in.ParentId == nil\n  - in.DevOid == nil\n  - in.DevOid.Partition != \"\"\n  - in.ActorId == nil\n  - in.ActorId.Partition != \"\"\n  - in.ParentId == nil\n  - in.ParentId.Partition != \"\"\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

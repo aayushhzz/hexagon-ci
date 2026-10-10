@@ -1,0 +1,450 @@
+{
+  "service": "Codex",
+  "coverage": {
+    "rpc": "MergeWorks",
+    "operation": "WorksMerge",
+    "tests": 5,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200,
+        400
+      ],
+      "missing": [
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 25
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 14,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 7,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 2,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 12,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.Actor.Components",
+        "in.Actor.Partition",
+        "in.Actor.PartitionType",
+        "in.Actor.ServiceType",
+        "in.DevOid.Components",
+        "in.DevOid.Partition",
+        "in.DevOid.PartitionType",
+        "in.DevOid.ServiceType",
+        "in.Dryrun",
+        "in.PrimaryWork.Components",
+        "in.PrimaryWork.Partition",
+        "in.PrimaryWork.PartitionType",
+        "in.PrimaryWork.ServiceType",
+        "in.SecondaryWorks"
+      ]
+    },
+    "branches": {
+      "total": 19,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 15,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 15,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "by_origin": {
+        "service": {
+          "total": 4,
+          "reachable_on_happy_path": 3,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 3
+        },
+        "generated": {
+          "total": 6,
+          "reachable_on_happy_path": 6,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 6
+        },
+        "library": {
+          "total": 9,
+          "reachable_on_happy_path": 6,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 6
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
+          "cond": "in.DevOid == nil",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
+          "cond": "in.DevOid.Partition != \"\"",
+          "predicate_paths": [
+            "in.DevOid.Partition"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
+          "cond": "in.Actor == nil",
+          "predicate_paths": [
+            "in.Actor"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
+          "cond": "in.Actor.Partition != \"\"",
+          "predicate_paths": [
+            "in.Actor.Partition"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/obj_type.go:1787",
+          "cond": "in.Actor|in.Actor.Partition",
+          "predicate_paths": [
+            "in.Actor"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/obj_type.go:1789",
+          "cond": "in.Actor|in.Actor.Partition",
+          "predicate_paths": [
+            "in.Actor"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/obj_type.go:1788",
+          "cond": "in.Actor|in.Actor.Partition",
+          "predicate_paths": [
+            "in.Actor"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
+          "cond": "in.PrimaryWork == nil",
+          "predicate_paths": [
+            "in.PrimaryWork"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
+          "cond": "in.PrimaryWork.Partition != \"\"",
+          "predicate_paths": [
+            "in.PrimaryWork.Partition"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1758",
+          "cond": "in.DevOid == nil",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b11",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1765",
+          "cond": "in.DevOid|in.DevOid.Partition",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1768",
+          "cond": "in.Actor == nil",
+          "predicate_paths": [
+            "in.Actor"
+          ]
+        },
+        {
+          "id": "b13",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1775",
+          "cond": "in.Actor|in.Actor.Partition",
+          "predicate_paths": [
+            "in.Actor"
+          ]
+        },
+        {
+          "id": "b14",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1789",
+          "cond": "in.PrimaryWork == nil",
+          "predicate_paths": [
+            "in.PrimaryWork"
+          ]
+        },
+        {
+          "id": "b15",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1796",
+          "cond": "in.PrimaryWork|in.PrimaryWork.Partition",
+          "predicate_paths": [
+            "in.PrimaryWork"
+          ]
+        },
+        {
+          "id": "b16",
+          "at": "internal/serverv2/merge_works.go:94",
+          "cond": "donv2.DON).String() == in.PrimaryWork|in.PrimaryWork.Partition",
+          "predicate_paths": [
+            "in.PrimaryWork"
+          ]
+        },
+        {
+          "id": "b17",
+          "at": "internal/serverv2/merge_works.go:34",
+          "cond": "in != nil",
+          "predicate_paths": [
+            "in"
+          ]
+        },
+        {
+          "id": "b18",
+          "at": "internal/serverv2/merge_works.go:69",
+          "cond": "in.PrimaryWork|in.PrimaryWork.Partition != *ObjectTypeTicket",
+          "predicate_paths": [
+            "in.PrimaryWork"
+          ]
+        },
+        {
+          "id": "b19",
+          "at": "internal/serverv2/merge_works.go:78",
+          "cond": "in.Dryrun",
+          "predicate_paths": [
+            "in.Dryrun"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "appliestopart",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "body",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "mergewith",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "ownedby",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "title",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "type",
+          "fuzzy_suggestions": [
+            "in.Actor.PartitionType",
+            "in.Actor.ServiceType",
+            "in.DevOid.PartitionType",
+            "in.DevOid.ServiceType",
+            "in.PrimaryWork.PartitionType",
+            "in.PrimaryWork.ServiceType"
+          ]
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Merge two tickets",
+        "file": "api/v2_internal/work/tickets/crud/merge_ticket_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "MergeWith"
+        ],
+        "statuses": null,
+        "asserts_success": true
+      },
+      {
+        "name": "Merge same ticket",
+        "file": "api/v2_internal/work/tickets/crud/merge_ticket_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "MergeWith"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "Should successfully merge two tickets and verify merged ticket",
+        "file": "e2e/ticktes_user_journey/tickets_merging_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Id",
+          "MergeWith",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "Should validate negative scenarios for ticket merging with different workspaces",
+        "file": "e2e/ticktes_user_journey/tickets_merging_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Id",
+          "MergeWith",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "Should successfully merge tickets from different source channels",
+        "file": "e2e/ticktes_user_journey/tickets_merging_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Id",
+          "MergeWith",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/codex/internal/serverv2.Codex).MergeWorks",
+    "request_type": "apiv2.MergeWorksRequest",
+    "response_type": "apiv2.MergeWorksResponse",
+    "sinks": [
+      {
+        "kind": "rpc",
+        "target": "GetAggregatedSchema",
+        "via_paths": [
+          "in.DevOid",
+          "in.PrimaryWork"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
+      },
+      {
+        "kind": "rpc",
+        "target": "DecryptText",
+        "via_paths": [
+          "in.DevOid",
+          "in.PrimaryWork"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/encryption/decryption.go:95"
+      },
+      {
+        "kind": "rpc",
+        "target": "DecryptBytes",
+        "via_paths": [
+          "in.DevOid",
+          "in.PrimaryWork"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/encryption/decryption.go:118"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetPreferences",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/serverv2/merge_works.go:224"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:446",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MergeWorks` (HTTP operation `WorksMerge`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Actor.Components\n  - in.Actor.Partition\n  - in.Actor.PartitionType\n  - in.Actor.ServiceType\n  - in.DevOid.Components\n  - in.DevOid.Partition\n  - in.DevOid.PartitionType\n  - in.DevOid.ServiceType\n  - in.Dryrun\n  - in.PrimaryWork.Components\n  - in.PrimaryWork.Partition\n  - in.PrimaryWork.PartitionType\n  - in.PrimaryWork.ServiceType\n  - in.SecondaryWorks\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid.Partition != \"\"\n  - in.Actor == nil\n  - in.Actor.Partition != \"\"\n  - in.Actor|in.Actor.Partition\n  - in.Actor|in.Actor.Partition\n  - in.Actor|in.Actor.Partition\n  - in.PrimaryWork == nil\n  - in.PrimaryWork.Partition != \"\"\n  - in.DevOid == nil\n  - in.DevOid|in.DevOid.Partition\n  - in.Actor == nil\n  - in.Actor|in.Actor.Partition\n  - in.PrimaryWork == nil\n  - in.PrimaryWork|in.PrimaryWork.Partition\n  - donv2.DON).String() == in.PrimaryWork|in.PrimaryWork.Partition\n  - in != nil\n  - in.PrimaryWork|in.PrimaryWork.Partition != *ObjectTypeTicket\n  - in.Dryrun\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions []\n  - test field `body` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `mergewith` -> suggestions []\n  - test field `ownedby` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions ['in.Actor.PartitionType', 'in.Actor.ServiceType', 'in.DevOid.PartitionType', 'in.DevOid.ServiceType', 'in.PrimaryWork.PartitionType', 'in.PrimaryWork.ServiceType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

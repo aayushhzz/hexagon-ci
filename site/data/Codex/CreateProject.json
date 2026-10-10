@@ -1,0 +1,495 @@
+{
+  "service": "Codex",
+  "coverage": {
+    "rpc": "CreateProject",
+    "operation": "ProjectsCreate",
+    "tests": 4,
+    "status": {
+      "documented": [
+        201,
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        201
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 12.5
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 21,
+      "covered_count": 2,
+      "coverage_pct": 9.5,
+      "request_fields_set_by_tests": 5,
+      "set_by_positive_tests": 1,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 13,
+          "set": 2,
+          "pct": 15.4
+        },
+        "deep": {
+          "total": 7,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": [
+        {
+          "path": "in.Project.CustomFields",
+          "match": "exact",
+          "by_tests": [
+            "Rejects a custom field with an unknown schema key"
+          ]
+        },
+        {
+          "path": "in.Project.Name",
+          "match": "exact",
+          "by_tests": [
+            "Creates a project with required fields and returns a well-formed DON at the start stage",
+            "Rejects a custom field with an unknown schema key",
+            "Rejects create with an invalid stage DON",
+            "Rejects create without owned_by"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.CustomSchemaSpec.Drop",
+        "in.CustomSchemaSpec.ValidateRequiredFields",
+        "in.Project.ArtifactIds",
+        "in.Project.Description",
+        "in.Project.Health",
+        "in.Project.MemberIds",
+        "in.Project.OwnedByIds",
+        "in.Project.ProjectSettings.AllowedObjectTypes",
+        "in.Project.ProjectSettings.ShowMilestones",
+        "in.Project.SharedWith",
+        "in.Project.Stage.Notes",
+        "in.Project.Stage.StageId.Components",
+        "in.Project.Stage.StageId.Partition",
+        "in.Project.Stage.StageId.PartitionType",
+        "in.Project.Stage.StageId.ServiceType",
+        "in.Project.TagIds",
+        "in.Project.TargetCloseDate",
+        "in.Project.TargetStartDate",
+        "in.StageValidationOptions"
+      ]
+    },
+    "branches": {
+      "total": 37,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 6,
+      "present_arm_exercised": 8,
+      "present_arm_pct": 21.6,
+      "absent_arm_exercised": 6,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 2,
+      "coverage_pct": 21.6,
+      "by_origin": {
+        "service": {
+          "total": 15,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 13.3,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 1
+        },
+        "generated": {
+          "total": 15,
+          "reachable_on_happy_path": 4,
+          "present_arm_exercised": 6,
+          "present_arm_pct": 40,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 4
+        },
+        "library": {
+          "total": 7,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 1
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "internal/serverv2/create_project.go:163",
+          "cond": "in == nil",
+          "predicate_paths": [
+            "in"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/serverv2/create_project.go:163",
+          "cond": "in.Project == nil",
+          "predicate_paths": [
+            "in.Project"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
+          "cond": "in.Project.Stage.StageId == nil",
+          "predicate_paths": [
+            "in.Project.Stage.StageId"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
+          "cond": "in.Project.Stage.StageId.Partition != \"\"",
+          "predicate_paths": [
+            "in.Project.Stage.StageId.Partition"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/composite.pb.validator.go:3261",
+          "cond": "in.Project.Stage.StageId == nil",
+          "predicate_paths": [
+            "in.Project.Stage.StageId"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/composite.pb.validator.go:3268",
+          "cond": "in.Project.Stage.StageId|in.Project.Stage.StageId.Partition",
+          "predicate_paths": [
+            "in.Project.Stage.StageId"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:1022",
+          "cond": "in.Project.Description != nil",
+          "predicate_paths": [
+            "in.Project.Description"
+          ]
+        },
+        {
+          "id": "b11",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:1061",
+          "cond": "in.Project.ProjectSettings != nil",
+          "predicate_paths": [
+            "in.Project.ProjectSettings"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:1062",
+          "cond": "in.Project.ProjectSettings != nil",
+          "predicate_paths": [
+            "in.Project.ProjectSettings"
+          ]
+        },
+        {
+          "id": "b15",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:246",
+          "cond": "in.CustomSchemaSpec.Drop != nil",
+          "predicate_paths": [
+            "in.CustomSchemaSpec.Drop"
+          ]
+        },
+        {
+          "id": "b16",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:247",
+          "cond": "in.CustomSchemaSpec.Drop != nil",
+          "predicate_paths": [
+            "in.CustomSchemaSpec.Drop"
+          ]
+        },
+        {
+          "id": "b17",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/project.pb.validator.go:18",
+          "cond": "in.Project != nil",
+          "predicate_paths": [
+            "in.Project"
+          ]
+        },
+        {
+          "id": "b18",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/project.pb.validator.go:19",
+          "cond": "in.Project != nil",
+          "predicate_paths": [
+            "in.Project"
+          ]
+        },
+        {
+          "id": "b21",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/go/archetype/archetype/unified_enum.go:145",
+          "cond": "in.Project.Health == nil",
+          "predicate_paths": [
+            "in.Project.Health"
+          ]
+        },
+        {
+          "id": "b22",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/go/archetype/archetype/unified_enum.go:160",
+          "cond": "*t23 == in.Project.Health",
+          "predicate_paths": [
+            "in.Project.Health"
+          ]
+        },
+        {
+          "id": "b23",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/gen_deps/unified_enum.go:31",
+          "cond": "in.Project.Health == nil",
+          "predicate_paths": [
+            "in.Project.Health"
+          ]
+        },
+        {
+          "id": "b24",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/gen_deps/unified_enum.go:63",
+          "cond": "**t50 == in.Project.Health",
+          "predicate_paths": [
+            "in.Project.Health"
+          ]
+        },
+        {
+          "id": "b25",
+          "at": "internal/collectionv2/project_settings.gen.go:248",
+          "cond": "in.Project.ProjectSettings.AllowedObjectTypes != nil",
+          "predicate_paths": [
+            "in.Project.ProjectSettings.AllowedObjectTypes"
+          ]
+        },
+        {
+          "id": "b26",
+          "at": "internal/collectionv2/stage.gen.go:289",
+          "cond": "in.Project.Stage.StageId != nil",
+          "predicate_paths": [
+            "in.Project.Stage.StageId"
+          ]
+        },
+        {
+          "id": "b27",
+          "at": "internal/collectionv2/project.gen.go:1530",
+          "cond": "in.Project.TargetStartDate != nil",
+          "predicate_paths": [
+            "in.Project.TargetStartDate"
+          ]
+        },
+        {
+          "id": "b28",
+          "at": "internal/collectionv2/project.gen.go:1534",
+          "cond": "in.Project.TargetCloseDate != nil",
+          "predicate_paths": [
+            "in.Project.TargetCloseDate"
+          ]
+        },
+        {
+          "id": "b29",
+          "at": "internal/collectionv2/project.gen.go:1538",
+          "cond": "in.Project.OwnedByIds != nil",
+          "predicate_paths": [
+            "in.Project.OwnedByIds"
+          ]
+        },
+        {
+          "id": "b30",
+          "at": "internal/collectionv2/project.gen.go:1552",
+          "cond": "in.Project.MemberIds != nil",
+          "predicate_paths": [
+            "in.Project.MemberIds"
+          ]
+        },
+        {
+          "id": "b31",
+          "at": "internal/collectionv2/project.gen.go:1566",
+          "cond": "in.Project.TagIds != nil",
+          "predicate_paths": [
+            "in.Project.TagIds"
+          ]
+        },
+        {
+          "id": "b32",
+          "at": "internal/collectionv2/project.gen.go:1580",
+          "cond": "in.Project.ProjectSettings != nil",
+          "predicate_paths": [
+            "in.Project.ProjectSettings"
+          ]
+        },
+        {
+          "id": "b34",
+          "at": "internal/collectionv2/project.gen.go:1594",
+          "cond": "in.Project.ArtifactIds != nil",
+          "predicate_paths": [
+            "in.Project.ArtifactIds"
+          ]
+        },
+        {
+          "id": "b35",
+          "at": "internal/collectionv2/project.gen.go:1608",
+          "cond": "in.Project.SharedWith != nil",
+          "predicate_paths": [
+            "in.Project.SharedWith"
+          ]
+        },
+        {
+          "id": "b36",
+          "at": "/Users/devrev/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:66",
+          "cond": "in.Project|in.Project.Description|in.Project.Name|in.Project.ProjectSettings|in.Project.ProjectSettings.ShowMilestones|in.Project.Stage|in.Project.Stage.Notes|in.Project.Stage.StageId|in.Project.Stage.StageId.Partition == nil",
+          "predicate_paths": [
+            "in.Project"
+          ]
+        },
+        {
+          "id": "b37",
+          "at": "internal/serverv2/create_project.go:61",
+          "cond": "in != nil",
+          "predicate_paths": [
+            "in"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "customschemaspec",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "ownedby",
+          "fuzzy_suggestions": [
+            "in.Project.OwnedByIds"
+          ]
+        },
+        {
+          "field": "stage",
+          "fuzzy_suggestions": [
+            "in.StageValidationOptions"
+          ]
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Creates a project with required fields and returns a well-formed DON at the start stage",
+        "file": "api/v2_internal/projects/crud/create_project_test.go",
+        "labels": null,
+        "fields_set": [
+          "Name",
+          "OwnedBy"
+        ],
+        "statuses": null,
+        "asserts_success": true
+      },
+      {
+        "name": "Rejects create without owned_by",
+        "file": "api/v2_internal/projects/crud/create_project_test.go",
+        "labels": null,
+        "fields_set": [
+          "Name",
+          "OwnedBy"
+        ],
+        "statuses": null,
+        "asserts_success": false
+      },
+      {
+        "name": "Rejects create with an invalid stage DON",
+        "file": "api/v2_internal/projects/crud/create_project_test.go",
+        "labels": null,
+        "fields_set": [
+          "Name",
+          "OwnedBy",
+          "Stage"
+        ],
+        "statuses": null,
+        "asserts_success": false
+      },
+      {
+        "name": "Rejects a custom field with an unknown schema key",
+        "file": "api/v2_internal/projects/crud/project_custom_fields_test.go",
+        "labels": null,
+        "fields_set": [
+          "CustomFields",
+          "CustomSchemaSpec",
+          "Name",
+          "OwnedBy"
+        ],
+        "statuses": null,
+        "asserts_success": false
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/codex/internal/serverv2.Codex).CreateProject",
+    "request_type": "apiv2.CreateProjectRequest",
+    "response_type": "apiv2.CreateProjectResponse",
+    "sinks": [
+      {
+        "kind": "rpc",
+        "target": "GetAggregatedSchemaForWrite",
+        "via_paths": [
+          "in.CustomSchemaSpec"
+        ],
+        "at": "internal/serverv2/create_project.go:44"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetCustomStage",
+        "via_paths": [
+          "in.Project.Stage.StageId"
+        ],
+        "at": "internal/serverv2/create_project.go:257"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:446",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrNilArguments",
+        "at": "/Users/devrev/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:68",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrNotSupported",
+        "at": "/Users/devrev/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:73",
+        "tainted": true
+      },
+      {
+        "symbol": "ErrNonPointerArgument",
+        "at": "/Users/devrev/go/pkg/mod/github.com/imdario/mergo@v0.3.16/merge.go:376",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrDifferentArgumentsTypes",
+        "at": "/Users/devrev/go/pkg/mod/github.com/imdario/mergo@v0.3.16/merge.go:393",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateProject` (HTTP operation `ProjectsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomSchemaSpec.Drop\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.Project.ArtifactIds\n  - in.Project.Description\n  - in.Project.Health\n  - in.Project.MemberIds\n  - in.Project.OwnedByIds\n  - in.Project.ProjectSettings.AllowedObjectTypes\n  - in.Project.ProjectSettings.ShowMilestones\n  - in.Project.SharedWith\n  - in.Project.Stage.Notes\n  - in.Project.Stage.StageId.Components\n  - in.Project.Stage.StageId.Partition\n  - in.Project.Stage.StageId.PartitionType\n  - in.Project.Stage.StageId.ServiceType\n  - in.Project.TagIds\n  - in.Project.TargetCloseDate\n  - in.Project.TargetStartDate\n  - in.StageValidationOptions\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in == nil\n  - in.Project == nil\n  - in.Project.Stage.StageId == nil\n  - in.Project.Stage.StageId.Partition != \"\"\n  - in.Project.Stage.StageId == nil\n  - in.Project.Stage.StageId|in.Project.Stage.StageId.Partition\n  - in.Project.Description != nil\n  - in.Project.ProjectSettings != nil\n  - in.Project.ProjectSettings != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.Project != nil\n  - in.Project != nil\n  - in.Project.Health == nil\n  - *t23 == in.Project.Health\n  - in.Project.Health == nil\n  - **t50 == in.Project.Health\n  - in.Project.ProjectSettings.AllowedObjectTypes != nil\n  - in.Project.Stage.StageId != nil\n  - in.Project.TargetStartDate != nil\n  - in.Project.TargetCloseDate != nil\n  - in.Project.OwnedByIds != nil\n  - in.Project.MemberIds != nil\n  - in.Project.TagIds != nil\n  - in.Project.ProjectSettings != nil\n  - in.Project.ArtifactIds != nil\n  - in.Project.SharedWith != nil\n  - in.Project|in.Project.Description|in.Project.Name|in.Project.ProjectSettings|in.Project.ProjectSettings.ShowMilestones|in.Project.Stage|in.Project.Stage.Notes|in.Project.Stage.StageId|in.Project.Stage.StageId.Partition == nil\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `customschemaspec` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Project.OwnedByIds']\n  - test field `stage` -> suggestions ['in.StageValidationOptions']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

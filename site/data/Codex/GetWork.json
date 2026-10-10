@@ -1,0 +1,486 @@
+{
+  "service": "Codex",
+  "coverage": {
+    "rpc": "GetWork",
+    "operation": "WorksGet",
+    "tests": 14,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200,
+        201,
+        404
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 22.2
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 9,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 5,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 8,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.DevOid.Components",
+        "in.DevOid.Partition",
+        "in.DevOid.PartitionType",
+        "in.DevOid.ServiceType",
+        "in.Id.Components",
+        "in.Id.Partition",
+        "in.Id.PartitionType",
+        "in.Id.ServiceType",
+        "in.UpdateCache"
+      ]
+    },
+    "branches": {
+      "total": 19,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 16,
+      "present_arm_exercised": 10,
+      "present_arm_pct": 52.6,
+      "absent_arm_exercised": 16,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 10,
+      "negative_arm_pct": 52.6,
+      "both_arms_exercised": 10,
+      "coverage_pct": 52.6,
+      "by_origin": {
+        "service": {
+          "total": 3,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 2
+        },
+        "generated": {
+          "total": 4,
+          "reachable_on_happy_path": 4,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 50,
+          "negative_arm_exercised": 2,
+          "negative_arm_pct": 50,
+          "absent_arm_exercised": 4
+        },
+        "library": {
+          "total": 12,
+          "reachable_on_happy_path": 10,
+          "present_arm_exercised": 8,
+          "present_arm_pct": 66.7,
+          "negative_arm_exercised": 8,
+          "negative_arm_pct": 66.7,
+          "absent_arm_exercised": 10
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
+          "cond": "in.DevOid == nil",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
+          "cond": "in.DevOid.Partition != \"\"",
+          "predicate_paths": [
+            "in.DevOid.Partition"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
+          "cond": "in.Id.Partition != \"\"",
+          "predicate_paths": [
+            "in.Id.Partition"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:117",
+          "cond": "in.DevOid == nil",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b13",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:124",
+          "cond": "in.DevOid|in.DevOid.Partition",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b16",
+          "at": "internal/serverv2/get_work.go:38",
+          "cond": "in.DevOid == nil",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b17",
+          "at": "internal/serverv2/get_work.go:41",
+          "cond": "in != nil",
+          "predicate_paths": [
+            "in"
+          ]
+        },
+        {
+          "id": "b18",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:667",
+          "cond": "in.DevOid|in.DevOid.Partition != objType",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b19",
+          "at": "internal/serverv2/get_work.go:73",
+          "cond": "in.UpdateCache",
+          "predicate_paths": [
+            "in.UpdateCache"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "appliestopart",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "ownedby",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "title",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "type",
+          "fuzzy_suggestions": [
+            "in.DevOid.PartitionType",
+            "in.DevOid.ServiceType",
+            "in.Id.PartitionType",
+            "in.Id.ServiceType"
+          ]
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Unsets milestone on all referencing issues when milestone is deleted",
+        "file": "api/v2_internal/milestones/crud/milestone_interaction_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true
+      },
+      {
+        "name": "CreateTicketPart1",
+        "file": "api/v2_internal/rools/rule_execution/part_based_routing_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Id",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "CreateTicketPart2",
+        "file": "api/v2_internal/rools/rule_execution/part_based_routing_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Id",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "CreateTicketPart3",
+        "file": "api/v2_internal/rools/rule_execution/part_based_routing_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Id",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "CheckIfGroupIsAssignedLoopPart1",
+        "file": "api/v2_internal/rools/rule_execution/part_based_routing_test.go",
+        "labels": [
+          "INVALID"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "CheckIfGroupIsAssignedLoopPart2",
+        "file": "api/v2_internal/rools/rule_execution/part_based_routing_test.go",
+        "labels": [
+          "INVALID"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "CheckIfGroupIsAssignedLoopPart3",
+        "file": "api/v2_internal/rools/rule_execution/part_based_routing_test.go",
+        "labels": [
+          "INVALID"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "CheckIfGroupIsAssigned",
+        "file": "api/v2_internal/rools/rule_execution/ticket_routing_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "CheckIfGroupIsAssignedLoop",
+        "file": "api/v2_internal/rools/rule_execution/ticket_routing_test.go",
+        "labels": [
+          "INVALID"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "Admin - Should be able to get an issue",
+        "file": "api/v2_internal/work/issues/crud/get_work_test.go",
+        "labels": [
+          "POSITIVE",
+          "ADMIN"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "Get by id",
+        "file": "api/v2_internal/work/tickets/crud/get_ticket_test.go",
+        "labels": [
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "DefaultGet",
+        "file": "api/v2_public/works/crud/get_work_test.go",
+        "labels": [
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "DefaultGet",
+        "file": "api/v2_public/works/crud/get_work_test.go",
+        "labels": [
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "Platform user should be able to perform all CRUD operations",
+        "file": "e2e/ticktes_user_journey/mfz_tickets_test/mfz_tickets_test.go",
+        "labels": [
+          "UAT",
+          "DEV_USER"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          404
+        ],
+        "asserts_success": true
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/codex/internal/serverv2.Codex).GetWork",
+    "request_type": "apiv2.GetWorkRequest",
+    "response_type": "apiv2.GetWorkResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetDevOid",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/common/crud.go:64"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetId",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/common/crud.go:71"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetAggregatedSchema",
+        "via_paths": [
+          "in.DevOid",
+          "in.DevOid.Partition"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
+      },
+      {
+        "kind": "rpc",
+        "target": "DecryptText",
+        "via_paths": [
+          "in.DevOid",
+          "in.DevOid.Partition"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/encryption/decryption.go:95"
+      },
+      {
+        "kind": "rpc",
+        "target": "DecryptBytes",
+        "via_paths": [
+          "in.DevOid",
+          "in.DevOid.Partition"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/encryption/decryption.go:118"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:446",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetWork` (HTTP operation `WorksGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid.Components\n  - in.DevOid.Partition\n  - in.DevOid.PartitionType\n  - in.DevOid.ServiceType\n  - in.Id.Components\n  - in.Id.Partition\n  - in.Id.PartitionType\n  - in.Id.ServiceType\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid.Partition != \"\"\n  - in.Id.Partition != \"\"\n  - in.DevOid == nil\n  - in.DevOid|in.DevOid.Partition\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid|in.DevOid.Partition != objType\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `ownedby` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions ['in.DevOid.PartitionType', 'in.DevOid.ServiceType', 'in.Id.PartitionType', 'in.Id.ServiceType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

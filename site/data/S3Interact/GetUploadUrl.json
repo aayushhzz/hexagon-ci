@@ -1,0 +1,667 @@
+{
+  "service": "S3Interact",
+  "coverage": {
+    "rpc": "GetUploadUrl",
+    "operation": "ArtifactsPrepare,ArtifactsUploadCreate",
+    "tests": 17,
+    "status": {
+      "documented": null,
+      "asserted": [
+        200,
+        201
+      ],
+      "missing": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 16,
+      "covered_count": 3,
+      "coverage_pct": 18.8,
+      "request_fields_set_by_tests": 7,
+      "set_by_positive_tests": 3,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 7,
+          "set": 3,
+          "pct": 42.9
+        },
+        "nested": {
+          "total": 9,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": [
+        {
+          "path": "in.ConfigurationSet",
+          "match": "exact",
+          "by_tests": [
+            "Invalid configuration_set on create should fail"
+          ]
+        },
+        {
+          "path": "in.FileName",
+          "match": "exact",
+          "by_tests": [
+            "Another member cursor cannot advance a different upload",
+            "Create with empty file name should fail",
+            "Create with negative part_size should fail",
+            "Download artifact with access key",
+            "Download public artifact with access key",
+            "Invalid configuration_set on create should fail",
+            "Invalid extension",
+            "Invalid headers on create should fail",
+            "PUT body does not match part_size",
+            "Prepare with empty file name should fail",
+            "TextArtifact",
+            "Unauthenticated download of public article artifact without key should succeed",
+            "UnknownTypeArtifact"
+          ]
+        },
+        {
+          "path": "in.FileType",
+          "match": "exact",
+          "by_tests": [
+            "Another member cursor cannot advance a different upload",
+            "Create with empty file name should fail",
+            "Create with negative part_size should fail",
+            "Download artifact with access key",
+            "Download public artifact with access key",
+            "Invalid configuration_set on create should fail",
+            "Invalid extension",
+            "Invalid headers on create should fail",
+            "PUT body does not match part_size",
+            "TextArtifact",
+            "Unauthenticated download of public article artifact without key should succeed"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.ActorId.Components",
+        "in.ActorId.Partition",
+        "in.ActorId.PartitionType",
+        "in.ActorId.ServiceType",
+        "in.DevOid.Components",
+        "in.DevOid.Partition",
+        "in.DevOid.PartitionType",
+        "in.DevOid.ServiceType",
+        "in.FileEncoding",
+        "in.FileSize",
+        "in.Headers.ContentDisposition",
+        "in.IsChunkedUpload",
+        "in.SkipFileConstrains"
+      ]
+    },
+    "branches": {
+      "total": 37,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 34,
+      "present_arm_exercised": 14,
+      "present_arm_pct": 37.8,
+      "absent_arm_exercised": 34,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 14,
+      "coverage_pct": 37.8,
+      "by_origin": {
+        "service": {
+          "total": 21,
+          "reachable_on_happy_path": 20,
+          "present_arm_exercised": 11,
+          "present_arm_pct": 52.4,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 20
+        },
+        "generated": {
+          "total": 7,
+          "reachable_on_happy_path": 7,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 28.6,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 7
+        },
+        "library": {
+          "total": 9,
+          "reachable_on_happy_path": 7,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 11.1,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 7
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+          "cond": "in.ActorId == nil",
+          "predicate_paths": [
+            "in.ActorId"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
+          "cond": "in.ActorId.Partition != \"\"",
+          "predicate_paths": [
+            "in.ActorId.Partition"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
+          "cond": "in.ActorId|in.ActorId.Partition",
+          "predicate_paths": [
+            "in.ActorId"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
+          "cond": "in.ActorId|in.ActorId.Partition",
+          "predicate_paths": [
+            "in.ActorId"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
+          "cond": "in.ActorId|in.ActorId.Partition",
+          "predicate_paths": [
+            "in.ActorId"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+          "cond": "in.DevOid == nil",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
+          "cond": "in.DevOid.Partition != \"\"",
+          "predicate_paths": [
+            "in.DevOid.Partition"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:322",
+          "cond": "in.ActorId == nil",
+          "predicate_paths": [
+            "in.ActorId"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:329",
+          "cond": "in.ActorId|in.ActorId.Partition",
+          "predicate_paths": [
+            "in.ActorId"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:332",
+          "cond": "in.DevOid == nil",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b11",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:339",
+          "cond": "in.DevOid|in.DevOid.Partition",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:357",
+          "cond": "in.FileSize >= 0",
+          "predicate_paths": [
+            "in.FileSize"
+          ]
+        },
+        {
+          "id": "b17",
+          "at": "internal/server/multipart_upload.go:32",
+          "cond": "in.FileSize <= 0",
+          "predicate_paths": [
+            "in.FileSize"
+          ]
+        },
+        {
+          "id": "b23",
+          "at": "internal/server/upload.go:141",
+          "cond": "in.FileSize > *t11 * 1024 * 1024",
+          "predicate_paths": [
+            "in.FileSize"
+          ]
+        },
+        {
+          "id": "b24",
+          "at": "internal/server/upload.go:152",
+          "cond": "in.FileSize < t38 * 1024 * 1024",
+          "predicate_paths": [
+            "in.FileSize"
+          ]
+        },
+        {
+          "id": "b25",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3600",
+          "cond": "in.ActorId|in.ActorId.Partition",
+          "predicate_paths": [
+            "in.ActorId"
+          ]
+        },
+        {
+          "id": "b28",
+          "at": "internal/server/multipart_upload.go:73",
+          "cond": "in.FileEncoding != \"\"",
+          "predicate_paths": [
+            "in.FileEncoding"
+          ]
+        },
+        {
+          "id": "b29",
+          "at": "internal/server/upload.go:181",
+          "cond": "in != nil",
+          "predicate_paths": [
+            "in"
+          ]
+        },
+        {
+          "id": "b30",
+          "at": "internal/server/upload.go:184",
+          "cond": "in.IsChunkedUpload",
+          "predicate_paths": [
+            "in.IsChunkedUpload"
+          ]
+        },
+        {
+          "id": "b32",
+          "at": "internal/server/upload.go:224",
+          "cond": "in.SkipFileConstrains",
+          "predicate_paths": [
+            "in.SkipFileConstrains"
+          ]
+        },
+        {
+          "id": "b35",
+          "at": "internal/server/upload.go:227",
+          "cond": "in.ActorId|in.ActorId.Partition != *ObjectTypeRevUser",
+          "predicate_paths": [
+            "in.ActorId"
+          ]
+        },
+        {
+          "id": "b36",
+          "at": "internal/server/upload.go:274",
+          "cond": "in.FileEncoding != \"\"",
+          "predicate_paths": [
+            "in.FileEncoding"
+          ]
+        },
+        {
+          "id": "b37",
+          "at": "internal/server/upload.go:278",
+          "cond": "in.IsChunkedUpload",
+          "predicate_paths": [
+            "in.IsChunkedUpload"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "cursor",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "headers",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "partsize",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Invalid extension",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": null,
+        "asserts_success": false
+      },
+      {
+        "name": "Prepare with empty file name should fail",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "FileName"
+        ],
+        "statuses": null,
+        "asserts_success": true
+      },
+      {
+        "name": "TextArtifact",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "UnknownTypeArtifact",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "FileName"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "Download artifact with access key",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_DOWNLOAD",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "Unauthenticated download of public article artifact without key should succeed",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_DOWNLOAD",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "Id"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "Invalid extension",
+        "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "NEGATIVE",
+          "PUBLIC_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": null,
+        "asserts_success": false
+      },
+      {
+        "name": "Prepare with empty file name should fail",
+        "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "NEGATIVE",
+          "PUBLIC_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "FileName"
+        ],
+        "statuses": null,
+        "asserts_success": true
+      },
+      {
+        "name": "TextArtifact",
+        "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "PUBLIC_ARTIFACTS_PREPARE",
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "UnknownTypeArtifact",
+        "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "PUBLIC_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "FileName"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "Download public artifact with access key",
+        "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "PUBLIC_ARTIFACTS_DOWNLOAD",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "Create with negative part_size should fail",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": null,
+        "asserts_success": true
+      },
+      {
+        "name": "Create with empty file name should fail",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": null,
+        "asserts_success": true
+      },
+      {
+        "name": "Invalid configuration_set on create should fail",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE"
+        ],
+        "fields_set": [
+          "ConfigurationSet",
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": null,
+        "asserts_success": true
+      },
+      {
+        "name": "Invalid headers on create should fail",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "Headers",
+          "PartSize"
+        ],
+        "statuses": null,
+        "asserts_success": true
+      },
+      {
+        "name": "Another member cursor cannot advance a different upload",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "Cursor",
+          "FileName",
+          "FileType",
+          "Id",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "PUT body does not match part_size",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/s3interact/internal/server.S3Interact).GetUploadUrl",
+    "request_type": "api.GetUploadUrlRequest",
+    "response_type": "api.GetUploadUrlResponse",
+    "sinks": [],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidMediaParameter",
+        "at": "/Users/devrev/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.1.darwin-arm64/src/mime/mediatype.go:172",
+        "tainted": false
+      },
+      {
+        "symbol": "errDuplicateParamName",
+        "at": "/Users/devrev/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.1.darwin-arm64/src/mime/mediatype.go:187",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrNilArguments",
+        "at": "/Users/devrev/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:68",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrNotSupported",
+        "at": "/Users/devrev/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:73",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrNonPointerArgument",
+        "at": "/Users/devrev/go/pkg/mod/github.com/imdario/mergo@v0.3.16/merge.go:376",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrDifferentArgumentsTypes",
+        "at": "/Users/devrev/go/pkg/mod/github.com/imdario/mergo@v0.3.16/merge.go:393",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetUploadUrl` (HTTP operation `ArtifactsPrepare,ArtifactsUploadCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId.Components\n  - in.ActorId.Partition\n  - in.ActorId.PartitionType\n  - in.ActorId.ServiceType\n  - in.DevOid.Components\n  - in.DevOid.Partition\n  - in.DevOid.PartitionType\n  - in.DevOid.ServiceType\n  - in.FileEncoding\n  - in.FileSize\n  - in.Headers.ContentDisposition\n  - in.IsChunkedUpload\n  - in.SkipFileConstrains\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId.Partition != \"\"\n  - in.ActorId|in.ActorId.Partition\n  - in.ActorId|in.ActorId.Partition\n  - in.ActorId|in.ActorId.Partition\n  - in.DevOid == nil\n  - in.DevOid.Partition != \"\"\n  - in.ActorId == nil\n  - in.ActorId|in.ActorId.Partition\n  - in.DevOid == nil\n  - in.DevOid|in.DevOid.Partition\n  - in.FileSize >= 0\n  - in.FileSize <= 0\n  - in.FileSize > *t11 * 1024 * 1024\n  - in.FileSize < t38 * 1024 * 1024\n  - in.ActorId|in.ActorId.Partition\n  - in.FileEncoding != \"\"\n  - in != nil\n  - in.IsChunkedUpload\n  - in.SkipFileConstrains\n  - in.ActorId|in.ActorId.Partition != *ObjectTypeRevUser\n  - in.FileEncoding != \"\"\n  - in.IsChunkedUpload\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrInvalidMediaParameter\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n  - errDuplicateParamName\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `cursor` -> suggestions []\n  - test field `headers` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `partsize` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}
