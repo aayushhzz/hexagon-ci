@@ -144,28 +144,72 @@ For a non-janus service, point the interface/impl flags at that server type.
 
 ## Interpreting coverage output
 
-Per RPC the report contains:
+The report has three independent coverage dimensions: **input fields**,
+**validation branches**, and **HTTP statuses**. A test can score on one and not
+the others (an empty-body smoke test covers a status and the happy branch arm
+but no input field). Keep them separate when reasoning about a result.
 
-- `fields.coverage_pct` / `covered_count` / `leaf_fields_read_by_rpc`
-  Percentage of *leaf* request fields the RPC reads that at least one test sets.
-  Leaf = a read path with no deeper read path beneath it (intermediate message
-  nodes like `in.Account` are excluded from the denominator).
-- `fields.covered[]` each covered leaf path, `match` (`exact` or `alias`), and
-  the tests that set it.
-- `fields.gaps[]` leaf fields the RPC reads that no test exercises. This is the
-  actionable list for adding tests.
-- `branches.coverage_pct` / `input_exercised` / `total` and `branches.gaps[]`
-  validation branches whose gating request fields no test sets.
-- `status.documented` / `asserted` / `missing` / `coverage_pct` HTTP statuses
+### Input (request field) metrics (`fields`)
+
+Denominator is the RPC's *leaf* request fields: read paths with no deeper read
+beneath them (intermediate message nodes like `in.Account` are excluded).
+
+- `leaf_fields_read_by_rpc` denominator.
+- `covered_count` / `coverage_pct` leaves at least one test sets.
+- `set_by_positive_tests` / `set_by_negative_tests` leaves set by a
+  success-asserting vs an error-asserting (4xx/5xx) test. Negative input
+  coverage is what drives validation-failure paths.
+- `by_depth` the same counts split by request-tree depth: `top_level` (`in.X`),
+  `nested` (`in.X.Y`), `deep` (`in.X.Y.Z...`). Depth also encodes validator
+  guard nesting (see branches). This keeps a few core fields from being drowned
+  out by large optional filter trees.
+- `covered[]` each covered leaf, `match` (`exact` or `alias`), and the tests.
+- `gaps[]` leaf fields no test sets. The actionable add-a-test list.
+
+### Branch (validation) metrics (`branches`)
+
+Each branch is an input-gated condition (mostly proto validator nil-guards).
+Every branch has two arms: **present** (gating field set, validation runs and
+can fail with a 4xx) and **absent** (gating field nil, skipped on the happy
+path). Metrics are outcome-aware:
+
+- `total` input-gated branches.
+- `happy_path_reached` a success test invoked the RPC at all, so the top-level
+  guards ran their absent (skip) arm.
+- `reachable_on_happy_path` top-level (depth-1) guards, whose absent arm runs on
+  an empty request. Deeper guards sit inside submessage validators that run only
+  when the parent is populated; we count them as reachable-on-happy only once we
+  can confirm the parent is set (conservative, given top-level test extraction).
+- `present_arm_exercised` / `present_arm_pct` a test set the gating field, so the
+  validation arm ran (over `total`). This is the headline `coverage_pct`.
+- `absent_arm_exercised` / `absent_arm_pct` the skip arm ran (over
+  `reachable_on_happy_path`).
+- `negative_arm_exercised` / `negative_arm_pct` the gating field was set by an
+  error-asserting test, i.e. the failure path was actually triggered (over
+  `total`). This is negative-case branch coverage.
+- `both_arms_exercised` branches where both the present and absent arm ran.
+- `gaps[]` branches whose present arm no test exercises.
+
+So an empty-body smoke test reads `happy_path_reached: true`,
+`absent_arm: N/N`, `present_arm: 0`, `negative_arm: 0` instead of a flat,
+misleading `0`.
+
+### Status metrics (`status`)
+
+- `documented` / `asserted` / `missing` / `coverage_pct` HTTP statuses
   documented for the operation (from the generated client spec) vs those the
   tests assert. `missing` is the actionable list (e.g. an untested `403`).
-- `test_facts[]` each test's name, file, labels, fields set, statuses, and
+
+### test_facts
+
+- `test_facts[]` each test's name, file, labels, `fields_set`, `statuses`, and
   `asserts_success`.
 
-This is static reachability intersected with test *inputs*, not executed-branch
-coverage: setting a field proves the input is present, not that both branch
-outcomes ran. The field is named `input_exercised`, not `covered`, for that
-reason.
+This is static reachability intersected with test *inputs/assertions*, not
+executed-branch coverage. Setting a field proves the input reaches the guard,
+not that every downstream outcome ran. Arms are inferred from field presence,
+negative assertions, and guard depth, not from execution traces.
+
 
 ## HTTP-body vs RPC-request field mismatches (anomalies)
 
