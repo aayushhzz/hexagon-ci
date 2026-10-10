@@ -865,12 +865,31 @@ func compositeKeys(c *ast.CompositeLit) []string {
 	var out []string
 	for _, el := range c.Elts {
 		if kv, ok := el.(*ast.KeyValueExpr); ok {
-			if id, ok := kv.Key.(*ast.Ident); ok {
+			if id, ok := kv.Key.(*ast.Ident); ok && !isEmptyValue(kv.Value) {
 				out = append(out, id.Name)
 			}
 		}
 	}
 	return out
+}
+
+// isEmptyValue reports whether a struct-field value is an obviously-empty
+// literal ("", 0, false, nil). Listing a field with an empty value does not
+// exercise that input, so it must not count toward input coverage.
+func isEmptyValue(e ast.Expr) bool {
+	switch v := e.(type) {
+	case *ast.BasicLit:
+		switch v.Kind {
+		case token.STRING:
+			s, err := strconv.Unquote(v.Value)
+			return err == nil && s == ""
+		case token.INT, token.FLOAT:
+			return v.Value == "0" || v.Value == "0.0"
+		}
+	case *ast.Ident:
+		return v.Name == "nil" || v.Name == "false"
+	}
+	return false
 }
 
 func labelArgs(c *ast.CallExpr) []string {

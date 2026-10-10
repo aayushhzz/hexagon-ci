@@ -156,7 +156,10 @@ Denominator is the RPC's *leaf* request fields: read paths with no deeper read
 beneath them (intermediate message nodes like `in.Account` are excluded).
 
 - `leaf_fields_read_by_rpc` denominator.
-- `covered_count` / `coverage_pct` leaves at least one test sets.
+- `covered_count` / `coverage_pct` leaves that at least one test fills with a
+  real (non-empty) value. Matching is by field name; an empty literal (`""`, `0`,
+  `false`, `nil`) does not count, and a field is not rewarded for being used by
+  more than one test (coverage is yes/no per field).
 - `set_by_positive_tests` / `set_by_negative_tests` leaves set by a
   success-asserting vs an error-asserting (4xx/5xx) test. Negative input
   coverage is what drives validation-failure paths.

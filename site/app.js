@@ -1,6 +1,6 @@
 "use strict";
 
-/* Lifejacket Coverage — static provenance + test-coverage explorer.
+/* Lifejacket Coverage: static code analysis + test-coverage explorer.
    Vanilla JS, hash-routed, no runtime dependencies. All metrics are static
    reachability intersected with test inputs/assertions, not executed coverage. */
 
@@ -64,22 +64,22 @@ function pctCell(res, { ratio = "" } = {}) {
     + `<span class="bar ${barClass(res.pct)}" aria-hidden="true"><span style="width:${w}%"></span></span></span>`;
 }
 
-/* Help tooltip — keyboard-focusable (tabindex) and tap-friendly (focus-within).
+/* Help tooltip: keyboard-focusable (tabindex) and tap-friendly (focus-within).
    Grounded directly in docs/running.md descriptions. */
 function help(text) {
   return `<span class="help" tabindex="0" role="note" aria-label="${attr(text)}">i<span class="help-text">${esc(text)}</span></span>`;
 }
 
 const HELP = {
-  field: "The share of the RPC's input fields that at least one test fills in. We count only leaf fields (the deepest fields that actually hold a value), not the container fields above them.",
-  present: "Checks where a test supplies the input the check looks at. Supplying the input suggests the check is reached. It does not prove the check ran, and a supplied value is not the same as an invalid one.",
-  negative: "Checks that a test exercises with an input expected to fail (the test asserts a 4xx or 5xx error response).",
-  absent: "Checks that are skipped when the input is left out, confirmed by a passing test. A test that sends an empty request can cover these without supplying any input.",
-  status: "The share of an operation's documented HTTP response codes that a test checks for. The ones with no test (for example an unchecked 403) are the gaps worth closing.",
-  anomalies: "HTTP request fields that did not line up one-to-one with an RPC input field. These are rename suggestions for a person to review. Nothing is changed automatically.",
-  tests: "The Lifejacket tests that are linked to this RPC's operation.",
-  depth: "Input coverage broken down by how deeply nested each field is, so a few important top-level fields are not hidden among large optional sub-sections.",
-  mapped: "Test-linked means a test could be matched to this RPC's operation. Not linked means no test could be matched (the RPC is internal or admin, or its operation name could not be derived). A not-linked RPC shows 'Not measured' rather than a real zero, and does not mean no tests exist for it.",
+  field: "How many of the request fields this endpoint actually reads are filled in by at least one test, using a real (non-empty) value. It is a simple yes/no per field across all of the endpoint's tests. We match fields by name, we do not check that the value is valid, and we do not reward a field for being used by many tests.",
+  present: "Checks (if-conditions in the code) where some test provides the value the check looks at. Providing the value means the check is likely reached. It does not prove the check ran, and providing a value is not the same as providing a wrong one.",
+  negative: "Checks that at least one test pushes down the failing path, by sending a bad value and expecting an error response (a 4xx or 5xx).",
+  absent: "Checks that are skipped when the field is left out, confirmed by a passing test. A test that sends an empty request can cover these without providing any value.",
+  status: "How many of the response codes this endpoint documents are actually checked by a test. The ones with no test (say an unchecked 403) are the gaps worth closing.",
+  anomalies: "Request fields in the tests that did not line up with a field this endpoint reads. These are rename suggestions for a person to review. Nothing is changed automatically.",
+  tests: "The Lifejacket tests that are linked to this endpoint.",
+  depth: "The same input coverage, split by how deeply nested each field is, so a few important top-level fields are not lost among large optional sub-sections.",
+  mapped: "Linked means a test could be matched to this endpoint. Not linked means no test matched (the endpoint is internal or admin, or its name could not be worked out). A not-linked endpoint shows 'Not measured' instead of a fake zero, and does not mean no tests exist for it.",
 };
 
 function setCrumbs(parts) {
@@ -161,7 +161,17 @@ async function viewServices(token) {
       from a test run. Each service number counts only its test-linked RPCs. Not-linked internal RPCs are
       left out of the total rather than counted as zero.
     </div>
-    <div class="service-grid">${cards || '<p class="empty-inline">No services found.</p>'}</div>`;
+    <div class="service-grid">${cards || '<p class="empty-inline">No services found.</p>'}</div>
+    <section class="methodology">
+      <h2>How this is measured (in short)</h2>
+      <ol class="method-steps">
+        <li><strong>Read the code.</strong> We analyse each backend service's source and, for every RPC, follow the request object to see which input fields it reads and which checks (if-conditions) depend on them.</li>
+        <li><strong>Read the tests.</strong> We parse the Lifejacket tests and, for each one, note the endpoint it calls, the request fields it fills with a real value, and the response codes it checks.</li>
+        <li><strong>Link them.</strong> Each test endpoint is matched to the backend RPC that the gateway routes it to, so a test can be lined up with the code it exercises.</li>
+        <li><strong>Compare.</strong> For a linked RPC we report how many of its input fields a test fills, how many of its checks a test reaches or pushes to failure, and how many documented response codes a test asserts.</li>
+      </ol>
+      <p class="method-note">This is a static comparison of code against test inputs and checks. It is not a test run, and it does not change any code. Where a request field or name does not line up, it is flagged for a person to review.</p>
+    </section>`;
   bindHelp();
 }
 
