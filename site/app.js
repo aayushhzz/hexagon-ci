@@ -71,14 +71,15 @@ function help(text) {
 }
 
 const HELP = {
-  field: "How many of the request fields this endpoint actually reads are filled in by at least one test, using a real (non-empty) value. It is a simple yes/no per field across all of the endpoint's tests. We match fields by name, we do not check that the value is valid, and we do not reward a field for being used by many tests.",
-  present: "Checks (if-conditions in the code) where some test provides the value the check looks at. Providing the value means the check is likely reached. It does not prove the check ran, and providing a value is not the same as providing a wrong one.",
-  negative: "Checks that at least one test pushes down the failing path, by sending a bad value and expecting an error response (a 4xx or 5xx).",
-  absent: "Checks that are skipped when the field is left out, confirmed by a passing test. A test that sends an empty request can cover these without providing any value.",
+  field: "Input field coverage: of the request fields this endpoint's code actually reads, how many does at least one test fill with a real (non-empty) value. Matched by field name. A field is not rewarded for being used by more than one test, and this does not check the value is valid.",
+  reached: "A test provides the value this if-condition looks at, so the condition is reached. This is reachability, not proof the branch ran, and providing a value is not the same as providing an invalid one.",
+  errorPath: "A test sends an invalid value and expects an error response (a 4xx or 5xx), so the if-condition's error path is taken.",
+  normalPath: "A passing test leaves the field out, so the if-condition is skipped and the normal path is taken.",
+  branchBoth: "Branch coverage (also called decision coverage): both ways out of the if-condition are tested, the error path and the normal path.",
   status: "How many of the response codes this endpoint documents are actually checked by a test. The ones with no test (say an unchecked 403) are the gaps worth closing.",
   anomalies: "Request fields in the tests that did not line up with a field this endpoint reads. These are rename suggestions for a person to review. Nothing is changed automatically.",
   tests: "The Lifejacket tests that are linked to this endpoint.",
-  depth: "The same input coverage, split by how deeply nested each field is, so a few important top-level fields are not lost among large optional sub-sections.",
+  depth: "The same input field coverage, split by how deeply nested each field is, so a few important top-level fields are not lost among large optional sub-sections.",
   mapped: "Linked means a test could be matched to this endpoint. Not linked means no test matched (the endpoint is internal or admin, or its name could not be worked out). A not-linked endpoint shows 'Not measured' instead of a fake zero, and does not mean no tests exist for it.",
 };
 
@@ -140,9 +141,9 @@ async function viewServices(token) {
       <div class="svc-name">${esc(s.service)}</div>
       <div class="svc-meta">${esc(s.rpcs)} RPCs (backend operations) &middot; ${esc(s.mapped)} test-linked &middot; ${esc(s.anomalies)} inputs missing from tests</div>
       <div class="service-metrics">
-        ${mm("Inputs covered", s.field_pct, "field")}
-        ${mm("Checks with input supplied", s.present_pct, "present")}
-        ${mm("Checks with error tests", s.negative_pct, "negative")}
+        ${mm("Input fields covered", s.field_pct, "field")}
+        ${mm("Branches reached", s.present_pct, "reached")}
+        ${mm("Error paths tested", s.negative_pct, "errorPath")}
         ${mm("Response codes checked", s.status_pct, "status")}
       </div>
     </a>`;
@@ -218,10 +219,10 @@ async function viewService(svc, token) {
 
     <div class="stat-strip">
       ${stat("RPCs", { kind: "value", text: String(t.rpcs) }, `${t.mapped} test-linked / ${t.unmapped} not linked`)}
-      ${stat("Inputs covered", fieldRes, `${t.field_covered} / ${t.field_total} input fields`, "field")}
-      ${stat("Checks with input supplied", presentRes, `${t.present_arm} / ${t.branch_total} checks`, "present")}
-      ${stat("Checks with error tests", negRes, `${t.negative_arm} / ${t.branch_total} checks`, "negative")}
-      ${stat("Checks skipped when input is omitted", absentRes, `${t.absent_arm} / ${t.reachable_on_happy} checks`, "absent")}
+      ${stat("Input fields covered", fieldRes, `${t.field_covered} / ${t.field_total} input fields`, "field")}
+      ${stat("Branches reached", presentRes, `${t.present_arm} / ${t.branch_total} branches`, "reached")}
+      ${stat("Error paths tested", negRes, `${t.negative_arm} / ${t.branch_total} branches`, "errorPath")}
+      ${stat("Normal paths tested", absentRes, `${t.absent_arm} / ${t.reachable_on_happy} branches`, "normalPath")}
       ${stat("Response codes checked", statusRes, `${t.status_asserted} / ${t.status_documented} documented`, "status")}
       ${stat("Inputs missing from tests", { kind: "value", text: String(t.anomalies) }, "Request fields that did not line up with an input", "anomalies")}
     </div>
@@ -342,9 +343,9 @@ function renderTable(svc, allRows) {
         ${sortBtn("rpc", "RPC")}
         ${sortBtn("operation", "Operation")}
         ${sortBtn("tests", "Tests", true)}
-        ${sortBtn("field_pct", "Inputs covered", true)}
-        ${sortBtn("present_pct", "Input supplied", true)}
-        ${sortBtn("negative_pct", "Error tests", true)}
+        ${sortBtn("field_pct", "Input fields covered", true)}
+        ${sortBtn("present_pct", "Branches reached", true)}
+        ${sortBtn("negative_pct", "Error paths tested", true)}
         ${sortBtn("status_pct", "Response codes", true)}
         ${sortBtn("anomaly_count", "Missing inputs", true)}
       </tr></thead>
@@ -412,7 +413,7 @@ async function viewRpc(svc, rpc, token) {
   // nothing-to-measure note for test-linked RPCs that read no input fields
   const zeroFieldNote = (!unmapped && leaf === 0) ? `
     <div class="callout">
-      This RPC reads no input fields directly, so there is nothing to cover and "Inputs covered" shows n/a
+      This RPC reads no input fields directly, so there is nothing to cover and "Input fields covered" shows n/a
       rather than 0%. The check and response-code sections below still apply.
     </div>` : "";
 
@@ -434,13 +435,15 @@ async function viewRpc(svc, rpc, token) {
 
   const fieldPanel = `
     <div class="panel">
-      <h3>Input coverage ${help(HELP.field)}</h3>
+      <h3>Input field coverage ${help(HELP.field)}</h3>
+      <p class="panel-sub">Does a test fill each input the code reads? (the data)</p>
       <div class="kv-list">
-        <div class="kv"><span class="k">Input fields covered</span>
+        <div class="kv"><span class="k">Input fields read by the code</span><span class="v">${leaf}</span></div>
+        <div class="kv"><span class="k">Covered (filled by a test)</span>
           <span class="v ${fieldRes.kind !== "value" ? "na" : ""}">${esc(fieldRes.text)} <small>${covered}/${leaf}</small></span></div>
-        <div class="kv"><span class="k">Filled by tests expecting success</span><span class="v">${f.set_by_positive_tests || 0}</span></div>
-        <div class="kv"><span class="k">Filled by error tests</span><span class="v">${f.set_by_negative_tests || 0}</span></div>
-        <div class="kv"><span class="k">By depth ${help(HELP.depth)}</span><span class="v"></span></div>
+        <div class="kv"><span class="k">Filled by positive tests</span><span class="v">${f.set_by_positive_tests || 0}</span></div>
+        <div class="kv"><span class="k">Filled by negative tests</span><span class="v">${f.set_by_negative_tests || 0}</span></div>
+        <div class="kv"><span class="k">By nesting depth ${help(HELP.depth)}</span><span class="v"></span></div>
         ${depthRow(depthLegend.top_level, depth.top_level)}
         ${depthRow(depthLegend.nested, depth.nested)}
         ${depthRow(depthLegend.deep, depth.deep)}
@@ -449,17 +452,19 @@ async function viewRpc(svc, rpc, token) {
 
   const branchPanel = `
     <div class="panel">
-      <h3>Input checks</h3>
+      <h3>Branch coverage</h3>
+      <p class="panel-sub">Does a test exercise each if-condition that reads an input? (the logic)</p>
       <div class="kv-list">
-        <div class="kv"><span class="k">Checks that read an input</span><span class="v">${b.total || 0}</span></div>
-        <div class="kv"><span class="k">Has a test expecting success</span><span class="v">${b.happy_path_reached ? "yes" : "no"}</span></div>
-        <div class="kv"><span class="k">Checks with input supplied ${help(HELP.present)}</span>
+        <div class="kv"><span class="k">Input-driven branches (if-conditions)</span><span class="v">${b.total || 0}</span></div>
+        <div class="kv"><span class="k">Reached by a passing request</span><span class="v">${b.happy_path_reached ? "yes" : "no"}</span></div>
+        <div class="kv"><span class="k">Reached: a test fills the input ${help(HELP.reached)}</span>
           <span class="v">${esc(fmtPct(b.present_arm_exercised || 0, b.total || 0, { unmapped }).text)} <small>${b.present_arm_exercised || 0}/${b.total || 0}</small></span></div>
-        <div class="kv"><span class="k">Checks with error tests ${help(HELP.negative)}</span>
+        <div class="kv"><span class="k">Error path tested ${help(HELP.errorPath)}</span>
           <span class="v">${esc(fmtPct(b.negative_arm_exercised || 0, b.total || 0, { unmapped }).text)} <small>${b.negative_arm_exercised || 0}/${b.total || 0}</small></span></div>
-        <div class="kv"><span class="k">Checks skipped when input is omitted ${help(HELP.absent)}</span>
+        <div class="kv"><span class="k">Normal path tested ${help(HELP.normalPath)}</span>
           <span class="v">${esc(fmtPct(b.absent_arm_exercised || 0, b.reachable_on_happy_path || 0, { unmapped }).text)} <small>${b.absent_arm_exercised || 0}/${b.reachable_on_happy_path || 0}</small></span></div>
-        <div class="kv"><span class="k">Checks tested with and without input</span><span class="v">${b.both_arms_exercised || 0}</span></div>
+        <div class="kv"><span class="k">Both paths tested = branch coverage ${help(HELP.branchBoth)}</span>
+          <span class="v">${esc(fmtPct(b.both_arms_exercised || 0, b.total || 0, { unmapped }).text)} <small>${b.both_arms_exercised || 0}/${b.total || 0}</small></span></div>
       </div>
     </div>`;
 
@@ -512,10 +517,10 @@ async function viewRpc(svc, rpc, token) {
 
   // ---- branch gaps with source location + predicate paths ----
   const branchGapSection = `
-    <h2 id="s-branchgaps">Checks missing test inputs <span class="muted">(${branchGaps.length})</span></h2>
-    <p class="section-note">Checks that read an input, where no linked test supplies that input.
-    Each shows the condition, its source location, and the request paths the check reads. Add a test that fills those paths.
-    Check the code first to decide on a valid or invalid value and the response you expect. Supplying an input is not the same as supplying an invalid one.</p>
+    <h2 id="s-branchgaps">Branches no test reaches <span class="muted">(${branchGaps.length})</span></h2>
+    <p class="section-note">Input-driven if-conditions where no linked test fills the input they read.
+    Each shows the condition, its source location, and the request paths it reads. Add a test that fills those paths.
+    Check the code first to decide on a valid or invalid value and the response you expect. Filling an input is not the same as supplying an invalid one.</p>
     ${branchGaps.length ? `<ul class="gap-list scroll">${branchGaps.map((g) => `
       <li class="gap-item">
         <span class="gap-cond">${esc(g.cond || "(condition unavailable)")}</span>
@@ -643,11 +648,11 @@ async function viewRpc(svc, rpc, token) {
 
   // ---- jump nav ----
   const jnItems = [
-    ["s-overview", "Overview", null],
+    ["s-overview", "Coverage", null],
     ["s-status", "Response codes", documented.length],
     ["s-covered", "Covered inputs", coveredFields.length],
     ["s-fieldgaps", "Inputs missing from tests", fieldGaps.length],
-    ["s-branchgaps", "Checks missing test inputs", branchGaps.length],
+    ["s-branchgaps", "Branches no test reaches", branchGaps.length],
     ["s-sinks", "Where request data goes", sinks.length],
     errorsRaw.length ? ["s-errors", "Error exits", new Set(errorsRaw.filter(e=>e.symbol).map(e=>e.symbol)).size] : null,
     anomalies.length ? ["s-anomalies", "Mapping review", anomalies.length] : null,
@@ -677,9 +682,11 @@ async function viewRpc(svc, rpc, token) {
     <div class="detail-layout">
       ${jumpNav}
       <div class="detail-main">
-        <h2 id="s-overview" class="flush">Overview</h2>
-        <p class="section-note">These numbers compare this operation's code with the inputs and checks written in its tests.
-        Supplying an input suggests a code check can be reached; it does not confirm that check ran or passed.</p>
+        <h2 id="s-overview" class="flush">Coverage</h2>
+        <p class="section-note">Two kinds of coverage, both comparing this operation's code against its linked tests.
+        <strong>Input field coverage</strong> asks whether tests fill the inputs the code reads (the data).
+        <strong>Branch coverage</strong> asks whether tests exercise the if-conditions that read those inputs (the logic).
+        Filling an input suggests a branch can be reached; it does not confirm the branch ran or passed.</p>
         <div class="panel-grid">${fieldPanel}${branchPanel}</div>
         ${statusSection}
         ${coveredSection}
