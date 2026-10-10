@@ -51,6 +51,36 @@ Graph v2 includes function nodes, resolved call edges, per-test subgraphs, unres
 
 The Go analyzer uses the Go standard library and does not type-check or execute repository code while building the graph. Interface dispatch, function values, callbacks, external modules, unknown receiver types, and package initialization can remain unresolved. Candidate tests are diagnostic until dependency completeness is established, so full-suite fallback remains the safe default.
 
+## Full-suite and candidate comparison in CI
+
+Pull requests run two separate Go checks. `Unit tests` executes the uncached full Go suite and the archived Python reference suites. `Candidate subset (diagnostic)` parses the PR diff, builds base and head graphs, and runs only the planner's candidate test roots. The comparison summary reports root counts, graph/planning time, candidate-run time, absolute time saved, and percentage saved. If diff mapping is incomplete, the planner includes every current test root. The ordinary `test` command continues to honor `run_full_suite`; only the separate diagnostic job opts into candidate execution.
+
+To run the same checks locally, first run the full suite and static checks:
+
+```sh
+go test -count=1 ./...
+go vet ./...
+PYTHONPATH=python python3 -m unittest discover -s python/tests -v
+PYTHONPATH=python/graph_v2_reference python3 -m unittest discover -s python/graph_v2_reference/tests -v
+```
+
+Then build a base checkout and run the candidate adapter. Set `BASE_SHA` to the PR target commit; for a stacked planner PR this is the graph-span commit. `git diff BASE_SHA` includes tracked staged and working-tree changes. Mark new files with `git add -N <path>` if they should appear in that local diff.
+
+```sh
+BASE_SHA=<pr-base-sha>
+TEMP_DIR="$(mktemp -d)"
+BASE_DIR="$TEMP_DIR/base"
+DIFF_FILE="$TEMP_DIR/change.diff"
+git worktree add --detach "$BASE_DIR" "$BASE_SHA"
+git diff --no-ext-diff --no-renames --unified=0 "$BASE_SHA" > "$DIFF_FILE"
+go run ./cmd/ci-impact --repository "$PWD" --base-repository "$BASE_DIR" --diff "$DIFF_FILE"
+git worktree remove "$BASE_DIR"
+python3 -c 'import os, sys; os.unlink(sys.argv[1])' "$DIFF_FILE"
+rmdir "$TEMP_DIR"
+```
+
+The adapter prints the unique selected test-root IDs and timing details. Compare them with the full-suite output: the CI comparison includes the full Go test-root count, candidate-root count, and net seconds saved (which can be negative when graph planning costs more than the tests it skips). The full-suite check remains the merge-safety baseline.
+
 The Python implementation is retained for reference and parity checks. To run it directly from the repository root:
 
 ```sh
