@@ -194,7 +194,7 @@ def main():
         cov_path = RESULTS / f"{slug}-coverage-all.json"
         prov_path = RESULTS / f"{slug}-provenance-all.json"
         if not cov_path.exists() or not prov_path.exists():
-            print(f"skip {svc['name']}: missing {cov_path.name} or {prov_path.name}")
+            print(f"skip {svc['name']}: missing {cov_path.name} or {prov_path.name} (run results/reproduce.sh first)")
             continue
         cov = json.loads(cov_path.read_text(encoding="utf-8"))
         prov = json.loads(prov_path.read_text(encoding="utf-8"))

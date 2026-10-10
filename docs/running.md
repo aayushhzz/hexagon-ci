@@ -94,6 +94,7 @@ JANUS=/Users/devrev/janus LIFEJACKET=/Users/devrev/lifejacket \
 It writes:
 
 - `results/janus-provenance-all.json` full provenance for all 160 RPCs
+  (large build artifact, gitignored; regenerate with `results/reproduce.sh`)
 - `results/janus-coverage-all.json` full coverage report for all 160 RPCs
 - `results/SUMMARY.md` human-readable coverage table + totals
 
