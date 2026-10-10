@@ -14,16 +14,19 @@ const fullSuiteReason = "AST call and package graphs cannot prove all runtime or
 
 // ImpactPlan reports known affected tests and records whether skipping the rest is safe.
 type ImpactPlan struct {
-	FormatVersion     int          `json:"format_version"`
-	Language          string       `json:"language"`
-	SourceFingerprint string       `json:"source_fingerprint"`
-	ChangedFiles      []string     `json:"changed_files"`
-	CandidateTests    []string     `json:"candidate_tests"`
-	BuildTags         []string     `json:"build_tags"`
-	AnalysisContext   BuildContext `json:"analysis_context"`
-	RunFullSuite      bool         `json:"run_full_suite"`
-	SelectionComplete bool         `json:"selection_complete,omitempty"`
-	Reason            string       `json:"reason"`
+	FormatVersion     int           `json:"format_version"`
+	Language          string        `json:"language"`
+	SourceFingerprint string        `json:"source_fingerprint"`
+	ChangedFiles      []string      `json:"changed_files"`
+	CandidateTests    []string      `json:"candidate_tests"`
+	ChangedFunctions  []string      `json:"changed_functions,omitempty"`
+	ImpactFunctions   []string      `json:"impact_functions,omitempty"`
+	DiffMappings      []DiffMapping `json:"diff_mappings,omitempty"`
+	BuildTags         []string      `json:"build_tags"`
+	AnalysisContext   BuildContext  `json:"analysis_context"`
+	RunFullSuite      bool          `json:"run_full_suite"`
+	SelectionComplete bool          `json:"selection_complete,omitempty"`
+	Reason            string        `json:"reason"`
 }
 
 // PlanFileChanges reports diagnostic test candidates and always retains the full-suite safety gate.

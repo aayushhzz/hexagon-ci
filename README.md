@@ -16,9 +16,11 @@ func plan(repository string, changedFiles []string, previous *hexagon.Graph) (*h
 }
 ```
 
-For function-level planning, parse Git hunk metadata at the caller and pass structured old/new paths with 1-based inclusive changed-line ranges to `PlanGitDiff`. The result's `TestRoots` are the unique test functions to execute; `FunctionsToRun` is the unique trace containing changed functions, caller functions, and those test roots. Compact graphs are supported by `PlanGitDiffCompact`. When a changed line cannot be mapped, a base graph is missing for old lines, or unresolved calls make the graph incomplete, `RunFullSuite` is set, `Reason` explains why, and `TestRoots` broadens to every current test root.
+For function-level impact, callers can pass parsed structured hunks to `PlanDiff` or `PlanCompactDiff`. These return the existing `ImpactPlan`, map changed lines to functions, walk reverse caller edges to test roots, and preserve the full-suite fallback whenever mapping or graph completeness is uncertain. Raw unified-diff parsing stays outside the library. `RunCandidateTests` is an explicit diagnostic path; ordinary `RunTests` continues to honor the full-suite safety flag.
 
-This library API does not change the existing file-based `plan` command or test runner.
+The function-oriented `PlanGitDiff` and `PlanGitDiffCompact` APIs accept old/new paths with 1-based inclusive changed-line ranges. They return `FunctionDiffPlan`: `TestRoots` lists affected tests, while `FunctionsToRun` gives the trace of changed functions, callers, and test roots. Unmappable ranges, missing base graphs, and unresolved calls set `RunFullSuite` and broaden the candidate roots to every current test.
+
+This library API does not change the existing file-based `plan` command.
 
 ```go
 plan, err := hexagon.PlanGitDiff(headGraph, gitDiff, baseGraph)
