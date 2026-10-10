@@ -36,6 +36,17 @@ function card(label, value, sub) {
   return `<div class="card"><div class="label">${esc(label)}</div><div class="value">${esc(value)}${sub ? ` <small>${esc(sub)}</small>` : ""}</div></div>`;
 }
 
+function originRows(byOrigin) {
+  const order = [["service", "service logic"], ["generated", "generated (validators)"], ["library", "library"]];
+  return order.map(([key, label]) => {
+    const o = byOrigin[key] || {};
+    const emph = key === "service" ? ' style="font-weight:600"' : "";
+    return `<div class="kv"${emph}><span class="k">${label}: present / negative</span>`
+      + `<span>${o.present_arm_exercised || 0}/${o.total || 0} (${(o.present_arm_pct || 0).toFixed(1)}%)`
+      + ` &middot; ${o.negative_arm_exercised || 0} (${(o.negative_arm_pct || 0).toFixed(1)}%)</span></div>`;
+  }).join("");
+}
+
 // ---- views ----
 async function viewServices() {
   setCrumbs([{ text: "Services" }]);
@@ -111,8 +122,8 @@ function renderTable() {
       <td class="muted">${esc(r.operation)}</td>
       <td class="num">${r.tests}</td>
       <td class="num">${pctCell(r.field_pct)}</td>
-      <td class="num">${pctCell(r.present_pct)}</td>
-      <td class="num">${pctCell(r.negative_pct)}</td>
+      <td class="num">${pctCell(r.svc_present_pct)}</td>
+      <td class="num">${pctCell(r.svc_negative_pct)}</td>
       <td class="num">${pctCell(r.status_pct)}</td>
       <td class="num">${r.anomaly_count || ""}</td>
     </tr>`).join("");
@@ -120,8 +131,8 @@ function renderTable() {
     <table>
       <thead><tr>
         ${head("rpc", "RPC")}${head("operation", "operation")}${head("tests", "tests", true)}
-        ${head("field_pct", "field", true)}${head("present_pct", "present", true)}
-        ${head("negative_pct", "negative", true)}${head("status_pct", "status", true)}${head("anomaly_count", "anom", true)}
+        ${head("field_pct", "field", true)}${head("svc_present_pct", "svc present", true)}
+        ${head("svc_negative_pct", "svc negative", true)}${head("status_pct", "status", true)}${head("anomaly_count", "anom", true)}
       </tr></thead>
       <tbody>${body || `<tr><td colspan="8" class="muted">no matches</td></tr>`}</tbody>
     </table>
@@ -172,11 +183,10 @@ async function viewRpc(svc, rpc) {
         ${depthRow("deep", depth.deep)}
       </div>
       <div class="panel">
-        <h3>Branches (outcome-aware)</h3>
-        <div class="kv"><span class="k">total</span><span>${b.total || 0}</span></div>
+        <h3>Branches (service logic emphasised)</h3>
+        <div class="kv"><span class="k">total (all origins)</span><span>${b.total || 0}</span></div>
         <div class="kv"><span class="k">happy path reached</span><span>${b.happy_path_reached ? "yes" : "no"}</span></div>
-        <div class="kv"><span class="k">present arm (validation run)</span><span>${b.present_arm_exercised || 0} (${(b.present_arm_pct || 0).toFixed(1)}%)</span></div>
-        <div class="kv"><span class="k">negative arm (failure path)</span><span>${b.negative_arm_exercised || 0} (${(b.negative_arm_pct || 0).toFixed(1)}%)</span></div>
+        ${originRows(b.by_origin || {})}
         <div class="kv"><span class="k">absent arm (happy path)</span><span>${b.absent_arm_exercised || 0}/${b.reachable_on_happy_path || 0} (${(b.absent_arm_pct || 0).toFixed(1)}%)</span></div>
         <div class="kv"><span class="k">both arms</span><span>${b.both_arms_exercised || 0}</span></div>
       </div>

@@ -89,6 +89,7 @@ def summary_row(entry):
     b = entry.get("branches") or {}
     s = entry.get("status") or {}
     a = (entry.get("anomalies") or {}).get("unmatched_test_fields") or []
+    svc = (b.get("by_origin") or {}).get("service", {})
     return {
         "rpc": entry["rpc"],
         "operation": entry.get("operation", ""),
@@ -97,6 +98,9 @@ def summary_row(entry):
         "field_pct": f.get("coverage_pct", 0.0) or 0.0,
         "field_covered": f.get("covered_count", 0) or 0,
         "field_total": f.get("leaf_fields_read_by_rpc", 0) or 0,
+        "svc_present_pct": svc.get("present_arm_pct", 0.0) or 0.0,
+        "svc_negative_pct": svc.get("negative_arm_pct", 0.0) or 0.0,
+        "svc_branch_total": svc.get("total", 0) or 0,
         "present_pct": b.get("present_arm_pct", 0.0) or 0.0,
         "negative_pct": b.get("negative_arm_pct", 0.0) or 0.0,
         "status_pct": s.get("coverage_pct", 0.0) or 0.0,

@@ -189,6 +189,11 @@ path). Metrics are outcome-aware:
   error-asserting test, i.e. the failure path was actually triggered (over
   `total`). This is negative-case branch coverage.
 - `both_arms_exercised` branches where both the present and absent arm ran.
+- `by_origin` the same outcome counts split by where the branch lives:
+  `service` (the analyzed module's own logic, the branches that matter most),
+  `generated` (proto `.pb` / `.pb.validator` nil-guards), and `library` (other
+  dependency code). Use the `service` bucket to judge how well tests exercise
+  the RPC's real code paths without generated validator noise diluting it.
 - `gaps[]` branches whose present arm no test exercises.
 
 So an empty-body smoke test reads `happy_path_reached: true`,

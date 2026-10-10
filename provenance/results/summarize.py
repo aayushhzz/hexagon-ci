@@ -37,6 +37,13 @@ def main():
     branch_absent = sum((entry.get("branches") or {}).get("absent_arm_exercised", 0) or 0 for entry in mapped)
     branch_reachable = sum((entry.get("branches") or {}).get("reachable_on_happy_path", 0) or 0 for entry in mapped)
     branch_total = sum((entry.get("branches") or {}).get("total", 0) or 0 for entry in mapped)
+
+    def svc(entry, field):
+        return ((entry.get("branches") or {}).get("by_origin") or {}).get("service", {}).get(field, 0) or 0
+
+    svc_total = sum(svc(e, "total") for e in mapped)
+    svc_present = sum(svc(e, "present_arm_exercised") for e in mapped)
+    svc_negative = sum(svc(e, "negative_arm_exercised") for e in mapped)
     status_documented = 0
     status_asserted_documented = 0
     anomalies_total = 0
@@ -59,16 +66,18 @@ def main():
         f"- RPCs mapped: **{len(mapped)}**",
         f"- RPCs unmapped: **{len(unmapped)}**",
         f"- Aggregate field coverage over mapped RPCs: **{fmt_pct(pct(field_covered, field_total))}** ({field_covered}/{field_total} leaf fields)",
-        f"- Branch present-arm (validation run) over mapped RPCs: **{fmt_pct(pct(branch_present, branch_total))}** ({branch_present}/{branch_total})",
-        f"- Branch negative-arm (failure path triggered) over mapped RPCs: **{fmt_pct(pct(branch_negative, branch_total))}** ({branch_negative}/{branch_total})",
+        f"- Service-logic branch present-arm over mapped RPCs: **{fmt_pct(pct(svc_present, svc_total))}** ({svc_present}/{svc_total})",
+        f"- Service-logic branch negative-arm over mapped RPCs: **{fmt_pct(pct(svc_negative, svc_total))}** ({svc_negative}/{svc_total})",
+        f"- All-branch present-arm (incl. generated/library) over mapped RPCs: **{fmt_pct(pct(branch_present, branch_total))}** ({branch_present}/{branch_total})",
+        f"- All-branch negative-arm over mapped RPCs: **{fmt_pct(pct(branch_negative, branch_total))}** ({branch_negative}/{branch_total})",
         f"- Branch absent-arm (happy path) over reachable guards: **{fmt_pct(pct(branch_absent, branch_reachable))}** ({branch_absent}/{branch_reachable})",
         f"- Aggregate status coverage over mapped RPCs: **{fmt_pct(pct(status_asserted_documented, status_documented))}** ({status_asserted_documented}/{status_documented})",
         f"- Total field anomalies across mapped RPCs: **{anomalies_total}**",
         "",
         "## Mapped RPCs",
         "",
-        "| RPC | operation(s) | field cov % | present % | negative % | absent % | status cov % | tests | missing statuses | anomalies |",
-        "|-----|-------------|-------------|-----------|------------|----------|--------------|-------|------------------|----------|",
+        "| RPC | operation(s) | field cov % | svc present % | svc negative % | all present % | status cov % | tests | missing statuses | anomalies |",
+        "|-----|-------------|-------------|---------------|----------------|---------------|--------------|-------|------------------|----------|",
     ]
 
     def sort_key(entry):
@@ -82,12 +91,13 @@ def main():
         operation = entry.get("operation", "")
         if isinstance(operation, list):
             operation = ", ".join(str(item) for item in operation)
+        svc_origin = (branches.get("by_origin") or {}).get("service", {})
         lines.append(
             f"| {entry.get('rpc', '')} | {operation} | "
             f"{fmt_pct(fields.get('coverage_pct', 0) or 0)} | "
+            f"{fmt_pct(svc_origin.get('present_arm_pct', 0) or 0)} | "
+            f"{fmt_pct(svc_origin.get('negative_arm_pct', 0) or 0)} | "
             f"{fmt_pct(branches.get('present_arm_pct', 0) or 0)} | "
-            f"{fmt_pct(branches.get('negative_arm_pct', 0) or 0)} | "
-            f"{fmt_pct(branches.get('absent_arm_pct', 0) or 0)} | "
             f"{fmt_pct(status.get('coverage_pct', 0) or 0)} | "
             f"{entry.get('tests', 0) or 0} | {fmt_list(status.get('missing'))} | {anomalies} |"
         )
