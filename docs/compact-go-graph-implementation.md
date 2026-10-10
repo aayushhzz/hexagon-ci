@@ -2,6 +2,41 @@
 
 The earlier [compact-format experiment](compact-go-graph-benchmark.md) avoided repeating function names and global call facts per test, but still constructed every named test view before conversion. The implementation now prepares the global numeric graph once, traverses it directly for either graph-v2 or compact output, and stores each compact test as a **sorted list of reachable function IDs**. The existing JSON graph-v2 contract remains the default; a `.hgc.gz` output selects the compact Go-specific format. The planner reads either format, including mixed base/head pairs, without expanding compact test views. The graph-v2 writer streams one test at a time to avoid an additional full-graph JSON buffer.
 
+## Architecture and pipeline
+
+```mermaid
+flowchart LR
+    A["Go repository"] --> B["Full source scan and Go AST analysis"]
+    B --> C["Shared numeric call graph"]
+    C --> J["graph.json or graph.json.gz"]
+    C --> H["graph.hgc.gz"]
+    J --> P["Impact planner: changed files"]
+    H --> P
+    O["Optional previous graph in either format"] --> P
+    P --> D["Plan: diagnostic candidates; full suite required"]
+    D --> T["Go runner: go test ./..."]
+```
+
+The CLI chooses the compact writer only when the output ends in `.hgc.gz`; JSON graph v2 remains the default. Both builders recheck the repository sources before publishing an atomic snapshot. The planner reads either format for the current and previous graph so deleted-file evidence is retained. Its plan remains version 1 with `run_full_suite=true`; the runner therefore executes all Go tests. The existing GitHub Actions workflow tests the implementation but does not build or consume compact graph artifacts automatically.
+
+```mermaid
+flowchart LR
+    N["Name table: dense ID to function name"] --> M["Name to ID lookup during construction"]
+    M --> E["Global call edges and callsites: caller ID to callee ID"]
+    M --> U["Global unresolved calls: caller ID"]
+    E --> V["Traverse each test root with reusable visit state"]
+    V --> R["Per-test sorted reachable IDs"]
+    N --> H["Compact artifact: global facts stored once"]
+    E --> H
+    U --> H
+    R --> H
+    H --> X["Reconstruct one named view on demand"]
+```
+
+Function IDs are positions in the name-sorted node table. They are deterministic for one snapshot but can shift when functions are added or removed, so current and previous snapshots are compared through function names and file metadata rather than assuming stable numeric IDs. The production format uses sparse `uint32` lists, not the fixed bitsets in the earlier experiment. This is an in-process representation and a smaller persisted artifact, not a cross-run cache: each graph command still scans and analyzes the repository. The compact file has a versioned magic header, gzip and Go `gob`; it retains build context and fingerprints and validates its structure on read. JSON remains the interoperable output.
+
+## Measurements and parity
+
 | Pinned repository | Tests | Graph-v2 gzip / compact bytes | Build v2 / compact (single run) | Load v2 / compact (median of 3) | 300 named views v2 / compact (median of 3) |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | [Prometheus](https://github.com/prometheus/prometheus) `2213c3c192574b8a339acd336ea6385974a7567b` | 2,074 | 11,638,252 / 924,597 | 3.03 / 0.94 s | 1,519 / 31 ms | 41 / 46 ms |
