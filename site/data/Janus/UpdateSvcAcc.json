@@ -2,20 +2,41 @@
   "service": "Janus",
   "coverage": {
     "rpc": "UpdateSvcAcc",
-    "operation": "",
-    "tests": 0,
+    "operation": "ServiceAccountsUpdate",
+    "tests": 1,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 11.1
     },
     "fields": {
       "leaf_fields_read_by_rpc": 6,
-      "covered_count": 0,
-      "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
-      "set_by_positive_tests": 0,
+      "covered_count": 1,
+      "coverage_pct": 16.7,
+      "request_fields_set_by_tests": 2,
+      "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
@@ -30,32 +51,39 @@
         },
         "deep": {
           "total": 1,
-          "set": 0,
-          "pct": 0
+          "set": 1,
+          "pct": 100
         }
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.Updates.DisplayPicture.Id",
+          "match": "exact",
+          "by_tests": [
+            "Updating a service account"
+          ]
+        }
+      ],
       "gaps": [
         "in.ServiceAccountId.Components",
         "in.ServiceAccountId.Partition",
         "in.ServiceAccountId.PartitionType",
         "in.ServiceAccountId.ServiceType",
-        "in.Updates.DisplayPicture.Id",
         "in.Updates.Keyrings"
       ]
     },
     "branches": {
       "total": 11,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 7,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
+      "present_arm_exercised": 1,
+      "present_arm_pct": 9.1,
+      "absent_arm_exercised": 7,
+      "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 9.1,
       "gaps": [
         {
           "id": "b1",
@@ -106,14 +134,6 @@
           ]
         },
         {
-          "id": "b7",
-          "at": "internal/service/artifacts.go:91",
-          "cond": "in.Updates.DisplayPicture.Id != \"\"",
-          "predicate_paths": [
-            "in.Updates.DisplayPicture.Id"
-          ]
-        },
-        {
           "id": "b8",
           "at": "internal/service/serviceaccount.go:237",
           "cond": "in.Updates == nil",
@@ -148,10 +168,31 @@
       ]
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "displayname",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "Updating a service account",
+        "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_SERVICE_ACCOUNTS_UPDATE"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/janus/internal/service.Janus).UpdateSvcAcc",
@@ -189,5 +230,5 @@
     "errors": [],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateSvcAcc` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ServiceAccountId.Components\n  - in.ServiceAccountId.Partition\n  - in.ServiceAccountId.PartitionType\n  - in.ServiceAccountId.ServiceType\n  - in.Updates.DisplayPicture.Id\n  - in.Updates.Keyrings\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ServiceAccountId == nil\n  - in.ServiceAccountId.Partition != \"\"\n  - in.ServiceAccountId|in.ServiceAccountId.Partition == \"\"\n  - in.ServiceAccountId|in.ServiceAccountId.Partition\n  - in.ServiceAccountId|in.ServiceAccountId.Partition == nil\n  - in.ServiceAccountId|in.ServiceAccountId.Partition == nil\n  - in.Updates.DisplayPicture.Id != \"\"\n  - in.Updates == nil\n  - in.Updates.Keyrings != nil\n  - in.ServiceAccountId == nil\n  - in.Updates.DisplayPicture != nil\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateSvcAcc` (HTTP operation `ServiceAccountsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ServiceAccountId.Components\n  - in.ServiceAccountId.Partition\n  - in.ServiceAccountId.PartitionType\n  - in.ServiceAccountId.ServiceType\n  - in.Updates.Keyrings\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ServiceAccountId == nil\n  - in.ServiceAccountId.Partition != \"\"\n  - in.ServiceAccountId|in.ServiceAccountId.Partition == \"\"\n  - in.ServiceAccountId|in.ServiceAccountId.Partition\n  - in.ServiceAccountId|in.ServiceAccountId.Partition == nil\n  - in.ServiceAccountId|in.ServiceAccountId.Partition == nil\n  - in.Updates == nil\n  - in.Updates.Keyrings != nil\n  - in.ServiceAccountId == nil\n  - in.Updates.DisplayPicture != nil\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `displayname` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

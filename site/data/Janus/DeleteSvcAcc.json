@@ -2,19 +2,40 @@
   "service": "Janus",
   "coverage": {
     "rpc": "DeleteSvcAcc",
-    "operation": "",
-    "tests": 0,
+    "operation": "ServiceAccountsDelete",
+    "tests": 2,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200,
+        400
+      ],
+      "missing": [
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 22.2
     },
     "fields": {
       "leaf_fields_read_by_rpc": 4,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
+      "request_fields_set_by_tests": 1,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -44,12 +65,12 @@
     },
     "branches": {
       "total": 4,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 3,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
+      "absent_arm_exercised": 3,
+      "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
@@ -90,10 +111,45 @@
       ]
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "Deleting a service account",
+        "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_SERVICE_ACCOUNTS_DELETE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "Deleting a non-existing service account",
+        "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_SERVICE_ACCOUNTS_DELETE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/janus/internal/service.Janus).DeleteSvcAcc",
@@ -164,5 +220,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteSvcAcc` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ServiceAccountId.Components\n  - in.ServiceAccountId.Partition\n  - in.ServiceAccountId.PartitionType\n  - in.ServiceAccountId.ServiceType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ServiceAccountId == nil\n  - in.ServiceAccountId.Partition != \"\"\n  - in.ServiceAccountId|in.ServiceAccountId.Partition == \"\"\n  - in.ServiceAccountId == nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errSvcAccKeyIDNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteSvcAcc` (HTTP operation `ServiceAccountsDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ServiceAccountId.Components\n  - in.ServiceAccountId.Partition\n  - in.ServiceAccountId.PartitionType\n  - in.ServiceAccountId.ServiceType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ServiceAccountId == nil\n  - in.ServiceAccountId.Partition != \"\"\n  - in.ServiceAccountId|in.ServiceAccountId.Partition == \"\"\n  - in.ServiceAccountId == nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errSvcAccKeyIDNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -54,7 +54,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "internal/service/devorg.go:2470",
+            "at": "internal/service/devorg.go:2462",
             "cond": "in != nil",
             "predicate_paths": [
               "in"
@@ -851,26 +851,45 @@
     },
     {
       "rpc": "BulkUpdateDevUserLicences",
-      "operation": "",
-      "tests": 0,
+      "operation": "DevUsersBulkUpdateLicenses",
+      "tests": 1,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200
+        ],
+        "missing": [
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 12.5
       },
       "fields": {
         "leaf_fields_read_by_rpc": 2,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
-        "set_by_positive_tests": 0,
+        "covered_count": 1,
+        "coverage_pct": 50,
+        "request_fields_set_by_tests": 2,
+        "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
             "total": 2,
-            "set": 0,
-            "pct": 0
+            "set": 1,
+            "pct": 50
           },
           "nested": {
             "total": 0,
@@ -883,15 +902,22 @@
             "pct": 0
           }
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.Licenses",
+            "match": "exact",
+            "by_tests": [
+              "updateDevUserLicenses"
+            ]
+          }
+        ],
         "gaps": [
-          "in.DevUserIds",
-          "in.Licenses"
+          "in.DevUserIds"
         ]
       },
       "branches": {
         "total": 1,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
@@ -913,10 +939,33 @@
         ]
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "devusers",
+            "fuzzy_suggestions": [
+              "in.DevUserIds"
+            ]
+          }
+        ]
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "updateDevUserLicenses",
+          "file": "api/v2_internal/dev_users/crud/devusers_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_DEVUSERS_BULK_UPDATE_LICENSES"
+          ],
+          "fields_set": [
+            "DevUsers",
+            "Licenses"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true
+        }
+      ]
     },
     {
       "rpc": "BulkUpdateRevUserAssociations",
@@ -11306,21 +11355,40 @@
     },
     {
       "rpc": "CountSvcAccs",
-      "operation": "",
-      "tests": 0,
+      "operation": "ServiceAccountsCountPost",
+      "tests": 1,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200,
+          403
+        ],
+        "missing": [
+          400,
+          401,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 25
       },
       "fields": {
         "leaf_fields_read_by_rpc": 75,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
-        "set_by_positive_tests": 0,
-        "set_by_negative_tests": 0,
+        "covered_count": 1,
+        "coverage_pct": 1.3,
+        "request_fields_set_by_tests": 5,
+        "set_by_positive_tests": 1,
+        "set_by_negative_tests": 1,
         "by_depth": {
           "top_level": {
             "total": 0,
@@ -11329,8 +11397,8 @@
           },
           "nested": {
             "total": 17,
-            "set": 0,
-            "pct": 0
+            "set": 1,
+            "pct": 5.9
           },
           "deep": {
             "total": 58,
@@ -11338,7 +11406,15 @@
             "pct": 0
           }
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.Filters.Email",
+            "match": "exact",
+            "by_tests": [
+              "Count service accounts"
+            ]
+          }
+        ],
         "gaps": [
           "in.Filters.CreatedByAgentId",
           "in.Filters.CreatedByAgentIdOp",
@@ -11369,7 +11445,6 @@
           "in.Filters.DevUserFilter.Timezone",
           "in.Filters.DevrevProfileFilter",
           "in.Filters.DisplayName",
-          "in.Filters.Email",
           "in.Filters.EmailOp",
           "in.Filters.ModifiedById",
           "in.Filters.ModifiedByIdOp",
@@ -11419,7 +11494,7 @@
       },
       "branches": {
         "total": 191,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
@@ -12961,10 +13036,53 @@
         ]
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "expiresin",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "externalref",
+            "fuzzy_suggestions": [
+              "in.Filters.RevUserFilter.ExternalRefs",
+              "in.Filters.RevUserFilter.ExternalRefsOp"
+            ]
+          },
+          {
+            "field": "requestedtokentype",
+            "fuzzy_suggestions": [
+              "in.Filters.CreatedDate.DatePreset.Type",
+              "in.Filters.ModifiedDate.DatePreset.Type"
+            ]
+          },
+          {
+            "field": "tokenhint",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "Count service accounts",
+          "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_SERVICE_ACCOUNTS_COUNT"
+          ],
+          "fields_set": [
+            "Email",
+            "ExpiresIn",
+            "ExternalRef",
+            "RequestedTokenType",
+            "TokenHint"
+          ],
+          "statuses": [
+            200,
+            403
+          ],
+          "asserts_success": true
+        }
+      ]
     },
     {
       "rpc": "CountSysUsers",
@@ -13949,7 +14067,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "internal/service/devorg.go:357",
+            "at": "internal/service/devorg.go:356",
             "cond": "in.DevOrg.DevSlug == \"\"",
             "predicate_paths": [
               "in.DevOrg.DevSlug"
@@ -13957,7 +14075,7 @@
           },
           {
             "id": "b2",
-            "at": "internal/service/devorg.go:379",
+            "at": "internal/service/devorg.go:378",
             "cond": "in.DevOrg.DevSlug",
             "predicate_paths": [
               "in.DevOrg.DevSlug"
@@ -13965,7 +14083,7 @@
           },
           {
             "id": "b3",
-            "at": "internal/service/devorg.go:278",
+            "at": "internal/service/devorg.go:277",
             "cond": "in.DevOrg == nil",
             "predicate_paths": [
               "in.DevOrg"
@@ -13973,7 +14091,7 @@
           },
           {
             "id": "b4",
-            "at": "internal/service/devorg.go:278",
+            "at": "internal/service/devorg.go:277",
             "cond": "in.DevOrg.DisplayName == nil",
             "predicate_paths": [
               "in.DevOrg.DisplayName"
@@ -13989,7 +14107,7 @@
           },
           {
             "id": "b6",
-            "at": "internal/service/devorg.go:290",
+            "at": "internal/service/devorg.go:289",
             "cond": "in.DevOrg.DevSlug",
             "predicate_paths": [
               "in.DevOrg.DevSlug"
@@ -13997,7 +14115,7 @@
           },
           {
             "id": "b7",
-            "at": "internal/service/devorg.go:411",
+            "at": "internal/service/devorg.go:410",
             "cond": "in.ServicePlan != nil",
             "predicate_paths": [
               "in.ServicePlan"
@@ -14005,7 +14123,7 @@
           },
           {
             "id": "b8",
-            "at": "internal/service/devorg.go:437",
+            "at": "internal/service/devorg.go:436",
             "cond": "in.DevOrg.AllowedEmailDomains",
             "predicate_paths": [
               "in.DevOrg.AllowedEmailDomains"
@@ -14013,7 +14131,7 @@
           },
           {
             "id": "b9",
-            "at": "internal/service/devorg.go:459",
+            "at": "internal/service/devorg.go:458",
             "cond": "in.DevOrg.DevSlug",
             "predicate_paths": [
               "in.DevOrg.DevSlug"
@@ -14021,7 +14139,7 @@
           },
           {
             "id": "b10",
-            "at": "internal/service/devorg.go:467",
+            "at": "internal/service/devorg.go:466",
             "cond": "in.DevOrg.AllowedEmailDomain != \"\"",
             "predicate_paths": [
               "in.DevOrg.AllowedEmailDomain"
@@ -14029,7 +14147,7 @@
           },
           {
             "id": "b11",
-            "at": "internal/service/devorg.go:492",
+            "at": "internal/service/devorg.go:491",
             "cond": "in.Utm != nil",
             "predicate_paths": [
               "in.Utm"
@@ -14037,7 +14155,7 @@
           },
           {
             "id": "b12",
-            "at": "internal/service/devorg.go:512",
+            "at": "internal/service/devorg.go:511",
             "cond": "in.DevOrgIdPrefix != nil",
             "predicate_paths": [
               "in.DevOrgIdPrefix"
@@ -16345,19 +16463,38 @@
     },
     {
       "rpc": "CreateSvcAcc",
-      "operation": "",
-      "tests": 0,
+      "operation": "ServiceAccountsCreate",
+      "tests": 4,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          201,
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          201,
+          403
+        ],
+        "missing": [
+          400,
+          401,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 25
       },
       "fields": {
         "leaf_fields_read_by_rpc": 1,
         "covered_count": 0,
         "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
+        "request_fields_set_by_tests": 7,
         "set_by_positive_tests": 0,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -16384,12 +16521,12 @@
       },
       "branches": {
         "total": 2,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
-        "absent_arm_exercised": 0,
-        "absent_arm_pct": 0,
+        "absent_arm_exercised": 1,
+        "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
@@ -16414,27 +16551,145 @@
         ]
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "actas",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "displayname",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "genkeyring",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "granttype",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "principal",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "requestedtokentype",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "rolesetassignmentinfo",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "Creating an AAT using AAT token with act-as functionality for devuser[0] after adding service account to Systems Users group",
+          "file": "api/v2_internal/auth_tokens/auth_act_as_tokens_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_AUTH_TOKENS_CREATE"
+          ],
+          "fields_set": [
+            "ActAs",
+            "DisplayName",
+            "GrantType",
+            "RequestedTokenType"
+          ],
+          "statuses": [
+            201,
+            403
+          ],
+          "asserts_success": true
+        },
+        {
+          "name": "CreateRoleSetViaApplyRoleSet - Fail",
+          "file": "api/v2_internal/role_sets/crud/role_set_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ROLE_SETS_CREATE",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "DisplayName",
+            "Principal",
+            "RoleSetAssignmentInfo"
+          ],
+          "statuses": [
+            201,
+            403
+          ],
+          "asserts_success": true
+        },
+        {
+          "name": "Creating a service account with a keyring",
+          "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_SERVICE_ACCOUNTS_CREATE"
+          ],
+          "fields_set": [
+            "DisplayName",
+            "GenKeyring"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": true
+        },
+        {
+          "name": "Creating a service account with no keyring",
+          "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_SERVICE_ACCOUNTS_CREATE"
+          ],
+          "fields_set": [
+            "DisplayName",
+            "GenKeyring"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": true
+        }
+      ]
     },
     {
       "rpc": "CreateSvcAccKeyring",
-      "operation": "",
-      "tests": 0,
+      "operation": "ServiceAccountsKeyringsCreate",
+      "tests": 1,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          201,
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          201
+        ],
+        "missing": [
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 12.5
       },
       "fields": {
         "leaf_fields_read_by_rpc": 6,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
-        "set_by_positive_tests": 0,
+        "covered_count": 1,
+        "coverage_pct": 16.7,
+        "request_fields_set_by_tests": 2,
+        "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
@@ -16444,8 +16699,8 @@
           },
           "nested": {
             "total": 6,
-            "set": 0,
-            "pct": 0
+            "set": 1,
+            "pct": 16.7
           },
           "deep": {
             "total": 0,
@@ -16453,51 +16708,42 @@
             "pct": 0
           }
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.ServiceAccountKeyring.DisplayName",
+            "match": "exact",
+            "by_tests": [
+              "Creating a keyring with an existing service account"
+            ]
+          }
+        ],
         "gaps": [
           "in.ServiceAccountId.Components",
           "in.ServiceAccountId.Partition",
           "in.ServiceAccountId.PartitionType",
           "in.ServiceAccountId.ServiceType",
-          "in.ServiceAccountKeyring.DisplayName",
           "in.ServiceAccountKeyring.KeyringId"
         ]
       },
       "branches": {
         "total": 7,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 4,
-        "present_arm_exercised": 0,
-        "present_arm_pct": 0,
-        "absent_arm_exercised": 0,
-        "absent_arm_pct": 0,
+        "present_arm_exercised": 4,
+        "present_arm_pct": 57.1,
+        "absent_arm_exercised": 1,
+        "absent_arm_pct": 25,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 0,
+        "coverage_pct": 57.1,
         "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
-            "cond": "in.ServiceAccountId == nil",
-            "predicate_paths": [
-              "in.ServiceAccountId"
-            ]
-          },
           {
             "id": "b2",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
             "cond": "in.ServiceAccountId.Partition != \"\"",
             "predicate_paths": [
               "in.ServiceAccountId.Partition"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
-            "cond": "in.ServiceAccountId|in.ServiceAccountId.Partition == \"\"",
-            "predicate_paths": [
-              "in.ServiceAccountId"
             ]
           },
           {
@@ -16509,36 +16755,41 @@
             ]
           },
           {
-            "id": "b5",
-            "at": "internal/service/serviceaccount.go:387",
-            "cond": "in.ServiceAccountKeyring.DisplayName == nil",
-            "predicate_paths": [
-              "in.ServiceAccountKeyring.DisplayName"
-            ]
-          },
-          {
             "id": "b6",
             "at": "internal/service/serviceaccount.go:386",
             "cond": "in.ServiceAccountKeyring.KeyringId == nil",
             "predicate_paths": [
               "in.ServiceAccountKeyring.KeyringId"
             ]
-          },
-          {
-            "id": "b7",
-            "at": "internal/service/serviceaccount.go:385",
-            "cond": "in.ServiceAccountId == nil",
-            "predicate_paths": [
-              "in.ServiceAccountId"
-            ]
           }
         ]
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "serviceaccountid",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "Creating a keyring with an existing service account",
+          "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_SERVICE_ACCOUNTS_KEYRINGS_CREATE"
+          ],
+          "fields_set": [
+            "DisplayName",
+            "ServiceAccountId"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": true
+        }
+      ]
     },
     {
       "rpc": "CreateSysUser",
@@ -18225,26 +18476,45 @@
     },
     {
       "rpc": "DeleteDevUserInvite",
-      "operation": "",
-      "tests": 0,
+      "operation": "UserInvitationDelete",
+      "tests": 1,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200
+        ],
+        "missing": [
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 12.5
       },
       "fields": {
         "leaf_fields_read_by_rpc": 1,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
-        "set_by_positive_tests": 0,
+        "covered_count": 1,
+        "coverage_pct": 100,
+        "request_fields_set_by_tests": 1,
+        "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
             "total": 1,
-            "set": 0,
-            "pct": 0
+            "set": 1,
+            "pct": 100
           },
           "nested": {
             "total": 0,
@@ -18257,14 +18527,20 @@
             "pct": 0
           }
         },
-        "covered": null,
-        "gaps": [
-          "in.Email"
-        ]
+        "covered": [
+          {
+            "path": "in.Email",
+            "match": "exact",
+            "by_tests": [
+              "DeleteDevuInvite"
+            ]
+          }
+        ],
+        "gaps": null
       },
       "branches": {
         "total": 0,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
@@ -18274,13 +18550,27 @@
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
         "coverage_pct": 0,
-        "gaps": []
+        "gaps": null
       },
       "anomalies": {
         "unmatched_test_fields": null
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "DeleteDevuInvite",
+          "file": "api/v2_internal/devu_invites/devuinvites_crud_test.go",
+          "labels": [
+            "INTERNAL_USERS_INVITATION_DELETE"
+          ],
+          "fields_set": [
+            "Email"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true
+        }
+      ]
     },
     {
       "rpc": "DeleteDevrevProfile",
@@ -18938,19 +19228,40 @@
     },
     {
       "rpc": "DeleteSvcAcc",
-      "operation": "",
-      "tests": 0,
+      "operation": "ServiceAccountsDelete",
+      "tests": 2,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          404,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200,
+          400
+        ],
+        "missing": [
+          401,
+          403,
+          404,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 22.2
       },
       "fields": {
         "leaf_fields_read_by_rpc": 4,
         "covered_count": 0,
         "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
+        "request_fields_set_by_tests": 1,
         "set_by_positive_tests": 0,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -18980,12 +19291,12 @@
       },
       "branches": {
         "total": 4,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
-        "absent_arm_exercised": 0,
-        "absent_arm_pct": 0,
+        "absent_arm_exercised": 3,
+        "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
@@ -19026,33 +19337,89 @@
         ]
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "id",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "Deleting a service account",
+          "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_SERVICE_ACCOUNTS_DELETE"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true
+        },
+        {
+          "name": "Deleting a non-existing service account",
+          "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_SERVICE_ACCOUNTS_DELETE"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": false
+        }
+      ]
     },
     {
       "rpc": "DeleteSvcAccKeyring",
-      "operation": "",
-      "tests": 0,
+      "operation": "ServiceAccountsKeyringsDelete",
+      "tests": 2,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          404,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200,
+          404
+        ],
+        "missing": [
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 22.2
       },
       "fields": {
         "leaf_fields_read_by_rpc": 5,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
-        "set_by_positive_tests": 0,
-        "set_by_negative_tests": 0,
+        "covered_count": 1,
+        "coverage_pct": 20,
+        "request_fields_set_by_tests": 2,
+        "set_by_positive_tests": 1,
+        "set_by_negative_tests": 1,
         "by_depth": {
           "top_level": {
             "total": 1,
-            "set": 0,
-            "pct": 0
+            "set": 1,
+            "pct": 100
           },
           "nested": {
             "total": 4,
@@ -19065,9 +19432,17 @@
             "pct": 0
           }
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.KeyId",
+            "match": "exact",
+            "by_tests": [
+              "Deleting a keyring associated with a service account",
+              "Deleting a non-existing keyring"
+            ]
+          }
+        ],
         "gaps": [
-          "in.KeyId",
           "in.ServiceAccountId.Components",
           "in.ServiceAccountId.Partition",
           "in.ServiceAccountId.PartitionType",
@@ -19076,25 +19451,17 @@
       },
       "branches": {
         "total": 5,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 4,
-        "present_arm_exercised": 0,
-        "present_arm_pct": 0,
+        "present_arm_exercised": 4,
+        "present_arm_pct": 80,
         "absent_arm_exercised": 0,
         "absent_arm_pct": 0,
-        "negative_arm_exercised": 0,
-        "negative_arm_pct": 0,
+        "negative_arm_exercised": 4,
+        "negative_arm_pct": 80,
         "both_arms_exercised": 0,
-        "coverage_pct": 0,
+        "coverage_pct": 80,
         "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
-            "cond": "in.ServiceAccountId == nil",
-            "predicate_paths": [
-              "in.ServiceAccountId"
-            ]
-          },
           {
             "id": "b2",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
@@ -19102,38 +19469,51 @@
             "predicate_paths": [
               "in.ServiceAccountId.Partition"
             ]
-          },
-          {
-            "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
-            "cond": "in.ServiceAccountId|in.ServiceAccountId.Partition == \"\"",
-            "predicate_paths": [
-              "in.ServiceAccountId"
-            ]
-          },
-          {
-            "id": "b4",
-            "at": "internal/service/serviceaccount.go:586",
-            "cond": "in.ServiceAccountId == nil",
-            "predicate_paths": [
-              "in.ServiceAccountId"
-            ]
-          },
-          {
-            "id": "b5",
-            "at": "internal/service/serviceaccount.go:617",
-            "cond": "**t64 == in.KeyId",
-            "predicate_paths": [
-              "in.KeyId"
-            ]
           }
         ]
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "serviceaccountid",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "Deleting a keyring associated with a service account",
+          "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_SERVICE_ACCOUNTS_KEYRINGS_DELETE"
+          ],
+          "fields_set": [
+            "KeyId",
+            "ServiceAccountId"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true
+        },
+        {
+          "name": "Deleting a non-existing keyring",
+          "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_SERVICE_ACCOUNTS_KEYRINGS_DELETE"
+          ],
+          "fields_set": [
+            "KeyId",
+            "ServiceAccountId"
+          ],
+          "statuses": [
+            404
+          ],
+          "asserts_success": false
+        }
+      ]
     },
     {
       "rpc": "DeleteSysUser",
@@ -19811,13 +20191,32 @@
     },
     {
       "rpc": "GetBulkImportSampleCsv",
-      "operation": "",
-      "tests": 0,
+      "operation": "GetAccountsSampleCsvPost",
+      "tests": 1,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200
+        ],
+        "missing": [
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 12.5
       },
       "fields": {
         "leaf_fields_read_by_rpc": 1,
@@ -19854,8 +20253,8 @@
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
-        "absent_arm_exercised": 0,
-        "absent_arm_pct": 0,
+        "absent_arm_exercised": 3,
+        "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
@@ -19890,8 +20289,21 @@
       "anomalies": {
         "unmatched_test_fields": null
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "Get csv import sample file",
+          "file": "api/v2_internal/accounts/accounts_csv_import_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ACCOUNTS_SAMPLE_CSV_GET"
+          ],
+          "fields_set": null,
+          "statuses": [
+            200
+          ],
+          "asserts_success": false
+        }
+      ]
     },
     {
       "rpc": "GetDevOrg",
@@ -19963,7 +20375,7 @@
           },
           {
             "id": "b3",
-            "at": "internal/service/devorg.go:1788",
+            "at": "internal/service/devorg.go:1784",
             "cond": "in.DevOid != \"\"",
             "predicate_paths": [
               "in.DevOid"
@@ -19971,7 +20383,7 @@
           },
           {
             "id": "b4",
-            "at": "internal/service/devorg.go:1791",
+            "at": "internal/service/devorg.go:1787",
             "cond": "in.DevOid == \"\"",
             "predicate_paths": [
               "in.DevOid"
@@ -19979,7 +20391,7 @@
           },
           {
             "id": "b5",
-            "at": "internal/service/devorg.go:1815",
+            "at": "internal/service/devorg.go:1811",
             "cond": "*t36 != in.DevOid",
             "predicate_paths": [
               "in.DevOid"
@@ -20191,7 +20603,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "internal/service/devorg.go:1364",
+            "at": "internal/service/devorg.go:1360",
             "cond": "in != nil",
             "predicate_paths": [
               "in"
@@ -21888,19 +22300,40 @@
     },
     {
       "rpc": "GetSvcAcc",
-      "operation": "",
-      "tests": 0,
+      "operation": "ServiceAccountsGetPost",
+      "tests": 2,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          404,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200,
+          404
+        ],
+        "missing": [
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 22.2
       },
       "fields": {
         "leaf_fields_read_by_rpc": 4,
         "covered_count": 0,
         "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
+        "request_fields_set_by_tests": 1,
         "set_by_positive_tests": 0,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -21930,12 +22363,12 @@
       },
       "branches": {
         "total": 4,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
-        "absent_arm_exercised": 0,
-        "absent_arm_pct": 0,
+        "absent_arm_exercised": 3,
+        "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
@@ -21976,33 +22409,89 @@
         ]
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "id",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "Reading a service account",
+          "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_SERVICE_ACCOUNTS_GET"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true
+        },
+        {
+          "name": "Reading a deleted service account",
+          "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_SERVICE_ACCOUNTS_GET"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            404
+          ],
+          "asserts_success": false
+        }
+      ]
     },
     {
       "rpc": "GetSvcAccKeyring",
-      "operation": "",
-      "tests": 0,
+      "operation": "ServiceAccountsKeyringsGetPost",
+      "tests": 2,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          404,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200,
+          404
+        ],
+        "missing": [
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 22.2
       },
       "fields": {
         "leaf_fields_read_by_rpc": 5,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
-        "set_by_positive_tests": 0,
-        "set_by_negative_tests": 0,
+        "covered_count": 1,
+        "coverage_pct": 20,
+        "request_fields_set_by_tests": 2,
+        "set_by_positive_tests": 1,
+        "set_by_negative_tests": 1,
         "by_depth": {
           "top_level": {
             "total": 1,
-            "set": 0,
-            "pct": 0
+            "set": 1,
+            "pct": 100
           },
           "nested": {
             "total": 4,
@@ -22015,9 +22504,17 @@
             "pct": 0
           }
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.KeyId",
+            "match": "exact",
+            "by_tests": [
+              "Reading a keyring associated with a service account",
+              "Reading a non-existing keyring"
+            ]
+          }
+        ],
         "gaps": [
-          "in.KeyId",
           "in.ServiceAccountId.Components",
           "in.ServiceAccountId.Partition",
           "in.ServiceAccountId.PartitionType",
@@ -22026,25 +22523,17 @@
       },
       "branches": {
         "total": 5,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 4,
-        "present_arm_exercised": 0,
-        "present_arm_pct": 0,
+        "present_arm_exercised": 4,
+        "present_arm_pct": 80,
         "absent_arm_exercised": 0,
         "absent_arm_pct": 0,
-        "negative_arm_exercised": 0,
-        "negative_arm_pct": 0,
+        "negative_arm_exercised": 4,
+        "negative_arm_pct": 80,
         "both_arms_exercised": 0,
-        "coverage_pct": 0,
+        "coverage_pct": 80,
         "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
-            "cond": "in.ServiceAccountId == nil",
-            "predicate_paths": [
-              "in.ServiceAccountId"
-            ]
-          },
           {
             "id": "b2",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
@@ -22052,38 +22541,51 @@
             "predicate_paths": [
               "in.ServiceAccountId.Partition"
             ]
-          },
-          {
-            "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
-            "cond": "in.ServiceAccountId|in.ServiceAccountId.Partition == \"\"",
-            "predicate_paths": [
-              "in.ServiceAccountId"
-            ]
-          },
-          {
-            "id": "b4",
-            "at": "internal/service/serviceaccount.go:532",
-            "cond": "in.ServiceAccountId == nil",
-            "predicate_paths": [
-              "in.ServiceAccountId"
-            ]
-          },
-          {
-            "id": "b5",
-            "at": "internal/service/serviceaccount.go:556",
-            "cond": "**t75 == in.KeyId",
-            "predicate_paths": [
-              "in.KeyId"
-            ]
           }
         ]
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "serviceaccountid",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "Reading a keyring associated with a service account",
+          "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_SERVICE_ACCOUNTS_KEYRINGS_GET"
+          ],
+          "fields_set": [
+            "KeyId",
+            "ServiceAccountId"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true
+        },
+        {
+          "name": "Reading a non-existing keyring",
+          "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_SERVICE_ACCOUNTS_KEYRINGS_GET"
+          ],
+          "fields_set": [
+            "KeyId",
+            "ServiceAccountId"
+          ],
+          "statuses": [
+            404
+          ],
+          "asserts_success": false
+        }
+      ]
     },
     {
       "rpc": "GetSysUser",
@@ -29644,26 +30146,29 @@
     },
     {
       "rpc": "InviteDevUser",
-      "operation": "",
-      "tests": 0,
+      "operation": "DevOrgsInvitesCreate,UserInvitationUpdate",
+      "tests": 2,
       "status": {
         "documented": null,
-        "asserted": [],
+        "asserted": [
+          200,
+          201
+        ],
         "missing": [],
         "coverage_pct": 0
       },
       "fields": {
         "leaf_fields_read_by_rpc": 4,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
-        "set_by_positive_tests": 0,
+        "covered_count": 1,
+        "coverage_pct": 25,
+        "request_fields_set_by_tests": 1,
+        "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
             "total": 4,
-            "set": 0,
-            "pct": 0
+            "set": 1,
+            "pct": 25
           },
           "nested": {
             "total": 0,
@@ -29676,9 +30181,17 @@
             "pct": 0
           }
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.Email",
+            "match": "exact",
+            "by_tests": [
+              "CreateDevuInvite",
+              "UpdateDevuInvite"
+            ]
+          }
+        ],
         "gaps": [
-          "in.Email",
           "in.GroupIds",
           "in.InviterName",
           "in.Licenses"
@@ -29686,41 +30199,17 @@
       },
       "branches": {
         "total": 4,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 4,
-        "present_arm_exercised": 0,
-        "present_arm_pct": 0,
-        "absent_arm_exercised": 0,
-        "absent_arm_pct": 0,
+        "present_arm_exercised": 3,
+        "present_arm_pct": 75,
+        "absent_arm_exercised": 1,
+        "absent_arm_pct": 25,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 0,
+        "coverage_pct": 75,
         "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.1.darwin-arm64/src/slices/slices.go:98",
-            "cond": "in.Email == *t4",
-            "predicate_paths": [
-              "in.Email"
-            ]
-          },
-          {
-            "id": "b2",
-            "at": "internal/service/devuser.go:409",
-            "cond": "in.Email",
-            "predicate_paths": [
-              "in.Email"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "internal/service/devuser_invites.go:306",
-            "cond": "in.Email",
-            "predicate_paths": [
-              "in.Email"
-            ]
-          },
           {
             "id": "b4",
             "at": "internal/service/devuser_invites.go:371",
@@ -29734,8 +30223,34 @@
       "anomalies": {
         "unmatched_test_fields": null
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "CreateDevuInvite",
+          "file": "api/v2_internal/devu_invites/devuinvites_crud_test.go",
+          "labels": null,
+          "fields_set": [
+            "Email"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": true
+        },
+        {
+          "name": "UpdateDevuInvite",
+          "file": "api/v2_internal/devu_invites/devuinvites_crud_test.go",
+          "labels": [
+            "INTERNAL_USERS_INVITATION_UPDATE"
+          ],
+          "fields_set": [
+            "Email"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true
+        }
+      ]
     },
     {
       "rpc": "IsProfileDisplayNameAvailable",
@@ -29867,7 +30382,7 @@
           },
           {
             "id": "b3",
-            "at": "internal/service/devorg.go:2374",
+            "at": "internal/service/devorg.go:2366",
             "cond": "in.DevOid == \"\"",
             "predicate_paths": [
               "in.DevOid"
@@ -29875,7 +30390,7 @@
           },
           {
             "id": "b4",
-            "at": "internal/service/devorg.go:2405",
+            "at": "internal/service/devorg.go:2397",
             "cond": "in.DevOid",
             "predicate_paths": [
               "in.DevOid"
@@ -33524,7 +34039,7 @@
           },
           {
             "id": "b4",
-            "at": "internal/service/devorg.go:1669",
+            "at": "internal/service/devorg.go:1665",
             "cond": "in != nil",
             "predicate_paths": [
               "in"
@@ -33532,7 +34047,7 @@
           },
           {
             "id": "b5",
-            "at": "internal/service/devorg.go:1714",
+            "at": "internal/service/devorg.go:1710",
             "cond": "in.UeSyncState != nil",
             "predicate_paths": [
               "in.UeSyncState"
@@ -33540,7 +34055,7 @@
           },
           {
             "id": "b6",
-            "at": "internal/service/devorg.go:1719",
+            "at": "internal/service/devorg.go:1715",
             "cond": "in.PageParams == nil",
             "predicate_paths": [
               "in.PageParams"
@@ -34145,7 +34660,7 @@
           },
           {
             "id": "b4",
-            "at": "internal/service/devorg.go:1542",
+            "at": "internal/service/devorg.go:1538",
             "cond": "in != nil",
             "predicate_paths": [
               "in"
@@ -34153,7 +34668,7 @@
           },
           {
             "id": "b5",
-            "at": "internal/service/devorg.go:1554",
+            "at": "internal/service/devorg.go:1550",
             "cond": "in.PageParams == nil",
             "predicate_paths": [
               "in.PageParams"
@@ -34161,7 +34676,7 @@
           },
           {
             "id": "b6",
-            "at": "internal/service/devorg.go:1642",
+            "at": "internal/service/devorg.go:1638",
             "cond": "in.UeSyncState != nil",
             "predicate_paths": [
               "in.UeSyncState"
@@ -34169,7 +34684,7 @@
           },
           {
             "id": "b7",
-            "at": "internal/service/devorg.go:1629",
+            "at": "internal/service/devorg.go:1625",
             "cond": "in.UeSyncState != nil",
             "predicate_paths": [
               "in.UeSyncState"
@@ -34177,7 +34692,7 @@
           },
           {
             "id": "b8",
-            "at": "internal/service/devorg.go:1629",
+            "at": "internal/service/devorg.go:1625",
             "cond": "*t184 != in.UeSyncState",
             "predicate_paths": [
               "in.UeSyncState"
@@ -43202,13 +43717,34 @@
     },
     {
       "rpc": "ListSvcAccs",
-      "operation": "",
-      "tests": 0,
+      "operation": "ServiceAccountsListPost",
+      "tests": 2,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          404,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200
+        ],
+        "missing": [
+          400,
+          401,
+          403,
+          404,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 11.1
       },
       "fields": {
         "leaf_fields_read_by_rpc": 77,
@@ -43317,12 +43853,12 @@
       },
       "branches": {
         "total": 192,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
-        "absent_arm_exercised": 0,
-        "absent_arm_pct": 0,
+        "absent_arm_exercised": 1,
+        "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
@@ -44869,8 +45405,34 @@
       "anomalies": {
         "unmatched_test_fields": null
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "Listing service accounts",
+          "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_SERVICE_ACCOUNTS_LIST"
+          ],
+          "fields_set": null,
+          "statuses": [
+            200
+          ],
+          "asserts_success": true
+        },
+        {
+          "name": "Listing service accounts after deletion",
+          "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_SERVICE_ACCOUNTS_LIST"
+          ],
+          "fields_set": null,
+          "statuses": [
+            200
+          ],
+          "asserts_success": true
+        }
+      ]
     },
     {
       "rpc": "ListSysUsers",
@@ -52936,7 +53498,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "internal/service/devorg.go:2095",
+            "at": "internal/service/devorg.go:2091",
             "cond": "in.DevOrg.AllowedEmailDomain != nil",
             "predicate_paths": [
               "in.DevOrg.AllowedEmailDomain"
@@ -52944,7 +53506,7 @@
           },
           {
             "id": "b2",
-            "at": "internal/service/devorg.go:2098",
+            "at": "internal/service/devorg.go:2094",
             "cond": "*t18 != in.DevOrg.AllowedEmailDomain",
             "predicate_paths": [
               "in.DevOrg.AllowedEmailDomain"
@@ -52952,7 +53514,7 @@
           },
           {
             "id": "b3",
-            "at": "internal/service/devorg.go:2104",
+            "at": "internal/service/devorg.go:2100",
             "cond": "in.DevOrg.AllowedEmailDomains.StringValues",
             "predicate_paths": [
               "in.DevOrg.AllowedEmailDomains.StringValues"
@@ -52960,7 +53522,7 @@
           },
           {
             "id": "b4",
-            "at": "internal/service/devorg.go:2095",
+            "at": "internal/service/devorg.go:2091",
             "cond": "in.DevOrg.AllowedEmailDomain != \"\"",
             "predicate_paths": [
               "in.DevOrg.AllowedEmailDomain"
@@ -52968,7 +53530,7 @@
           },
           {
             "id": "b5",
-            "at": "internal/service/devorg.go:2130",
+            "at": "internal/service/devorg.go:2126",
             "cond": "in.DevOrg.DevSlug != nil",
             "predicate_paths": [
               "in.DevOrg.DevSlug"
@@ -53327,33 +53889,16 @@
     },
     {
       "rpc": "UpdateDevUser",
-      "operation": "DevUsersUpdate",
-      "tests": 3,
+      "operation": "DevUsersSelfUpdate,DevUsersUpdate",
+      "tests": 4,
       "status": {
-        "documented": [
-          200,
-          400,
-          401,
-          403,
-          413,
-          429,
-          500,
-          503
-        ],
+        "documented": null,
         "asserted": [
           200,
           201
         ],
-        "missing": [
-          400,
-          401,
-          403,
-          413,
-          429,
-          500,
-          503
-        ],
-        "coverage_pct": 12.5
+        "missing": [],
+        "coverage_pct": 0
       },
       "fields": {
         "leaf_fields_read_by_rpc": 31,
@@ -53398,6 +53943,7 @@
             "path": "in.Updates.DisplayName",
             "match": "exact",
             "by_tests": [
+              "selfUpdateDevUser",
               "updateDevUserDisplayHandle",
               "updateDevUserDisplayName"
             ]
@@ -53827,6 +54373,20 @@
         ]
       },
       "test_facts": [
+        {
+          "name": "selfUpdateDevUser",
+          "file": "api/v2_internal/dev_users/crud/devusers_crud_test.go",
+          "labels": [
+            "INTERNAL_DEVUSERS_SELF_UPDATE"
+          ],
+          "fields_set": [
+            "DisplayName"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true
+        },
         {
           "name": "updateDevUserDisplayHandle",
           "file": "api/v2_internal/dev_users/crud/devusers_crud_test.go",
@@ -54858,20 +55418,41 @@
     },
     {
       "rpc": "UpdateSvcAcc",
-      "operation": "",
-      "tests": 0,
+      "operation": "ServiceAccountsUpdate",
+      "tests": 1,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          404,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200
+        ],
+        "missing": [
+          400,
+          401,
+          403,
+          404,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 11.1
       },
       "fields": {
         "leaf_fields_read_by_rpc": 6,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
-        "set_by_positive_tests": 0,
+        "covered_count": 1,
+        "coverage_pct": 16.7,
+        "request_fields_set_by_tests": 2,
+        "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
@@ -54886,32 +55467,39 @@
           },
           "deep": {
             "total": 1,
-            "set": 0,
-            "pct": 0
+            "set": 1,
+            "pct": 100
           }
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.Updates.DisplayPicture.Id",
+            "match": "exact",
+            "by_tests": [
+              "Updating a service account"
+            ]
+          }
+        ],
         "gaps": [
           "in.ServiceAccountId.Components",
           "in.ServiceAccountId.Partition",
           "in.ServiceAccountId.PartitionType",
           "in.ServiceAccountId.ServiceType",
-          "in.Updates.DisplayPicture.Id",
           "in.Updates.Keyrings"
         ]
       },
       "branches": {
         "total": 11,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 7,
-        "present_arm_exercised": 0,
-        "present_arm_pct": 0,
-        "absent_arm_exercised": 0,
-        "absent_arm_pct": 0,
+        "present_arm_exercised": 1,
+        "present_arm_pct": 9.1,
+        "absent_arm_exercised": 7,
+        "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 0,
+        "coverage_pct": 9.1,
         "gaps": [
           {
             "id": "b1",
@@ -54962,14 +55550,6 @@
             ]
           },
           {
-            "id": "b7",
-            "at": "internal/service/artifacts.go:91",
-            "cond": "in.Updates.DisplayPicture.Id != \"\"",
-            "predicate_paths": [
-              "in.Updates.DisplayPicture.Id"
-            ]
-          },
-          {
             "id": "b8",
             "at": "internal/service/serviceaccount.go:237",
             "cond": "in.Updates == nil",
@@ -55004,33 +55584,75 @@
         ]
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "displayname",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "Updating a service account",
+          "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_SERVICE_ACCOUNTS_UPDATE"
+          ],
+          "fields_set": [
+            "DisplayName",
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true
+        }
+      ]
     },
     {
       "rpc": "UpdateSvcAccKeyring",
-      "operation": "",
-      "tests": 0,
+      "operation": "ServiceAccountsKeyringsUpdate",
+      "tests": 1,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          404,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200
+        ],
+        "missing": [
+          400,
+          401,
+          403,
+          404,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 11.1
       },
       "fields": {
         "leaf_fields_read_by_rpc": 6,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
-        "set_by_positive_tests": 0,
+        "covered_count": 1,
+        "coverage_pct": 16.7,
+        "request_fields_set_by_tests": 3,
+        "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
             "total": 1,
-            "set": 0,
-            "pct": 0
+            "set": 1,
+            "pct": 100
           },
           "nested": {
             "total": 4,
@@ -55043,9 +55665,16 @@
             "pct": 0
           }
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.KeyId",
+            "match": "exact",
+            "by_tests": [
+              "Updating a keyring associated with a service account"
+            ]
+          }
+        ],
         "gaps": [
-          "in.KeyId",
           "in.ServiceAccountId.Components",
           "in.ServiceAccountId.Partition",
           "in.ServiceAccountId.PartitionType",
@@ -55055,25 +55684,17 @@
       },
       "branches": {
         "total": 8,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 5,
-        "present_arm_exercised": 0,
-        "present_arm_pct": 0,
-        "absent_arm_exercised": 0,
-        "absent_arm_pct": 0,
+        "present_arm_exercised": 5,
+        "present_arm_pct": 62.5,
+        "absent_arm_exercised": 1,
+        "absent_arm_pct": 20,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 0,
+        "coverage_pct": 62.5,
         "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
-            "cond": "in.ServiceAccountId == nil",
-            "predicate_paths": [
-              "in.ServiceAccountId"
-            ]
-          },
           {
             "id": "b2",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
@@ -55083,43 +55704,11 @@
             ]
           },
           {
-            "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
-            "cond": "in.ServiceAccountId|in.ServiceAccountId.Partition == \"\"",
-            "predicate_paths": [
-              "in.ServiceAccountId"
-            ]
-          },
-          {
-            "id": "b4",
-            "at": "internal/service/serviceaccount.go:674",
-            "cond": "in.ServiceAccountId == nil",
-            "predicate_paths": [
-              "in.ServiceAccountId"
-            ]
-          },
-          {
             "id": "b5",
             "at": "internal/service/serviceaccount.go:679",
             "cond": "in.Updates == nil",
             "predicate_paths": [
               "in.Updates"
-            ]
-          },
-          {
-            "id": "b6",
-            "at": "internal/service/serviceaccount.go:679",
-            "cond": "in.Updates.DisplayName == nil",
-            "predicate_paths": [
-              "in.Updates.DisplayName"
-            ]
-          },
-          {
-            "id": "b7",
-            "at": "internal/service/serviceaccount.go:711",
-            "cond": "in.Updates.DisplayName.Value == in.KeyId",
-            "predicate_paths": [
-              "in.KeyId"
             ]
           },
           {
@@ -55133,10 +55722,36 @@
         ]
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "displayname",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "serviceaccountid",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "Updating a keyring associated with a service account",
+          "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_SERVICE_ACCOUNTS_KEYRINGS_UPDATE"
+          ],
+          "fields_set": [
+            "DisplayName",
+            "KeyId",
+            "ServiceAccountId"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true
+        }
+      ]
     },
     {
       "rpc": "UpdateSysUser",
@@ -56912,19 +57527,40 @@
     },
     {
       "rpc": "ValidateObjectDeletion",
-      "operation": "",
-      "tests": 0,
+      "operation": "AccountsDeleteValidate",
+      "tests": 1,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          404,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200,
+          400
+        ],
+        "missing": [
+          401,
+          403,
+          404,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 22.2
       },
       "fields": {
         "leaf_fields_read_by_rpc": 4,
         "covered_count": 0,
         "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
+        "request_fields_set_by_tests": 1,
         "set_by_positive_tests": 0,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -56954,12 +57590,12 @@
       },
       "branches": {
         "total": 6,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 5,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
-        "absent_arm_exercised": 0,
-        "absent_arm_pct": 0,
+        "absent_arm_exercised": 5,
+        "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
@@ -57016,10 +57652,32 @@
         ]
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "id",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "Validate and delete account with attached ticket",
+          "file": "api/v2_internal/accounts/accounts_delete_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ACCOUNTS_DELETE_VALIDATE",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            200,
+            400
+          ],
+          "asserts_success": true
+        }
+      ]
     },
     {
       "rpc": "ValidateUpdateSpace",

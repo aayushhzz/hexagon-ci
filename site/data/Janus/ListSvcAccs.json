@@ -2,13 +2,34 @@
   "service": "Janus",
   "coverage": {
     "rpc": "ListSvcAccs",
-    "operation": "",
-    "tests": 0,
+    "operation": "ServiceAccountsListPost",
+    "tests": 2,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 11.1
     },
     "fields": {
       "leaf_fields_read_by_rpc": 77,
@@ -117,12 +138,12 @@
     },
     "branches": {
       "total": 192,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 1,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
+      "absent_arm_exercised": 1,
+      "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
@@ -1669,8 +1690,34 @@
     "anomalies": {
       "unmatched_test_fields": null
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "Listing service accounts",
+        "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_SERVICE_ACCOUNTS_LIST"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "Listing service accounts after deletion",
+        "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_SERVICE_ACCOUNTS_LIST"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/janus/internal/service.Janus).ListSvcAccs",
@@ -1818,5 +1865,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListSvcAccs` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Filters.CreatedByAgentId\n  - in.Filters.CreatedByAgentIdOp\n  - in.Filters.CreatedById\n  - in.Filters.CreatedByIdOp\n  - in.Filters.CreatedDate.After\n  - in.Filters.CreatedDate.Before\n  - in.Filters.CreatedDate.DatePreset.Type\n  - in.Filters.DevUserFilter.Apps\n  - in.Filters.DevUserFilter.AppsOp\n  - in.Filters.DevUserFilter.Availability\n  - in.Filters.DevUserFilter.AvailabilityModes\n  - in.Filters.DevUserFilter.AvailabilityModesOp\n  - in.Filters.DevUserFilter.AvailabilityOp\n  - in.Filters.DevUserFilter.CustomFields.Fields\n  - in.Filters.DevUserFilter.ExternalIdentities\n  - in.Filters.DevUserFilter.ExternalSourceData\n  - in.Filters.DevUserFilter.IsInvited\n  - in.Filters.DevUserFilter.JobHistory\n  - in.Filters.DevUserFilter.JobHistoryOp\n  - in.Filters.DevUserFilter.JobTitle\n  - in.Filters.DevUserFilter.ProfileId\n  - in.Filters.DevUserFilter.ReportsToId\n  - in.Filters.DevUserFilter.StagedInfo\n  - in.Filters.DevUserFilter.Subtype\n  - in.Filters.DevUserFilter.SubtypeOp\n  - in.Filters.DevUserFilter.SyncMetadata\n  - in.Filters.DevUserFilter.Timezone\n  - in.Filters.DevrevProfileFilter\n  - in.Filters.DisplayName\n  - in.Filters.Email\n  - in.Filters.EmailOp\n  - in.Filters.ModifiedById\n  - in.Filters.ModifiedByIdOp\n  - in.Filters.ModifiedDate.After\n  - in.Filters.ModifiedDate.Before\n  - in.Filters.ModifiedDate.DatePreset.Type\n  - in.Filters.PhoneNumbers\n  - in.Filters.PhoneNumbersOp\n  - in.Filters.PrimaryIdentity\n  - in.Filters.PrimaryIdentityOp\n  - in.Filters.RevUserFilter.Apps\n  - in.Filters.RevUserFilter.AppsOp\n  - in.Filters.RevUserFilter.Associations\n  - in.Filters.RevUserFilter.AssociationsOp\n  - in.Filters.RevUserFilter.CustomFields.Fields\n  - in.Filters.RevUserFilter.ExternalRefs\n  - in.Filters.RevUserFilter.ExternalRefsOp\n  - in.Filters.RevUserFilter.ExternalSourceData\n  - in.Filters.RevUserFilter.ExternalUid\n  - in.Filters.RevUserFilter.ExternalUidIssuer\n  - in.Filters.RevUserFilter.ExternalUidOp\n  - in.Filters.RevUserFilter.Gender\n  - in.Filters.RevUserFilter.IngestionChannel\n  - in.Filters.RevUserFilter.IsVerified\n  - in.Filters.RevUserFilter.PlugAvailability\n  - in.Filters.RevUserFilter.PlugAvailabilityOp\n  - in.Filters.RevUserFilter.PreferredContactMethod\n  - in.Filters.RevUserFilter.RevOid\n  - in.Filters.RevUserFilter.RevOidOp\n  - in.Filters.RevUserFilter.RevOrg\n  - (+17 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filters.DevUserFilter.CustomFields == nil\n  - in.Filters.DevUserFilter.AvailabilityModesOp == 3\n  - in.Filters.DevUserFilter.AvailabilityModesOp == 4\n  - in.Filters.DevUserFilter.AvailabilityModesOp == 2\n  - in.Filters.DevUserFilter.AvailabilityModesOp == 4\n  - in.Filters.DevUserFilter.AvailabilityModesOp == 5\n  - in.Filters.DevUserFilter.AvailabilityModesOp == 2\n  - in.Filters.DevUserFilter.AvailabilityModesOp == 1\n  - in.Filters.DevUserFilter.AvailabilityModesOp == 3\n  - in.Filters.DevUserFilter.AvailabilityOp == 3\n  - in.Filters.DevUserFilter.AvailabilityOp == 4\n  - in.Filters.DevUserFilter.AvailabilityOp == 2\n  - in.Filters.DevUserFilter.AvailabilityOp == 4\n  - in.Filters.DevUserFilter.AvailabilityOp == 5\n  - in.Filters.DevUserFilter.AvailabilityOp == 2\n  - in.Filters.DevUserFilter.AvailabilityOp == 1\n  - in.Filters.DevUserFilter.AvailabilityOp == 3\n  - in.Filters.DevUserFilter.JobHistoryOp == 3\n  - in.Filters.DevUserFilter.JobHistoryOp == 4\n  - in.Filters.DevUserFilter.JobHistoryOp == 2\n  - in.Filters.DevUserFilter.JobHistoryOp == 4\n  - in.Filters.DevUserFilter.JobHistoryOp == 5\n  - in.Filters.DevUserFilter.JobHistoryOp == 2\n  - in.Filters.DevUserFilter.JobHistoryOp == 1\n  - in.Filters.DevUserFilter.JobHistoryOp == 3\n  - in.Filters.DevUserFilter.SubtypeOp == 4\n  - in.Filters.DevUserFilter.SubtypeOp == 3\n  - in.Filters.DevUserFilter.SubtypeOp == 4\n  - in.Filters.DevUserFilter.SubtypeOp == 2\n  - in.Filters.DevUserFilter.SubtypeOp == 5\n  - in.Filters.DevUserFilter.SubtypeOp == 2\n  - in.Filters.DevUserFilter.SubtypeOp == 1\n  - in.Filters.DevUserFilter.SubtypeOp == 3\n  - in.Filters.DevUserFilter != nil\n  - in.Filters.DevUserFilter.AppsOp == 4\n  - in.Filters.DevUserFilter.AppsOp == 3\n  - in.Filters.DevUserFilter.AppsOp == 2\n  - in.Filters.DevUserFilter.AppsOp == 4\n  - in.Filters.DevUserFilter.AppsOp == 5\n  - in.Filters.DevUserFilter.AppsOp == 2\n  - (+152 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidAuthContext\n  - errSvcAccNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListSvcAccs` (HTTP operation `ServiceAccountsListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Filters.CreatedByAgentId\n  - in.Filters.CreatedByAgentIdOp\n  - in.Filters.CreatedById\n  - in.Filters.CreatedByIdOp\n  - in.Filters.CreatedDate.After\n  - in.Filters.CreatedDate.Before\n  - in.Filters.CreatedDate.DatePreset.Type\n  - in.Filters.DevUserFilter.Apps\n  - in.Filters.DevUserFilter.AppsOp\n  - in.Filters.DevUserFilter.Availability\n  - in.Filters.DevUserFilter.AvailabilityModes\n  - in.Filters.DevUserFilter.AvailabilityModesOp\n  - in.Filters.DevUserFilter.AvailabilityOp\n  - in.Filters.DevUserFilter.CustomFields.Fields\n  - in.Filters.DevUserFilter.ExternalIdentities\n  - in.Filters.DevUserFilter.ExternalSourceData\n  - in.Filters.DevUserFilter.IsInvited\n  - in.Filters.DevUserFilter.JobHistory\n  - in.Filters.DevUserFilter.JobHistoryOp\n  - in.Filters.DevUserFilter.JobTitle\n  - in.Filters.DevUserFilter.ProfileId\n  - in.Filters.DevUserFilter.ReportsToId\n  - in.Filters.DevUserFilter.StagedInfo\n  - in.Filters.DevUserFilter.Subtype\n  - in.Filters.DevUserFilter.SubtypeOp\n  - in.Filters.DevUserFilter.SyncMetadata\n  - in.Filters.DevUserFilter.Timezone\n  - in.Filters.DevrevProfileFilter\n  - in.Filters.DisplayName\n  - in.Filters.Email\n  - in.Filters.EmailOp\n  - in.Filters.ModifiedById\n  - in.Filters.ModifiedByIdOp\n  - in.Filters.ModifiedDate.After\n  - in.Filters.ModifiedDate.Before\n  - in.Filters.ModifiedDate.DatePreset.Type\n  - in.Filters.PhoneNumbers\n  - in.Filters.PhoneNumbersOp\n  - in.Filters.PrimaryIdentity\n  - in.Filters.PrimaryIdentityOp\n  - in.Filters.RevUserFilter.Apps\n  - in.Filters.RevUserFilter.AppsOp\n  - in.Filters.RevUserFilter.Associations\n  - in.Filters.RevUserFilter.AssociationsOp\n  - in.Filters.RevUserFilter.CustomFields.Fields\n  - in.Filters.RevUserFilter.ExternalRefs\n  - in.Filters.RevUserFilter.ExternalRefsOp\n  - in.Filters.RevUserFilter.ExternalSourceData\n  - in.Filters.RevUserFilter.ExternalUid\n  - in.Filters.RevUserFilter.ExternalUidIssuer\n  - in.Filters.RevUserFilter.ExternalUidOp\n  - in.Filters.RevUserFilter.Gender\n  - in.Filters.RevUserFilter.IngestionChannel\n  - in.Filters.RevUserFilter.IsVerified\n  - in.Filters.RevUserFilter.PlugAvailability\n  - in.Filters.RevUserFilter.PlugAvailabilityOp\n  - in.Filters.RevUserFilter.PreferredContactMethod\n  - in.Filters.RevUserFilter.RevOid\n  - in.Filters.RevUserFilter.RevOidOp\n  - in.Filters.RevUserFilter.RevOrg\n  - (+17 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filters.DevUserFilter.CustomFields == nil\n  - in.Filters.DevUserFilter.AvailabilityModesOp == 3\n  - in.Filters.DevUserFilter.AvailabilityModesOp == 4\n  - in.Filters.DevUserFilter.AvailabilityModesOp == 2\n  - in.Filters.DevUserFilter.AvailabilityModesOp == 4\n  - in.Filters.DevUserFilter.AvailabilityModesOp == 5\n  - in.Filters.DevUserFilter.AvailabilityModesOp == 2\n  - in.Filters.DevUserFilter.AvailabilityModesOp == 1\n  - in.Filters.DevUserFilter.AvailabilityModesOp == 3\n  - in.Filters.DevUserFilter.AvailabilityOp == 3\n  - in.Filters.DevUserFilter.AvailabilityOp == 4\n  - in.Filters.DevUserFilter.AvailabilityOp == 2\n  - in.Filters.DevUserFilter.AvailabilityOp == 4\n  - in.Filters.DevUserFilter.AvailabilityOp == 5\n  - in.Filters.DevUserFilter.AvailabilityOp == 2\n  - in.Filters.DevUserFilter.AvailabilityOp == 1\n  - in.Filters.DevUserFilter.AvailabilityOp == 3\n  - in.Filters.DevUserFilter.JobHistoryOp == 3\n  - in.Filters.DevUserFilter.JobHistoryOp == 4\n  - in.Filters.DevUserFilter.JobHistoryOp == 2\n  - in.Filters.DevUserFilter.JobHistoryOp == 4\n  - in.Filters.DevUserFilter.JobHistoryOp == 5\n  - in.Filters.DevUserFilter.JobHistoryOp == 2\n  - in.Filters.DevUserFilter.JobHistoryOp == 1\n  - in.Filters.DevUserFilter.JobHistoryOp == 3\n  - in.Filters.DevUserFilter.SubtypeOp == 4\n  - in.Filters.DevUserFilter.SubtypeOp == 3\n  - in.Filters.DevUserFilter.SubtypeOp == 4\n  - in.Filters.DevUserFilter.SubtypeOp == 2\n  - in.Filters.DevUserFilter.SubtypeOp == 5\n  - in.Filters.DevUserFilter.SubtypeOp == 2\n  - in.Filters.DevUserFilter.SubtypeOp == 1\n  - in.Filters.DevUserFilter.SubtypeOp == 3\n  - in.Filters.DevUserFilter != nil\n  - in.Filters.DevUserFilter.AppsOp == 4\n  - in.Filters.DevUserFilter.AppsOp == 3\n  - in.Filters.DevUserFilter.AppsOp == 2\n  - in.Filters.DevUserFilter.AppsOp == 4\n  - in.Filters.DevUserFilter.AppsOp == 5\n  - in.Filters.DevUserFilter.AppsOp == 2\n  - (+152 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidAuthContext\n  - errSvcAccNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }
