@@ -269,6 +269,30 @@
         }
       ]
     },
+    "dependencies": {
+      "services": [
+        {
+          "service": "schemaregistry",
+          "calls": [
+            "GetAggregatedSchema"
+          ]
+        },
+        {
+          "service": "this service",
+          "calls": [
+            "GetAggregatedSchemaForWrite"
+          ]
+        }
+      ],
+      "datastore_calls": [
+        "Get",
+        "LockForRead",
+        "Set"
+      ],
+      "service_count": 2,
+      "call_count": 2,
+      "reached_by_test": false
+    },
     "anomalies": {
       "unmatched_test_fields": null
     },

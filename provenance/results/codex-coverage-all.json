@@ -82,6 +82,13 @@
         },
         "gaps": []
       },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
+      },
       "anomalies": {
         "unmatched_test_fields": null
       },
@@ -169,6 +176,13 @@
           }
         },
         "gaps": []
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -301,6 +315,20 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "shared",
+            "calls": [
+              "CursorListItemsHelper"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 1,
+        "call_count": 1,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -442,6 +470,31 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "schemaregistry",
+            "calls": [
+              "GetAggregatedSchema",
+              "GetUpgradeInstructionsV2"
+            ]
+          },
+          {
+            "service": "this service",
+            "calls": [
+              "CreateJob",
+              "GetDevOid",
+              "GetTags",
+              "SetError",
+              "SetTags"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 2,
+        "call_count": 7,
+        "reached_by_test": true
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -650,6 +703,13 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -1327,6 +1387,13 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -2188,6 +2255,28 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "janus",
+            "calls": [
+              "ListGroups"
+            ]
+          },
+          {
+            "service": "this service",
+            "calls": [
+              "CountSearch",
+              "Search",
+              "SetError"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 2,
+        "call_count": 4,
+        "reached_by_test": true
+      },
       "anomalies": {
         "unmatched_test_fields": [
           {
@@ -2554,6 +2643,20 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "GetAggregatedSchemaForWrite"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 1,
+        "call_count": 1,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -4708,6 +4811,31 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "BulkGetTag",
+              "CreateCustomStage",
+              "CreateCustomState",
+              "GetAggregatedSchemaForWrite",
+              "GetBrand",
+              "GetGroup",
+              "GetSpace",
+              "GetStageDiagram",
+              "ListCustomStages",
+              "ListCustomStates",
+              "ListGroups",
+              "SetError"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 1,
+        "call_count": 12,
+        "reached_by_test": false
+      },
       "anomalies": {
         "unmatched_test_fields": null
       },
@@ -4923,6 +5051,13 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": true
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -5361,6 +5496,21 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "GetAggregatedSchemaForWrite",
+              "GetCustomStage"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 1,
+        "call_count": 2,
+        "reached_by_test": true
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -6174,6 +6324,22 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "SetError"
+            ]
+          }
+        ],
+        "datastore_calls": [
+          "Aggregate"
+        ],
+        "service_count": 1,
+        "call_count": 1,
+        "reached_by_test": true
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -12328,6 +12494,68 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "codex",
+            "calls": [
+              "DecryptBytes",
+              "DecryptText"
+            ]
+          },
+          {
+            "service": "schemaregistry",
+            "calls": [
+              "GetAggregatedSchema",
+              "GetStageDiagram",
+              "GetUpgradeInstructionsV2"
+            ]
+          },
+          {
+            "service": "this service",
+            "calls": [
+              "BulkGetTag",
+              "BulkUpdateArtifacts",
+              "CopyArtifact",
+              "CreateCustomStage",
+              "CreateCustomState",
+              "CreateSvcAcc",
+              "CreateTag",
+              "EncryptBytes",
+              "EncryptText",
+              "GetAggregatedSchemaForWrite",
+              "GetArtifactIds",
+              "GetBody",
+              "GetBrand",
+              "GetCustomSchemaFragmentIds",
+              "GetExternalCommunicationChannel",
+              "GetExternalSourceData",
+              "GetPlugSetting",
+              "GetPreferences",
+              "GetSpace",
+              "GetStageDiagram",
+              "GetTag",
+              "GetTags",
+              "GetUploadUrl",
+              "ListCustomStages",
+              "ListCustomStates",
+              "ListGroups",
+              "ListPreferences",
+              "ListRevUsers",
+              "ListSvcAccs",
+              "Resolve",
+              "SetCustomFields",
+              "SetCustomSchemaFragmentIds",
+              "TryLock",
+              "UpdatePreferences"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 3,
+        "call_count": 39,
+        "reached_by_test": true
+      },
       "anomalies": {
         "unmatched_test_fields": [
           {
@@ -12815,6 +13043,13 @@
           }
         ]
       },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
+      },
       "anomalies": {
         "unmatched_test_fields": null
       },
@@ -12969,6 +13204,13 @@
           }
         ]
       },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
+      },
       "anomalies": {
         "unmatched_test_fields": null
       },
@@ -13093,6 +13335,13 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": true
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -13237,6 +13486,21 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "Remove",
+              "TryLock"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 1,
+        "call_count": 2,
+        "reached_by_test": true
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -13387,6 +13651,21 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "Remove",
+              "TryLock"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 1,
+        "call_count": 2,
+        "reached_by_test": false
+      },
       "anomalies": {
         "unmatched_test_fields": null
       },
@@ -13525,6 +13804,13 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -13696,6 +13982,27 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "codex",
+            "calls": [
+              "DecryptBytes",
+              "DecryptText"
+            ]
+          },
+          {
+            "service": "schemaregistry",
+            "calls": [
+              "GetAggregatedSchema"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 2,
+        "call_count": 3,
+        "reached_by_test": true
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -13943,6 +14250,21 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "schemaregistry",
+            "calls": [
+              "GetAggregatedSchema",
+              "GetUpgradeInstructionsV2"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 1,
+        "call_count": 2,
+        "reached_by_test": false
+      },
       "anomalies": {
         "unmatched_test_fields": null
       },
@@ -14110,6 +14432,30 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "schemaregistry",
+            "calls": [
+              "GetAggregatedSchema",
+              "GetUpgradeInstructionsV2"
+            ]
+          },
+          {
+            "service": "this service",
+            "calls": [
+              "GetDevOid",
+              "GetTags",
+              "SetError",
+              "SetTags"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 2,
+        "call_count": 6,
+        "reached_by_test": true
+      },
       "anomalies": {
         "unmatched_test_fields": null
       },
@@ -14251,6 +14597,13 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": true
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -14428,6 +14781,27 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "schemaregistry",
+            "calls": [
+              "GetAggregatedSchema",
+              "GetUpgradeInstructionsV2"
+            ]
+          },
+          {
+            "service": "this service",
+            "calls": [
+              "TryLock"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 2,
+        "call_count": 3,
+        "reached_by_test": true
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -14650,6 +15024,20 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "TryLock"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 1,
+        "call_count": 1,
+        "reached_by_test": true
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -14891,6 +15279,27 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "codex",
+            "calls": [
+              "DecryptBytes",
+              "DecryptText"
+            ]
+          },
+          {
+            "service": "schemaregistry",
+            "calls": [
+              "GetAggregatedSchema"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 2,
+        "call_count": 3,
+        "reached_by_test": true
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -18276,6 +18685,22 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "janus",
+            "calls": [
+              "ListGroups"
+            ]
+          }
+        ],
+        "datastore_calls": [
+          "Aggregate"
+        ],
+        "service_count": 1,
+        "call_count": 1,
+        "reached_by_test": true
+      },
       "anomalies": {
         "unmatched_test_fields": [
           {
@@ -18426,6 +18851,13 @@
           }
         ]
       },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
+      },
       "anomalies": {
         "unmatched_test_fields": null
       },
@@ -18538,6 +18970,13 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -20275,6 +20714,36 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "codex",
+            "calls": [
+              "DecryptBytes",
+              "DecryptText"
+            ]
+          },
+          {
+            "service": "schemaregistry",
+            "calls": [
+              "GetAggregatedSchema"
+            ]
+          },
+          {
+            "service": "this service",
+            "calls": [
+              "GroupSearch",
+              "SetError"
+            ]
+          }
+        ],
+        "datastore_calls": [
+          "Aggregate"
+        ],
+        "service_count": 3,
+        "call_count": 5,
+        "reached_by_test": true
+      },
       "anomalies": {
         "unmatched_test_fields": [
           {
@@ -20587,6 +21056,13 @@
           }
         ]
       },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
+      },
       "anomalies": {
         "unmatched_test_fields": null
       },
@@ -20757,6 +21233,13 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -20936,6 +21419,13 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -21702,6 +22192,15 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [
+          "Aggregate"
+        ],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -24751,6 +25250,28 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "janus",
+            "calls": [
+              "ListGroups"
+            ]
+          },
+          {
+            "service": "this service",
+            "calls": [
+              "SetError"
+            ]
+          }
+        ],
+        "datastore_calls": [
+          "Aggregate"
+        ],
+        "service_count": 2,
+        "call_count": 2,
+        "reached_by_test": true
+      },
       "anomalies": {
         "unmatched_test_fields": [
           {
@@ -25025,6 +25546,13 @@
           }
         ]
       },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
+      },
       "anomalies": {
         "unmatched_test_fields": null
       },
@@ -25166,6 +25694,20 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "PrefixSearchV2"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 1,
+        "call_count": 1,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -25914,6 +26456,22 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "SetError"
+            ]
+          }
+        ],
+        "datastore_calls": [
+          "Aggregate"
+        ],
+        "service_count": 1,
+        "call_count": 1,
+        "reached_by_test": true
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -27660,6 +28218,43 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "codex",
+            "calls": [
+              "DecryptBytes",
+              "DecryptText"
+            ]
+          },
+          {
+            "service": "janus",
+            "calls": [
+              "ListGroups"
+            ]
+          },
+          {
+            "service": "schemaregistry",
+            "calls": [
+              "GetAggregatedSchema"
+            ]
+          },
+          {
+            "service": "this service",
+            "calls": [
+              "CoreSearchV2",
+              "Search",
+              "SetError"
+            ]
+          }
+        ],
+        "datastore_calls": [
+          "Aggregate"
+        ],
+        "service_count": 4,
+        "call_count": 7,
+        "reached_by_test": true
+      },
       "anomalies": {
         "unmatched_test_fields": [
           {
@@ -28069,6 +28664,13 @@
           }
         ]
       },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
+      },
       "anomalies": {
         "unmatched_test_fields": null
       },
@@ -28222,6 +28824,13 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -28483,6 +29092,21 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "GetRevOrg",
+              "SetError"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 1,
+        "call_count": 2,
+        "reached_by_test": false
+      },
       "anomalies": {
         "unmatched_test_fields": null
       },
@@ -28662,6 +29286,20 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "SetError"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 1,
+        "call_count": 1,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -28902,6 +29540,33 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "codex",
+            "calls": [
+              "DecryptBytes",
+              "DecryptText"
+            ]
+          },
+          {
+            "service": "schemaregistry",
+            "calls": [
+              "GetAggregatedSchema"
+            ]
+          },
+          {
+            "service": "this service",
+            "calls": [
+              "GetPreferences"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 3,
+        "call_count": 4,
+        "reached_by_test": true
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -29209,6 +29874,33 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "codex",
+            "calls": [
+              "DecryptBytes",
+              "DecryptText"
+            ]
+          },
+          {
+            "service": "schemaregistry",
+            "calls": [
+              "GetAggregatedSchema"
+            ]
+          },
+          {
+            "service": "this service",
+            "calls": [
+              "GetUserPrivileges"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 3,
+        "call_count": 4,
+        "reached_by_test": false
+      },
       "anomalies": {
         "unmatched_test_fields": null
       },
@@ -29403,6 +30095,13 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -31003,6 +31702,22 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "janus",
+            "calls": [
+              "ListGroups"
+            ]
+          }
+        ],
+        "datastore_calls": [
+          "Aggregate"
+        ],
+        "service_count": 1,
+        "call_count": 1,
+        "reached_by_test": false
+      },
       "anomalies": {
         "unmatched_test_fields": null
       },
@@ -32523,6 +33238,30 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "codex",
+            "calls": [
+              "DecryptBytes",
+              "DecryptText"
+            ]
+          },
+          {
+            "service": "this service",
+            "calls": [
+              "CoreSearchV2",
+              "SetError"
+            ]
+          }
+        ],
+        "datastore_calls": [
+          "Aggregate"
+        ],
+        "service_count": 2,
+        "call_count": 4,
+        "reached_by_test": false
+      },
       "anomalies": {
         "unmatched_test_fields": null
       },
@@ -32631,6 +33370,22 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "SetError"
+            ]
+          }
+        ],
+        "datastore_calls": [
+          "Aggregate"
+        ],
+        "service_count": 1,
+        "call_count": 1,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -32903,6 +33658,27 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "schemaregistry",
+            "calls": [
+              "GetAggregatedSchema",
+              "GetUpgradeInstructionsV2"
+            ]
+          },
+          {
+            "service": "this service",
+            "calls": [
+              "GetAggregatedSchemaForWrite"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 2,
+        "call_count": 3,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -34785,6 +35561,27 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "enact",
+            "calls": [
+              "BulkGet",
+              "ValidateEntitlements"
+            ]
+          },
+          {
+            "service": "this service",
+            "calls": [
+              "GetGroup"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 2,
+        "call_count": 3,
+        "reached_by_test": true
+      },
       "anomalies": {
         "unmatched_test_fields": [
           {
@@ -34989,6 +35786,13 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": true
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -35377,6 +36181,31 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "schemaregistry",
+            "calls": [
+              "GetAggregatedSchema",
+              "GetStageDiagram",
+              "GetUpgradeInstructionsV2"
+            ]
+          },
+          {
+            "service": "this service",
+            "calls": [
+              "GetAggregatedSchemaForWrite",
+              "GetCustomStage",
+              "Remove",
+              "TryLock"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 2,
+        "call_count": 7,
+        "reached_by_test": true
+      },
       "anomalies": {
         "unmatched_test_fields": [
           {
@@ -35648,6 +36477,21 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "Remove",
+              "TryLock"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 1,
+        "call_count": 2,
+        "reached_by_test": true
       },
       "anomalies": {
         "unmatched_test_fields": [
@@ -42176,6 +43020,47 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "codex",
+            "calls": [
+              "DecryptBytes",
+              "DecryptText"
+            ]
+          },
+          {
+            "service": "enact",
+            "calls": [
+              "BulkGet",
+              "ValidateEntitlements"
+            ]
+          },
+          {
+            "service": "schemaregistry",
+            "calls": [
+              "GetAggregatedSchema"
+            ]
+          },
+          {
+            "service": "this service",
+            "calls": [
+              "CreateSvcAcc",
+              "GetExternalSourceData",
+              "GetSpace",
+              "GetUploadUrl",
+              "HasOnlyDerivedAttributes",
+              "ListPreferences",
+              "ListSvcAccs",
+              "UpdatePreferences"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 4,
+        "call_count": 13,
+        "reached_by_test": true
+      },
       "anomalies": {
         "unmatched_test_fields": [
           {
@@ -42630,6 +43515,13 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false
       },
       "anomalies": {
         "unmatched_test_fields": null
@@ -43132,6 +44024,20 @@
           }
         ]
       },
+      "dependencies": {
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "SetError"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 1,
+        "call_count": 1,
+        "reached_by_test": false
+      },
       "anomalies": {
         "unmatched_test_fields": null
       },
@@ -43289,6 +44195,20 @@
             ]
           }
         ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "timeline",
+            "calls": [
+              "QueryEntries"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 1,
+        "call_count": 1,
+        "reached_by_test": true
       },
       "anomalies": {
         "unmatched_test_fields": [

@@ -81,6 +81,7 @@ const HELP = {
   tests: "The Lifejacket tests that are linked to this endpoint.",
   depth: "The same input field coverage, split by how deeply nested each field is, so a few important top-level fields are not lost among large optional sub-sections.",
   mapped: "Linked means a test could be matched to this endpoint. Not linked means no test matched (the endpoint is internal or admin, or its name could not be worked out). A not-linked endpoint shows 'Not measured' instead of a fake zero, and does not mean no tests exist for it.",
+  deps: "Other services and the datastore this endpoint calls while handling the request. Input and branch coverage do not see these, so a read-or-enrich endpoint can look empty while its real work is here. 'Reached by a test' means a passing test calls this endpoint, so these calls run on that path. It does not prove the test checks what came back.",
 };
 
 function setCrumbs(parts) {
@@ -169,7 +170,7 @@ async function viewServices(token) {
         <li><strong>Read the code.</strong> We analyse each backend service's source and, for every RPC, follow the request object to see which input fields it reads and which checks (if-conditions) depend on them.</li>
         <li><strong>Read the tests.</strong> We parse the Lifejacket tests and, for each one, note the endpoint it calls, the request fields it fills with a real value, and the response codes it checks.</li>
         <li><strong>Link them.</strong> Each test endpoint is matched to the backend RPC that the gateway routes it to, so a test can be lined up with the code it exercises.</li>
-        <li><strong>Compare.</strong> For a linked RPC we report how many of its input fields a test fills, how many of its checks a test reaches or pushes to failure, and how many documented response codes a test asserts.</li>
+        <li><strong>Compare.</strong> For a linked RPC we report how many of its input fields a test fills, how many of its checks a test reaches or pushes to failure, how many documented response codes a test asserts, and which other services it calls downstream.</li>
       </ol>
       <p class="method-note">This is a static comparison of code against test inputs and checks. It is not a test run, and it does not change any code. Where a request field or name does not line up, it is flagged for a person to review.</p>
     </section>`;
@@ -224,6 +225,7 @@ async function viewService(svc, token) {
       ${stat("Error paths tested", negRes, `${t.negative_arm} / ${t.branch_total} branches`, "errorPath")}
       ${stat("Normal paths tested", absentRes, `${t.absent_arm} / ${t.reachable_on_happy} branches`, "normalPath")}
       ${stat("Response codes checked", statusRes, `${t.status_asserted} / ${t.status_documented} documented`, "status")}
+      ${stat("Calls other services", { kind: "value", text: String(t.dep_rpcs || 0) }, `${t.dep_rpcs_reached || 0} of ${t.dep_rpcs || 0} reached by a test`, "deps")}
       ${stat("Inputs missing from tests", { kind: "value", text: String(t.anomalies) }, "Request fields that did not line up with an input", "anomalies")}
     </div>
 
@@ -468,6 +470,22 @@ async function viewRpc(svc, rpc, token) {
       </div>
     </div>`;
 
+  const dep = c.dependencies || {};
+  const depServiceRows = (dep.services || []).map((s) =>
+    `<div class="kv"><span class="k">${esc(s.service)}</span><span class="v"><small>${esc((s.calls || []).join(", "))}</small></span></div>`
+  ).join("");
+  const depPanel = `
+    <div class="panel">
+      <h3>Dependencies ${help(HELP.deps)}</h3>
+      <p class="panel-sub">What this endpoint calls downstream (not seen by the coverage above).</p>
+      <div class="kv-list">
+        <div class="kv"><span class="k">Other services called</span><span class="v">${dep.service_count || 0}</span></div>
+        ${depServiceRows || '<div class="kv"><span class="k">(none)</span><span class="v"></span></div>'}
+        <div class="kv"><span class="k">Datastore operations</span><span class="v"><small>${esc((dep.datastore_calls || []).join(", ")) || "none"}</small></span></div>
+        <div class="kv"><span class="k">Reached by a passing test</span><span class="v">${dep.reached_by_test ? "yes" : "no"}</span></div>
+      </div>
+    </div>`;
+
   // ---- HTTP statuses: explicit asserted / missing (not just colour) ----
   const asserted = new Set(st.asserted || []);
   const statusRows = documented.length ? documented.map((code) => {
@@ -687,7 +705,7 @@ async function viewRpc(svc, rpc, token) {
         <strong>Input field coverage</strong> asks whether tests fill the inputs the code reads (the data).
         <strong>Branch coverage</strong> asks whether tests exercise the if-conditions that read those inputs (the logic).
         Filling an input suggests a branch can be reached; it does not confirm the branch ran or passed.</p>
-        <div class="panel-grid">${fieldPanel}${branchPanel}</div>
+        <div class="panel-grid">${fieldPanel}${branchPanel}${depPanel}</div>
         ${statusSection}
         ${coveredSection}
         ${fieldGapSection}

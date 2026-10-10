@@ -148,6 +148,33 @@
         }
       ]
     },
+    "dependencies": {
+      "services": [
+        {
+          "service": "sdk",
+          "calls": [
+            "ConfigureClient"
+          ]
+        },
+        {
+          "service": "shared",
+          "calls": [
+            "ExecuteWorkflow"
+          ]
+        },
+        {
+          "service": "this service",
+          "calls": [
+            "Lock",
+            "RemoveAccountWithExternalRefs"
+          ]
+        }
+      ],
+      "datastore_calls": [],
+      "service_count": 3,
+      "call_count": 4,
+      "reached_by_test": false
+    },
     "anomalies": {
       "unmatched_test_fields": null
     },

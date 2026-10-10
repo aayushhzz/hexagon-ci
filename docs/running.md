@@ -145,10 +145,15 @@ For a non-janus service, point the interface/impl flags at that server type.
 
 ## Interpreting coverage output
 
-The report has three independent coverage dimensions: **input fields**,
-**validation branches**, and **HTTP statuses**. A test can score on one and not
-the others (an empty-body smoke test covers a status and the happy branch arm
-but no input field). Keep them separate when reasoning about a result.
+The report has four coverage dimensions: **input fields**, **validation
+branches**, **HTTP statuses**, and **dependencies** (downstream service and
+datastore calls). A test can score on one and not the others (an empty-body
+smoke test covers a status and the happy branch arm but no input field). Keep
+them separate when reasoning about a result.
+
+A DON identifier proto (`donv2.DONProto`) is collapsed to a single opaque leaf:
+its encoding fields (partition, service_type, components, ...) are not counted
+as separately testable inputs, since a caller supplies one id string.
 
 ### Input (request field) metrics (`fields`)
 
@@ -208,6 +213,21 @@ misleading `0`.
 - `documented` / `asserted` / `missing` / `coverage_pct` HTTP statuses
   documented for the operation (from the generated client spec) vs those the
   tests assert. `missing` is the actionable list (e.g. an untested `403`).
+
+### Dependency metrics (`dependencies`)
+
+The downstream work an RPC does beyond validating its own request, derived from
+provenance sinks. Input and branch coverage are blind to this, so a read/enrich
+RPC can look empty while its real behaviour is here.
+
+- `services` external services called, each with the method names (`calls`),
+  grouped by service (derived from the dependency module path, e.g.
+  `schemaregistry-client` -> `schemaregistry`).
+- `datastore_calls` datastore operation names (Get, Set, ...).
+- `service_count` / `call_count` number of external services and calls.
+- `reached_by_test` a passing test invokes this RPC, so these calls run on that
+  path. This is reachability only; it does not prove the test checks the
+  returned data. Proving a downstream path executed needs a runtime trace.
 
 ### test_facts
 

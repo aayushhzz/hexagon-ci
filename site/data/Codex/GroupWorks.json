@@ -1730,6 +1730,36 @@
         }
       ]
     },
+    "dependencies": {
+      "services": [
+        {
+          "service": "codex",
+          "calls": [
+            "DecryptBytes",
+            "DecryptText"
+          ]
+        },
+        {
+          "service": "schemaregistry",
+          "calls": [
+            "GetAggregatedSchema"
+          ]
+        },
+        {
+          "service": "this service",
+          "calls": [
+            "GroupSearch",
+            "SetError"
+          ]
+        }
+      ],
+      "datastore_calls": [
+        "Aggregate"
+      ],
+      "service_count": 3,
+      "call_count": 5,
+      "reached_by_test": true
+    },
     "anomalies": {
       "unmatched_test_fields": [
         {

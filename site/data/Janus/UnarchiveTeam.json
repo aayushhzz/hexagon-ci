@@ -115,6 +115,30 @@
         }
       ]
     },
+    "dependencies": {
+      "services": [
+        {
+          "service": "schemaregistry",
+          "calls": [
+            "GetAggregatedSchema",
+            "GetUpgradeInstructionsV2"
+          ]
+        },
+        {
+          "service": "this service",
+          "calls": [
+            "Lock"
+          ]
+        }
+      ],
+      "datastore_calls": [
+        "Delete",
+        "ReadWithFilter"
+      ],
+      "service_count": 2,
+      "call_count": 3,
+      "reached_by_test": false
+    },
     "anomalies": {
       "unmatched_test_fields": null
     },

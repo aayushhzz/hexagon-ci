@@ -223,6 +223,45 @@
         }
       ]
     },
+    "dependencies": {
+      "services": [
+        {
+          "service": "mfz",
+          "calls": [
+            "GetNamespace",
+            "Lock"
+          ]
+        },
+        {
+          "service": "schemaregistry",
+          "calls": [
+            "GetAggregatedSchema",
+            "GetUpgradeInstructionsV2"
+          ]
+        },
+        {
+          "service": "this service",
+          "calls": [
+            "BulkUpdateArtifacts",
+            "GetAggregatedSchemaForWrite",
+            "Invalidate",
+            "Lock",
+            "SyncUnitGet",
+            "UpdatePreferences"
+          ]
+        }
+      ],
+      "datastore_calls": [
+        "Delete",
+        "Get",
+        "LockForRead",
+        "ReadWithFilter",
+        "Set"
+      ],
+      "service_count": 3,
+      "call_count": 10,
+      "reached_by_test": false
+    },
     "anomalies": {
       "unmatched_test_fields": null
     },

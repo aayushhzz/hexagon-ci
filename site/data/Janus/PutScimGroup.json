@@ -150,6 +150,37 @@
         }
       ]
     },
+    "dependencies": {
+      "services": [
+        {
+          "service": "mfz",
+          "calls": [
+            "GetNamespace",
+            "Lock"
+          ]
+        },
+        {
+          "service": "schemaregistry",
+          "calls": [
+            "GetUpgradeInstructionsV2"
+          ]
+        },
+        {
+          "service": "this service",
+          "calls": [
+            "GetAggregatedSchemaForWrite",
+            "SyncUnitGet"
+          ]
+        }
+      ],
+      "datastore_calls": [
+        "Delete",
+        "ReadWithFilter"
+      ],
+      "service_count": 3,
+      "call_count": 5,
+      "reached_by_test": false
+    },
     "anomalies": {
       "unmatched_test_fields": null
     },

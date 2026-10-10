@@ -37,15 +37,37 @@ type opFacts struct {
 
 // CoverageReport is the per-RPC coverage result emitted as JSON.
 type CoverageReport struct {
-	RPC       string         `json:"rpc"`
-	Operation string         `json:"operation"`
-	Tests     int            `json:"tests"`
-	Status    StatusCoverage `json:"status"`
-	Fields    FieldCoverage  `json:"fields"`
-	Branches  BranchCoverage `json:"branches"`
-	Anomalies Anomalies      `json:"anomalies"`
-	TestFacts []testFact     `json:"test_facts"`
-	Unmapped  bool           `json:"unmapped,omitempty"`
+	RPC          string             `json:"rpc"`
+	Operation    string             `json:"operation"`
+	Tests        int                `json:"tests"`
+	Status       StatusCoverage     `json:"status"`
+	Fields       FieldCoverage      `json:"fields"`
+	Branches     BranchCoverage     `json:"branches"`
+	Dependencies DependencyCoverage `json:"dependencies"`
+	Anomalies    Anomalies          `json:"anomalies"`
+	TestFacts    []testFact         `json:"test_facts"`
+	Unmapped     bool               `json:"unmapped,omitempty"`
+}
+
+// DependencyCoverage surfaces the downstream work an RPC does beyond validating
+// its own request: calls to other services and to the datastore. Input and
+// branch coverage are blind to this, so a read/enrich RPC (for example one that
+// fetches a schema from schemaregistry and builds the response) can look
+// "uncovered" while its real behaviour is these calls. We can enumerate the
+// surface statically; we cannot prove a downstream path executed without a
+// runtime trace, so ReachedByTest only means a passing test invoked the RPC.
+type DependencyCoverage struct {
+	Services       []ServiceDep `json:"services"`        // external service calls, grouped
+	DatastoreCalls []string     `json:"datastore_calls"` // db operation names
+	ServiceCount   int          `json:"service_count"`
+	CallCount      int          `json:"call_count"`      // external service calls only
+	ReachedByTest  bool         `json:"reached_by_test"` // a passing test invoked this RPC
+}
+
+// ServiceDep is one downstream service and the methods this RPC calls on it.
+type ServiceDep struct {
+	Service string   `json:"service"`
+	Calls   []string `json:"calls"`
 }
 
 // StatusCoverage compares documented HTTP statuses (from the generated client
@@ -295,6 +317,7 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 	leaves := leafReadPaths(p)
 	rep.Fields.LeafFieldsReadByRPC = len(leaves)
 	rep.Branches.Total = len(p.Branches)
+	rep.Dependencies = dependencyCoverage(p, of)
 	if of == nil {
 		rep.Unmapped = true
 		rep.Fields.Gaps = leaves
@@ -742,6 +765,66 @@ func mergeOpFacts(dst, src *opFacts) {
 
 // leafReadPaths returns request access paths the RPC reads that are not a prefix
 // of a deeper read path (the settable leaf fields), sorted and deduped.
+// dependencyCoverage summarises the downstream service and datastore calls an
+// RPC makes, derived from provenance sinks. of may be nil (no linked test).
+func dependencyCoverage(p *Provenance, of *opFacts) DependencyCoverage {
+	dc := DependencyCoverage{}
+	byService := map[string]map[string]bool{}
+	db := map[string]bool{}
+	for _, s := range p.Sinks {
+		switch s.Kind {
+		case "rpc":
+			svc := serviceFromLocation(s.At)
+			if byService[svc] == nil {
+				byService[svc] = map[string]bool{}
+			}
+			if s.Target != "" {
+				byService[svc][s.Target] = true
+			}
+		case "db":
+			if s.Target != "" {
+				db[s.Target] = true
+			}
+		}
+	}
+	for svc, calls := range byService {
+		dc.Services = append(dc.Services, ServiceDep{Service: svc, Calls: sortedKeys(calls)})
+		dc.CallCount += len(calls)
+	}
+	sort.Slice(dc.Services, func(i, j int) bool { return dc.Services[i].Service < dc.Services[j].Service })
+	dc.DatastoreCalls = sortedKeys(db)
+	dc.ServiceCount = len(dc.Services)
+	dc.ReachedByTest = of != nil && of.success
+	return dc
+}
+
+// serviceFromLocation derives a downstream service name from a sink source
+// location. External calls land in a dependency module path like
+// ".../schemaregistry-client@v.../lib/foo.go"; we take the module's base name
+// without the "-client" suffix. Calls inside the analyzed service itself fall
+// back to "this service".
+func serviceFromLocation(at string) string {
+	const mod = "/pkg/mod/"
+	i := strings.LastIndex(at, mod)
+	if i < 0 {
+		return "this service"
+	}
+	rest := at[i+len(mod):]
+	// rest looks like "github.com/devrev/schemaregistry-client@ver/lib/..".
+	if at := strings.Index(rest, "@"); at >= 0 {
+		rest = rest[:at]
+	}
+	seg := rest
+	if j := strings.LastIndex(seg, "/"); j >= 0 {
+		seg = seg[j+1:]
+	}
+	seg = strings.TrimSuffix(seg, "-client")
+	if seg == "" {
+		return "this service"
+	}
+	return seg
+}
+
 func leafReadPaths(p *Provenance) []string {
 	read := map[string]bool{}
 	for _, ip := range p.InputPaths {

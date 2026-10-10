@@ -1514,6 +1514,30 @@
         }
       ]
     },
+    "dependencies": {
+      "services": [
+        {
+          "service": "codex",
+          "calls": [
+            "DecryptBytes",
+            "DecryptText"
+          ]
+        },
+        {
+          "service": "this service",
+          "calls": [
+            "CoreSearchV2",
+            "SetError"
+          ]
+        }
+      ],
+      "datastore_calls": [
+        "Aggregate"
+      ],
+      "service_count": 2,
+      "call_count": 4,
+      "reached_by_test": false
+    },
     "anomalies": {
       "unmatched_test_fields": null
     },

@@ -108,6 +108,8 @@ def summary_row(entry):
         "missing_count": len(s.get("missing") or []),
         "anomaly_count": len(a),
         "gap_count": len(f.get("gaps") or []),
+        "dep_services": (entry.get("dependencies") or {}).get("service_count", 0) or 0,
+        "dep_reached": bool((entry.get("dependencies") or {}).get("reached_by_test", False)),
     }
 
 
@@ -128,6 +130,8 @@ def build_service(service, cov, prov):
     anomalies_total = sum(
         len((e.get("anomalies") or {}).get("unmatched_test_fields") or []) for e in mapped
     )
+    dep_rpcs = [e for e in mapped if (e.get("dependencies") or {}).get("service_count", 0)]
+    dep_reached = [e for e in dep_rpcs if (e.get("dependencies") or {}).get("reached_by_test")]
     totals = {
         "rpcs": len(entries),
         "mapped": len(mapped),
@@ -142,6 +146,8 @@ def build_service(service, cov, prov):
         "status_documented": status_doc,
         "status_asserted": status_hit,
         "anomalies": anomalies_total,
+        "dep_rpcs": len(dep_rpcs),
+        "dep_rpcs_reached": len(dep_reached),
     }
     totals["field_pct"] = pct(totals["field_covered"], totals["field_total"])
     totals["present_pct"] = pct(totals["present_arm"], totals["branch_total"])

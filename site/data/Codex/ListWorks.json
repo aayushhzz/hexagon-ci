@@ -1727,6 +1727,43 @@
         }
       ]
     },
+    "dependencies": {
+      "services": [
+        {
+          "service": "codex",
+          "calls": [
+            "DecryptBytes",
+            "DecryptText"
+          ]
+        },
+        {
+          "service": "janus",
+          "calls": [
+            "ListGroups"
+          ]
+        },
+        {
+          "service": "schemaregistry",
+          "calls": [
+            "GetAggregatedSchema"
+          ]
+        },
+        {
+          "service": "this service",
+          "calls": [
+            "CoreSearchV2",
+            "Search",
+            "SetError"
+          ]
+        }
+      ],
+      "datastore_calls": [
+        "Aggregate"
+      ],
+      "service_count": 4,
+      "call_count": 7,
+      "reached_by_test": true
+    },
     "anomalies": {
       "unmatched_test_fields": [
         {

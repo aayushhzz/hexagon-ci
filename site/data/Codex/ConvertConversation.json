@@ -135,6 +135,31 @@
         }
       ]
     },
+    "dependencies": {
+      "services": [
+        {
+          "service": "schemaregistry",
+          "calls": [
+            "GetAggregatedSchema",
+            "GetUpgradeInstructionsV2"
+          ]
+        },
+        {
+          "service": "this service",
+          "calls": [
+            "CreateJob",
+            "GetDevOid",
+            "GetTags",
+            "SetError",
+            "SetTags"
+          ]
+        }
+      ],
+      "datastore_calls": [],
+      "service_count": 2,
+      "call_count": 7,
+      "reached_by_test": true
+    },
     "anomalies": {
       "unmatched_test_fields": [
         {
