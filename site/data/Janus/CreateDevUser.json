@@ -1,0 +1,235 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "CreateDevUser",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": null,
+      "asserted": [],
+      "missing": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 13,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 11,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.AggregateErrors",
+        "in.DevUser.Auth0UserIds",
+        "in.DevUser.DisplayName",
+        "in.DevUser.Email",
+        "in.DevUser.ExperienceStartDate",
+        "in.DevUser.FullName",
+        "in.DevUser.JobHistory",
+        "in.DevUser.PhoneNumbers",
+        "in.DevUser.ReportsToId.Id",
+        "in.DevUser.Skills",
+        "in.DevUser.State",
+        "in.DevUser.TermsConditionsAcceptAt",
+        "in.DevUser.TermsConditionsAccepted"
+      ]
+    },
+    "branches": {
+      "total": 15,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 2,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "internal/service/utils.go:70",
+          "cond": "in.DevUser.FullName == \"\"",
+          "predicate_paths": [
+            "in.DevUser.FullName"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "internal/service/utils.go:74",
+          "cond": "in.DevUser.FullName",
+          "predicate_paths": [
+            "in.DevUser.FullName"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/service/utils.go:70",
+          "cond": "in.DevUser.DisplayName == \"\"",
+          "predicate_paths": [
+            "in.DevUser.DisplayName"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "internal/service/utils.go:74",
+          "cond": "in.DevUser.DisplayName",
+          "predicate_paths": [
+            "in.DevUser.DisplayName"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "internal/service/devuser_validations.go:190",
+          "cond": "in.AggregateErrors",
+          "predicate_paths": [
+            "in.AggregateErrors"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "",
+          "cond": "in",
+          "predicate_paths": [
+            "in"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "internal/service/devuser.go:464",
+          "cond": "in.DevUser != nil",
+          "predicate_paths": [
+            "in.DevUser"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "internal/service/devuser.go:572",
+          "cond": "in.DevUser.Skills != nil",
+          "predicate_paths": [
+            "in.DevUser.Skills"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "internal/service/devuser.go:584",
+          "cond": "in.DevUser.FullName == nil",
+          "predicate_paths": [
+            "in.DevUser.FullName"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "internal/service/devuser.go:572",
+          "cond": "in.DevUser.JobHistory != nil",
+          "predicate_paths": [
+            "in.DevUser.JobHistory"
+          ]
+        },
+        {
+          "id": "b11",
+          "at": "internal/service/devuser.go:572",
+          "cond": "in.DevUser.ExperienceStartDate != nil",
+          "predicate_paths": [
+            "in.DevUser.ExperienceStartDate"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "internal/service/devuser.go:588",
+          "cond": "in.DevUser.DisplayName == nil",
+          "predicate_paths": [
+            "in.DevUser.DisplayName"
+          ]
+        },
+        {
+          "id": "b13",
+          "at": "internal/service/devuser.go:584",
+          "cond": "in.DevUser.FullName == \"\"",
+          "predicate_paths": [
+            "in.DevUser.FullName"
+          ]
+        },
+        {
+          "id": "b14",
+          "at": "internal/service/devuser.go:592",
+          "cond": "in.DevUser.ReportsToId != nil",
+          "predicate_paths": [
+            "in.DevUser.ReportsToId"
+          ]
+        },
+        {
+          "id": "b15",
+          "at": "internal/service/devuser.go:588",
+          "cond": "in.DevUser.DisplayName == \"\"",
+          "predicate_paths": [
+            "in.DevUser.DisplayName"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).CreateDevUser",
+    "request_type": "api.CreateDevUserRequest",
+    "response_type": "api.CreateDevUserResponse",
+    "sinks": [],
+    "errors": [
+      {
+        "symbol": "errPhoneNumberInvalid",
+        "at": "internal/service/phonenumbers.go:153",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidAuthContextEmail",
+        "at": "internal/service/devuser.go:445",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidAuthContextDevOid",
+        "at": "internal/service/devuser.go:451",
+        "tainted": false
+      },
+      {
+        "symbol": "errCreatingDevUser",
+        "at": "internal/service/devuser.go:494",
+        "tainted": true
+      },
+      {
+        "symbol": "errUserAlreadyJoined",
+        "at": "internal/service/devuser.go:522",
+        "tainted": true
+      },
+      {
+        "symbol": "errCreatingDevUser",
+        "at": "internal/service/devuser.go:660",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateDevUser` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AggregateErrors\n  - in.DevUser.Auth0UserIds\n  - in.DevUser.DisplayName\n  - in.DevUser.Email\n  - in.DevUser.ExperienceStartDate\n  - in.DevUser.FullName\n  - in.DevUser.JobHistory\n  - in.DevUser.PhoneNumbers\n  - in.DevUser.ReportsToId.Id\n  - in.DevUser.Skills\n  - in.DevUser.State\n  - in.DevUser.TermsConditionsAcceptAt\n  - in.DevUser.TermsConditionsAccepted\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUser.FullName == \"\"\n  - in.DevUser.FullName\n  - in.DevUser.DisplayName == \"\"\n  - in.DevUser.DisplayName\n  - in.AggregateErrors\n  - in\n  - in.DevUser != nil\n  - in.DevUser.Skills != nil\n  - in.DevUser.FullName == nil\n  - in.DevUser.JobHistory != nil\n  - in.DevUser.ExperienceStartDate != nil\n  - in.DevUser.DisplayName == nil\n  - in.DevUser.FullName == \"\"\n  - in.DevUser.ReportsToId != nil\n  - in.DevUser.DisplayName == \"\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - errCreatingDevUser\n  - errInvalidAuthContextDevOid\n  - errInvalidAuthContextEmail\n  - errPhoneNumberInvalid\n  - errUserAlreadyJoined\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

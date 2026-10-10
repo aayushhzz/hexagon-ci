@@ -1,0 +1,312 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "CreateRevUser",
+    "operation": "RevUsersCreate",
+    "tests": 2,
+    "status": {
+      "documented": [
+        201,
+        400,
+        401,
+        403,
+        409,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        201
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        409,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 11.1
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 14,
+      "covered_count": 1,
+      "coverage_pct": 7.1,
+      "request_fields_set_by_tests": 5,
+      "set_by_positive_tests": 1,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 6,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 4,
+          "set": 1,
+          "pct": 25
+        },
+        "deep": {
+          "total": 4,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": [
+        {
+          "path": "in.RevUser.Email",
+          "match": "exact",
+          "by_tests": [
+            "Create a session rev act as with AAT Token"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.AccountId",
+        "in.AggregateErrors",
+        "in.CustomSchemaSpec",
+        "in.IsJanusAsyncFlow",
+        "in.IsSystemCreate",
+        "in.OrgIdentifier.OrgDisplayId",
+        "in.OrgIdentifier.OrgDon.Components",
+        "in.OrgIdentifier.OrgDon.Partition",
+        "in.OrgIdentifier.OrgDon.PartitionType",
+        "in.OrgIdentifier.OrgDon.ServiceType",
+        "in.OrgIdentifier.OrgExternalId",
+        "in.OrgIdentifier.OrgExternalIdIssuer",
+        "in.RevUserAssociation"
+      ]
+    },
+    "branches": {
+      "total": 10,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 3,
+      "present_arm_exercised": 1,
+      "present_arm_pct": 10,
+      "absent_arm_exercised": 3,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 10,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+          "cond": "in.AccountId|in.OrgIdentifier.OrgDon == nil",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
+          "cond": "in.AccountId|in.OrgIdentifier.OrgDon.Partition != \"\"",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon.Partition"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/service/revorg.go:1316",
+          "cond": "in.AccountId|in.OrgIdentifier == nil",
+          "predicate_paths": [
+            "in.OrgIdentifier"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "internal/service/revorg.go:1321",
+          "cond": "in.AccountId|in.OrgIdentifier.OrgDon != nil",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "internal/service/revorg.go:1278",
+          "cond": "in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer != \"\"",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgExternalIdIssuer"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "internal/service/revorg.go:1279",
+          "cond": "**t51 == in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgExternalIdIssuer"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "internal/service/revorg.go:1281",
+          "cond": "**t68 == in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgExternalIdIssuer"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "internal/service/revuser.go:480",
+          "cond": "in.AccountId != nil",
+          "predicate_paths": [
+            "in.AccountId"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "internal/service/revuser.go:488",
+          "cond": "in.AccountId|in.OrgIdentifier != nil",
+          "predicate_paths": [
+            "in.OrgIdentifier"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "displayname",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "granttype",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "requestedtokentype",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "revinfo",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Create a session rev act as with AAT Token",
+        "file": "api/v2_internal/auth_tokens/auth_act_as_tokens_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_AUTH_TOKENS_CREATE"
+        ],
+        "fields_set": [
+          "Email",
+          "GrantType",
+          "RequestedTokenType",
+          "RevInfo"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "WithOnlyRequiredFields",
+        "file": "api/v2_internal/rev_users/crud/create_rev_users_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).CreateRevUser",
+    "request_type": "api.CreateRevUserRequest",
+    "response_type": "api.CreateRevUserResponse",
+    "sinks": [
+      {
+        "kind": "rpc",
+        "target": "AccountExists",
+        "via_paths": [
+          "in.AccountId",
+          "in.AggregateErrors",
+          "in.CustomSchemaSpec",
+          "in.IsJanusAsyncFlow",
+          "in.IsSystemCreate",
+          "in.RevUser",
+          "in.RevUserAssociation"
+        ],
+        "at": "internal/service/account.go:1057"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.AccountId",
+          "in.AggregateErrors",
+          "in.CustomSchemaSpec",
+          "in.IsJanusAsyncFlow",
+          "in.IsSystemCreate",
+          "in.RevUser",
+          "in.RevUserAssociation"
+        ],
+        "at": "internal/service/common.go:319"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "errInvalidRevOrgFilter",
+        "at": "internal/service/revorg.go:1374",
+        "tainted": true
+      },
+      {
+        "symbol": "errRevOrgNotFound",
+        "at": "internal/service/revorg.go:1262",
+        "tainted": false
+      },
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "tainted": false
+      },
+      {
+        "symbol": "errRevOrgNotFound",
+        "at": "internal/service/revorg.go:1243",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidInputEmail",
+        "at": "internal/service/revuser_utils.go:219",
+        "tainted": false
+      },
+      {
+        "symbol": "errPhoneNumberInvalid",
+        "at": "internal/service/utils.go:95",
+        "tainted": false
+      },
+      {
+        "symbol": "errRevUserAlreadyExists",
+        "at": "internal/service/revuser_validations.go:474",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidInputEmail",
+        "at": "internal/service/revuser_validations.go:93",
+        "tainted": false
+      },
+      {
+        "symbol": "errEmailAlreadyExists",
+        "at": "internal/service/revuser_validations.go:105",
+        "tainted": false
+      },
+      {
+        "symbol": "errAccountNotFound",
+        "at": "internal/service/revuser.go:139",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateRevUser` (HTTP operation `RevUsersCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountId\n  - in.AggregateErrors\n  - in.CustomSchemaSpec\n  - in.IsJanusAsyncFlow\n  - in.IsSystemCreate\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon.Components\n  - in.OrgIdentifier.OrgDon.Partition\n  - in.OrgIdentifier.OrgDon.PartitionType\n  - in.OrgIdentifier.OrgDon.ServiceType\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevUserAssociation\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountId|in.OrgIdentifier.OrgDon == nil\n  - in.AccountId|in.OrgIdentifier.OrgDon.Partition != \"\"\n  - in.AccountId|in.OrgIdentifier == nil\n  - in.AccountId|in.OrgIdentifier.OrgDon != nil\n  - in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer\n  - in.AccountId != nil\n  - in.AccountId|in.OrgIdentifier != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errAccountNotFound\n  - errEmailAlreadyExists\n  - errInvalidInputEmail\n  - errInvalidRevOrgFilter\n  - errPhoneNumberInvalid\n  - errRevOrgNotFound\n  - errRevUserAlreadyExists\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `displayname` -> suggestions []\n  - test field `granttype` -> suggestions []\n  - test field `requestedtokentype` -> suggestions []\n  - test field `revinfo` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

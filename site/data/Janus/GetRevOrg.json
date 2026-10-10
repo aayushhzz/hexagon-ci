@@ -1,0 +1,483 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "GetRevOrg",
+    "operation": "RevOrgsGet",
+    "tests": 3,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200,
+        400
+      ],
+      "missing": [
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 22.2
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 9,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 1,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 2,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 3,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 4,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.IncludeArchived",
+        "in.OrgIdentifier.OrgDisplayId",
+        "in.OrgIdentifier.OrgDon.Components",
+        "in.OrgIdentifier.OrgDon.Partition",
+        "in.OrgIdentifier.OrgDon.PartitionType",
+        "in.OrgIdentifier.OrgDon.ServiceType",
+        "in.OrgIdentifier.OrgExternalId",
+        "in.OrgIdentifier.OrgExternalIdIssuer",
+        "in.ResolvePrimary"
+      ]
+    },
+    "branches": {
+      "total": 36,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 9,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 9,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+          "cond": "in.OrgIdentifier.OrgDon == nil",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
+          "cond": "in.OrgIdentifier.OrgDon.Partition != \"\"",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon.Partition"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1252",
+          "cond": "in.OrgIdentifier.OrgDon != nil",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1257",
+          "cond": "in.OrgIdentifier.OrgDon|in.OrgIdentifier.OrgDon.Partition",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1117",
+          "cond": "in.OrgIdentifier == nil",
+          "predicate_paths": [
+            "in.OrgIdentifier"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1120",
+          "cond": "in.OrgIdentifier != nil",
+          "predicate_paths": [
+            "in.OrgIdentifier"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:577",
+          "cond": "in.OrgIdentifier.OrgDisplayId",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDisplayId"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:593",
+          "cond": "in.OrgIdentifier.OrgDisplayId == nil",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDisplayId"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
+          "cond": "in.OrgIdentifier.OrgDon|in.OrgIdentifier.OrgDon.Partition == \"\"",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "internal/canonicalizer/don_canonicalizer.go:90",
+          "cond": "in.OrgIdentifier.OrgDon == nil",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b11",
+          "at": "internal/canonicalizer/don_canonicalizer.go:99",
+          "cond": "in.OrgIdentifier.OrgDon|in.OrgIdentifier.OrgDon.Partition",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+          "cond": "in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon == nil",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b13",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
+          "cond": "in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon.Partition != \"\"",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon.Partition"
+          ]
+        },
+        {
+          "id": "b14",
+          "at": "internal/service/revorg.go:1316",
+          "cond": "in.OrgIdentifier|in.OrgIdentifier.OrgDisplayId == nil",
+          "predicate_paths": [
+            "in.OrgIdentifier"
+          ]
+        },
+        {
+          "id": "b15",
+          "at": "internal/service/revorg.go:1321",
+          "cond": "in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon != nil",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b16",
+          "at": "internal/service/revorg.go:1314",
+          "cond": "in.ResolvePrimary",
+          "predicate_paths": [
+            "in.ResolvePrimary"
+          ]
+        },
+        {
+          "id": "b17",
+          "at": "internal/service/revorg.go:1278",
+          "cond": "in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgExternalIdIssuer != \"\"",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgExternalIdIssuer"
+          ]
+        },
+        {
+          "id": "b18",
+          "at": "internal/service/revorg.go:1279",
+          "cond": "**t51 == in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgExternalIdIssuer",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgExternalIdIssuer"
+          ]
+        },
+        {
+          "id": "b19",
+          "at": "internal/service/revorg.go:1281",
+          "cond": "**t68 == in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgExternalIdIssuer",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgExternalIdIssuer"
+          ]
+        },
+        {
+          "id": "b20",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:593",
+          "cond": "in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon|in.OrgIdentifier.OrgDon.Partition == nil",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b21",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
+          "cond": "in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon|in.OrgIdentifier.OrgDon.Partition == \"\"",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b22",
+          "at": "internal/canonicalizer/don_canonicalizer.go:90",
+          "cond": "in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon == nil",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b23",
+          "at": "internal/canonicalizer/don_canonicalizer.go:99",
+          "cond": "in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon|in.OrgIdentifier.OrgDon.Partition",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b24",
+          "at": "internal/service/revorg.go:194",
+          "cond": "in != nil",
+          "predicate_paths": [
+            "in"
+          ]
+        },
+        {
+          "id": "b25",
+          "at": "internal/service/revorg.go:198",
+          "cond": "in.ResolvePrimary",
+          "predicate_paths": [
+            "in.ResolvePrimary"
+          ]
+        },
+        {
+          "id": "b26",
+          "at": "internal/service/revorg.go:206",
+          "cond": "in.OrgIdentifier.OrgDisplayId != \"\"",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDisplayId"
+          ]
+        },
+        {
+          "id": "b27",
+          "at": "internal/service/revorg.go:198",
+          "cond": "in.IncludeArchived",
+          "predicate_paths": [
+            "in.IncludeArchived"
+          ]
+        },
+        {
+          "id": "b28",
+          "at": "internal/service/revorg.go:215",
+          "cond": "in.OrgIdentifier.OrgDon != nil",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b29",
+          "at": "internal/service/revorg.go:206",
+          "cond": "in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon == nil",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b30",
+          "at": "internal/service/revorg.go:217",
+          "cond": "in.OrgIdentifier.OrgDisplayId != \"\"",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDisplayId"
+          ]
+        },
+        {
+          "id": "b31",
+          "at": "internal/service/revorg.go:215",
+          "cond": "in.OrgIdentifier.OrgDisplayId != \"\"",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDisplayId"
+          ]
+        },
+        {
+          "id": "b32",
+          "at": "internal/service/revorg.go:217",
+          "cond": "in.OrgIdentifier.OrgDon == nil",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b33",
+          "at": "internal/service/revorg.go:233",
+          "cond": "in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon",
+          "predicate_paths": [
+            "in.OrgIdentifier.OrgDon"
+          ]
+        },
+        {
+          "id": "b34",
+          "at": "internal/service/revorg.go:233",
+          "cond": "in.ResolvePrimary",
+          "predicate_paths": [
+            "in.ResolvePrimary"
+          ]
+        },
+        {
+          "id": "b35",
+          "at": "internal/service/revorg.go:245",
+          "cond": "in.IncludeArchived",
+          "predicate_paths": [
+            "in.IncludeArchived"
+          ]
+        },
+        {
+          "id": "b36",
+          "at": "internal/service/revorg.go:257",
+          "cond": "in.IncludeArchived",
+          "predicate_paths": [
+            "in.IncludeArchived"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "WithOnlyRequiredFields",
+        "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "MissingId",
+        "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          400
+        ],
+        "asserts_success": false
+      },
+      {
+        "name": "UnknownRevOrgId",
+        "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).GetRevOrg",
+    "request_type": "api.GetRevOrgRequest",
+    "response_type": "api.GetRevOrgResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetExternalError",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/revorg.go:195"
+      },
+      {
+        "kind": "rpc",
+        "target": "RevOrgExists",
+        "via_paths": [
+          "in.OrgIdentifier.OrgDisplayId",
+          "in.OrgIdentifier.OrgDon",
+          "in.OrgIdentifier.OrgDon.Partition"
+        ],
+        "at": "internal/service/revorg.go:239"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.OrgIdentifier.OrgDisplayId",
+          "in.OrgIdentifier.OrgDon",
+          "in.OrgIdentifier.OrgDon.Partition"
+        ],
+        "at": "internal/service/common.go:319"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetRevOrg",
+        "via_paths": [
+          "in.OrgIdentifier.OrgDisplayId",
+          "in.OrgIdentifier.OrgDon",
+          "in.OrgIdentifier.OrgDon.Partition"
+        ],
+        "at": "internal/service/cache.go:376"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidRevOrgFilter",
+        "at": "internal/service/revorg.go:1374",
+        "tainted": true
+      },
+      {
+        "symbol": "errRevOrgNotFound",
+        "at": "internal/service/revorg.go:1262",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetRevOrg` (HTTP operation `RevOrgsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IncludeArchived\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon.Components\n  - in.OrgIdentifier.OrgDon.Partition\n  - in.OrgIdentifier.OrgDon.PartitionType\n  - in.OrgIdentifier.OrgDon.ServiceType\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n  - in.ResolvePrimary\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier.OrgDon.Partition != \"\"\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgDon|in.OrgIdentifier.OrgDon.Partition\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier != nil\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDisplayId == nil\n  - in.OrgIdentifier.OrgDon|in.OrgIdentifier.OrgDon.Partition == \"\"\n  - in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier.OrgDon|in.OrgIdentifier.OrgDon.Partition\n  - in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon.Partition != \"\"\n  - in.OrgIdentifier|in.OrgIdentifier.OrgDisplayId == nil\n  - in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon != nil\n  - in.ResolvePrimary\n  - in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgExternalIdIssuer\n  - in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon|in.OrgIdentifier.OrgDon.Partition == nil\n  - in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon|in.OrgIdentifier.OrgDon.Partition == \"\"\n  - in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon|in.OrgIdentifier.OrgDon.Partition\n  - in != nil\n  - in.ResolvePrimary\n  - in.OrgIdentifier.OrgDisplayId != \"\"\n  - in.IncludeArchived\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier.OrgDisplayId != \"\"\n  - in.OrgIdentifier.OrgDisplayId != \"\"\n  - in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier.OrgDisplayId|in.OrgIdentifier.OrgDon\n  - in.ResolvePrimary\n  - in.IncludeArchived\n  - in.IncludeArchived\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInvalidRevOrgFilter\n  - errRevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

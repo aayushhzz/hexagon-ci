@@ -1,0 +1,223 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "DeleteRevUser",
+    "operation": "RevUsersDelete",
+    "tests": 3,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200,
+        400
+      ],
+      "missing": [
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 22.2
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 6,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 1,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 4,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.IsSystemDelete",
+        "in.UserIdentifier.UserDon.Components",
+        "in.UserIdentifier.UserDon.Partition",
+        "in.UserIdentifier.UserDon.PartitionType",
+        "in.UserIdentifier.UserDon.ServiceType",
+        "in.UserIdentifier.UserExternalId"
+      ]
+    },
+    "branches": {
+      "total": 10,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 3,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 3,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+          "cond": "in.UserIdentifier.UserDon == nil",
+          "predicate_paths": [
+            "in.UserIdentifier.UserDon"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
+          "cond": "in.UserIdentifier.UserDon.Partition != \"\"",
+          "predicate_paths": [
+            "in.UserIdentifier.UserDon.Partition"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1786",
+          "cond": "in.UserIdentifier.UserDon != nil",
+          "predicate_paths": [
+            "in.UserIdentifier.UserDon"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1791",
+          "cond": "in.UserIdentifier.UserDon|in.UserIdentifier.UserDon.Partition",
+          "predicate_paths": [
+            "in.UserIdentifier.UserDon"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1760",
+          "cond": "in.UserIdentifier == nil",
+          "predicate_paths": [
+            "in.UserIdentifier"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1763",
+          "cond": "in.UserIdentifier != nil",
+          "predicate_paths": [
+            "in.UserIdentifier"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "internal/service/revuser.go:2156",
+          "cond": "in.UserIdentifier.UserDon != nil",
+          "predicate_paths": [
+            "in.UserIdentifier.UserDon"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "internal/service/revuser_utils.go:159",
+          "cond": "in.UserIdentifier.UserDon == nil",
+          "predicate_paths": [
+            "in.UserIdentifier.UserDon"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "internal/service/revuser.go:1186",
+          "cond": "in.IsSystemDelete",
+          "predicate_paths": [
+            "in.IsSystemDelete"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "internal/service/revuser.go:1170",
+          "cond": "in != nil",
+          "predicate_paths": [
+            "in"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "WithOnlyRequiredFields",
+        "file": "api/v2_internal/rev_users/crud/delete_rev_users_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "MissingId",
+        "file": "api/v2_internal/rev_users/crud/delete_rev_users_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          400
+        ],
+        "asserts_success": false
+      },
+      {
+        "name": "UnknownRevUserId",
+        "file": "api/v2_internal/rev_users/crud/delete_rev_users_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).DeleteRevUser",
+    "request_type": "api.DeleteRevUserRequest",
+    "response_type": "api.EmptyResponse",
+    "sinks": [],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteRevUser` (HTTP operation `RevUsersDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsSystemDelete\n  - in.UserIdentifier.UserDon.Components\n  - in.UserIdentifier.UserDon.Partition\n  - in.UserIdentifier.UserDon.PartitionType\n  - in.UserIdentifier.UserDon.ServiceType\n  - in.UserIdentifier.UserExternalId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon.Partition != \"\"\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon|in.UserIdentifier.UserDon.Partition\n  - in.UserIdentifier == nil\n  - in.UserIdentifier != nil\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon == nil\n  - in.IsSystemDelete\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

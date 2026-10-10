@@ -1,0 +1,331 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "UpdateAccount",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": null,
+      "asserted": [],
+      "missing": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 14,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 2,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 11,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.Account.DisplayName.Value",
+        "in.Account.Domains.StringValues",
+        "in.Account.ExternalRefs.StringValues",
+        "in.Account.PhoneNumbers.StringValues",
+        "in.Account.SharedWith.Values",
+        "in.Account.Tags.Values",
+        "in.Account.Websites.StringValues",
+        "in.AccountIdentifier.AccountDon.Components",
+        "in.AccountIdentifier.AccountDon.Partition",
+        "in.AccountIdentifier.AccountDon.PartitionType",
+        "in.AccountIdentifier.AccountDon.ServiceType",
+        "in.AccountIdentifier.Domain",
+        "in.AccountIdentifier.ExternalRef",
+        "in.UniqueDisplayNameSuffix"
+      ]
+    },
+    "branches": {
+      "total": 17,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 3,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+          "cond": "in.AccountIdentifier.AccountDon == nil",
+          "predicate_paths": [
+            "in.AccountIdentifier.AccountDon"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
+          "cond": "in.AccountIdentifier.AccountDon.Partition != \"\"",
+          "predicate_paths": [
+            "in.AccountIdentifier.AccountDon.Partition"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/service/account.go:91",
+          "cond": "in.AccountIdentifier == nil",
+          "predicate_paths": [
+            "in.AccountIdentifier"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "internal/service/account.go:95",
+          "cond": "in.AccountIdentifier.AccountDon != nil",
+          "predicate_paths": [
+            "in.AccountIdentifier.AccountDon"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "internal/service/account.go:109",
+          "cond": "in.AccountIdentifier.Domain != \"\"",
+          "predicate_paths": [
+            "in.AccountIdentifier.Domain"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "internal/service/account.go:117",
+          "cond": "in.AccountIdentifier.ExternalRef != nil",
+          "predicate_paths": [
+            "in.AccountIdentifier.ExternalRef"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "internal/service/account_validations.go:286",
+          "cond": "in.Account.Websites.StringValues",
+          "predicate_paths": [
+            "in.Account.Websites.StringValues"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "internal/service/account_validations.go:313",
+          "cond": "in.Account.Domains.StringValues",
+          "predicate_paths": [
+            "in.Account.Domains.StringValues"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "internal/service/account_validations.go:353",
+          "cond": "in.Account.ExternalRefs.StringValues",
+          "predicate_paths": [
+            "in.Account.ExternalRefs.StringValues"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "internal/service/account_validations.go:391",
+          "cond": "in.UniqueDisplayNameSuffix == nil",
+          "predicate_paths": [
+            "in.UniqueDisplayNameSuffix"
+          ]
+        },
+        {
+          "id": "b11",
+          "at": "internal/service/account_validations.go:399",
+          "cond": "in.UniqueDisplayNameSuffix != nil",
+          "predicate_paths": [
+            "in.UniqueDisplayNameSuffix"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "",
+          "cond": "in",
+          "predicate_paths": [
+            "in"
+          ]
+        },
+        {
+          "id": "b13",
+          "at": "internal/service/account_validations.go:171",
+          "cond": "in.Account.DisplayName != nil",
+          "predicate_paths": [
+            "in.Account.DisplayName"
+          ]
+        },
+        {
+          "id": "b14",
+          "at": "internal/service/account_validations.go:205",
+          "cond": "in.Account.Websites != nil",
+          "predicate_paths": [
+            "in.Account.Websites"
+          ]
+        },
+        {
+          "id": "b15",
+          "at": "internal/service/account_validations.go:213",
+          "cond": "in.Account.Domains != nil",
+          "predicate_paths": [
+            "in.Account.Domains"
+          ]
+        },
+        {
+          "id": "b16",
+          "at": "internal/service/account_validations.go:221",
+          "cond": "in.Account.ExternalRefs != nil",
+          "predicate_paths": [
+            "in.Account.ExternalRefs"
+          ]
+        },
+        {
+          "id": "b17",
+          "at": "internal/service/account_validations.go:229",
+          "cond": "in.Account.DisplayName != nil",
+          "predicate_paths": [
+            "in.Account.DisplayName"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).UpdateAccount",
+    "request_type": "api.UpdateAccountRequest",
+    "response_type": "api.UpdateAccountResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetAggregateErrors",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/account_validations.go:206"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetAggregateErrors",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/account_validations.go:214"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetAggregateErrors",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/account_validations.go:222"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetAggregateErrors",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/account_validations.go:230"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetAggregateErrors",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/account_validations.go:238"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetAggregateErrors",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/account_validations.go:249"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "errInputContainsDuplicateWebsites",
+        "at": "internal/service/account_validations.go:288",
+        "tainted": true
+      },
+      {
+        "symbol": "errWebsiteAlreadyExists",
+        "at": "internal/service/account_validations.go:297",
+        "tainted": true
+      },
+      {
+        "symbol": "errInputContainsDuplicateDomains",
+        "at": "internal/service/account_validations.go:315",
+        "tainted": true
+      },
+      {
+        "symbol": "errInputContainsNotAcceptableDomains",
+        "at": "internal/service/account_validations.go:323",
+        "tainted": true
+      },
+      {
+        "symbol": "errDomainAlreadyExists",
+        "at": "internal/service/account_validations.go:337",
+        "tainted": true
+      },
+      {
+        "symbol": "errInputContainsDuplicateExternalRefs",
+        "at": "internal/service/account_validations.go:355",
+        "tainted": true
+      },
+      {
+        "symbol": "errEmptyExternalRefs",
+        "at": "internal/service/account_validations.go:380",
+        "tainted": false
+      },
+      {
+        "symbol": "errAccountEmptyDisplayName",
+        "at": "internal/service/account_validations.go:393",
+        "tainted": true
+      },
+      {
+        "symbol": "errAccountDisplayNameAlreadyExists",
+        "at": "internal/service/account_validations.go:429",
+        "tainted": true
+      },
+      {
+        "symbol": "errPhoneNumberInvalid",
+        "at": "internal/service/utils.go:95",
+        "tainted": false
+      },
+      {
+        "symbol": "errInputContainsNotAcceptableWebsites",
+        "at": "internal/service/account_validations.go:451",
+        "tainted": false
+      },
+      {
+        "symbol": "errAccountNotFound",
+        "at": "internal/service/account_validations.go:162",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateAccount` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Account.DisplayName.Value\n  - in.Account.Domains.StringValues\n  - in.Account.ExternalRefs.StringValues\n  - in.Account.PhoneNumbers.StringValues\n  - in.Account.SharedWith.Values\n  - in.Account.Tags.Values\n  - in.Account.Websites.StringValues\n  - in.AccountIdentifier.AccountDon.Components\n  - in.AccountIdentifier.AccountDon.Partition\n  - in.AccountIdentifier.AccountDon.PartitionType\n  - in.AccountIdentifier.AccountDon.ServiceType\n  - in.AccountIdentifier.Domain\n  - in.AccountIdentifier.ExternalRef\n  - in.UniqueDisplayNameSuffix\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountIdentifier.AccountDon == nil\n  - in.AccountIdentifier.AccountDon.Partition != \"\"\n  - in.AccountIdentifier == nil\n  - in.AccountIdentifier.AccountDon != nil\n  - in.AccountIdentifier.Domain != \"\"\n  - in.AccountIdentifier.ExternalRef != nil\n  - in.Account.Websites.StringValues\n  - in.Account.Domains.StringValues\n  - in.Account.ExternalRefs.StringValues\n  - in.UniqueDisplayNameSuffix == nil\n  - in.UniqueDisplayNameSuffix != nil\n  - in\n  - in.Account.DisplayName != nil\n  - in.Account.Websites != nil\n  - in.Account.Domains != nil\n  - in.Account.ExternalRefs != nil\n  - in.Account.DisplayName != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errAccountDisplayNameAlreadyExists\n  - errAccountEmptyDisplayName\n  - errAccountNotFound\n  - errDomainAlreadyExists\n  - errEmptyExternalRefs\n  - errInputContainsDuplicateDomains\n  - errInputContainsDuplicateExternalRefs\n  - errInputContainsDuplicateWebsites\n  - errInputContainsNotAcceptableDomains\n  - errInputContainsNotAcceptableWebsites\n  - errPhoneNumberInvalid\n  - errWebsiteAlreadyExists\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

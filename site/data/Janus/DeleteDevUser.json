@@ -1,0 +1,156 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "DeleteDevUser",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": null,
+      "asserted": [],
+      "missing": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 1,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.DevUid.Value"
+      ]
+    },
+    "branches": {
+      "total": 5,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 1,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3623",
+          "cond": "in.DevUid.Value",
+          "predicate_paths": [
+            "in.DevUid.Value"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
+          "cond": "in.DevUid.Value == \"\"",
+          "predicate_paths": [
+            "in.DevUid.Value"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/service/devuser.go:1368",
+          "cond": "in.DevUid != nil",
+          "predicate_paths": [
+            "in.DevUid"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "internal/service/devuser.go:1372",
+          "cond": "in.DevUid.Value == \"\"",
+          "predicate_paths": [
+            "in.DevUid.Value"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "internal/service/devuser.go:1368",
+          "cond": "in.DevUid.Value != *t70",
+          "predicate_paths": [
+            "in.DevUid.Value"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).DeleteDevUser",
+    "request_type": "api.DeleteDevUserRequest",
+    "response_type": "api.EmptyRequest",
+    "sinks": [
+      {
+        "kind": "db",
+        "target": "Get",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "internal/service/devuser.go:136"
+      },
+      {
+        "kind": "db",
+        "target": "LockForRead",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "internal/service/devuser.go:145"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "internal/service/cache.go:299"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "internal/service/devuser.go:166"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "errDeleteOrDeactivateCallForLastActiveUser",
+        "at": "internal/service/devuser.go:3210",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidAuthContextDevUid",
+        "at": "internal/service/devuser.go:1374",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteDevUser` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUid.Value\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUid.Value\n  - in.DevUid.Value == \"\"\n  - in.DevUid != nil\n  - in.DevUid.Value == \"\"\n  - in.DevUid.Value != *t70\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDeleteOrDeactivateCallForLastActiveUser\n  - errInvalidAuthContextDevUid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

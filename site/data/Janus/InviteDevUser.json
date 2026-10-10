@@ -1,0 +1,214 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "InviteDevUser",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": null,
+      "asserted": [],
+      "missing": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 4,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 4,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.Email",
+        "in.GroupIds",
+        "in.InviterName",
+        "in.Licenses"
+      ]
+    },
+    "branches": {
+      "total": 4,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 4,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.1.darwin-arm64/src/slices/slices.go:98",
+          "cond": "in.Email == *t4",
+          "predicate_paths": [
+            "in.Email"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "internal/service/devuser.go:409",
+          "cond": "in.Email",
+          "predicate_paths": [
+            "in.Email"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/service/devuser_invites.go:306",
+          "cond": "in.Email",
+          "predicate_paths": [
+            "in.Email"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "internal/service/devuser_invites.go:371",
+          "cond": "in.InviterName != \"\"",
+          "predicate_paths": [
+            "in.InviterName"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).InviteDevUser",
+    "request_type": "api.InviteDevUserRequest",
+    "response_type": "api.InviteDevUserResponse",
+    "sinks": [
+      {
+        "kind": "rpc",
+        "target": "GetInvitationAppID",
+        "via_paths": [
+          "in.Email",
+          "in.InviterName",
+          "in.Licenses"
+        ],
+        "at": "internal/service/devuser_invites.go:229"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetPreferences",
+        "via_paths": [
+          "in.Email",
+          "in.InviterName",
+          "in.Licenses"
+        ],
+        "at": "internal/service/preferences.go:21"
+      },
+      {
+        "kind": "db",
+        "target": "Get",
+        "via_paths": [
+          "in.Email",
+          "in.InviterName",
+          "in.Licenses"
+        ],
+        "at": "internal/service/devorg.go:141"
+      },
+      {
+        "kind": "db",
+        "target": "LockForRead",
+        "via_paths": [
+          "in.Email",
+          "in.InviterName",
+          "in.Licenses"
+        ],
+        "at": "internal/service/devorg.go:150"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.Email",
+          "in.InviterName",
+          "in.Licenses"
+        ],
+        "at": "internal/service/cache.go:147"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.Email",
+          "in.InviterName",
+          "in.Licenses"
+        ],
+        "at": "internal/service/devorg.go:171"
+      },
+      {
+        "kind": "rpc",
+        "target": "CreateInvitation",
+        "via_paths": [
+          "in.Email",
+          "in.InviterName",
+          "in.Licenses"
+        ],
+        "at": "internal/service/devuser_invites.go:270"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "errInviteToInvalidGroup",
+        "at": "internal/service/devuser_invites.go:185",
+        "tainted": false
+      },
+      {
+        "symbol": "errUserNotAllowedToInviteToGroup",
+        "at": "internal/service/devuser_invites.go:200",
+        "tainted": false
+      },
+      {
+        "symbol": "errDevOrgNotFound",
+        "at": "internal/service/devorg.go:187",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidInputEmail",
+        "at": "internal/service/devuser_invites.go:308",
+        "tainted": true
+      },
+      {
+        "symbol": "errInviteDeactivatedUser",
+        "at": "internal/service/devuser_invites.go:333",
+        "tainted": true
+      },
+      {
+        "symbol": "errUserAlreadyJoined",
+        "at": "internal/service/devuser_invites.go:341",
+        "tainted": true
+      },
+      {
+        "symbol": "errInternalServiceError",
+        "at": "internal/service/devuser_invites.go:417",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `InviteDevUser` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Email\n  - in.GroupIds\n  - in.InviterName\n  - in.Licenses\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Email == *t4\n  - in.Email\n  - in.Email\n  - in.InviterName != \"\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevOrgNotFound\n  - errInternalServiceError\n  - errInvalidInputEmail\n  - errInviteDeactivatedUser\n  - errInviteToInvalidGroup\n  - errUserAlreadyJoined\n  - errUserNotAllowedToInviteToGroup\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

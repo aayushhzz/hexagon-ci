@@ -1,0 +1,107 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "EnableDisableDevOrgAuthConnectionAutoMembership",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": null,
+      "asserted": [],
+      "missing": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 2,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 2,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.ConnectionId",
+        "in.EnableAutoMembership"
+      ]
+    },
+    "branches": {
+      "total": 1,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 1,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "internal/service/devorg_connections.go:1156",
+          "cond": "management.OrganizationConnection).GetConnectionID() == in.ConnectionId",
+          "predicate_paths": [
+            "in.ConnectionId"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).EnableDisableDevOrgAuthConnectionAutoMembership",
+    "request_type": "api.EnableDisableDevOrgAuthConnectionAutoMembershipRequest",
+    "response_type": "api.EmptyResponse",
+    "sinks": [
+      {
+        "kind": "rpc",
+        "target": "UpdateOrgConnection",
+        "via_paths": [
+          "in.ConnectionId",
+          "in.EnableAutoMembership"
+        ],
+        "at": "internal/service/devorg_connections.go:1171"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "errInvalidJWTToken",
+        "at": "internal/service/devorg_connections.go:1125",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidAuthContextDevOid",
+        "at": "internal/service/devorg_connections.go:1131",
+        "tainted": false
+      },
+      {
+        "symbol": "errNoAssociatedAuth0OrgID",
+        "at": "internal/service/devorg_connections.go:1143",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `EnableDisableDevOrgAuthConnectionAutoMembership` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ConnectionId\n  - in.EnableAutoMembership\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - management.OrganizationConnection).GetConnectionID() == in.ConnectionId\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContextDevOid\n  - errInvalidJWTToken\n  - errNoAssociatedAuth0OrgID\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

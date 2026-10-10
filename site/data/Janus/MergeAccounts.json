@@ -1,0 +1,196 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "MergeAccounts",
+    "operation": "AccountsMerge",
+    "tests": 2,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200,
+        400
+      ],
+      "missing": [
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 22.2
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 8,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 2,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 8,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.From.Components",
+        "in.From.Partition",
+        "in.From.PartitionType",
+        "in.From.ServiceType",
+        "in.To.Components",
+        "in.To.Partition",
+        "in.To.PartitionType",
+        "in.To.ServiceType"
+      ]
+    },
+    "branches": {
+      "total": 10,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 7,
+      "present_arm_exercised": 7,
+      "present_arm_pct": 70,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 7,
+      "negative_arm_pct": 70,
+      "both_arms_exercised": 0,
+      "coverage_pct": 70,
+      "gaps": [
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
+          "cond": "in.From.Partition != \"\"",
+          "predicate_paths": [
+            "in.From.Partition"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
+          "cond": "in.To.Partition != \"\"",
+          "predicate_paths": [
+            "in.To.Partition"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "internal/service/account.go:1808",
+          "cond": "in != nil",
+          "predicate_paths": [
+            "in"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "from",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "to",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Merge Accounts With Wrong Id",
+        "file": "api/v2_internal/accounts/accounts_merge_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ACCOUNTS_MERGE"
+        ],
+        "fields_set": [
+          "From",
+          "To"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "Merge Accounts",
+        "file": "api/v2_internal/accounts/accounts_merge_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ACCOUNTS_MERGE"
+        ],
+        "fields_set": [
+          "From",
+          "To"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).MergeAccounts",
+    "request_type": "api.MergeAccountsRequest",
+    "response_type": "api.MergeAccountsResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetExternalError",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/account.go:1809"
+      },
+      {
+        "kind": "rpc",
+        "target": "AccountExists",
+        "via_paths": [
+          "in.From"
+        ],
+        "at": "internal/service/account.go:1057"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.From"
+        ],
+        "at": "internal/service/common.go:319"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MergeAccounts` (HTTP operation `AccountsMerge`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.From.Components\n  - in.From.Partition\n  - in.From.PartitionType\n  - in.From.ServiceType\n  - in.To.Components\n  - in.To.Partition\n  - in.To.PartitionType\n  - in.To.ServiceType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.From.Partition != \"\"\n  - in.To.Partition != \"\"\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `from` -> suggestions []\n  - test field `to` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

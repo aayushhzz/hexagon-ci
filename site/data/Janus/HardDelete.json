@@ -1,0 +1,211 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "HardDelete",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": null,
+      "asserted": [],
+      "missing": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 6,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 2,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 4,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.Limit",
+        "in.ObjectTypes",
+        "in.ParentId.Components",
+        "in.ParentId.Partition",
+        "in.ParentId.PartitionType",
+        "in.ParentId.ServiceType"
+      ]
+    },
+    "branches": {
+      "total": 16,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 14,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+          "cond": "in.ParentId == nil",
+          "predicate_paths": [
+            "in.ParentId"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
+          "cond": "in.ParentId.Partition != \"\"",
+          "predicate_paths": [
+            "in.ParentId.Partition"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2608",
+          "cond": "in.ParentId == nil",
+          "predicate_paths": [
+            "in.ParentId"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2615",
+          "cond": "in.ParentId|in.ParentId.Partition",
+          "predicate_paths": [
+            "in.ParentId"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2623",
+          "cond": "in.Limit != nil",
+          "predicate_paths": [
+            "in.Limit"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2626",
+          "cond": "in.Limit != nil",
+          "predicate_paths": [
+            "in.Limit"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2623",
+          "cond": "in.Limit > 0",
+          "predicate_paths": [
+            "in.Limit"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2626",
+          "cond": "in.Limit <= 5000",
+          "predicate_paths": [
+            "in.Limit"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "internal/service/hard_delete.go:34",
+          "cond": "in.Limit <= 0",
+          "predicate_paths": [
+            "in.Limit"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "internal/service/hard_delete.go:53",
+          "cond": "in.Limit > 5000",
+          "predicate_paths": [
+            "in.Limit"
+          ]
+        },
+        {
+          "id": "b11",
+          "at": "internal/service/hard_delete.go:44",
+          "cond": "t7 < in.Limit",
+          "predicate_paths": [
+            "in.Limit"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "internal/service/hard_delete.go:57",
+          "cond": "t10 > in.Limit",
+          "predicate_paths": [
+            "in.Limit"
+          ]
+        },
+        {
+          "id": "b13",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
+          "cond": "in.ParentId|in.ParentId.Partition == \"\"",
+          "predicate_paths": [
+            "in.ParentId"
+          ]
+        },
+        {
+          "id": "b14",
+          "at": "internal/service/hard_delete.go:157",
+          "cond": "in.Limit <= 0",
+          "predicate_paths": [
+            "in.Limit"
+          ]
+        },
+        {
+          "id": "b15",
+          "at": "internal/service/hard_delete.go:143",
+          "cond": "in.Limit > 0",
+          "predicate_paths": [
+            "in.Limit"
+          ]
+        },
+        {
+          "id": "b16",
+          "at": "internal/service/hard_delete.go:95",
+          "cond": "in != nil",
+          "predicate_paths": [
+            "in"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).HardDelete",
+    "request_type": "api.HardDeleteRequest",
+    "response_type": "api.HardDeleteResponse",
+    "sinks": [],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `HardDelete` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Limit\n  - in.ObjectTypes\n  - in.ParentId.Components\n  - in.ParentId.Partition\n  - in.ParentId.PartitionType\n  - in.ParentId.ServiceType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ParentId == nil\n  - in.ParentId.Partition != \"\"\n  - in.ParentId == nil\n  - in.ParentId|in.ParentId.Partition\n  - in.Limit != nil\n  - in.Limit != nil\n  - in.Limit > 0\n  - in.Limit <= 5000\n  - in.Limit <= 0\n  - in.Limit > 5000\n  - t7 < in.Limit\n  - t10 > in.Limit\n  - in.ParentId|in.ParentId.Partition == \"\"\n  - in.Limit <= 0\n  - in.Limit > 0\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

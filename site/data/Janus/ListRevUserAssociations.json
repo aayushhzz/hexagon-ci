@@ -1,0 +1,198 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "ListRevUserAssociations",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": null,
+      "asserted": [],
+      "missing": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 8,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 7,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.Filters",
+        "in.PageParams.Page",
+        "in.PageParams.PerPage",
+        "in.PageParams.SortBy",
+        "in.RevUserId.Components",
+        "in.RevUserId.Partition",
+        "in.RevUserId.PartitionType",
+        "in.RevUserId.ServiceType"
+      ]
+    },
+    "branches": {
+      "total": 13,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 7,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+          "cond": "in.RevUserId == nil",
+          "predicate_paths": [
+            "in.RevUserId"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
+          "cond": "in.RevUserId.Partition != \"\"",
+          "predicate_paths": [
+            "in.RevUserId.Partition"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1948",
+          "cond": "in.RevUserId == nil",
+          "predicate_paths": [
+            "in.RevUserId"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1955",
+          "cond": "in.RevUserId|in.RevUserId.Partition",
+          "predicate_paths": [
+            "in.RevUserId"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1958",
+          "cond": "in.PageParams != nil",
+          "predicate_paths": [
+            "in.PageParams"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1959",
+          "cond": "in.PageParams != nil",
+          "predicate_paths": [
+            "in.PageParams"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "internal/service/revuser_associations.go:439",
+          "cond": "in != nil",
+          "predicate_paths": [
+            "in"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "internal/service/revuser_associations.go:447",
+          "cond": "in.PageParams == nil",
+          "predicate_paths": [
+            "in.PageParams"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "internal/service/revuser_associations.go:450",
+          "cond": "in.PageParams.SortBy != nil",
+          "predicate_paths": [
+            "in.PageParams.SortBy"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "internal/service/revuser_associations.go:453",
+          "cond": "in.PageParams.Page <= 0",
+          "predicate_paths": [
+            "in.PageParams.Page"
+          ]
+        },
+        {
+          "id": "b11",
+          "at": "internal/service/revuser_associations.go:456",
+          "cond": "in.PageParams.PerPage > 100",
+          "predicate_paths": [
+            "in.PageParams.PerPage"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "internal/service/revuser_associations.go:459",
+          "cond": "in.PageParams.PerPage <= 0",
+          "predicate_paths": [
+            "in.PageParams.PerPage"
+          ]
+        },
+        {
+          "id": "b13",
+          "at": "internal/service/revuser_associations.go:480",
+          "cond": "in.Filters != nil",
+          "predicate_paths": [
+            "in.Filters"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).ListRevUserAssociations",
+    "request_type": "api.ListRevUserAssociationRequest",
+    "response_type": "api.ListRevUserAssociationResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetExternalError",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/revuser_associations.go:440"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListRevUserAssociations` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Filters\n  - in.PageParams.Page\n  - in.PageParams.PerPage\n  - in.PageParams.SortBy\n  - in.RevUserId.Components\n  - in.RevUserId.Partition\n  - in.RevUserId.PartitionType\n  - in.RevUserId.ServiceType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.RevUserId == nil\n  - in.RevUserId.Partition != \"\"\n  - in.RevUserId == nil\n  - in.RevUserId|in.RevUserId.Partition\n  - in.PageParams != nil\n  - in.PageParams != nil\n  - in != nil\n  - in.PageParams == nil\n  - in.PageParams.SortBy != nil\n  - in.PageParams.Page <= 0\n  - in.PageParams.PerPage > 100\n  - in.PageParams.PerPage <= 0\n  - in.Filters != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

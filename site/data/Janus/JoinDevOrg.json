@@ -1,0 +1,201 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "JoinDevOrg",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": null,
+      "asserted": [],
+      "missing": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 2,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 2,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.Client",
+        "in.DevOid"
+      ]
+    },
+    "branches": {
+      "total": 4,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 4,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3600",
+          "cond": "in.DevOid",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
+          "cond": "in.DevOid == \"\"",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/service/devorg.go:2374",
+          "cond": "in.DevOid == \"\"",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "internal/service/devorg.go:2405",
+          "cond": "in.DevOid",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).JoinDevOrg",
+    "request_type": "api.JoinDevOrgRequest",
+    "response_type": "api.JoinDevOrgResponse",
+    "sinks": [
+      {
+        "kind": "db",
+        "target": "Get",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/service/devorg.go:141"
+      },
+      {
+        "kind": "db",
+        "target": "LockForRead",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/service/devorg.go:150"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/service/cache.go:147"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/service/devorg.go:171"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetInvitationAppID",
+        "via_paths": [
+          "in.Client",
+          "in.DevOid"
+        ],
+        "at": "internal/service/devuser_invites.go:229"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetPreferences",
+        "via_paths": [
+          "in.Client",
+          "in.DevOid"
+        ],
+        "at": "internal/service/preferences.go:21"
+      },
+      {
+        "kind": "rpc",
+        "target": "CreateInvitation",
+        "via_paths": [
+          "in.Client",
+          "in.DevOid"
+        ],
+        "at": "internal/service/devuser_invites.go:270"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "errDevOrgNotFound",
+        "at": "internal/service/devorg.go:187",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidArguments",
+        "at": "internal/service/devorg.go:2375",
+        "tainted": true
+      },
+      {
+        "symbol": "errInvalidAuthContextEmail",
+        "at": "internal/service/devorg.go:2378",
+        "tainted": true
+      },
+      {
+        "symbol": "errInvalidAuthContextAuth0UserID",
+        "at": "internal/service/devorg.go:2382",
+        "tainted": true
+      },
+      {
+        "symbol": "errNotTrustedConnection",
+        "at": "internal/service/devorg.go:2386",
+        "tainted": true
+      },
+      {
+        "symbol": "errInvalidAuthContextDevOid",
+        "at": "internal/service/devorg.go:2395",
+        "tainted": true
+      },
+      {
+        "symbol": "errInvalidJoinDevOrgRequest",
+        "at": "internal/service/devorg.go:2406",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `JoinDevOrg` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Client\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid\n  - in.DevOid == \"\"\n  - in.DevOid == \"\"\n  - in.DevOid\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevOrgNotFound\n  - errInvalidArguments\n  - errInvalidAuthContextAuth0UserID\n  - errInvalidAuthContextDevOid\n  - errInvalidAuthContextEmail\n  - errInvalidJoinDevOrgRequest\n  - errNotTrustedConnection\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

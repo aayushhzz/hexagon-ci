@@ -1,0 +1,129 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "DisableDevOrgAuthConnection",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": null,
+      "asserted": [],
+      "missing": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 1,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.ConnectionId"
+      ]
+    },
+    "branches": {
+      "total": 3,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 3,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.1.darwin-arm64/src/slices/slices.go:98",
+          "cond": "in.ConnectionId == *t4",
+          "predicate_paths": [
+            "in.ConnectionId"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "internal/service/devorg_connections.go:1051",
+          "cond": "in.ConnectionId",
+          "predicate_paths": [
+            "in.ConnectionId"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/service/devorg_connections.go:1076",
+          "cond": "**t71 == in.ConnectionId",
+          "predicate_paths": [
+            "in.ConnectionId"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).DisableDevOrgAuthConnection",
+    "request_type": "api.DisableDevOrgAuthConnectionRequest",
+    "response_type": "api.EmptyResponse",
+    "sinks": [
+      {
+        "kind": "rpc",
+        "target": "CheckDefaultConnectionByID",
+        "via_paths": [
+          "in.ConnectionId"
+        ],
+        "at": "internal/service/devorg_connections.go:1053"
+      },
+      {
+        "kind": "rpc",
+        "target": "DeleteOrgConnection",
+        "via_paths": [
+          "in.ConnectionId"
+        ],
+        "at": "internal/service/devorg_connections.go:1102"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "errInvalidJWTToken",
+        "at": "internal/service/devorg_connections.go:1036",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidAuthContextDevOid",
+        "at": "internal/service/devorg_connections.go:1042",
+        "tainted": false
+      },
+      {
+        "symbol": "errNoAssociatedAuth0OrgID",
+        "at": "internal/service/devorg_connections.go:1063",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DisableDevOrgAuthConnection` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ConnectionId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ConnectionId == *t4\n  - in.ConnectionId\n  - **t71 == in.ConnectionId\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContextDevOid\n  - errInvalidJWTToken\n  - errNoAssociatedAuth0OrgID\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

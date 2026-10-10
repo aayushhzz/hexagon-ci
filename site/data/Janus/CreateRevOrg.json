@@ -1,0 +1,280 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "CreateRevOrg",
+    "operation": "RevOrgsCreate",
+    "tests": 10,
+    "status": {
+      "documented": [
+        201,
+        400,
+        401,
+        403,
+        409,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        201,
+        400
+      ],
+      "missing": [
+        401,
+        403,
+        409,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 22.2
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 5,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 4,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 4,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.IsJanusAsyncFlow",
+        "in.RevOrg.Account",
+        "in.RevOrg.ExternalOidIssuer",
+        "in.RevOrg.PhoneNumbers",
+        "in.RevOrg.SharedWith"
+      ]
+    },
+    "branches": {
+      "total": 4,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 1,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 1,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "internal/service/revorg.go:47",
+          "cond": "in.RevOrg.ExternalOidIssuer != nil",
+          "predicate_paths": [
+            "in.RevOrg.ExternalOidIssuer"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "internal/service/revorg.go:118",
+          "cond": "in.IsJanusAsyncFlow",
+          "predicate_paths": [
+            "in.IsJanusAsyncFlow"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/service/revorg.go:118",
+          "cond": "in.RevOrg.ExternalOidIssuer",
+          "predicate_paths": [
+            "in.RevOrg.ExternalOidIssuer"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "internal/service/revorg.go:142",
+          "cond": "in.RevOrg.Account == nil",
+          "predicate_paths": [
+            "in.RevOrg.Account"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "description",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "displayname",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "environment",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "externalref",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "WithOnlyRequiredFields",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "WithAllFields",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "WithDescription",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "WithEnvironmentAsProduction",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Environment"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "WithEnvironmentAsStaging",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Environment"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "WithEnvironmentAsTest",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Environment"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "WithExternalRef",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "ExternalRef"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true
+      },
+      {
+        "name": "MissingDisplayName",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false
+      },
+      {
+        "name": "EmptyBody",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          400
+        ],
+        "asserts_success": false
+      },
+      {
+        "name": "UnknownEnvironmentEnum",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).CreateRevOrg",
+    "request_type": "api.CreateRevOrgRequest",
+    "response_type": "api.CreateRevOrgResponse",
+    "sinks": [],
+    "errors": [
+      {
+        "symbol": "errPhoneNumberInvalid",
+        "at": "internal/service/phonenumbers.go:153",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateRevOrg` (HTTP operation `RevOrgsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsJanusAsyncFlow\n  - in.RevOrg.Account\n  - in.RevOrg.ExternalOidIssuer\n  - in.RevOrg.PhoneNumbers\n  - in.RevOrg.SharedWith\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.RevOrg.ExternalOidIssuer != nil\n  - in.IsJanusAsyncFlow\n  - in.RevOrg.ExternalOidIssuer\n  - in.RevOrg.Account == nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errPhoneNumberInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `displayname` -> suggestions []\n  - test field `environment` -> suggestions []\n  - test field `externalref` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

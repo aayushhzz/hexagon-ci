@@ -1,0 +1,239 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "ActivateDevUser",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": null,
+      "asserted": [],
+      "missing": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 2,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.DevUid.Value",
+        "in.GroupIds"
+      ]
+    },
+    "branches": {
+      "total": 3,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 1,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3623",
+          "cond": "in.DevUid.Value",
+          "predicate_paths": [
+            "in.DevUid.Value"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
+          "cond": "in.DevUid.Value == \"\"",
+          "predicate_paths": [
+            "in.DevUid.Value"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/service/devuser.go:3323",
+          "cond": "in.DevUid == \"\"",
+          "predicate_paths": [
+            "in.DevUid"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).ActivateDevUser",
+    "request_type": "api.ActivateDevUserRequest",
+    "response_type": "api.ActivateDevUserResponse",
+    "sinks": [
+      {
+        "kind": "db",
+        "target": "Get",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "internal/service/devuser.go:136"
+      },
+      {
+        "kind": "db",
+        "target": "LockForRead",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "internal/service/devuser.go:145"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "internal/service/cache.go:299"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "internal/service/devuser.go:166"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetNamespace",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20261007122402-40ae46af559c/mfz/cache/cache.go:1067"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20261007122402-40ae46af559c/mfz/cache/cache.go:1067"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetNamespace",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20261007122402-40ae46af559c/mfz/cache/cache.go:1059"
+      },
+      {
+        "kind": "db",
+        "target": "Delete",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20261007122402-40ae46af559c/mfz/cache/cache.go:432"
+      },
+      {
+        "kind": "db",
+        "target": "ReadWithFilter",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "mfz/service/common.go:725"
+      },
+      {
+        "kind": "rpc",
+        "target": "SyncUnitGet",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "mfz/service/common.go:2195"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20261007122402-40ae46af559c/mfz/cache/cache.go:123"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20261007122402-40ae46af559c/mfz/cache/groups.go:894"
+      },
+      {
+        "kind": "db",
+        "target": "Delete",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20261007122402-40ae46af559c/mfz/cache/groups.go:862"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20261007122402-40ae46af559c/mfz/cache/groups.go:741"
+      },
+      {
+        "kind": "db",
+        "target": "Delete",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20261007122402-40ae46af559c/mfz/cache/groups.go:709"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "tainted": false
+      },
+      {
+        "symbol": "errDefaultGroupNotFound",
+        "at": "internal/service/devuser.go:695",
+        "tainted": false
+      },
+      {
+        "symbol": "errReadingMongoCollection",
+        "at": "internal/service/devuser.go:3313",
+        "tainted": false
+      },
+      {
+        "symbol": "errReadingMongoCollection",
+        "at": "internal/service/devuser.go:3334",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ActivateDevUser` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUid.Value\n  - in.GroupIds\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUid.Value\n  - in.DevUid.Value == \"\"\n  - in.DevUid == \"\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errDefaultGroupNotFound\n  - errReadingMongoCollection\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

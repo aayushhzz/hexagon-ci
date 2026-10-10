@@ -1,0 +1,330 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "UpdateRevUser",
+    "operation": "RevUsersUpdate",
+    "tests": 1,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        409,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200,
+        201
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        404,
+        409,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 10
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 11,
+      "covered_count": 1,
+      "coverage_pct": 9.1,
+      "request_fields_set_by_tests": 15,
+      "set_by_positive_tests": 1,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 4,
+          "set": 1,
+          "pct": 25
+        },
+        "deep": {
+          "total": 6,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": [
+        {
+          "path": "in.RevUser.Email",
+          "match": "exact",
+          "by_tests": [
+            "Creates ticket roles for RevUsers with stock and custom actor caveats through role set create and update"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.IsJanusAsyncFlow",
+        "in.RevUser.ExternalRefs.StringValues",
+        "in.RevUser.ExternalUid",
+        "in.RevUser.State",
+        "in.RevUser.UnsetFieldMask.Paths",
+        "in.UserIdentifier.UserDon.Components",
+        "in.UserIdentifier.UserDon.Partition",
+        "in.UserIdentifier.UserDon.PartitionType",
+        "in.UserIdentifier.UserDon.ServiceType",
+        "in.UserIdentifier.UserExternalId"
+      ]
+    },
+    "branches": {
+      "total": 17,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 2,
+      "present_arm_exercised": 2,
+      "present_arm_pct": 11.8,
+      "absent_arm_exercised": 2,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 11.8,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+          "cond": "in.UserIdentifier.UserDon == nil",
+          "predicate_paths": [
+            "in.UserIdentifier.UserDon"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
+          "cond": "in.UserIdentifier.UserDon.Partition != \"\"",
+          "predicate_paths": [
+            "in.UserIdentifier.UserDon.Partition"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/service/revuser.go:2156",
+          "cond": "in.UserIdentifier.UserDon != nil",
+          "predicate_paths": [
+            "in.UserIdentifier.UserDon"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "internal/service/revuser_utils.go:159",
+          "cond": "in.UserIdentifier.UserDon == nil",
+          "predicate_paths": [
+            "in.UserIdentifier.UserDon"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "internal/service/revuser.go:1759",
+          "cond": "in.RevUser.State != 0",
+          "predicate_paths": [
+            "in.RevUser.State"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "internal/service/revuser.go:1763",
+          "cond": "in.RevUser.UnsetFieldMask.Paths",
+          "predicate_paths": [
+            "in.RevUser.UnsetFieldMask.Paths"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "internal/service/revuser.go:1768",
+          "cond": "in.RevUser.UnsetFieldMask.Paths",
+          "predicate_paths": [
+            "in.RevUser.UnsetFieldMask.Paths"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "internal/service/revuser.go:1767",
+          "cond": "in.RevUser.UnsetFieldMask.Paths",
+          "predicate_paths": [
+            "in.RevUser.UnsetFieldMask.Paths"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "internal/service/revuser.go:1766",
+          "cond": "in.RevUser.UnsetFieldMask.Paths",
+          "predicate_paths": [
+            "in.RevUser.UnsetFieldMask.Paths"
+          ]
+        },
+        {
+          "id": "b11",
+          "at": "internal/service/revuser.go:1765",
+          "cond": "in.RevUser.UnsetFieldMask.Paths",
+          "predicate_paths": [
+            "in.RevUser.UnsetFieldMask.Paths"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "internal/service/revuser.go:1764",
+          "cond": "in.RevUser.UnsetFieldMask.Paths",
+          "predicate_paths": [
+            "in.RevUser.UnsetFieldMask.Paths"
+          ]
+        },
+        {
+          "id": "b13",
+          "at": "internal/service/revuser.go:1784",
+          "cond": "in.IsJanusAsyncFlow",
+          "predicate_paths": [
+            "in.IsJanusAsyncFlow"
+          ]
+        },
+        {
+          "id": "b14",
+          "at": "internal/service/revuser.go:1787",
+          "cond": "in.RevUser",
+          "predicate_paths": [
+            "in.RevUser"
+          ]
+        },
+        {
+          "id": "b16",
+          "at": "internal/service/revuser.go:1861",
+          "cond": "in.RevUser.ExternalUid != nil",
+          "predicate_paths": [
+            "in.RevUser.ExternalUid"
+          ]
+        },
+        {
+          "id": "b17",
+          "at": "internal/service/revuser.go:1863",
+          "cond": "in.RevUser.ExternalRefs != nil",
+          "predicate_paths": [
+            "in.RevUser.ExternalRefs"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "applicableprincipaltype",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "assign",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "body",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "createroles",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "customfields",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "customschemaspec",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "description",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "name",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "principal",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "revoke",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "role",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "title",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "type",
+          "fuzzy_suggestions": [
+            "in.UserIdentifier.UserDon.PartitionType",
+            "in.UserIdentifier.UserDon.ServiceType"
+          ]
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Creates ticket roles for RevUsers with stock and custom actor caveats through role set create and update",
+        "file": "api/v2_internal/role_sets/crud/role_set_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ROLE_SETS_CREATE",
+          "INTERNAL_ROLE_SETS_UPDATE"
+        ],
+        "fields_set": [
+          "ApplicablePrincipalType",
+          "Assign",
+          "Body",
+          "CreateRoles",
+          "CustomFields",
+          "CustomSchemaSpec",
+          "Description",
+          "Email",
+          "Id",
+          "Name",
+          "Principal",
+          "Revoke",
+          "Role",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).UpdateRevUser",
+    "request_type": "api.UpdateRevUserRequest",
+    "response_type": "api.UpdateRevUserResponse",
+    "sinks": [],
+    "errors": [
+      {
+        "symbol": "errRevUserEmailUpdateForbidden",
+        "at": "internal/service/revuser.go:1851",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateRevUser` (HTTP operation `RevUsersUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsJanusAsyncFlow\n  - in.RevUser.ExternalRefs.StringValues\n  - in.RevUser.ExternalUid\n  - in.RevUser.State\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.UserIdentifier.UserDon.Components\n  - in.UserIdentifier.UserDon.Partition\n  - in.UserIdentifier.UserDon.PartitionType\n  - in.UserIdentifier.UserDon.ServiceType\n  - in.UserIdentifier.UserExternalId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon.Partition != \"\"\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon == nil\n  - in.RevUser.State != 0\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.IsJanusAsyncFlow\n  - in.RevUser\n  - in.RevUser.ExternalUid != nil\n  - in.RevUser.ExternalRefs != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errRevUserEmailUpdateForbidden\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `applicableprincipaltype` -> suggestions []\n  - test field `assign` -> suggestions []\n  - test field `body` -> suggestions []\n  - test field `createroles` -> suggestions []\n  - test field `customfields` -> suggestions []\n  - test field `customschemaspec` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `revoke` -> suggestions []\n  - test field `role` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions ['in.UserIdentifier.UserDon.PartitionType', 'in.UserIdentifier.UserDon.ServiceType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

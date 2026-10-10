@@ -1,0 +1,176 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "CreateSvcAccKeyring",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": null,
+      "asserted": [],
+      "missing": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 6,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 6,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": null,
+      "gaps": [
+        "in.ServiceAccountId.Components",
+        "in.ServiceAccountId.Partition",
+        "in.ServiceAccountId.PartitionType",
+        "in.ServiceAccountId.ServiceType",
+        "in.ServiceAccountKeyring.DisplayName",
+        "in.ServiceAccountKeyring.KeyringId"
+      ]
+    },
+    "branches": {
+      "total": 7,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 4,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+          "cond": "in.ServiceAccountId == nil",
+          "predicate_paths": [
+            "in.ServiceAccountId"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
+          "cond": "in.ServiceAccountId.Partition != \"\"",
+          "predicate_paths": [
+            "in.ServiceAccountId.Partition"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
+          "cond": "in.ServiceAccountId|in.ServiceAccountId.Partition == \"\"",
+          "predicate_paths": [
+            "in.ServiceAccountId"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "internal/service/serviceaccount.go:385",
+          "cond": "in.ServiceAccountKeyring == nil",
+          "predicate_paths": [
+            "in.ServiceAccountKeyring"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "internal/service/serviceaccount.go:387",
+          "cond": "in.ServiceAccountKeyring.DisplayName == nil",
+          "predicate_paths": [
+            "in.ServiceAccountKeyring.DisplayName"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "internal/service/serviceaccount.go:386",
+          "cond": "in.ServiceAccountKeyring.KeyringId == nil",
+          "predicate_paths": [
+            "in.ServiceAccountKeyring.KeyringId"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "internal/service/serviceaccount.go:385",
+          "cond": "in.ServiceAccountId == nil",
+          "predicate_paths": [
+            "in.ServiceAccountId"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).CreateSvcAccKeyring",
+    "request_type": "api.CreateSvcAccKeyringRequest",
+    "response_type": "api.CreateSvcAccKeyringResponse",
+    "sinks": [
+      {
+        "kind": "db",
+        "target": "Get",
+        "via_paths": [
+          "in.ServiceAccountId",
+          "in.ServiceAccountId.Partition"
+        ],
+        "at": "internal/service/serviceaccount.go:813"
+      },
+      {
+        "kind": "db",
+        "target": "LockForRead",
+        "via_paths": [
+          "in.ServiceAccountId",
+          "in.ServiceAccountId.Partition"
+        ],
+        "at": "internal/service/serviceaccount.go:824"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.ServiceAccountId",
+          "in.ServiceAccountId.Partition"
+        ],
+        "at": "internal/service/cache.go:188"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.ServiceAccountId",
+          "in.ServiceAccountId.Partition"
+        ],
+        "at": "internal/service/serviceaccount.go:844"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "errSvcAccKeyIDNotFound",
+        "at": "internal/service/serviceaccount.go:864",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateSvcAccKeyring` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ServiceAccountId.Components\n  - in.ServiceAccountId.Partition\n  - in.ServiceAccountId.PartitionType\n  - in.ServiceAccountId.ServiceType\n  - in.ServiceAccountKeyring.DisplayName\n  - in.ServiceAccountKeyring.KeyringId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ServiceAccountId == nil\n  - in.ServiceAccountId.Partition != \"\"\n  - in.ServiceAccountId|in.ServiceAccountId.Partition == \"\"\n  - in.ServiceAccountKeyring == nil\n  - in.ServiceAccountKeyring.DisplayName == nil\n  - in.ServiceAccountKeyring.KeyringId == nil\n  - in.ServiceAccountId == nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errSvcAccKeyIDNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

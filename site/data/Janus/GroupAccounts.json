@@ -1,0 +1,1909 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "GroupAccounts",
+    "operation": "AccountsGroup",
+    "tests": 2,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        400
+      ],
+      "missing": [
+        200,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 12.5
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 73,
+      "covered_count": 1,
+      "coverage_pct": 1.4,
+      "request_fields_set_by_tests": 1,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 1,
+      "by_depth": {
+        "top_level": {
+          "total": 3,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 16,
+          "set": 1,
+          "pct": 6.3
+        },
+        "deep": {
+          "total": 54,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "covered": [
+        {
+          "path": "in.GroupPageParams.GroupBy",
+          "match": "exact",
+          "by_tests": [
+            "Group accounts with invalid group by"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.DqlQuery.SearchExpression",
+        "in.DqlQuery.SearchQuery",
+        "in.GroupPageParams.PerGroup",
+        "in.GroupPageParams.SortBy",
+        "in.GroupPageParams.SortGroupKeyBy",
+        "in.OrgFilter.AccountFilter.Apps",
+        "in.OrgFilter.AccountFilter.AppsOp",
+        "in.OrgFilter.AccountFilter.CustomFields.Fields",
+        "in.OrgFilter.AccountFilter.Domains",
+        "in.OrgFilter.AccountFilter.DomainsOp",
+        "in.OrgFilter.AccountFilter.ExternalRefs",
+        "in.OrgFilter.AccountFilter.ExternalRefsOp",
+        "in.OrgFilter.AccountFilter.ExternalSourceData",
+        "in.OrgFilter.AccountFilter.Industry",
+        "in.OrgFilter.AccountFilter.IndustryOp",
+        "in.OrgFilter.AccountFilter.IngestionChannel",
+        "in.OrgFilter.AccountFilter.LeadSource",
+        "in.OrgFilter.AccountFilter.LeadSourceOp",
+        "in.OrgFilter.AccountFilter.OwnedBy",
+        "in.OrgFilter.AccountFilter.OwnedByOp",
+        "in.OrgFilter.AccountFilter.SharedWith",
+        "in.OrgFilter.AccountFilter.Stage",
+        "in.OrgFilter.AccountFilter.StagedInfo",
+        "in.OrgFilter.AccountFilter.Subtype",
+        "in.OrgFilter.AccountFilter.SubtypeOp",
+        "in.OrgFilter.AccountFilter.SyncMetadata",
+        "in.OrgFilter.AccountFilter.Tags",
+        "in.OrgFilter.AccountFilter.TagsOp",
+        "in.OrgFilter.AccountFilter.Tier",
+        "in.OrgFilter.AccountFilter.TierOp",
+        "in.OrgFilter.AccountFilter.TotalRevenue",
+        "in.OrgFilter.AccountFilter.Websites",
+        "in.OrgFilter.AccountFilter.WebsitesOp",
+        "in.OrgFilter.CreatedByAgentId",
+        "in.OrgFilter.CreatedByAgentIdOp",
+        "in.OrgFilter.CreatedById",
+        "in.OrgFilter.CreatedByIdOp",
+        "in.OrgFilter.CreatedDate.After",
+        "in.OrgFilter.CreatedDate.Before",
+        "in.OrgFilter.CreatedDate.DatePreset.Type",
+        "in.OrgFilter.DevOrgFilter.UeSyncState",
+        "in.OrgFilter.DisplayName",
+        "in.OrgFilter.Environment",
+        "in.OrgFilter.EnvironmentOp",
+        "in.OrgFilter.ModifiedById",
+        "in.OrgFilter.ModifiedByIdOp",
+        "in.OrgFilter.ModifiedDate.After",
+        "in.OrgFilter.ModifiedDate.Before",
+        "in.OrgFilter.ModifiedDate.DatePreset.Type",
+        "in.OrgFilter.RevOrgFilter.Account",
+        "in.OrgFilter.RevOrgFilter.AccountOp",
+        "in.OrgFilter.RevOrgFilter.Apps",
+        "in.OrgFilter.RevOrgFilter.AppsOp",
+        "in.OrgFilter.RevOrgFilter.CustomFields.Fields",
+        "in.OrgFilter.RevOrgFilter.ExternalOid",
+        "in.OrgFilter.RevOrgFilter.ExternalOidIssuer",
+        "in.OrgFilter.RevOrgFilter.ExternalOidOp",
+        "in.OrgFilter.RevOrgFilter.ExternalSourceData",
+        "in.OrgFilter.RevOrgFilter.SharedWith",
+        "in.OrgFilter.RevOrgFilter.SlaId",
+        "in.OrgFilter.RevOrgFilter.StagedInfo",
+        "in.OrgFilter.RevOrgFilter.Subtype",
+        "in.OrgFilter.RevOrgFilter.SubtypeOp",
+        "in.OrgFilter.RevOrgFilter.SyncMetadata",
+        "in.OrgFilter.RevOrgFilter.Tags",
+        "in.OrgFilter.RevOrgFilter.TagsOp",
+        "in.OrgFilter.RevOrgFilter.Tier",
+        "in.OrgFilter.RevOrgFilter.Type",
+        "in.OrgFilter.State",
+        "in.SkipItemsInGroup",
+        "in.SkipTotalGroups",
+        "in.SkipTotalItems"
+      ]
+    },
+    "branches": {
+      "total": 193,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 9,
+      "present_arm_exercised": 5,
+      "present_arm_pct": 2.6,
+      "absent_arm_exercised": 9,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 5,
+      "negative_arm_pct": 2.6,
+      "both_arms_exercised": 0,
+      "coverage_pct": 2.6,
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "internal/service/dql_search.go:35",
+          "cond": "in.DqlQuery == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "internal/service/dql_search.go:39",
+          "cond": "in.DqlQuery.SearchQuery != \"\"",
+          "predicate_paths": [
+            "in.DqlQuery.SearchQuery"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/dql/converter.go:72",
+          "cond": "in.DqlQuery == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "internal/dql/converter.go:46",
+          "cond": "in.DqlQuery == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:96",
+          "cond": "in.GroupPageParams.PerGroup < 0",
+          "predicate_paths": [
+            "in.GroupPageParams.PerGroup"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:99",
+          "cond": "in.GroupPageParams.PerGroup != 0",
+          "predicate_paths": [
+            "in.GroupPageParams.PerGroup"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:100",
+          "cond": "in.GroupPageParams.PerGroup < 0",
+          "predicate_paths": [
+            "in.GroupPageParams.PerGroup"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:100",
+          "cond": "in.GroupPageParams.PerGroup > *maxItemsPerGroup",
+          "predicate_paths": [
+            "in.GroupPageParams.PerGroup"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:134",
+          "cond": "call() * in.GroupPageParams.PerGroup > *maxTotalGroupItems",
+          "predicate_paths": [
+            "in.GroupPageParams.PerGroup"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "internal/service/account_dql.go:403",
+          "cond": "in.GroupPageParams == nil",
+          "predicate_paths": [
+            "in.GroupPageParams"
+          ]
+        },
+        {
+          "id": "b13",
+          "at": "internal/service/account_dql.go:314",
+          "cond": "in.DqlQuery == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b14",
+          "at": "internal/service/account_dql.go:318",
+          "cond": "in.DqlQuery",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b15",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/query.go:160",
+          "cond": "in.OrgFilter.RevOrgFilter.CustomFields == nil",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.CustomFields"
+          ]
+        },
+        {
+          "id": "b16",
+          "at": "internal/filter/orgs.gen.go:564",
+          "cond": "in.OrgFilter.RevOrgFilter.ExternalOidOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.ExternalOidOp"
+          ]
+        },
+        {
+          "id": "b17",
+          "at": "internal/filter/orgs.gen.go:582",
+          "cond": "in.OrgFilter.RevOrgFilter.ExternalOidOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.ExternalOidOp"
+          ]
+        },
+        {
+          "id": "b18",
+          "at": "internal/filter/orgs.gen.go:569",
+          "cond": "in.OrgFilter.RevOrgFilter.ExternalOidOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.ExternalOidOp"
+          ]
+        },
+        {
+          "id": "b19",
+          "at": "internal/filter/orgs.gen.go:569",
+          "cond": "in.OrgFilter.RevOrgFilter.ExternalOidOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.ExternalOidOp"
+          ]
+        },
+        {
+          "id": "b20",
+          "at": "internal/filter/orgs.gen.go:584",
+          "cond": "in.OrgFilter.RevOrgFilter.ExternalOidOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.ExternalOidOp"
+          ]
+        },
+        {
+          "id": "b21",
+          "at": "internal/filter/orgs.gen.go:586",
+          "cond": "in.OrgFilter.RevOrgFilter.ExternalOidOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.ExternalOidOp"
+          ]
+        },
+        {
+          "id": "b22",
+          "at": "internal/filter/orgs.gen.go:586",
+          "cond": "in.OrgFilter.RevOrgFilter.ExternalOidOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.ExternalOidOp"
+          ]
+        },
+        {
+          "id": "b23",
+          "at": "internal/filter/orgs.gen.go:586",
+          "cond": "in.OrgFilter.RevOrgFilter.ExternalOidOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.ExternalOidOp"
+          ]
+        },
+        {
+          "id": "b24",
+          "at": "internal/filter/orgs.gen.go:614",
+          "cond": "in.OrgFilter.RevOrgFilter.TagsOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.TagsOp"
+          ]
+        },
+        {
+          "id": "b25",
+          "at": "internal/filter/orgs.gen.go:657",
+          "cond": "in.OrgFilter.RevOrgFilter.TagsOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.TagsOp"
+          ]
+        },
+        {
+          "id": "b26",
+          "at": "internal/filter/orgs.gen.go:627",
+          "cond": "in.OrgFilter.RevOrgFilter.TagsOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.TagsOp"
+          ]
+        },
+        {
+          "id": "b27",
+          "at": "internal/filter/orgs.gen.go:637",
+          "cond": "in.OrgFilter.RevOrgFilter.TagsOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.TagsOp"
+          ]
+        },
+        {
+          "id": "b28",
+          "at": "internal/filter/orgs.gen.go:659",
+          "cond": "in.OrgFilter.RevOrgFilter.TagsOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.TagsOp"
+          ]
+        },
+        {
+          "id": "b29",
+          "at": "internal/filter/orgs.gen.go:661",
+          "cond": "in.OrgFilter.RevOrgFilter.TagsOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.TagsOp"
+          ]
+        },
+        {
+          "id": "b30",
+          "at": "internal/filter/orgs.gen.go:661",
+          "cond": "in.OrgFilter.RevOrgFilter.TagsOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.TagsOp"
+          ]
+        },
+        {
+          "id": "b31",
+          "at": "internal/filter/orgs.gen.go:661",
+          "cond": "in.OrgFilter.RevOrgFilter.TagsOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.TagsOp"
+          ]
+        },
+        {
+          "id": "b32",
+          "at": "internal/filter/orgs.gen.go:690",
+          "cond": "in.OrgFilter.RevOrgFilter.AccountOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.AccountOp"
+          ]
+        },
+        {
+          "id": "b33",
+          "at": "internal/filter/orgs.gen.go:678",
+          "cond": "in.OrgFilter.RevOrgFilter.AccountOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.AccountOp"
+          ]
+        },
+        {
+          "id": "b34",
+          "at": "internal/filter/orgs.gen.go:680",
+          "cond": "in.OrgFilter.RevOrgFilter.AccountOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.AccountOp"
+          ]
+        },
+        {
+          "id": "b35",
+          "at": "internal/filter/orgs.gen.go:680",
+          "cond": "in.OrgFilter.RevOrgFilter.AccountOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.AccountOp"
+          ]
+        },
+        {
+          "id": "b36",
+          "at": "internal/filter/orgs.gen.go:692",
+          "cond": "in.OrgFilter.RevOrgFilter.AccountOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.AccountOp"
+          ]
+        },
+        {
+          "id": "b37",
+          "at": "internal/filter/orgs.gen.go:694",
+          "cond": "in.OrgFilter.RevOrgFilter.AccountOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.AccountOp"
+          ]
+        },
+        {
+          "id": "b38",
+          "at": "internal/filter/orgs.gen.go:694",
+          "cond": "in.OrgFilter.RevOrgFilter.AccountOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.AccountOp"
+          ]
+        },
+        {
+          "id": "b39",
+          "at": "internal/filter/orgs.gen.go:694",
+          "cond": "in.OrgFilter.RevOrgFilter.AccountOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.AccountOp"
+          ]
+        },
+        {
+          "id": "b40",
+          "at": "internal/filter/orgs.gen.go:865",
+          "cond": "in.OrgFilter.RevOrgFilter.SubtypeOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b41",
+          "at": "internal/filter/orgs.gen.go:853",
+          "cond": "in.OrgFilter.RevOrgFilter.SubtypeOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b42",
+          "at": "internal/filter/orgs.gen.go:855",
+          "cond": "in.OrgFilter.RevOrgFilter.SubtypeOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b43",
+          "at": "internal/filter/orgs.gen.go:855",
+          "cond": "in.OrgFilter.RevOrgFilter.SubtypeOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b44",
+          "at": "internal/filter/orgs.gen.go:867",
+          "cond": "in.OrgFilter.RevOrgFilter.SubtypeOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b45",
+          "at": "internal/filter/orgs.gen.go:869",
+          "cond": "in.OrgFilter.RevOrgFilter.SubtypeOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b46",
+          "at": "internal/filter/orgs.gen.go:869",
+          "cond": "in.OrgFilter.RevOrgFilter.SubtypeOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b47",
+          "at": "internal/filter/orgs.gen.go:869",
+          "cond": "in.OrgFilter.RevOrgFilter.SubtypeOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b48",
+          "at": "internal/filter/orgs.gen.go:910",
+          "cond": "in.OrgFilter.RevOrgFilter != nil",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter"
+          ]
+        },
+        {
+          "id": "b49",
+          "at": "internal/filter/orgs.gen.go:899",
+          "cond": "in.OrgFilter.RevOrgFilter.AppsOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.AppsOp"
+          ]
+        },
+        {
+          "id": "b50",
+          "at": "internal/filter/orgs.gen.go:886",
+          "cond": "in.OrgFilter.RevOrgFilter.AppsOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.AppsOp"
+          ]
+        },
+        {
+          "id": "b51",
+          "at": "internal/filter/orgs.gen.go:888",
+          "cond": "in.OrgFilter.RevOrgFilter.AppsOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.AppsOp"
+          ]
+        },
+        {
+          "id": "b52",
+          "at": "internal/filter/orgs.gen.go:890",
+          "cond": "in.OrgFilter.RevOrgFilter.AppsOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.AppsOp"
+          ]
+        },
+        {
+          "id": "b53",
+          "at": "internal/filter/orgs.gen.go:901",
+          "cond": "in.OrgFilter.RevOrgFilter.AppsOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.AppsOp"
+          ]
+        },
+        {
+          "id": "b54",
+          "at": "internal/filter/orgs.gen.go:903",
+          "cond": "in.OrgFilter.RevOrgFilter.AppsOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.AppsOp"
+          ]
+        },
+        {
+          "id": "b55",
+          "at": "internal/filter/orgs.gen.go:903",
+          "cond": "in.OrgFilter.RevOrgFilter.AppsOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.AppsOp"
+          ]
+        },
+        {
+          "id": "b56",
+          "at": "internal/filter/orgs.gen.go:903",
+          "cond": "in.OrgFilter.RevOrgFilter.AppsOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.AppsOp"
+          ]
+        },
+        {
+          "id": "b57",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/query.go:160",
+          "cond": "in.OrgFilter.AccountFilter.CustomFields == nil",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.CustomFields"
+          ]
+        },
+        {
+          "id": "b58",
+          "at": "internal/filter/orgs.gen.go:954",
+          "cond": "in.OrgFilter.AccountFilter.OwnedByOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.OwnedByOp"
+          ]
+        },
+        {
+          "id": "b59",
+          "at": "internal/filter/orgs.gen.go:941",
+          "cond": "in.OrgFilter.AccountFilter.OwnedByOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.OwnedByOp"
+          ]
+        },
+        {
+          "id": "b60",
+          "at": "internal/filter/orgs.gen.go:943",
+          "cond": "in.OrgFilter.AccountFilter.OwnedByOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.OwnedByOp"
+          ]
+        },
+        {
+          "id": "b61",
+          "at": "internal/filter/orgs.gen.go:945",
+          "cond": "in.OrgFilter.AccountFilter.OwnedByOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.OwnedByOp"
+          ]
+        },
+        {
+          "id": "b62",
+          "at": "internal/filter/orgs.gen.go:956",
+          "cond": "in.OrgFilter.AccountFilter.OwnedByOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.OwnedByOp"
+          ]
+        },
+        {
+          "id": "b63",
+          "at": "internal/filter/orgs.gen.go:958",
+          "cond": "in.OrgFilter.AccountFilter.OwnedByOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.OwnedByOp"
+          ]
+        },
+        {
+          "id": "b64",
+          "at": "internal/filter/orgs.gen.go:958",
+          "cond": "in.OrgFilter.AccountFilter.OwnedByOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.OwnedByOp"
+          ]
+        },
+        {
+          "id": "b65",
+          "at": "internal/filter/orgs.gen.go:958",
+          "cond": "in.OrgFilter.AccountFilter.OwnedByOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.OwnedByOp"
+          ]
+        },
+        {
+          "id": "b66",
+          "at": "internal/filter/orgs.gen.go:968",
+          "cond": "in.OrgFilter.AccountFilter.DomainsOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.DomainsOp"
+          ]
+        },
+        {
+          "id": "b67",
+          "at": "internal/filter/orgs.gen.go:990",
+          "cond": "in.OrgFilter.AccountFilter.DomainsOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.DomainsOp"
+          ]
+        },
+        {
+          "id": "b68",
+          "at": "internal/filter/orgs.gen.go:973",
+          "cond": "in.OrgFilter.AccountFilter.DomainsOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.DomainsOp"
+          ]
+        },
+        {
+          "id": "b69",
+          "at": "internal/filter/orgs.gen.go:978",
+          "cond": "in.OrgFilter.AccountFilter.DomainsOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.DomainsOp"
+          ]
+        },
+        {
+          "id": "b70",
+          "at": "internal/filter/orgs.gen.go:992",
+          "cond": "in.OrgFilter.AccountFilter.DomainsOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.DomainsOp"
+          ]
+        },
+        {
+          "id": "b71",
+          "at": "internal/filter/orgs.gen.go:994",
+          "cond": "in.OrgFilter.AccountFilter.DomainsOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.DomainsOp"
+          ]
+        },
+        {
+          "id": "b72",
+          "at": "internal/filter/orgs.gen.go:994",
+          "cond": "in.OrgFilter.AccountFilter.DomainsOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.DomainsOp"
+          ]
+        },
+        {
+          "id": "b73",
+          "at": "internal/filter/orgs.gen.go:994",
+          "cond": "in.OrgFilter.AccountFilter.DomainsOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.DomainsOp"
+          ]
+        },
+        {
+          "id": "b74",
+          "at": "internal/filter/orgs.gen.go:1004",
+          "cond": "in.OrgFilter.AccountFilter.TagsOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.TagsOp"
+          ]
+        },
+        {
+          "id": "b75",
+          "at": "internal/filter/orgs.gen.go:1047",
+          "cond": "in.OrgFilter.AccountFilter.TagsOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.TagsOp"
+          ]
+        },
+        {
+          "id": "b76",
+          "at": "internal/filter/orgs.gen.go:1017",
+          "cond": "in.OrgFilter.AccountFilter.TagsOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.TagsOp"
+          ]
+        },
+        {
+          "id": "b77",
+          "at": "internal/filter/orgs.gen.go:1027",
+          "cond": "in.OrgFilter.AccountFilter.TagsOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.TagsOp"
+          ]
+        },
+        {
+          "id": "b78",
+          "at": "internal/filter/orgs.gen.go:1049",
+          "cond": "in.OrgFilter.AccountFilter.TagsOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.TagsOp"
+          ]
+        },
+        {
+          "id": "b79",
+          "at": "internal/filter/orgs.gen.go:1051",
+          "cond": "in.OrgFilter.AccountFilter.TagsOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.TagsOp"
+          ]
+        },
+        {
+          "id": "b80",
+          "at": "internal/filter/orgs.gen.go:1051",
+          "cond": "in.OrgFilter.AccountFilter.TagsOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.TagsOp"
+          ]
+        },
+        {
+          "id": "b81",
+          "at": "internal/filter/orgs.gen.go:1051",
+          "cond": "in.OrgFilter.AccountFilter.TagsOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.TagsOp"
+          ]
+        },
+        {
+          "id": "b82",
+          "at": "internal/filter/orgs.gen.go:1061",
+          "cond": "in.OrgFilter.AccountFilter.TierOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.TierOp"
+          ]
+        },
+        {
+          "id": "b83",
+          "at": "internal/filter/orgs.gen.go:1079",
+          "cond": "in.OrgFilter.AccountFilter.TierOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.TierOp"
+          ]
+        },
+        {
+          "id": "b84",
+          "at": "internal/filter/orgs.gen.go:1066",
+          "cond": "in.OrgFilter.AccountFilter.TierOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.TierOp"
+          ]
+        },
+        {
+          "id": "b85",
+          "at": "internal/filter/orgs.gen.go:1066",
+          "cond": "in.OrgFilter.AccountFilter.TierOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.TierOp"
+          ]
+        },
+        {
+          "id": "b86",
+          "at": "internal/filter/orgs.gen.go:1081",
+          "cond": "in.OrgFilter.AccountFilter.TierOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.TierOp"
+          ]
+        },
+        {
+          "id": "b87",
+          "at": "internal/filter/orgs.gen.go:1083",
+          "cond": "in.OrgFilter.AccountFilter.TierOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.TierOp"
+          ]
+        },
+        {
+          "id": "b88",
+          "at": "internal/filter/orgs.gen.go:1083",
+          "cond": "in.OrgFilter.AccountFilter.TierOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.TierOp"
+          ]
+        },
+        {
+          "id": "b89",
+          "at": "internal/filter/orgs.gen.go:1083",
+          "cond": "in.OrgFilter.AccountFilter.TierOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.TierOp"
+          ]
+        },
+        {
+          "id": "b90",
+          "at": "internal/filter/orgs.gen.go:1093",
+          "cond": "in.OrgFilter.AccountFilter.ExternalRefsOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.ExternalRefsOp"
+          ]
+        },
+        {
+          "id": "b91",
+          "at": "internal/filter/orgs.gen.go:1115",
+          "cond": "in.OrgFilter.AccountFilter.ExternalRefsOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.ExternalRefsOp"
+          ]
+        },
+        {
+          "id": "b92",
+          "at": "internal/filter/orgs.gen.go:1098",
+          "cond": "in.OrgFilter.AccountFilter.ExternalRefsOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.ExternalRefsOp"
+          ]
+        },
+        {
+          "id": "b93",
+          "at": "internal/filter/orgs.gen.go:1103",
+          "cond": "in.OrgFilter.AccountFilter.ExternalRefsOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.ExternalRefsOp"
+          ]
+        },
+        {
+          "id": "b94",
+          "at": "internal/filter/orgs.gen.go:1117",
+          "cond": "in.OrgFilter.AccountFilter.ExternalRefsOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.ExternalRefsOp"
+          ]
+        },
+        {
+          "id": "b95",
+          "at": "internal/filter/orgs.gen.go:1119",
+          "cond": "in.OrgFilter.AccountFilter.ExternalRefsOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.ExternalRefsOp"
+          ]
+        },
+        {
+          "id": "b96",
+          "at": "internal/filter/orgs.gen.go:1119",
+          "cond": "in.OrgFilter.AccountFilter.ExternalRefsOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.ExternalRefsOp"
+          ]
+        },
+        {
+          "id": "b97",
+          "at": "internal/filter/orgs.gen.go:1119",
+          "cond": "in.OrgFilter.AccountFilter.ExternalRefsOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.ExternalRefsOp"
+          ]
+        },
+        {
+          "id": "b98",
+          "at": "internal/filter/orgs.gen.go:1165",
+          "cond": "in.OrgFilter.AccountFilter.WebsitesOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.WebsitesOp"
+          ]
+        },
+        {
+          "id": "b99",
+          "at": "internal/filter/orgs.gen.go:1187",
+          "cond": "in.OrgFilter.AccountFilter.WebsitesOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.WebsitesOp"
+          ]
+        },
+        {
+          "id": "b100",
+          "at": "internal/filter/orgs.gen.go:1170",
+          "cond": "in.OrgFilter.AccountFilter.WebsitesOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.WebsitesOp"
+          ]
+        },
+        {
+          "id": "b101",
+          "at": "internal/filter/orgs.gen.go:1175",
+          "cond": "in.OrgFilter.AccountFilter.WebsitesOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.WebsitesOp"
+          ]
+        },
+        {
+          "id": "b102",
+          "at": "internal/filter/orgs.gen.go:1189",
+          "cond": "in.OrgFilter.AccountFilter.WebsitesOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.WebsitesOp"
+          ]
+        },
+        {
+          "id": "b103",
+          "at": "internal/filter/orgs.gen.go:1191",
+          "cond": "in.OrgFilter.AccountFilter.WebsitesOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.WebsitesOp"
+          ]
+        },
+        {
+          "id": "b104",
+          "at": "internal/filter/orgs.gen.go:1191",
+          "cond": "in.OrgFilter.AccountFilter.WebsitesOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.WebsitesOp"
+          ]
+        },
+        {
+          "id": "b105",
+          "at": "internal/filter/orgs.gen.go:1191",
+          "cond": "in.OrgFilter.AccountFilter.WebsitesOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.WebsitesOp"
+          ]
+        },
+        {
+          "id": "b106",
+          "at": "internal/filter/orgs.gen.go:1208",
+          "cond": "in.OrgFilter.AccountFilter.IndustryOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.IndustryOp"
+          ]
+        },
+        {
+          "id": "b107",
+          "at": "internal/filter/orgs.gen.go:1226",
+          "cond": "in.OrgFilter.AccountFilter.IndustryOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.IndustryOp"
+          ]
+        },
+        {
+          "id": "b108",
+          "at": "internal/filter/orgs.gen.go:1213",
+          "cond": "in.OrgFilter.AccountFilter.IndustryOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.IndustryOp"
+          ]
+        },
+        {
+          "id": "b109",
+          "at": "internal/filter/orgs.gen.go:1213",
+          "cond": "in.OrgFilter.AccountFilter.IndustryOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.IndustryOp"
+          ]
+        },
+        {
+          "id": "b110",
+          "at": "internal/filter/orgs.gen.go:1228",
+          "cond": "in.OrgFilter.AccountFilter.IndustryOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.IndustryOp"
+          ]
+        },
+        {
+          "id": "b111",
+          "at": "internal/filter/orgs.gen.go:1230",
+          "cond": "in.OrgFilter.AccountFilter.IndustryOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.IndustryOp"
+          ]
+        },
+        {
+          "id": "b112",
+          "at": "internal/filter/orgs.gen.go:1230",
+          "cond": "in.OrgFilter.AccountFilter.IndustryOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.IndustryOp"
+          ]
+        },
+        {
+          "id": "b113",
+          "at": "internal/filter/orgs.gen.go:1230",
+          "cond": "in.OrgFilter.AccountFilter.IndustryOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.IndustryOp"
+          ]
+        },
+        {
+          "id": "b114",
+          "at": "internal/filter/orgs.gen.go:1240",
+          "cond": "in.OrgFilter.AccountFilter.LeadSourceOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.LeadSourceOp"
+          ]
+        },
+        {
+          "id": "b115",
+          "at": "internal/filter/orgs.gen.go:1258",
+          "cond": "in.OrgFilter.AccountFilter.LeadSourceOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.LeadSourceOp"
+          ]
+        },
+        {
+          "id": "b116",
+          "at": "internal/filter/orgs.gen.go:1245",
+          "cond": "in.OrgFilter.AccountFilter.LeadSourceOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.LeadSourceOp"
+          ]
+        },
+        {
+          "id": "b117",
+          "at": "internal/filter/orgs.gen.go:1245",
+          "cond": "in.OrgFilter.AccountFilter.LeadSourceOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.LeadSourceOp"
+          ]
+        },
+        {
+          "id": "b118",
+          "at": "internal/filter/orgs.gen.go:1260",
+          "cond": "in.OrgFilter.AccountFilter.LeadSourceOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.LeadSourceOp"
+          ]
+        },
+        {
+          "id": "b119",
+          "at": "internal/filter/orgs.gen.go:1262",
+          "cond": "in.OrgFilter.AccountFilter.LeadSourceOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.LeadSourceOp"
+          ]
+        },
+        {
+          "id": "b120",
+          "at": "internal/filter/orgs.gen.go:1262",
+          "cond": "in.OrgFilter.AccountFilter.LeadSourceOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.LeadSourceOp"
+          ]
+        },
+        {
+          "id": "b121",
+          "at": "internal/filter/orgs.gen.go:1262",
+          "cond": "in.OrgFilter.AccountFilter.LeadSourceOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.LeadSourceOp"
+          ]
+        },
+        {
+          "id": "b122",
+          "at": "internal/filter/orgs.gen.go:1426",
+          "cond": "in.OrgFilter.AccountFilter.SubtypeOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b123",
+          "at": "internal/filter/orgs.gen.go:1414",
+          "cond": "in.OrgFilter.AccountFilter.SubtypeOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b124",
+          "at": "internal/filter/orgs.gen.go:1416",
+          "cond": "in.OrgFilter.AccountFilter.SubtypeOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b125",
+          "at": "internal/filter/orgs.gen.go:1416",
+          "cond": "in.OrgFilter.AccountFilter.SubtypeOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b126",
+          "at": "internal/filter/orgs.gen.go:1428",
+          "cond": "in.OrgFilter.AccountFilter.SubtypeOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b127",
+          "at": "internal/filter/orgs.gen.go:1430",
+          "cond": "in.OrgFilter.AccountFilter.SubtypeOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b128",
+          "at": "internal/filter/orgs.gen.go:1430",
+          "cond": "in.OrgFilter.AccountFilter.SubtypeOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b129",
+          "at": "internal/filter/orgs.gen.go:1430",
+          "cond": "in.OrgFilter.AccountFilter.SubtypeOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b130",
+          "at": "internal/filter/orgs.gen.go:1471",
+          "cond": "in.OrgFilter.AccountFilter != nil",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter"
+          ]
+        },
+        {
+          "id": "b131",
+          "at": "internal/filter/orgs.gen.go:1460",
+          "cond": "in.OrgFilter.AccountFilter.AppsOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.AppsOp"
+          ]
+        },
+        {
+          "id": "b132",
+          "at": "internal/filter/orgs.gen.go:1447",
+          "cond": "in.OrgFilter.AccountFilter.AppsOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.AppsOp"
+          ]
+        },
+        {
+          "id": "b133",
+          "at": "internal/filter/orgs.gen.go:1449",
+          "cond": "in.OrgFilter.AccountFilter.AppsOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.AppsOp"
+          ]
+        },
+        {
+          "id": "b134",
+          "at": "internal/filter/orgs.gen.go:1451",
+          "cond": "in.OrgFilter.AccountFilter.AppsOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.AppsOp"
+          ]
+        },
+        {
+          "id": "b135",
+          "at": "internal/filter/orgs.gen.go:1462",
+          "cond": "in.OrgFilter.AccountFilter.AppsOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.AppsOp"
+          ]
+        },
+        {
+          "id": "b136",
+          "at": "internal/filter/orgs.gen.go:1464",
+          "cond": "in.OrgFilter.AccountFilter.AppsOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.AppsOp"
+          ]
+        },
+        {
+          "id": "b137",
+          "at": "internal/filter/orgs.gen.go:1464",
+          "cond": "in.OrgFilter.AccountFilter.AppsOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.AppsOp"
+          ]
+        },
+        {
+          "id": "b138",
+          "at": "internal/filter/orgs.gen.go:1464",
+          "cond": "in.OrgFilter.AccountFilter.AppsOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.AppsOp"
+          ]
+        },
+        {
+          "id": "b139",
+          "at": "internal/filter/orgs.gen.go:175",
+          "cond": "in.OrgFilter.CreatedDate != nil",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedDate"
+          ]
+        },
+        {
+          "id": "b140",
+          "at": "internal/filter/orgs.gen.go:164",
+          "cond": "in.OrgFilter.CreatedByIdOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedByIdOp"
+          ]
+        },
+        {
+          "id": "b141",
+          "at": "internal/filter/orgs.gen.go:152",
+          "cond": "in.OrgFilter.CreatedByIdOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedByIdOp"
+          ]
+        },
+        {
+          "id": "b142",
+          "at": "internal/filter/orgs.gen.go:154",
+          "cond": "in.OrgFilter.CreatedByIdOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedByIdOp"
+          ]
+        },
+        {
+          "id": "b143",
+          "at": "internal/filter/orgs.gen.go:154",
+          "cond": "in.OrgFilter.CreatedByIdOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedByIdOp"
+          ]
+        },
+        {
+          "id": "b144",
+          "at": "internal/filter/orgs.gen.go:166",
+          "cond": "in.OrgFilter.CreatedByIdOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedByIdOp"
+          ]
+        },
+        {
+          "id": "b145",
+          "at": "internal/filter/orgs.gen.go:168",
+          "cond": "in.OrgFilter.CreatedByIdOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedByIdOp"
+          ]
+        },
+        {
+          "id": "b146",
+          "at": "internal/filter/orgs.gen.go:168",
+          "cond": "in.OrgFilter.CreatedByIdOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedByIdOp"
+          ]
+        },
+        {
+          "id": "b147",
+          "at": "internal/filter/orgs.gen.go:168",
+          "cond": "in.OrgFilter.CreatedByIdOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedByIdOp"
+          ]
+        },
+        {
+          "id": "b148",
+          "at": "internal/filter/orgs.gen.go:178",
+          "cond": "in.OrgFilter.CreatedDate.After != nil",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedDate.After"
+          ]
+        },
+        {
+          "id": "b149",
+          "at": "internal/filter/orgs.gen.go:185",
+          "cond": "in.OrgFilter.CreatedDate.Before != nil",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedDate.Before"
+          ]
+        },
+        {
+          "id": "b150",
+          "at": "internal/filter/orgs.gen.go:192",
+          "cond": "in.OrgFilter.CreatedDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b151",
+          "at": "internal/filter/orgs.gen.go:193",
+          "cond": "in.OrgFilter.CreatedDate.After != nil",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedDate.After"
+          ]
+        },
+        {
+          "id": "b152",
+          "at": "",
+          "cond": "in.OrgFilter.CreatedDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedDate.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b153",
+          "at": "internal/filter/orgs.gen.go:193",
+          "cond": "in.OrgFilter.CreatedDate.Before != nil",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedDate.Before"
+          ]
+        },
+        {
+          "id": "b154",
+          "at": "internal/filter/orgs.gen.go:299",
+          "cond": "in.OrgFilter.ModifiedDate != nil",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedDate"
+          ]
+        },
+        {
+          "id": "b155",
+          "at": "internal/filter/orgs.gen.go:288",
+          "cond": "in.OrgFilter.ModifiedByIdOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedByIdOp"
+          ]
+        },
+        {
+          "id": "b156",
+          "at": "internal/filter/orgs.gen.go:276",
+          "cond": "in.OrgFilter.ModifiedByIdOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedByIdOp"
+          ]
+        },
+        {
+          "id": "b157",
+          "at": "internal/filter/orgs.gen.go:278",
+          "cond": "in.OrgFilter.ModifiedByIdOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedByIdOp"
+          ]
+        },
+        {
+          "id": "b158",
+          "at": "internal/filter/orgs.gen.go:278",
+          "cond": "in.OrgFilter.ModifiedByIdOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedByIdOp"
+          ]
+        },
+        {
+          "id": "b159",
+          "at": "internal/filter/orgs.gen.go:290",
+          "cond": "in.OrgFilter.ModifiedByIdOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedByIdOp"
+          ]
+        },
+        {
+          "id": "b160",
+          "at": "internal/filter/orgs.gen.go:292",
+          "cond": "in.OrgFilter.ModifiedByIdOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedByIdOp"
+          ]
+        },
+        {
+          "id": "b161",
+          "at": "internal/filter/orgs.gen.go:292",
+          "cond": "in.OrgFilter.ModifiedByIdOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedByIdOp"
+          ]
+        },
+        {
+          "id": "b162",
+          "at": "internal/filter/orgs.gen.go:292",
+          "cond": "in.OrgFilter.ModifiedByIdOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedByIdOp"
+          ]
+        },
+        {
+          "id": "b163",
+          "at": "internal/filter/orgs.gen.go:302",
+          "cond": "in.OrgFilter.ModifiedDate.After != nil",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedDate.After"
+          ]
+        },
+        {
+          "id": "b164",
+          "at": "internal/filter/orgs.gen.go:309",
+          "cond": "in.OrgFilter.ModifiedDate.Before != nil",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedDate.Before"
+          ]
+        },
+        {
+          "id": "b165",
+          "at": "internal/filter/orgs.gen.go:316",
+          "cond": "in.OrgFilter.ModifiedDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b166",
+          "at": "internal/filter/orgs.gen.go:317",
+          "cond": "in.OrgFilter.ModifiedDate.After != nil",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedDate.After"
+          ]
+        },
+        {
+          "id": "b167",
+          "at": "",
+          "cond": "in.OrgFilter.ModifiedDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedDate.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b168",
+          "at": "internal/filter/orgs.gen.go:317",
+          "cond": "in.OrgFilter.ModifiedDate.Before != nil",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedDate.Before"
+          ]
+        },
+        {
+          "id": "b169",
+          "at": "internal/filter/orgs.gen.go:412",
+          "cond": "in.OrgFilter.CreatedByAgentIdOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedByAgentIdOp"
+          ]
+        },
+        {
+          "id": "b170",
+          "at": "internal/filter/orgs.gen.go:400",
+          "cond": "in.OrgFilter.CreatedByAgentIdOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedByAgentIdOp"
+          ]
+        },
+        {
+          "id": "b171",
+          "at": "internal/filter/orgs.gen.go:402",
+          "cond": "in.OrgFilter.CreatedByAgentIdOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedByAgentIdOp"
+          ]
+        },
+        {
+          "id": "b172",
+          "at": "internal/filter/orgs.gen.go:402",
+          "cond": "in.OrgFilter.CreatedByAgentIdOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedByAgentIdOp"
+          ]
+        },
+        {
+          "id": "b173",
+          "at": "internal/filter/orgs.gen.go:414",
+          "cond": "in.OrgFilter.CreatedByAgentIdOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedByAgentIdOp"
+          ]
+        },
+        {
+          "id": "b174",
+          "at": "internal/filter/orgs.gen.go:416",
+          "cond": "in.OrgFilter.CreatedByAgentIdOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedByAgentIdOp"
+          ]
+        },
+        {
+          "id": "b175",
+          "at": "internal/filter/orgs.gen.go:416",
+          "cond": "in.OrgFilter.CreatedByAgentIdOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedByAgentIdOp"
+          ]
+        },
+        {
+          "id": "b176",
+          "at": "internal/filter/orgs.gen.go:416",
+          "cond": "in.OrgFilter.CreatedByAgentIdOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedByAgentIdOp"
+          ]
+        },
+        {
+          "id": "b177",
+          "at": "internal/filter/orgs.gen.go:463",
+          "cond": "in.OrgFilter.EnvironmentOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.EnvironmentOp"
+          ]
+        },
+        {
+          "id": "b178",
+          "at": "internal/filter/orgs.gen.go:451",
+          "cond": "in.OrgFilter.EnvironmentOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.EnvironmentOp"
+          ]
+        },
+        {
+          "id": "b179",
+          "at": "internal/filter/orgs.gen.go:453",
+          "cond": "in.OrgFilter.EnvironmentOp == 4",
+          "predicate_paths": [
+            "in.OrgFilter.EnvironmentOp"
+          ]
+        },
+        {
+          "id": "b180",
+          "at": "internal/filter/orgs.gen.go:453",
+          "cond": "in.OrgFilter.EnvironmentOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.EnvironmentOp"
+          ]
+        },
+        {
+          "id": "b181",
+          "at": "internal/filter/orgs.gen.go:465",
+          "cond": "in.OrgFilter.EnvironmentOp == 5",
+          "predicate_paths": [
+            "in.OrgFilter.EnvironmentOp"
+          ]
+        },
+        {
+          "id": "b182",
+          "at": "internal/filter/orgs.gen.go:467",
+          "cond": "in.OrgFilter.EnvironmentOp == 2",
+          "predicate_paths": [
+            "in.OrgFilter.EnvironmentOp"
+          ]
+        },
+        {
+          "id": "b183",
+          "at": "internal/filter/orgs.gen.go:467",
+          "cond": "in.OrgFilter.EnvironmentOp == 1",
+          "predicate_paths": [
+            "in.OrgFilter.EnvironmentOp"
+          ]
+        },
+        {
+          "id": "b184",
+          "at": "internal/filter/orgs.gen.go:467",
+          "cond": "in.OrgFilter.EnvironmentOp == 3",
+          "predicate_paths": [
+            "in.OrgFilter.EnvironmentOp"
+          ]
+        },
+        {
+          "id": "b185",
+          "at": "internal/filter/orgs.gen.go:480",
+          "cond": "in.OrgFilter.DevOrgFilter != nil",
+          "predicate_paths": [
+            "in.OrgFilter.DevOrgFilter"
+          ]
+        },
+        {
+          "id": "b186",
+          "at": "internal/filter/orgs.gen.go:498",
+          "cond": "in.OrgFilter.RevOrgFilter != nil",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter"
+          ]
+        },
+        {
+          "id": "b187",
+          "at": "internal/filter/orgs.gen.go:516",
+          "cond": "in.OrgFilter.AccountFilter != nil",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter"
+          ]
+        },
+        {
+          "id": "b188",
+          "at": "internal/service/account.go:2165",
+          "cond": "in.DqlQuery != nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b189",
+          "at": "internal/service/account.go:2169",
+          "cond": "in.GroupPageParams == nil",
+          "predicate_paths": [
+            "in.GroupPageParams"
+          ]
+        },
+        {
+          "id": "b190",
+          "at": "internal/service/account.go:2174",
+          "cond": "in.GroupPageParams != nil",
+          "predicate_paths": [
+            "in.GroupPageParams"
+          ]
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": [
+      {
+        "name": "Group accounts with invalid group by",
+        "file": "api/v2_internal/accounts/accounts_group_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ACCOUNTS_GROUP"
+        ],
+        "fields_set": [
+          "GroupBy"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false
+      },
+      {
+        "name": "Group accounts with empty group by",
+        "file": "api/v2_internal/accounts/accounts_group_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ACCOUNTS_GROUP"
+        ],
+        "fields_set": null,
+        "statuses": [
+          400
+        ],
+        "asserts_success": false
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).GroupAccounts",
+    "request_type": "api.GroupAccountsRequest",
+    "response_type": "api.GroupAccountsResponse",
+    "sinks": [
+      {
+        "kind": "rpc",
+        "target": "GroupSearch",
+        "via_paths": [
+          "in.DqlQuery",
+          "in.SkipItemsInGroup"
+        ],
+        "at": "internal/service/dql_search.go:259"
+      },
+      {
+        "kind": "dispatch",
+        "target": "ParseQuery",
+        "via_paths": [
+          "in.DqlQuery"
+        ],
+        "at": "internal/dql/converter.go:78"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetSortBy",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:107"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetSortBy",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:110"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetSortBy",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:111"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPage",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:118"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPage",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:121"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:126"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPage",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:124"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:127"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:134"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:130"
+      },
+      {
+        "kind": "db",
+        "target": "Aggregate",
+        "via_paths": [
+          "in.GroupPageParams",
+          "in.GroupPageParams.GroupBy",
+          "in.GroupPageParams.PerGroup",
+          "in.GroupPageParams.SortGroupKeyBy",
+          "in.SkipItemsInGroup",
+          "in.SkipTotalGroups",
+          "in.SkipTotalItems"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:699"
+      },
+      {
+        "kind": "db",
+        "target": "Aggregate",
+        "via_paths": [
+          "in.GroupPageParams",
+          "in.GroupPageParams.GroupBy",
+          "in.GroupPageParams.PerGroup",
+          "in.GroupPageParams.SortGroupKeyBy",
+          "in.SkipItemsInGroup",
+          "in.SkipTotalGroups",
+          "in.SkipTotalItems"
+        ],
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/db/group_item_helpers.go:534"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "orgStateEnumReverseMap",
+        "at": "internal/service/dql_search.go:145",
+        "tainted": false
+      },
+      {
+        "symbol": "userStateEnumReverseMap",
+        "at": "internal/service/dql_search.go:149",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrDQLQueryNil",
+        "at": "internal/dql/converter.go:73",
+        "tainted": true
+      },
+      {
+        "symbol": "errInvalidGroupParams",
+        "at": "internal/service/account_dql.go:413",
+        "tainted": true
+      },
+      {
+        "symbol": "ErrInvalidQuarter",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/fiscal/fiscal_boundaries.go:116",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrTimeBeforeFiscalStart",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/fiscal/fiscal_boundaries.go:197",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidPeriod",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/fiscal/fiscal_boundaries.go:211",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrTimeBeforeFiscalStart",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/fiscal/fiscal_boundaries.go:207",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/fiscal/fiscal_boundaries.go:283",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/fiscal/fiscal_boundaries.go:319",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/fiscal/fiscal_boundaries.go:380",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/fiscal/fiscal_boundaries.go:219",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/fiscal/fiscal_boundaries.go:225",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidGroupParams",
+        "at": "internal/service/account.go:2170",
+        "tainted": true
+      },
+      {
+        "symbol": "errInvalidSortByInputField",
+        "at": "internal/service/account.go:2178",
+        "tainted": true
+      },
+      {
+        "symbol": "errInvalidGroupByInputField",
+        "at": "internal/service/account.go:2187",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GroupAccounts` (HTTP operation `AccountsGroup`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [200, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SearchQuery\n  - in.GroupPageParams.PerGroup\n  - in.GroupPageParams.SortBy\n  - in.GroupPageParams.SortGroupKeyBy\n  - in.OrgFilter.AccountFilter.Apps\n  - in.OrgFilter.AccountFilter.AppsOp\n  - in.OrgFilter.AccountFilter.CustomFields.Fields\n  - in.OrgFilter.AccountFilter.Domains\n  - in.OrgFilter.AccountFilter.DomainsOp\n  - in.OrgFilter.AccountFilter.ExternalRefs\n  - in.OrgFilter.AccountFilter.ExternalRefsOp\n  - in.OrgFilter.AccountFilter.ExternalSourceData\n  - in.OrgFilter.AccountFilter.Industry\n  - in.OrgFilter.AccountFilter.IndustryOp\n  - in.OrgFilter.AccountFilter.IngestionChannel\n  - in.OrgFilter.AccountFilter.LeadSource\n  - in.OrgFilter.AccountFilter.LeadSourceOp\n  - in.OrgFilter.AccountFilter.OwnedBy\n  - in.OrgFilter.AccountFilter.OwnedByOp\n  - in.OrgFilter.AccountFilter.SharedWith\n  - in.OrgFilter.AccountFilter.Stage\n  - in.OrgFilter.AccountFilter.StagedInfo\n  - in.OrgFilter.AccountFilter.Subtype\n  - in.OrgFilter.AccountFilter.SubtypeOp\n  - in.OrgFilter.AccountFilter.SyncMetadata\n  - in.OrgFilter.AccountFilter.Tags\n  - in.OrgFilter.AccountFilter.TagsOp\n  - in.OrgFilter.AccountFilter.Tier\n  - in.OrgFilter.AccountFilter.TierOp\n  - in.OrgFilter.AccountFilter.TotalRevenue\n  - in.OrgFilter.AccountFilter.Websites\n  - in.OrgFilter.AccountFilter.WebsitesOp\n  - in.OrgFilter.CreatedByAgentId\n  - in.OrgFilter.CreatedByAgentIdOp\n  - in.OrgFilter.CreatedById\n  - in.OrgFilter.CreatedByIdOp\n  - in.OrgFilter.CreatedDate.After\n  - in.OrgFilter.CreatedDate.Before\n  - in.OrgFilter.CreatedDate.DatePreset.Type\n  - in.OrgFilter.DevOrgFilter.UeSyncState\n  - in.OrgFilter.DisplayName\n  - in.OrgFilter.Environment\n  - in.OrgFilter.EnvironmentOp\n  - in.OrgFilter.ModifiedById\n  - in.OrgFilter.ModifiedByIdOp\n  - in.OrgFilter.ModifiedDate.After\n  - in.OrgFilter.ModifiedDate.Before\n  - in.OrgFilter.ModifiedDate.DatePreset.Type\n  - in.OrgFilter.RevOrgFilter.Account\n  - in.OrgFilter.RevOrgFilter.AccountOp\n  - in.OrgFilter.RevOrgFilter.Apps\n  - in.OrgFilter.RevOrgFilter.AppsOp\n  - in.OrgFilter.RevOrgFilter.CustomFields.Fields\n  - in.OrgFilter.RevOrgFilter.ExternalOid\n  - in.OrgFilter.RevOrgFilter.ExternalOidIssuer\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp\n  - in.OrgFilter.RevOrgFilter.ExternalSourceData\n  - in.OrgFilter.RevOrgFilter.SharedWith\n  - in.OrgFilter.RevOrgFilter.SlaId\n  - (+12 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DqlQuery == nil\n  - in.DqlQuery.SearchQuery != \"\"\n  - in.DqlQuery == nil\n  - in.DqlQuery == nil\n  - in.GroupPageParams.PerGroup < 0\n  - in.GroupPageParams.PerGroup != 0\n  - in.GroupPageParams.PerGroup < 0\n  - in.GroupPageParams.PerGroup > *maxItemsPerGroup\n  - call() * in.GroupPageParams.PerGroup > *maxTotalGroupItems\n  - in.GroupPageParams == nil\n  - in.DqlQuery == nil\n  - in.DqlQuery\n  - in.OrgFilter.RevOrgFilter.CustomFields == nil\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 3\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 4\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 2\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 4\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 5\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 2\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 1\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 3\n  - in.OrgFilter.RevOrgFilter.TagsOp == 3\n  - in.OrgFilter.RevOrgFilter.TagsOp == 4\n  - in.OrgFilter.RevOrgFilter.TagsOp == 2\n  - in.OrgFilter.RevOrgFilter.TagsOp == 4\n  - in.OrgFilter.RevOrgFilter.TagsOp == 5\n  - in.OrgFilter.RevOrgFilter.TagsOp == 2\n  - in.OrgFilter.RevOrgFilter.TagsOp == 1\n  - in.OrgFilter.RevOrgFilter.TagsOp == 3\n  - in.OrgFilter.RevOrgFilter.AccountOp == 4\n  - in.OrgFilter.RevOrgFilter.AccountOp == 3\n  - in.OrgFilter.RevOrgFilter.AccountOp == 4\n  - in.OrgFilter.RevOrgFilter.AccountOp == 2\n  - in.OrgFilter.RevOrgFilter.AccountOp == 5\n  - in.OrgFilter.RevOrgFilter.AccountOp == 2\n  - in.OrgFilter.RevOrgFilter.AccountOp == 1\n  - in.OrgFilter.RevOrgFilter.AccountOp == 3\n  - in.OrgFilter.RevOrgFilter.SubtypeOp == 4\n  - in.OrgFilter.RevOrgFilter.SubtypeOp == 3\n  - in.OrgFilter.RevOrgFilter.SubtypeOp == 4\n  - (+148 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidGroupByInputField\n  - errInvalidGroupParams\n  - errInvalidSortByInputField\n  - orgStateEnumReverseMap\n  - userStateEnumReverseMap\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}
