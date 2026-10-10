@@ -11,7 +11,7 @@
       "coverage_pct": 0
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 5,
+      "leaf_fields_read_by_rpc": 2,
       "covered_count": 0,
       "coverage_pct": 0,
       "request_fields_set_by_tests": 0,
@@ -19,12 +19,12 @@
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 1,
+          "total": 2,
           "set": 0,
           "pct": 0
         },
         "nested": {
-          "total": 4,
+          "total": 0,
           "set": 0,
           "pct": 0
         },
@@ -36,15 +36,12 @@
       },
       "covered": null,
       "gaps": [
-        "in.AccountId.Components",
-        "in.AccountId.Partition",
-        "in.AccountId.PartitionType",
-        "in.AccountId.ServiceType",
+        "in.AccountId",
         "in.IsSystemDelete"
       ]
     },
     "branches": {
-      "total": 9,
+      "total": 8,
       "happy_path_reached": false,
       "reachable_on_happy_path": 7,
       "present_arm_exercised": 0,
@@ -75,7 +72,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 4,
+          "total": 3,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -95,14 +92,6 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.AccountId.Partition != \"\"",
-          "predicate_paths": [
-            "in.AccountId.Partition"
-          ]
-        },
-        {
-          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1503",
           "cond": "in.AccountId == nil",
           "predicate_paths": [
@@ -110,39 +99,39 @@
           ]
         },
         {
-          "id": "b4",
+          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1510",
-          "cond": "in.AccountId|in.AccountId.Partition",
+          "cond": "in.AccountId",
+          "predicate_paths": [
+            "in.AccountId"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
+          "cond": "in.AccountId == \"\"",
           "predicate_paths": [
             "in.AccountId"
           ]
         },
         {
           "id": "b5",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
-          "cond": "in.AccountId|in.AccountId.Partition == \"\"",
+          "at": "internal/service/cache.go:584",
+          "cond": "in.AccountId != nil",
           "predicate_paths": [
             "in.AccountId"
           ]
         },
         {
           "id": "b6",
-          "at": "internal/service/cache.go:584",
-          "cond": "in.AccountId|in.AccountId.Partition != nil",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:593",
+          "cond": "in.AccountId == nil",
           "predicate_paths": [
             "in.AccountId"
           ]
         },
         {
           "id": "b7",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:593",
-          "cond": "in.AccountId|in.AccountId.Partition == nil",
-          "predicate_paths": [
-            "in.AccountId"
-          ]
-        },
-        {
-          "id": "b8",
           "at": "internal/service/account.go:1260",
           "cond": "in.IsSystemDelete",
           "predicate_paths": [
@@ -150,7 +139,7 @@
           ]
         },
         {
-          "id": "b9",
+          "id": "b8",
           "at": "internal/service/account.go:1226",
           "cond": "in != nil",
           "predicate_paths": [
@@ -182,8 +171,7 @@
         "kind": "rpc",
         "target": "Lock",
         "via_paths": [
-          "in.AccountId",
-          "in.AccountId.Partition"
+          "in.AccountId"
         ],
         "at": "internal/service/cache.go:576"
       },
@@ -191,8 +179,7 @@
         "kind": "rpc",
         "target": "RemoveAccountWithExternalRefs",
         "via_paths": [
-          "in.AccountId",
-          "in.AccountId.Partition"
+          "in.AccountId"
         ],
         "at": "internal/service/cache.go:585"
       },
@@ -201,7 +188,6 @@
         "target": "ConfigureClient",
         "via_paths": [
           "in.AccountId",
-          "in.AccountId.Partition",
           "in.IsSystemDelete"
         ],
         "at": "/Users/devrev/go/pkg/mod/go.temporal.io/sdk@v1.46.0/internal/client.go:1447"
@@ -211,7 +197,6 @@
         "target": "ExecuteWorkflow",
         "via_paths": [
           "in.AccountId",
-          "in.AccountId.Partition",
           "in.IsSystemDelete"
         ],
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/sdks/temporal/workflow/workflow.go:64"
@@ -236,5 +221,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteAccount` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountId.Components\n  - in.AccountId.Partition\n  - in.AccountId.PartitionType\n  - in.AccountId.ServiceType\n  - in.IsSystemDelete\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountId == nil\n  - in.AccountId.Partition != \"\"\n  - in.AccountId == nil\n  - in.AccountId|in.AccountId.Partition\n  - in.AccountId|in.AccountId.Partition == \"\"\n  - in.AccountId|in.AccountId.Partition != nil\n  - in.AccountId|in.AccountId.Partition == nil\n  - in.IsSystemDelete\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errAccountNotFound\n  - errInvalidSortByInputField\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteAccount` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountId\n  - in.IsSystemDelete\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountId == nil\n  - in.AccountId == nil\n  - in.AccountId\n  - in.AccountId == \"\"\n  - in.AccountId != nil\n  - in.AccountId == nil\n  - in.IsSystemDelete\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errAccountNotFound\n  - errInvalidSortByInputField\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

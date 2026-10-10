@@ -31,7 +31,7 @@
       "coverage_pct": 12.5
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 12,
+      "leaf_fields_read_by_rpc": 3,
       "covered_count": 0,
       "coverage_pct": 0,
       "request_fields_set_by_tests": 3,
@@ -39,12 +39,12 @@
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 0,
+          "total": 3,
           "set": 0,
           "pct": 0
         },
         "nested": {
-          "total": 12,
+          "total": 0,
           "set": 0,
           "pct": 0
         },
@@ -56,22 +56,13 @@
       },
       "covered": null,
       "gaps": [
-        "in.ActorId.Components",
-        "in.ActorId.Partition",
-        "in.ActorId.PartitionType",
-        "in.ActorId.ServiceType",
-        "in.ArtifactId.Components",
-        "in.ArtifactId.Partition",
-        "in.ArtifactId.PartitionType",
-        "in.ArtifactId.ServiceType",
-        "in.DevOid.Components",
-        "in.DevOid.Partition",
-        "in.DevOid.PartitionType",
-        "in.DevOid.ServiceType"
+        "in.ActorId",
+        "in.ArtifactId",
+        "in.DevOid"
       ]
     },
     "branches": {
-      "total": 17,
+      "total": 14,
       "happy_path_reached": true,
       "reachable_on_happy_path": 13,
       "present_arm_exercised": 0,
@@ -102,7 +93,7 @@
           "absent_arm_exercised": 6
         },
         "library": {
-          "total": 10,
+          "total": 7,
           "reachable_on_happy_path": 7,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -122,38 +113,30 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.ActorId.Partition != \"\"",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
+          "cond": "in.ActorId",
           "predicate_paths": [
-            "in.ActorId.Partition"
+            "in.ActorId"
           ]
         },
         {
           "id": "b3",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
-          "cond": "in.ActorId|in.ActorId.Partition",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
+          "cond": "in.ActorId",
           "predicate_paths": [
             "in.ActorId"
           ]
         },
         {
           "id": "b4",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
-          "cond": "in.ActorId|in.ActorId.Partition",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
+          "cond": "in.ActorId",
           "predicate_paths": [
             "in.ActorId"
           ]
         },
         {
           "id": "b5",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
-          "cond": "in.ActorId|in.ActorId.Partition",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
@@ -161,15 +144,7 @@
           ]
         },
         {
-          "id": "b7",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.DevOid.Partition != \"\"",
-          "predicate_paths": [
-            "in.DevOid.Partition"
-          ]
-        },
-        {
-          "id": "b8",
+          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
           "cond": "in.ArtifactId == nil",
           "predicate_paths": [
@@ -177,23 +152,15 @@
           ]
         },
         {
-          "id": "b9",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.ArtifactId.Partition != \"\"",
-          "predicate_paths": [
-            "in.ArtifactId.Partition"
-          ]
-        },
-        {
-          "id": "b10",
+          "id": "b7",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
-          "cond": "in.ArtifactId|in.ArtifactId.Partition == *ObjectTypeArtifact",
+          "cond": "in.ArtifactId == *ObjectTypeArtifact",
           "predicate_paths": [
             "in.ArtifactId"
           ]
         },
         {
-          "id": "b11",
+          "id": "b8",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:491",
           "cond": "in.ActorId == nil",
           "predicate_paths": [
@@ -201,15 +168,15 @@
           ]
         },
         {
-          "id": "b12",
+          "id": "b9",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:498",
-          "cond": "in.ActorId|in.ActorId.Partition",
+          "cond": "in.ActorId",
           "predicate_paths": [
             "in.ActorId"
           ]
         },
         {
-          "id": "b13",
+          "id": "b10",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:501",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
@@ -217,15 +184,15 @@
           ]
         },
         {
-          "id": "b14",
+          "id": "b11",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:508",
-          "cond": "in.DevOid|in.DevOid.Partition",
+          "cond": "in.DevOid",
           "predicate_paths": [
             "in.DevOid"
           ]
         },
         {
-          "id": "b15",
+          "id": "b12",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:511",
           "cond": "in.ArtifactId == nil",
           "predicate_paths": [
@@ -233,15 +200,15 @@
           ]
         },
         {
-          "id": "b16",
+          "id": "b13",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:518",
-          "cond": "in.ArtifactId|in.ArtifactId.Partition",
+          "cond": "in.ArtifactId",
           "predicate_paths": [
             "in.ArtifactId"
           ]
         },
         {
-          "id": "b17",
+          "id": "b14",
           "at": "internal/server/update_artifact_content.go:33",
           "cond": "in != nil",
           "predicate_paths": [
@@ -327,5 +294,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateArtifactContent` (HTTP operation `ArtifactsVersionsPrepare`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId.Components\n  - in.ActorId.Partition\n  - in.ActorId.PartitionType\n  - in.ActorId.ServiceType\n  - in.ArtifactId.Components\n  - in.ArtifactId.Partition\n  - in.ArtifactId.PartitionType\n  - in.ArtifactId.ServiceType\n  - in.DevOid.Components\n  - in.DevOid.Partition\n  - in.DevOid.PartitionType\n  - in.DevOid.ServiceType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId.Partition != \"\"\n  - in.ActorId|in.ActorId.Partition\n  - in.ActorId|in.ActorId.Partition\n  - in.ActorId|in.ActorId.Partition\n  - in.DevOid == nil\n  - in.DevOid.Partition != \"\"\n  - in.ArtifactId == nil\n  - in.ArtifactId.Partition != \"\"\n  - in.ArtifactId|in.ArtifactId.Partition == *ObjectTypeArtifact\n  - in.ActorId == nil\n  - in.ActorId|in.ActorId.Partition\n  - in.DevOid == nil\n  - in.DevOid|in.DevOid.Partition\n  - in.ArtifactId == nil\n  - in.ArtifactId|in.ArtifactId.Partition\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `filename` -> suggestions []\n  - test field `filetype` -> suggestions []\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateArtifactContent` (HTTP operation `ArtifactsVersionsPrepare`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.ArtifactId\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId\n  - in.ActorId\n  - in.ActorId\n  - in.DevOid == nil\n  - in.ArtifactId == nil\n  - in.ArtifactId == *ObjectTypeArtifact\n  - in.ActorId == nil\n  - in.ActorId\n  - in.DevOid == nil\n  - in.DevOid\n  - in.ArtifactId == nil\n  - in.ArtifactId\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `filename` -> suggestions []\n  - test field `filetype` -> suggestions []\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

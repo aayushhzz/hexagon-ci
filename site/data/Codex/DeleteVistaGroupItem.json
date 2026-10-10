@@ -11,7 +11,7 @@
       "coverage_pct": 0
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 12,
+      "leaf_fields_read_by_rpc": 3,
       "covered_count": 0,
       "coverage_pct": 0,
       "request_fields_set_by_tests": 0,
@@ -19,12 +19,12 @@
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 0,
+          "total": 3,
           "set": 0,
           "pct": 0
         },
         "nested": {
-          "total": 12,
+          "total": 0,
           "set": 0,
           "pct": 0
         },
@@ -36,22 +36,13 @@
       },
       "covered": null,
       "gaps": [
-        "in.ActorId.Components",
-        "in.ActorId.Partition",
-        "in.ActorId.PartitionType",
-        "in.ActorId.ServiceType",
-        "in.DevOid.Components",
-        "in.DevOid.Partition",
-        "in.DevOid.PartitionType",
-        "in.DevOid.ServiceType",
-        "in.Id.Components",
-        "in.Id.Partition",
-        "in.Id.PartitionType",
-        "in.Id.ServiceType"
+        "in.ActorId",
+        "in.DevOid",
+        "in.Id"
       ]
     },
     "branches": {
-      "total": 9,
+      "total": 6,
       "happy_path_reached": false,
       "reachable_on_happy_path": 6,
       "present_arm_exercised": 0,
@@ -82,7 +73,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 6,
+          "total": 3,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -126,14 +117,6 @@
         },
         {
           "id": "b5",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.Id.Partition != \"\"",
-          "predicate_paths": [
-            "in.Id.Partition"
-          ]
-        },
-        {
-          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
@@ -141,27 +124,11 @@
           ]
         },
         {
-          "id": "b7",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.DevOid.Partition != \"\"",
-          "predicate_paths": [
-            "in.DevOid.Partition"
-          ]
-        },
-        {
-          "id": "b8",
+          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
           "cond": "in.ActorId == nil",
           "predicate_paths": [
             "in.ActorId"
-          ]
-        },
-        {
-          "id": "b9",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.ActorId.Partition != \"\"",
-          "predicate_paths": [
-            "in.ActorId.Partition"
           ]
         }
       ]
@@ -181,8 +148,7 @@
         "kind": "rpc",
         "target": "TryLock",
         "via_paths": [
-          "in.Id",
-          "in.Id.Partition"
+          "in.Id"
         ],
         "at": "internal/serverv2/crud.go:224"
       },
@@ -190,8 +156,7 @@
         "kind": "rpc",
         "target": "Remove",
         "via_paths": [
-          "in.Id",
-          "in.Id.Partition"
+          "in.Id"
         ],
         "at": "internal/serverv2/crud.go:230"
       }
@@ -199,5 +164,5 @@
     "errors": [],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteVistaGroupItem` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId.Components\n  - in.ActorId.Partition\n  - in.ActorId.PartitionType\n  - in.ActorId.ServiceType\n  - in.DevOid.Components\n  - in.DevOid.Partition\n  - in.DevOid.PartitionType\n  - in.DevOid.ServiceType\n  - in.Id.Components\n  - in.Id.Partition\n  - in.Id.PartitionType\n  - in.Id.ServiceType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.ActorId == nil\n  - in.Id == nil\n  - in.Id == nil\n  - in.Id.Partition != \"\"\n  - in.DevOid == nil\n  - in.DevOid.Partition != \"\"\n  - in.ActorId == nil\n  - in.ActorId.Partition != \"\"\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteVistaGroupItem` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.DevOid\n  - in.Id\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.ActorId == nil\n  - in.Id == nil\n  - in.Id == nil\n  - in.DevOid == nil\n  - in.ActorId == nil\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

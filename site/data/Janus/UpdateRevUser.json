@@ -35,9 +35,9 @@
       "coverage_pct": 10
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 11,
+      "leaf_fields_read_by_rpc": 8,
       "covered_count": 1,
-      "coverage_pct": 9.1,
+      "coverage_pct": 12.5,
       "request_fields_set_by_tests": 15,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
@@ -48,12 +48,12 @@
           "pct": 0
         },
         "nested": {
-          "total": 4,
+          "total": 5,
           "set": 1,
-          "pct": 25
+          "pct": 20
         },
         "deep": {
-          "total": 6,
+          "total": 2,
           "set": 0,
           "pct": 0
         }
@@ -73,25 +73,22 @@
         "in.RevUser.ExternalUid",
         "in.RevUser.State",
         "in.RevUser.UnsetFieldMask.Paths",
-        "in.UserIdentifier.UserDon.Components",
-        "in.UserIdentifier.UserDon.Partition",
-        "in.UserIdentifier.UserDon.PartitionType",
-        "in.UserIdentifier.UserDon.ServiceType",
+        "in.UserIdentifier.UserDon",
         "in.UserIdentifier.UserExternalId"
       ]
     },
     "branches": {
-      "total": 17,
+      "total": 16,
       "happy_path_reached": true,
       "reachable_on_happy_path": 1,
       "present_arm_exercised": 2,
-      "present_arm_pct": 11.8,
+      "present_arm_pct": 12.5,
       "absent_arm_exercised": 1,
       "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 11.8,
+      "coverage_pct": 12.5,
       "by_origin": {
         "service": {
           "total": 15,
@@ -112,7 +109,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 2,
+          "total": 1,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -132,14 +129,6 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.UserIdentifier.UserDon.Partition != \"\"",
-          "predicate_paths": [
-            "in.UserIdentifier.UserDon.Partition"
-          ]
-        },
-        {
-          "id": "b3",
           "at": "internal/service/revuser.go:2156",
           "cond": "in.UserIdentifier.UserDon != nil",
           "predicate_paths": [
@@ -147,7 +136,7 @@
           ]
         },
         {
-          "id": "b4",
+          "id": "b3",
           "at": "internal/service/revuser_utils.go:159",
           "cond": "in.UserIdentifier.UserDon == nil",
           "predicate_paths": [
@@ -155,7 +144,7 @@
           ]
         },
         {
-          "id": "b6",
+          "id": "b5",
           "at": "internal/service/revuser.go:1759",
           "cond": "in.RevUser.State != 0",
           "predicate_paths": [
@@ -163,7 +152,7 @@
           ]
         },
         {
-          "id": "b7",
+          "id": "b6",
           "at": "internal/service/revuser.go:1763",
           "cond": "in.RevUser.UnsetFieldMask.Paths",
           "predicate_paths": [
@@ -171,7 +160,7 @@
           ]
         },
         {
-          "id": "b8",
+          "id": "b7",
           "at": "internal/service/revuser.go:1768",
           "cond": "in.RevUser.UnsetFieldMask.Paths",
           "predicate_paths": [
@@ -179,7 +168,7 @@
           ]
         },
         {
-          "id": "b9",
+          "id": "b8",
           "at": "internal/service/revuser.go:1767",
           "cond": "in.RevUser.UnsetFieldMask.Paths",
           "predicate_paths": [
@@ -187,7 +176,7 @@
           ]
         },
         {
-          "id": "b10",
+          "id": "b9",
           "at": "internal/service/revuser.go:1766",
           "cond": "in.RevUser.UnsetFieldMask.Paths",
           "predicate_paths": [
@@ -195,7 +184,7 @@
           ]
         },
         {
-          "id": "b11",
+          "id": "b10",
           "at": "internal/service/revuser.go:1765",
           "cond": "in.RevUser.UnsetFieldMask.Paths",
           "predicate_paths": [
@@ -203,7 +192,7 @@
           ]
         },
         {
-          "id": "b12",
+          "id": "b11",
           "at": "internal/service/revuser.go:1764",
           "cond": "in.RevUser.UnsetFieldMask.Paths",
           "predicate_paths": [
@@ -211,7 +200,7 @@
           ]
         },
         {
-          "id": "b13",
+          "id": "b12",
           "at": "internal/service/revuser.go:1784",
           "cond": "in.IsJanusAsyncFlow",
           "predicate_paths": [
@@ -219,7 +208,7 @@
           ]
         },
         {
-          "id": "b14",
+          "id": "b13",
           "at": "internal/service/revuser.go:1787",
           "cond": "in.RevUser.UnsetFieldMask.Paths",
           "predicate_paths": [
@@ -227,7 +216,7 @@
           ]
         },
         {
-          "id": "b16",
+          "id": "b15",
           "at": "internal/service/revuser.go:1861",
           "cond": "in.RevUser.ExternalUid != nil",
           "predicate_paths": [
@@ -235,7 +224,7 @@
           ]
         },
         {
-          "id": "b17",
+          "id": "b16",
           "at": "internal/service/revuser.go:1863",
           "cond": "in.RevUser.ExternalRefs != nil",
           "predicate_paths": [
@@ -300,10 +289,7 @@
         },
         {
           "field": "type",
-          "fuzzy_suggestions": [
-            "in.UserIdentifier.UserDon.PartitionType",
-            "in.UserIdentifier.UserDon.ServiceType"
-          ]
+          "fuzzy_suggestions": null
         }
       ]
     },
@@ -355,5 +341,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateRevUser` (HTTP operation `RevUsersUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsJanusAsyncFlow\n  - in.RevUser.ExternalRefs.StringValues\n  - in.RevUser.ExternalUid\n  - in.RevUser.State\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.UserIdentifier.UserDon.Components\n  - in.UserIdentifier.UserDon.Partition\n  - in.UserIdentifier.UserDon.PartitionType\n  - in.UserIdentifier.UserDon.ServiceType\n  - in.UserIdentifier.UserExternalId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon.Partition != \"\"\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon == nil\n  - in.RevUser.State != 0\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.IsJanusAsyncFlow\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.ExternalUid != nil\n  - in.RevUser.ExternalRefs != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errRevUserEmailUpdateForbidden\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `applicableprincipaltype` -> suggestions []\n  - test field `assign` -> suggestions []\n  - test field `body` -> suggestions []\n  - test field `createroles` -> suggestions []\n  - test field `customfields` -> suggestions []\n  - test field `customschemaspec` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `revoke` -> suggestions []\n  - test field `role` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions ['in.UserIdentifier.UserDon.PartitionType', 'in.UserIdentifier.UserDon.ServiceType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateRevUser` (HTTP operation `RevUsersUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsJanusAsyncFlow\n  - in.RevUser.ExternalRefs.StringValues\n  - in.RevUser.ExternalUid\n  - in.RevUser.State\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.UserIdentifier.UserDon\n  - in.UserIdentifier.UserExternalId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon == nil\n  - in.RevUser.State != 0\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.IsJanusAsyncFlow\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.ExternalUid != nil\n  - in.RevUser.ExternalRefs != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errRevUserEmailUpdateForbidden\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `applicableprincipaltype` -> suggestions []\n  - test field `assign` -> suggestions []\n  - test field `body` -> suggestions []\n  - test field `createroles` -> suggestions []\n  - test field `customfields` -> suggestions []\n  - test field `customschemaspec` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `revoke` -> suggestions []\n  - test field `role` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

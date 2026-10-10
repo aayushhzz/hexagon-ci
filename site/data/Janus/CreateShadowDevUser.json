@@ -11,7 +11,7 @@
       "coverage_pct": 0
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 21,
+      "leaf_fields_read_by_rpc": 18,
       "covered_count": 0,
       "coverage_pct": 0,
       "request_fields_set_by_tests": 0,
@@ -19,12 +19,12 @@
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 9,
+          "total": 10,
           "set": 0,
           "pct": 0
         },
         "nested": {
-          "total": 8,
+          "total": 4,
           "set": 0,
           "pct": 0
         },
@@ -49,10 +49,7 @@
         "in.FullName",
         "in.IngestionSource",
         "in.PhoneNumbers",
-        "in.ReportsToId.Components",
-        "in.ReportsToId.Partition",
-        "in.ReportsToId.PartitionType",
-        "in.ReportsToId.ServiceType",
+        "in.ReportsToId",
         "in.StagedInfo.SyncInUnresolvedFields",
         "in.StagedInfo.SyncOutUnresolvedFields",
         "in.State",
@@ -60,7 +57,7 @@
       ]
     },
     "branches": {
-      "total": 45,
+      "total": 44,
       "happy_path_reached": false,
       "reachable_on_happy_path": 27,
       "present_arm_exercised": 0,
@@ -91,7 +88,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 8,
+          "total": 7,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -207,14 +204,6 @@
         },
         {
           "id": "b14",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.ReportsToId.Partition != \"\"",
-          "predicate_paths": [
-            "in.ReportsToId.Partition"
-          ]
-        },
-        {
-          "id": "b15",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2626",
           "cond": "in.DevrevCopy.OriginId != nil",
           "predicate_paths": [
@@ -222,7 +211,7 @@
           ]
         },
         {
-          "id": "b16",
+          "id": "b15",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2631",
           "cond": "in.DevrevCopy.OriginOrgId != nil",
           "predicate_paths": [
@@ -230,7 +219,7 @@
           ]
         },
         {
-          "id": "b17",
+          "id": "b16",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2636",
           "cond": "in.DevrevCopy.OriginOrgId.Id",
           "predicate_paths": [
@@ -238,7 +227,7 @@
           ]
         },
         {
-          "id": "b18",
+          "id": "b17",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:700",
           "cond": "in.SyncMetadata != nil",
           "predicate_paths": [
@@ -246,7 +235,7 @@
           ]
         },
         {
-          "id": "b19",
+          "id": "b18",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:701",
           "cond": "in.SyncMetadata != nil",
           "predicate_paths": [
@@ -254,7 +243,7 @@
           ]
         },
         {
-          "id": "b20",
+          "id": "b19",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:705",
           "cond": "in.StagedInfo != nil",
           "predicate_paths": [
@@ -262,7 +251,7 @@
           ]
         },
         {
-          "id": "b21",
+          "id": "b20",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:706",
           "cond": "in.StagedInfo != nil",
           "predicate_paths": [
@@ -270,7 +259,7 @@
           ]
         },
         {
-          "id": "b22",
+          "id": "b21",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:710",
           "cond": "in.ExternalSourceData != nil",
           "predicate_paths": [
@@ -278,7 +267,7 @@
           ]
         },
         {
-          "id": "b23",
+          "id": "b22",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:711",
           "cond": "in.ExternalSourceData != nil",
           "predicate_paths": [
@@ -286,7 +275,7 @@
           ]
         },
         {
-          "id": "b24",
+          "id": "b23",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:715",
           "cond": "in.CustomSchemaSpec != nil",
           "predicate_paths": [
@@ -294,7 +283,7 @@
           ]
         },
         {
-          "id": "b25",
+          "id": "b24",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:716",
           "cond": "in.CustomSchemaSpec != nil",
           "predicate_paths": [
@@ -302,7 +291,7 @@
           ]
         },
         {
-          "id": "b26",
+          "id": "b25",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:720",
           "cond": "in.ReportsToId != nil",
           "predicate_paths": [
@@ -310,7 +299,7 @@
           ]
         },
         {
-          "id": "b27",
+          "id": "b26",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:729",
           "cond": "in.DevrevCopy != nil",
           "predicate_paths": [
@@ -318,15 +307,15 @@
           ]
         },
         {
-          "id": "b28",
+          "id": "b27",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:725",
-          "cond": "in.ReportsToId|in.ReportsToId.Partition",
+          "cond": "in.ReportsToId",
           "predicate_paths": [
             "in.ReportsToId"
           ]
         },
         {
-          "id": "b29",
+          "id": "b28",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:730",
           "cond": "in.DevrevCopy != nil",
           "predicate_paths": [
@@ -334,7 +323,7 @@
           ]
         },
         {
-          "id": "b30",
+          "id": "b29",
           "at": "internal/service/utils.go:70",
           "cond": "in.FullName == \"\"",
           "predicate_paths": [
@@ -342,7 +331,7 @@
           ]
         },
         {
-          "id": "b31",
+          "id": "b30",
           "at": "internal/service/utils.go:74",
           "cond": "in.FullName",
           "predicate_paths": [
@@ -350,7 +339,7 @@
           ]
         },
         {
-          "id": "b32",
+          "id": "b31",
           "at": "internal/service/utils.go:70",
           "cond": "in.DisplayNamePrefix == \"\"",
           "predicate_paths": [
@@ -358,7 +347,7 @@
           ]
         },
         {
-          "id": "b33",
+          "id": "b32",
           "at": "internal/service/utils.go:74",
           "cond": "in.DisplayNamePrefix",
           "predicate_paths": [
@@ -366,7 +355,7 @@
           ]
         },
         {
-          "id": "b34",
+          "id": "b33",
           "at": "internal/service/devuser_validations.go:190",
           "cond": "in.AggregateErrors",
           "predicate_paths": [
@@ -374,7 +363,7 @@
           ]
         },
         {
-          "id": "b35",
+          "id": "b34",
           "at": "internal/service/devuser_validations.go:240",
           "cond": "in.DevOid == \"\"",
           "predicate_paths": [
@@ -382,7 +371,7 @@
           ]
         },
         {
-          "id": "b36",
+          "id": "b35",
           "at": "internal/service/devuser_validations.go:236",
           "cond": "in.AggregateErrors",
           "predicate_paths": [
@@ -390,7 +379,7 @@
           ]
         },
         {
-          "id": "b37",
+          "id": "b36",
           "at": "internal/service/devuser_validations.go:252",
           "cond": "in.Email == \"\"",
           "predicate_paths": [
@@ -398,7 +387,7 @@
           ]
         },
         {
-          "id": "b38",
+          "id": "b37",
           "at": "internal/service/devuser_validations.go:271",
           "cond": "in.AggregateErrors",
           "predicate_paths": [
@@ -406,7 +395,7 @@
           ]
         },
         {
-          "id": "b39",
+          "id": "b38",
           "at": "",
           "cond": "in",
           "predicate_paths": [
@@ -414,7 +403,7 @@
           ]
         },
         {
-          "id": "b40",
+          "id": "b39",
           "at": "internal/service/devuser.go:1042",
           "cond": "in.State == 6",
           "predicate_paths": [
@@ -422,7 +411,7 @@
           ]
         },
         {
-          "id": "b41",
+          "id": "b40",
           "at": "internal/service/devuser.go:1043",
           "cond": "in.State == 5",
           "predicate_paths": [
@@ -430,7 +419,7 @@
           ]
         },
         {
-          "id": "b42",
+          "id": "b41",
           "at": "internal/service/devuser.go:733",
           "cond": "in != nil",
           "predicate_paths": [
@@ -438,7 +427,7 @@
           ]
         },
         {
-          "id": "b43",
+          "id": "b42",
           "at": "internal/service/devuser.go:846",
           "cond": "in.State",
           "predicate_paths": [
@@ -446,7 +435,7 @@
           ]
         },
         {
-          "id": "b44",
+          "id": "b43",
           "at": "internal/service/devuser.go:853",
           "cond": "in.FullName != \"\"",
           "predicate_paths": [
@@ -454,7 +443,7 @@
           ]
         },
         {
-          "id": "b45",
+          "id": "b44",
           "at": "internal/service/devuser.go:881",
           "cond": "in.ReportsToId != nil",
           "predicate_paths": [
@@ -602,5 +591,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateShadowDevUser` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AggregateErrors\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.DevrevCopy.OriginId.Id\n  - in.DevrevCopy.OriginOrgId.Id\n  - in.DisplayNamePrefix\n  - in.Email\n  - in.ExternalIdentities\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.FullName\n  - in.IngestionSource\n  - in.PhoneNumbers\n  - in.ReportsToId.Components\n  - in.ReportsToId.Partition\n  - in.ReportsToId.PartitionType\n  - in.ReportsToId.ServiceType\n  - in.StagedInfo.SyncInUnresolvedFields\n  - in.StagedInfo.SyncOutUnresolvedFields\n  - in.State\n  - in.SyncMetadata.SyncedByDevUsers\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.CreatedById != nil\n  - in.ExternalSourceData.ModifiedById != nil\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.ReportsToId == nil\n  - in.ReportsToId.Partition != \"\"\n  - in.DevrevCopy.OriginId != nil\n  - in.DevrevCopy.OriginOrgId != nil\n  - in.DevrevCopy.OriginOrgId.Id\n  - in.SyncMetadata != nil\n  - in.SyncMetadata != nil\n  - in.StagedInfo != nil\n  - in.StagedInfo != nil\n  - in.ExternalSourceData != nil\n  - in.ExternalSourceData != nil\n  - in.CustomSchemaSpec != nil\n  - in.CustomSchemaSpec != nil\n  - in.ReportsToId != nil\n  - in.DevrevCopy != nil\n  - in.ReportsToId|in.ReportsToId.Partition\n  - in.DevrevCopy != nil\n  - in.FullName == \"\"\n  - in.FullName\n  - in.DisplayNamePrefix == \"\"\n  - in.DisplayNamePrefix\n  - in.AggregateErrors\n  - in.DevOid == \"\"\n  - in.AggregateErrors\n  - in.Email == \"\"\n  - in.AggregateErrors\n  - in\n  - in.State == 6\n  - (+5 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrAuthContextNotFound\n  - ErrParseServiceContext\n  - ErrParseUserContext\n  - ErrServiceContextNotFound\n  - ErrUserContextNotFound\n  - ObjectTypeInvalid\n  - errDevOrgNotFound\n  - errInternalServiceError\n  - errInvalidAuthContextDevOid\n  - errInvalidInputEmail\n  - errInvalidRequestBody\n  - errInvalidStateForShadowUserCreation\n  - errPhoneNumberInvalid\n  - errUserNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateShadowDevUser` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AggregateErrors\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.DevrevCopy.OriginId.Id\n  - in.DevrevCopy.OriginOrgId.Id\n  - in.DisplayNamePrefix\n  - in.Email\n  - in.ExternalIdentities\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.FullName\n  - in.IngestionSource\n  - in.PhoneNumbers\n  - in.ReportsToId\n  - in.StagedInfo.SyncInUnresolvedFields\n  - in.StagedInfo.SyncOutUnresolvedFields\n  - in.State\n  - in.SyncMetadata.SyncedByDevUsers\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.CreatedById != nil\n  - in.ExternalSourceData.ModifiedById != nil\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.ReportsToId == nil\n  - in.DevrevCopy.OriginId != nil\n  - in.DevrevCopy.OriginOrgId != nil\n  - in.DevrevCopy.OriginOrgId.Id\n  - in.SyncMetadata != nil\n  - in.SyncMetadata != nil\n  - in.StagedInfo != nil\n  - in.StagedInfo != nil\n  - in.ExternalSourceData != nil\n  - in.ExternalSourceData != nil\n  - in.CustomSchemaSpec != nil\n  - in.CustomSchemaSpec != nil\n  - in.ReportsToId != nil\n  - in.DevrevCopy != nil\n  - in.ReportsToId\n  - in.DevrevCopy != nil\n  - in.FullName == \"\"\n  - in.FullName\n  - in.DisplayNamePrefix == \"\"\n  - in.DisplayNamePrefix\n  - in.AggregateErrors\n  - in.DevOid == \"\"\n  - in.AggregateErrors\n  - in.Email == \"\"\n  - in.AggregateErrors\n  - in\n  - in.State == 6\n  - in.State == 5\n  - (+4 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrAuthContextNotFound\n  - ErrParseServiceContext\n  - ErrParseUserContext\n  - ErrServiceContextNotFound\n  - ErrUserContextNotFound\n  - ObjectTypeInvalid\n  - errDevOrgNotFound\n  - errInternalServiceError\n  - errInvalidAuthContextDevOid\n  - errInvalidInputEmail\n  - errInvalidRequestBody\n  - errInvalidStateForShadowUserCreation\n  - errPhoneNumberInvalid\n  - errUserNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

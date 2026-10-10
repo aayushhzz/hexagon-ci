@@ -108,7 +108,7 @@
         "coverage_pct": 0
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 11,
+        "leaf_fields_read_by_rpc": 5,
         "covered_count": 0,
         "coverage_pct": 0,
         "request_fields_set_by_tests": 0,
@@ -116,12 +116,12 @@
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 3,
+            "total": 5,
             "set": 0,
             "pct": 0
           },
           "nested": {
-            "total": 8,
+            "total": 0,
             "set": 0,
             "pct": 0
           },
@@ -135,19 +135,13 @@
         "gaps": [
           "in.ArtifactIds",
           "in.ConfigurationSet",
-          "in.DevOid.Components",
-          "in.DevOid.Partition",
-          "in.DevOid.PartitionType",
-          "in.DevOid.ServiceType",
+          "in.DevOid",
           "in.Operation",
-          "in.ParentId.Components",
-          "in.ParentId.Partition",
-          "in.ParentId.PartitionType",
-          "in.ParentId.ServiceType"
+          "in.ParentId"
         ]
       },
       "branches": {
-        "total": 18,
+        "total": 16,
         "happy_path_reached": false,
         "reachable_on_happy_path": 15,
         "present_arm_exercised": 0,
@@ -178,7 +172,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 5,
+            "total": 3,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -198,14 +192,6 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.DevOid.Partition != \"\"",
-            "predicate_paths": [
-              "in.DevOid.Partition"
-            ]
-          },
-          {
-            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.ParentId == nil",
             "predicate_paths": [
@@ -213,15 +199,7 @@
             ]
           },
           {
-            "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.ParentId.Partition != \"\"",
-            "predicate_paths": [
-              "in.ParentId.Partition"
-            ]
-          },
-          {
-            "id": "b5",
+            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:212",
             "cond": "in.DevOid == nil",
             "predicate_paths": [
@@ -229,15 +207,15 @@
             ]
           },
           {
-            "id": "b6",
+            "id": "b4",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:219",
-            "cond": "in.DevOid|in.DevOid.Partition",
+            "cond": "in.DevOid",
             "predicate_paths": [
               "in.DevOid"
             ]
           },
           {
-            "id": "b7",
+            "id": "b5",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:225",
             "cond": "in.ParentId != nil",
             "predicate_paths": [
@@ -245,7 +223,7 @@
             ]
           },
           {
-            "id": "b8",
+            "id": "b6",
             "at": "internal/server/bulk_update_artifact.go:36",
             "cond": "in != nil",
             "predicate_paths": [
@@ -253,7 +231,7 @@
             ]
           },
           {
-            "id": "b9",
+            "id": "b7",
             "at": "internal/server/bulk_update_artifact.go:40",
             "cond": "in.Operation == 3",
             "predicate_paths": [
@@ -261,7 +239,7 @@
             ]
           },
           {
-            "id": "b10",
+            "id": "b8",
             "at": "internal/server/bulk_update_artifact.go:41",
             "cond": "in.ParentId != nil",
             "predicate_paths": [
@@ -269,7 +247,7 @@
             ]
           },
           {
-            "id": "b11",
+            "id": "b9",
             "at": "internal/server/bulk_update_artifact.go:48",
             "cond": "in.ParentId == nil",
             "predicate_paths": [
@@ -277,39 +255,39 @@
             ]
           },
           {
-            "id": "b12",
+            "id": "b10",
             "at": "internal/server/bulk_update_artifact.go:63",
-            "cond": "in.ParentId|in.ParentId.Partition == \"\"",
+            "cond": "in.ParentId == \"\"",
+            "predicate_paths": [
+              "in.ParentId"
+            ]
+          },
+          {
+            "id": "b11",
+            "at": "internal/server/bulk_update_artifact.go:67",
+            "cond": "in.ParentId == *ObjectTypeMarketplaceSubmission",
+            "predicate_paths": [
+              "in.ParentId"
+            ]
+          },
+          {
+            "id": "b12",
+            "at": "internal/server/bulk_update_artifact.go:71",
+            "cond": "donv2.DON).DevOID() != in.ParentId",
             "predicate_paths": [
               "in.ParentId"
             ]
           },
           {
             "id": "b13",
-            "at": "internal/server/bulk_update_artifact.go:67",
-            "cond": "in.ParentId|in.ParentId.Partition == *ObjectTypeMarketplaceSubmission",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/datapath/mfz/context/context.go:77",
+            "cond": "in.ParentId == nil",
             "predicate_paths": [
               "in.ParentId"
             ]
           },
           {
             "id": "b14",
-            "at": "internal/server/bulk_update_artifact.go:71",
-            "cond": "donv2.DON).DevOID() != in.ParentId|in.ParentId.Partition",
-            "predicate_paths": [
-              "in.ParentId"
-            ]
-          },
-          {
-            "id": "b15",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/datapath/mfz/context/context.go:77",
-            "cond": "in.ParentId|in.ParentId.Partition == nil",
-            "predicate_paths": [
-              "in.ParentId"
-            ]
-          },
-          {
-            "id": "b16",
             "at": "internal/server/bulk_update_artifact.go:315",
             "cond": "in.Operation == 0",
             "predicate_paths": [
@@ -317,7 +295,7 @@
             ]
           },
           {
-            "id": "b17",
+            "id": "b15",
             "at": "internal/server/bulk_update_artifact.go:319",
             "cond": "in.ConfigurationSet == 0",
             "predicate_paths": [
@@ -325,7 +303,7 @@
             ]
           },
           {
-            "id": "b18",
+            "id": "b16",
             "at": "internal/server/bulk_update_artifact.go:341",
             "cond": "in.ParentId != nil",
             "predicate_paths": [
@@ -370,20 +348,20 @@
         "coverage_pct": 12.5
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 9,
-        "covered_count": 1,
-        "coverage_pct": 11.1,
+        "leaf_fields_read_by_rpc": 3,
+        "covered_count": 2,
+        "coverage_pct": 66.7,
         "request_fields_set_by_tests": 7,
-        "set_by_positive_tests": 1,
+        "set_by_positive_tests": 2,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 1,
-            "set": 1,
-            "pct": 100
+            "total": 3,
+            "set": 2,
+            "pct": 66.7
           },
           "nested": {
-            "total": 8,
+            "total": 0,
             "set": 0,
             "pct": 0
           },
@@ -411,31 +389,31 @@
               "Non-final part under 5 MiB should fail on complete",
               "Requests without authentication are rejected"
             ]
+          },
+          {
+            "path": "in.ParentId",
+            "match": "exact",
+            "by_tests": [
+              "Complete with parent_id outside tenant should fail"
+            ]
           }
         ],
         "gaps": [
-          "in.ArtifactId.Components",
-          "in.ArtifactId.Partition",
-          "in.ArtifactId.PartitionType",
-          "in.ArtifactId.ServiceType",
-          "in.ParentId.Components",
-          "in.ParentId.Partition",
-          "in.ParentId.PartitionType",
-          "in.ParentId.ServiceType"
+          "in.ArtifactId"
         ]
       },
       "branches": {
-        "total": 17,
+        "total": 15,
         "happy_path_reached": true,
         "reachable_on_happy_path": 14,
         "present_arm_exercised": 5,
-        "present_arm_pct": 29.4,
+        "present_arm_pct": 33.3,
         "absent_arm_exercised": 14,
         "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 5,
-        "coverage_pct": 29.4,
+        "coverage_pct": 33.3,
         "by_origin": {
           "service": {
             "total": 3,
@@ -456,10 +434,10 @@
             "absent_arm_exercised": 3
           },
           "library": {
-            "total": 11,
+            "total": 9,
             "reachable_on_happy_path": 9,
             "present_arm_exercised": 3,
-            "present_arm_pct": 27.3,
+            "present_arm_pct": 33.3,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 9
@@ -476,30 +454,14 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.ArtifactId.Partition != \"\"",
-            "predicate_paths": [
-              "in.ArtifactId.Partition"
-            ]
-          },
-          {
-            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition == *ObjectTypeArtifact",
+            "cond": "in.ArtifactId == *ObjectTypeArtifact",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
-            "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.ParentId.Partition != \"\"",
-            "predicate_paths": [
-              "in.ParentId.Partition"
-            ]
-          },
-          {
-            "id": "b6",
+            "id": "b4",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:425",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
@@ -507,55 +469,55 @@
             ]
           },
           {
-            "id": "b7",
+            "id": "b5",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:432",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition",
+            "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
-            "id": "b9",
+            "id": "b7",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:667",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition != objType",
+            "cond": "in.ArtifactId != objType",
+            "predicate_paths": [
+              "in.ArtifactId"
+            ]
+          },
+          {
+            "id": "b10",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3600",
+            "cond": "in.ArtifactId",
+            "predicate_paths": [
+              "in.ArtifactId"
+            ]
+          },
+          {
+            "id": "b11",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:659",
+            "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
             "id": "b12",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3600",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3620",
+            "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
             "id": "b13",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:659",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition",
+            "at": "internal/server/util.go:26",
+            "cond": "in.ArtifactId == \"\"",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
             "id": "b14",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3620",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition",
-            "predicate_paths": [
-              "in.ArtifactId"
-            ]
-          },
-          {
-            "id": "b15",
-            "at": "internal/server/util.go:26",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition == \"\"",
-            "predicate_paths": [
-              "in.ArtifactId"
-            ]
-          },
-          {
-            "id": "b16",
             "at": "internal/server/multipart_upload.go:206",
             "cond": "in != nil",
             "predicate_paths": [
@@ -580,10 +542,6 @@
           },
           {
             "field": "id",
-            "fuzzy_suggestions": null
-          },
-          {
-            "field": "parentid",
             "fuzzy_suggestions": null
           },
           {
@@ -961,20 +919,20 @@
         "coverage_pct": 11.1
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 9,
-        "covered_count": 0,
-        "coverage_pct": 0,
+        "leaf_fields_read_by_rpc": 3,
+        "covered_count": 1,
+        "coverage_pct": 33.3,
         "request_fields_set_by_tests": 3,
-        "set_by_positive_tests": 0,
+        "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 0,
-            "set": 0,
-            "pct": 0
+            "total": 2,
+            "set": 1,
+            "pct": 50
           },
           "nested": {
-            "total": 9,
+            "total": 1,
             "set": 0,
             "pct": 0
           },
@@ -984,31 +942,34 @@
             "pct": 0
           }
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.Id",
+            "match": "exact",
+            "by_tests": [
+              "Another org's owner cannot COPY an artifact",
+              "Copy artifact",
+              "Copy non-existent artifact should return 4xx"
+            ]
+          }
+        ],
         "gaps": [
-          "in.ActorId.Components",
-          "in.ActorId.Partition",
-          "in.ActorId.PartitionType",
-          "in.ActorId.ServiceType",
-          "in.Headers.ContentDisposition",
-          "in.Id.Components",
-          "in.Id.Partition",
-          "in.Id.PartitionType",
-          "in.Id.ServiceType"
+          "in.ActorId",
+          "in.Headers.ContentDisposition"
         ]
       },
       "branches": {
-        "total": 17,
+        "total": 15,
         "happy_path_reached": true,
         "reachable_on_happy_path": 14,
         "present_arm_exercised": 5,
-        "present_arm_pct": 29.4,
+        "present_arm_pct": 33.3,
         "absent_arm_exercised": 9,
         "absent_arm_pct": 64.3,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 29.4,
+        "coverage_pct": 33.3,
         "by_origin": {
           "service": {
             "total": 2,
@@ -1029,10 +990,10 @@
             "absent_arm_exercised": 4
           },
           "library": {
-            "total": 9,
+            "total": 7,
             "reachable_on_happy_path": 7,
             "present_arm_exercised": 3,
-            "present_arm_pct": 33.3,
+            "present_arm_pct": 42.9,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 4
@@ -1049,46 +1010,30 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.ActorId.Partition != \"\"",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
+            "cond": "in.ActorId",
             "predicate_paths": [
-              "in.ActorId.Partition"
+              "in.ActorId"
             ]
           },
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
-            "cond": "in.ActorId|in.ActorId.Partition",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
+            "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
             ]
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
-            "cond": "in.ActorId|in.ActorId.Partition",
-            "predicate_paths": [
-              "in.ActorId"
-            ]
-          },
-          {
-            "id": "b5",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
-            "cond": "in.ActorId|in.ActorId.Partition",
+            "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
             ]
           },
           {
             "id": "b7",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.Id.Partition != \"\"",
-            "predicate_paths": [
-              "in.Id.Partition"
-            ]
-          },
-          {
-            "id": "b9",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:47",
             "cond": "in.ActorId == nil",
             "predicate_paths": [
@@ -1096,15 +1041,15 @@
             ]
           },
           {
-            "id": "b10",
+            "id": "b8",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:54",
-            "cond": "in.ActorId|in.ActorId.Partition",
+            "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
             ]
           },
           {
-            "id": "b13",
+            "id": "b11",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:67",
             "cond": "in.Headers != nil",
             "predicate_paths": [
@@ -1112,7 +1057,7 @@
             ]
           },
           {
-            "id": "b14",
+            "id": "b12",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:68",
             "cond": "in.Headers != nil",
             "predicate_paths": [
@@ -1120,7 +1065,7 @@
             ]
           },
           {
-            "id": "b16",
+            "id": "b14",
             "at": "internal/server/copy_artifact.go:29",
             "cond": "in != nil",
             "predicate_paths": [
@@ -1128,7 +1073,7 @@
             ]
           },
           {
-            "id": "b17",
+            "id": "b15",
             "at": "internal/server/copy_artifact.go:94",
             "cond": "in.Headers != nil",
             "predicate_paths": [
@@ -1145,10 +1090,6 @@
           },
           {
             "field": "filetype",
-            "fuzzy_suggestions": null
-          },
-          {
-            "field": "id",
             "fuzzy_suggestions": null
           }
         ]
@@ -1211,7 +1152,7 @@
         "coverage_pct": 0
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 23,
+        "leaf_fields_read_by_rpc": 14,
         "covered_count": 0,
         "coverage_pct": 0,
         "request_fields_set_by_tests": 0,
@@ -1219,27 +1160,24 @@
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 0,
+            "total": 2,
             "set": 0,
             "pct": 0
           },
           "nested": {
-            "total": 12,
+            "total": 5,
             "set": 0,
             "pct": 0
           },
           "deep": {
-            "total": 11,
+            "total": 7,
             "set": 0,
             "pct": 0
           }
         },
         "covered": null,
         "gaps": [
-          "in.ActorId.Components",
-          "in.ActorId.Partition",
-          "in.ActorId.PartitionType",
-          "in.ActorId.ServiceType",
+          "in.ActorId",
           "in.Artifact.ArchivedDate",
           "in.Artifact.ConfigurationSet",
           "in.Artifact.File.Encoding",
@@ -1250,19 +1188,13 @@
           "in.Artifact.GeneratedFiles",
           "in.Artifact.Headers.ContentDisposition",
           "in.Artifact.Headers.ContentId",
-          "in.Artifact.ParentId.Components",
-          "in.Artifact.ParentId.Partition",
-          "in.Artifact.ParentId.PartitionType",
-          "in.Artifact.ParentId.ServiceType",
+          "in.Artifact.ParentId",
           "in.Artifact.PublishedDate",
-          "in.DevOid.Components",
-          "in.DevOid.Partition",
-          "in.DevOid.PartitionType",
-          "in.DevOid.ServiceType"
+          "in.DevOid"
         ]
       },
       "branches": {
-        "total": 38,
+        "total": 35,
         "happy_path_reached": false,
         "reachable_on_happy_path": 13,
         "present_arm_exercised": 0,
@@ -1293,7 +1225,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 12,
+            "total": 9,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -1313,38 +1245,30 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.ActorId.Partition != \"\"",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
+            "cond": "in.ActorId",
             "predicate_paths": [
-              "in.ActorId.Partition"
+              "in.ActorId"
             ]
           },
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
-            "cond": "in.ActorId|in.ActorId.Partition",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
+            "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
             ]
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
-            "cond": "in.ActorId|in.ActorId.Partition",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
+            "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
             ]
           },
           {
             "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
-            "cond": "in.ActorId|in.ActorId.Partition",
-            "predicate_paths": [
-              "in.ActorId"
-            ]
-          },
-          {
-            "id": "b6",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.DevOid == nil",
             "predicate_paths": [
@@ -1352,15 +1276,7 @@
             ]
           },
           {
-            "id": "b7",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.DevOid.Partition != \"\"",
-            "predicate_paths": [
-              "in.DevOid.Partition"
-            ]
-          },
-          {
-            "id": "b8",
+            "id": "b6",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.Artifact.ParentId == nil",
             "predicate_paths": [
@@ -1368,15 +1284,7 @@
             ]
           },
           {
-            "id": "b9",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.Artifact.ParentId.Partition != \"\"",
-            "predicate_paths": [
-              "in.Artifact.ParentId.Partition"
-            ]
-          },
-          {
-            "id": "b10",
+            "id": "b7",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:48",
             "cond": "in.Artifact.File.Name == nil",
             "predicate_paths": [
@@ -1384,7 +1292,7 @@
             ]
           },
           {
-            "id": "b11",
+            "id": "b8",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:54",
             "cond": "in.Artifact.File.Name != nil",
             "predicate_paths": [
@@ -1392,7 +1300,7 @@
             ]
           },
           {
-            "id": "b12",
+            "id": "b9",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:57",
             "cond": "in.Artifact.File.Type == nil",
             "predicate_paths": [
@@ -1400,7 +1308,7 @@
             ]
           },
           {
-            "id": "b13",
+            "id": "b10",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:63",
             "cond": "in.Artifact.File.Type != nil",
             "predicate_paths": [
@@ -1408,7 +1316,7 @@
             ]
           },
           {
-            "id": "b14",
+            "id": "b11",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:66",
             "cond": "in.Artifact.File.Key == nil",
             "predicate_paths": [
@@ -1416,7 +1324,7 @@
             ]
           },
           {
-            "id": "b15",
+            "id": "b12",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:72",
             "cond": "in.Artifact.File.Encoding != nil",
             "predicate_paths": [
@@ -1424,7 +1332,7 @@
             ]
           },
           {
-            "id": "b16",
+            "id": "b13",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:130",
             "cond": "in.Artifact.ParentId != nil",
             "predicate_paths": [
@@ -1432,7 +1340,7 @@
             ]
           },
           {
-            "id": "b17",
+            "id": "b14",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:135",
             "cond": "in.Artifact.File != nil",
             "predicate_paths": [
@@ -1440,7 +1348,7 @@
             ]
           },
           {
-            "id": "b18",
+            "id": "b15",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:136",
             "cond": "in.Artifact.File != nil",
             "predicate_paths": [
@@ -1448,7 +1356,7 @@
             ]
           },
           {
-            "id": "b19",
+            "id": "b16",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:140",
             "cond": "in.Artifact.Headers != nil",
             "predicate_paths": [
@@ -1456,7 +1364,7 @@
             ]
           },
           {
-            "id": "b20",
+            "id": "b17",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:141",
             "cond": "in.Artifact.Headers != nil",
             "predicate_paths": [
@@ -1464,7 +1372,7 @@
             ]
           },
           {
-            "id": "b21",
+            "id": "b18",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:18",
             "cond": "in.ActorId == nil",
             "predicate_paths": [
@@ -1472,15 +1380,15 @@
             ]
           },
           {
-            "id": "b22",
+            "id": "b19",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:25",
-            "cond": "in.ActorId|in.ActorId.Partition",
+            "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
             ]
           },
           {
-            "id": "b23",
+            "id": "b20",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:28",
             "cond": "in.DevOid == nil",
             "predicate_paths": [
@@ -1488,15 +1396,15 @@
             ]
           },
           {
-            "id": "b24",
+            "id": "b21",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:35",
-            "cond": "in.DevOid|in.DevOid.Partition",
+            "cond": "in.DevOid",
             "predicate_paths": [
               "in.DevOid"
             ]
           },
           {
-            "id": "b25",
+            "id": "b22",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:38",
             "cond": "in.Artifact == nil",
             "predicate_paths": [
@@ -1504,7 +1412,7 @@
             ]
           },
           {
-            "id": "b26",
+            "id": "b23",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:41",
             "cond": "in.Artifact != nil",
             "predicate_paths": [
@@ -1512,7 +1420,7 @@
             ]
           },
           {
-            "id": "b27",
+            "id": "b24",
             "at": "internal/server/create_artifact.go:33",
             "cond": "in != nil",
             "predicate_paths": [
@@ -1520,7 +1428,7 @@
             ]
           },
           {
-            "id": "b28",
+            "id": "b25",
             "at": "internal/server/create_artifact.go:36",
             "cond": "in.Artifact.File == nil",
             "predicate_paths": [
@@ -1528,7 +1436,7 @@
             ]
           },
           {
-            "id": "b29",
+            "id": "b26",
             "at": "internal/collection/artifact.gen.go:898",
             "cond": "in.Artifact.ParentId != nil",
             "predicate_paths": [
@@ -1536,7 +1444,7 @@
             ]
           },
           {
-            "id": "b30",
+            "id": "b27",
             "at": "internal/collection/artifact.gen.go:907",
             "cond": "in.Artifact.File != nil",
             "predicate_paths": [
@@ -1544,7 +1452,7 @@
             ]
           },
           {
-            "id": "b31",
+            "id": "b28",
             "at": "internal/collection/artifact.gen.go:913",
             "cond": "in.Artifact.Headers != nil",
             "predicate_paths": [
@@ -1552,7 +1460,7 @@
             ]
           },
           {
-            "id": "b32",
+            "id": "b29",
             "at": "internal/collection/artifact.gen.go:919",
             "cond": "in.Artifact.GeneratedFiles != nil",
             "predicate_paths": [
@@ -1560,7 +1468,7 @@
             ]
           },
           {
-            "id": "b33",
+            "id": "b30",
             "at": "internal/collection/artifact.gen.go:929",
             "cond": "in.Artifact.PublishedDate != nil",
             "predicate_paths": [
@@ -1568,7 +1476,7 @@
             ]
           },
           {
-            "id": "b34",
+            "id": "b31",
             "at": "internal/collection/artifact.gen.go:933",
             "cond": "in.Artifact.ArchivedDate != nil",
             "predicate_paths": [
@@ -1576,15 +1484,15 @@
             ]
           },
           {
-            "id": "b35",
+            "id": "b32",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:667",
-            "cond": "in.DevOid|in.DevOid.Partition != objType",
+            "cond": "in.DevOid != objType",
             "predicate_paths": [
               "in.DevOid"
             ]
           },
           {
-            "id": "b36",
+            "id": "b33",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/configset/configset.go:338",
             "cond": "in.Artifact.ConfigurationSet == 0",
             "predicate_paths": [
@@ -1592,7 +1500,7 @@
             ]
           },
           {
-            "id": "b37",
+            "id": "b34",
             "at": "s3/buckets.go:49",
             "cond": "in.Artifact.ConfigurationSet == 0",
             "predicate_paths": [
@@ -1600,9 +1508,9 @@
             ]
           },
           {
-            "id": "b38",
+            "id": "b35",
             "at": "/Users/devrev/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:66",
-            "cond": "in.Artifact|in.Artifact.File|in.Artifact.File.Encoding|in.Artifact.File.Key|in.Artifact.File.Name|in.Artifact.File.Size|in.Artifact.File.Type|in.Artifact.Headers|in.Artifact.Headers.ContentId|in.Artifact.ParentId|in.Artifact.ParentId.Partition == nil",
+            "cond": "in.Artifact|in.Artifact.File|in.Artifact.File.Encoding|in.Artifact.File.Key|in.Artifact.File.Name|in.Artifact.File.Size|in.Artifact.File.Type|in.Artifact.Headers|in.Artifact.Headers.ContentId|in.Artifact.ParentId == nil",
             "predicate_paths": [
               "in.Artifact"
             ]
@@ -2062,7 +1970,7 @@
         "coverage_pct": 0
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 4,
+        "leaf_fields_read_by_rpc": 1,
         "covered_count": 0,
         "coverage_pct": 0,
         "request_fields_set_by_tests": 0,
@@ -2070,12 +1978,12 @@
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 0,
+            "total": 1,
             "set": 0,
             "pct": 0
           },
           "nested": {
-            "total": 4,
+            "total": 0,
             "set": 0,
             "pct": 0
           },
@@ -2087,14 +1995,11 @@
         },
         "covered": null,
         "gaps": [
-          "in.Id.Components",
-          "in.Id.Partition",
-          "in.Id.PartitionType",
-          "in.Id.ServiceType"
+          "in.Id"
         ]
       },
       "branches": {
-        "total": 9,
+        "total": 8,
         "happy_path_reached": false,
         "reachable_on_happy_path": 7,
         "present_arm_exercised": 0,
@@ -2125,7 +2030,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 5,
+            "total": 4,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -2145,22 +2050,14 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.Id.Partition != \"\"",
-            "predicate_paths": [
-              "in.Id.Partition"
-            ]
-          },
-          {
-            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
-            "cond": "in.Id|in.Id.Partition == *ObjectTypeArtifact",
+            "cond": "in.Id == *ObjectTypeArtifact",
             "predicate_paths": [
               "in.Id"
             ]
           },
           {
-            "id": "b4",
+            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:246",
             "cond": "in.Id == nil",
             "predicate_paths": [
@@ -2168,39 +2065,39 @@
             ]
           },
           {
-            "id": "b5",
+            "id": "b4",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:253",
-            "cond": "in.Id|in.Id.Partition",
+            "cond": "in.Id",
+            "predicate_paths": [
+              "in.Id"
+            ]
+          },
+          {
+            "id": "b5",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:659",
+            "cond": "in.Id",
             "predicate_paths": [
               "in.Id"
             ]
           },
           {
             "id": "b6",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:659",
-            "cond": "in.Id|in.Id.Partition",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3620",
+            "cond": "in.Id",
             "predicate_paths": [
               "in.Id"
             ]
           },
           {
             "id": "b7",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3620",
-            "cond": "in.Id|in.Id.Partition",
+            "at": "internal/server/util.go:26",
+            "cond": "in.Id == \"\"",
             "predicate_paths": [
               "in.Id"
             ]
           },
           {
             "id": "b8",
-            "at": "internal/server/util.go:26",
-            "cond": "in.Id|in.Id.Partition == \"\"",
-            "predicate_paths": [
-              "in.Id"
-            ]
-          },
-          {
-            "id": "b9",
             "at": "internal/server/delete_artifact.go:25",
             "cond": "in != nil",
             "predicate_paths": [
@@ -2229,57 +2126,77 @@
         "coverage_pct": 0
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 12,
-        "covered_count": 0,
-        "coverage_pct": 0,
+        "leaf_fields_read_by_rpc": 6,
+        "covered_count": 1,
+        "coverage_pct": 16.7,
         "request_fields_set_by_tests": 7,
-        "set_by_positive_tests": 0,
+        "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 3,
-            "set": 0,
-            "pct": 0
+            "total": 4,
+            "set": 1,
+            "pct": 25
           },
           "nested": {
-            "total": 5,
+            "total": 2,
             "set": 0,
             "pct": 0
           },
           "deep": {
-            "total": 4,
+            "total": 0,
             "set": 0,
             "pct": 0
           }
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.Id",
+            "match": "exact",
+            "by_tests": [
+              "100 MiB multi-part upload create next complete",
+              "Actor field does not override created_by",
+              "Another org's owner cannot DOWNLOAD an artifact",
+              "Another org's owner cannot GET an artifact",
+              "Download artifact with empty key should return 403",
+              "Download artifact with invalid key should return 403",
+              "Download artifact with no key and no auth should return 403",
+              "Download non-article artifact without auth should return 403",
+              "Download non-existent artifact should return 404",
+              "Download parentless artifact without auth should return 403",
+              "Download private artifact with invalid key should return 403",
+              "Download private artifact with no key and no auth should return 403",
+              "Download with another artifact's access key should return 403 (key swap attack)",
+              "Download with extremely long key should return error",
+              "Download with key set to literal 'null' or 'undefined' should return 403",
+              "Get artifact",
+              "Get non-existent artifact should return 404",
+              "Get with malformed artifact ID should return 400",
+              "RevUser cannot download artifact not in their conversation",
+              "Unauthenticated download of private (unpublished) article artifact should return 403"
+            ]
+          }
+        ],
         "gaps": [
           "in.AccessToken",
-          "in.Id.Components",
-          "in.Id.Partition",
-          "in.Id.PartitionType",
-          "in.Id.ServiceType",
           "in.RequireVersionInformation",
           "in.SkipPresignedUrlGeneration",
-          "in.Version.ModifiedBy.Components",
-          "in.Version.ModifiedBy.Partition",
-          "in.Version.ModifiedBy.PartitionType",
-          "in.Version.ModifiedBy.ServiceType",
+          "in.Version.ModifiedBy",
           "in.Version.VersionId"
         ]
       },
       "branches": {
-        "total": 23,
+        "total": 21,
         "happy_path_reached": true,
         "reachable_on_happy_path": 13,
         "present_arm_exercised": 5,
-        "present_arm_pct": 21.7,
+        "present_arm_pct": 23.8,
         "absent_arm_exercised": 13,
         "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 5,
-        "coverage_pct": 21.7,
+        "coverage_pct": 23.8,
         "by_origin": {
           "service": {
             "total": 8,
@@ -2300,10 +2217,10 @@
             "absent_arm_exercised": 4
           },
           "library": {
-            "total": 9,
+            "total": 7,
             "reachable_on_happy_path": 3,
             "present_arm_exercised": 3,
-            "present_arm_pct": 33.3,
+            "present_arm_pct": 42.9,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 3
@@ -2311,15 +2228,7 @@
         },
         "gaps": [
           {
-            "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.Id.Partition != \"\"",
-            "predicate_paths": [
-              "in.Id.Partition"
-            ]
-          },
-          {
-            "id": "b4",
+            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.Version.ModifiedBy == nil",
             "predicate_paths": [
@@ -2327,39 +2236,31 @@
             ]
           },
           {
-            "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.Version.ModifiedBy.Partition != \"\"",
+            "id": "b4",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
+            "cond": "in.Version.ModifiedBy",
             "predicate_paths": [
-              "in.Version.ModifiedBy.Partition"
+              "in.Version.ModifiedBy"
+            ]
+          },
+          {
+            "id": "b5",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
+            "cond": "in.Version.ModifiedBy",
+            "predicate_paths": [
+              "in.Version.ModifiedBy"
             ]
           },
           {
             "id": "b6",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
-            "cond": "in.Version.ModifiedBy|in.Version.ModifiedBy.Partition",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
+            "cond": "in.Version.ModifiedBy",
             "predicate_paths": [
               "in.Version.ModifiedBy"
             ]
           },
           {
             "id": "b7",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
-            "cond": "in.Version.ModifiedBy|in.Version.ModifiedBy.Partition",
-            "predicate_paths": [
-              "in.Version.ModifiedBy"
-            ]
-          },
-          {
-            "id": "b8",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
-            "cond": "in.Version.ModifiedBy|in.Version.ModifiedBy.Partition",
-            "predicate_paths": [
-              "in.Version.ModifiedBy"
-            ]
-          },
-          {
-            "id": "b9",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:93",
             "cond": "in.Version.ModifiedBy != nil",
             "predicate_paths": [
@@ -2367,15 +2268,15 @@
             ]
           },
           {
-            "id": "b10",
+            "id": "b8",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:98",
-            "cond": "in.Version.ModifiedBy|in.Version.ModifiedBy.Partition",
+            "cond": "in.Version.ModifiedBy",
             "predicate_paths": [
               "in.Version.ModifiedBy"
             ]
           },
           {
-            "id": "b13",
+            "id": "b11",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:115",
             "cond": "in.Version != nil",
             "predicate_paths": [
@@ -2383,7 +2284,7 @@
             ]
           },
           {
-            "id": "b14",
+            "id": "b12",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:116",
             "cond": "in.Version != nil",
             "predicate_paths": [
@@ -2391,7 +2292,7 @@
             ]
           },
           {
-            "id": "b16",
+            "id": "b14",
             "at": "internal/server/get_artifact.go:38",
             "cond": "in != nil",
             "predicate_paths": [
@@ -2399,7 +2300,7 @@
             ]
           },
           {
-            "id": "b17",
+            "id": "b15",
             "at": "internal/server/get_artifact.go:42",
             "cond": "in.RequireVersionInformation != nil",
             "predicate_paths": [
@@ -2407,7 +2308,7 @@
             ]
           },
           {
-            "id": "b18",
+            "id": "b16",
             "at": "internal/server/get_artifact.go:70",
             "cond": "in.AccessToken != \"\"",
             "predicate_paths": [
@@ -2415,7 +2316,7 @@
             ]
           },
           {
-            "id": "b19",
+            "id": "b17",
             "at": "internal/server/get_artifact.go:71",
             "cond": "in.AccessToken == api.Artifact).GetAccessToken()",
             "predicate_paths": [
@@ -2423,7 +2324,7 @@
             ]
           },
           {
-            "id": "b20",
+            "id": "b18",
             "at": "internal/server/get_artifact.go:95",
             "cond": "in.Version != nil",
             "predicate_paths": [
@@ -2431,7 +2332,7 @@
             ]
           },
           {
-            "id": "b21",
+            "id": "b19",
             "at": "internal/server/get_artifact.go:71",
             "cond": "in.AccessToken == api.File).GetKey()",
             "predicate_paths": [
@@ -2439,7 +2340,7 @@
             ]
           },
           {
-            "id": "b22",
+            "id": "b20",
             "at": "internal/server/get_artifact.go:100",
             "cond": "in.SkipPresignedUrlGeneration",
             "predicate_paths": [
@@ -2447,7 +2348,7 @@
             ]
           },
           {
-            "id": "b23",
+            "id": "b21",
             "at": "internal/server/get_artifact.go:95",
             "cond": "in.Version.VersionId != \"\"",
             "predicate_paths": [
@@ -2472,10 +2373,6 @@
           },
           {
             "field": "filetype",
-            "fuzzy_suggestions": null
-          },
-          {
-            "field": "id",
             "fuzzy_suggestions": null
           },
           {
@@ -2898,57 +2795,68 @@
         "coverage_pct": 11.1
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 12,
-        "covered_count": 0,
-        "coverage_pct": 0,
+        "leaf_fields_read_by_rpc": 6,
+        "covered_count": 1,
+        "coverage_pct": 16.7,
         "request_fields_set_by_tests": 6,
-        "set_by_positive_tests": 0,
+        "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 3,
-            "set": 0,
-            "pct": 0
+            "total": 4,
+            "set": 1,
+            "pct": 25
           },
           "nested": {
-            "total": 5,
+            "total": 2,
             "set": 0,
             "pct": 0
           },
           "deep": {
-            "total": 4,
+            "total": 0,
             "set": 0,
             "pct": 0
           }
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.Id",
+            "match": "exact",
+            "by_tests": [
+              "Another org's owner cannot LOCATE an artifact",
+              "Another tenant cannot get or locate completed artifact",
+              "Locate Private Article Artifact - No Auth",
+              "Locate Public Article Artifact - No Auth",
+              "Locate artifact",
+              "Locate non-existent artifact should return 404",
+              "Multi-part upload create next complete",
+              "Single-part upload create PUT complete",
+              "Three-part upload create next next complete",
+              "Version Creation",
+              "Version delete"
+            ]
+          }
+        ],
         "gaps": [
-          "in.Id.Components",
-          "in.Id.Partition",
-          "in.Id.PartitionType",
-          "in.Id.ServiceType",
           "in.Name",
           "in.PreferDownload",
           "in.Preview",
-          "in.Version.ModifiedBy.Components",
-          "in.Version.ModifiedBy.Partition",
-          "in.Version.ModifiedBy.PartitionType",
-          "in.Version.ModifiedBy.ServiceType",
+          "in.Version.ModifiedBy",
           "in.Version.VersionId"
         ]
       },
       "branches": {
-        "total": 21,
+        "total": 19,
         "happy_path_reached": true,
         "reachable_on_happy_path": 11,
         "present_arm_exercised": 7,
-        "present_arm_pct": 33.3,
+        "present_arm_pct": 36.8,
         "absent_arm_exercised": 11,
         "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 7,
-        "coverage_pct": 33.3,
+        "coverage_pct": 36.8,
         "by_origin": {
           "service": {
             "total": 7,
@@ -2969,10 +2877,10 @@
             "absent_arm_exercised": 4
           },
           "library": {
-            "total": 8,
+            "total": 6,
             "reachable_on_happy_path": 2,
             "present_arm_exercised": 2,
-            "present_arm_pct": 25,
+            "present_arm_pct": 33.3,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 2
@@ -2980,15 +2888,7 @@
         },
         "gaps": [
           {
-            "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.Id.Partition != \"\"",
-            "predicate_paths": [
-              "in.Id.Partition"
-            ]
-          },
-          {
-            "id": "b4",
+            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.Version.ModifiedBy == nil",
             "predicate_paths": [
@@ -2996,39 +2896,31 @@
             ]
           },
           {
-            "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.Version.ModifiedBy.Partition != \"\"",
+            "id": "b4",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
+            "cond": "in.Version.ModifiedBy",
             "predicate_paths": [
-              "in.Version.ModifiedBy.Partition"
+              "in.Version.ModifiedBy"
+            ]
+          },
+          {
+            "id": "b5",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
+            "cond": "in.Version.ModifiedBy",
+            "predicate_paths": [
+              "in.Version.ModifiedBy"
             ]
           },
           {
             "id": "b6",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
-            "cond": "in.Version.ModifiedBy|in.Version.ModifiedBy.Partition",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
+            "cond": "in.Version.ModifiedBy",
             "predicate_paths": [
               "in.Version.ModifiedBy"
             ]
           },
           {
             "id": "b7",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
-            "cond": "in.Version.ModifiedBy|in.Version.ModifiedBy.Partition",
-            "predicate_paths": [
-              "in.Version.ModifiedBy"
-            ]
-          },
-          {
-            "id": "b8",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
-            "cond": "in.Version.ModifiedBy|in.Version.ModifiedBy.Partition",
-            "predicate_paths": [
-              "in.Version.ModifiedBy"
-            ]
-          },
-          {
-            "id": "b9",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:93",
             "cond": "in.Version.ModifiedBy != nil",
             "predicate_paths": [
@@ -3036,15 +2928,15 @@
             ]
           },
           {
-            "id": "b10",
+            "id": "b8",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:98",
-            "cond": "in.Version.ModifiedBy|in.Version.ModifiedBy.Partition",
+            "cond": "in.Version.ModifiedBy",
             "predicate_paths": [
               "in.Version.ModifiedBy"
             ]
           },
           {
-            "id": "b15",
+            "id": "b13",
             "at": "internal/server/download.go:22",
             "cond": "in != nil",
             "predicate_paths": [
@@ -3052,7 +2944,7 @@
             ]
           },
           {
-            "id": "b16",
+            "id": "b14",
             "at": "internal/server/download.go:49",
             "cond": "in.Name == \"\"",
             "predicate_paths": [
@@ -3060,7 +2952,7 @@
             ]
           },
           {
-            "id": "b17",
+            "id": "b15",
             "at": "internal/server/download.go:50",
             "cond": "in.Preview",
             "predicate_paths": [
@@ -3068,7 +2960,7 @@
             ]
           },
           {
-            "id": "b18",
+            "id": "b16",
             "at": "internal/server/download.go:49",
             "cond": "in.Name == **t53",
             "predicate_paths": [
@@ -3076,7 +2968,7 @@
             ]
           },
           {
-            "id": "b19",
+            "id": "b17",
             "at": "internal/server/download.go:57",
             "cond": "in.Name == **t74",
             "predicate_paths": [
@@ -3084,7 +2976,7 @@
             ]
           },
           {
-            "id": "b21",
+            "id": "b19",
             "at": "internal/server/download.go:86",
             "cond": "in.Version.VersionId != \"\"",
             "predicate_paths": [
@@ -3107,10 +2999,6 @@
           },
           {
             "field": "filetype",
-            "fuzzy_suggestions": null
-          },
-          {
-            "field": "id",
             "fuzzy_suggestions": null
           },
           {
@@ -3391,20 +3279,20 @@
         "coverage_pct": 12.5
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 6,
+        "leaf_fields_read_by_rpc": 3,
         "covered_count": 1,
-        "coverage_pct": 16.7,
+        "coverage_pct": 33.3,
         "request_fields_set_by_tests": 5,
         "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 2,
+            "total": 3,
             "set": 1,
-            "pct": 50
+            "pct": 33.3
           },
           "nested": {
-            "total": 4,
+            "total": 0,
             "set": 0,
             "pct": 0
           },
@@ -3424,15 +3312,12 @@
           }
         ],
         "gaps": [
-          "in.ArtifactId.Components",
-          "in.ArtifactId.Partition",
-          "in.ArtifactId.PartitionType",
-          "in.ArtifactId.ServiceType",
+          "in.ArtifactId",
           "in.ChunkSize"
         ]
       },
       "branches": {
-        "total": 10,
+        "total": 9,
         "happy_path_reached": true,
         "reachable_on_happy_path": 8,
         "present_arm_exercised": 0,
@@ -3463,7 +3348,7 @@
             "absent_arm_exercised": 3
           },
           "library": {
-            "total": 5,
+            "total": 4,
             "reachable_on_happy_path": 4,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -3483,22 +3368,14 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.ArtifactId.Partition != \"\"",
-            "predicate_paths": [
-              "in.ArtifactId.Partition"
-            ]
-          },
-          {
-            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition == *ObjectTypeArtifact",
+            "cond": "in.ArtifactId == *ObjectTypeArtifact",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
-            "id": "b4",
+            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:397",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
@@ -3506,15 +3383,15 @@
             ]
           },
           {
-            "id": "b5",
+            "id": "b4",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:404",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition",
+            "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
-            "id": "b6",
+            "id": "b5",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:410",
             "cond": "in.ChunkSize \u003e= 0",
             "predicate_paths": [
@@ -3522,7 +3399,7 @@
             ]
           },
           {
-            "id": "b7",
+            "id": "b6",
             "at": "internal/server/multipart_upload.go:32",
             "cond": "in.ChunkSize \u003c= 0",
             "predicate_paths": [
@@ -3530,23 +3407,23 @@
             ]
           },
           {
-            "id": "b8",
+            "id": "b7",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:667",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition != objType",
+            "cond": "in.ArtifactId != objType",
+            "predicate_paths": [
+              "in.ArtifactId"
+            ]
+          },
+          {
+            "id": "b8",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3600",
+            "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
             "id": "b9",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3600",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition",
-            "predicate_paths": [
-              "in.ArtifactId"
-            ]
-          },
-          {
-            "id": "b10",
             "at": "internal/server/multipart_upload.go:143",
             "cond": "in != nil",
             "predicate_paths": [
@@ -3611,20 +3488,20 @@
         "coverage_pct": 0
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 16,
+        "leaf_fields_read_by_rpc": 10,
         "covered_count": 3,
-        "coverage_pct": 18.8,
+        "coverage_pct": 30,
         "request_fields_set_by_tests": 7,
         "set_by_positive_tests": 3,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 7,
+            "total": 9,
             "set": 3,
-            "pct": 42.9
+            "pct": 33.3
           },
           "nested": {
-            "total": 9,
+            "total": 1,
             "set": 0,
             "pct": 0
           },
@@ -3678,14 +3555,8 @@
           }
         ],
         "gaps": [
-          "in.ActorId.Components",
-          "in.ActorId.Partition",
-          "in.ActorId.PartitionType",
-          "in.ActorId.ServiceType",
-          "in.DevOid.Components",
-          "in.DevOid.Partition",
-          "in.DevOid.PartitionType",
-          "in.DevOid.ServiceType",
+          "in.ActorId",
+          "in.DevOid",
           "in.FileEncoding",
           "in.FileSize",
           "in.Headers.ContentDisposition",
@@ -3694,17 +3565,17 @@
         ]
       },
       "branches": {
-        "total": 37,
+        "total": 35,
         "happy_path_reached": true,
         "reachable_on_happy_path": 34,
         "present_arm_exercised": 14,
-        "present_arm_pct": 37.8,
+        "present_arm_pct": 40,
         "absent_arm_exercised": 34,
         "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 14,
-        "coverage_pct": 37.8,
+        "coverage_pct": 40,
         "by_origin": {
           "service": {
             "total": 21,
@@ -3725,10 +3596,10 @@
             "absent_arm_exercised": 7
           },
           "library": {
-            "total": 9,
+            "total": 7,
             "reachable_on_happy_path": 7,
             "present_arm_exercised": 1,
-            "present_arm_pct": 11.1,
+            "present_arm_pct": 14.3,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 7
@@ -3745,38 +3616,30 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.ActorId.Partition != \"\"",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
+            "cond": "in.ActorId",
             "predicate_paths": [
-              "in.ActorId.Partition"
+              "in.ActorId"
             ]
           },
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
-            "cond": "in.ActorId|in.ActorId.Partition",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
+            "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
             ]
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
-            "cond": "in.ActorId|in.ActorId.Partition",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
+            "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
             ]
           },
           {
             "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
-            "cond": "in.ActorId|in.ActorId.Partition",
-            "predicate_paths": [
-              "in.ActorId"
-            ]
-          },
-          {
-            "id": "b6",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.DevOid == nil",
             "predicate_paths": [
@@ -3784,15 +3647,7 @@
             ]
           },
           {
-            "id": "b7",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.DevOid.Partition != \"\"",
-            "predicate_paths": [
-              "in.DevOid.Partition"
-            ]
-          },
-          {
-            "id": "b8",
+            "id": "b6",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:322",
             "cond": "in.ActorId == nil",
             "predicate_paths": [
@@ -3800,15 +3655,15 @@
             ]
           },
           {
-            "id": "b9",
+            "id": "b7",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:329",
-            "cond": "in.ActorId|in.ActorId.Partition",
+            "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
             ]
           },
           {
-            "id": "b10",
+            "id": "b8",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:332",
             "cond": "in.DevOid == nil",
             "predicate_paths": [
@@ -3816,15 +3671,15 @@
             ]
           },
           {
-            "id": "b11",
+            "id": "b9",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:339",
-            "cond": "in.DevOid|in.DevOid.Partition",
+            "cond": "in.DevOid",
             "predicate_paths": [
               "in.DevOid"
             ]
           },
           {
-            "id": "b12",
+            "id": "b10",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:357",
             "cond": "in.FileSize \u003e= 0",
             "predicate_paths": [
@@ -3832,7 +3687,7 @@
             ]
           },
           {
-            "id": "b17",
+            "id": "b15",
             "at": "internal/server/multipart_upload.go:32",
             "cond": "in.FileSize \u003c= 0",
             "predicate_paths": [
@@ -3840,7 +3695,7 @@
             ]
           },
           {
-            "id": "b23",
+            "id": "b21",
             "at": "internal/server/upload.go:141",
             "cond": "in.FileSize \u003e *t11 * 1024 * 1024",
             "predicate_paths": [
@@ -3848,7 +3703,7 @@
             ]
           },
           {
-            "id": "b24",
+            "id": "b22",
             "at": "internal/server/upload.go:152",
             "cond": "in.FileSize \u003c t38 * 1024 * 1024",
             "predicate_paths": [
@@ -3856,15 +3711,15 @@
             ]
           },
           {
-            "id": "b25",
+            "id": "b23",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3600",
-            "cond": "in.ActorId|in.ActorId.Partition",
+            "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
             ]
           },
           {
-            "id": "b28",
+            "id": "b26",
             "at": "internal/server/multipart_upload.go:73",
             "cond": "in.FileEncoding != \"\"",
             "predicate_paths": [
@@ -3872,7 +3727,7 @@
             ]
           },
           {
-            "id": "b29",
+            "id": "b27",
             "at": "internal/server/upload.go:181",
             "cond": "in != nil",
             "predicate_paths": [
@@ -3880,7 +3735,7 @@
             ]
           },
           {
-            "id": "b30",
+            "id": "b28",
             "at": "internal/server/upload.go:184",
             "cond": "in.IsChunkedUpload",
             "predicate_paths": [
@@ -3888,7 +3743,7 @@
             ]
           },
           {
-            "id": "b32",
+            "id": "b30",
             "at": "internal/server/upload.go:224",
             "cond": "in.SkipFileConstrains",
             "predicate_paths": [
@@ -3896,15 +3751,15 @@
             ]
           },
           {
-            "id": "b35",
+            "id": "b33",
             "at": "internal/server/upload.go:227",
-            "cond": "in.ActorId|in.ActorId.Partition != *ObjectTypeRevUser",
+            "cond": "in.ActorId != *ObjectTypeRevUser",
             "predicate_paths": [
               "in.ActorId"
             ]
           },
           {
-            "id": "b36",
+            "id": "b34",
             "at": "internal/server/upload.go:274",
             "cond": "in.FileEncoding != \"\"",
             "predicate_paths": [
@@ -3912,7 +3767,7 @@
             ]
           },
           {
-            "id": "b37",
+            "id": "b35",
             "at": "internal/server/upload.go:278",
             "cond": "in.IsChunkedUpload",
             "predicate_paths": [
@@ -4239,20 +4094,20 @@
         "coverage_pct": 12.5
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 5,
-        "covered_count": 0,
-        "coverage_pct": 0,
+        "leaf_fields_read_by_rpc": 2,
+        "covered_count": 1,
+        "coverage_pct": 50,
         "request_fields_set_by_tests": 12,
-        "set_by_positive_tests": 0,
+        "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 1,
-            "set": 0,
-            "pct": 0
+            "total": 2,
+            "set": 1,
+            "pct": 50
           },
           "nested": {
-            "total": 4,
+            "total": 0,
             "set": 0,
             "pct": 0
           },
@@ -4262,27 +4117,32 @@
             "pct": 0
           }
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.Id",
+            "match": "exact",
+            "by_tests": [
+              "Hard delete version for non-existent artifact should return 404",
+              "Should verify file attachment content matches original using SHA256"
+            ]
+          }
+        ],
         "gaps": [
-          "in.Id.Components",
-          "in.Id.Partition",
-          "in.Id.PartitionType",
-          "in.Id.ServiceType",
           "in.VersionId"
         ]
       },
       "branches": {
-        "total": 10,
+        "total": 9,
         "happy_path_reached": true,
         "reachable_on_happy_path": 8,
         "present_arm_exercised": 7,
-        "present_arm_pct": 70,
+        "present_arm_pct": 77.8,
         "absent_arm_exercised": 8,
         "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 7,
-        "coverage_pct": 70,
+        "coverage_pct": 77.8,
         "by_origin": {
           "service": {
             "total": 3,
@@ -4303,10 +4163,10 @@
             "absent_arm_exercised": 2
           },
           "library": {
-            "total": 5,
+            "total": 4,
             "reachable_on_happy_path": 4,
             "present_arm_exercised": 4,
-            "present_arm_pct": 80,
+            "present_arm_pct": 100,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 4
@@ -4314,15 +4174,7 @@
         },
         "gaps": [
           {
-            "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.Id.Partition != \"\"",
-            "predicate_paths": [
-              "in.Id.Partition"
-            ]
-          },
-          {
-            "id": "b9",
+            "id": "b8",
             "at": "internal/server/hard_delete_artifact_version.go:32",
             "cond": "in != nil",
             "predicate_paths": [
@@ -4330,7 +4182,7 @@
             ]
           },
           {
-            "id": "b10",
+            "id": "b9",
             "at": "internal/server/hard_delete_artifact_version.go:103",
             "cond": "in.VersionId == \"\"",
             "predicate_paths": [
@@ -4370,10 +4222,6 @@
             "fuzzy_suggestions": null
           },
           {
-            "field": "id",
-            "fuzzy_suggestions": null
-          },
-          {
             "field": "ownedby",
             "fuzzy_suggestions": null
           },
@@ -4383,10 +4231,7 @@
           },
           {
             "field": "type",
-            "fuzzy_suggestions": [
-              "in.Id.PartitionType",
-              "in.Id.ServiceType"
-            ]
+            "fuzzy_suggestions": null
           },
           {
             "field": "version",
@@ -4464,7 +4309,7 @@
         "coverage_pct": 0
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 4,
+        "leaf_fields_read_by_rpc": 1,
         "covered_count": 0,
         "coverage_pct": 0,
         "request_fields_set_by_tests": 0,
@@ -4472,12 +4317,12 @@
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 0,
+            "total": 1,
             "set": 0,
             "pct": 0
           },
           "nested": {
-            "total": 4,
+            "total": 0,
             "set": 0,
             "pct": 0
           },
@@ -4489,14 +4334,11 @@
         },
         "covered": null,
         "gaps": [
-          "in.ParentId.Components",
-          "in.ParentId.Partition",
-          "in.ParentId.PartitionType",
-          "in.ParentId.ServiceType"
+          "in.ParentId"
         ]
       },
       "branches": {
-        "total": 5,
+        "total": 4,
         "happy_path_reached": false,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
@@ -4527,7 +4369,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 3,
+            "total": 2,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -4547,14 +4389,6 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.ParentId.Partition != \"\"",
-            "predicate_paths": [
-              "in.ParentId.Partition"
-            ]
-          },
-          {
-            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:479",
             "cond": "in.ParentId == nil",
             "predicate_paths": [
@@ -4562,15 +4396,15 @@
             ]
           },
           {
-            "id": "b4",
+            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/datapath/mfz/context/context.go:77",
-            "cond": "in.ParentId|in.ParentId.Partition == nil",
+            "cond": "in.ParentId == nil",
             "predicate_paths": [
               "in.ParentId"
             ]
           },
           {
-            "id": "b5",
+            "id": "b4",
             "at": "internal/server/hard_delete_artifact.go:27",
             "cond": "in != nil",
             "predicate_paths": [
@@ -4618,20 +4452,20 @@
         "coverage_pct": 11.1
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 4,
-        "covered_count": 0,
-        "coverage_pct": 0,
+        "leaf_fields_read_by_rpc": 1,
+        "covered_count": 1,
+        "coverage_pct": 100,
         "request_fields_set_by_tests": 3,
-        "set_by_positive_tests": 0,
+        "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 0,
-            "set": 0,
-            "pct": 0
+            "total": 1,
+            "set": 1,
+            "pct": 100
           },
           "nested": {
-            "total": 4,
+            "total": 0,
             "set": 0,
             "pct": 0
           },
@@ -4641,26 +4475,30 @@
             "pct": 0
           }
         },
-        "covered": null,
-        "gaps": [
-          "in.Id.Components",
-          "in.Id.Partition",
-          "in.Id.PartitionType",
-          "in.Id.ServiceType"
-        ]
+        "covered": [
+          {
+            "path": "in.Id",
+            "match": "exact",
+            "by_tests": [
+              "Version List",
+              "Versions list for non-existent artifact should return 404"
+            ]
+          }
+        ],
+        "gaps": null
       },
       "branches": {
-        "total": 6,
+        "total": 5,
         "happy_path_reached": true,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 4,
-        "present_arm_pct": 66.7,
+        "present_arm_pct": 80,
         "absent_arm_exercised": 0,
         "absent_arm_pct": 0,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 66.7,
+        "coverage_pct": 80,
         "by_origin": {
           "service": {
             "total": 1,
@@ -4681,10 +4519,10 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 3,
+            "total": 2,
             "reachable_on_happy_path": 2,
             "present_arm_exercised": 2,
-            "present_arm_pct": 66.7,
+            "present_arm_pct": 100,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 0
@@ -4692,15 +4530,7 @@
         },
         "gaps": [
           {
-            "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.Id.Partition != \"\"",
-            "predicate_paths": [
-              "in.Id.Partition"
-            ]
-          },
-          {
-            "id": "b6",
+            "id": "b5",
             "at": "internal/server/list_artifact_versions.go:29",
             "cond": "in != nil",
             "predicate_paths": [
@@ -4717,10 +4547,6 @@
           },
           {
             "field": "filetype",
-            "fuzzy_suggestions": null
-          },
-          {
-            "field": "id",
             "fuzzy_suggestions": null
           }
         ]
@@ -4791,20 +4617,20 @@
         "coverage_pct": 11.1
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 10,
-        "covered_count": 0,
-        "coverage_pct": 0,
+        "leaf_fields_read_by_rpc": 4,
+        "covered_count": 1,
+        "coverage_pct": 25,
         "request_fields_set_by_tests": 6,
-        "set_by_positive_tests": 0,
+        "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 2,
-            "set": 0,
-            "pct": 0
+            "total": 4,
+            "set": 1,
+            "pct": 25
           },
           "nested": {
-            "total": 8,
+            "total": 0,
             "set": 0,
             "pct": 0
           },
@@ -4814,32 +4640,36 @@
             "pct": 0
           }
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.ParentId",
+            "match": "exact",
+            "by_tests": [
+              "Another org's owner cannot LIST artifacts of a parent in another org",
+              "List artifacts for non-existent parent should return 403",
+              "ListArtifacts",
+              "parent_id on complete attaches artifact to parent"
+            ]
+          }
+        ],
         "gaps": [
-          "in.Ancestor.Components",
-          "in.Ancestor.Partition",
-          "in.Ancestor.PartitionType",
-          "in.Ancestor.ServiceType",
+          "in.Ancestor",
           "in.ConfigurationSet",
-          "in.IncludeChildObjectTypes",
-          "in.ParentId.Components",
-          "in.ParentId.Partition",
-          "in.ParentId.PartitionType",
-          "in.ParentId.ServiceType"
+          "in.IncludeChildObjectTypes"
         ]
       },
       "branches": {
-        "total": 24,
+        "total": 22,
         "happy_path_reached": true,
         "reachable_on_happy_path": 21,
         "present_arm_exercised": 15,
-        "present_arm_pct": 62.5,
+        "present_arm_pct": 68.2,
         "absent_arm_exercised": 21,
         "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 15,
-        "coverage_pct": 62.5,
+        "coverage_pct": 68.2,
         "by_origin": {
           "service": {
             "total": 16,
@@ -4860,10 +4690,10 @@
             "absent_arm_exercised": 2
           },
           "library": {
-            "total": 6,
+            "total": 4,
             "reachable_on_happy_path": 4,
             "present_arm_exercised": 3,
-            "present_arm_pct": 50,
+            "present_arm_pct": 75,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 4
@@ -4872,14 +4702,6 @@
         "gaps": [
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.ParentId.Partition != \"\"",
-            "predicate_paths": [
-              "in.ParentId.Partition"
-            ]
-          },
-          {
-            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.Ancestor == nil",
             "predicate_paths": [
@@ -4888,14 +4710,6 @@
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.Ancestor.Partition != \"\"",
-            "predicate_paths": [
-              "in.Ancestor.Partition"
-            ]
-          },
-          {
-            "id": "b6",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:275",
             "cond": "in.Ancestor != nil",
             "predicate_paths": [
@@ -4903,7 +4717,7 @@
             ]
           },
           {
-            "id": "b9",
+            "id": "b7",
             "at": "internal/server/list_artifact.go:29",
             "cond": "in.Ancestor == nil",
             "predicate_paths": [
@@ -4911,7 +4725,7 @@
             ]
           },
           {
-            "id": "b10",
+            "id": "b8",
             "at": "internal/server/list_artifact.go:35",
             "cond": "in.Ancestor != nil",
             "predicate_paths": [
@@ -4919,7 +4733,7 @@
             ]
           },
           {
-            "id": "b11",
+            "id": "b9",
             "at": "internal/server/list_artifact.go:32",
             "cond": "in.Ancestor != nil",
             "predicate_paths": [
@@ -4927,7 +4741,7 @@
             ]
           },
           {
-            "id": "b21",
+            "id": "b19",
             "at": "internal/server/list_artifact.go:44",
             "cond": "in != nil",
             "predicate_paths": [
@@ -4935,7 +4749,7 @@
             ]
           },
           {
-            "id": "b23",
+            "id": "b21",
             "at": "internal/server/list_artifact.go:111",
             "cond": "in.ConfigurationSet != 0",
             "predicate_paths": [
@@ -4960,10 +4774,6 @@
           },
           {
             "field": "id",
-            "fuzzy_suggestions": null
-          },
-          {
-            "field": "parentid",
             "fuzzy_suggestions": null
           },
           {
@@ -5154,7 +4964,7 @@
         "coverage_pct": 0
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 10,
+        "leaf_fields_read_by_rpc": 4,
         "covered_count": 0,
         "coverage_pct": 0,
         "request_fields_set_by_tests": 0,
@@ -5162,12 +4972,12 @@
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 2,
+            "total": 4,
             "set": 0,
             "pct": 0
           },
           "nested": {
-            "total": 8,
+            "total": 0,
             "set": 0,
             "pct": 0
           },
@@ -5179,20 +4989,14 @@
         },
         "covered": null,
         "gaps": [
-          "in.ArtifactId.Components",
-          "in.ArtifactId.Partition",
-          "in.ArtifactId.PartitionType",
-          "in.ArtifactId.ServiceType",
+          "in.ArtifactId",
           "in.ConfigurationSet",
-          "in.ParentId.Components",
-          "in.ParentId.Partition",
-          "in.ParentId.PartitionType",
-          "in.ParentId.ServiceType",
+          "in.ParentId",
           "in.UnsetParentId"
         ]
       },
       "branches": {
-        "total": 24,
+        "total": 22,
         "happy_path_reached": false,
         "reachable_on_happy_path": 21,
         "present_arm_exercised": 0,
@@ -5223,7 +5027,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 9,
+            "total": 7,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -5243,22 +5047,14 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.ArtifactId.Partition != \"\"",
-            "predicate_paths": [
-              "in.ArtifactId.Partition"
-            ]
-          },
-          {
-            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition == *ObjectTypeArtifact",
+            "cond": "in.ArtifactId == *ObjectTypeArtifact",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
-            "id": "b4",
+            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.ParentId == nil",
             "predicate_paths": [
@@ -5266,15 +5062,7 @@
             ]
           },
           {
-            "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.ParentId.Partition != \"\"",
-            "predicate_paths": [
-              "in.ParentId.Partition"
-            ]
-          },
-          {
-            "id": "b6",
+            "id": "b4",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:550",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
@@ -5282,15 +5070,15 @@
             ]
           },
           {
-            "id": "b7",
+            "id": "b5",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:557",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition",
+            "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
-            "id": "b8",
+            "id": "b6",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:560",
             "cond": "in.ParentId != nil",
             "predicate_paths": [
@@ -5298,7 +5086,7 @@
             ]
           },
           {
-            "id": "b9",
+            "id": "b7",
             "at": "internal/server/update_artifact.go:24",
             "cond": "in != nil",
             "predicate_paths": [
@@ -5306,7 +5094,7 @@
             ]
           },
           {
-            "id": "b10",
+            "id": "b8",
             "at": "internal/server/update_artifact.go:28",
             "cond": "in.ParentId == nil",
             "predicate_paths": [
@@ -5314,7 +5102,7 @@
             ]
           },
           {
-            "id": "b11",
+            "id": "b9",
             "at": "internal/server/update_artifact.go:32",
             "cond": "in.ParentId != nil",
             "predicate_paths": [
@@ -5322,7 +5110,7 @@
             ]
           },
           {
-            "id": "b12",
+            "id": "b10",
             "at": "internal/server/update_artifact.go:28",
             "cond": "in.UnsetParentId",
             "predicate_paths": [
@@ -5330,7 +5118,7 @@
             ]
           },
           {
-            "id": "b13",
+            "id": "b11",
             "at": "internal/server/update_artifact.go:37",
             "cond": "in.ParentId != nil",
             "predicate_paths": [
@@ -5338,7 +5126,7 @@
             ]
           },
           {
-            "id": "b14",
+            "id": "b12",
             "at": "internal/server/update_artifact.go:32",
             "cond": "in.UnsetParentId",
             "predicate_paths": [
@@ -5346,32 +5134,32 @@
             ]
           },
           {
-            "id": "b15",
+            "id": "b13",
             "at": "internal/server/update_artifact.go:46",
-            "cond": "in.ParentId|in.ParentId.Partition != \"\"",
+            "cond": "in.ParentId != \"\"",
             "predicate_paths": [
               "in.ParentId"
             ]
           },
           {
-            "id": "b16",
+            "id": "b14",
             "at": "internal/server/update_artifact.go:48",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition != in.ParentId|in.ParentId.Partition",
+            "cond": "in.ArtifactId != in.ParentId",
             "predicate_paths": [
               "in.ArtifactId",
               "in.ParentId"
             ]
           },
           {
-            "id": "b17",
+            "id": "b15",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/datapath/mfz/context/context.go:77",
-            "cond": "in.ParentId|in.ParentId.Partition == nil",
+            "cond": "in.ParentId == nil",
             "predicate_paths": [
               "in.ParentId"
             ]
           },
           {
-            "id": "b18",
+            "id": "b16",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/datapath/mfz/context/context.go:86",
             "cond": "in.ParentId == nil",
             "predicate_paths": [
@@ -5379,31 +5167,31 @@
             ]
           },
           {
-            "id": "b19",
+            "id": "b17",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:659",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition",
+            "cond": "in.ArtifactId",
+            "predicate_paths": [
+              "in.ArtifactId"
+            ]
+          },
+          {
+            "id": "b18",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3620",
+            "cond": "in.ArtifactId",
+            "predicate_paths": [
+              "in.ArtifactId"
+            ]
+          },
+          {
+            "id": "b19",
+            "at": "internal/server/util.go:26",
+            "cond": "in.ArtifactId == \"\"",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
             "id": "b20",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3620",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition",
-            "predicate_paths": [
-              "in.ArtifactId"
-            ]
-          },
-          {
-            "id": "b21",
-            "at": "internal/server/util.go:26",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition == \"\"",
-            "predicate_paths": [
-              "in.ArtifactId"
-            ]
-          },
-          {
-            "id": "b22",
             "at": "internal/server/update_artifact.go:71",
             "cond": "in.ParentId != nil",
             "predicate_paths": [
@@ -5411,7 +5199,7 @@
             ]
           },
           {
-            "id": "b23",
+            "id": "b21",
             "at": "internal/server/update_artifact.go:73",
             "cond": "in.ConfigurationSet == 0",
             "predicate_paths": [
@@ -5419,7 +5207,7 @@
             ]
           },
           {
-            "id": "b24",
+            "id": "b22",
             "at": "internal/server/update_artifact.go:106",
             "cond": "in.UnsetParentId",
             "predicate_paths": [
@@ -5465,7 +5253,7 @@
         "coverage_pct": 12.5
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 12,
+        "leaf_fields_read_by_rpc": 3,
         "covered_count": 0,
         "coverage_pct": 0,
         "request_fields_set_by_tests": 3,
@@ -5473,12 +5261,12 @@
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 0,
+            "total": 3,
             "set": 0,
             "pct": 0
           },
           "nested": {
-            "total": 12,
+            "total": 0,
             "set": 0,
             "pct": 0
           },
@@ -5490,22 +5278,13 @@
         },
         "covered": null,
         "gaps": [
-          "in.ActorId.Components",
-          "in.ActorId.Partition",
-          "in.ActorId.PartitionType",
-          "in.ActorId.ServiceType",
-          "in.ArtifactId.Components",
-          "in.ArtifactId.Partition",
-          "in.ArtifactId.PartitionType",
-          "in.ArtifactId.ServiceType",
-          "in.DevOid.Components",
-          "in.DevOid.Partition",
-          "in.DevOid.PartitionType",
-          "in.DevOid.ServiceType"
+          "in.ActorId",
+          "in.ArtifactId",
+          "in.DevOid"
         ]
       },
       "branches": {
-        "total": 17,
+        "total": 14,
         "happy_path_reached": true,
         "reachable_on_happy_path": 13,
         "present_arm_exercised": 0,
@@ -5536,7 +5315,7 @@
             "absent_arm_exercised": 6
           },
           "library": {
-            "total": 10,
+            "total": 7,
             "reachable_on_happy_path": 7,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -5556,38 +5335,30 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.ActorId.Partition != \"\"",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
+            "cond": "in.ActorId",
             "predicate_paths": [
-              "in.ActorId.Partition"
+              "in.ActorId"
             ]
           },
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
-            "cond": "in.ActorId|in.ActorId.Partition",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
+            "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
             ]
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
-            "cond": "in.ActorId|in.ActorId.Partition",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
+            "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
             ]
           },
           {
             "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
-            "cond": "in.ActorId|in.ActorId.Partition",
-            "predicate_paths": [
-              "in.ActorId"
-            ]
-          },
-          {
-            "id": "b6",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.DevOid == nil",
             "predicate_paths": [
@@ -5595,15 +5366,7 @@
             ]
           },
           {
-            "id": "b7",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.DevOid.Partition != \"\"",
-            "predicate_paths": [
-              "in.DevOid.Partition"
-            ]
-          },
-          {
-            "id": "b8",
+            "id": "b6",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
@@ -5611,23 +5374,15 @@
             ]
           },
           {
-            "id": "b9",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.ArtifactId.Partition != \"\"",
-            "predicate_paths": [
-              "in.ArtifactId.Partition"
-            ]
-          },
-          {
-            "id": "b10",
+            "id": "b7",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition == *ObjectTypeArtifact",
+            "cond": "in.ArtifactId == *ObjectTypeArtifact",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
-            "id": "b11",
+            "id": "b8",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:491",
             "cond": "in.ActorId == nil",
             "predicate_paths": [
@@ -5635,15 +5390,15 @@
             ]
           },
           {
-            "id": "b12",
+            "id": "b9",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:498",
-            "cond": "in.ActorId|in.ActorId.Partition",
+            "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
             ]
           },
           {
-            "id": "b13",
+            "id": "b10",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:501",
             "cond": "in.DevOid == nil",
             "predicate_paths": [
@@ -5651,15 +5406,15 @@
             ]
           },
           {
-            "id": "b14",
+            "id": "b11",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:508",
-            "cond": "in.DevOid|in.DevOid.Partition",
+            "cond": "in.DevOid",
             "predicate_paths": [
               "in.DevOid"
             ]
           },
           {
-            "id": "b15",
+            "id": "b12",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:511",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
@@ -5667,15 +5422,15 @@
             ]
           },
           {
-            "id": "b16",
+            "id": "b13",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:518",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition",
+            "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
-            "id": "b17",
+            "id": "b14",
             "at": "internal/server/update_artifact_content.go:33",
             "cond": "in != nil",
             "predicate_paths": [
@@ -5758,7 +5513,7 @@
         "coverage_pct": 0
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 5,
+        "leaf_fields_read_by_rpc": 2,
         "covered_count": 0,
         "coverage_pct": 0,
         "request_fields_set_by_tests": 0,
@@ -5766,12 +5521,12 @@
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 1,
+            "total": 2,
             "set": 0,
             "pct": 0
           },
           "nested": {
-            "total": 4,
+            "total": 0,
             "set": 0,
             "pct": 0
           },
@@ -5783,15 +5538,12 @@
         },
         "covered": null,
         "gaps": [
-          "in.ArtifactId.Components",
-          "in.ArtifactId.Partition",
-          "in.ArtifactId.PartitionType",
-          "in.ArtifactId.ServiceType",
+          "in.ArtifactId",
           "in.StagedContentId"
         ]
       },
       "branches": {
-        "total": 6,
+        "total": 5,
         "happy_path_reached": false,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 0,
@@ -5822,7 +5574,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 3,
+            "total": 2,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -5842,22 +5594,14 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.ArtifactId.Partition != \"\"",
-            "predicate_paths": [
-              "in.ArtifactId.Partition"
-            ]
-          },
-          {
-            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition == *ObjectTypeArtifact",
+            "cond": "in.ArtifactId == *ObjectTypeArtifact",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
-            "id": "b4",
+            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:672",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
@@ -5865,15 +5609,15 @@
             ]
           },
           {
-            "id": "b5",
+            "id": "b4",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:679",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition",
+            "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
-            "id": "b6",
+            "id": "b5",
             "at": "internal/server/staged_content.go:404",
             "cond": "in != nil",
             "predicate_paths": [
@@ -5899,7 +5643,7 @@
         "coverage_pct": 0
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 6,
+        "leaf_fields_read_by_rpc": 3,
         "covered_count": 0,
         "coverage_pct": 0,
         "request_fields_set_by_tests": 0,
@@ -5907,12 +5651,12 @@
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 1,
+            "total": 2,
             "set": 0,
             "pct": 0
           },
           "nested": {
-            "total": 5,
+            "total": 1,
             "set": 0,
             "pct": 0
           },
@@ -5924,16 +5668,13 @@
         },
         "covered": null,
         "gaps": [
-          "in.ArtifactId.Components",
-          "in.ArtifactId.Partition",
-          "in.ArtifactId.PartitionType",
-          "in.ArtifactId.ServiceType",
+          "in.ArtifactId",
           "in.Content",
           "in.Headers.ContentDisposition"
         ]
       },
       "branches": {
-        "total": 8,
+        "total": 7,
         "happy_path_reached": false,
         "reachable_on_happy_path": 6,
         "present_arm_exercised": 0,
@@ -5964,7 +5705,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 3,
+            "total": 2,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -5984,22 +5725,14 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-            "cond": "in.ArtifactId.Partition != \"\"",
-            "predicate_paths": [
-              "in.ArtifactId.Partition"
-            ]
-          },
-          {
-            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition == *ObjectTypeArtifact",
+            "cond": "in.ArtifactId == *ObjectTypeArtifact",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
-            "id": "b4",
+            "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:749",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
@@ -6007,15 +5740,15 @@
             ]
           },
           {
-            "id": "b5",
+            "id": "b4",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:756",
-            "cond": "in.ArtifactId|in.ArtifactId.Partition",
+            "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
             ]
           },
           {
-            "id": "b6",
+            "id": "b5",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:765",
             "cond": "in.Headers != nil",
             "predicate_paths": [
@@ -6023,7 +5756,7 @@
             ]
           },
           {
-            "id": "b7",
+            "id": "b6",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:766",
             "cond": "in.Headers != nil",
             "predicate_paths": [
@@ -6031,7 +5764,7 @@
             ]
           },
           {
-            "id": "b8",
+            "id": "b7",
             "at": "internal/server/update_artifact_with_content.go:29",
             "cond": "in != nil",
             "predicate_paths": [

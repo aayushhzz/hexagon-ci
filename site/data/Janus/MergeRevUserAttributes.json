@@ -11,7 +11,7 @@
       "coverage_pct": 0
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 8,
+      "leaf_fields_read_by_rpc": 2,
       "covered_count": 0,
       "coverage_pct": 0,
       "request_fields_set_by_tests": 0,
@@ -19,12 +19,12 @@
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 0,
+          "total": 2,
           "set": 0,
           "pct": 0
         },
         "nested": {
-          "total": 8,
+          "total": 0,
           "set": 0,
           "pct": 0
         },
@@ -36,18 +36,12 @@
       },
       "covered": null,
       "gaps": [
-        "in.PrimaryUserId.Components",
-        "in.PrimaryUserId.Partition",
-        "in.PrimaryUserId.PartitionType",
-        "in.PrimaryUserId.ServiceType",
-        "in.SecondaryUserId.Components",
-        "in.SecondaryUserId.Partition",
-        "in.SecondaryUserId.PartitionType",
-        "in.SecondaryUserId.ServiceType"
+        "in.PrimaryUserId",
+        "in.SecondaryUserId"
       ]
     },
     "branches": {
-      "total": 9,
+      "total": 7,
       "happy_path_reached": false,
       "reachable_on_happy_path": 6,
       "present_arm_exercised": 0,
@@ -78,7 +72,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 4,
+          "total": 2,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -98,14 +92,6 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.PrimaryUserId.Partition != \"\"",
-          "predicate_paths": [
-            "in.PrimaryUserId.Partition"
-          ]
-        },
-        {
-          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
           "cond": "in.SecondaryUserId == nil",
           "predicate_paths": [
@@ -113,15 +99,7 @@
           ]
         },
         {
-          "id": "b4",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.SecondaryUserId.Partition != \"\"",
-          "predicate_paths": [
-            "in.SecondaryUserId.Partition"
-          ]
-        },
-        {
-          "id": "b5",
+          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2439",
           "cond": "in.PrimaryUserId == nil",
           "predicate_paths": [
@@ -129,15 +107,15 @@
           ]
         },
         {
-          "id": "b6",
+          "id": "b4",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2446",
-          "cond": "in.PrimaryUserId|in.PrimaryUserId.Partition",
+          "cond": "in.PrimaryUserId",
           "predicate_paths": [
             "in.PrimaryUserId"
           ]
         },
         {
-          "id": "b7",
+          "id": "b5",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2449",
           "cond": "in.SecondaryUserId == nil",
           "predicate_paths": [
@@ -145,15 +123,15 @@
           ]
         },
         {
-          "id": "b8",
+          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2456",
-          "cond": "in.SecondaryUserId|in.SecondaryUserId.Partition",
+          "cond": "in.SecondaryUserId",
           "predicate_paths": [
             "in.SecondaryUserId"
           ]
         },
         {
-          "id": "b9",
+          "id": "b7",
           "at": "internal/service/revuser_merge.go:341",
           "cond": "in != nil",
           "predicate_paths": [
@@ -177,8 +155,7 @@
         "kind": "rpc",
         "target": "Lock",
         "via_paths": [
-          "in.PrimaryUserId",
-          "in.PrimaryUserId.Partition"
+          "in.PrimaryUserId"
         ],
         "at": "internal/service/cache.go:394"
       },
@@ -186,8 +163,7 @@
         "kind": "rpc",
         "target": "RemoveRevUser",
         "via_paths": [
-          "in.PrimaryUserId",
-          "in.PrimaryUserId.Partition"
+          "in.PrimaryUserId"
         ],
         "at": "internal/service/cache.go:412"
       },
@@ -195,8 +171,7 @@
         "kind": "db",
         "target": "Delete",
         "via_paths": [
-          "in.PrimaryUserId",
-          "in.PrimaryUserId.Partition"
+          "in.PrimaryUserId"
         ],
         "at": "internal/service/cache.go:436"
       }
@@ -210,5 +185,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MergeRevUserAttributes` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.PrimaryUserId.Components\n  - in.PrimaryUserId.Partition\n  - in.PrimaryUserId.PartitionType\n  - in.PrimaryUserId.ServiceType\n  - in.SecondaryUserId.Components\n  - in.SecondaryUserId.Partition\n  - in.SecondaryUserId.PartitionType\n  - in.SecondaryUserId.ServiceType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.PrimaryUserId == nil\n  - in.PrimaryUserId.Partition != \"\"\n  - in.SecondaryUserId == nil\n  - in.SecondaryUserId.Partition != \"\"\n  - in.PrimaryUserId == nil\n  - in.PrimaryUserId|in.PrimaryUserId.Partition\n  - in.SecondaryUserId == nil\n  - in.SecondaryUserId|in.SecondaryUserId.Partition\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MergeRevUserAttributes` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.PrimaryUserId\n  - in.SecondaryUserId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.PrimaryUserId == nil\n  - in.SecondaryUserId == nil\n  - in.PrimaryUserId == nil\n  - in.PrimaryUserId\n  - in.SecondaryUserId == nil\n  - in.SecondaryUserId\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

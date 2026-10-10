@@ -30,7 +30,7 @@
       "coverage_pct": 25
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 127,
+      "leaf_fields_read_by_rpc": 121,
       "covered_count": 0,
       "coverage_pct": 0,
       "request_fields_set_by_tests": 1,
@@ -38,12 +38,12 @@
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 4,
+          "total": 6,
           "set": 0,
           "pct": 0
         },
         "nested": {
-          "total": 41,
+          "total": 33,
           "set": 0,
           "pct": 0
         },
@@ -58,10 +58,7 @@
         "in.CustomFilter.IssueFilters",
         "in.CustomFilter.TaskFilters",
         "in.CustomFilter.TicketFilters",
-        "in.DevOid.Components",
-        "in.DevOid.Partition",
-        "in.DevOid.PartitionType",
-        "in.DevOid.ServiceType",
+        "in.DevOid",
         "in.ExcludeWorkIds",
         "in.Filter.ActualCloseDateOp",
         "in.Filter.CreatedByAgentId",
@@ -178,14 +175,11 @@
         "in.IncludeWorkIds",
         "in.IndexHint",
         "in.SearchQuery",
-        "in.VistaId.Components",
-        "in.VistaId.Partition",
-        "in.VistaId.PartitionType",
-        "in.VistaId.ServiceType"
+        "in.VistaId"
       ]
     },
     "branches": {
-      "total": 81,
+      "total": 79,
       "happy_path_reached": true,
       "reachable_on_happy_path": 16,
       "present_arm_exercised": 0,
@@ -216,7 +210,7 @@
           "absent_arm_exercised": 7
         },
         "library": {
-          "total": 4,
+          "total": 2,
           "reachable_on_happy_path": 2,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -252,14 +246,6 @@
         },
         {
           "id": "b4",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.DevOid.Partition != \"\"",
-          "predicate_paths": [
-            "in.DevOid.Partition"
-          ]
-        },
-        {
-          "id": "b5",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6482",
           "cond": "in.Filter.TicketFilter.AppliesToPartIdOp != nil",
           "predicate_paths": [
@@ -267,7 +253,7 @@
           ]
         },
         {
-          "id": "b6",
+          "id": "b5",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6501",
           "cond": "in.Filter.TicketFilter.RevOidOp != nil",
           "predicate_paths": [
@@ -275,7 +261,7 @@
           ]
         },
         {
-          "id": "b7",
+          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6513",
           "cond": "in.Filter.TicketFilter.AccountIdOp != nil",
           "predicate_paths": [
@@ -283,7 +269,7 @@
           ]
         },
         {
-          "id": "b8",
+          "id": "b7",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6530",
           "cond": "in.Filter.TicketFilter.GroupOp != nil",
           "predicate_paths": [
@@ -291,7 +277,7 @@
           ]
         },
         {
-          "id": "b9",
+          "id": "b8",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6554",
           "cond": "in.Filter.TicketFilter.ChannelsOp != nil",
           "predicate_paths": [
@@ -299,7 +285,7 @@
           ]
         },
         {
-          "id": "b10",
+          "id": "b9",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6566",
           "cond": "in.Filter.TicketFilter.ChannelsV2Op != nil",
           "predicate_paths": [
@@ -307,7 +293,7 @@
           ]
         },
         {
-          "id": "b11",
+          "id": "b10",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6578",
           "cond": "in.Filter.TicketFilter.ChannelsV2InstancesOp != nil",
           "predicate_paths": [
@@ -315,7 +301,7 @@
           ]
         },
         {
-          "id": "b12",
+          "id": "b11",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6597",
           "cond": "in.Filter.TicketFilter.ProjectIdOp != nil",
           "predicate_paths": [
@@ -323,7 +309,7 @@
           ]
         },
         {
-          "id": "b13",
+          "id": "b12",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6609",
           "cond": "in.Filter.TicketFilter.MilestoneIdOp != nil",
           "predicate_paths": [
@@ -331,7 +317,7 @@
           ]
         },
         {
-          "id": "b14",
+          "id": "b13",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6635",
           "cond": "in.Filter.TicketFilter.SurveysAggregationOp != nil",
           "predicate_paths": [
@@ -339,7 +325,7 @@
           ]
         },
         {
-          "id": "b15",
+          "id": "b14",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6640",
           "cond": "in.Filter.TicketFilter.SentimentOp != nil",
           "predicate_paths": [
@@ -347,7 +333,7 @@
           ]
         },
         {
-          "id": "b16",
+          "id": "b15",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6666",
           "cond": "in.Filter.TicketFilter.SubtypeOp != nil",
           "predicate_paths": [
@@ -355,7 +341,7 @@
           ]
         },
         {
-          "id": "b17",
+          "id": "b16",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6671",
           "cond": "in.Filter.TicketFilter.AppsOp != nil",
           "predicate_paths": [
@@ -363,7 +349,7 @@
           ]
         },
         {
-          "id": "b18",
+          "id": "b17",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6686",
           "cond": "in.Filter.IssueFilter.AppliesToPartIdOp != nil",
           "predicate_paths": [
@@ -371,7 +357,7 @@
           ]
         },
         {
-          "id": "b19",
+          "id": "b18",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6724",
           "cond": "in.Filter.IssueFilter.RevOrgIdsOp != nil",
           "predicate_paths": [
@@ -379,7 +365,7 @@
           ]
         },
         {
-          "id": "b20",
+          "id": "b19",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6736",
           "cond": "in.Filter.IssueFilter.AccountIdsOp != nil",
           "predicate_paths": [
@@ -387,7 +373,7 @@
           ]
         },
         {
-          "id": "b21",
+          "id": "b20",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6748",
           "cond": "in.Filter.IssueFilter.SprintIdOp != nil",
           "predicate_paths": [
@@ -395,7 +381,7 @@
           ]
         },
         {
-          "id": "b22",
+          "id": "b21",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6758",
           "cond": "in.Filter.IssueFilter.SprintStateOp != nil",
           "predicate_paths": [
@@ -403,7 +389,7 @@
           ]
         },
         {
-          "id": "b23",
+          "id": "b22",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6770",
           "cond": "in.Filter.IssueFilter.ProjectIdOp != nil",
           "predicate_paths": [
@@ -411,7 +397,7 @@
           ]
         },
         {
-          "id": "b24",
+          "id": "b23",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6782",
           "cond": "in.Filter.IssueFilter.MilestoneIdOp != nil",
           "predicate_paths": [
@@ -419,7 +405,7 @@
           ]
         },
         {
-          "id": "b25",
+          "id": "b24",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6787",
           "cond": "in.Filter.IssueFilter.TargetStartDateOp != nil",
           "predicate_paths": [
@@ -427,7 +413,7 @@
           ]
         },
         {
-          "id": "b26",
+          "id": "b25",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6792",
           "cond": "in.Filter.IssueFilter.ActualStartDateOp != nil",
           "predicate_paths": [
@@ -435,7 +421,7 @@
           ]
         },
         {
-          "id": "b27",
+          "id": "b26",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6797",
           "cond": "in.Filter.IssueFilter.LastCodeActivityOp != nil",
           "predicate_paths": [
@@ -443,7 +429,7 @@
           ]
         },
         {
-          "id": "b28",
+          "id": "b27",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6823",
           "cond": "in.Filter.IssueFilter.SubtypeOp != nil",
           "predicate_paths": [
@@ -451,7 +437,7 @@
           ]
         },
         {
-          "id": "b29",
+          "id": "b28",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6828",
           "cond": "in.Filter.IssueFilter.AppsOp != nil",
           "predicate_paths": [
@@ -459,7 +445,7 @@
           ]
         },
         {
-          "id": "b30",
+          "id": "b29",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6843",
           "cond": "in.Filter.TaskFilter.AppliesToPartIdOp != nil",
           "predicate_paths": [
@@ -467,7 +453,7 @@
           ]
         },
         {
-          "id": "b31",
+          "id": "b30",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6860",
           "cond": "in.Filter.TaskFilter.SubtypeOp != nil",
           "predicate_paths": [
@@ -475,7 +461,7 @@
           ]
         },
         {
-          "id": "b32",
+          "id": "b31",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6865",
           "cond": "in.Filter.TaskFilter.AppsOp != nil",
           "predicate_paths": [
@@ -483,7 +469,7 @@
           ]
         },
         {
-          "id": "b33",
+          "id": "b32",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6880",
           "cond": "in.Filter.OpportunityFilter.AccountIdOp != nil",
           "predicate_paths": [
@@ -491,7 +477,7 @@
           ]
         },
         {
-          "id": "b34",
+          "id": "b33",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6897",
           "cond": "in.Filter.OpportunityFilter.ContactIdsOp != nil",
           "predicate_paths": [
@@ -499,7 +485,7 @@
           ]
         },
         {
-          "id": "b35",
+          "id": "b34",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6935",
           "cond": "in.Filter.OpportunityFilter.SubtypeOp != nil",
           "predicate_paths": [
@@ -507,7 +493,7 @@
           ]
         },
         {
-          "id": "b36",
+          "id": "b35",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6940",
           "cond": "in.Filter.OpportunityFilter.AppsOp != nil",
           "predicate_paths": [
@@ -515,7 +501,7 @@
           ]
         },
         {
-          "id": "b37",
+          "id": "b36",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6279",
           "cond": "in.Filter.CreatedByIdOp != nil",
           "predicate_paths": [
@@ -523,7 +509,7 @@
           ]
         },
         {
-          "id": "b38",
+          "id": "b37",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6291",
           "cond": "in.Filter.ModifiedByIdOp != nil",
           "predicate_paths": [
@@ -531,7 +517,7 @@
           ]
         },
         {
-          "id": "b39",
+          "id": "b38",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6303",
           "cond": "in.Filter.CreatedByAgentIdOp != nil",
           "predicate_paths": [
@@ -539,7 +525,7 @@
           ]
         },
         {
-          "id": "b40",
+          "id": "b39",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6320",
           "cond": "in.Filter.ReportedByIdsOp != nil",
           "predicate_paths": [
@@ -547,7 +533,7 @@
           ]
         },
         {
-          "id": "b41",
+          "id": "b40",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6332",
           "cond": "in.Filter.OwnedByIdsOp != nil",
           "predicate_paths": [
@@ -555,7 +541,7 @@
           ]
         },
         {
-          "id": "b42",
+          "id": "b41",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6337",
           "cond": "in.Filter.TargetCloseDateOp != nil",
           "predicate_paths": [
@@ -563,7 +549,7 @@
           ]
         },
         {
-          "id": "b43",
+          "id": "b42",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6342",
           "cond": "in.Filter.ActualCloseDateOp != nil",
           "predicate_paths": [
@@ -571,7 +557,7 @@
           ]
         },
         {
-          "id": "b44",
+          "id": "b43",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6354",
           "cond": "in.Filter.TagsOp != nil",
           "predicate_paths": [
@@ -579,7 +565,7 @@
           ]
         },
         {
-          "id": "b45",
+          "id": "b44",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6366",
           "cond": "in.Filter.LinksOp != nil",
           "predicate_paths": [
@@ -587,7 +573,7 @@
           ]
         },
         {
-          "id": "b46",
+          "id": "b45",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6385",
           "cond": "in.Filter.StageOp != nil",
           "predicate_paths": [
@@ -595,7 +581,7 @@
           ]
         },
         {
-          "id": "b47",
+          "id": "b46",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6397",
           "cond": "in.Filter.SyncMetadataOp != nil",
           "predicate_paths": [
@@ -603,7 +589,7 @@
           ]
         },
         {
-          "id": "b48",
+          "id": "b47",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6423",
           "cond": "in.Filter.DeprecatedCreatedByAgentIdOp != nil",
           "predicate_paths": [
@@ -611,7 +597,7 @@
           ]
         },
         {
-          "id": "b49",
+          "id": "b48",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6435",
           "cond": "in.Filter.WorkflowRunIdOp != nil",
           "predicate_paths": [
@@ -619,7 +605,7 @@
           ]
         },
         {
-          "id": "b50",
+          "id": "b49",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6447",
           "cond": "in.Filter.WorkflowIdOp != nil",
           "predicate_paths": [
@@ -627,7 +613,7 @@
           ]
         },
         {
-          "id": "b51",
+          "id": "b50",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6452",
           "cond": "in.Filter.TicketFilter != nil",
           "predicate_paths": [
@@ -635,7 +621,7 @@
           ]
         },
         {
-          "id": "b52",
+          "id": "b51",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6453",
           "cond": "in.Filter.TicketFilter != nil",
           "predicate_paths": [
@@ -643,7 +629,7 @@
           ]
         },
         {
-          "id": "b53",
+          "id": "b52",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6457",
           "cond": "in.Filter.IssueFilter != nil",
           "predicate_paths": [
@@ -651,7 +637,7 @@
           ]
         },
         {
-          "id": "b54",
+          "id": "b53",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6458",
           "cond": "in.Filter.IssueFilter != nil",
           "predicate_paths": [
@@ -659,7 +645,7 @@
           ]
         },
         {
-          "id": "b55",
+          "id": "b54",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6462",
           "cond": "in.Filter.TaskFilter != nil",
           "predicate_paths": [
@@ -667,7 +653,7 @@
           ]
         },
         {
-          "id": "b56",
+          "id": "b55",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6463",
           "cond": "in.Filter.TaskFilter != nil",
           "predicate_paths": [
@@ -675,7 +661,7 @@
           ]
         },
         {
-          "id": "b57",
+          "id": "b56",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6467",
           "cond": "in.Filter.OpportunityFilter != nil",
           "predicate_paths": [
@@ -683,7 +669,7 @@
           ]
         },
         {
-          "id": "b58",
+          "id": "b57",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6468",
           "cond": "in.Filter.OpportunityFilter != nil",
           "predicate_paths": [
@@ -691,7 +677,7 @@
           ]
         },
         {
-          "id": "b59",
+          "id": "b58",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
           "cond": "in.VistaId == nil",
           "predicate_paths": [
@@ -699,15 +685,7 @@
           ]
         },
         {
-          "id": "b60",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.VistaId.Partition != \"\"",
-          "predicate_paths": [
-            "in.VistaId.Partition"
-          ]
-        },
-        {
-          "id": "b61",
+          "id": "b59",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:285",
           "cond": "in.CustomFilter.IssueFilters != nil",
           "predicate_paths": [
@@ -715,7 +693,7 @@
           ]
         },
         {
-          "id": "b62",
+          "id": "b60",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:286",
           "cond": "in.CustomFilter.IssueFilters != nil",
           "predicate_paths": [
@@ -723,7 +701,7 @@
           ]
         },
         {
-          "id": "b63",
+          "id": "b61",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:290",
           "cond": "in.CustomFilter.TicketFilters != nil",
           "predicate_paths": [
@@ -731,7 +709,7 @@
           ]
         },
         {
-          "id": "b64",
+          "id": "b62",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:291",
           "cond": "in.CustomFilter.TicketFilters != nil",
           "predicate_paths": [
@@ -739,7 +717,7 @@
           ]
         },
         {
-          "id": "b65",
+          "id": "b63",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:295",
           "cond": "in.CustomFilter.TaskFilters != nil",
           "predicate_paths": [
@@ -747,7 +725,7 @@
           ]
         },
         {
-          "id": "b66",
+          "id": "b64",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:296",
           "cond": "in.CustomFilter.TaskFilters != nil",
           "predicate_paths": [
@@ -755,7 +733,7 @@
           ]
         },
         {
-          "id": "b67",
+          "id": "b65",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:543",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
@@ -763,15 +741,15 @@
           ]
         },
         {
-          "id": "b68",
+          "id": "b66",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:550",
-          "cond": "in.DevOid|in.DevOid.Partition",
+          "cond": "in.DevOid",
           "predicate_paths": [
             "in.DevOid"
           ]
         },
         {
-          "id": "b69",
+          "id": "b67",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:553",
           "cond": "in.Filter != nil",
           "predicate_paths": [
@@ -779,7 +757,7 @@
           ]
         },
         {
-          "id": "b70",
+          "id": "b68",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:554",
           "cond": "in.Filter != nil",
           "predicate_paths": [
@@ -787,7 +765,7 @@
           ]
         },
         {
-          "id": "b71",
+          "id": "b69",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:580",
           "cond": "in.VistaId != nil",
           "predicate_paths": [
@@ -795,7 +773,7 @@
           ]
         },
         {
-          "id": "b72",
+          "id": "b70",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:585",
           "cond": "in.CustomFilter != nil",
           "predicate_paths": [
@@ -803,7 +781,7 @@
           ]
         },
         {
-          "id": "b73",
+          "id": "b71",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:586",
           "cond": "in.CustomFilter != nil",
           "predicate_paths": [
@@ -811,7 +789,7 @@
           ]
         },
         {
-          "id": "b74",
+          "id": "b72",
           "at": "internal/serverv2/count_works.go:41",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
@@ -819,7 +797,7 @@
           ]
         },
         {
-          "id": "b75",
+          "id": "b73",
           "at": "internal/serverv2/count_works.go:44",
           "cond": "in != nil",
           "predicate_paths": [
@@ -827,7 +805,7 @@
           ]
         },
         {
-          "id": "b76",
+          "id": "b74",
           "at": "internal/serverv2/works_helper.go:1655",
           "cond": "in.SearchQuery",
           "predicate_paths": [
@@ -835,7 +813,7 @@
           ]
         },
         {
-          "id": "b77",
+          "id": "b75",
           "at": "internal/serverv2/works_helper.go:1656",
           "cond": "in.Filter",
           "predicate_paths": [
@@ -843,7 +821,7 @@
           ]
         },
         {
-          "id": "b78",
+          "id": "b76",
           "at": "internal/serverv2/count_works.go:148",
           "cond": "in.SearchQuery != \"\"",
           "predicate_paths": [
@@ -851,7 +829,7 @@
           ]
         },
         {
-          "id": "b79",
+          "id": "b77",
           "at": "internal/serverv2/count_works.go:163",
           "cond": "in",
           "predicate_paths": [
@@ -859,7 +837,7 @@
           ]
         },
         {
-          "id": "b80",
+          "id": "b78",
           "at": "internal/serverv2/count_works.go:175",
           "cond": "in.IndexHint != \"\"",
           "predicate_paths": [
@@ -867,7 +845,7 @@
           ]
         },
         {
-          "id": "b81",
+          "id": "b79",
           "at": "internal/serverv2/count_works.go:163",
           "cond": "in.VistaId != nil",
           "predicate_paths": [
@@ -881,8 +859,6 @@
         {
           "field": "type",
           "fuzzy_suggestions": [
-            "in.DevOid.PartitionType",
-            "in.DevOid.ServiceType",
             "in.Filter.IssueFilter.Subtype",
             "in.Filter.IssueFilter.SubtypeOp",
             "in.Filter.OpportunityFilter.Subtype",
@@ -891,9 +867,7 @@
             "in.Filter.TaskFilter.SubtypeOp",
             "in.Filter.TicketFilter.Subtype",
             "in.Filter.TicketFilter.SubtypeOp",
-            "in.Filter.WorkType",
-            "in.VistaId.PartitionType",
-            "in.VistaId.ServiceType"
+            "in.Filter.WorkType"
           ]
         }
       ]
@@ -1299,5 +1273,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CountWorks` (HTTP operation `WorksCountPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomFilter.IssueFilters\n  - in.CustomFilter.TaskFilters\n  - in.CustomFilter.TicketFilters\n  - in.DevOid.Components\n  - in.DevOid.Partition\n  - in.DevOid.PartitionType\n  - in.DevOid.ServiceType\n  - in.ExcludeWorkIds\n  - in.Filter.ActualCloseDateOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.DeprecatedCreatedByAgentId\n  - in.Filter.DeprecatedCreatedByAgentIdOp\n  - in.Filter.ExternalSourceData\n  - in.Filter.IssueFilter.AccountIds\n  - in.Filter.IssueFilter.AccountIdsOp\n  - in.Filter.IssueFilter.ActualStartDateOp\n  - in.Filter.IssueFilter.AppliesToPartId\n  - in.Filter.IssueFilter.AppliesToPartIdOp\n  - in.Filter.IssueFilter.AppliesToVersionIds\n  - in.Filter.IssueFilter.AppsOp\n  - in.Filter.IssueFilter.DevelopedWith\n  - in.Filter.IssueFilter.LastCodeActivityOp\n  - in.Filter.IssueFilter.MilestoneId\n  - in.Filter.IssueFilter.MilestoneIdOp\n  - in.Filter.IssueFilter.Priority\n  - in.Filter.IssueFilter.ProjectId\n  - in.Filter.IssueFilter.ProjectIdOp\n  - in.Filter.IssueFilter.ReleaseVersionIds\n  - in.Filter.IssueFilter.RevOrgIds\n  - in.Filter.IssueFilter.RevOrgIdsOp\n  - in.Filter.IssueFilter.SharedWith\n  - in.Filter.IssueFilter.SlaId\n  - in.Filter.IssueFilter.SlaSummary\n  - in.Filter.IssueFilter.SprintId\n  - in.Filter.IssueFilter.SprintIdOp\n  - in.Filter.IssueFilter.SprintState\n  - in.Filter.IssueFilter.SprintStateOp\n  - in.Filter.IssueFilter.Subtype\n  - in.Filter.IssueFilter.SubtypeOp\n  - in.Filter.IssueFilter.TargetStartDateOp\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.OpportunityFilter.AccountId\n  - in.Filter.OpportunityFilter.AccountIdOp\n  - in.Filter.OpportunityFilter.AnnualContractValue\n  - in.Filter.OpportunityFilter.AppsOp\n  - in.Filter.OpportunityFilter.Budget\n  - in.Filter.OpportunityFilter.ContactIds\n  - in.Filter.OpportunityFilter.ContactIdsOp\n  - in.Filter.OpportunityFilter.ForecastCategory\n  - in.Filter.OpportunityFilter.Priority\n  - in.Filter.OpportunityFilter.SharedWith\n  - in.Filter.OpportunityFilter.SpacesFilter.SpaceId\n  - in.Filter.OpportunityFilter.Subtype\n  - in.Filter.OpportunityFilter.SubtypeOp\n  - (+67 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp == nil\n  - in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp != 0\n  - in.DevOid == nil\n  - in.DevOid.Partition != \"\"\n  - in.Filter.TicketFilter.AppliesToPartIdOp != nil\n  - in.Filter.TicketFilter.RevOidOp != nil\n  - in.Filter.TicketFilter.AccountIdOp != nil\n  - in.Filter.TicketFilter.GroupOp != nil\n  - in.Filter.TicketFilter.ChannelsOp != nil\n  - in.Filter.TicketFilter.ChannelsV2Op != nil\n  - in.Filter.TicketFilter.ChannelsV2InstancesOp != nil\n  - in.Filter.TicketFilter.ProjectIdOp != nil\n  - in.Filter.TicketFilter.MilestoneIdOp != nil\n  - in.Filter.TicketFilter.SurveysAggregationOp != nil\n  - in.Filter.TicketFilter.SentimentOp != nil\n  - in.Filter.TicketFilter.SubtypeOp != nil\n  - in.Filter.TicketFilter.AppsOp != nil\n  - in.Filter.IssueFilter.AppliesToPartIdOp != nil\n  - in.Filter.IssueFilter.RevOrgIdsOp != nil\n  - in.Filter.IssueFilter.AccountIdsOp != nil\n  - in.Filter.IssueFilter.SprintIdOp != nil\n  - in.Filter.IssueFilter.SprintStateOp != nil\n  - in.Filter.IssueFilter.ProjectIdOp != nil\n  - in.Filter.IssueFilter.MilestoneIdOp != nil\n  - in.Filter.IssueFilter.TargetStartDateOp != nil\n  - in.Filter.IssueFilter.ActualStartDateOp != nil\n  - in.Filter.IssueFilter.LastCodeActivityOp != nil\n  - in.Filter.IssueFilter.SubtypeOp != nil\n  - in.Filter.IssueFilter.AppsOp != nil\n  - in.Filter.TaskFilter.AppliesToPartIdOp != nil\n  - in.Filter.TaskFilter.SubtypeOp != nil\n  - in.Filter.TaskFilter.AppsOp != nil\n  - in.Filter.OpportunityFilter.AccountIdOp != nil\n  - in.Filter.OpportunityFilter.ContactIdsOp != nil\n  - in.Filter.OpportunityFilter.SubtypeOp != nil\n  - in.Filter.OpportunityFilter.AppsOp != nil\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.ReportedByIdsOp != nil\n  - (+41 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `type` -> suggestions ['in.DevOid.PartitionType', 'in.DevOid.ServiceType', 'in.Filter.IssueFilter.Subtype', 'in.Filter.IssueFilter.SubtypeOp', 'in.Filter.OpportunityFilter.Subtype', 'in.Filter.OpportunityFilter.SubtypeOp', 'in.Filter.TaskFilter.Subtype', 'in.Filter.TaskFilter.SubtypeOp', 'in.Filter.TicketFilter.Subtype', 'in.Filter.TicketFilter.SubtypeOp', 'in.Filter.WorkType', 'in.VistaId.PartitionType', 'in.VistaId.ServiceType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CountWorks` (HTTP operation `WorksCountPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomFilter.IssueFilters\n  - in.CustomFilter.TaskFilters\n  - in.CustomFilter.TicketFilters\n  - in.DevOid\n  - in.ExcludeWorkIds\n  - in.Filter.ActualCloseDateOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.DeprecatedCreatedByAgentId\n  - in.Filter.DeprecatedCreatedByAgentIdOp\n  - in.Filter.ExternalSourceData\n  - in.Filter.IssueFilter.AccountIds\n  - in.Filter.IssueFilter.AccountIdsOp\n  - in.Filter.IssueFilter.ActualStartDateOp\n  - in.Filter.IssueFilter.AppliesToPartId\n  - in.Filter.IssueFilter.AppliesToPartIdOp\n  - in.Filter.IssueFilter.AppliesToVersionIds\n  - in.Filter.IssueFilter.AppsOp\n  - in.Filter.IssueFilter.DevelopedWith\n  - in.Filter.IssueFilter.LastCodeActivityOp\n  - in.Filter.IssueFilter.MilestoneId\n  - in.Filter.IssueFilter.MilestoneIdOp\n  - in.Filter.IssueFilter.Priority\n  - in.Filter.IssueFilter.ProjectId\n  - in.Filter.IssueFilter.ProjectIdOp\n  - in.Filter.IssueFilter.ReleaseVersionIds\n  - in.Filter.IssueFilter.RevOrgIds\n  - in.Filter.IssueFilter.RevOrgIdsOp\n  - in.Filter.IssueFilter.SharedWith\n  - in.Filter.IssueFilter.SlaId\n  - in.Filter.IssueFilter.SlaSummary\n  - in.Filter.IssueFilter.SprintId\n  - in.Filter.IssueFilter.SprintIdOp\n  - in.Filter.IssueFilter.SprintState\n  - in.Filter.IssueFilter.SprintStateOp\n  - in.Filter.IssueFilter.Subtype\n  - in.Filter.IssueFilter.SubtypeOp\n  - in.Filter.IssueFilter.TargetStartDateOp\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.OpportunityFilter.AccountId\n  - in.Filter.OpportunityFilter.AccountIdOp\n  - in.Filter.OpportunityFilter.AnnualContractValue\n  - in.Filter.OpportunityFilter.AppsOp\n  - in.Filter.OpportunityFilter.Budget\n  - in.Filter.OpportunityFilter.ContactIds\n  - in.Filter.OpportunityFilter.ContactIdsOp\n  - in.Filter.OpportunityFilter.ForecastCategory\n  - in.Filter.OpportunityFilter.Priority\n  - in.Filter.OpportunityFilter.SharedWith\n  - in.Filter.OpportunityFilter.SpacesFilter.SpaceId\n  - in.Filter.OpportunityFilter.Subtype\n  - in.Filter.OpportunityFilter.SubtypeOp\n  - in.Filter.OpportunityFilter.Value\n  - in.Filter.OwnedByIds\n  - in.Filter.OwnedByIdsOp\n  - (+61 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp == nil\n  - in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp != 0\n  - in.DevOid == nil\n  - in.Filter.TicketFilter.AppliesToPartIdOp != nil\n  - in.Filter.TicketFilter.RevOidOp != nil\n  - in.Filter.TicketFilter.AccountIdOp != nil\n  - in.Filter.TicketFilter.GroupOp != nil\n  - in.Filter.TicketFilter.ChannelsOp != nil\n  - in.Filter.TicketFilter.ChannelsV2Op != nil\n  - in.Filter.TicketFilter.ChannelsV2InstancesOp != nil\n  - in.Filter.TicketFilter.ProjectIdOp != nil\n  - in.Filter.TicketFilter.MilestoneIdOp != nil\n  - in.Filter.TicketFilter.SurveysAggregationOp != nil\n  - in.Filter.TicketFilter.SentimentOp != nil\n  - in.Filter.TicketFilter.SubtypeOp != nil\n  - in.Filter.TicketFilter.AppsOp != nil\n  - in.Filter.IssueFilter.AppliesToPartIdOp != nil\n  - in.Filter.IssueFilter.RevOrgIdsOp != nil\n  - in.Filter.IssueFilter.AccountIdsOp != nil\n  - in.Filter.IssueFilter.SprintIdOp != nil\n  - in.Filter.IssueFilter.SprintStateOp != nil\n  - in.Filter.IssueFilter.ProjectIdOp != nil\n  - in.Filter.IssueFilter.MilestoneIdOp != nil\n  - in.Filter.IssueFilter.TargetStartDateOp != nil\n  - in.Filter.IssueFilter.ActualStartDateOp != nil\n  - in.Filter.IssueFilter.LastCodeActivityOp != nil\n  - in.Filter.IssueFilter.SubtypeOp != nil\n  - in.Filter.IssueFilter.AppsOp != nil\n  - in.Filter.TaskFilter.AppliesToPartIdOp != nil\n  - in.Filter.TaskFilter.SubtypeOp != nil\n  - in.Filter.TaskFilter.AppsOp != nil\n  - in.Filter.OpportunityFilter.AccountIdOp != nil\n  - in.Filter.OpportunityFilter.ContactIdsOp != nil\n  - in.Filter.OpportunityFilter.SubtypeOp != nil\n  - in.Filter.OpportunityFilter.AppsOp != nil\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.ReportedByIdsOp != nil\n  - in.Filter.OwnedByIdsOp != nil\n  - (+39 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `type` -> suggestions ['in.Filter.IssueFilter.Subtype', 'in.Filter.IssueFilter.SubtypeOp', 'in.Filter.OpportunityFilter.Subtype', 'in.Filter.OpportunityFilter.SubtypeOp', 'in.Filter.TaskFilter.Subtype', 'in.Filter.TaskFilter.SubtypeOp', 'in.Filter.TicketFilter.Subtype', 'in.Filter.TicketFilter.SubtypeOp', 'in.Filter.WorkType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

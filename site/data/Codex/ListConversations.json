@@ -16,22 +16,22 @@
       "coverage_pct": 0
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 85,
+      "leaf_fields_read_by_rpc": 82,
       "covered_count": 8,
-      "coverage_pct": 9.4,
+      "coverage_pct": 9.8,
       "request_fields_set_by_tests": 7,
       "set_by_positive_tests": 8,
       "set_by_negative_tests": 2,
       "by_depth": {
         "top_level": {
-          "total": 5,
+          "total": 6,
           "set": 1,
-          "pct": 20
+          "pct": 16.7
         },
         "nested": {
-          "total": 61,
+          "total": 57,
           "set": 1,
-          "pct": 1.6
+          "pct": 1.8
         },
         "deep": {
           "total": 19,
@@ -106,10 +106,7 @@
         }
       ],
       "gaps": [
-        "in.DevOid.Components",
-        "in.DevOid.Partition",
-        "in.DevOid.PartitionType",
-        "in.DevOid.ServiceType",
+        "in.DevOid",
         "in.DqlQuery",
         "in.Filter.AccountId",
         "in.Filter.AccountIdOp",
@@ -186,12 +183,12 @@
       ]
     },
     "branches": {
-      "total": 369,
+      "total": 364,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 25,
+      "reachable_on_happy_path": 22,
       "present_arm_exercised": 12,
       "present_arm_pct": 3.3,
-      "absent_arm_exercised": 25,
+      "absent_arm_exercised": 22,
       "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
@@ -199,31 +196,31 @@
       "coverage_pct": 3.3,
       "by_origin": {
         "service": {
-          "total": 323,
-          "reachable_on_happy_path": 11,
+          "total": 322,
+          "reachable_on_happy_path": 10,
           "present_arm_exercised": 12,
           "present_arm_pct": 3.7,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 11
+          "absent_arm_exercised": 10
         },
         "generated": {
-          "total": 39,
-          "reachable_on_happy_path": 11,
+          "total": 38,
+          "reachable_on_happy_path": 10,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 11
+          "absent_arm_exercised": 10
         },
         "library": {
-          "total": 7,
-          "reachable_on_happy_path": 3,
+          "total": 4,
+          "reachable_on_happy_path": 2,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 3
+          "absent_arm_exercised": 2
         }
       },
       "gaps": [
@@ -237,14 +234,6 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.DevOid.Partition != \"\"",
-          "predicate_paths": [
-            "in.DevOid.Partition"
-          ]
-        },
-        {
-          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6955",
           "cond": "in.Filter.CreatedByIdOp != nil",
           "predicate_paths": [
@@ -252,7 +241,7 @@
           ]
         },
         {
-          "id": "b4",
+          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6967",
           "cond": "in.Filter.ModifiedByIdOp != nil",
           "predicate_paths": [
@@ -260,7 +249,7 @@
           ]
         },
         {
-          "id": "b5",
+          "id": "b4",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6979",
           "cond": "in.Filter.CreatedByAgentIdOp != nil",
           "predicate_paths": [
@@ -268,7 +257,7 @@
           ]
         },
         {
-          "id": "b6",
+          "id": "b5",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7012",
           "cond": "in.Filter.ChannelsInstancesOp != nil",
           "predicate_paths": [
@@ -276,7 +265,7 @@
           ]
         },
         {
-          "id": "b7",
+          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7017",
           "cond": "in.Filter.SourceChannelOp != nil",
           "predicate_paths": [
@@ -284,7 +273,7 @@
           ]
         },
         {
-          "id": "b8",
+          "id": "b7",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7050",
           "cond": "in.Filter.OwnedByIdsOp != nil",
           "predicate_paths": [
@@ -292,7 +281,7 @@
           ]
         },
         {
-          "id": "b9",
+          "id": "b8",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7074",
           "cond": "in.Filter.AccountIdOp != nil",
           "predicate_paths": [
@@ -300,7 +289,7 @@
           ]
         },
         {
-          "id": "b10",
+          "id": "b9",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7086",
           "cond": "in.Filter.TagsOp != nil",
           "predicate_paths": [
@@ -308,7 +297,7 @@
           ]
         },
         {
-          "id": "b11",
+          "id": "b10",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7119",
           "cond": "in.Filter.LinksOp != nil",
           "predicate_paths": [
@@ -316,7 +305,7 @@
           ]
         },
         {
-          "id": "b12",
+          "id": "b11",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7145",
           "cond": "in.Filter.SurveysAggregationOp != nil",
           "predicate_paths": [
@@ -324,7 +313,7 @@
           ]
         },
         {
-          "id": "b13",
+          "id": "b12",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7164",
           "cond": "in.Filter.SyncMetadataOp != nil",
           "predicate_paths": [
@@ -332,7 +321,7 @@
           ]
         },
         {
-          "id": "b14",
+          "id": "b13",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7190",
           "cond": "in.Filter.SentimentOp != nil",
           "predicate_paths": [
@@ -340,7 +329,7 @@
           ]
         },
         {
-          "id": "b15",
+          "id": "b14",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7195",
           "cond": "in.Filter.SubtypeOp != nil",
           "predicate_paths": [
@@ -348,7 +337,7 @@
           ]
         },
         {
-          "id": "b16",
+          "id": "b15",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7200",
           "cond": "in.Filter.AppsOp != nil",
           "predicate_paths": [
@@ -356,7 +345,7 @@
           ]
         },
         {
-          "id": "b17",
+          "id": "b16",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1527",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
@@ -364,16 +353,24 @@
           ]
         },
         {
-          "id": "b18",
+          "id": "b17",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1534",
-          "cond": "in.DevOid|in.DevOid.Partition",
+          "cond": "in.DevOid",
           "predicate_paths": [
             "in.DevOid"
           ]
         },
         {
-          "id": "b19",
+          "id": "b18",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1537",
+          "cond": "in.Filter != nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b19",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1538",
           "cond": "in.Filter != nil",
           "predicate_paths": [
             "in.Filter"
@@ -381,14 +378,6 @@
         },
         {
           "id": "b20",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1538",
-          "cond": "in.Filter != nil",
-          "predicate_paths": [
-            "in.Filter"
-          ]
-        },
-        {
-          "id": "b21",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1542",
           "cond": "in.Page >= 0",
           "predicate_paths": [
@@ -396,7 +385,7 @@
           ]
         },
         {
-          "id": "b22",
+          "id": "b21",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1545",
           "cond": "in.PerPage >= 0",
           "predicate_paths": [
@@ -404,7 +393,7 @@
           ]
         },
         {
-          "id": "b23",
+          "id": "b22",
           "at": "internal/serverv2/list_conversations.go:33",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
@@ -412,7 +401,7 @@
           ]
         },
         {
-          "id": "b24",
+          "id": "b23",
           "at": "internal/serverv2/list_conversations.go:36",
           "cond": "in != nil",
           "predicate_paths": [
@@ -420,15 +409,15 @@
           ]
         },
         {
-          "id": "b25",
+          "id": "b24",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:667",
-          "cond": "in.DevOid|in.DevOid.Partition != objType",
+          "cond": "in.DevOid != objType",
           "predicate_paths": [
             "in.DevOid"
           ]
         },
         {
-          "id": "b26",
+          "id": "b25",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/query.go:160",
           "cond": "in.Filter.CustomFields == nil",
           "predicate_paths": [
@@ -436,7 +425,7 @@
           ]
         },
         {
-          "id": "b27",
+          "id": "b26",
           "at": "internal/filterv2/conversations.gen.go:240",
           "cond": "in.Filter.CreatedDate != nil",
           "predicate_paths": [
@@ -444,7 +433,7 @@
           ]
         },
         {
-          "id": "b28",
+          "id": "b27",
           "at": "internal/filterv2/conversations.gen.go:229",
           "cond": "in.Filter.CreatedByIdOp == 4",
           "predicate_paths": [
@@ -452,9 +441,17 @@
           ]
         },
         {
-          "id": "b29",
+          "id": "b28",
           "at": "internal/filterv2/conversations.gen.go:217",
           "cond": "in.Filter.CreatedByIdOp == 3",
+          "predicate_paths": [
+            "in.Filter.CreatedByIdOp"
+          ]
+        },
+        {
+          "id": "b29",
+          "at": "internal/filterv2/conversations.gen.go:219",
+          "cond": "in.Filter.CreatedByIdOp == 4",
           "predicate_paths": [
             "in.Filter.CreatedByIdOp"
           ]
@@ -462,21 +459,13 @@
         {
           "id": "b30",
           "at": "internal/filterv2/conversations.gen.go:219",
-          "cond": "in.Filter.CreatedByIdOp == 4",
-          "predicate_paths": [
-            "in.Filter.CreatedByIdOp"
-          ]
-        },
-        {
-          "id": "b31",
-          "at": "internal/filterv2/conversations.gen.go:219",
           "cond": "in.Filter.CreatedByIdOp == 2",
           "predicate_paths": [
             "in.Filter.CreatedByIdOp"
           ]
         },
         {
-          "id": "b32",
+          "id": "b31",
           "at": "internal/filterv2/conversations.gen.go:231",
           "cond": "in.Filter.CreatedByIdOp == 5",
           "predicate_paths": [
@@ -484,7 +473,7 @@
           ]
         },
         {
-          "id": "b33",
+          "id": "b32",
           "at": "internal/filterv2/conversations.gen.go:233",
           "cond": "in.Filter.CreatedByIdOp == 2",
           "predicate_paths": [
@@ -492,7 +481,7 @@
           ]
         },
         {
-          "id": "b34",
+          "id": "b33",
           "at": "internal/filterv2/conversations.gen.go:233",
           "cond": "in.Filter.CreatedByIdOp == 1",
           "predicate_paths": [
@@ -500,7 +489,7 @@
           ]
         },
         {
-          "id": "b35",
+          "id": "b34",
           "at": "internal/filterv2/conversations.gen.go:233",
           "cond": "in.Filter.CreatedByIdOp == 3",
           "predicate_paths": [
@@ -508,7 +497,7 @@
           ]
         },
         {
-          "id": "b36",
+          "id": "b35",
           "at": "internal/filterv2/conversations.gen.go:243",
           "cond": "in.Filter.CreatedDate.After != nil",
           "predicate_paths": [
@@ -516,7 +505,7 @@
           ]
         },
         {
-          "id": "b37",
+          "id": "b36",
           "at": "internal/filterv2/conversations.gen.go:250",
           "cond": "in.Filter.CreatedDate.Before != nil",
           "predicate_paths": [
@@ -524,7 +513,7 @@
           ]
         },
         {
-          "id": "b38",
+          "id": "b37",
           "at": "internal/filterv2/conversations.gen.go:257",
           "cond": "in.Filter.CreatedDate.DatePreset != nil",
           "predicate_paths": [
@@ -532,7 +521,7 @@
           ]
         },
         {
-          "id": "b39",
+          "id": "b38",
           "at": "internal/filterv2/conversations.gen.go:258",
           "cond": "in.Filter.CreatedDate.After != nil",
           "predicate_paths": [
@@ -540,7 +529,7 @@
           ]
         },
         {
-          "id": "b41",
+          "id": "b40",
           "at": "internal/filterv2/conversations.gen.go:258",
           "cond": "in.Filter.CreatedDate.Before != nil",
           "predicate_paths": [
@@ -548,7 +537,7 @@
           ]
         },
         {
-          "id": "b42",
+          "id": "b41",
           "at": "internal/filterv2/conversations.gen.go:364",
           "cond": "in.Filter.ModifiedDate != nil",
           "predicate_paths": [
@@ -556,7 +545,7 @@
           ]
         },
         {
-          "id": "b43",
+          "id": "b42",
           "at": "internal/filterv2/conversations.gen.go:353",
           "cond": "in.Filter.ModifiedByIdOp == 4",
           "predicate_paths": [
@@ -564,9 +553,17 @@
           ]
         },
         {
-          "id": "b44",
+          "id": "b43",
           "at": "internal/filterv2/conversations.gen.go:341",
           "cond": "in.Filter.ModifiedByIdOp == 3",
+          "predicate_paths": [
+            "in.Filter.ModifiedByIdOp"
+          ]
+        },
+        {
+          "id": "b44",
+          "at": "internal/filterv2/conversations.gen.go:343",
+          "cond": "in.Filter.ModifiedByIdOp == 4",
           "predicate_paths": [
             "in.Filter.ModifiedByIdOp"
           ]
@@ -574,21 +571,13 @@
         {
           "id": "b45",
           "at": "internal/filterv2/conversations.gen.go:343",
-          "cond": "in.Filter.ModifiedByIdOp == 4",
-          "predicate_paths": [
-            "in.Filter.ModifiedByIdOp"
-          ]
-        },
-        {
-          "id": "b46",
-          "at": "internal/filterv2/conversations.gen.go:343",
           "cond": "in.Filter.ModifiedByIdOp == 2",
           "predicate_paths": [
             "in.Filter.ModifiedByIdOp"
           ]
         },
         {
-          "id": "b47",
+          "id": "b46",
           "at": "internal/filterv2/conversations.gen.go:355",
           "cond": "in.Filter.ModifiedByIdOp == 5",
           "predicate_paths": [
@@ -596,7 +585,7 @@
           ]
         },
         {
-          "id": "b48",
+          "id": "b47",
           "at": "internal/filterv2/conversations.gen.go:357",
           "cond": "in.Filter.ModifiedByIdOp == 2",
           "predicate_paths": [
@@ -604,7 +593,7 @@
           ]
         },
         {
-          "id": "b49",
+          "id": "b48",
           "at": "internal/filterv2/conversations.gen.go:357",
           "cond": "in.Filter.ModifiedByIdOp == 1",
           "predicate_paths": [
@@ -612,7 +601,7 @@
           ]
         },
         {
-          "id": "b50",
+          "id": "b49",
           "at": "internal/filterv2/conversations.gen.go:357",
           "cond": "in.Filter.ModifiedByIdOp == 3",
           "predicate_paths": [
@@ -620,7 +609,7 @@
           ]
         },
         {
-          "id": "b51",
+          "id": "b50",
           "at": "internal/filterv2/conversations.gen.go:367",
           "cond": "in.Filter.ModifiedDate.After != nil",
           "predicate_paths": [
@@ -628,7 +617,7 @@
           ]
         },
         {
-          "id": "b52",
+          "id": "b51",
           "at": "internal/filterv2/conversations.gen.go:374",
           "cond": "in.Filter.ModifiedDate.Before != nil",
           "predicate_paths": [
@@ -636,7 +625,7 @@
           ]
         },
         {
-          "id": "b53",
+          "id": "b52",
           "at": "internal/filterv2/conversations.gen.go:381",
           "cond": "in.Filter.ModifiedDate.DatePreset != nil",
           "predicate_paths": [
@@ -644,7 +633,7 @@
           ]
         },
         {
-          "id": "b54",
+          "id": "b53",
           "at": "internal/filterv2/conversations.gen.go:382",
           "cond": "in.Filter.ModifiedDate.After != nil",
           "predicate_paths": [
@@ -652,7 +641,7 @@
           ]
         },
         {
-          "id": "b56",
+          "id": "b55",
           "at": "internal/filterv2/conversations.gen.go:382",
           "cond": "in.Filter.ModifiedDate.Before != nil",
           "predicate_paths": [
@@ -660,7 +649,7 @@
           ]
         },
         {
-          "id": "b57",
+          "id": "b56",
           "at": "internal/filterv2/conversations.gen.go:477",
           "cond": "in.Filter.CreatedByAgentIdOp == 4",
           "predicate_paths": [
@@ -668,9 +657,17 @@
           ]
         },
         {
-          "id": "b58",
+          "id": "b57",
           "at": "internal/filterv2/conversations.gen.go:465",
           "cond": "in.Filter.CreatedByAgentIdOp == 3",
+          "predicate_paths": [
+            "in.Filter.CreatedByAgentIdOp"
+          ]
+        },
+        {
+          "id": "b58",
+          "at": "internal/filterv2/conversations.gen.go:467",
+          "cond": "in.Filter.CreatedByAgentIdOp == 4",
           "predicate_paths": [
             "in.Filter.CreatedByAgentIdOp"
           ]
@@ -678,21 +675,13 @@
         {
           "id": "b59",
           "at": "internal/filterv2/conversations.gen.go:467",
-          "cond": "in.Filter.CreatedByAgentIdOp == 4",
-          "predicate_paths": [
-            "in.Filter.CreatedByAgentIdOp"
-          ]
-        },
-        {
-          "id": "b60",
-          "at": "internal/filterv2/conversations.gen.go:467",
           "cond": "in.Filter.CreatedByAgentIdOp == 2",
           "predicate_paths": [
             "in.Filter.CreatedByAgentIdOp"
           ]
         },
         {
-          "id": "b61",
+          "id": "b60",
           "at": "internal/filterv2/conversations.gen.go:479",
           "cond": "in.Filter.CreatedByAgentIdOp == 5",
           "predicate_paths": [
@@ -700,7 +689,7 @@
           ]
         },
         {
-          "id": "b62",
+          "id": "b61",
           "at": "internal/filterv2/conversations.gen.go:481",
           "cond": "in.Filter.CreatedByAgentIdOp == 2",
           "predicate_paths": [
@@ -708,7 +697,7 @@
           ]
         },
         {
-          "id": "b63",
+          "id": "b62",
           "at": "internal/filterv2/conversations.gen.go:481",
           "cond": "in.Filter.CreatedByAgentIdOp == 1",
           "predicate_paths": [
@@ -716,7 +705,7 @@
           ]
         },
         {
-          "id": "b64",
+          "id": "b63",
           "at": "internal/filterv2/conversations.gen.go:481",
           "cond": "in.Filter.CreatedByAgentIdOp == 3",
           "predicate_paths": [
@@ -724,7 +713,7 @@
           ]
         },
         {
-          "id": "b65",
+          "id": "b64",
           "at": "internal/filterv2/conversations.gen.go:565",
           "cond": "in.Filter.ChannelsInstancesOp == 4",
           "predicate_paths": [
@@ -732,7 +721,7 @@
           ]
         },
         {
-          "id": "b66",
+          "id": "b65",
           "at": "internal/filterv2/conversations.gen.go:552",
           "cond": "in.Filter.ChannelsInstancesOp == 3",
           "predicate_paths": [
@@ -740,7 +729,7 @@
           ]
         },
         {
-          "id": "b67",
+          "id": "b66",
           "at": "internal/filterv2/conversations.gen.go:554",
           "cond": "in.Filter.ChannelsInstancesOp == 2",
           "predicate_paths": [
@@ -748,7 +737,7 @@
           ]
         },
         {
-          "id": "b68",
+          "id": "b67",
           "at": "internal/filterv2/conversations.gen.go:556",
           "cond": "in.Filter.ChannelsInstancesOp == 4",
           "predicate_paths": [
@@ -756,7 +745,7 @@
           ]
         },
         {
-          "id": "b69",
+          "id": "b68",
           "at": "internal/filterv2/conversations.gen.go:567",
           "cond": "in.Filter.ChannelsInstancesOp == 5",
           "predicate_paths": [
@@ -764,7 +753,7 @@
           ]
         },
         {
-          "id": "b70",
+          "id": "b69",
           "at": "internal/filterv2/conversations.gen.go:569",
           "cond": "in.Filter.ChannelsInstancesOp == 2",
           "predicate_paths": [
@@ -772,7 +761,7 @@
           ]
         },
         {
-          "id": "b71",
+          "id": "b70",
           "at": "internal/filterv2/conversations.gen.go:569",
           "cond": "in.Filter.ChannelsInstancesOp == 1",
           "predicate_paths": [
@@ -780,7 +769,7 @@
           ]
         },
         {
-          "id": "b72",
+          "id": "b71",
           "at": "internal/filterv2/conversations.gen.go:569",
           "cond": "in.Filter.ChannelsInstancesOp == 3",
           "predicate_paths": [
@@ -788,7 +777,7 @@
           ]
         },
         {
-          "id": "b73",
+          "id": "b72",
           "at": "internal/filterv2/conversations.gen.go:579",
           "cond": "in.Filter.SourceChannelOp == 3",
           "predicate_paths": [
@@ -796,9 +785,17 @@
           ]
         },
         {
-          "id": "b74",
+          "id": "b73",
           "at": "internal/filterv2/conversations.gen.go:597",
           "cond": "in.Filter.SourceChannelOp == 4",
+          "predicate_paths": [
+            "in.Filter.SourceChannelOp"
+          ]
+        },
+        {
+          "id": "b74",
+          "at": "internal/filterv2/conversations.gen.go:584",
+          "cond": "in.Filter.SourceChannelOp == 2",
           "predicate_paths": [
             "in.Filter.SourceChannelOp"
           ]
@@ -806,21 +803,13 @@
         {
           "id": "b75",
           "at": "internal/filterv2/conversations.gen.go:584",
-          "cond": "in.Filter.SourceChannelOp == 2",
-          "predicate_paths": [
-            "in.Filter.SourceChannelOp"
-          ]
-        },
-        {
-          "id": "b76",
-          "at": "internal/filterv2/conversations.gen.go:584",
           "cond": "in.Filter.SourceChannelOp == 4",
           "predicate_paths": [
             "in.Filter.SourceChannelOp"
           ]
         },
         {
-          "id": "b77",
+          "id": "b76",
           "at": "internal/filterv2/conversations.gen.go:599",
           "cond": "in.Filter.SourceChannelOp == 5",
           "predicate_paths": [
@@ -828,7 +817,7 @@
           ]
         },
         {
-          "id": "b78",
+          "id": "b77",
           "at": "internal/filterv2/conversations.gen.go:601",
           "cond": "in.Filter.SourceChannelOp == 2",
           "predicate_paths": [
@@ -836,7 +825,7 @@
           ]
         },
         {
-          "id": "b79",
+          "id": "b78",
           "at": "internal/filterv2/conversations.gen.go:601",
           "cond": "in.Filter.SourceChannelOp == 1",
           "predicate_paths": [
@@ -844,7 +833,7 @@
           ]
         },
         {
-          "id": "b80",
+          "id": "b79",
           "at": "internal/filterv2/conversations.gen.go:601",
           "cond": "in.Filter.SourceChannelOp == 3",
           "predicate_paths": [
@@ -852,7 +841,7 @@
           ]
         },
         {
-          "id": "b81",
+          "id": "b80",
           "at": "internal/filterv2/conversations.gen.go:664",
           "cond": "in.Filter.OwnedByIdsOp == 4",
           "predicate_paths": [
@@ -860,7 +849,7 @@
           ]
         },
         {
-          "id": "b82",
+          "id": "b81",
           "at": "internal/filterv2/conversations.gen.go:651",
           "cond": "in.Filter.OwnedByIdsOp == 3",
           "predicate_paths": [
@@ -868,7 +857,7 @@
           ]
         },
         {
-          "id": "b83",
+          "id": "b82",
           "at": "internal/filterv2/conversations.gen.go:653",
           "cond": "in.Filter.OwnedByIdsOp == 2",
           "predicate_paths": [
@@ -876,7 +865,7 @@
           ]
         },
         {
-          "id": "b84",
+          "id": "b83",
           "at": "internal/filterv2/conversations.gen.go:655",
           "cond": "in.Filter.OwnedByIdsOp == 4",
           "predicate_paths": [
@@ -884,7 +873,7 @@
           ]
         },
         {
-          "id": "b85",
+          "id": "b84",
           "at": "internal/filterv2/conversations.gen.go:666",
           "cond": "in.Filter.OwnedByIdsOp == 5",
           "predicate_paths": [
@@ -892,7 +881,7 @@
           ]
         },
         {
-          "id": "b86",
+          "id": "b85",
           "at": "internal/filterv2/conversations.gen.go:668",
           "cond": "in.Filter.OwnedByIdsOp == 2",
           "predicate_paths": [
@@ -900,7 +889,7 @@
           ]
         },
         {
-          "id": "b87",
+          "id": "b86",
           "at": "internal/filterv2/conversations.gen.go:668",
           "cond": "in.Filter.OwnedByIdsOp == 1",
           "predicate_paths": [
@@ -908,7 +897,7 @@
           ]
         },
         {
-          "id": "b88",
+          "id": "b87",
           "at": "internal/filterv2/conversations.gen.go:668",
           "cond": "in.Filter.OwnedByIdsOp == 3",
           "predicate_paths": [
@@ -916,7 +905,7 @@
           ]
         },
         {
-          "id": "b89",
+          "id": "b88",
           "at": "internal/filterv2/conversations.gen.go:697",
           "cond": "in.Filter.LastMessageTimestamp != nil",
           "predicate_paths": [
@@ -924,7 +913,7 @@
           ]
         },
         {
-          "id": "b90",
+          "id": "b89",
           "at": "internal/filterv2/conversations.gen.go:700",
           "cond": "in.Filter.LastMessageTimestamp.After != nil",
           "predicate_paths": [
@@ -932,7 +921,7 @@
           ]
         },
         {
-          "id": "b91",
+          "id": "b90",
           "at": "internal/filterv2/conversations.gen.go:707",
           "cond": "in.Filter.LastMessageTimestamp.Before != nil",
           "predicate_paths": [
@@ -940,7 +929,7 @@
           ]
         },
         {
-          "id": "b92",
+          "id": "b91",
           "at": "internal/filterv2/conversations.gen.go:714",
           "cond": "in.Filter.LastMessageTimestamp.DatePreset != nil",
           "predicate_paths": [
@@ -948,7 +937,7 @@
           ]
         },
         {
-          "id": "b93",
+          "id": "b92",
           "at": "internal/filterv2/conversations.gen.go:715",
           "cond": "in.Filter.LastMessageTimestamp.After != nil",
           "predicate_paths": [
@@ -956,7 +945,7 @@
           ]
         },
         {
-          "id": "b95",
+          "id": "b94",
           "at": "internal/filterv2/conversations.gen.go:715",
           "cond": "in.Filter.LastMessageTimestamp.Before != nil",
           "predicate_paths": [
@@ -964,7 +953,7 @@
           ]
         },
         {
-          "id": "b96",
+          "id": "b95",
           "at": "internal/filterv2/conversations.gen.go:810",
           "cond": "in.Filter.AccountIdOp == 4",
           "predicate_paths": [
@@ -972,9 +961,17 @@
           ]
         },
         {
-          "id": "b97",
+          "id": "b96",
           "at": "internal/filterv2/conversations.gen.go:798",
           "cond": "in.Filter.AccountIdOp == 3",
+          "predicate_paths": [
+            "in.Filter.AccountIdOp"
+          ]
+        },
+        {
+          "id": "b97",
+          "at": "internal/filterv2/conversations.gen.go:800",
+          "cond": "in.Filter.AccountIdOp == 4",
           "predicate_paths": [
             "in.Filter.AccountIdOp"
           ]
@@ -982,21 +979,13 @@
         {
           "id": "b98",
           "at": "internal/filterv2/conversations.gen.go:800",
-          "cond": "in.Filter.AccountIdOp == 4",
-          "predicate_paths": [
-            "in.Filter.AccountIdOp"
-          ]
-        },
-        {
-          "id": "b99",
-          "at": "internal/filterv2/conversations.gen.go:800",
           "cond": "in.Filter.AccountIdOp == 2",
           "predicate_paths": [
             "in.Filter.AccountIdOp"
           ]
         },
         {
-          "id": "b100",
+          "id": "b99",
           "at": "internal/filterv2/conversations.gen.go:812",
           "cond": "in.Filter.AccountIdOp == 5",
           "predicate_paths": [
@@ -1004,7 +993,7 @@
           ]
         },
         {
-          "id": "b101",
+          "id": "b100",
           "at": "internal/filterv2/conversations.gen.go:814",
           "cond": "in.Filter.AccountIdOp == 2",
           "predicate_paths": [
@@ -1012,7 +1001,7 @@
           ]
         },
         {
-          "id": "b102",
+          "id": "b101",
           "at": "internal/filterv2/conversations.gen.go:814",
           "cond": "in.Filter.AccountIdOp == 1",
           "predicate_paths": [
@@ -1020,7 +1009,7 @@
           ]
         },
         {
-          "id": "b103",
+          "id": "b102",
           "at": "internal/filterv2/conversations.gen.go:814",
           "cond": "in.Filter.AccountIdOp == 3",
           "predicate_paths": [
@@ -1028,7 +1017,7 @@
           ]
         },
         {
-          "id": "b104",
+          "id": "b103",
           "at": "internal/filterv2/conversations.gen.go:824",
           "cond": "in.Filter.TagsOp == 3",
           "predicate_paths": [
@@ -1036,7 +1025,7 @@
           ]
         },
         {
-          "id": "b105",
+          "id": "b104",
           "at": "internal/filterv2/conversations.gen.go:867",
           "cond": "in.Filter.TagsOp == 4",
           "predicate_paths": [
@@ -1044,7 +1033,7 @@
           ]
         },
         {
-          "id": "b106",
+          "id": "b105",
           "at": "internal/filterv2/conversations.gen.go:837",
           "cond": "in.Filter.TagsOp == 2",
           "predicate_paths": [
@@ -1052,7 +1041,7 @@
           ]
         },
         {
-          "id": "b107",
+          "id": "b106",
           "at": "internal/filterv2/conversations.gen.go:847",
           "cond": "in.Filter.TagsOp == 4",
           "predicate_paths": [
@@ -1060,7 +1049,7 @@
           ]
         },
         {
-          "id": "b108",
+          "id": "b107",
           "at": "internal/filterv2/conversations.gen.go:869",
           "cond": "in.Filter.TagsOp == 5",
           "predicate_paths": [
@@ -1068,7 +1057,7 @@
           ]
         },
         {
-          "id": "b109",
+          "id": "b108",
           "at": "internal/filterv2/conversations.gen.go:871",
           "cond": "in.Filter.TagsOp == 2",
           "predicate_paths": [
@@ -1076,7 +1065,7 @@
           ]
         },
         {
-          "id": "b110",
+          "id": "b109",
           "at": "internal/filterv2/conversations.gen.go:871",
           "cond": "in.Filter.TagsOp == 1",
           "predicate_paths": [
@@ -1084,7 +1073,7 @@
           ]
         },
         {
-          "id": "b111",
+          "id": "b110",
           "at": "internal/filterv2/conversations.gen.go:871",
           "cond": "in.Filter.TagsOp == 3",
           "predicate_paths": [
@@ -1092,7 +1081,7 @@
           ]
         },
         {
-          "id": "b112",
+          "id": "b111",
           "at": "internal/filterv2/conversations.gen.go:889",
           "cond": "in.Filter.FirstResponseTime != nil",
           "predicate_paths": [
@@ -1100,7 +1089,7 @@
           ]
         },
         {
-          "id": "b113",
+          "id": "b112",
           "at": "internal/filterv2/conversations.gen.go:892",
           "cond": "in.Filter.FirstResponseTime.After != nil",
           "predicate_paths": [
@@ -1108,7 +1097,7 @@
           ]
         },
         {
-          "id": "b114",
+          "id": "b113",
           "at": "internal/filterv2/conversations.gen.go:899",
           "cond": "in.Filter.FirstResponseTime.Before != nil",
           "predicate_paths": [
@@ -1116,7 +1105,7 @@
           ]
         },
         {
-          "id": "b115",
+          "id": "b114",
           "at": "internal/filterv2/conversations.gen.go:906",
           "cond": "in.Filter.FirstResponseTime.DatePreset != nil",
           "predicate_paths": [
@@ -1124,7 +1113,7 @@
           ]
         },
         {
-          "id": "b116",
+          "id": "b115",
           "at": "internal/filterv2/conversations.gen.go:907",
           "cond": "in.Filter.FirstResponseTime.After != nil",
           "predicate_paths": [
@@ -1132,7 +1121,7 @@
           ]
         },
         {
-          "id": "b118",
+          "id": "b117",
           "at": "internal/filterv2/conversations.gen.go:907",
           "cond": "in.Filter.FirstResponseTime.Before != nil",
           "predicate_paths": [
@@ -1140,7 +1129,7 @@
           ]
         },
         {
-          "id": "b119",
+          "id": "b118",
           "at": "internal/filterv2/conversations.gen.go:994",
           "cond": "in.Filter.ActualCloseDate != nil",
           "predicate_paths": [
@@ -1148,7 +1137,7 @@
           ]
         },
         {
-          "id": "b120",
+          "id": "b119",
           "at": "internal/filterv2/conversations.gen.go:997",
           "cond": "in.Filter.ActualCloseDate.After != nil",
           "predicate_paths": [
@@ -1156,7 +1145,7 @@
           ]
         },
         {
-          "id": "b121",
+          "id": "b120",
           "at": "internal/filterv2/conversations.gen.go:1004",
           "cond": "in.Filter.ActualCloseDate.Before != nil",
           "predicate_paths": [
@@ -1164,7 +1153,7 @@
           ]
         },
         {
-          "id": "b122",
+          "id": "b121",
           "at": "internal/filterv2/conversations.gen.go:1011",
           "cond": "in.Filter.ActualCloseDate.DatePreset != nil",
           "predicate_paths": [
@@ -1172,7 +1161,7 @@
           ]
         },
         {
-          "id": "b123",
+          "id": "b122",
           "at": "internal/filterv2/conversations.gen.go:1012",
           "cond": "in.Filter.ActualCloseDate.After != nil",
           "predicate_paths": [
@@ -1180,7 +1169,7 @@
           ]
         },
         {
-          "id": "b125",
+          "id": "b124",
           "at": "internal/filterv2/conversations.gen.go:1012",
           "cond": "in.Filter.ActualCloseDate.Before != nil",
           "predicate_paths": [
@@ -1188,7 +1177,7 @@
           ]
         },
         {
-          "id": "b126",
+          "id": "b125",
           "at": "internal/filterv2/conversations.gen.go:1092",
           "cond": "in.Filter.LastExternalMessageDate != nil",
           "predicate_paths": [
@@ -1196,7 +1185,7 @@
           ]
         },
         {
-          "id": "b127",
+          "id": "b126",
           "at": "internal/filterv2/conversations.gen.go:1095",
           "cond": "in.Filter.LastExternalMessageDate.After != nil",
           "predicate_paths": [
@@ -1204,7 +1193,7 @@
           ]
         },
         {
-          "id": "b128",
+          "id": "b127",
           "at": "internal/filterv2/conversations.gen.go:1102",
           "cond": "in.Filter.LastExternalMessageDate.Before != nil",
           "predicate_paths": [
@@ -1212,7 +1201,7 @@
           ]
         },
         {
-          "id": "b129",
+          "id": "b128",
           "at": "internal/filterv2/conversations.gen.go:1109",
           "cond": "in.Filter.LastExternalMessageDate.DatePreset != nil",
           "predicate_paths": [
@@ -1220,7 +1209,7 @@
           ]
         },
         {
-          "id": "b130",
+          "id": "b129",
           "at": "internal/filterv2/conversations.gen.go:1110",
           "cond": "in.Filter.LastExternalMessageDate.After != nil",
           "predicate_paths": [
@@ -1228,7 +1217,7 @@
           ]
         },
         {
-          "id": "b132",
+          "id": "b131",
           "at": "internal/filterv2/conversations.gen.go:1110",
           "cond": "in.Filter.LastExternalMessageDate.Before != nil",
           "predicate_paths": [
@@ -1236,7 +1225,7 @@
           ]
         },
         {
-          "id": "b133",
+          "id": "b132",
           "at": "internal/filterv2/conversations.gen.go:1254",
           "cond": "in.Filter.LinksOp == 3",
           "predicate_paths": [
@@ -1244,7 +1233,7 @@
           ]
         },
         {
-          "id": "b134",
+          "id": "b133",
           "at": "internal/filterv2/conversations.gen.go:1297",
           "cond": "in.Filter.LinksOp == 4",
           "predicate_paths": [
@@ -1252,7 +1241,7 @@
           ]
         },
         {
-          "id": "b135",
+          "id": "b134",
           "at": "internal/filterv2/conversations.gen.go:1267",
           "cond": "in.Filter.LinksOp == 2",
           "predicate_paths": [
@@ -1260,7 +1249,7 @@
           ]
         },
         {
-          "id": "b136",
+          "id": "b135",
           "at": "internal/filterv2/conversations.gen.go:1277",
           "cond": "in.Filter.LinksOp == 4",
           "predicate_paths": [
@@ -1268,7 +1257,7 @@
           ]
         },
         {
-          "id": "b137",
+          "id": "b136",
           "at": "internal/filterv2/conversations.gen.go:1299",
           "cond": "in.Filter.LinksOp == 5",
           "predicate_paths": [
@@ -1276,7 +1265,7 @@
           ]
         },
         {
-          "id": "b138",
+          "id": "b137",
           "at": "internal/filterv2/conversations.gen.go:1301",
           "cond": "in.Filter.LinksOp == 2",
           "predicate_paths": [
@@ -1284,7 +1273,7 @@
           ]
         },
         {
-          "id": "b139",
+          "id": "b138",
           "at": "internal/filterv2/conversations.gen.go:1301",
           "cond": "in.Filter.LinksOp == 1",
           "predicate_paths": [
@@ -1292,7 +1281,7 @@
           ]
         },
         {
-          "id": "b140",
+          "id": "b139",
           "at": "internal/filterv2/conversations.gen.go:1301",
           "cond": "in.Filter.LinksOp == 3",
           "predicate_paths": [
@@ -1300,7 +1289,7 @@
           ]
         },
         {
-          "id": "b141",
+          "id": "b140",
           "at": "internal/filterv2/conversations.gen.go:1358",
           "cond": "in.Filter.SurveysAggregationOp == 3",
           "predicate_paths": [
@@ -1308,7 +1297,7 @@
           ]
         },
         {
-          "id": "b142",
+          "id": "b141",
           "at": "internal/filterv2/conversations.gen.go:1401",
           "cond": "in.Filter.SurveysAggregationOp == 4",
           "predicate_paths": [
@@ -1316,7 +1305,7 @@
           ]
         },
         {
-          "id": "b143",
+          "id": "b142",
           "at": "internal/filterv2/conversations.gen.go:1371",
           "cond": "in.Filter.SurveysAggregationOp == 2",
           "predicate_paths": [
@@ -1324,7 +1313,7 @@
           ]
         },
         {
-          "id": "b144",
+          "id": "b143",
           "at": "internal/filterv2/conversations.gen.go:1381",
           "cond": "in.Filter.SurveysAggregationOp == 4",
           "predicate_paths": [
@@ -1332,7 +1321,7 @@
           ]
         },
         {
-          "id": "b145",
+          "id": "b144",
           "at": "internal/filterv2/conversations.gen.go:1403",
           "cond": "in.Filter.SurveysAggregationOp == 5",
           "predicate_paths": [
@@ -1340,7 +1329,7 @@
           ]
         },
         {
-          "id": "b146",
+          "id": "b145",
           "at": "internal/filterv2/conversations.gen.go:1405",
           "cond": "in.Filter.SurveysAggregationOp == 2",
           "predicate_paths": [
@@ -1348,7 +1337,7 @@
           ]
         },
         {
-          "id": "b147",
+          "id": "b146",
           "at": "internal/filterv2/conversations.gen.go:1405",
           "cond": "in.Filter.SurveysAggregationOp == 1",
           "predicate_paths": [
@@ -1356,7 +1345,7 @@
           ]
         },
         {
-          "id": "b148",
+          "id": "b147",
           "at": "internal/filterv2/conversations.gen.go:1405",
           "cond": "in.Filter.SurveysAggregationOp == 3",
           "predicate_paths": [
@@ -1364,7 +1353,7 @@
           ]
         },
         {
-          "id": "b149",
+          "id": "b148",
           "at": "internal/filterv2/conversations.gen.go:1436",
           "cond": "in.Filter.SyncMetadataOp == 3",
           "predicate_paths": [
@@ -1372,9 +1361,17 @@
           ]
         },
         {
-          "id": "b150",
+          "id": "b149",
           "at": "internal/filterv2/conversations.gen.go:1512",
           "cond": "in.Filter.SyncMetadataOp == 4",
+          "predicate_paths": [
+            "in.Filter.SyncMetadataOp"
+          ]
+        },
+        {
+          "id": "b150",
+          "at": "internal/filterv2/conversations.gen.go:1470",
+          "cond": "in.Filter.SyncMetadataOp == 2",
           "predicate_paths": [
             "in.Filter.SyncMetadataOp"
           ]
@@ -1382,21 +1379,13 @@
         {
           "id": "b151",
           "at": "internal/filterv2/conversations.gen.go:1470",
-          "cond": "in.Filter.SyncMetadataOp == 2",
-          "predicate_paths": [
-            "in.Filter.SyncMetadataOp"
-          ]
-        },
-        {
-          "id": "b152",
-          "at": "internal/filterv2/conversations.gen.go:1470",
           "cond": "in.Filter.SyncMetadataOp == 4",
           "predicate_paths": [
             "in.Filter.SyncMetadataOp"
           ]
         },
         {
-          "id": "b153",
+          "id": "b152",
           "at": "internal/filterv2/conversations.gen.go:1514",
           "cond": "in.Filter.SyncMetadataOp == 5",
           "predicate_paths": [
@@ -1404,7 +1393,7 @@
           ]
         },
         {
-          "id": "b154",
+          "id": "b153",
           "at": "internal/filterv2/conversations.gen.go:1516",
           "cond": "in.Filter.SyncMetadataOp == 2",
           "predicate_paths": [
@@ -1412,7 +1401,7 @@
           ]
         },
         {
-          "id": "b155",
+          "id": "b154",
           "at": "internal/filterv2/conversations.gen.go:1516",
           "cond": "in.Filter.SyncMetadataOp == 1",
           "predicate_paths": [
@@ -1420,7 +1409,7 @@
           ]
         },
         {
-          "id": "b156",
+          "id": "b155",
           "at": "internal/filterv2/conversations.gen.go:1516",
           "cond": "in.Filter.SyncMetadataOp == 3",
           "predicate_paths": [
@@ -1428,7 +1417,7 @@
           ]
         },
         {
-          "id": "b157",
+          "id": "b156",
           "at": "internal/filterv2/conversations.gen.go:1610",
           "cond": "in.Filter.SentimentOp == 3",
           "predicate_paths": [
@@ -1436,7 +1425,7 @@
           ]
         },
         {
-          "id": "b158",
+          "id": "b157",
           "at": "internal/filterv2/conversations.gen.go:1639",
           "cond": "in.Filter.SpacesFilter != nil",
           "predicate_paths": [
@@ -1444,9 +1433,17 @@
           ]
         },
         {
-          "id": "b159",
+          "id": "b158",
           "at": "internal/filterv2/conversations.gen.go:1628",
           "cond": "in.Filter.SentimentOp == 4",
+          "predicate_paths": [
+            "in.Filter.SentimentOp"
+          ]
+        },
+        {
+          "id": "b159",
+          "at": "internal/filterv2/conversations.gen.go:1615",
+          "cond": "in.Filter.SentimentOp == 2",
           "predicate_paths": [
             "in.Filter.SentimentOp"
           ]
@@ -1454,21 +1451,13 @@
         {
           "id": "b160",
           "at": "internal/filterv2/conversations.gen.go:1615",
-          "cond": "in.Filter.SentimentOp == 2",
-          "predicate_paths": [
-            "in.Filter.SentimentOp"
-          ]
-        },
-        {
-          "id": "b161",
-          "at": "internal/filterv2/conversations.gen.go:1615",
           "cond": "in.Filter.SentimentOp == 4",
           "predicate_paths": [
             "in.Filter.SentimentOp"
           ]
         },
         {
-          "id": "b162",
+          "id": "b161",
           "at": "internal/filterv2/conversations.gen.go:1630",
           "cond": "in.Filter.SentimentOp == 5",
           "predicate_paths": [
@@ -1476,7 +1465,7 @@
           ]
         },
         {
-          "id": "b163",
+          "id": "b162",
           "at": "internal/filterv2/conversations.gen.go:1632",
           "cond": "in.Filter.SentimentOp == 2",
           "predicate_paths": [
@@ -1484,7 +1473,7 @@
           ]
         },
         {
-          "id": "b164",
+          "id": "b163",
           "at": "internal/filterv2/conversations.gen.go:1632",
           "cond": "in.Filter.SentimentOp == 1",
           "predicate_paths": [
@@ -1492,7 +1481,7 @@
           ]
         },
         {
-          "id": "b165",
+          "id": "b164",
           "at": "internal/filterv2/conversations.gen.go:1632",
           "cond": "in.Filter.SentimentOp == 3",
           "predicate_paths": [
@@ -1500,7 +1489,7 @@
           ]
         },
         {
-          "id": "b166",
+          "id": "b165",
           "at": "internal/filterv2/conversations.gen.go:1685",
           "cond": "in.Filter.SubtypeOp == 4",
           "predicate_paths": [
@@ -1508,9 +1497,17 @@
           ]
         },
         {
-          "id": "b167",
+          "id": "b166",
           "at": "internal/filterv2/conversations.gen.go:1673",
           "cond": "in.Filter.SubtypeOp == 3",
+          "predicate_paths": [
+            "in.Filter.SubtypeOp"
+          ]
+        },
+        {
+          "id": "b167",
+          "at": "internal/filterv2/conversations.gen.go:1675",
+          "cond": "in.Filter.SubtypeOp == 4",
           "predicate_paths": [
             "in.Filter.SubtypeOp"
           ]
@@ -1518,21 +1515,13 @@
         {
           "id": "b168",
           "at": "internal/filterv2/conversations.gen.go:1675",
-          "cond": "in.Filter.SubtypeOp == 4",
-          "predicate_paths": [
-            "in.Filter.SubtypeOp"
-          ]
-        },
-        {
-          "id": "b169",
-          "at": "internal/filterv2/conversations.gen.go:1675",
           "cond": "in.Filter.SubtypeOp == 2",
           "predicate_paths": [
             "in.Filter.SubtypeOp"
           ]
         },
         {
-          "id": "b170",
+          "id": "b169",
           "at": "internal/filterv2/conversations.gen.go:1687",
           "cond": "in.Filter.SubtypeOp == 5",
           "predicate_paths": [
@@ -1540,7 +1529,7 @@
           ]
         },
         {
-          "id": "b171",
+          "id": "b170",
           "at": "internal/filterv2/conversations.gen.go:1689",
           "cond": "in.Filter.SubtypeOp == 2",
           "predicate_paths": [
@@ -1548,7 +1537,7 @@
           ]
         },
         {
-          "id": "b172",
+          "id": "b171",
           "at": "internal/filterv2/conversations.gen.go:1689",
           "cond": "in.Filter.SubtypeOp == 1",
           "predicate_paths": [
@@ -1556,7 +1545,7 @@
           ]
         },
         {
-          "id": "b173",
+          "id": "b172",
           "at": "internal/filterv2/conversations.gen.go:1689",
           "cond": "in.Filter.SubtypeOp == 3",
           "predicate_paths": [
@@ -1564,7 +1553,7 @@
           ]
         },
         {
-          "id": "b174",
+          "id": "b173",
           "at": "internal/filterv2/conversations.gen.go:1730",
           "cond": "in.Filter != nil",
           "predicate_paths": [
@@ -1572,7 +1561,7 @@
           ]
         },
         {
-          "id": "b175",
+          "id": "b174",
           "at": "internal/filterv2/conversations.gen.go:1719",
           "cond": "in.Filter.AppsOp == 4",
           "predicate_paths": [
@@ -1580,7 +1569,7 @@
           ]
         },
         {
-          "id": "b176",
+          "id": "b175",
           "at": "internal/filterv2/conversations.gen.go:1706",
           "cond": "in.Filter.AppsOp == 3",
           "predicate_paths": [
@@ -1588,7 +1577,7 @@
           ]
         },
         {
-          "id": "b177",
+          "id": "b176",
           "at": "internal/filterv2/conversations.gen.go:1708",
           "cond": "in.Filter.AppsOp == 2",
           "predicate_paths": [
@@ -1596,7 +1585,7 @@
           ]
         },
         {
-          "id": "b178",
+          "id": "b177",
           "at": "internal/filterv2/conversations.gen.go:1710",
           "cond": "in.Filter.AppsOp == 4",
           "predicate_paths": [
@@ -1604,7 +1593,7 @@
           ]
         },
         {
-          "id": "b179",
+          "id": "b178",
           "at": "internal/filterv2/conversations.gen.go:1721",
           "cond": "in.Filter.AppsOp == 5",
           "predicate_paths": [
@@ -1612,7 +1601,7 @@
           ]
         },
         {
-          "id": "b180",
+          "id": "b179",
           "at": "internal/filterv2/conversations.gen.go:1723",
           "cond": "in.Filter.AppsOp == 2",
           "predicate_paths": [
@@ -1620,7 +1609,7 @@
           ]
         },
         {
-          "id": "b181",
+          "id": "b180",
           "at": "internal/filterv2/conversations.gen.go:1723",
           "cond": "in.Filter.AppsOp == 1",
           "predicate_paths": [
@@ -1628,7 +1617,7 @@
           ]
         },
         {
-          "id": "b182",
+          "id": "b181",
           "at": "internal/filterv2/conversations.gen.go:1723",
           "cond": "in.Filter.AppsOp == 3",
           "predicate_paths": [
@@ -1636,8 +1625,16 @@
           ]
         },
         {
-          "id": "b183",
+          "id": "b182",
           "at": "internal/dql/dql_converter.go:85",
+          "cond": "in.DqlQuery == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b183",
+          "at": "internal/dql/dql_converter.go:57",
           "cond": "in.DqlQuery == nil",
           "predicate_paths": [
             "in.DqlQuery"
@@ -1645,1440 +1642,1400 @@
         },
         {
           "id": "b184",
-          "at": "internal/dql/dql_converter.go:57",
-          "cond": "in.DqlQuery == nil",
-          "predicate_paths": [
-            "in.DqlQuery"
-          ]
-        },
-        {
-          "id": "b185",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
-          "cond": "in.DevOid|in.DevOid.Partition == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b186",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.DevOid|in.DevOid.Partition != \"\"",
-          "predicate_paths": [
-            "in.DevOid.Partition"
-          ]
-        },
-        {
-          "id": "b187",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6955",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByIdOp != nil",
+          "cond": "in.DevOid|in.Filter.CreatedByIdOp != nil",
           "predicate_paths": [
             "in.Filter.CreatedByIdOp"
           ]
         },
         {
-          "id": "b188",
+          "id": "b185",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6967",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ModifiedByIdOp != nil",
+          "cond": "in.DevOid|in.Filter.ModifiedByIdOp != nil",
           "predicate_paths": [
             "in.Filter.ModifiedByIdOp"
           ]
         },
         {
-          "id": "b189",
+          "id": "b186",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6979",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByAgentIdOp != nil",
+          "cond": "in.DevOid|in.Filter.CreatedByAgentIdOp != nil",
           "predicate_paths": [
             "in.Filter.CreatedByAgentIdOp"
           ]
         },
         {
-          "id": "b190",
+          "id": "b187",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7012",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ChannelsInstancesOp != nil",
+          "cond": "in.DevOid|in.Filter.ChannelsInstancesOp != nil",
           "predicate_paths": [
             "in.Filter.ChannelsInstancesOp"
           ]
         },
         {
-          "id": "b191",
+          "id": "b188",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7017",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SourceChannelOp != nil",
+          "cond": "in.DevOid|in.Filter.SourceChannelOp != nil",
           "predicate_paths": [
             "in.Filter.SourceChannelOp"
           ]
         },
         {
-          "id": "b192",
+          "id": "b189",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7050",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.OwnedByIdsOp != nil",
+          "cond": "in.DevOid|in.Filter.OwnedByIdsOp != nil",
           "predicate_paths": [
             "in.Filter.OwnedByIdsOp"
           ]
         },
         {
-          "id": "b193",
+          "id": "b190",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7074",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AccountIdOp != nil",
+          "cond": "in.DevOid|in.Filter.AccountIdOp != nil",
           "predicate_paths": [
             "in.Filter.AccountIdOp"
           ]
         },
         {
-          "id": "b194",
+          "id": "b191",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7086",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.TagsOp != nil",
+          "cond": "in.DevOid|in.Filter.TagsOp != nil",
           "predicate_paths": [
             "in.Filter.TagsOp"
           ]
         },
         {
-          "id": "b195",
+          "id": "b192",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7119",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LinksOp != nil",
+          "cond": "in.DevOid|in.Filter.LinksOp != nil",
           "predicate_paths": [
             "in.Filter.LinksOp"
           ]
         },
         {
-          "id": "b196",
+          "id": "b193",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7145",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SurveysAggregationOp != nil",
+          "cond": "in.DevOid|in.Filter.SurveysAggregationOp != nil",
           "predicate_paths": [
             "in.Filter.SurveysAggregationOp"
           ]
         },
         {
-          "id": "b197",
+          "id": "b194",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7164",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SyncMetadataOp != nil",
+          "cond": "in.DevOid|in.Filter.SyncMetadataOp != nil",
           "predicate_paths": [
             "in.Filter.SyncMetadataOp"
           ]
         },
         {
-          "id": "b198",
+          "id": "b195",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7190",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SentimentOp != nil",
+          "cond": "in.DevOid|in.Filter.SentimentOp != nil",
           "predicate_paths": [
             "in.Filter.SentimentOp"
           ]
         },
         {
-          "id": "b199",
+          "id": "b196",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7195",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SubtypeOp != nil",
+          "cond": "in.DevOid|in.Filter.SubtypeOp != nil",
           "predicate_paths": [
             "in.Filter.SubtypeOp"
           ]
         },
         {
-          "id": "b200",
+          "id": "b197",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:7200",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AppsOp != nil",
+          "cond": "in.DevOid|in.Filter.AppsOp != nil",
           "predicate_paths": [
             "in.Filter.AppsOp"
           ]
         },
         {
-          "id": "b201",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1527",
-          "cond": "in.DevOid|in.DevOid.Partition == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b202",
+          "id": "b198",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1537",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter != nil",
+          "cond": "in.DevOid|in.Filter != nil",
           "predicate_paths": [
             "in.Filter"
           ]
         },
         {
-          "id": "b203",
+          "id": "b199",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1538",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter != nil",
+          "cond": "in.DevOid|in.Filter != nil",
           "predicate_paths": [
             "in.Filter"
           ]
         },
         {
-          "id": "b204",
+          "id": "b200",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1542",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Page >= 0",
+          "cond": "in.DevOid|in.Page >= 0",
           "predicate_paths": [
             "in.Page"
           ]
         },
         {
-          "id": "b205",
+          "id": "b201",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1545",
-          "cond": "in.DevOid|in.DevOid.Partition|in.PerPage >= 0",
+          "cond": "in.DevOid|in.PerPage >= 0",
           "predicate_paths": [
             "in.PerPage"
           ]
         },
         {
-          "id": "b206",
-          "at": "internal/serverv2/list_conversations.go:33",
-          "cond": "in.DevOid|in.DevOid.Partition == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b207",
+          "id": "b202",
           "at": "internal/serverv2/list_conversations.go:36",
-          "cond": "in|in.DevOid|in.DevOid.Partition != nil",
+          "cond": "in|in.DevOid != nil",
           "predicate_paths": [
             "in"
           ]
         },
         {
-          "id": "b208",
+          "id": "b203",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/query.go:160",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CustomFields == nil",
+          "cond": "in.DevOid|in.Filter.CustomFields == nil",
           "predicate_paths": [
             "in.Filter.CustomFields"
           ]
         },
         {
-          "id": "b209",
+          "id": "b204",
           "at": "internal/filterv2/conversations.gen.go:240",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedDate != nil",
+          "cond": "in.DevOid|in.Filter.CreatedDate != nil",
           "predicate_paths": [
             "in.Filter.CreatedDate"
           ]
         },
         {
-          "id": "b210",
+          "id": "b205",
           "at": "internal/filterv2/conversations.gen.go:229",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByIdOp == 4",
+          "cond": "in.DevOid|in.Filter.CreatedByIdOp == 4",
+          "predicate_paths": [
+            "in.Filter.CreatedByIdOp"
+          ]
+        },
+        {
+          "id": "b206",
+          "at": "internal/filterv2/conversations.gen.go:217",
+          "cond": "in.DevOid|in.Filter.CreatedByIdOp == 3",
+          "predicate_paths": [
+            "in.Filter.CreatedByIdOp"
+          ]
+        },
+        {
+          "id": "b207",
+          "at": "internal/filterv2/conversations.gen.go:219",
+          "cond": "in.DevOid|in.Filter.CreatedByIdOp == 4",
+          "predicate_paths": [
+            "in.Filter.CreatedByIdOp"
+          ]
+        },
+        {
+          "id": "b208",
+          "at": "internal/filterv2/conversations.gen.go:219",
+          "cond": "in.DevOid|in.Filter.CreatedByIdOp == 2",
+          "predicate_paths": [
+            "in.Filter.CreatedByIdOp"
+          ]
+        },
+        {
+          "id": "b209",
+          "at": "internal/filterv2/conversations.gen.go:231",
+          "cond": "in.DevOid|in.Filter.CreatedByIdOp == 5",
+          "predicate_paths": [
+            "in.Filter.CreatedByIdOp"
+          ]
+        },
+        {
+          "id": "b210",
+          "at": "internal/filterv2/conversations.gen.go:233",
+          "cond": "in.DevOid|in.Filter.CreatedByIdOp == 2",
           "predicate_paths": [
             "in.Filter.CreatedByIdOp"
           ]
         },
         {
           "id": "b211",
-          "at": "internal/filterv2/conversations.gen.go:217",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByIdOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:233",
+          "cond": "in.DevOid|in.Filter.CreatedByIdOp == 1",
           "predicate_paths": [
             "in.Filter.CreatedByIdOp"
           ]
         },
         {
           "id": "b212",
-          "at": "internal/filterv2/conversations.gen.go:219",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByIdOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:233",
+          "cond": "in.DevOid|in.Filter.CreatedByIdOp == 3",
           "predicate_paths": [
             "in.Filter.CreatedByIdOp"
           ]
         },
         {
           "id": "b213",
-          "at": "internal/filterv2/conversations.gen.go:219",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByIdOp == 2",
-          "predicate_paths": [
-            "in.Filter.CreatedByIdOp"
-          ]
-        },
-        {
-          "id": "b214",
-          "at": "internal/filterv2/conversations.gen.go:231",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByIdOp == 5",
-          "predicate_paths": [
-            "in.Filter.CreatedByIdOp"
-          ]
-        },
-        {
-          "id": "b215",
-          "at": "internal/filterv2/conversations.gen.go:233",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByIdOp == 2",
-          "predicate_paths": [
-            "in.Filter.CreatedByIdOp"
-          ]
-        },
-        {
-          "id": "b216",
-          "at": "internal/filterv2/conversations.gen.go:233",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByIdOp == 1",
-          "predicate_paths": [
-            "in.Filter.CreatedByIdOp"
-          ]
-        },
-        {
-          "id": "b217",
-          "at": "internal/filterv2/conversations.gen.go:233",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByIdOp == 3",
-          "predicate_paths": [
-            "in.Filter.CreatedByIdOp"
-          ]
-        },
-        {
-          "id": "b218",
           "at": "internal/filterv2/conversations.gen.go:243",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedDate.After != nil",
+          "cond": "in.DevOid|in.Filter.CreatedDate.After != nil",
           "predicate_paths": [
             "in.Filter.CreatedDate.After"
           ]
         },
         {
-          "id": "b219",
+          "id": "b214",
           "at": "internal/filterv2/conversations.gen.go:250",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedDate.Before != nil",
+          "cond": "in.DevOid|in.Filter.CreatedDate.Before != nil",
           "predicate_paths": [
             "in.Filter.CreatedDate.Before"
           ]
         },
         {
-          "id": "b220",
+          "id": "b215",
           "at": "internal/filterv2/conversations.gen.go:257",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedDate.DatePreset != nil",
+          "cond": "in.DevOid|in.Filter.CreatedDate.DatePreset != nil",
           "predicate_paths": [
             "in.Filter.CreatedDate.DatePreset"
           ]
         },
         {
-          "id": "b221",
+          "id": "b216",
           "at": "internal/filterv2/conversations.gen.go:258",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedDate.After != nil",
+          "cond": "in.DevOid|in.Filter.CreatedDate.After != nil",
           "predicate_paths": [
             "in.Filter.CreatedDate.After"
           ]
         },
         {
-          "id": "b223",
+          "id": "b218",
           "at": "internal/filterv2/conversations.gen.go:258",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedDate.Before != nil",
+          "cond": "in.DevOid|in.Filter.CreatedDate.Before != nil",
           "predicate_paths": [
             "in.Filter.CreatedDate.Before"
           ]
         },
         {
-          "id": "b224",
+          "id": "b219",
           "at": "internal/filterv2/conversations.gen.go:364",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ModifiedDate != nil",
+          "cond": "in.DevOid|in.Filter.ModifiedDate != nil",
           "predicate_paths": [
             "in.Filter.ModifiedDate"
           ]
         },
         {
-          "id": "b225",
+          "id": "b220",
           "at": "internal/filterv2/conversations.gen.go:353",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ModifiedByIdOp == 4",
+          "cond": "in.DevOid|in.Filter.ModifiedByIdOp == 4",
+          "predicate_paths": [
+            "in.Filter.ModifiedByIdOp"
+          ]
+        },
+        {
+          "id": "b221",
+          "at": "internal/filterv2/conversations.gen.go:341",
+          "cond": "in.DevOid|in.Filter.ModifiedByIdOp == 3",
+          "predicate_paths": [
+            "in.Filter.ModifiedByIdOp"
+          ]
+        },
+        {
+          "id": "b222",
+          "at": "internal/filterv2/conversations.gen.go:343",
+          "cond": "in.DevOid|in.Filter.ModifiedByIdOp == 4",
+          "predicate_paths": [
+            "in.Filter.ModifiedByIdOp"
+          ]
+        },
+        {
+          "id": "b223",
+          "at": "internal/filterv2/conversations.gen.go:343",
+          "cond": "in.DevOid|in.Filter.ModifiedByIdOp == 2",
+          "predicate_paths": [
+            "in.Filter.ModifiedByIdOp"
+          ]
+        },
+        {
+          "id": "b224",
+          "at": "internal/filterv2/conversations.gen.go:355",
+          "cond": "in.DevOid|in.Filter.ModifiedByIdOp == 5",
+          "predicate_paths": [
+            "in.Filter.ModifiedByIdOp"
+          ]
+        },
+        {
+          "id": "b225",
+          "at": "internal/filterv2/conversations.gen.go:357",
+          "cond": "in.DevOid|in.Filter.ModifiedByIdOp == 2",
           "predicate_paths": [
             "in.Filter.ModifiedByIdOp"
           ]
         },
         {
           "id": "b226",
-          "at": "internal/filterv2/conversations.gen.go:341",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ModifiedByIdOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:357",
+          "cond": "in.DevOid|in.Filter.ModifiedByIdOp == 1",
           "predicate_paths": [
             "in.Filter.ModifiedByIdOp"
           ]
         },
         {
           "id": "b227",
-          "at": "internal/filterv2/conversations.gen.go:343",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ModifiedByIdOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:357",
+          "cond": "in.DevOid|in.Filter.ModifiedByIdOp == 3",
           "predicate_paths": [
             "in.Filter.ModifiedByIdOp"
           ]
         },
         {
           "id": "b228",
-          "at": "internal/filterv2/conversations.gen.go:343",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ModifiedByIdOp == 2",
-          "predicate_paths": [
-            "in.Filter.ModifiedByIdOp"
-          ]
-        },
-        {
-          "id": "b229",
-          "at": "internal/filterv2/conversations.gen.go:355",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ModifiedByIdOp == 5",
-          "predicate_paths": [
-            "in.Filter.ModifiedByIdOp"
-          ]
-        },
-        {
-          "id": "b230",
-          "at": "internal/filterv2/conversations.gen.go:357",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ModifiedByIdOp == 2",
-          "predicate_paths": [
-            "in.Filter.ModifiedByIdOp"
-          ]
-        },
-        {
-          "id": "b231",
-          "at": "internal/filterv2/conversations.gen.go:357",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ModifiedByIdOp == 1",
-          "predicate_paths": [
-            "in.Filter.ModifiedByIdOp"
-          ]
-        },
-        {
-          "id": "b232",
-          "at": "internal/filterv2/conversations.gen.go:357",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ModifiedByIdOp == 3",
-          "predicate_paths": [
-            "in.Filter.ModifiedByIdOp"
-          ]
-        },
-        {
-          "id": "b233",
           "at": "internal/filterv2/conversations.gen.go:367",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ModifiedDate.After != nil",
+          "cond": "in.DevOid|in.Filter.ModifiedDate.After != nil",
           "predicate_paths": [
             "in.Filter.ModifiedDate.After"
           ]
         },
         {
-          "id": "b234",
+          "id": "b229",
           "at": "internal/filterv2/conversations.gen.go:374",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ModifiedDate.Before != nil",
+          "cond": "in.DevOid|in.Filter.ModifiedDate.Before != nil",
           "predicate_paths": [
             "in.Filter.ModifiedDate.Before"
           ]
         },
         {
-          "id": "b235",
+          "id": "b230",
           "at": "internal/filterv2/conversations.gen.go:381",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ModifiedDate.DatePreset != nil",
+          "cond": "in.DevOid|in.Filter.ModifiedDate.DatePreset != nil",
           "predicate_paths": [
             "in.Filter.ModifiedDate.DatePreset"
           ]
         },
         {
-          "id": "b236",
+          "id": "b231",
           "at": "internal/filterv2/conversations.gen.go:382",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ModifiedDate.After != nil",
+          "cond": "in.DevOid|in.Filter.ModifiedDate.After != nil",
           "predicate_paths": [
             "in.Filter.ModifiedDate.After"
           ]
         },
         {
-          "id": "b238",
+          "id": "b233",
           "at": "internal/filterv2/conversations.gen.go:382",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ModifiedDate.Before != nil",
+          "cond": "in.DevOid|in.Filter.ModifiedDate.Before != nil",
           "predicate_paths": [
             "in.Filter.ModifiedDate.Before"
           ]
         },
         {
-          "id": "b239",
+          "id": "b234",
           "at": "internal/filterv2/conversations.gen.go:477",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByAgentIdOp == 4",
+          "cond": "in.DevOid|in.Filter.CreatedByAgentIdOp == 4",
+          "predicate_paths": [
+            "in.Filter.CreatedByAgentIdOp"
+          ]
+        },
+        {
+          "id": "b235",
+          "at": "internal/filterv2/conversations.gen.go:465",
+          "cond": "in.DevOid|in.Filter.CreatedByAgentIdOp == 3",
+          "predicate_paths": [
+            "in.Filter.CreatedByAgentIdOp"
+          ]
+        },
+        {
+          "id": "b236",
+          "at": "internal/filterv2/conversations.gen.go:467",
+          "cond": "in.DevOid|in.Filter.CreatedByAgentIdOp == 4",
+          "predicate_paths": [
+            "in.Filter.CreatedByAgentIdOp"
+          ]
+        },
+        {
+          "id": "b237",
+          "at": "internal/filterv2/conversations.gen.go:467",
+          "cond": "in.DevOid|in.Filter.CreatedByAgentIdOp == 2",
+          "predicate_paths": [
+            "in.Filter.CreatedByAgentIdOp"
+          ]
+        },
+        {
+          "id": "b238",
+          "at": "internal/filterv2/conversations.gen.go:479",
+          "cond": "in.DevOid|in.Filter.CreatedByAgentIdOp == 5",
+          "predicate_paths": [
+            "in.Filter.CreatedByAgentIdOp"
+          ]
+        },
+        {
+          "id": "b239",
+          "at": "internal/filterv2/conversations.gen.go:481",
+          "cond": "in.DevOid|in.Filter.CreatedByAgentIdOp == 2",
           "predicate_paths": [
             "in.Filter.CreatedByAgentIdOp"
           ]
         },
         {
           "id": "b240",
-          "at": "internal/filterv2/conversations.gen.go:465",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByAgentIdOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:481",
+          "cond": "in.DevOid|in.Filter.CreatedByAgentIdOp == 1",
           "predicate_paths": [
             "in.Filter.CreatedByAgentIdOp"
           ]
         },
         {
           "id": "b241",
-          "at": "internal/filterv2/conversations.gen.go:467",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByAgentIdOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:481",
+          "cond": "in.DevOid|in.Filter.CreatedByAgentIdOp == 3",
           "predicate_paths": [
             "in.Filter.CreatedByAgentIdOp"
           ]
         },
         {
           "id": "b242",
-          "at": "internal/filterv2/conversations.gen.go:467",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByAgentIdOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:565",
+          "cond": "in.DevOid|in.Filter.ChannelsInstancesOp == 4",
           "predicate_paths": [
-            "in.Filter.CreatedByAgentIdOp"
+            "in.Filter.ChannelsInstancesOp"
           ]
         },
         {
           "id": "b243",
-          "at": "internal/filterv2/conversations.gen.go:479",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByAgentIdOp == 5",
+          "at": "internal/filterv2/conversations.gen.go:552",
+          "cond": "in.DevOid|in.Filter.ChannelsInstancesOp == 3",
           "predicate_paths": [
-            "in.Filter.CreatedByAgentIdOp"
+            "in.Filter.ChannelsInstancesOp"
           ]
         },
         {
           "id": "b244",
-          "at": "internal/filterv2/conversations.gen.go:481",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByAgentIdOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:554",
+          "cond": "in.DevOid|in.Filter.ChannelsInstancesOp == 2",
           "predicate_paths": [
-            "in.Filter.CreatedByAgentIdOp"
+            "in.Filter.ChannelsInstancesOp"
           ]
         },
         {
           "id": "b245",
-          "at": "internal/filterv2/conversations.gen.go:481",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByAgentIdOp == 1",
+          "at": "internal/filterv2/conversations.gen.go:556",
+          "cond": "in.DevOid|in.Filter.ChannelsInstancesOp == 4",
           "predicate_paths": [
-            "in.Filter.CreatedByAgentIdOp"
+            "in.Filter.ChannelsInstancesOp"
           ]
         },
         {
           "id": "b246",
-          "at": "internal/filterv2/conversations.gen.go:481",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.CreatedByAgentIdOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:567",
+          "cond": "in.DevOid|in.Filter.ChannelsInstancesOp == 5",
           "predicate_paths": [
-            "in.Filter.CreatedByAgentIdOp"
+            "in.Filter.ChannelsInstancesOp"
           ]
         },
         {
           "id": "b247",
-          "at": "internal/filterv2/conversations.gen.go:565",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ChannelsInstancesOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:569",
+          "cond": "in.DevOid|in.Filter.ChannelsInstancesOp == 2",
           "predicate_paths": [
             "in.Filter.ChannelsInstancesOp"
           ]
         },
         {
           "id": "b248",
-          "at": "internal/filterv2/conversations.gen.go:552",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ChannelsInstancesOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:569",
+          "cond": "in.DevOid|in.Filter.ChannelsInstancesOp == 1",
           "predicate_paths": [
             "in.Filter.ChannelsInstancesOp"
           ]
         },
         {
           "id": "b249",
-          "at": "internal/filterv2/conversations.gen.go:554",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ChannelsInstancesOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:569",
+          "cond": "in.DevOid|in.Filter.ChannelsInstancesOp == 3",
           "predicate_paths": [
             "in.Filter.ChannelsInstancesOp"
           ]
         },
         {
           "id": "b250",
-          "at": "internal/filterv2/conversations.gen.go:556",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ChannelsInstancesOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:579",
+          "cond": "in.DevOid|in.Filter.SourceChannelOp == 3",
           "predicate_paths": [
-            "in.Filter.ChannelsInstancesOp"
+            "in.Filter.SourceChannelOp"
           ]
         },
         {
           "id": "b251",
-          "at": "internal/filterv2/conversations.gen.go:567",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ChannelsInstancesOp == 5",
+          "at": "internal/filterv2/conversations.gen.go:597",
+          "cond": "in.DevOid|in.Filter.SourceChannelOp == 4",
           "predicate_paths": [
-            "in.Filter.ChannelsInstancesOp"
+            "in.Filter.SourceChannelOp"
           ]
         },
         {
           "id": "b252",
-          "at": "internal/filterv2/conversations.gen.go:569",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ChannelsInstancesOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:584",
+          "cond": "in.DevOid|in.Filter.SourceChannelOp == 2",
           "predicate_paths": [
-            "in.Filter.ChannelsInstancesOp"
+            "in.Filter.SourceChannelOp"
           ]
         },
         {
           "id": "b253",
-          "at": "internal/filterv2/conversations.gen.go:569",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ChannelsInstancesOp == 1",
+          "at": "internal/filterv2/conversations.gen.go:584",
+          "cond": "in.DevOid|in.Filter.SourceChannelOp == 4",
           "predicate_paths": [
-            "in.Filter.ChannelsInstancesOp"
+            "in.Filter.SourceChannelOp"
           ]
         },
         {
           "id": "b254",
-          "at": "internal/filterv2/conversations.gen.go:569",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ChannelsInstancesOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:599",
+          "cond": "in.DevOid|in.Filter.SourceChannelOp == 5",
           "predicate_paths": [
-            "in.Filter.ChannelsInstancesOp"
+            "in.Filter.SourceChannelOp"
           ]
         },
         {
           "id": "b255",
-          "at": "internal/filterv2/conversations.gen.go:579",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SourceChannelOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:601",
+          "cond": "in.DevOid|in.Filter.SourceChannelOp == 2",
           "predicate_paths": [
             "in.Filter.SourceChannelOp"
           ]
         },
         {
           "id": "b256",
-          "at": "internal/filterv2/conversations.gen.go:597",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SourceChannelOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:601",
+          "cond": "in.DevOid|in.Filter.SourceChannelOp == 1",
           "predicate_paths": [
             "in.Filter.SourceChannelOp"
           ]
         },
         {
           "id": "b257",
-          "at": "internal/filterv2/conversations.gen.go:584",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SourceChannelOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:601",
+          "cond": "in.DevOid|in.Filter.SourceChannelOp == 3",
           "predicate_paths": [
             "in.Filter.SourceChannelOp"
           ]
         },
         {
           "id": "b258",
-          "at": "internal/filterv2/conversations.gen.go:584",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SourceChannelOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:664",
+          "cond": "in.DevOid|in.Filter.OwnedByIdsOp == 4",
           "predicate_paths": [
-            "in.Filter.SourceChannelOp"
+            "in.Filter.OwnedByIdsOp"
           ]
         },
         {
           "id": "b259",
-          "at": "internal/filterv2/conversations.gen.go:599",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SourceChannelOp == 5",
+          "at": "internal/filterv2/conversations.gen.go:651",
+          "cond": "in.DevOid|in.Filter.OwnedByIdsOp == 3",
           "predicate_paths": [
-            "in.Filter.SourceChannelOp"
+            "in.Filter.OwnedByIdsOp"
           ]
         },
         {
           "id": "b260",
-          "at": "internal/filterv2/conversations.gen.go:601",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SourceChannelOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:653",
+          "cond": "in.DevOid|in.Filter.OwnedByIdsOp == 2",
           "predicate_paths": [
-            "in.Filter.SourceChannelOp"
+            "in.Filter.OwnedByIdsOp"
           ]
         },
         {
           "id": "b261",
-          "at": "internal/filterv2/conversations.gen.go:601",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SourceChannelOp == 1",
+          "at": "internal/filterv2/conversations.gen.go:655",
+          "cond": "in.DevOid|in.Filter.OwnedByIdsOp == 4",
           "predicate_paths": [
-            "in.Filter.SourceChannelOp"
+            "in.Filter.OwnedByIdsOp"
           ]
         },
         {
           "id": "b262",
-          "at": "internal/filterv2/conversations.gen.go:601",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SourceChannelOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:666",
+          "cond": "in.DevOid|in.Filter.OwnedByIdsOp == 5",
           "predicate_paths": [
-            "in.Filter.SourceChannelOp"
+            "in.Filter.OwnedByIdsOp"
           ]
         },
         {
           "id": "b263",
-          "at": "internal/filterv2/conversations.gen.go:664",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.OwnedByIdsOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:668",
+          "cond": "in.DevOid|in.Filter.OwnedByIdsOp == 2",
           "predicate_paths": [
             "in.Filter.OwnedByIdsOp"
           ]
         },
         {
           "id": "b264",
-          "at": "internal/filterv2/conversations.gen.go:651",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.OwnedByIdsOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:668",
+          "cond": "in.DevOid|in.Filter.OwnedByIdsOp == 1",
           "predicate_paths": [
             "in.Filter.OwnedByIdsOp"
           ]
         },
         {
           "id": "b265",
-          "at": "internal/filterv2/conversations.gen.go:653",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.OwnedByIdsOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:668",
+          "cond": "in.DevOid|in.Filter.OwnedByIdsOp == 3",
           "predicate_paths": [
             "in.Filter.OwnedByIdsOp"
           ]
         },
         {
           "id": "b266",
-          "at": "internal/filterv2/conversations.gen.go:655",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.OwnedByIdsOp == 4",
-          "predicate_paths": [
-            "in.Filter.OwnedByIdsOp"
-          ]
-        },
-        {
-          "id": "b267",
-          "at": "internal/filterv2/conversations.gen.go:666",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.OwnedByIdsOp == 5",
-          "predicate_paths": [
-            "in.Filter.OwnedByIdsOp"
-          ]
-        },
-        {
-          "id": "b268",
-          "at": "internal/filterv2/conversations.gen.go:668",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.OwnedByIdsOp == 2",
-          "predicate_paths": [
-            "in.Filter.OwnedByIdsOp"
-          ]
-        },
-        {
-          "id": "b269",
-          "at": "internal/filterv2/conversations.gen.go:668",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.OwnedByIdsOp == 1",
-          "predicate_paths": [
-            "in.Filter.OwnedByIdsOp"
-          ]
-        },
-        {
-          "id": "b270",
-          "at": "internal/filterv2/conversations.gen.go:668",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.OwnedByIdsOp == 3",
-          "predicate_paths": [
-            "in.Filter.OwnedByIdsOp"
-          ]
-        },
-        {
-          "id": "b271",
           "at": "internal/filterv2/conversations.gen.go:697",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LastMessageTimestamp != nil",
+          "cond": "in.DevOid|in.Filter.LastMessageTimestamp != nil",
           "predicate_paths": [
             "in.Filter.LastMessageTimestamp"
           ]
         },
         {
-          "id": "b272",
+          "id": "b267",
           "at": "internal/filterv2/conversations.gen.go:700",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LastMessageTimestamp.After != nil",
+          "cond": "in.DevOid|in.Filter.LastMessageTimestamp.After != nil",
           "predicate_paths": [
             "in.Filter.LastMessageTimestamp.After"
           ]
         },
         {
-          "id": "b273",
+          "id": "b268",
           "at": "internal/filterv2/conversations.gen.go:707",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LastMessageTimestamp.Before != nil",
+          "cond": "in.DevOid|in.Filter.LastMessageTimestamp.Before != nil",
           "predicate_paths": [
             "in.Filter.LastMessageTimestamp.Before"
           ]
         },
         {
-          "id": "b274",
+          "id": "b269",
           "at": "internal/filterv2/conversations.gen.go:714",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LastMessageTimestamp.DatePreset != nil",
+          "cond": "in.DevOid|in.Filter.LastMessageTimestamp.DatePreset != nil",
           "predicate_paths": [
             "in.Filter.LastMessageTimestamp.DatePreset"
           ]
         },
         {
-          "id": "b275",
+          "id": "b270",
           "at": "internal/filterv2/conversations.gen.go:715",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LastMessageTimestamp.After != nil",
+          "cond": "in.DevOid|in.Filter.LastMessageTimestamp.After != nil",
           "predicate_paths": [
             "in.Filter.LastMessageTimestamp.After"
           ]
         },
         {
-          "id": "b277",
+          "id": "b272",
           "at": "internal/filterv2/conversations.gen.go:715",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LastMessageTimestamp.Before != nil",
+          "cond": "in.DevOid|in.Filter.LastMessageTimestamp.Before != nil",
           "predicate_paths": [
             "in.Filter.LastMessageTimestamp.Before"
           ]
         },
         {
-          "id": "b278",
+          "id": "b273",
           "at": "internal/filterv2/conversations.gen.go:810",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AccountIdOp == 4",
+          "cond": "in.DevOid|in.Filter.AccountIdOp == 4",
+          "predicate_paths": [
+            "in.Filter.AccountIdOp"
+          ]
+        },
+        {
+          "id": "b274",
+          "at": "internal/filterv2/conversations.gen.go:798",
+          "cond": "in.DevOid|in.Filter.AccountIdOp == 3",
+          "predicate_paths": [
+            "in.Filter.AccountIdOp"
+          ]
+        },
+        {
+          "id": "b275",
+          "at": "internal/filterv2/conversations.gen.go:800",
+          "cond": "in.DevOid|in.Filter.AccountIdOp == 4",
+          "predicate_paths": [
+            "in.Filter.AccountIdOp"
+          ]
+        },
+        {
+          "id": "b276",
+          "at": "internal/filterv2/conversations.gen.go:800",
+          "cond": "in.DevOid|in.Filter.AccountIdOp == 2",
+          "predicate_paths": [
+            "in.Filter.AccountIdOp"
+          ]
+        },
+        {
+          "id": "b277",
+          "at": "internal/filterv2/conversations.gen.go:812",
+          "cond": "in.DevOid|in.Filter.AccountIdOp == 5",
+          "predicate_paths": [
+            "in.Filter.AccountIdOp"
+          ]
+        },
+        {
+          "id": "b278",
+          "at": "internal/filterv2/conversations.gen.go:814",
+          "cond": "in.DevOid|in.Filter.AccountIdOp == 2",
           "predicate_paths": [
             "in.Filter.AccountIdOp"
           ]
         },
         {
           "id": "b279",
-          "at": "internal/filterv2/conversations.gen.go:798",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AccountIdOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:814",
+          "cond": "in.DevOid|in.Filter.AccountIdOp == 1",
           "predicate_paths": [
             "in.Filter.AccountIdOp"
           ]
         },
         {
           "id": "b280",
-          "at": "internal/filterv2/conversations.gen.go:800",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AccountIdOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:814",
+          "cond": "in.DevOid|in.Filter.AccountIdOp == 3",
           "predicate_paths": [
             "in.Filter.AccountIdOp"
           ]
         },
         {
           "id": "b281",
-          "at": "internal/filterv2/conversations.gen.go:800",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AccountIdOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:824",
+          "cond": "in.DevOid|in.Filter.TagsOp == 3",
           "predicate_paths": [
-            "in.Filter.AccountIdOp"
+            "in.Filter.TagsOp"
           ]
         },
         {
           "id": "b282",
-          "at": "internal/filterv2/conversations.gen.go:812",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AccountIdOp == 5",
+          "at": "internal/filterv2/conversations.gen.go:867",
+          "cond": "in.DevOid|in.Filter.TagsOp == 4",
           "predicate_paths": [
-            "in.Filter.AccountIdOp"
+            "in.Filter.TagsOp"
           ]
         },
         {
           "id": "b283",
-          "at": "internal/filterv2/conversations.gen.go:814",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AccountIdOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:837",
+          "cond": "in.DevOid|in.Filter.TagsOp == 2",
           "predicate_paths": [
-            "in.Filter.AccountIdOp"
+            "in.Filter.TagsOp"
           ]
         },
         {
           "id": "b284",
-          "at": "internal/filterv2/conversations.gen.go:814",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AccountIdOp == 1",
+          "at": "internal/filterv2/conversations.gen.go:847",
+          "cond": "in.DevOid|in.Filter.TagsOp == 4",
           "predicate_paths": [
-            "in.Filter.AccountIdOp"
+            "in.Filter.TagsOp"
           ]
         },
         {
           "id": "b285",
-          "at": "internal/filterv2/conversations.gen.go:814",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AccountIdOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:869",
+          "cond": "in.DevOid|in.Filter.TagsOp == 5",
           "predicate_paths": [
-            "in.Filter.AccountIdOp"
+            "in.Filter.TagsOp"
           ]
         },
         {
           "id": "b286",
-          "at": "internal/filterv2/conversations.gen.go:824",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.TagsOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:871",
+          "cond": "in.DevOid|in.Filter.TagsOp == 2",
           "predicate_paths": [
             "in.Filter.TagsOp"
           ]
         },
         {
           "id": "b287",
-          "at": "internal/filterv2/conversations.gen.go:867",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.TagsOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:871",
+          "cond": "in.DevOid|in.Filter.TagsOp == 1",
           "predicate_paths": [
             "in.Filter.TagsOp"
           ]
         },
         {
           "id": "b288",
-          "at": "internal/filterv2/conversations.gen.go:837",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.TagsOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:871",
+          "cond": "in.DevOid|in.Filter.TagsOp == 3",
           "predicate_paths": [
             "in.Filter.TagsOp"
           ]
         },
         {
           "id": "b289",
-          "at": "internal/filterv2/conversations.gen.go:847",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.TagsOp == 4",
-          "predicate_paths": [
-            "in.Filter.TagsOp"
-          ]
-        },
-        {
-          "id": "b290",
-          "at": "internal/filterv2/conversations.gen.go:869",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.TagsOp == 5",
-          "predicate_paths": [
-            "in.Filter.TagsOp"
-          ]
-        },
-        {
-          "id": "b291",
-          "at": "internal/filterv2/conversations.gen.go:871",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.TagsOp == 2",
-          "predicate_paths": [
-            "in.Filter.TagsOp"
-          ]
-        },
-        {
-          "id": "b292",
-          "at": "internal/filterv2/conversations.gen.go:871",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.TagsOp == 1",
-          "predicate_paths": [
-            "in.Filter.TagsOp"
-          ]
-        },
-        {
-          "id": "b293",
-          "at": "internal/filterv2/conversations.gen.go:871",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.TagsOp == 3",
-          "predicate_paths": [
-            "in.Filter.TagsOp"
-          ]
-        },
-        {
-          "id": "b294",
           "at": "internal/filterv2/conversations.gen.go:889",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.FirstResponseTime != nil",
+          "cond": "in.DevOid|in.Filter.FirstResponseTime != nil",
           "predicate_paths": [
             "in.Filter.FirstResponseTime"
           ]
         },
         {
-          "id": "b295",
+          "id": "b290",
           "at": "internal/filterv2/conversations.gen.go:892",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.FirstResponseTime.After != nil",
+          "cond": "in.DevOid|in.Filter.FirstResponseTime.After != nil",
           "predicate_paths": [
             "in.Filter.FirstResponseTime.After"
           ]
         },
         {
-          "id": "b296",
+          "id": "b291",
           "at": "internal/filterv2/conversations.gen.go:899",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.FirstResponseTime.Before != nil",
+          "cond": "in.DevOid|in.Filter.FirstResponseTime.Before != nil",
           "predicate_paths": [
             "in.Filter.FirstResponseTime.Before"
           ]
         },
         {
-          "id": "b297",
+          "id": "b292",
           "at": "internal/filterv2/conversations.gen.go:906",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.FirstResponseTime.DatePreset != nil",
+          "cond": "in.DevOid|in.Filter.FirstResponseTime.DatePreset != nil",
           "predicate_paths": [
             "in.Filter.FirstResponseTime.DatePreset"
           ]
         },
         {
-          "id": "b298",
+          "id": "b293",
           "at": "internal/filterv2/conversations.gen.go:907",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.FirstResponseTime.After != nil",
+          "cond": "in.DevOid|in.Filter.FirstResponseTime.After != nil",
           "predicate_paths": [
             "in.Filter.FirstResponseTime.After"
           ]
         },
         {
-          "id": "b300",
+          "id": "b295",
           "at": "internal/filterv2/conversations.gen.go:907",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.FirstResponseTime.Before != nil",
+          "cond": "in.DevOid|in.Filter.FirstResponseTime.Before != nil",
           "predicate_paths": [
             "in.Filter.FirstResponseTime.Before"
           ]
         },
         {
-          "id": "b301",
+          "id": "b296",
           "at": "internal/filterv2/conversations.gen.go:994",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ActualCloseDate != nil",
+          "cond": "in.DevOid|in.Filter.ActualCloseDate != nil",
           "predicate_paths": [
             "in.Filter.ActualCloseDate"
           ]
         },
         {
-          "id": "b302",
+          "id": "b297",
           "at": "internal/filterv2/conversations.gen.go:997",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ActualCloseDate.After != nil",
+          "cond": "in.DevOid|in.Filter.ActualCloseDate.After != nil",
           "predicate_paths": [
             "in.Filter.ActualCloseDate.After"
           ]
         },
         {
-          "id": "b303",
+          "id": "b298",
           "at": "internal/filterv2/conversations.gen.go:1004",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ActualCloseDate.Before != nil",
+          "cond": "in.DevOid|in.Filter.ActualCloseDate.Before != nil",
           "predicate_paths": [
             "in.Filter.ActualCloseDate.Before"
           ]
         },
         {
-          "id": "b304",
+          "id": "b299",
           "at": "internal/filterv2/conversations.gen.go:1011",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ActualCloseDate.DatePreset != nil",
+          "cond": "in.DevOid|in.Filter.ActualCloseDate.DatePreset != nil",
           "predicate_paths": [
             "in.Filter.ActualCloseDate.DatePreset"
           ]
         },
         {
-          "id": "b305",
+          "id": "b300",
           "at": "internal/filterv2/conversations.gen.go:1012",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ActualCloseDate.After != nil",
+          "cond": "in.DevOid|in.Filter.ActualCloseDate.After != nil",
           "predicate_paths": [
             "in.Filter.ActualCloseDate.After"
           ]
         },
         {
-          "id": "b307",
+          "id": "b302",
           "at": "internal/filterv2/conversations.gen.go:1012",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.ActualCloseDate.Before != nil",
+          "cond": "in.DevOid|in.Filter.ActualCloseDate.Before != nil",
           "predicate_paths": [
             "in.Filter.ActualCloseDate.Before"
           ]
         },
         {
-          "id": "b308",
+          "id": "b303",
           "at": "internal/filterv2/conversations.gen.go:1092",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LastExternalMessageDate != nil",
+          "cond": "in.DevOid|in.Filter.LastExternalMessageDate != nil",
           "predicate_paths": [
             "in.Filter.LastExternalMessageDate"
           ]
         },
         {
-          "id": "b309",
+          "id": "b304",
           "at": "internal/filterv2/conversations.gen.go:1095",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LastExternalMessageDate.After != nil",
+          "cond": "in.DevOid|in.Filter.LastExternalMessageDate.After != nil",
           "predicate_paths": [
             "in.Filter.LastExternalMessageDate.After"
           ]
         },
         {
-          "id": "b310",
+          "id": "b305",
           "at": "internal/filterv2/conversations.gen.go:1102",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LastExternalMessageDate.Before != nil",
+          "cond": "in.DevOid|in.Filter.LastExternalMessageDate.Before != nil",
           "predicate_paths": [
             "in.Filter.LastExternalMessageDate.Before"
           ]
         },
         {
-          "id": "b311",
+          "id": "b306",
           "at": "internal/filterv2/conversations.gen.go:1109",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LastExternalMessageDate.DatePreset != nil",
+          "cond": "in.DevOid|in.Filter.LastExternalMessageDate.DatePreset != nil",
           "predicate_paths": [
             "in.Filter.LastExternalMessageDate.DatePreset"
           ]
         },
         {
-          "id": "b312",
+          "id": "b307",
           "at": "internal/filterv2/conversations.gen.go:1110",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LastExternalMessageDate.After != nil",
+          "cond": "in.DevOid|in.Filter.LastExternalMessageDate.After != nil",
           "predicate_paths": [
             "in.Filter.LastExternalMessageDate.After"
           ]
         },
         {
-          "id": "b314",
+          "id": "b309",
           "at": "internal/filterv2/conversations.gen.go:1110",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LastExternalMessageDate.Before != nil",
+          "cond": "in.DevOid|in.Filter.LastExternalMessageDate.Before != nil",
           "predicate_paths": [
             "in.Filter.LastExternalMessageDate.Before"
           ]
         },
         {
-          "id": "b315",
+          "id": "b310",
           "at": "internal/filterv2/conversations.gen.go:1254",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LinksOp == 3",
+          "cond": "in.DevOid|in.Filter.LinksOp == 3",
+          "predicate_paths": [
+            "in.Filter.LinksOp"
+          ]
+        },
+        {
+          "id": "b311",
+          "at": "internal/filterv2/conversations.gen.go:1297",
+          "cond": "in.DevOid|in.Filter.LinksOp == 4",
+          "predicate_paths": [
+            "in.Filter.LinksOp"
+          ]
+        },
+        {
+          "id": "b312",
+          "at": "internal/filterv2/conversations.gen.go:1267",
+          "cond": "in.DevOid|in.Filter.LinksOp == 2",
+          "predicate_paths": [
+            "in.Filter.LinksOp"
+          ]
+        },
+        {
+          "id": "b313",
+          "at": "internal/filterv2/conversations.gen.go:1277",
+          "cond": "in.DevOid|in.Filter.LinksOp == 4",
+          "predicate_paths": [
+            "in.Filter.LinksOp"
+          ]
+        },
+        {
+          "id": "b314",
+          "at": "internal/filterv2/conversations.gen.go:1299",
+          "cond": "in.DevOid|in.Filter.LinksOp == 5",
+          "predicate_paths": [
+            "in.Filter.LinksOp"
+          ]
+        },
+        {
+          "id": "b315",
+          "at": "internal/filterv2/conversations.gen.go:1301",
+          "cond": "in.DevOid|in.Filter.LinksOp == 2",
           "predicate_paths": [
             "in.Filter.LinksOp"
           ]
         },
         {
           "id": "b316",
-          "at": "internal/filterv2/conversations.gen.go:1297",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LinksOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:1301",
+          "cond": "in.DevOid|in.Filter.LinksOp == 1",
           "predicate_paths": [
             "in.Filter.LinksOp"
           ]
         },
         {
           "id": "b317",
-          "at": "internal/filterv2/conversations.gen.go:1267",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LinksOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:1301",
+          "cond": "in.DevOid|in.Filter.LinksOp == 3",
           "predicate_paths": [
             "in.Filter.LinksOp"
           ]
         },
         {
           "id": "b318",
-          "at": "internal/filterv2/conversations.gen.go:1277",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LinksOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:1358",
+          "cond": "in.DevOid|in.Filter.SurveysAggregationOp == 3",
           "predicate_paths": [
-            "in.Filter.LinksOp"
+            "in.Filter.SurveysAggregationOp"
           ]
         },
         {
           "id": "b319",
-          "at": "internal/filterv2/conversations.gen.go:1299",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LinksOp == 5",
+          "at": "internal/filterv2/conversations.gen.go:1401",
+          "cond": "in.DevOid|in.Filter.SurveysAggregationOp == 4",
           "predicate_paths": [
-            "in.Filter.LinksOp"
+            "in.Filter.SurveysAggregationOp"
           ]
         },
         {
           "id": "b320",
-          "at": "internal/filterv2/conversations.gen.go:1301",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LinksOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:1371",
+          "cond": "in.DevOid|in.Filter.SurveysAggregationOp == 2",
           "predicate_paths": [
-            "in.Filter.LinksOp"
+            "in.Filter.SurveysAggregationOp"
           ]
         },
         {
           "id": "b321",
-          "at": "internal/filterv2/conversations.gen.go:1301",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LinksOp == 1",
+          "at": "internal/filterv2/conversations.gen.go:1381",
+          "cond": "in.DevOid|in.Filter.SurveysAggregationOp == 4",
           "predicate_paths": [
-            "in.Filter.LinksOp"
+            "in.Filter.SurveysAggregationOp"
           ]
         },
         {
           "id": "b322",
-          "at": "internal/filterv2/conversations.gen.go:1301",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.LinksOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:1403",
+          "cond": "in.DevOid|in.Filter.SurveysAggregationOp == 5",
           "predicate_paths": [
-            "in.Filter.LinksOp"
+            "in.Filter.SurveysAggregationOp"
           ]
         },
         {
           "id": "b323",
-          "at": "internal/filterv2/conversations.gen.go:1358",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SurveysAggregationOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:1405",
+          "cond": "in.DevOid|in.Filter.SurveysAggregationOp == 2",
           "predicate_paths": [
             "in.Filter.SurveysAggregationOp"
           ]
         },
         {
           "id": "b324",
-          "at": "internal/filterv2/conversations.gen.go:1401",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SurveysAggregationOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:1405",
+          "cond": "in.DevOid|in.Filter.SurveysAggregationOp == 1",
           "predicate_paths": [
             "in.Filter.SurveysAggregationOp"
           ]
         },
         {
           "id": "b325",
-          "at": "internal/filterv2/conversations.gen.go:1371",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SurveysAggregationOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:1405",
+          "cond": "in.DevOid|in.Filter.SurveysAggregationOp == 3",
           "predicate_paths": [
             "in.Filter.SurveysAggregationOp"
           ]
         },
         {
           "id": "b326",
-          "at": "internal/filterv2/conversations.gen.go:1381",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SurveysAggregationOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:1436",
+          "cond": "in.DevOid|in.Filter.SyncMetadataOp == 3",
           "predicate_paths": [
-            "in.Filter.SurveysAggregationOp"
+            "in.Filter.SyncMetadataOp"
           ]
         },
         {
           "id": "b327",
-          "at": "internal/filterv2/conversations.gen.go:1403",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SurveysAggregationOp == 5",
+          "at": "internal/filterv2/conversations.gen.go:1512",
+          "cond": "in.DevOid|in.Filter.SyncMetadataOp == 4",
           "predicate_paths": [
-            "in.Filter.SurveysAggregationOp"
+            "in.Filter.SyncMetadataOp"
           ]
         },
         {
           "id": "b328",
-          "at": "internal/filterv2/conversations.gen.go:1405",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SurveysAggregationOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:1470",
+          "cond": "in.DevOid|in.Filter.SyncMetadataOp == 2",
           "predicate_paths": [
-            "in.Filter.SurveysAggregationOp"
+            "in.Filter.SyncMetadataOp"
           ]
         },
         {
           "id": "b329",
-          "at": "internal/filterv2/conversations.gen.go:1405",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SurveysAggregationOp == 1",
+          "at": "internal/filterv2/conversations.gen.go:1470",
+          "cond": "in.DevOid|in.Filter.SyncMetadataOp == 4",
           "predicate_paths": [
-            "in.Filter.SurveysAggregationOp"
+            "in.Filter.SyncMetadataOp"
           ]
         },
         {
           "id": "b330",
-          "at": "internal/filterv2/conversations.gen.go:1405",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SurveysAggregationOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:1514",
+          "cond": "in.DevOid|in.Filter.SyncMetadataOp == 5",
           "predicate_paths": [
-            "in.Filter.SurveysAggregationOp"
+            "in.Filter.SyncMetadataOp"
           ]
         },
         {
           "id": "b331",
-          "at": "internal/filterv2/conversations.gen.go:1436",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SyncMetadataOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:1516",
+          "cond": "in.DevOid|in.Filter.SyncMetadataOp == 2",
           "predicate_paths": [
             "in.Filter.SyncMetadataOp"
           ]
         },
         {
           "id": "b332",
-          "at": "internal/filterv2/conversations.gen.go:1512",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SyncMetadataOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:1516",
+          "cond": "in.DevOid|in.Filter.SyncMetadataOp == 1",
           "predicate_paths": [
             "in.Filter.SyncMetadataOp"
           ]
         },
         {
           "id": "b333",
-          "at": "internal/filterv2/conversations.gen.go:1470",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SyncMetadataOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:1516",
+          "cond": "in.DevOid|in.Filter.SyncMetadataOp == 3",
           "predicate_paths": [
             "in.Filter.SyncMetadataOp"
           ]
         },
         {
           "id": "b334",
-          "at": "internal/filterv2/conversations.gen.go:1470",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SyncMetadataOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:1610",
+          "cond": "in.DevOid|in.Filter.SentimentOp == 3",
           "predicate_paths": [
-            "in.Filter.SyncMetadataOp"
+            "in.Filter.SentimentOp"
           ]
         },
         {
           "id": "b335",
-          "at": "internal/filterv2/conversations.gen.go:1514",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SyncMetadataOp == 5",
+          "at": "internal/filterv2/conversations.gen.go:1639",
+          "cond": "in.DevOid|in.Filter.SpacesFilter != nil",
           "predicate_paths": [
-            "in.Filter.SyncMetadataOp"
+            "in.Filter.SpacesFilter"
           ]
         },
         {
           "id": "b336",
-          "at": "internal/filterv2/conversations.gen.go:1516",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SyncMetadataOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:1628",
+          "cond": "in.DevOid|in.Filter.SentimentOp == 4",
           "predicate_paths": [
-            "in.Filter.SyncMetadataOp"
+            "in.Filter.SentimentOp"
           ]
         },
         {
           "id": "b337",
-          "at": "internal/filterv2/conversations.gen.go:1516",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SyncMetadataOp == 1",
+          "at": "internal/filterv2/conversations.gen.go:1615",
+          "cond": "in.DevOid|in.Filter.SentimentOp == 2",
           "predicate_paths": [
-            "in.Filter.SyncMetadataOp"
+            "in.Filter.SentimentOp"
           ]
         },
         {
           "id": "b338",
-          "at": "internal/filterv2/conversations.gen.go:1516",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SyncMetadataOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:1615",
+          "cond": "in.DevOid|in.Filter.SentimentOp == 4",
           "predicate_paths": [
-            "in.Filter.SyncMetadataOp"
+            "in.Filter.SentimentOp"
           ]
         },
         {
           "id": "b339",
-          "at": "internal/filterv2/conversations.gen.go:1610",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SentimentOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:1630",
+          "cond": "in.DevOid|in.Filter.SentimentOp == 5",
           "predicate_paths": [
             "in.Filter.SentimentOp"
           ]
         },
         {
           "id": "b340",
-          "at": "internal/filterv2/conversations.gen.go:1639",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SpacesFilter != nil",
+          "at": "internal/filterv2/conversations.gen.go:1632",
+          "cond": "in.DevOid|in.Filter.SentimentOp == 2",
           "predicate_paths": [
-            "in.Filter.SpacesFilter"
+            "in.Filter.SentimentOp"
           ]
         },
         {
           "id": "b341",
-          "at": "internal/filterv2/conversations.gen.go:1628",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SentimentOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:1632",
+          "cond": "in.DevOid|in.Filter.SentimentOp == 1",
           "predicate_paths": [
             "in.Filter.SentimentOp"
           ]
         },
         {
           "id": "b342",
-          "at": "internal/filterv2/conversations.gen.go:1615",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SentimentOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:1632",
+          "cond": "in.DevOid|in.Filter.SentimentOp == 3",
           "predicate_paths": [
             "in.Filter.SentimentOp"
           ]
         },
         {
           "id": "b343",
-          "at": "internal/filterv2/conversations.gen.go:1615",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SentimentOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:1685",
+          "cond": "in.DevOid|in.Filter.SubtypeOp == 4",
           "predicate_paths": [
-            "in.Filter.SentimentOp"
+            "in.Filter.SubtypeOp"
           ]
         },
         {
           "id": "b344",
-          "at": "internal/filterv2/conversations.gen.go:1630",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SentimentOp == 5",
+          "at": "internal/filterv2/conversations.gen.go:1673",
+          "cond": "in.DevOid|in.Filter.SubtypeOp == 3",
           "predicate_paths": [
-            "in.Filter.SentimentOp"
+            "in.Filter.SubtypeOp"
           ]
         },
         {
           "id": "b345",
-          "at": "internal/filterv2/conversations.gen.go:1632",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SentimentOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:1675",
+          "cond": "in.DevOid|in.Filter.SubtypeOp == 4",
           "predicate_paths": [
-            "in.Filter.SentimentOp"
+            "in.Filter.SubtypeOp"
           ]
         },
         {
           "id": "b346",
-          "at": "internal/filterv2/conversations.gen.go:1632",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SentimentOp == 1",
+          "at": "internal/filterv2/conversations.gen.go:1675",
+          "cond": "in.DevOid|in.Filter.SubtypeOp == 2",
           "predicate_paths": [
-            "in.Filter.SentimentOp"
+            "in.Filter.SubtypeOp"
           ]
         },
         {
           "id": "b347",
-          "at": "internal/filterv2/conversations.gen.go:1632",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SentimentOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:1687",
+          "cond": "in.DevOid|in.Filter.SubtypeOp == 5",
           "predicate_paths": [
-            "in.Filter.SentimentOp"
+            "in.Filter.SubtypeOp"
           ]
         },
         {
           "id": "b348",
-          "at": "internal/filterv2/conversations.gen.go:1685",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SubtypeOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:1689",
+          "cond": "in.DevOid|in.Filter.SubtypeOp == 2",
           "predicate_paths": [
             "in.Filter.SubtypeOp"
           ]
         },
         {
           "id": "b349",
-          "at": "internal/filterv2/conversations.gen.go:1673",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SubtypeOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:1689",
+          "cond": "in.DevOid|in.Filter.SubtypeOp == 1",
           "predicate_paths": [
             "in.Filter.SubtypeOp"
           ]
         },
         {
           "id": "b350",
-          "at": "internal/filterv2/conversations.gen.go:1675",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SubtypeOp == 4",
+          "at": "internal/filterv2/conversations.gen.go:1689",
+          "cond": "in.DevOid|in.Filter.SubtypeOp == 3",
           "predicate_paths": [
             "in.Filter.SubtypeOp"
           ]
         },
         {
           "id": "b351",
-          "at": "internal/filterv2/conversations.gen.go:1675",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SubtypeOp == 2",
-          "predicate_paths": [
-            "in.Filter.SubtypeOp"
-          ]
-        },
-        {
-          "id": "b352",
-          "at": "internal/filterv2/conversations.gen.go:1687",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SubtypeOp == 5",
-          "predicate_paths": [
-            "in.Filter.SubtypeOp"
-          ]
-        },
-        {
-          "id": "b353",
-          "at": "internal/filterv2/conversations.gen.go:1689",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SubtypeOp == 2",
-          "predicate_paths": [
-            "in.Filter.SubtypeOp"
-          ]
-        },
-        {
-          "id": "b354",
-          "at": "internal/filterv2/conversations.gen.go:1689",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SubtypeOp == 1",
-          "predicate_paths": [
-            "in.Filter.SubtypeOp"
-          ]
-        },
-        {
-          "id": "b355",
-          "at": "internal/filterv2/conversations.gen.go:1689",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.SubtypeOp == 3",
-          "predicate_paths": [
-            "in.Filter.SubtypeOp"
-          ]
-        },
-        {
-          "id": "b356",
           "at": "internal/filterv2/conversations.gen.go:1730",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter != nil",
+          "cond": "in.DevOid|in.Filter != nil",
           "predicate_paths": [
             "in.Filter"
           ]
         },
         {
-          "id": "b357",
+          "id": "b352",
           "at": "internal/filterv2/conversations.gen.go:1719",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AppsOp == 4",
+          "cond": "in.DevOid|in.Filter.AppsOp == 4",
+          "predicate_paths": [
+            "in.Filter.AppsOp"
+          ]
+        },
+        {
+          "id": "b353",
+          "at": "internal/filterv2/conversations.gen.go:1706",
+          "cond": "in.DevOid|in.Filter.AppsOp == 3",
+          "predicate_paths": [
+            "in.Filter.AppsOp"
+          ]
+        },
+        {
+          "id": "b354",
+          "at": "internal/filterv2/conversations.gen.go:1708",
+          "cond": "in.DevOid|in.Filter.AppsOp == 2",
+          "predicate_paths": [
+            "in.Filter.AppsOp"
+          ]
+        },
+        {
+          "id": "b355",
+          "at": "internal/filterv2/conversations.gen.go:1710",
+          "cond": "in.DevOid|in.Filter.AppsOp == 4",
+          "predicate_paths": [
+            "in.Filter.AppsOp"
+          ]
+        },
+        {
+          "id": "b356",
+          "at": "internal/filterv2/conversations.gen.go:1721",
+          "cond": "in.DevOid|in.Filter.AppsOp == 5",
+          "predicate_paths": [
+            "in.Filter.AppsOp"
+          ]
+        },
+        {
+          "id": "b357",
+          "at": "internal/filterv2/conversations.gen.go:1723",
+          "cond": "in.DevOid|in.Filter.AppsOp == 2",
           "predicate_paths": [
             "in.Filter.AppsOp"
           ]
         },
         {
           "id": "b358",
-          "at": "internal/filterv2/conversations.gen.go:1706",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AppsOp == 3",
+          "at": "internal/filterv2/conversations.gen.go:1723",
+          "cond": "in.DevOid|in.Filter.AppsOp == 1",
           "predicate_paths": [
             "in.Filter.AppsOp"
           ]
         },
         {
           "id": "b359",
-          "at": "internal/filterv2/conversations.gen.go:1708",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AppsOp == 2",
+          "at": "internal/filterv2/conversations.gen.go:1723",
+          "cond": "in.DevOid|in.Filter.AppsOp == 3",
           "predicate_paths": [
             "in.Filter.AppsOp"
           ]
         },
         {
           "id": "b360",
-          "at": "internal/filterv2/conversations.gen.go:1710",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AppsOp == 4",
+          "at": "internal/dql/dql_converter.go:85",
+          "cond": "in.DevOid|in.DqlQuery == nil",
           "predicate_paths": [
-            "in.Filter.AppsOp"
+            "in.DqlQuery"
           ]
         },
         {
           "id": "b361",
-          "at": "internal/filterv2/conversations.gen.go:1721",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AppsOp == 5",
+          "at": "internal/dql/dql_converter.go:57",
+          "cond": "in.DevOid|in.DqlQuery == nil",
           "predicate_paths": [
-            "in.Filter.AppsOp"
+            "in.DqlQuery"
           ]
         },
         {
           "id": "b362",
-          "at": "internal/filterv2/conversations.gen.go:1723",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AppsOp == 2",
+          "at": "internal/serverv2/list_conversations.go:104",
+          "cond": "in.DevOid|in.Filter != nil",
           "predicate_paths": [
-            "in.Filter.AppsOp"
+            "in.Filter"
           ]
         },
         {
           "id": "b363",
-          "at": "internal/filterv2/conversations.gen.go:1723",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AppsOp == 1",
+          "at": "internal/serverv2/list_conversations.go:120",
+          "cond": "in.DevOid|in.Filter != nil",
           "predicate_paths": [
-            "in.Filter.AppsOp"
+            "in.Filter"
           ]
         },
         {
           "id": "b364",
-          "at": "internal/filterv2/conversations.gen.go:1723",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter.AppsOp == 3",
-          "predicate_paths": [
-            "in.Filter.AppsOp"
-          ]
-        },
-        {
-          "id": "b365",
-          "at": "internal/dql/dql_converter.go:85",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery == nil",
-          "predicate_paths": [
-            "in.DqlQuery"
-          ]
-        },
-        {
-          "id": "b366",
-          "at": "internal/dql/dql_converter.go:57",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery == nil",
-          "predicate_paths": [
-            "in.DqlQuery"
-          ]
-        },
-        {
-          "id": "b367",
-          "at": "internal/serverv2/list_conversations.go:104",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter != nil",
-          "predicate_paths": [
-            "in.Filter"
-          ]
-        },
-        {
-          "id": "b368",
-          "at": "internal/serverv2/list_conversations.go:120",
-          "cond": "in.DevOid|in.DevOid.Partition|in.Filter != nil",
-          "predicate_paths": [
-            "in.Filter"
-          ]
-        },
-        {
-          "id": "b369",
           "at": "internal/serverv2/list_conversations.go:128",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery != nil",
+          "cond": "in.DevOid|in.DqlQuery != nil",
           "predicate_paths": [
             "in.DqlQuery"
           ]
@@ -3278,8 +3235,7 @@
         "target": "GetSortBy",
         "via_paths": [
           "in",
-          "in.DevOid",
-          "in.DevOid.Partition"
+          "in.DevOid"
         ],
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/db/list_item_helpers.go:104"
       },
@@ -3288,8 +3244,7 @@
         "target": "GetSortBy",
         "via_paths": [
           "in",
-          "in.DevOid",
-          "in.DevOid.Partition"
+          "in.DevOid"
         ],
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/db/list_item_helpers.go:107"
       },
@@ -3298,8 +3253,7 @@
         "target": "GetSortBy",
         "via_paths": [
           "in",
-          "in.DevOid",
-          "in.DevOid.Partition"
+          "in.DevOid"
         ],
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/db/list_item_helpers.go:108"
       },
@@ -3308,8 +3262,7 @@
         "target": "GetPage",
         "via_paths": [
           "in",
-          "in.DevOid",
-          "in.DevOid.Partition"
+          "in.DevOid"
         ],
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/db/list_item_helpers.go:115"
       },
@@ -3318,8 +3271,7 @@
         "target": "GetPage",
         "via_paths": [
           "in",
-          "in.DevOid",
-          "in.DevOid.Partition"
+          "in.DevOid"
         ],
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/db/list_item_helpers.go:118"
       },
@@ -3328,8 +3280,7 @@
         "target": "GetPerPage",
         "via_paths": [
           "in",
-          "in.DevOid",
-          "in.DevOid.Partition"
+          "in.DevOid"
         ],
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/db/list_item_helpers.go:124"
       },
@@ -3338,8 +3289,7 @@
         "target": "GetPage",
         "via_paths": [
           "in",
-          "in.DevOid",
-          "in.DevOid.Partition"
+          "in.DevOid"
         ],
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/db/list_item_helpers.go:121"
       },
@@ -3348,8 +3298,7 @@
         "target": "GetPerPage",
         "via_paths": [
           "in",
-          "in.DevOid",
-          "in.DevOid.Partition"
+          "in.DevOid"
         ],
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/db/list_item_helpers.go:125"
       },
@@ -3358,8 +3307,7 @@
         "target": "GetPerPage",
         "via_paths": [
           "in",
-          "in.DevOid",
-          "in.DevOid.Partition"
+          "in.DevOid"
         ],
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/db/list_item_helpers.go:128"
       },
@@ -3369,7 +3317,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.SkipTotal"
         ],
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/db/list_item_helpers.go:275"
@@ -3380,7 +3327,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.SkipTotal"
         ],
         "at": "internal/common/errors.go:129"
@@ -3391,7 +3337,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.SkipTotal"
         ],
         "at": "internal/common/errors.go:139"
@@ -3402,7 +3347,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.SkipTotal"
         ],
         "at": "internal/common/errors.go:148"
@@ -3413,7 +3357,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.SkipTotal"
         ],
         "at": "internal/common/errors.go:163"
@@ -3424,7 +3367,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.SkipTotal"
         ],
         "at": "internal/common/errors.go:173"
@@ -3435,7 +3377,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.SkipTotal"
         ],
         "at": "internal/common/errors.go:184"
@@ -3446,7 +3387,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.SkipTotal"
         ],
         "at": "internal/common/errors.go:204"
@@ -3457,7 +3397,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.SkipTotal"
         ],
         "at": "internal/common/errors.go:214"
@@ -3522,5 +3461,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListConversations` (HTTP operation `ConversationsCount,ConversationsList,ConversationsListPost,LobbiesList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid.Components\n  - in.DevOid.Partition\n  - in.DevOid.PartitionType\n  - in.DevOid.ServiceType\n  - in.DqlQuery\n  - in.Filter.AccountId\n  - in.Filter.AccountIdOp\n  - in.Filter.ActualCloseDate.After\n  - in.Filter.ActualCloseDate.Before\n  - in.Filter.AiResolutionStatus\n  - in.Filter.AppliesToPartIds\n  - in.Filter.Apps\n  - in.Filter.AppsOp\n  - in.Filter.BrandId\n  - in.Filter.BroadcastChannels\n  - in.Filter.Channels\n  - in.Filter.ChannelsInstances\n  - in.Filter.ChannelsInstancesOp\n  - in.Filter.ConversationType\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CustomFields.Fields\n  - in.Filter.ExternalSourceData\n  - in.Filter.FirstResponseTime.After\n  - in.Filter.FirstResponseTime.Before\n  - in.Filter.Group\n  - in.Filter.HasSpaceId\n  - in.Filter.IsCreatorVerified\n  - in.Filter.IsFrozen\n  - in.Filter.IsSpam\n  - in.Filter.LastExternalMessageDate.After\n  - in.Filter.LastExternalMessageDate.Before\n  - in.Filter.LastMessageTimestamp.After\n  - in.Filter.LastMessageTimestamp.Before\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.MemberIds\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.OwnedByAgentId\n  - in.Filter.OwnedByIds\n  - in.Filter.OwnedByIdsOp\n  - in.Filter.ParticipantOids\n  - in.Filter.ParticipantUids\n  - in.Filter.Priority\n  - in.Filter.Sentiment\n  - in.Filter.SentimentOp\n  - in.Filter.Sessions\n  - in.Filter.SlaId\n  - in.Filter.SlaSummary\n  - in.Filter.SourceChannel\n  - in.Filter.SourceChannelOp\n  - in.Filter.SourceChannelV2\n  - in.Filter.SourceChannelV2Instance\n  - (+17 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid.Partition != \"\"\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.ChannelsInstancesOp != nil\n  - in.Filter.SourceChannelOp != nil\n  - in.Filter.OwnedByIdsOp != nil\n  - in.Filter.AccountIdOp != nil\n  - in.Filter.TagsOp != nil\n  - in.Filter.LinksOp != nil\n  - in.Filter.SurveysAggregationOp != nil\n  - in.Filter.SyncMetadataOp != nil\n  - in.Filter.SentimentOp != nil\n  - in.Filter.SubtypeOp != nil\n  - in.Filter.AppsOp != nil\n  - in.DevOid == nil\n  - in.DevOid|in.DevOid.Partition\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Page >= 0\n  - in.PerPage >= 0\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid|in.DevOid.Partition != objType\n  - in.Filter.CustomFields == nil\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 5\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 1\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - (+317 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestoparts` -> suggestions ['in.Filter.AppliesToPartIds']\n  - test field `messages` -> suggestions []\n  - test field `stagename` -> suggestions ['in.Filter.Stage']\n  - test field `title` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListConversations` (HTTP operation `ConversationsCount,ConversationsList,ConversationsListPost,LobbiesList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.DqlQuery\n  - in.Filter.AccountId\n  - in.Filter.AccountIdOp\n  - in.Filter.ActualCloseDate.After\n  - in.Filter.ActualCloseDate.Before\n  - in.Filter.AiResolutionStatus\n  - in.Filter.AppliesToPartIds\n  - in.Filter.Apps\n  - in.Filter.AppsOp\n  - in.Filter.BrandId\n  - in.Filter.BroadcastChannels\n  - in.Filter.Channels\n  - in.Filter.ChannelsInstances\n  - in.Filter.ChannelsInstancesOp\n  - in.Filter.ConversationType\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CustomFields.Fields\n  - in.Filter.ExternalSourceData\n  - in.Filter.FirstResponseTime.After\n  - in.Filter.FirstResponseTime.Before\n  - in.Filter.Group\n  - in.Filter.HasSpaceId\n  - in.Filter.IsCreatorVerified\n  - in.Filter.IsFrozen\n  - in.Filter.IsSpam\n  - in.Filter.LastExternalMessageDate.After\n  - in.Filter.LastExternalMessageDate.Before\n  - in.Filter.LastMessageTimestamp.After\n  - in.Filter.LastMessageTimestamp.Before\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.MemberIds\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.OwnedByAgentId\n  - in.Filter.OwnedByIds\n  - in.Filter.OwnedByIdsOp\n  - in.Filter.ParticipantOids\n  - in.Filter.ParticipantUids\n  - in.Filter.Priority\n  - in.Filter.Sentiment\n  - in.Filter.SentimentOp\n  - in.Filter.Sessions\n  - in.Filter.SlaId\n  - in.Filter.SlaSummary\n  - in.Filter.SourceChannel\n  - in.Filter.SourceChannelOp\n  - in.Filter.SourceChannelV2\n  - in.Filter.SourceChannelV2Instance\n  - in.Filter.SpacesFilter\n  - in.Filter.StagedInfo\n  - in.Filter.State\n  - (+14 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.ChannelsInstancesOp != nil\n  - in.Filter.SourceChannelOp != nil\n  - in.Filter.OwnedByIdsOp != nil\n  - in.Filter.AccountIdOp != nil\n  - in.Filter.TagsOp != nil\n  - in.Filter.LinksOp != nil\n  - in.Filter.SurveysAggregationOp != nil\n  - in.Filter.SyncMetadataOp != nil\n  - in.Filter.SentimentOp != nil\n  - in.Filter.SubtypeOp != nil\n  - in.Filter.AppsOp != nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Page >= 0\n  - in.PerPage >= 0\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n  - in.Filter.CustomFields == nil\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 5\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 1\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.ModifiedDate != nil\n  - (+312 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestoparts` -> suggestions ['in.Filter.AppliesToPartIds']\n  - test field `messages` -> suggestions []\n  - test field `stagename` -> suggestions ['in.Filter.Stage']\n  - test field `title` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

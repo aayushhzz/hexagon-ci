@@ -32,20 +32,20 @@
       "coverage_pct": 22.2
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 8,
-      "covered_count": 0,
-      "coverage_pct": 0,
+      "leaf_fields_read_by_rpc": 2,
+      "covered_count": 2,
+      "coverage_pct": 100,
       "request_fields_set_by_tests": 2,
-      "set_by_positive_tests": 0,
-      "set_by_negative_tests": 0,
+      "set_by_positive_tests": 2,
+      "set_by_negative_tests": 2,
       "by_depth": {
         "top_level": {
-          "total": 0,
-          "set": 0,
-          "pct": 0
+          "total": 2,
+          "set": 2,
+          "pct": 100
         },
         "nested": {
-          "total": 8,
+          "total": 0,
           "set": 0,
           "pct": 0
         },
@@ -55,30 +55,38 @@
           "pct": 0
         }
       },
-      "covered": null,
-      "gaps": [
-        "in.From.Components",
-        "in.From.Partition",
-        "in.From.PartitionType",
-        "in.From.ServiceType",
-        "in.To.Components",
-        "in.To.Partition",
-        "in.To.PartitionType",
-        "in.To.ServiceType"
-      ]
+      "covered": [
+        {
+          "path": "in.From",
+          "match": "exact",
+          "by_tests": [
+            "Merge Accounts",
+            "Merge Accounts With Wrong Id"
+          ]
+        },
+        {
+          "path": "in.To",
+          "match": "exact",
+          "by_tests": [
+            "Merge Accounts",
+            "Merge Accounts With Wrong Id"
+          ]
+        }
+      ],
+      "gaps": null
     },
     "branches": {
-      "total": 10,
+      "total": 8,
       "happy_path_reached": true,
       "reachable_on_happy_path": 7,
       "present_arm_exercised": 7,
-      "present_arm_pct": 70,
+      "present_arm_pct": 87.5,
       "absent_arm_exercised": 0,
       "absent_arm_pct": 0,
       "negative_arm_exercised": 7,
-      "negative_arm_pct": 70,
+      "negative_arm_pct": 87.5,
       "both_arms_exercised": 0,
-      "coverage_pct": 70,
+      "coverage_pct": 87.5,
       "by_origin": {
         "service": {
           "total": 2,
@@ -99,34 +107,18 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 4,
+          "total": 2,
           "reachable_on_happy_path": 2,
           "present_arm_exercised": 2,
-          "present_arm_pct": 50,
+          "present_arm_pct": 100,
           "negative_arm_exercised": 2,
-          "negative_arm_pct": 50,
+          "negative_arm_pct": 100,
           "absent_arm_exercised": 0
         }
       },
       "gaps": [
         {
-          "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.From.Partition != \"\"",
-          "predicate_paths": [
-            "in.From.Partition"
-          ]
-        },
-        {
-          "id": "b4",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.To.Partition != \"\"",
-          "predicate_paths": [
-            "in.To.Partition"
-          ]
-        },
-        {
-          "id": "b9",
+          "id": "b7",
           "at": "internal/service/account.go:1808",
           "cond": "in != nil",
           "predicate_paths": [
@@ -136,16 +128,7 @@
       ]
     },
     "anomalies": {
-      "unmatched_test_fields": [
-        {
-          "field": "from",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "to",
-          "fuzzy_suggestions": null
-        }
-      ]
+      "unmatched_test_fields": null
     },
     "test_facts": [
       {
@@ -221,5 +204,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MergeAccounts` (HTTP operation `AccountsMerge`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.From.Components\n  - in.From.Partition\n  - in.From.PartitionType\n  - in.From.ServiceType\n  - in.To.Components\n  - in.To.Partition\n  - in.To.PartitionType\n  - in.To.ServiceType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.From.Partition != \"\"\n  - in.To.Partition != \"\"\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `from` -> suggestions []\n  - test field `to` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MergeAccounts` (HTTP operation `AccountsMerge`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - none\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

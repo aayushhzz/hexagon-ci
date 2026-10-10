@@ -11,7 +11,7 @@
       "coverage_pct": 0
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 42,
+      "leaf_fields_read_by_rpc": 24,
       "covered_count": 0,
       "coverage_pct": 0,
       "request_fields_set_by_tests": 0,
@@ -19,17 +19,17 @@
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 4,
+          "total": 5,
           "set": 0,
           "pct": 0
         },
         "nested": {
-          "total": 9,
+          "total": 8,
           "set": 0,
           "pct": 0
         },
         "deep": {
-          "total": 29,
+          "total": 11,
           "set": 0,
           "pct": 0
         }
@@ -39,34 +39,16 @@
         "in.AuthType",
         "in.CreateRevUserIfNotFound",
         "in.IsUnsecureAuthFlow",
-        "in.RevUserDon.Components",
-        "in.RevUserDon.Partition",
-        "in.RevUserDon.PartitionType",
-        "in.RevUserDon.ServiceType",
-        "in.RevUserIdentifier.RevUserDon.Components",
-        "in.RevUserIdentifier.RevUserDon.Partition",
-        "in.RevUserIdentifier.RevUserDon.PartitionType",
-        "in.RevUserIdentifier.RevUserDon.ServiceType",
+        "in.RevUserDon",
+        "in.RevUserIdentifier.RevUserDon",
         "in.RevUserRef",
-        "in.UpsertRevUserArgs.AccountDon.Components",
-        "in.UpsertRevUserArgs.AccountDon.Partition",
-        "in.UpsertRevUserArgs.AccountDon.PartitionType",
-        "in.UpsertRevUserArgs.AccountDon.ServiceType",
-        "in.UpsertRevUserArgs.AccountIdentifier.AccountDon.Components",
-        "in.UpsertRevUserArgs.AccountIdentifier.AccountDon.Partition",
-        "in.UpsertRevUserArgs.AccountIdentifier.AccountDon.PartitionType",
-        "in.UpsertRevUserArgs.AccountIdentifier.AccountDon.ServiceType",
+        "in.UpsertRevUserArgs.AccountDon",
+        "in.UpsertRevUserArgs.AccountIdentifier.AccountDon",
         "in.UpsertRevUserArgs.AccountRef",
         "in.UpsertRevUserArgs.AccountTraits.CustomSchemaSpec.Drop",
         "in.UpsertRevUserArgs.FlowType",
-        "in.UpsertRevUserArgs.RevOrgDon.Components",
-        "in.UpsertRevUserArgs.RevOrgDon.Partition",
-        "in.UpsertRevUserArgs.RevOrgDon.PartitionType",
-        "in.UpsertRevUserArgs.RevOrgDon.ServiceType",
-        "in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon.Components",
-        "in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon.Partition",
-        "in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon.PartitionType",
-        "in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon.ServiceType",
+        "in.UpsertRevUserArgs.RevOrgDon",
+        "in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon",
         "in.UpsertRevUserArgs.RevOrgRef",
         "in.UpsertRevUserArgs.RevOrgRefIssuer",
         "in.UpsertRevUserArgs.RevOrgTraits.CustomSchemaSpec.Drop",
@@ -81,7 +63,7 @@
       ]
     },
     "branches": {
-      "total": 87,
+      "total": 81,
       "happy_path_reached": false,
       "reachable_on_happy_path": 21,
       "present_arm_exercised": 0,
@@ -112,7 +94,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 12,
+          "total": 6,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -132,14 +114,6 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.RevUserIdentifier.RevUserDon.Partition != \"\"",
-          "predicate_paths": [
-            "in.RevUserIdentifier.RevUserDon.Partition"
-          ]
-        },
-        {
-          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
           "cond": "in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon == nil",
           "predicate_paths": [
@@ -147,15 +121,7 @@
           ]
         },
         {
-          "id": "b4",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon.Partition != \"\"",
-          "predicate_paths": [
-            "in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon.Partition"
-          ]
-        },
-        {
-          "id": "b5",
+          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
           "cond": "in.UpsertRevUserArgs.AccountIdentifier.AccountDon == nil",
           "predicate_paths": [
@@ -163,15 +129,7 @@
           ]
         },
         {
-          "id": "b6",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.UpsertRevUserArgs.AccountIdentifier.AccountDon.Partition != \"\"",
-          "predicate_paths": [
-            "in.UpsertRevUserArgs.AccountIdentifier.AccountDon.Partition"
-          ]
-        },
-        {
-          "id": "b7",
+          "id": "b4",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:246",
           "cond": "in.UpsertRevUserArgs.RevUserTraits.CustomSchemaSpec.Drop != nil",
           "predicate_paths": [
@@ -179,7 +137,7 @@
           ]
         },
         {
-          "id": "b8",
+          "id": "b5",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:247",
           "cond": "in.UpsertRevUserArgs.RevUserTraits.CustomSchemaSpec.Drop != nil",
           "predicate_paths": [
@@ -187,7 +145,7 @@
           ]
         },
         {
-          "id": "b9",
+          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2496",
           "cond": "in.UpsertRevUserArgs.RevUserTraits.CustomSchemaSpec != nil",
           "predicate_paths": [
@@ -195,7 +153,7 @@
           ]
         },
         {
-          "id": "b10",
+          "id": "b7",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2497",
           "cond": "in.UpsertRevUserArgs.RevUserTraits.CustomSchemaSpec != nil",
           "predicate_paths": [
@@ -203,7 +161,7 @@
           ]
         },
         {
-          "id": "b11",
+          "id": "b8",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:246",
           "cond": "in.UpsertRevUserArgs.RevOrgTraits.CustomSchemaSpec.Drop != nil",
           "predicate_paths": [
@@ -211,7 +169,7 @@
           ]
         },
         {
-          "id": "b12",
+          "id": "b9",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:247",
           "cond": "in.UpsertRevUserArgs.RevOrgTraits.CustomSchemaSpec.Drop != nil",
           "predicate_paths": [
@@ -219,7 +177,7 @@
           ]
         },
         {
-          "id": "b13",
+          "id": "b10",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2504",
           "cond": "in.UpsertRevUserArgs.RevOrgTraits.CustomSchemaSpec != nil",
           "predicate_paths": [
@@ -227,7 +185,7 @@
           ]
         },
         {
-          "id": "b14",
+          "id": "b11",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2505",
           "cond": "in.UpsertRevUserArgs.RevOrgTraits.CustomSchemaSpec != nil",
           "predicate_paths": [
@@ -235,7 +193,7 @@
           ]
         },
         {
-          "id": "b15",
+          "id": "b12",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:246",
           "cond": "in.UpsertRevUserArgs.AccountTraits.CustomSchemaSpec.Drop != nil",
           "predicate_paths": [
@@ -243,7 +201,7 @@
           ]
         },
         {
-          "id": "b16",
+          "id": "b13",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:247",
           "cond": "in.UpsertRevUserArgs.AccountTraits.CustomSchemaSpec.Drop != nil",
           "predicate_paths": [
@@ -251,7 +209,7 @@
           ]
         },
         {
-          "id": "b17",
+          "id": "b14",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2512",
           "cond": "in.UpsertRevUserArgs.AccountTraits.CustomSchemaSpec != nil",
           "predicate_paths": [
@@ -259,7 +217,7 @@
           ]
         },
         {
-          "id": "b18",
+          "id": "b15",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2513",
           "cond": "in.UpsertRevUserArgs.AccountTraits.CustomSchemaSpec != nil",
           "predicate_paths": [
@@ -267,7 +225,7 @@
           ]
         },
         {
-          "id": "b19",
+          "id": "b16",
           "at": "",
           "cond": "in.UpsertRevUserArgs.RevOrgIdentifier",
           "predicate_paths": [
@@ -275,7 +233,7 @@
           ]
         },
         {
-          "id": "b20",
+          "id": "b17",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2522",
           "cond": "in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon != nil",
           "predicate_paths": [
@@ -283,7 +241,7 @@
           ]
         },
         {
-          "id": "b21",
+          "id": "b18",
           "at": "",
           "cond": "in.UpsertRevUserArgs.AccountIdentifier",
           "predicate_paths": [
@@ -291,15 +249,15 @@
           ]
         },
         {
-          "id": "b22",
+          "id": "b19",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2527",
-          "cond": "in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon|in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon.Partition",
+          "cond": "in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon",
           "predicate_paths": [
             "in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon"
           ]
         },
         {
-          "id": "b23",
+          "id": "b20",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2534",
           "cond": "in.UpsertRevUserArgs.AccountIdentifier.AccountDon != nil",
           "predicate_paths": [
@@ -307,7 +265,7 @@
           ]
         },
         {
-          "id": "b24",
+          "id": "b21",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2544",
           "cond": "in.UpsertRevUserArgs.RevUserTraits != nil",
           "predicate_paths": [
@@ -315,15 +273,15 @@
           ]
         },
         {
-          "id": "b25",
+          "id": "b22",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2539",
-          "cond": "in.UpsertRevUserArgs.AccountIdentifier.AccountDon|in.UpsertRevUserArgs.AccountIdentifier.AccountDon.Partition",
+          "cond": "in.UpsertRevUserArgs.AccountIdentifier.AccountDon",
           "predicate_paths": [
             "in.UpsertRevUserArgs.AccountIdentifier.AccountDon"
           ]
         },
         {
-          "id": "b26",
+          "id": "b23",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2545",
           "cond": "in.UpsertRevUserArgs.RevUserTraits != nil",
           "predicate_paths": [
@@ -331,7 +289,7 @@
           ]
         },
         {
-          "id": "b27",
+          "id": "b24",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2549",
           "cond": "in.UpsertRevUserArgs.RevOrgTraits != nil",
           "predicate_paths": [
@@ -339,7 +297,7 @@
           ]
         },
         {
-          "id": "b28",
+          "id": "b25",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2550",
           "cond": "in.UpsertRevUserArgs.RevOrgTraits != nil",
           "predicate_paths": [
@@ -347,7 +305,7 @@
           ]
         },
         {
-          "id": "b29",
+          "id": "b26",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2554",
           "cond": "in.UpsertRevUserArgs.AccountTraits != nil",
           "predicate_paths": [
@@ -355,7 +313,7 @@
           ]
         },
         {
-          "id": "b30",
+          "id": "b27",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2555",
           "cond": "in.UpsertRevUserArgs.AccountTraits != nil",
           "predicate_paths": [
@@ -363,7 +321,7 @@
           ]
         },
         {
-          "id": "b31",
+          "id": "b28",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2559",
           "cond": "in.UpsertRevUserArgs.FlowType != nil",
           "predicate_paths": [
@@ -371,7 +329,7 @@
           ]
         },
         {
-          "id": "b32",
+          "id": "b29",
           "at": "",
           "cond": "in.RevUserIdentifier",
           "predicate_paths": [
@@ -379,7 +337,7 @@
           ]
         },
         {
-          "id": "b33",
+          "id": "b30",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2569",
           "cond": "in.RevUserIdentifier.RevUserDon != nil",
           "predicate_paths": [
@@ -387,7 +345,7 @@
           ]
         },
         {
-          "id": "b34",
+          "id": "b31",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2579",
           "cond": "in.UpsertRevUserArgs != nil",
           "predicate_paths": [
@@ -395,15 +353,15 @@
           ]
         },
         {
-          "id": "b35",
+          "id": "b32",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2574",
-          "cond": "in.RevUserIdentifier.RevUserDon|in.RevUserIdentifier.RevUserDon.Partition",
+          "cond": "in.RevUserIdentifier.RevUserDon",
           "predicate_paths": [
             "in.RevUserIdentifier.RevUserDon"
           ]
         },
         {
-          "id": "b36",
+          "id": "b33",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2580",
           "cond": "in.UpsertRevUserArgs != nil",
           "predicate_paths": [
@@ -411,7 +369,7 @@
           ]
         },
         {
-          "id": "b37",
+          "id": "b34",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
           "cond": "in.UpsertRevUserArgs.RevOrgDon == nil",
           "predicate_paths": [
@@ -419,15 +377,7 @@
           ]
         },
         {
-          "id": "b38",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.UpsertRevUserArgs.RevOrgDon.Partition != \"\"",
-          "predicate_paths": [
-            "in.UpsertRevUserArgs.RevOrgDon.Partition"
-          ]
-        },
-        {
-          "id": "b39",
+          "id": "b35",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
           "cond": "in.UpsertRevUserArgs.AccountDon == nil",
           "predicate_paths": [
@@ -435,15 +385,7 @@
           ]
         },
         {
-          "id": "b40",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.UpsertRevUserArgs.AccountDon.Partition != \"\"",
-          "predicate_paths": [
-            "in.UpsertRevUserArgs.AccountDon.Partition"
-          ]
-        },
-        {
-          "id": "b41",
+          "id": "b36",
           "at": "internal/service/revuser_upsert.go:43",
           "cond": "in.UpsertRevUserArgs.RevOrgIdentifier != nil",
           "predicate_paths": [
@@ -451,7 +393,7 @@
           ]
         },
         {
-          "id": "b42",
+          "id": "b37",
           "at": "internal/service/revuser_upsert.go:48",
           "cond": "in.UpsertRevUserArgs.RevOrgRef != \"\"",
           "predicate_paths": [
@@ -459,7 +401,7 @@
           ]
         },
         {
-          "id": "b43",
+          "id": "b38",
           "at": "internal/service/revuser_upsert.go:64",
           "cond": "in.UpsertRevUserArgs.AccountIdentifier != nil",
           "predicate_paths": [
@@ -467,7 +409,7 @@
           ]
         },
         {
-          "id": "b44",
+          "id": "b39",
           "at": "internal/service/revuser_upsert.go:50",
           "cond": "in.UpsertRevUserArgs.RevOrgRefIssuer != \"\"",
           "predicate_paths": [
@@ -475,7 +417,7 @@
           ]
         },
         {
-          "id": "b45",
+          "id": "b40",
           "at": "internal/service/revuser_upsert.go:54",
           "cond": "in.UpsertRevUserArgs.RevOrgDon != nil",
           "predicate_paths": [
@@ -483,7 +425,7 @@
           ]
         },
         {
-          "id": "b46",
+          "id": "b41",
           "at": "internal/service/revuser_upsert.go:66",
           "cond": "in.UpsertRevUserArgs.AccountRef != \"\"",
           "predicate_paths": [
@@ -491,7 +433,7 @@
           ]
         },
         {
-          "id": "b47",
+          "id": "b42",
           "at": "internal/service/revuser_upsert.go:69",
           "cond": "in.UpsertRevUserArgs.AccountDon != nil",
           "predicate_paths": [
@@ -499,7 +441,7 @@
           ]
         },
         {
-          "id": "b48",
+          "id": "b43",
           "at": "internal/service/revuser_upsert.go:648",
           "cond": "in != nil",
           "predicate_paths": [
@@ -507,7 +449,7 @@
           ]
         },
         {
-          "id": "b49",
+          "id": "b44",
           "at": "internal/service/revuser_upsert.go:653",
           "cond": "in.IsUnsecureAuthFlow",
           "predicate_paths": [
@@ -515,7 +457,7 @@
           ]
         },
         {
-          "id": "b50",
+          "id": "b45",
           "at": "internal/service/revuser_upsert.go:680",
           "cond": "in.UpsertRevUserArgs.RevUserRefIssuer == \"devrev:platform:devu\"",
           "predicate_paths": [
@@ -523,7 +465,7 @@
           ]
         },
         {
-          "id": "b51",
+          "id": "b46",
           "at": "internal/service/revuser_upsert.go:695",
           "cond": "in.UpsertRevUserArgs.RevOrgRef != \"\"",
           "predicate_paths": [
@@ -531,7 +473,7 @@
           ]
         },
         {
-          "id": "b52",
+          "id": "b47",
           "at": "internal/service/revuser_upsert.go:681",
           "cond": "in.UpsertRevUserArgs.RevOrgRefIssuer == \"devrev:platform\"",
           "predicate_paths": [
@@ -539,7 +481,7 @@
           ]
         },
         {
-          "id": "b53",
+          "id": "b48",
           "at": "internal/service/revuser_upsert.go:707",
           "cond": "in.UpsertRevUserArgs.RevOrgRef != *ObjectTypeDevOrg",
           "predicate_paths": [
@@ -547,7 +489,7 @@
           ]
         },
         {
-          "id": "b54",
+          "id": "b49",
           "at": "internal/service/revuser_upsert.go:722",
           "cond": "in.AuthType == 2",
           "predicate_paths": [
@@ -555,7 +497,7 @@
           ]
         },
         {
-          "id": "b55",
+          "id": "b50",
           "at": "internal/service/revuser_upsert.go:724",
           "cond": "in.CreateRevUserIfNotFound",
           "predicate_paths": [
@@ -563,7 +505,7 @@
           ]
         },
         {
-          "id": "b56",
+          "id": "b51",
           "at": "internal/service/revuser_upsert.go:727",
           "cond": "in.RevUserDon == nil",
           "predicate_paths": [
@@ -571,7 +513,7 @@
           ]
         },
         {
-          "id": "b57",
+          "id": "b52",
           "at": "internal/service/revuser_upsert.go:730",
           "cond": "in.IsUnsecureAuthFlow",
           "predicate_paths": [
@@ -579,7 +521,7 @@
           ]
         },
         {
-          "id": "b58",
+          "id": "b53",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
           "cond": "in.RevUserDon == nil",
           "predicate_paths": [
@@ -587,15 +529,7 @@
           ]
         },
         {
-          "id": "b59",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.RevUserDon.Partition != \"\"",
-          "predicate_paths": [
-            "in.RevUserDon.Partition"
-          ]
-        },
-        {
-          "id": "b60",
+          "id": "b54",
           "at": "internal/service/revuser_upsert.go:87",
           "cond": "in.RevUserIdentifier == nil",
           "predicate_paths": [
@@ -603,7 +537,7 @@
           ]
         },
         {
-          "id": "b61",
+          "id": "b55",
           "at": "internal/service/revuser_upsert.go:100",
           "cond": "in.RevUserRef != \"\"",
           "predicate_paths": [
@@ -611,7 +545,7 @@
           ]
         },
         {
-          "id": "b62",
+          "id": "b56",
           "at": "internal/service/revuser_upsert.go:109",
           "cond": "in.RevUserDon != nil",
           "predicate_paths": [
@@ -619,7 +553,7 @@
           ]
         },
         {
-          "id": "b63",
+          "id": "b57",
           "at": "internal/service/revuser_upsert.go:1000",
           "cond": "in.IsUnsecureAuthFlow",
           "predicate_paths": [
@@ -627,7 +561,7 @@
           ]
         },
         {
-          "id": "b64",
+          "id": "b58",
           "at": "internal/service/revuser_upsert.go:942",
           "cond": "in.AuthType != 2",
           "predicate_paths": [
@@ -635,7 +569,7 @@
           ]
         },
         {
-          "id": "b65",
+          "id": "b59",
           "at": "internal/service/revuser_upsert.go:1030",
           "cond": "in.UpsertRevUserArgs == nil",
           "predicate_paths": [
@@ -643,7 +577,7 @@
           ]
         },
         {
-          "id": "b66",
+          "id": "b60",
           "at": "internal/service/revuser_upsert.go:1083",
           "cond": "in.RevUserRef == *ObjectTypeDevUser",
           "predicate_paths": [
@@ -651,7 +585,7 @@
           ]
         },
         {
-          "id": "b67",
+          "id": "b61",
           "at": "internal/service/revuser_upsert.go:420",
           "cond": "in.AuthType == 2",
           "predicate_paths": [
@@ -659,7 +593,7 @@
           ]
         },
         {
-          "id": "b68",
+          "id": "b62",
           "at": "internal/service/revuser_upsert.go:419",
           "cond": "in.IsUnsecureAuthFlow",
           "predicate_paths": [
@@ -667,7 +601,7 @@
           ]
         },
         {
-          "id": "b69",
+          "id": "b63",
           "at": "internal/service/revuser_upsert.go:500",
           "cond": "in.CreateRevUserIfNotFound",
           "predicate_paths": [
@@ -675,7 +609,7 @@
           ]
         },
         {
-          "id": "b70",
+          "id": "b64",
           "at": "internal/service/revuser_upsert.go:560",
           "cond": "in.UpsertRevUserArgs.RevUserRefIssuer == \"devrev:platform:devu\"",
           "predicate_paths": [
@@ -683,7 +617,7 @@
           ]
         },
         {
-          "id": "b71",
+          "id": "b65",
           "at": "internal/service/revuser_upsert.go:563",
           "cond": "in.UpsertRevUserArgs.RevUserRefIssuer != \"\"",
           "predicate_paths": [
@@ -691,7 +625,7 @@
           ]
         },
         {
-          "id": "b72",
+          "id": "b66",
           "at": "internal/service/revuser_upsert.go:566",
           "cond": "in.UpsertRevUserArgs.RevUserTraits == nil",
           "predicate_paths": [
@@ -699,7 +633,7 @@
           ]
         },
         {
-          "id": "b73",
+          "id": "b67",
           "at": "internal/service/revuser_upsert.go:752",
           "cond": "in.CreateRevUserIfNotFound",
           "predicate_paths": [
@@ -707,7 +641,7 @@
           ]
         },
         {
-          "id": "b74",
+          "id": "b68",
           "at": "internal/service/revuser_upsert.go:189",
           "cond": "in.CreateRevUserIfNotFound",
           "predicate_paths": [
@@ -715,7 +649,7 @@
           ]
         },
         {
-          "id": "b75",
+          "id": "b69",
           "at": "internal/service/revuser_upsert.go:899",
           "cond": "in.UpsertRevUserArgs.RevUserTraits == nil",
           "predicate_paths": [
@@ -723,7 +657,7 @@
           ]
         },
         {
-          "id": "b76",
+          "id": "b70",
           "at": "internal/service/revuser_upsert.go:905",
           "cond": "in.UpsertRevUserArgs.RevUserTraits.DisplayName != nil",
           "predicate_paths": [
@@ -731,7 +665,7 @@
           ]
         },
         {
-          "id": "b77",
+          "id": "b71",
           "at": "internal/service/revuser_upsert.go:909",
           "cond": "in.UpsertRevUserArgs.RevUserTraits.Email != nil",
           "predicate_paths": [
@@ -739,7 +673,7 @@
           ]
         },
         {
-          "id": "b78",
+          "id": "b72",
           "at": "internal/service/revuser_upsert.go:905",
           "cond": "api.RevUser).GetDisplayName() != in.UpsertRevUserArgs.RevUserTraits.DisplayName",
           "predicate_paths": [
@@ -747,7 +681,7 @@
           ]
         },
         {
-          "id": "b79",
+          "id": "b73",
           "at": "internal/service/revuser_upsert.go:913",
           "cond": "in.UpsertRevUserArgs.RevUserTraits.FullName != nil",
           "predicate_paths": [
@@ -755,7 +689,7 @@
           ]
         },
         {
-          "id": "b80",
+          "id": "b74",
           "at": "internal/service/revuser_upsert.go:909",
           "cond": "api.RevUser).GetEmail() != in.UpsertRevUserArgs.RevUserTraits.Email",
           "predicate_paths": [
@@ -763,7 +697,7 @@
           ]
         },
         {
-          "id": "b81",
+          "id": "b75",
           "at": "internal/service/revuser_upsert.go:917",
           "cond": "in.UpsertRevUserArgs.RevUserTraits.Description != nil",
           "predicate_paths": [
@@ -771,7 +705,7 @@
           ]
         },
         {
-          "id": "b82",
+          "id": "b76",
           "at": "internal/service/revuser_upsert.go:913",
           "cond": "api.RevUser).GetFullName() != in.UpsertRevUserArgs.RevUserTraits.FullName",
           "predicate_paths": [
@@ -779,7 +713,7 @@
           ]
         },
         {
-          "id": "b83",
+          "id": "b77",
           "at": "internal/service/revuser_upsert.go:921",
           "cond": "in.UpsertRevUserArgs.RevUserTraits.PhoneNumbers != nil",
           "predicate_paths": [
@@ -787,7 +721,7 @@
           ]
         },
         {
-          "id": "b84",
+          "id": "b78",
           "at": "internal/service/revuser_upsert.go:917",
           "cond": "api.RevUser).GetDescription() != in.UpsertRevUserArgs.RevUserTraits.Description",
           "predicate_paths": [
@@ -795,7 +729,7 @@
           ]
         },
         {
-          "id": "b85",
+          "id": "b79",
           "at": "internal/service/revuser_upsert.go:925",
           "cond": "in.UpsertRevUserArgs.RevUserTraits.CustomFields != nil",
           "predicate_paths": [
@@ -803,7 +737,7 @@
           ]
         },
         {
-          "id": "b86",
+          "id": "b80",
           "at": "internal/service/revuser_upsert.go:921",
           "cond": "in.UpsertRevUserArgs.RevUserTraits.PhoneNumbers",
           "predicate_paths": [
@@ -811,7 +745,7 @@
           ]
         },
         {
-          "id": "b87",
+          "id": "b81",
           "at": "internal/service/revuser_upsert.go:163",
           "cond": "in.UpsertRevUserArgs.RevUserTraits != nil",
           "predicate_paths": [
@@ -928,5 +862,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpsertRevUser` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AuthType\n  - in.CreateRevUserIfNotFound\n  - in.IsUnsecureAuthFlow\n  - in.RevUserDon.Components\n  - in.RevUserDon.Partition\n  - in.RevUserDon.PartitionType\n  - in.RevUserDon.ServiceType\n  - in.RevUserIdentifier.RevUserDon.Components\n  - in.RevUserIdentifier.RevUserDon.Partition\n  - in.RevUserIdentifier.RevUserDon.PartitionType\n  - in.RevUserIdentifier.RevUserDon.ServiceType\n  - in.RevUserRef\n  - in.UpsertRevUserArgs.AccountDon.Components\n  - in.UpsertRevUserArgs.AccountDon.Partition\n  - in.UpsertRevUserArgs.AccountDon.PartitionType\n  - in.UpsertRevUserArgs.AccountDon.ServiceType\n  - in.UpsertRevUserArgs.AccountIdentifier.AccountDon.Components\n  - in.UpsertRevUserArgs.AccountIdentifier.AccountDon.Partition\n  - in.UpsertRevUserArgs.AccountIdentifier.AccountDon.PartitionType\n  - in.UpsertRevUserArgs.AccountIdentifier.AccountDon.ServiceType\n  - in.UpsertRevUserArgs.AccountRef\n  - in.UpsertRevUserArgs.AccountTraits.CustomSchemaSpec.Drop\n  - in.UpsertRevUserArgs.FlowType\n  - in.UpsertRevUserArgs.RevOrgDon.Components\n  - in.UpsertRevUserArgs.RevOrgDon.Partition\n  - in.UpsertRevUserArgs.RevOrgDon.PartitionType\n  - in.UpsertRevUserArgs.RevOrgDon.ServiceType\n  - in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon.Components\n  - in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon.Partition\n  - in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon.PartitionType\n  - in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon.ServiceType\n  - in.UpsertRevUserArgs.RevOrgRef\n  - in.UpsertRevUserArgs.RevOrgRefIssuer\n  - in.UpsertRevUserArgs.RevOrgTraits.CustomSchemaSpec.Drop\n  - in.UpsertRevUserArgs.RevUserRefIssuer\n  - in.UpsertRevUserArgs.RevUserTraits.CustomFields\n  - in.UpsertRevUserArgs.RevUserTraits.CustomSchemaSpec.Drop\n  - in.UpsertRevUserArgs.RevUserTraits.Description\n  - in.UpsertRevUserArgs.RevUserTraits.DisplayName\n  - in.UpsertRevUserArgs.RevUserTraits.Email\n  - in.UpsertRevUserArgs.RevUserTraits.FullName\n  - in.UpsertRevUserArgs.RevUserTraits.PhoneNumbers\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.RevUserIdentifier.RevUserDon == nil\n  - in.RevUserIdentifier.RevUserDon.Partition != \"\"\n  - in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon == nil\n  - in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon.Partition != \"\"\n  - in.UpsertRevUserArgs.AccountIdentifier.AccountDon == nil\n  - in.UpsertRevUserArgs.AccountIdentifier.AccountDon.Partition != \"\"\n  - in.UpsertRevUserArgs.RevUserTraits.CustomSchemaSpec.Drop != nil\n  - in.UpsertRevUserArgs.RevUserTraits.CustomSchemaSpec.Drop != nil\n  - in.UpsertRevUserArgs.RevUserTraits.CustomSchemaSpec != nil\n  - in.UpsertRevUserArgs.RevUserTraits.CustomSchemaSpec != nil\n  - in.UpsertRevUserArgs.RevOrgTraits.CustomSchemaSpec.Drop != nil\n  - in.UpsertRevUserArgs.RevOrgTraits.CustomSchemaSpec.Drop != nil\n  - in.UpsertRevUserArgs.RevOrgTraits.CustomSchemaSpec != nil\n  - in.UpsertRevUserArgs.RevOrgTraits.CustomSchemaSpec != nil\n  - in.UpsertRevUserArgs.AccountTraits.CustomSchemaSpec.Drop != nil\n  - in.UpsertRevUserArgs.AccountTraits.CustomSchemaSpec.Drop != nil\n  - in.UpsertRevUserArgs.AccountTraits.CustomSchemaSpec != nil\n  - in.UpsertRevUserArgs.AccountTraits.CustomSchemaSpec != nil\n  - in.UpsertRevUserArgs.RevOrgIdentifier\n  - in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon != nil\n  - in.UpsertRevUserArgs.AccountIdentifier\n  - in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon|in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon.Partition\n  - in.UpsertRevUserArgs.AccountIdentifier.AccountDon != nil\n  - in.UpsertRevUserArgs.RevUserTraits != nil\n  - in.UpsertRevUserArgs.AccountIdentifier.AccountDon|in.UpsertRevUserArgs.AccountIdentifier.AccountDon.Partition\n  - in.UpsertRevUserArgs.RevUserTraits != nil\n  - in.UpsertRevUserArgs.RevOrgTraits != nil\n  - in.UpsertRevUserArgs.RevOrgTraits != nil\n  - in.UpsertRevUserArgs.AccountTraits != nil\n  - in.UpsertRevUserArgs.AccountTraits != nil\n  - in.UpsertRevUserArgs.FlowType != nil\n  - in.RevUserIdentifier\n  - in.RevUserIdentifier.RevUserDon != nil\n  - in.UpsertRevUserArgs != nil\n  - in.RevUserIdentifier.RevUserDon|in.RevUserIdentifier.RevUserDon.Partition\n  - in.UpsertRevUserArgs != nil\n  - in.UpsertRevUserArgs.RevOrgDon == nil\n  - in.UpsertRevUserArgs.RevOrgDon.Partition != \"\"\n  - in.UpsertRevUserArgs.AccountDon == nil\n  - in.UpsertRevUserArgs.AccountDon.Partition != \"\"\n  - (+47 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errAccountNotFound\n  - errEmailAlreadyExists\n  - errInvalidInputEmail\n  - errInvalidRevOrgFilter\n  - errPhoneNumberInvalid\n  - errRevOrgNotFound\n  - errRevUserAlreadyExists\n  - errRevUserEmailUpdateForbidden\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpsertRevUser` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AuthType\n  - in.CreateRevUserIfNotFound\n  - in.IsUnsecureAuthFlow\n  - in.RevUserDon\n  - in.RevUserIdentifier.RevUserDon\n  - in.RevUserRef\n  - in.UpsertRevUserArgs.AccountDon\n  - in.UpsertRevUserArgs.AccountIdentifier.AccountDon\n  - in.UpsertRevUserArgs.AccountRef\n  - in.UpsertRevUserArgs.AccountTraits.CustomSchemaSpec.Drop\n  - in.UpsertRevUserArgs.FlowType\n  - in.UpsertRevUserArgs.RevOrgDon\n  - in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon\n  - in.UpsertRevUserArgs.RevOrgRef\n  - in.UpsertRevUserArgs.RevOrgRefIssuer\n  - in.UpsertRevUserArgs.RevOrgTraits.CustomSchemaSpec.Drop\n  - in.UpsertRevUserArgs.RevUserRefIssuer\n  - in.UpsertRevUserArgs.RevUserTraits.CustomFields\n  - in.UpsertRevUserArgs.RevUserTraits.CustomSchemaSpec.Drop\n  - in.UpsertRevUserArgs.RevUserTraits.Description\n  - in.UpsertRevUserArgs.RevUserTraits.DisplayName\n  - in.UpsertRevUserArgs.RevUserTraits.Email\n  - in.UpsertRevUserArgs.RevUserTraits.FullName\n  - in.UpsertRevUserArgs.RevUserTraits.PhoneNumbers\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.RevUserIdentifier.RevUserDon == nil\n  - in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon == nil\n  - in.UpsertRevUserArgs.AccountIdentifier.AccountDon == nil\n  - in.UpsertRevUserArgs.RevUserTraits.CustomSchemaSpec.Drop != nil\n  - in.UpsertRevUserArgs.RevUserTraits.CustomSchemaSpec.Drop != nil\n  - in.UpsertRevUserArgs.RevUserTraits.CustomSchemaSpec != nil\n  - in.UpsertRevUserArgs.RevUserTraits.CustomSchemaSpec != nil\n  - in.UpsertRevUserArgs.RevOrgTraits.CustomSchemaSpec.Drop != nil\n  - in.UpsertRevUserArgs.RevOrgTraits.CustomSchemaSpec.Drop != nil\n  - in.UpsertRevUserArgs.RevOrgTraits.CustomSchemaSpec != nil\n  - in.UpsertRevUserArgs.RevOrgTraits.CustomSchemaSpec != nil\n  - in.UpsertRevUserArgs.AccountTraits.CustomSchemaSpec.Drop != nil\n  - in.UpsertRevUserArgs.AccountTraits.CustomSchemaSpec.Drop != nil\n  - in.UpsertRevUserArgs.AccountTraits.CustomSchemaSpec != nil\n  - in.UpsertRevUserArgs.AccountTraits.CustomSchemaSpec != nil\n  - in.UpsertRevUserArgs.RevOrgIdentifier\n  - in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon != nil\n  - in.UpsertRevUserArgs.AccountIdentifier\n  - in.UpsertRevUserArgs.RevOrgIdentifier.RevOrgDon\n  - in.UpsertRevUserArgs.AccountIdentifier.AccountDon != nil\n  - in.UpsertRevUserArgs.RevUserTraits != nil\n  - in.UpsertRevUserArgs.AccountIdentifier.AccountDon\n  - in.UpsertRevUserArgs.RevUserTraits != nil\n  - in.UpsertRevUserArgs.RevOrgTraits != nil\n  - in.UpsertRevUserArgs.RevOrgTraits != nil\n  - in.UpsertRevUserArgs.AccountTraits != nil\n  - in.UpsertRevUserArgs.AccountTraits != nil\n  - in.UpsertRevUserArgs.FlowType != nil\n  - in.RevUserIdentifier\n  - in.RevUserIdentifier.RevUserDon != nil\n  - in.UpsertRevUserArgs != nil\n  - in.RevUserIdentifier.RevUserDon\n  - in.UpsertRevUserArgs != nil\n  - in.UpsertRevUserArgs.RevOrgDon == nil\n  - in.UpsertRevUserArgs.AccountDon == nil\n  - in.UpsertRevUserArgs.RevOrgIdentifier != nil\n  - in.UpsertRevUserArgs.RevOrgRef != \"\"\n  - in.UpsertRevUserArgs.AccountIdentifier != nil\n  - in.UpsertRevUserArgs.RevOrgRefIssuer != \"\"\n  - in.UpsertRevUserArgs.RevOrgDon != nil\n  - (+41 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errAccountNotFound\n  - errEmailAlreadyExists\n  - errInvalidInputEmail\n  - errInvalidRevOrgFilter\n  - errPhoneNumberInvalid\n  - errRevOrgNotFound\n  - errRevUserAlreadyExists\n  - errRevUserEmailUpdateForbidden\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -32,20 +32,20 @@
       "coverage_pct": 22.2
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 9,
-      "covered_count": 0,
-      "coverage_pct": 0,
+      "leaf_fields_read_by_rpc": 3,
+      "covered_count": 1,
+      "coverage_pct": 33.3,
       "request_fields_set_by_tests": 4,
-      "set_by_positive_tests": 0,
-      "set_by_negative_tests": 0,
+      "set_by_positive_tests": 1,
+      "set_by_negative_tests": 1,
       "by_depth": {
         "top_level": {
-          "total": 1,
-          "set": 0,
-          "pct": 0
+          "total": 3,
+          "set": 1,
+          "pct": 33.3
         },
         "nested": {
-          "total": 8,
+          "total": 0,
           "set": 0,
           "pct": 0
         },
@@ -55,31 +55,34 @@
           "pct": 0
         }
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.Id",
+          "match": "exact",
+          "by_tests": [
+            "Successfully deleted vista group item",
+            "Successfully moved items between vista groups",
+            "Successfully retrieved vista group item"
+          ]
+        }
+      ],
       "gaps": [
-        "in.DevOid.Components",
-        "in.DevOid.Partition",
-        "in.DevOid.PartitionType",
-        "in.DevOid.ServiceType",
-        "in.Id.Components",
-        "in.Id.Partition",
-        "in.Id.PartitionType",
-        "in.Id.ServiceType",
+        "in.DevOid",
         "in.UpdateCache"
       ]
     },
     "branches": {
-      "total": 17,
+      "total": 15,
       "happy_path_reached": true,
       "reachable_on_happy_path": 14,
       "present_arm_exercised": 9,
-      "present_arm_pct": 52.9,
+      "present_arm_pct": 60,
       "absent_arm_exercised": 5,
       "absent_arm_pct": 35.7,
       "negative_arm_exercised": 9,
-      "negative_arm_pct": 52.9,
+      "negative_arm_pct": 60,
       "both_arms_exercised": 0,
-      "coverage_pct": 52.9,
+      "coverage_pct": 60,
       "by_origin": {
         "service": {
           "total": 6,
@@ -100,12 +103,12 @@
           "absent_arm_exercised": 2
         },
         "library": {
-          "total": 7,
+          "total": 5,
           "reachable_on_happy_path": 5,
           "present_arm_exercised": 4,
-          "present_arm_pct": 57.1,
+          "present_arm_pct": 80,
           "negative_arm_exercised": 4,
-          "negative_arm_pct": 57.1,
+          "negative_arm_pct": 80,
           "absent_arm_exercised": 1
         }
       },
@@ -119,23 +122,7 @@
           ]
         },
         {
-          "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.DevOid.Partition != \"\"",
-          "predicate_paths": [
-            "in.DevOid.Partition"
-          ]
-        },
-        {
-          "id": "b4",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.Id.Partition != \"\"",
-          "predicate_paths": [
-            "in.Id.Partition"
-          ]
-        },
-        {
-          "id": "b5",
+          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:951",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
@@ -143,15 +130,15 @@
           ]
         },
         {
-          "id": "b6",
+          "id": "b4",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:958",
-          "cond": "in.DevOid|in.DevOid.Partition",
+          "cond": "in.DevOid",
           "predicate_paths": [
             "in.DevOid"
           ]
         },
         {
-          "id": "b9",
+          "id": "b7",
           "at": "internal/serverv2/get_vista_group_item.go:20",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
@@ -159,7 +146,7 @@
           ]
         },
         {
-          "id": "b10",
+          "id": "b8",
           "at": "internal/serverv2/get_vista_group_item.go:23",
           "cond": "in != nil",
           "predicate_paths": [
@@ -167,7 +154,7 @@
           ]
         },
         {
-          "id": "b17",
+          "id": "b15",
           "at": "internal/serverv2/get_vista_group_item.go:65",
           "cond": "in.UpdateCache",
           "predicate_paths": [
@@ -178,10 +165,6 @@
     },
     "anomalies": {
       "unmatched_test_fields": [
-        {
-          "field": "id",
-          "fuzzy_suggestions": null
-        },
         {
           "field": "items",
           "fuzzy_suggestions": null
@@ -248,8 +231,7 @@
         "kind": "rpc",
         "target": "TryLock",
         "via_paths": [
-          "in.Id",
-          "in.Id.Partition"
+          "in.Id"
         ],
         "at": "internal/serverv2/crud.go:334"
       }
@@ -263,5 +245,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetVistaGroupItem` (HTTP operation `VistasGroupsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid.Components\n  - in.DevOid.Partition\n  - in.DevOid.PartitionType\n  - in.DevOid.ServiceType\n  - in.Id.Components\n  - in.Id.Partition\n  - in.Id.PartitionType\n  - in.Id.ServiceType\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid.Partition != \"\"\n  - in.Id.Partition != \"\"\n  - in.DevOid == nil\n  - in.DevOid|in.DevOid.Partition\n  - in.DevOid == nil\n  - in != nil\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n  - test field `items` -> suggestions []\n  - test field `source` -> suggestions []\n  - test field `target` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetVistaGroupItem` (HTTP operation `VistasGroupsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in != nil\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `items` -> suggestions []\n  - test field `source` -> suggestions []\n  - test field `target` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

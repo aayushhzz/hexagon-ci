@@ -11,7 +11,7 @@
       "coverage_pct": 0
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 4,
+      "leaf_fields_read_by_rpc": 1,
       "covered_count": 0,
       "coverage_pct": 0,
       "request_fields_set_by_tests": 0,
@@ -19,12 +19,12 @@
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 0,
+          "total": 1,
           "set": 0,
           "pct": 0
         },
         "nested": {
-          "total": 4,
+          "total": 0,
           "set": 0,
           "pct": 0
         },
@@ -36,14 +36,11 @@
       },
       "covered": null,
       "gaps": [
-        "in.RevOrgId.Components",
-        "in.RevOrgId.Partition",
-        "in.RevOrgId.PartitionType",
-        "in.RevOrgId.ServiceType"
+        "in.RevOrgId"
       ]
     },
     "branches": {
-      "total": 5,
+      "total": 4,
       "happy_path_reached": false,
       "reachable_on_happy_path": 3,
       "present_arm_exercised": 0,
@@ -74,7 +71,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 2,
+          "total": 1,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -94,14 +91,6 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.RevOrgId.Partition != \"\"",
-          "predicate_paths": [
-            "in.RevOrgId.Partition"
-          ]
-        },
-        {
-          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1177",
           "cond": "in.RevOrgId == nil",
           "predicate_paths": [
@@ -109,15 +98,15 @@
           ]
         },
         {
-          "id": "b4",
+          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1184",
-          "cond": "in.RevOrgId|in.RevOrgId.Partition",
+          "cond": "in.RevOrgId",
           "predicate_paths": [
             "in.RevOrgId"
           ]
         },
         {
-          "id": "b5",
+          "id": "b4",
           "at": "internal/service/revorg.go:2051",
           "cond": "in != nil",
           "predicate_paths": [
@@ -151,5 +140,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UnarchiveRevOrg` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.RevOrgId.Components\n  - in.RevOrgId.Partition\n  - in.RevOrgId.PartitionType\n  - in.RevOrgId.ServiceType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.RevOrgId == nil\n  - in.RevOrgId.Partition != \"\"\n  - in.RevOrgId == nil\n  - in.RevOrgId|in.RevOrgId.Partition\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errRevOrgNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UnarchiveRevOrg` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.RevOrgId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.RevOrgId == nil\n  - in.RevOrgId == nil\n  - in.RevOrgId\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errRevOrgNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

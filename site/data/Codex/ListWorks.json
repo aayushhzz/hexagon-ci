@@ -15,22 +15,22 @@
       "coverage_pct": 0
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 139,
+      "leaf_fields_read_by_rpc": 133,
       "covered_count": 1,
-      "coverage_pct": 0.7,
+      "coverage_pct": 0.8,
       "request_fields_set_by_tests": 12,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 10,
+          "total": 12,
           "set": 0,
           "pct": 0
         },
         "nested": {
-          "total": 43,
+          "total": 35,
           "set": 1,
-          "pct": 2.3
+          "pct": 2.9
         },
         "deep": {
           "total": 86,
@@ -55,10 +55,7 @@
         "in.CustomFilter.IssueFilters",
         "in.CustomFilter.TaskFilters",
         "in.CustomFilter.TicketFilters",
-        "in.DevOid.Components",
-        "in.DevOid.Partition",
-        "in.DevOid.PartitionType",
-        "in.DevOid.ServiceType",
+        "in.DevOid",
         "in.DqlQuery.SearchExpression",
         "in.DqlQuery.SearchQuery",
         "in.ExcludeWorkIds",
@@ -186,14 +183,11 @@
         "in.SearchQuery",
         "in.SkipTotal",
         "in.SortBy",
-        "in.VistaId.Components",
-        "in.VistaId.Partition",
-        "in.VistaId.PartitionType",
-        "in.VistaId.ServiceType"
+        "in.VistaId"
       ]
     },
     "branches": {
-      "total": 192,
+      "total": 187,
       "happy_path_reached": true,
       "reachable_on_happy_path": 58,
       "present_arm_exercised": 0,
@@ -224,7 +218,7 @@
           "absent_arm_exercised": 18
         },
         "library": {
-          "total": 10,
+          "total": 5,
           "reachable_on_happy_path": 5,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -268,14 +262,6 @@
         },
         {
           "id": "b5",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.DevOid.Partition|in.SortBy != \"\"",
-          "predicate_paths": [
-            "in.DevOid.Partition"
-          ]
-        },
-        {
-          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6482",
           "cond": "in.Filter.TicketFilter.AppliesToPartIdOp|in.SortBy != nil",
           "predicate_paths": [
@@ -283,7 +269,7 @@
           ]
         },
         {
-          "id": "b7",
+          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6501",
           "cond": "in.Filter.TicketFilter.RevOidOp|in.SortBy != nil",
           "predicate_paths": [
@@ -291,7 +277,7 @@
           ]
         },
         {
-          "id": "b8",
+          "id": "b7",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6513",
           "cond": "in.Filter.TicketFilter.AccountIdOp|in.SortBy != nil",
           "predicate_paths": [
@@ -299,7 +285,7 @@
           ]
         },
         {
-          "id": "b9",
+          "id": "b8",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6530",
           "cond": "in.Filter.TicketFilter.GroupOp|in.SortBy != nil",
           "predicate_paths": [
@@ -307,7 +293,7 @@
           ]
         },
         {
-          "id": "b10",
+          "id": "b9",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6554",
           "cond": "in.Filter.TicketFilter.ChannelsOp|in.SortBy != nil",
           "predicate_paths": [
@@ -315,7 +301,7 @@
           ]
         },
         {
-          "id": "b11",
+          "id": "b10",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6566",
           "cond": "in.Filter.TicketFilter.ChannelsV2Op|in.SortBy != nil",
           "predicate_paths": [
@@ -323,7 +309,7 @@
           ]
         },
         {
-          "id": "b12",
+          "id": "b11",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6578",
           "cond": "in.Filter.TicketFilter.ChannelsV2InstancesOp|in.SortBy != nil",
           "predicate_paths": [
@@ -331,7 +317,7 @@
           ]
         },
         {
-          "id": "b13",
+          "id": "b12",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6597",
           "cond": "in.Filter.TicketFilter.ProjectIdOp|in.SortBy != nil",
           "predicate_paths": [
@@ -339,7 +325,7 @@
           ]
         },
         {
-          "id": "b14",
+          "id": "b13",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6609",
           "cond": "in.Filter.TicketFilter.MilestoneIdOp|in.SortBy != nil",
           "predicate_paths": [
@@ -347,7 +333,7 @@
           ]
         },
         {
-          "id": "b15",
+          "id": "b14",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6635",
           "cond": "in.Filter.TicketFilter.SurveysAggregationOp|in.SortBy != nil",
           "predicate_paths": [
@@ -355,7 +341,7 @@
           ]
         },
         {
-          "id": "b16",
+          "id": "b15",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6640",
           "cond": "in.Filter.TicketFilter.SentimentOp|in.SortBy != nil",
           "predicate_paths": [
@@ -363,7 +349,7 @@
           ]
         },
         {
-          "id": "b17",
+          "id": "b16",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6666",
           "cond": "in.Filter.TicketFilter.SubtypeOp|in.SortBy != nil",
           "predicate_paths": [
@@ -371,7 +357,7 @@
           ]
         },
         {
-          "id": "b18",
+          "id": "b17",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6671",
           "cond": "in.Filter.TicketFilter.AppsOp|in.SortBy != nil",
           "predicate_paths": [
@@ -379,7 +365,7 @@
           ]
         },
         {
-          "id": "b19",
+          "id": "b18",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6686",
           "cond": "in.Filter.IssueFilter.AppliesToPartIdOp|in.SortBy != nil",
           "predicate_paths": [
@@ -387,7 +373,7 @@
           ]
         },
         {
-          "id": "b20",
+          "id": "b19",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6724",
           "cond": "in.Filter.IssueFilter.RevOrgIdsOp|in.SortBy != nil",
           "predicate_paths": [
@@ -395,7 +381,7 @@
           ]
         },
         {
-          "id": "b21",
+          "id": "b20",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6736",
           "cond": "in.Filter.IssueFilter.AccountIdsOp|in.SortBy != nil",
           "predicate_paths": [
@@ -403,7 +389,7 @@
           ]
         },
         {
-          "id": "b22",
+          "id": "b21",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6748",
           "cond": "in.Filter.IssueFilter.SprintIdOp|in.SortBy != nil",
           "predicate_paths": [
@@ -411,7 +397,7 @@
           ]
         },
         {
-          "id": "b23",
+          "id": "b22",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6758",
           "cond": "in.Filter.IssueFilter.SprintStateOp|in.SortBy != nil",
           "predicate_paths": [
@@ -419,7 +405,7 @@
           ]
         },
         {
-          "id": "b24",
+          "id": "b23",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6770",
           "cond": "in.Filter.IssueFilter.ProjectIdOp|in.SortBy != nil",
           "predicate_paths": [
@@ -427,7 +413,7 @@
           ]
         },
         {
-          "id": "b25",
+          "id": "b24",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6782",
           "cond": "in.Filter.IssueFilter.MilestoneIdOp|in.SortBy != nil",
           "predicate_paths": [
@@ -435,7 +421,7 @@
           ]
         },
         {
-          "id": "b26",
+          "id": "b25",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6787",
           "cond": "in.Filter.IssueFilter.TargetStartDateOp|in.SortBy != nil",
           "predicate_paths": [
@@ -443,7 +429,7 @@
           ]
         },
         {
-          "id": "b27",
+          "id": "b26",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6792",
           "cond": "in.Filter.IssueFilter.ActualStartDateOp|in.SortBy != nil",
           "predicate_paths": [
@@ -451,7 +437,7 @@
           ]
         },
         {
-          "id": "b28",
+          "id": "b27",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6797",
           "cond": "in.Filter.IssueFilter.LastCodeActivityOp|in.SortBy != nil",
           "predicate_paths": [
@@ -459,7 +445,7 @@
           ]
         },
         {
-          "id": "b29",
+          "id": "b28",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6823",
           "cond": "in.Filter.IssueFilter.SubtypeOp|in.SortBy != nil",
           "predicate_paths": [
@@ -467,7 +453,7 @@
           ]
         },
         {
-          "id": "b30",
+          "id": "b29",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6828",
           "cond": "in.Filter.IssueFilter.AppsOp|in.SortBy != nil",
           "predicate_paths": [
@@ -475,7 +461,7 @@
           ]
         },
         {
-          "id": "b31",
+          "id": "b30",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6843",
           "cond": "in.Filter.TaskFilter.AppliesToPartIdOp|in.SortBy != nil",
           "predicate_paths": [
@@ -483,7 +469,7 @@
           ]
         },
         {
-          "id": "b32",
+          "id": "b31",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6860",
           "cond": "in.Filter.TaskFilter.SubtypeOp|in.SortBy != nil",
           "predicate_paths": [
@@ -491,7 +477,7 @@
           ]
         },
         {
-          "id": "b33",
+          "id": "b32",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6865",
           "cond": "in.Filter.TaskFilter.AppsOp|in.SortBy != nil",
           "predicate_paths": [
@@ -499,7 +485,7 @@
           ]
         },
         {
-          "id": "b34",
+          "id": "b33",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6880",
           "cond": "in.Filter.OpportunityFilter.AccountIdOp|in.SortBy != nil",
           "predicate_paths": [
@@ -507,7 +493,7 @@
           ]
         },
         {
-          "id": "b35",
+          "id": "b34",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6897",
           "cond": "in.Filter.OpportunityFilter.ContactIdsOp|in.SortBy != nil",
           "predicate_paths": [
@@ -515,7 +501,7 @@
           ]
         },
         {
-          "id": "b36",
+          "id": "b35",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6935",
           "cond": "in.Filter.OpportunityFilter.SubtypeOp|in.SortBy != nil",
           "predicate_paths": [
@@ -523,7 +509,7 @@
           ]
         },
         {
-          "id": "b37",
+          "id": "b36",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6940",
           "cond": "in.Filter.OpportunityFilter.AppsOp|in.SortBy != nil",
           "predicate_paths": [
@@ -531,7 +517,7 @@
           ]
         },
         {
-          "id": "b38",
+          "id": "b37",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6279",
           "cond": "in.Filter.CreatedByIdOp|in.SortBy != nil",
           "predicate_paths": [
@@ -539,7 +525,7 @@
           ]
         },
         {
-          "id": "b39",
+          "id": "b38",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6291",
           "cond": "in.Filter.ModifiedByIdOp|in.SortBy != nil",
           "predicate_paths": [
@@ -547,7 +533,7 @@
           ]
         },
         {
-          "id": "b40",
+          "id": "b39",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6303",
           "cond": "in.Filter.CreatedByAgentIdOp|in.SortBy != nil",
           "predicate_paths": [
@@ -555,7 +541,7 @@
           ]
         },
         {
-          "id": "b41",
+          "id": "b40",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6320",
           "cond": "in.Filter.ReportedByIdsOp|in.SortBy != nil",
           "predicate_paths": [
@@ -563,7 +549,7 @@
           ]
         },
         {
-          "id": "b42",
+          "id": "b41",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6332",
           "cond": "in.Filter.OwnedByIdsOp|in.SortBy != nil",
           "predicate_paths": [
@@ -571,7 +557,7 @@
           ]
         },
         {
-          "id": "b43",
+          "id": "b42",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6337",
           "cond": "in.Filter.TargetCloseDateOp|in.SortBy != nil",
           "predicate_paths": [
@@ -579,7 +565,7 @@
           ]
         },
         {
-          "id": "b44",
+          "id": "b43",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6342",
           "cond": "in.Filter.ActualCloseDateOp|in.SortBy != nil",
           "predicate_paths": [
@@ -587,7 +573,7 @@
           ]
         },
         {
-          "id": "b45",
+          "id": "b44",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6354",
           "cond": "in.Filter.TagsOp|in.SortBy != nil",
           "predicate_paths": [
@@ -595,7 +581,7 @@
           ]
         },
         {
-          "id": "b46",
+          "id": "b45",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6366",
           "cond": "in.Filter.LinksOp|in.SortBy != nil",
           "predicate_paths": [
@@ -603,7 +589,7 @@
           ]
         },
         {
-          "id": "b47",
+          "id": "b46",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6385",
           "cond": "in.Filter.StageOp|in.SortBy != nil",
           "predicate_paths": [
@@ -611,7 +597,7 @@
           ]
         },
         {
-          "id": "b48",
+          "id": "b47",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6397",
           "cond": "in.Filter.SyncMetadataOp|in.SortBy != nil",
           "predicate_paths": [
@@ -619,7 +605,7 @@
           ]
         },
         {
-          "id": "b49",
+          "id": "b48",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6423",
           "cond": "in.Filter.DeprecatedCreatedByAgentIdOp|in.SortBy != nil",
           "predicate_paths": [
@@ -627,7 +613,7 @@
           ]
         },
         {
-          "id": "b50",
+          "id": "b49",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6435",
           "cond": "in.Filter.WorkflowRunIdOp|in.SortBy != nil",
           "predicate_paths": [
@@ -635,7 +621,7 @@
           ]
         },
         {
-          "id": "b51",
+          "id": "b50",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6447",
           "cond": "in.Filter.WorkflowIdOp|in.SortBy != nil",
           "predicate_paths": [
@@ -643,8 +629,16 @@
           ]
         },
         {
-          "id": "b52",
+          "id": "b51",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6452",
+          "cond": "in.Filter.TicketFilter|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.TicketFilter"
+          ]
+        },
+        {
+          "id": "b52",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6453",
           "cond": "in.Filter.TicketFilter|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TicketFilter"
@@ -652,15 +646,15 @@
         },
         {
           "id": "b53",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6453",
-          "cond": "in.Filter.TicketFilter|in.SortBy != nil",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6457",
+          "cond": "in.Filter.IssueFilter|in.SortBy != nil",
           "predicate_paths": [
-            "in.Filter.TicketFilter"
+            "in.Filter.IssueFilter"
           ]
         },
         {
           "id": "b54",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6457",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6458",
           "cond": "in.Filter.IssueFilter|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.IssueFilter"
@@ -668,15 +662,15 @@
         },
         {
           "id": "b55",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6458",
-          "cond": "in.Filter.IssueFilter|in.SortBy != nil",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6462",
+          "cond": "in.Filter.TaskFilter|in.SortBy != nil",
           "predicate_paths": [
-            "in.Filter.IssueFilter"
+            "in.Filter.TaskFilter"
           ]
         },
         {
           "id": "b56",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6462",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6463",
           "cond": "in.Filter.TaskFilter|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TaskFilter"
@@ -684,15 +678,15 @@
         },
         {
           "id": "b57",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6463",
-          "cond": "in.Filter.TaskFilter|in.SortBy != nil",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6467",
+          "cond": "in.Filter.OpportunityFilter|in.SortBy != nil",
           "predicate_paths": [
-            "in.Filter.TaskFilter"
+            "in.Filter.OpportunityFilter"
           ]
         },
         {
           "id": "b58",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6467",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6468",
           "cond": "in.Filter.OpportunityFilter|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.OpportunityFilter"
@@ -700,14 +694,6 @@
         },
         {
           "id": "b59",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6468",
-          "cond": "in.Filter.OpportunityFilter|in.SortBy != nil",
-          "predicate_paths": [
-            "in.Filter.OpportunityFilter"
-          ]
-        },
-        {
-          "id": "b60",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
           "cond": "in.SortBy|in.VistaId == nil",
           "predicate_paths": [
@@ -715,15 +701,7 @@
           ]
         },
         {
-          "id": "b61",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.SortBy|in.VistaId.Partition != \"\"",
-          "predicate_paths": [
-            "in.VistaId.Partition"
-          ]
-        },
-        {
-          "id": "b62",
+          "id": "b60",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:285",
           "cond": "in.CustomFilter.IssueFilters|in.SortBy != nil",
           "predicate_paths": [
@@ -731,7 +709,7 @@
           ]
         },
         {
-          "id": "b63",
+          "id": "b61",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:286",
           "cond": "in.CustomFilter.IssueFilters|in.SortBy != nil",
           "predicate_paths": [
@@ -739,7 +717,7 @@
           ]
         },
         {
-          "id": "b64",
+          "id": "b62",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:290",
           "cond": "in.CustomFilter.TicketFilters|in.SortBy != nil",
           "predicate_paths": [
@@ -747,7 +725,7 @@
           ]
         },
         {
-          "id": "b65",
+          "id": "b63",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:291",
           "cond": "in.CustomFilter.TicketFilters|in.SortBy != nil",
           "predicate_paths": [
@@ -755,7 +733,7 @@
           ]
         },
         {
-          "id": "b66",
+          "id": "b64",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:295",
           "cond": "in.CustomFilter.TaskFilters|in.SortBy != nil",
           "predicate_paths": [
@@ -763,7 +741,7 @@
           ]
         },
         {
-          "id": "b67",
+          "id": "b65",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:296",
           "cond": "in.CustomFilter.TaskFilters|in.SortBy != nil",
           "predicate_paths": [
@@ -771,7 +749,7 @@
           ]
         },
         {
-          "id": "b68",
+          "id": "b66",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:312",
           "cond": "in.DevOid|in.SortBy == nil",
           "predicate_paths": [
@@ -779,15 +757,15 @@
           ]
         },
         {
-          "id": "b69",
+          "id": "b67",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:319",
-          "cond": "in.DevOid|in.DevOid.Partition|in.SortBy",
+          "cond": "in.DevOid|in.SortBy",
           "predicate_paths": [
             "in.DevOid"
           ]
         },
         {
-          "id": "b70",
+          "id": "b68",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:322",
           "cond": "in.Filter|in.SortBy != nil",
           "predicate_paths": [
@@ -795,7 +773,7 @@
           ]
         },
         {
-          "id": "b71",
+          "id": "b69",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:323",
           "cond": "in.Filter|in.SortBy != nil",
           "predicate_paths": [
@@ -803,7 +781,7 @@
           ]
         },
         {
-          "id": "b72",
+          "id": "b70",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:327",
           "cond": "in.Page|in.SortBy >= 0",
           "predicate_paths": [
@@ -811,7 +789,7 @@
           ]
         },
         {
-          "id": "b73",
+          "id": "b71",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:330",
           "cond": "in.PerPage|in.SortBy >= 0",
           "predicate_paths": [
@@ -819,7 +797,7 @@
           ]
         },
         {
-          "id": "b74",
+          "id": "b72",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:355",
           "cond": "in.SortBy|in.VistaId != nil",
           "predicate_paths": [
@@ -827,7 +805,7 @@
           ]
         },
         {
-          "id": "b75",
+          "id": "b73",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:360",
           "cond": "in.CustomFilter|in.SortBy != nil",
           "predicate_paths": [
@@ -835,7 +813,7 @@
           ]
         },
         {
-          "id": "b76",
+          "id": "b74",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:361",
           "cond": "in.CustomFilter|in.SortBy != nil",
           "predicate_paths": [
@@ -843,7 +821,7 @@
           ]
         },
         {
-          "id": "b77",
+          "id": "b75",
           "at": "internal/serverv2/list_works.go:64",
           "cond": "in.DevOid|in.SortBy == nil",
           "predicate_paths": [
@@ -851,7 +829,7 @@
           ]
         },
         {
-          "id": "b78",
+          "id": "b76",
           "at": "internal/serverv2/list_works.go:67",
           "cond": "in|in.SortBy != nil",
           "predicate_paths": [
@@ -859,7 +837,7 @@
           ]
         },
         {
-          "id": "b79",
+          "id": "b77",
           "at": "internal/serverv2/list_works.go:258",
           "cond": "in.Filter|in.SortBy != nil",
           "predicate_paths": [
@@ -867,7 +845,7 @@
           ]
         },
         {
-          "id": "b80",
+          "id": "b78",
           "at": "internal/serverv2/works_helper.go:1572",
           "cond": "in.Filter|in.SortBy == nil",
           "predicate_paths": [
@@ -875,7 +853,7 @@
           ]
         },
         {
-          "id": "b81",
+          "id": "b79",
           "at": "internal/serverv2/works_helper.go:1655",
           "cond": "in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.SearchQuery|in.SortBy",
           "predicate_paths": [
@@ -883,7 +861,7 @@
           ]
         },
         {
-          "id": "b82",
+          "id": "b80",
           "at": "internal/serverv2/works_helper.go:1660",
           "cond": "in.DqlQuery|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.SortBy",
           "predicate_paths": [
@@ -891,7 +869,7 @@
           ]
         },
         {
-          "id": "b83",
+          "id": "b81",
           "at": "internal/serverv2/works_helper.go:1658",
           "cond": "in.DqlQuery|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.SortBy",
           "predicate_paths": [
@@ -899,7 +877,7 @@
           ]
         },
         {
-          "id": "b84",
+          "id": "b82",
           "at": "internal/serverv2/works_helper.go:1656",
           "cond": "in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.SortBy",
           "predicate_paths": [
@@ -907,7 +885,7 @@
           ]
         },
         {
-          "id": "b85",
+          "id": "b83",
           "at": "internal/serverv2/works_helper.go:1617",
           "cond": "in.DqlQuery|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.SortBy == nil",
           "predicate_paths": [
@@ -915,7 +893,7 @@
           ]
         },
         {
-          "id": "b86",
+          "id": "b84",
           "at": "internal/serverv2/works_helper.go:1620",
           "cond": "in.DqlQuery.SearchQuery|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.SortBy != \"\"",
           "predicate_paths": [
@@ -923,7 +901,7 @@
           ]
         },
         {
-          "id": "b87",
+          "id": "b85",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
           "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
           "predicate_paths": [
@@ -931,15 +909,7 @@
           ]
         },
         {
-          "id": "b88",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.Page|in.PerPage|in.SearchQuery|in.SortBy != \"\"",
-          "predicate_paths": [
-            "in.DevOid.Partition"
-          ]
-        },
-        {
-          "id": "b89",
+          "id": "b86",
           "at": "internal/dql/dql_converter.go:85",
           "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
           "predicate_paths": [
@@ -947,7 +917,7 @@
           ]
         },
         {
-          "id": "b90",
+          "id": "b87",
           "at": "internal/dql/dql_converter.go:57",
           "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
           "predicate_paths": [
@@ -955,818 +925,802 @@
           ]
         },
         {
-          "id": "b91",
+          "id": "b88",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
           "predicate_paths": [
             "in.DevOid"
           ]
         },
         {
-          "id": "b92",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != \"\"",
-          "predicate_paths": [
-            "in.DevOid.Partition"
-          ]
-        },
-        {
-          "id": "b93",
+          "id": "b89",
           "at": "internal/serverv2/list_works.go:281",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
           "predicate_paths": [
             "in.SortBy"
           ]
         },
         {
-          "id": "b94",
+          "id": "b90",
           "at": "internal/serverv2/list_works.go:300",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
           "predicate_paths": [
             "in.Filter"
           ]
         },
         {
-          "id": "b95",
+          "id": "b91",
           "at": "internal/serverv2/list_works.go:309",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != 0",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != 0",
           "predicate_paths": [
             "in.Filter.DeprecatedCreatedByAgentIdOp"
           ]
         },
         {
-          "id": "b96",
+          "id": "b92",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6482",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.AppliesToPartIdOp|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.AppliesToPartIdOp|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TicketFilter.AppliesToPartIdOp"
           ]
         },
         {
-          "id": "b97",
+          "id": "b93",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6501",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.RevOidOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.RevOidOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TicketFilter.RevOidOp"
           ]
         },
         {
-          "id": "b98",
+          "id": "b94",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6513",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.AccountIdOp|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.AccountIdOp|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TicketFilter.AccountIdOp"
           ]
         },
         {
-          "id": "b99",
+          "id": "b95",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6530",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.GroupOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.GroupOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TicketFilter.GroupOp"
           ]
         },
         {
-          "id": "b100",
+          "id": "b96",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6554",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.ChannelsOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.ChannelsOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TicketFilter.ChannelsOp"
           ]
         },
         {
-          "id": "b101",
+          "id": "b97",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6566",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.ChannelsV2Op|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.ChannelsV2Op|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TicketFilter.ChannelsV2Op"
           ]
         },
         {
-          "id": "b102",
+          "id": "b98",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6578",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.ChannelsV2InstancesOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.ChannelsV2InstancesOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TicketFilter.ChannelsV2InstancesOp"
           ]
         },
         {
-          "id": "b103",
+          "id": "b99",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6597",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.ProjectIdOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.ProjectIdOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TicketFilter.ProjectIdOp"
           ]
         },
         {
-          "id": "b104",
+          "id": "b100",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6609",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.MilestoneIdOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.MilestoneIdOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TicketFilter.MilestoneIdOp"
           ]
         },
         {
-          "id": "b105",
+          "id": "b101",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6635",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.SurveysAggregationOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.SurveysAggregationOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TicketFilter.SurveysAggregationOp"
           ]
         },
         {
-          "id": "b106",
+          "id": "b102",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6640",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.SentimentOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.SentimentOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TicketFilter.SentimentOp"
           ]
         },
         {
-          "id": "b107",
+          "id": "b103",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6666",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.SubtypeOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.SubtypeOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TicketFilter.SubtypeOp"
           ]
         },
         {
-          "id": "b108",
+          "id": "b104",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6671",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.AppsOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.TicketFilter.AppsOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TicketFilter.AppsOp"
           ]
         },
         {
-          "id": "b109",
+          "id": "b105",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6686",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.AppliesToPartIdOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.AppliesToPartIdOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.IssueFilter.AppliesToPartIdOp"
           ]
         },
         {
-          "id": "b110",
+          "id": "b106",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6724",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.RevOrgIdsOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.RevOrgIdsOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.IssueFilter.RevOrgIdsOp"
           ]
         },
         {
-          "id": "b111",
+          "id": "b107",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6736",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.AccountIdsOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.AccountIdsOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.IssueFilter.AccountIdsOp"
           ]
         },
         {
-          "id": "b112",
+          "id": "b108",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6748",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.SprintIdOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.SprintIdOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.IssueFilter.SprintIdOp"
           ]
         },
         {
-          "id": "b113",
+          "id": "b109",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6758",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.SprintStateOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.SprintStateOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.IssueFilter.SprintStateOp"
           ]
         },
         {
-          "id": "b114",
+          "id": "b110",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6770",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.ProjectIdOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.ProjectIdOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.IssueFilter.ProjectIdOp"
           ]
         },
         {
-          "id": "b115",
+          "id": "b111",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6782",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.MilestoneIdOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.MilestoneIdOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.IssueFilter.MilestoneIdOp"
           ]
         },
         {
-          "id": "b116",
+          "id": "b112",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6787",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.TargetStartDateOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.TargetStartDateOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.IssueFilter.TargetStartDateOp"
           ]
         },
         {
-          "id": "b117",
+          "id": "b113",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6792",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.ActualStartDateOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.ActualStartDateOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.IssueFilter.ActualStartDateOp"
           ]
         },
         {
-          "id": "b118",
+          "id": "b114",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6797",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.LastCodeActivityOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.LastCodeActivityOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.IssueFilter.LastCodeActivityOp"
           ]
         },
         {
-          "id": "b119",
+          "id": "b115",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6823",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.SubtypeOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.SubtypeOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.IssueFilter.SubtypeOp"
           ]
         },
         {
-          "id": "b120",
+          "id": "b116",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6828",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.AppsOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.AppsOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.IssueFilter.AppsOp"
           ]
         },
         {
-          "id": "b121",
+          "id": "b117",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6843",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.AppliesToPartIdOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.AppliesToPartIdOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TaskFilter.AppliesToPartIdOp"
           ]
         },
         {
-          "id": "b122",
+          "id": "b118",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6860",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TaskFilter.SubtypeOp|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TaskFilter.SubtypeOp|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TaskFilter.SubtypeOp"
           ]
         },
         {
-          "id": "b123",
+          "id": "b119",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6865",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TaskFilter.AppsOp|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TaskFilter.AppsOp|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TaskFilter.AppsOp"
           ]
         },
         {
-          "id": "b124",
+          "id": "b120",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6880",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.AccountIdOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.AccountIdOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.OpportunityFilter.AccountIdOp"
           ]
         },
         {
-          "id": "b125",
+          "id": "b121",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6897",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.OpportunityFilter.ContactIdsOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.OpportunityFilter.ContactIdsOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.OpportunityFilter.ContactIdsOp"
           ]
         },
         {
-          "id": "b126",
+          "id": "b122",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6935",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.OpportunityFilter.SubtypeOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.OpportunityFilter.SubtypeOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.OpportunityFilter.SubtypeOp"
           ]
         },
         {
-          "id": "b127",
+          "id": "b123",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6940",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.OpportunityFilter.AppsOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.OpportunityFilter.AppsOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.OpportunityFilter.AppsOp"
           ]
         },
         {
-          "id": "b128",
+          "id": "b124",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6279",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.CreatedByIdOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.CreatedByIdOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.CreatedByIdOp"
           ]
         },
         {
-          "id": "b129",
+          "id": "b125",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6291",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.ModifiedByIdOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.ModifiedByIdOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.ModifiedByIdOp"
           ]
         },
         {
-          "id": "b130",
+          "id": "b126",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6303",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.CreatedByAgentIdOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.CreatedByAgentIdOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.CreatedByAgentIdOp"
           ]
         },
         {
-          "id": "b131",
+          "id": "b127",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6320",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.ReportedByIdsOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.ReportedByIdsOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.ReportedByIdsOp"
           ]
         },
         {
-          "id": "b132",
+          "id": "b128",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6332",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.OwnedByIdsOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.OwnedByIdsOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.OwnedByIdsOp"
           ]
         },
         {
-          "id": "b133",
+          "id": "b129",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6337",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TargetCloseDateOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TargetCloseDateOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TargetCloseDateOp"
           ]
         },
         {
-          "id": "b134",
+          "id": "b130",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6342",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.ActualCloseDateOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.ActualCloseDateOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.ActualCloseDateOp"
           ]
         },
         {
-          "id": "b135",
+          "id": "b131",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6354",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TagsOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TagsOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TagsOp"
           ]
         },
         {
-          "id": "b136",
+          "id": "b132",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6366",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.LinksOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.LinksOp|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.LinksOp"
           ]
         },
         {
-          "id": "b137",
+          "id": "b133",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6385",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.StageOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.StageOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.StageOp"
           ]
         },
         {
-          "id": "b138",
+          "id": "b134",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6397",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.SyncMetadataOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.SyncMetadataOp|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.SyncMetadataOp"
           ]
         },
         {
-          "id": "b139",
+          "id": "b135",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6423",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.DeprecatedCreatedByAgentIdOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.DeprecatedCreatedByAgentIdOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.DeprecatedCreatedByAgentIdOp"
           ]
         },
         {
-          "id": "b140",
+          "id": "b136",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6435",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.WorkflowRunIdOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.WorkflowRunIdOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.WorkflowRunIdOp"
           ]
         },
         {
-          "id": "b141",
+          "id": "b137",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6447",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.WorkflowIdOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.Filter.WorkflowIdOp|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.WorkflowIdOp"
           ]
         },
         {
-          "id": "b142",
+          "id": "b138",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6452",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter.TicketFilter"
+          ]
+        },
+        {
+          "id": "b139",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6453",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.TicketFilter"
+          ]
+        },
+        {
+          "id": "b140",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6457",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.IssueFilter"
+          ]
+        },
+        {
+          "id": "b141",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6458",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.IssueFilter"
+          ]
+        },
+        {
+          "id": "b142",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6462",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.TaskFilter"
           ]
         },
         {
           "id": "b143",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6453",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6463",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
-            "in.Filter.TicketFilter"
+            "in.Filter.TaskFilter"
           ]
         },
         {
           "id": "b144",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6457",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6467",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
-            "in.Filter.IssueFilter"
+            "in.Filter.OpportunityFilter"
           ]
         },
         {
           "id": "b145",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6458",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6468",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
-            "in.Filter.IssueFilter"
+            "in.Filter.OpportunityFilter"
           ]
         },
         {
           "id": "b146",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6462",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
-          "predicate_paths": [
-            "in.Filter.TaskFilter"
-          ]
-        },
-        {
-          "id": "b147",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6463",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
-          "predicate_paths": [
-            "in.Filter.TaskFilter"
-          ]
-        },
-        {
-          "id": "b148",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6467",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
-          "predicate_paths": [
-            "in.Filter.OpportunityFilter"
-          ]
-        },
-        {
-          "id": "b149",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6468",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
-          "predicate_paths": [
-            "in.Filter.OpportunityFilter"
-          ]
-        },
-        {
-          "id": "b150",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy|in.VistaId == nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy|in.VistaId == nil",
           "predicate_paths": [
             "in.VistaId"
           ]
         },
         {
-          "id": "b151",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy|in.VistaId.Partition != \"\"",
+          "id": "b147",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:285",
+          "cond": "in.CustomFilter.IssueFilters|in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
-            "in.VistaId.Partition"
+            "in.CustomFilter.IssueFilters"
+          ]
+        },
+        {
+          "id": "b148",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:286",
+          "cond": "in.CustomFilter.IssueFilters|in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter.IssueFilters"
+          ]
+        },
+        {
+          "id": "b149",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:290",
+          "cond": "in.CustomFilter.TicketFilters|in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter.TicketFilters"
+          ]
+        },
+        {
+          "id": "b150",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:291",
+          "cond": "in.CustomFilter.TicketFilters|in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter.TicketFilters"
+          ]
+        },
+        {
+          "id": "b151",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:295",
+          "cond": "in.CustomFilter.TaskFilters|in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter.TaskFilters"
           ]
         },
         {
           "id": "b152",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:285",
-          "cond": "in.CustomFilter.IssueFilters|in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:296",
+          "cond": "in.CustomFilter.TaskFilters|in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
-            "in.CustomFilter.IssueFilters"
+            "in.CustomFilter.TaskFilters"
           ]
         },
         {
           "id": "b153",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:286",
-          "cond": "in.CustomFilter.IssueFilters|in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:312",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
           "predicate_paths": [
-            "in.CustomFilter.IssueFilters"
+            "in.DevOid"
           ]
         },
         {
           "id": "b154",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:290",
-          "cond": "in.CustomFilter.TicketFilters|in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:319",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy",
           "predicate_paths": [
-            "in.CustomFilter.TicketFilters"
+            "in.DevOid"
           ]
         },
         {
           "id": "b155",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:291",
-          "cond": "in.CustomFilter.TicketFilters|in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:322",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
-            "in.CustomFilter.TicketFilters"
+            "in.Filter"
           ]
         },
         {
           "id": "b156",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:295",
-          "cond": "in.CustomFilter.TaskFilters|in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:323",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
-            "in.CustomFilter.TaskFilters"
+            "in.Filter"
           ]
         },
         {
           "id": "b157",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:296",
-          "cond": "in.CustomFilter.TaskFilters|in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
-          "predicate_paths": [
-            "in.CustomFilter.TaskFilters"
-          ]
-        },
-        {
-          "id": "b158",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:312",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b159",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:319",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b160",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:322",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
-          "predicate_paths": [
-            "in.Filter"
-          ]
-        },
-        {
-          "id": "b161",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:323",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
-          "predicate_paths": [
-            "in.Filter"
-          ]
-        },
-        {
-          "id": "b162",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:327",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy >= 0",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy >= 0",
           "predicate_paths": [
             "in.Page"
           ]
         },
         {
-          "id": "b163",
+          "id": "b158",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:330",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy >= 0",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy >= 0",
           "predicate_paths": [
             "in.PerPage"
           ]
         },
         {
-          "id": "b164",
+          "id": "b159",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:355",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy|in.VistaId != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy|in.VistaId != nil",
           "predicate_paths": [
             "in.VistaId"
           ]
         },
         {
-          "id": "b165",
+          "id": "b160",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:360",
-          "cond": "in.CustomFilter|in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.CustomFilter|in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.CustomFilter"
           ]
         },
         {
-          "id": "b166",
+          "id": "b161",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:361",
-          "cond": "in.CustomFilter|in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.CustomFilter|in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.CustomFilter"
           ]
         },
         {
-          "id": "b167",
+          "id": "b162",
           "at": "internal/serverv2/list_works.go:64",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
           "predicate_paths": [
             "in.DevOid"
           ]
         },
         {
-          "id": "b168",
+          "id": "b163",
           "at": "internal/serverv2/list_works.go:67",
-          "cond": "in|in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in|in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in"
           ]
         },
         {
-          "id": "b169",
+          "id": "b164",
           "at": "internal/serverv2/list_works.go:258",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.Filter"
           ]
         },
         {
-          "id": "b170",
+          "id": "b165",
           "at": "internal/serverv2/works_helper.go:1572",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
           "predicate_paths": [
             "in.Filter"
           ]
         },
         {
-          "id": "b171",
+          "id": "b166",
           "at": "internal/serverv2/works_helper.go:1655",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy",
           "predicate_paths": [
             "in.DqlQuery",
             "in.SearchQuery"
           ]
         },
         {
-          "id": "b172",
+          "id": "b167",
           "at": "internal/serverv2/works_helper.go:1660",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b168",
+          "at": "internal/serverv2/works_helper.go:1658",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b169",
+          "at": "internal/serverv2/works_helper.go:1656",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b170",
+          "at": "internal/serverv2/works_helper.go:1617",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b171",
+          "at": "internal/serverv2/works_helper.go:1620",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != \"\"",
+          "predicate_paths": [
+            "in.DqlQuery.SearchQuery"
+          ]
+        },
+        {
+          "id": "b172",
+          "at": "internal/dql/dql_converter.go:85",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
           "predicate_paths": [
             "in.DqlQuery"
           ]
         },
         {
           "id": "b173",
-          "at": "internal/serverv2/works_helper.go:1658",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy",
+          "at": "internal/dql/dql_converter.go:57",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
           "predicate_paths": [
             "in.DqlQuery"
           ]
         },
         {
           "id": "b174",
-          "at": "internal/serverv2/works_helper.go:1656",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy",
+          "at": "internal/serverv2/list_works.go:405",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != \"\"",
+          "predicate_paths": [
+            "in.SearchQuery"
+          ]
+        },
+        {
+          "id": "b175",
+          "at": "internal/serverv2/list_works.go:401",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
           "predicate_paths": [
             "in.Filter"
           ]
         },
         {
-          "id": "b175",
-          "at": "internal/serverv2/works_helper.go:1617",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
-          "predicate_paths": [
-            "in.DqlQuery"
-          ]
-        },
-        {
           "id": "b176",
-          "at": "internal/serverv2/works_helper.go:1620",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != \"\"",
+          "at": "internal/serverv2/list_works.go:407",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != \"\"",
           "predicate_paths": [
             "in.DqlQuery.SearchQuery"
           ]
         },
         {
           "id": "b177",
-          "at": "internal/dql/dql_converter.go:85",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
+          "at": "internal/serverv2/list_works.go:403",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
             "in.DqlQuery"
           ]
         },
         {
           "id": "b178",
-          "at": "internal/dql/dql_converter.go:57",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
+          "at": "internal/serverv2/list_works.go:432",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy",
           "predicate_paths": [
             "in.DqlQuery"
           ]
         },
         {
           "id": "b179",
-          "at": "internal/serverv2/list_works.go:405",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != \"\"",
+          "at": "internal/serverv2/list_works.go:492",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
           "predicate_paths": [
-            "in.SearchQuery"
+            "in.DqlQuery"
           ]
         },
         {
           "id": "b180",
-          "at": "internal/serverv2/list_works.go:401",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
+          "at": "internal/serverv2/list_works.go:400",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy",
           "predicate_paths": [
             "in.Filter"
           ]
         },
         {
           "id": "b181",
-          "at": "internal/serverv2/list_works.go:407",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != \"\"",
-          "predicate_paths": [
-            "in.DqlQuery.SearchQuery"
-          ]
-        },
-        {
-          "id": "b182",
-          "at": "internal/serverv2/list_works.go:403",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
-          "predicate_paths": [
-            "in.DqlQuery"
-          ]
-        },
-        {
-          "id": "b183",
-          "at": "internal/serverv2/list_works.go:432",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy",
-          "predicate_paths": [
-            "in.DqlQuery"
-          ]
-        },
-        {
-          "id": "b184",
-          "at": "internal/serverv2/list_works.go:492",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != nil",
-          "predicate_paths": [
-            "in.DqlQuery"
-          ]
-        },
-        {
-          "id": "b185",
-          "at": "internal/serverv2/list_works.go:400",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy",
-          "predicate_paths": [
-            "in.Filter"
-          ]
-        },
-        {
-          "id": "b186",
           "at": "internal/serverv2/list_works.go:562",
-          "cond": "in|in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy",
+          "cond": "in|in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy",
           "predicate_paths": [
             "in"
           ]
         },
         {
-          "id": "b187",
+          "id": "b182",
           "at": "internal/serverv2/list_works.go:562",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy|in.VistaId != nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy|in.VistaId != nil",
           "predicate_paths": [
             "in.VistaId"
           ]
         },
         {
-          "id": "b188",
+          "id": "b183",
           "at": "internal/serverv2/list_works.go:578",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.SprintId|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.SprintId|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == nil",
           "predicate_paths": [
             "in.Filter.IssueFilter.SprintId"
           ]
         },
         {
-          "id": "b189",
+          "id": "b184",
           "at": "internal/serverv2/list_works.go:578",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == \"\"",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy == \"\"",
           "predicate_paths": [
             "in.SearchQuery"
           ]
         },
         {
-          "id": "b190",
+          "id": "b185",
           "at": "internal/serverv2/list_works.go:578",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy|in.VistaId == nil",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy|in.VistaId == nil",
           "predicate_paths": [
             "in.VistaId"
           ]
         },
         {
-          "id": "b191",
+          "id": "b186",
           "at": "internal/serverv2/list_works.go:608",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.IndexHint|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != \"\"",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.IndexHint|in.ObjectTypes|in.Page|in.PerPage|in.SearchQuery|in.SortBy != \"\"",
           "predicate_paths": [
             "in.IndexHint"
           ]
         },
         {
-          "id": "b192",
+          "id": "b187",
           "at": "internal/serverv2/list_works.go:615",
-          "cond": "in.DevOid|in.DevOid.Partition|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.PreferSecondaryRead|in.SearchQuery|in.SortBy",
+          "cond": "in.DevOid|in.DqlQuery|in.DqlQuery.SearchQuery|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.IncludeWorkIds|in.ObjectTypes|in.Page|in.PerPage|in.PreferSecondaryRead|in.SearchQuery|in.SortBy",
           "predicate_paths": [
             "in.PreferSecondaryRead"
           ]
@@ -1835,8 +1789,6 @@
         {
           "field": "type",
           "fuzzy_suggestions": [
-            "in.DevOid.PartitionType",
-            "in.DevOid.ServiceType",
             "in.Filter.IssueFilter.Subtype",
             "in.Filter.IssueFilter.SubtypeOp",
             "in.Filter.OpportunityFilter.Subtype",
@@ -1846,9 +1798,7 @@
             "in.Filter.TicketFilter.Subtype",
             "in.Filter.TicketFilter.SubtypeOp",
             "in.Filter.WorkType",
-            "in.ObjectTypes",
-            "in.VistaId.PartitionType",
-            "in.VistaId.ServiceType"
+            "in.ObjectTypes"
           ]
         }
       ]
@@ -2670,7 +2620,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.DqlQuery",
           "in.DqlQuery.SearchQuery",
           "in.Filter",
@@ -2693,7 +2642,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.DqlQuery",
           "in.DqlQuery.SearchQuery",
           "in.Filter",
@@ -2716,7 +2664,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.DqlQuery",
           "in.DqlQuery.SearchQuery",
           "in.Filter",
@@ -2739,7 +2686,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.DqlQuery",
           "in.DqlQuery.SearchQuery",
           "in.Filter",
@@ -2762,7 +2708,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.DqlQuery",
           "in.DqlQuery.SearchQuery",
           "in.Filter",
@@ -2785,7 +2730,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.DqlQuery",
           "in.DqlQuery.SearchQuery",
           "in.Filter",
@@ -2808,7 +2752,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.DqlQuery",
           "in.DqlQuery.SearchQuery",
           "in.Filter",
@@ -2831,7 +2774,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.DqlQuery",
           "in.DqlQuery.SearchQuery",
           "in.Filter",
@@ -2854,7 +2796,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.DqlQuery",
           "in.DqlQuery.SearchQuery",
           "in.Filter",
@@ -2877,7 +2818,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.DqlQuery",
           "in.DqlQuery.SearchQuery",
           "in.Filter",
@@ -2900,7 +2840,6 @@
         "via_paths": [
           "in",
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.DqlQuery",
           "in.DqlQuery.SearchQuery",
           "in.Filter",
@@ -2923,7 +2862,6 @@
         "target": "DecryptText",
         "via_paths": [
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.DqlQuery",
           "in.DqlQuery.SearchQuery",
           "in.Filter",
@@ -2945,7 +2883,6 @@
         "target": "DecryptBytes",
         "via_paths": [
           "in.DevOid",
-          "in.DevOid.Partition",
           "in.DqlQuery",
           "in.DqlQuery.SearchQuery",
           "in.Filter",
@@ -3022,5 +2959,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListWorks` (HTTP operation `WorksExport,WorksList,WorksListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomFilter.IssueFilters\n  - in.CustomFilter.TaskFilters\n  - in.CustomFilter.TicketFilters\n  - in.DevOid.Components\n  - in.DevOid.Partition\n  - in.DevOid.PartitionType\n  - in.DevOid.ServiceType\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SearchQuery\n  - in.ExcludeWorkIds\n  - in.Filter.ActualCloseDateOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.DeprecatedCreatedByAgentId\n  - in.Filter.DeprecatedCreatedByAgentIdOp\n  - in.Filter.ExternalSourceData\n  - in.Filter.IssueFilter.AccountIds\n  - in.Filter.IssueFilter.AccountIdsOp\n  - in.Filter.IssueFilter.ActualStartDateOp\n  - in.Filter.IssueFilter.AppliesToPartId\n  - in.Filter.IssueFilter.AppliesToPartIdOp\n  - in.Filter.IssueFilter.AppliesToVersionIds\n  - in.Filter.IssueFilter.Apps\n  - in.Filter.IssueFilter.AppsOp\n  - in.Filter.IssueFilter.DevelopedWith\n  - in.Filter.IssueFilter.LastCodeActivityOp\n  - in.Filter.IssueFilter.MilestoneId\n  - in.Filter.IssueFilter.MilestoneIdOp\n  - in.Filter.IssueFilter.Priority\n  - in.Filter.IssueFilter.ProjectId\n  - in.Filter.IssueFilter.ProjectIdOp\n  - in.Filter.IssueFilter.ReleaseVersionIds\n  - in.Filter.IssueFilter.RevOrgIds\n  - in.Filter.IssueFilter.RevOrgIdsOp\n  - in.Filter.IssueFilter.SharedWith\n  - in.Filter.IssueFilter.SlaId\n  - in.Filter.IssueFilter.SlaSummary\n  - in.Filter.IssueFilter.SprintId\n  - in.Filter.IssueFilter.SprintIdOp\n  - in.Filter.IssueFilter.SprintState\n  - in.Filter.IssueFilter.SprintStateOp\n  - in.Filter.IssueFilter.Subtype\n  - in.Filter.IssueFilter.SubtypeOp\n  - in.Filter.IssueFilter.TargetStartDateOp\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.OpportunityFilter.AccountId\n  - in.Filter.OpportunityFilter.AccountIdOp\n  - in.Filter.OpportunityFilter.AnnualContractValue\n  - in.Filter.OpportunityFilter.Apps\n  - in.Filter.OpportunityFilter.AppsOp\n  - in.Filter.OpportunityFilter.Budget\n  - in.Filter.OpportunityFilter.ContactIds\n  - in.Filter.OpportunityFilter.ContactIdsOp\n  - in.Filter.OpportunityFilter.ForecastCategory\n  - in.Filter.OpportunityFilter.Priority\n  - (+78 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.SortBy == nil\n  - in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.SortBy == nil\n  - in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.SortBy != 0\n  - in.DevOid|in.SortBy == nil\n  - in.DevOid.Partition|in.SortBy != \"\"\n  - in.Filter.TicketFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.TicketFilter.RevOidOp|in.SortBy != nil\n  - in.Filter.TicketFilter.AccountIdOp|in.SortBy != nil\n  - in.Filter.TicketFilter.GroupOp|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsOp|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsV2Op|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsV2InstancesOp|in.SortBy != nil\n  - in.Filter.TicketFilter.ProjectIdOp|in.SortBy != nil\n  - in.Filter.TicketFilter.MilestoneIdOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SurveysAggregationOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SentimentOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.TicketFilter.AppsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.RevOrgIdsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AccountIdsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SprintIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SprintStateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.ProjectIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.MilestoneIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.TargetStartDateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.ActualStartDateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.LastCodeActivityOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AppsOp|in.SortBy != nil\n  - in.Filter.TaskFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.TaskFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.TaskFilter.AppsOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.AccountIdOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.ContactIdsOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.AppsOp|in.SortBy != nil\n  - in.Filter.CreatedByIdOp|in.SortBy != nil\n  - in.Filter.ModifiedByIdOp|in.SortBy != nil\n  - in.Filter.CreatedByAgentIdOp|in.SortBy != nil\n  - (+152 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `ancestorpart` -> suggestions []\n  - test field `appliestopart` -> suggestions ['in.Filter.IssueFilter.AppliesToPartId', 'in.Filter.IssueFilter.AppliesToPartIdOp', 'in.Filter.TaskFilter.AppliesToPartId', 'in.Filter.TaskFilter.AppliesToPartIdOp', 'in.Filter.TicketFilter.AppliesToPartId', 'in.Filter.TicketFilter.AppliesToPartIdOp']\n  - test field `cursor` -> suggestions []\n  - test field `customfields` -> suggestions []\n  - test field `issue` -> suggestions ['in.CustomFilter.IssueFilters']\n  - test field `limit` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Filter.OwnedByIds', 'in.Filter.OwnedByIdsOp', 'in.Filter.TicketFilter.OwnedByAgentId']\n  - test field `stagenames` -> suggestions ['in.Filter.Stage']\n  - test field `ticket` -> suggestions ['in.CustomFilter.TicketFilters']\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions ['in.DevOid.PartitionType', 'in.DevOid.ServiceType', 'in.Filter.IssueFilter.Subtype', 'in.Filter.IssueFilter.SubtypeOp', 'in.Filter.OpportunityFilter.Subtype', 'in.Filter.OpportunityFilter.SubtypeOp', 'in.Filter.TaskFilter.Subtype', 'in.Filter.TaskFilter.SubtypeOp', 'in.Filter.TicketFilter.Subtype', 'in.Filter.TicketFilter.SubtypeOp', 'in.Filter.WorkType', 'in.ObjectTypes', 'in.VistaId.PartitionType', 'in.VistaId.ServiceType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListWorks` (HTTP operation `WorksExport,WorksList,WorksListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomFilter.IssueFilters\n  - in.CustomFilter.TaskFilters\n  - in.CustomFilter.TicketFilters\n  - in.DevOid\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SearchQuery\n  - in.ExcludeWorkIds\n  - in.Filter.ActualCloseDateOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.DeprecatedCreatedByAgentId\n  - in.Filter.DeprecatedCreatedByAgentIdOp\n  - in.Filter.ExternalSourceData\n  - in.Filter.IssueFilter.AccountIds\n  - in.Filter.IssueFilter.AccountIdsOp\n  - in.Filter.IssueFilter.ActualStartDateOp\n  - in.Filter.IssueFilter.AppliesToPartId\n  - in.Filter.IssueFilter.AppliesToPartIdOp\n  - in.Filter.IssueFilter.AppliesToVersionIds\n  - in.Filter.IssueFilter.Apps\n  - in.Filter.IssueFilter.AppsOp\n  - in.Filter.IssueFilter.DevelopedWith\n  - in.Filter.IssueFilter.LastCodeActivityOp\n  - in.Filter.IssueFilter.MilestoneId\n  - in.Filter.IssueFilter.MilestoneIdOp\n  - in.Filter.IssueFilter.Priority\n  - in.Filter.IssueFilter.ProjectId\n  - in.Filter.IssueFilter.ProjectIdOp\n  - in.Filter.IssueFilter.ReleaseVersionIds\n  - in.Filter.IssueFilter.RevOrgIds\n  - in.Filter.IssueFilter.RevOrgIdsOp\n  - in.Filter.IssueFilter.SharedWith\n  - in.Filter.IssueFilter.SlaId\n  - in.Filter.IssueFilter.SlaSummary\n  - in.Filter.IssueFilter.SprintId\n  - in.Filter.IssueFilter.SprintIdOp\n  - in.Filter.IssueFilter.SprintState\n  - in.Filter.IssueFilter.SprintStateOp\n  - in.Filter.IssueFilter.Subtype\n  - in.Filter.IssueFilter.SubtypeOp\n  - in.Filter.IssueFilter.TargetStartDateOp\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.OpportunityFilter.AccountId\n  - in.Filter.OpportunityFilter.AccountIdOp\n  - in.Filter.OpportunityFilter.AnnualContractValue\n  - in.Filter.OpportunityFilter.Apps\n  - in.Filter.OpportunityFilter.AppsOp\n  - in.Filter.OpportunityFilter.Budget\n  - in.Filter.OpportunityFilter.ContactIds\n  - in.Filter.OpportunityFilter.ContactIdsOp\n  - in.Filter.OpportunityFilter.ForecastCategory\n  - in.Filter.OpportunityFilter.Priority\n  - in.Filter.OpportunityFilter.SharedWith\n  - in.Filter.OpportunityFilter.SpacesFilter.SpaceId\n  - in.Filter.OpportunityFilter.Subtype\n  - (+72 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.SortBy == nil\n  - in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.SortBy == nil\n  - in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.SortBy != 0\n  - in.DevOid|in.SortBy == nil\n  - in.Filter.TicketFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.TicketFilter.RevOidOp|in.SortBy != nil\n  - in.Filter.TicketFilter.AccountIdOp|in.SortBy != nil\n  - in.Filter.TicketFilter.GroupOp|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsOp|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsV2Op|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsV2InstancesOp|in.SortBy != nil\n  - in.Filter.TicketFilter.ProjectIdOp|in.SortBy != nil\n  - in.Filter.TicketFilter.MilestoneIdOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SurveysAggregationOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SentimentOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.TicketFilter.AppsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.RevOrgIdsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AccountIdsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SprintIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SprintStateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.ProjectIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.MilestoneIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.TargetStartDateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.ActualStartDateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.LastCodeActivityOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AppsOp|in.SortBy != nil\n  - in.Filter.TaskFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.TaskFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.TaskFilter.AppsOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.AccountIdOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.ContactIdsOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.AppsOp|in.SortBy != nil\n  - in.Filter.CreatedByIdOp|in.SortBy != nil\n  - in.Filter.ModifiedByIdOp|in.SortBy != nil\n  - in.Filter.CreatedByAgentIdOp|in.SortBy != nil\n  - in.Filter.ReportedByIdsOp|in.SortBy != nil\n  - (+147 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `ancestorpart` -> suggestions []\n  - test field `appliestopart` -> suggestions ['in.Filter.IssueFilter.AppliesToPartId', 'in.Filter.IssueFilter.AppliesToPartIdOp', 'in.Filter.TaskFilter.AppliesToPartId', 'in.Filter.TaskFilter.AppliesToPartIdOp', 'in.Filter.TicketFilter.AppliesToPartId', 'in.Filter.TicketFilter.AppliesToPartIdOp']\n  - test field `cursor` -> suggestions []\n  - test field `customfields` -> suggestions []\n  - test field `issue` -> suggestions ['in.CustomFilter.IssueFilters']\n  - test field `limit` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Filter.OwnedByIds', 'in.Filter.OwnedByIdsOp', 'in.Filter.TicketFilter.OwnedByAgentId']\n  - test field `stagenames` -> suggestions ['in.Filter.Stage']\n  - test field `ticket` -> suggestions ['in.CustomFilter.TicketFilters']\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions ['in.Filter.IssueFilter.Subtype', 'in.Filter.IssueFilter.SubtypeOp', 'in.Filter.OpportunityFilter.Subtype', 'in.Filter.OpportunityFilter.SubtypeOp', 'in.Filter.TaskFilter.Subtype', 'in.Filter.TaskFilter.SubtypeOp', 'in.Filter.TicketFilter.Subtype', 'in.Filter.TicketFilter.SubtypeOp', 'in.Filter.WorkType', 'in.ObjectTypes']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

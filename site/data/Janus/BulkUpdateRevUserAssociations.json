@@ -11,7 +11,7 @@
       "coverage_pct": 0
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 10,
+      "leaf_fields_read_by_rpc": 4,
       "covered_count": 0,
       "coverage_pct": 0,
       "request_fields_set_by_tests": 0,
@@ -24,32 +24,26 @@
           "pct": 0
         },
         "nested": {
-          "total": 2,
+          "total": 4,
           "set": 0,
           "pct": 0
         },
         "deep": {
-          "total": 8,
+          "total": 0,
           "set": 0,
           "pct": 0
         }
       },
       "covered": null,
       "gaps": [
-        "in.AssociationUpdates.Add.Components",
-        "in.AssociationUpdates.Add.Partition",
-        "in.AssociationUpdates.Add.PartitionType",
-        "in.AssociationUpdates.Add.ServiceType",
+        "in.AssociationUpdates.Add",
         "in.AssociationUpdates.Remove",
-        "in.Filter.AssociationToInclude.Components",
-        "in.Filter.AssociationToInclude.Partition",
-        "in.Filter.AssociationToInclude.PartitionType",
-        "in.Filter.AssociationToInclude.ServiceType",
+        "in.Filter.AssociationToInclude",
         "in.Filter.AssociationsToExclude"
       ]
     },
     "branches": {
-      "total": 14,
+      "total": 12,
       "happy_path_reached": false,
       "reachable_on_happy_path": 4,
       "present_arm_exercised": 0,
@@ -80,7 +74,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 4,
+          "total": 2,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -100,14 +94,6 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.Filter.AssociationToInclude.Partition != \"\"",
-          "predicate_paths": [
-            "in.Filter.AssociationToInclude.Partition"
-          ]
-        },
-        {
-          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1998",
           "cond": "in.Filter.AssociationToInclude == nil",
           "predicate_paths": [
@@ -115,15 +101,15 @@
           ]
         },
         {
-          "id": "b4",
+          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2005",
-          "cond": "in.Filter.AssociationToInclude|in.Filter.AssociationToInclude.Partition",
+          "cond": "in.Filter.AssociationToInclude",
           "predicate_paths": [
             "in.Filter.AssociationToInclude"
           ]
         },
         {
-          "id": "b5",
+          "id": "b4",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
           "cond": "in.AssociationUpdates.Add == nil",
           "predicate_paths": [
@@ -131,15 +117,7 @@
           ]
         },
         {
-          "id": "b6",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.AssociationUpdates.Add.Partition != \"\"",
-          "predicate_paths": [
-            "in.AssociationUpdates.Add.Partition"
-          ]
-        },
-        {
-          "id": "b7",
+          "id": "b5",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2033",
           "cond": "in.AssociationUpdates.Add != nil",
           "predicate_paths": [
@@ -147,15 +125,15 @@
           ]
         },
         {
-          "id": "b8",
+          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2038",
-          "cond": "in.AssociationUpdates.Add|in.AssociationUpdates.Add.Partition",
+          "cond": "in.AssociationUpdates.Add",
           "predicate_paths": [
             "in.AssociationUpdates.Add"
           ]
         },
         {
-          "id": "b9",
+          "id": "b7",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1983",
           "cond": "in.Filter == nil",
           "predicate_paths": [
@@ -163,7 +141,7 @@
           ]
         },
         {
-          "id": "b10",
+          "id": "b8",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1986",
           "cond": "in.Filter != nil",
           "predicate_paths": [
@@ -171,7 +149,7 @@
           ]
         },
         {
-          "id": "b11",
+          "id": "b9",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1989",
           "cond": "in.AssociationUpdates == nil",
           "predicate_paths": [
@@ -179,7 +157,7 @@
           ]
         },
         {
-          "id": "b12",
+          "id": "b10",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1992",
           "cond": "in.AssociationUpdates != nil",
           "predicate_paths": [
@@ -187,7 +165,7 @@
           ]
         },
         {
-          "id": "b13",
+          "id": "b11",
           "at": "internal/service/revuser_associations.go:513",
           "cond": "in != nil",
           "predicate_paths": [
@@ -195,7 +173,7 @@
           ]
         },
         {
-          "id": "b14",
+          "id": "b12",
           "at": "internal/service/revuser_associations.go:666",
           "cond": "in.AssociationUpdates.Add != nil",
           "predicate_paths": [
@@ -233,5 +211,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `BulkUpdateRevUserAssociations` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AssociationUpdates.Add.Components\n  - in.AssociationUpdates.Add.Partition\n  - in.AssociationUpdates.Add.PartitionType\n  - in.AssociationUpdates.Add.ServiceType\n  - in.AssociationUpdates.Remove\n  - in.Filter.AssociationToInclude.Components\n  - in.Filter.AssociationToInclude.Partition\n  - in.Filter.AssociationToInclude.PartitionType\n  - in.Filter.AssociationToInclude.ServiceType\n  - in.Filter.AssociationsToExclude\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter.AssociationToInclude == nil\n  - in.Filter.AssociationToInclude.Partition != \"\"\n  - in.Filter.AssociationToInclude == nil\n  - in.Filter.AssociationToInclude|in.Filter.AssociationToInclude.Partition\n  - in.AssociationUpdates.Add == nil\n  - in.AssociationUpdates.Add.Partition != \"\"\n  - in.AssociationUpdates.Add != nil\n  - in.AssociationUpdates.Add|in.AssociationUpdates.Add.Partition\n  - in.Filter == nil\n  - in.Filter != nil\n  - in.AssociationUpdates == nil\n  - in.AssociationUpdates != nil\n  - in != nil\n  - in.AssociationUpdates.Add != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `BulkUpdateRevUserAssociations` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AssociationUpdates.Add\n  - in.AssociationUpdates.Remove\n  - in.Filter.AssociationToInclude\n  - in.Filter.AssociationsToExclude\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter.AssociationToInclude == nil\n  - in.Filter.AssociationToInclude == nil\n  - in.Filter.AssociationToInclude\n  - in.AssociationUpdates.Add == nil\n  - in.AssociationUpdates.Add != nil\n  - in.AssociationUpdates.Add\n  - in.Filter == nil\n  - in.Filter != nil\n  - in.AssociationUpdates == nil\n  - in.AssociationUpdates != nil\n  - in != nil\n  - in.AssociationUpdates.Add != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

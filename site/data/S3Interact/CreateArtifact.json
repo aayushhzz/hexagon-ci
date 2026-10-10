@@ -11,7 +11,7 @@
       "coverage_pct": 0
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 23,
+      "leaf_fields_read_by_rpc": 14,
       "covered_count": 0,
       "coverage_pct": 0,
       "request_fields_set_by_tests": 0,
@@ -19,27 +19,24 @@
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 0,
+          "total": 2,
           "set": 0,
           "pct": 0
         },
         "nested": {
-          "total": 12,
+          "total": 5,
           "set": 0,
           "pct": 0
         },
         "deep": {
-          "total": 11,
+          "total": 7,
           "set": 0,
           "pct": 0
         }
       },
       "covered": null,
       "gaps": [
-        "in.ActorId.Components",
-        "in.ActorId.Partition",
-        "in.ActorId.PartitionType",
-        "in.ActorId.ServiceType",
+        "in.ActorId",
         "in.Artifact.ArchivedDate",
         "in.Artifact.ConfigurationSet",
         "in.Artifact.File.Encoding",
@@ -50,19 +47,13 @@
         "in.Artifact.GeneratedFiles",
         "in.Artifact.Headers.ContentDisposition",
         "in.Artifact.Headers.ContentId",
-        "in.Artifact.ParentId.Components",
-        "in.Artifact.ParentId.Partition",
-        "in.Artifact.ParentId.PartitionType",
-        "in.Artifact.ParentId.ServiceType",
+        "in.Artifact.ParentId",
         "in.Artifact.PublishedDate",
-        "in.DevOid.Components",
-        "in.DevOid.Partition",
-        "in.DevOid.PartitionType",
-        "in.DevOid.ServiceType"
+        "in.DevOid"
       ]
     },
     "branches": {
-      "total": 38,
+      "total": 35,
       "happy_path_reached": false,
       "reachable_on_happy_path": 13,
       "present_arm_exercised": 0,
@@ -93,7 +84,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 12,
+          "total": 9,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -113,38 +104,30 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.ActorId.Partition != \"\"",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
+          "cond": "in.ActorId",
           "predicate_paths": [
-            "in.ActorId.Partition"
+            "in.ActorId"
           ]
         },
         {
           "id": "b3",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
-          "cond": "in.ActorId|in.ActorId.Partition",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
+          "cond": "in.ActorId",
           "predicate_paths": [
             "in.ActorId"
           ]
         },
         {
           "id": "b4",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
-          "cond": "in.ActorId|in.ActorId.Partition",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
+          "cond": "in.ActorId",
           "predicate_paths": [
             "in.ActorId"
           ]
         },
         {
           "id": "b5",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
-          "cond": "in.ActorId|in.ActorId.Partition",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
@@ -152,15 +135,7 @@
           ]
         },
         {
-          "id": "b7",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.DevOid.Partition != \"\"",
-          "predicate_paths": [
-            "in.DevOid.Partition"
-          ]
-        },
-        {
-          "id": "b8",
+          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
           "cond": "in.Artifact.ParentId == nil",
           "predicate_paths": [
@@ -168,15 +143,7 @@
           ]
         },
         {
-          "id": "b9",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.Artifact.ParentId.Partition != \"\"",
-          "predicate_paths": [
-            "in.Artifact.ParentId.Partition"
-          ]
-        },
-        {
-          "id": "b10",
+          "id": "b7",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:48",
           "cond": "in.Artifact.File.Name == nil",
           "predicate_paths": [
@@ -184,7 +151,7 @@
           ]
         },
         {
-          "id": "b11",
+          "id": "b8",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:54",
           "cond": "in.Artifact.File.Name != nil",
           "predicate_paths": [
@@ -192,7 +159,7 @@
           ]
         },
         {
-          "id": "b12",
+          "id": "b9",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:57",
           "cond": "in.Artifact.File.Type == nil",
           "predicate_paths": [
@@ -200,7 +167,7 @@
           ]
         },
         {
-          "id": "b13",
+          "id": "b10",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:63",
           "cond": "in.Artifact.File.Type != nil",
           "predicate_paths": [
@@ -208,7 +175,7 @@
           ]
         },
         {
-          "id": "b14",
+          "id": "b11",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:66",
           "cond": "in.Artifact.File.Key == nil",
           "predicate_paths": [
@@ -216,7 +183,7 @@
           ]
         },
         {
-          "id": "b15",
+          "id": "b12",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:72",
           "cond": "in.Artifact.File.Encoding != nil",
           "predicate_paths": [
@@ -224,7 +191,7 @@
           ]
         },
         {
-          "id": "b16",
+          "id": "b13",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:130",
           "cond": "in.Artifact.ParentId != nil",
           "predicate_paths": [
@@ -232,7 +199,7 @@
           ]
         },
         {
-          "id": "b17",
+          "id": "b14",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:135",
           "cond": "in.Artifact.File != nil",
           "predicate_paths": [
@@ -240,7 +207,7 @@
           ]
         },
         {
-          "id": "b18",
+          "id": "b15",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:136",
           "cond": "in.Artifact.File != nil",
           "predicate_paths": [
@@ -248,7 +215,7 @@
           ]
         },
         {
-          "id": "b19",
+          "id": "b16",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:140",
           "cond": "in.Artifact.Headers != nil",
           "predicate_paths": [
@@ -256,7 +223,7 @@
           ]
         },
         {
-          "id": "b20",
+          "id": "b17",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:141",
           "cond": "in.Artifact.Headers != nil",
           "predicate_paths": [
@@ -264,7 +231,7 @@
           ]
         },
         {
-          "id": "b21",
+          "id": "b18",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:18",
           "cond": "in.ActorId == nil",
           "predicate_paths": [
@@ -272,15 +239,15 @@
           ]
         },
         {
-          "id": "b22",
+          "id": "b19",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:25",
-          "cond": "in.ActorId|in.ActorId.Partition",
+          "cond": "in.ActorId",
           "predicate_paths": [
             "in.ActorId"
           ]
         },
         {
-          "id": "b23",
+          "id": "b20",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:28",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
@@ -288,15 +255,15 @@
           ]
         },
         {
-          "id": "b24",
+          "id": "b21",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:35",
-          "cond": "in.DevOid|in.DevOid.Partition",
+          "cond": "in.DevOid",
           "predicate_paths": [
             "in.DevOid"
           ]
         },
         {
-          "id": "b25",
+          "id": "b22",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:38",
           "cond": "in.Artifact == nil",
           "predicate_paths": [
@@ -304,7 +271,7 @@
           ]
         },
         {
-          "id": "b26",
+          "id": "b23",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:41",
           "cond": "in.Artifact != nil",
           "predicate_paths": [
@@ -312,7 +279,7 @@
           ]
         },
         {
-          "id": "b27",
+          "id": "b24",
           "at": "internal/server/create_artifact.go:33",
           "cond": "in != nil",
           "predicate_paths": [
@@ -320,7 +287,7 @@
           ]
         },
         {
-          "id": "b28",
+          "id": "b25",
           "at": "internal/server/create_artifact.go:36",
           "cond": "in.Artifact.File == nil",
           "predicate_paths": [
@@ -328,7 +295,7 @@
           ]
         },
         {
-          "id": "b29",
+          "id": "b26",
           "at": "internal/collection/artifact.gen.go:898",
           "cond": "in.Artifact.ParentId != nil",
           "predicate_paths": [
@@ -336,7 +303,7 @@
           ]
         },
         {
-          "id": "b30",
+          "id": "b27",
           "at": "internal/collection/artifact.gen.go:907",
           "cond": "in.Artifact.File != nil",
           "predicate_paths": [
@@ -344,7 +311,7 @@
           ]
         },
         {
-          "id": "b31",
+          "id": "b28",
           "at": "internal/collection/artifact.gen.go:913",
           "cond": "in.Artifact.Headers != nil",
           "predicate_paths": [
@@ -352,7 +319,7 @@
           ]
         },
         {
-          "id": "b32",
+          "id": "b29",
           "at": "internal/collection/artifact.gen.go:919",
           "cond": "in.Artifact.GeneratedFiles != nil",
           "predicate_paths": [
@@ -360,7 +327,7 @@
           ]
         },
         {
-          "id": "b33",
+          "id": "b30",
           "at": "internal/collection/artifact.gen.go:929",
           "cond": "in.Artifact.PublishedDate != nil",
           "predicate_paths": [
@@ -368,7 +335,7 @@
           ]
         },
         {
-          "id": "b34",
+          "id": "b31",
           "at": "internal/collection/artifact.gen.go:933",
           "cond": "in.Artifact.ArchivedDate != nil",
           "predicate_paths": [
@@ -376,15 +343,15 @@
           ]
         },
         {
-          "id": "b35",
+          "id": "b32",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:667",
-          "cond": "in.DevOid|in.DevOid.Partition != objType",
+          "cond": "in.DevOid != objType",
           "predicate_paths": [
             "in.DevOid"
           ]
         },
         {
-          "id": "b36",
+          "id": "b33",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/configset/configset.go:338",
           "cond": "in.Artifact.ConfigurationSet == 0",
           "predicate_paths": [
@@ -392,7 +359,7 @@
           ]
         },
         {
-          "id": "b37",
+          "id": "b34",
           "at": "s3/buckets.go:49",
           "cond": "in.Artifact.ConfigurationSet == 0",
           "predicate_paths": [
@@ -400,9 +367,9 @@
           ]
         },
         {
-          "id": "b38",
+          "id": "b35",
           "at": "/Users/devrev/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:66",
-          "cond": "in.Artifact|in.Artifact.File|in.Artifact.File.Encoding|in.Artifact.File.Key|in.Artifact.File.Name|in.Artifact.File.Size|in.Artifact.File.Type|in.Artifact.Headers|in.Artifact.Headers.ContentId|in.Artifact.ParentId|in.Artifact.ParentId.Partition == nil",
+          "cond": "in.Artifact|in.Artifact.File|in.Artifact.File.Encoding|in.Artifact.File.Key|in.Artifact.File.Name|in.Artifact.File.Size|in.Artifact.File.Type|in.Artifact.Headers|in.Artifact.Headers.ContentId|in.Artifact.ParentId == nil",
           "predicate_paths": [
             "in.Artifact"
           ]
@@ -449,5 +416,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateArtifact` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId.Components\n  - in.ActorId.Partition\n  - in.ActorId.PartitionType\n  - in.ActorId.ServiceType\n  - in.Artifact.ArchivedDate\n  - in.Artifact.ConfigurationSet\n  - in.Artifact.File.Encoding\n  - in.Artifact.File.Key\n  - in.Artifact.File.Name\n  - in.Artifact.File.Size\n  - in.Artifact.File.Type\n  - in.Artifact.GeneratedFiles\n  - in.Artifact.Headers.ContentDisposition\n  - in.Artifact.Headers.ContentId\n  - in.Artifact.ParentId.Components\n  - in.Artifact.ParentId.Partition\n  - in.Artifact.ParentId.PartitionType\n  - in.Artifact.ParentId.ServiceType\n  - in.Artifact.PublishedDate\n  - in.DevOid.Components\n  - in.DevOid.Partition\n  - in.DevOid.PartitionType\n  - in.DevOid.ServiceType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId.Partition != \"\"\n  - in.ActorId|in.ActorId.Partition\n  - in.ActorId|in.ActorId.Partition\n  - in.ActorId|in.ActorId.Partition\n  - in.DevOid == nil\n  - in.DevOid.Partition != \"\"\n  - in.Artifact.ParentId == nil\n  - in.Artifact.ParentId.Partition != \"\"\n  - in.Artifact.File.Name == nil\n  - in.Artifact.File.Name != nil\n  - in.Artifact.File.Type == nil\n  - in.Artifact.File.Type != nil\n  - in.Artifact.File.Key == nil\n  - in.Artifact.File.Encoding != nil\n  - in.Artifact.ParentId != nil\n  - in.Artifact.File != nil\n  - in.Artifact.File != nil\n  - in.Artifact.Headers != nil\n  - in.Artifact.Headers != nil\n  - in.ActorId == nil\n  - in.ActorId|in.ActorId.Partition\n  - in.DevOid == nil\n  - in.DevOid|in.DevOid.Partition\n  - in.Artifact == nil\n  - in.Artifact != nil\n  - in != nil\n  - in.Artifact.File == nil\n  - in.Artifact.ParentId != nil\n  - in.Artifact.File != nil\n  - in.Artifact.Headers != nil\n  - in.Artifact.GeneratedFiles != nil\n  - in.Artifact.PublishedDate != nil\n  - in.Artifact.ArchivedDate != nil\n  - in.DevOid|in.DevOid.Partition != objType\n  - in.Artifact.ConfigurationSet == 0\n  - in.Artifact.ConfigurationSet == 0\n  - in.Artifact|in.Artifact.File|in.Artifact.File.Encoding|in.Artifact.File.Key|in.Artifact.File.Name|in.Artifact.File.Size|in.Artifact.File.Type|in.Artifact.Headers|in.Artifact.Headers.ContentId|in.Artifact.ParentId|in.Artifact.ParentId.Partition == nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateArtifact` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.Artifact.ArchivedDate\n  - in.Artifact.ConfigurationSet\n  - in.Artifact.File.Encoding\n  - in.Artifact.File.Key\n  - in.Artifact.File.Name\n  - in.Artifact.File.Size\n  - in.Artifact.File.Type\n  - in.Artifact.GeneratedFiles\n  - in.Artifact.Headers.ContentDisposition\n  - in.Artifact.Headers.ContentId\n  - in.Artifact.ParentId\n  - in.Artifact.PublishedDate\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId\n  - in.ActorId\n  - in.ActorId\n  - in.DevOid == nil\n  - in.Artifact.ParentId == nil\n  - in.Artifact.File.Name == nil\n  - in.Artifact.File.Name != nil\n  - in.Artifact.File.Type == nil\n  - in.Artifact.File.Type != nil\n  - in.Artifact.File.Key == nil\n  - in.Artifact.File.Encoding != nil\n  - in.Artifact.ParentId != nil\n  - in.Artifact.File != nil\n  - in.Artifact.File != nil\n  - in.Artifact.Headers != nil\n  - in.Artifact.Headers != nil\n  - in.ActorId == nil\n  - in.ActorId\n  - in.DevOid == nil\n  - in.DevOid\n  - in.Artifact == nil\n  - in.Artifact != nil\n  - in != nil\n  - in.Artifact.File == nil\n  - in.Artifact.ParentId != nil\n  - in.Artifact.File != nil\n  - in.Artifact.Headers != nil\n  - in.Artifact.GeneratedFiles != nil\n  - in.Artifact.PublishedDate != nil\n  - in.Artifact.ArchivedDate != nil\n  - in.DevOid != objType\n  - in.Artifact.ConfigurationSet == 0\n  - in.Artifact.ConfigurationSet == 0\n  - in.Artifact|in.Artifact.File|in.Artifact.File.Encoding|in.Artifact.File.Key|in.Artifact.File.Name|in.Artifact.File.Size|in.Artifact.File.Type|in.Artifact.Headers|in.Artifact.Headers.ContentId|in.Artifact.ParentId == nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

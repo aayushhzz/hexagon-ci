@@ -32,7 +32,7 @@
       "coverage_pct": 11.1
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 26,
+      "leaf_fields_read_by_rpc": 19,
       "covered_count": 0,
       "coverage_pct": 0,
       "request_fields_set_by_tests": 2,
@@ -45,12 +45,12 @@
           "pct": 0
         },
         "nested": {
-          "total": 13,
+          "total": 9,
           "set": 0,
           "pct": 0
         },
         "deep": {
-          "total": 12,
+          "total": 9,
           "set": 0,
           "pct": 0
         }
@@ -59,12 +59,8 @@
       "gaps": [
         "in.CustomSchemaSpec.Drop",
         "in.CustomSchemaSpec.ValidateRequiredFields",
-        "in.Id.Components",
         "in.Id.CustomCompositeSchemas",
         "in.Id.CustomFields",
-        "in.Id.Partition",
-        "in.Id.PartitionType",
-        "in.Id.ServiceType",
         "in.Id.StockCompositeSchemas",
         "in.Id.StockFields",
         "in.Id.UnselectedFields",
@@ -77,26 +73,23 @@
         "in.Project.OwnedByIds.IdValues",
         "in.Project.ProjectSettings.AllowedObjectTypes.Int64Values",
         "in.Project.SharedWith.Values",
-        "in.Project.Stage.StageId.Components",
-        "in.Project.Stage.StageId.Partition",
-        "in.Project.Stage.StageId.PartitionType",
-        "in.Project.Stage.StageId.ServiceType",
+        "in.Project.Stage.StageId",
         "in.Project.TagIds.IdValues",
         "in.StageValidationOptions"
       ]
     },
     "branches": {
-      "total": 31,
+      "total": 29,
       "happy_path_reached": true,
       "reachable_on_happy_path": 9,
       "present_arm_exercised": 7,
-      "present_arm_pct": 22.6,
+      "present_arm_pct": 24.1,
       "absent_arm_exercised": 4,
       "absent_arm_pct": 44.4,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 22.6,
+      "coverage_pct": 24.1,
       "by_origin": {
         "service": {
           "total": 4,
@@ -117,10 +110,10 @@
           "absent_arm_exercised": 4
         },
         "library": {
-          "total": 6,
+          "total": 4,
           "reachable_on_happy_path": 3,
           "present_arm_exercised": 3,
-          "present_arm_pct": 50,
+          "present_arm_pct": 75,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 0
@@ -129,14 +122,6 @@
       "gaps": [
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.Id.Partition != \"\"",
-          "predicate_paths": [
-            "in.Id.Partition"
-          ]
-        },
-        {
-          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
           "cond": "in.Project.Stage.StageId == nil",
           "predicate_paths": [
@@ -144,15 +129,7 @@
           ]
         },
         {
-          "id": "b4",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.Project.Stage.StageId.Partition != \"\"",
-          "predicate_paths": [
-            "in.Project.Stage.StageId.Partition"
-          ]
-        },
-        {
-          "id": "b5",
+          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/composite.pb.validator.go:3274",
           "cond": "in.Project.Stage.StageId != nil",
           "predicate_paths": [
@@ -160,15 +137,15 @@
           ]
         },
         {
-          "id": "b6",
+          "id": "b4",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/composite.pb.validator.go:3279",
-          "cond": "in.Project.Stage.StageId|in.Project.Stage.StageId.Partition",
+          "cond": "in.Project.Stage.StageId",
           "predicate_paths": [
             "in.Project.Stage.StageId"
           ]
         },
         {
-          "id": "b7",
+          "id": "b5",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:1093",
           "cond": "in.Project.Name != nil",
           "predicate_paths": [
@@ -176,7 +153,7 @@
           ]
         },
         {
-          "id": "b8",
+          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:1101",
           "cond": "in.Project.Description != nil",
           "predicate_paths": [
@@ -184,7 +161,7 @@
           ]
         },
         {
-          "id": "b9",
+          "id": "b7",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:1106",
           "cond": "in.Project.OwnedByIds != nil",
           "predicate_paths": [
@@ -192,7 +169,7 @@
           ]
         },
         {
-          "id": "b10",
+          "id": "b8",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:1122",
           "cond": "in.Project.MemberIds != nil",
           "predicate_paths": [
@@ -200,7 +177,7 @@
           ]
         },
         {
-          "id": "b11",
+          "id": "b9",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:1135",
           "cond": "in.Project.TagIds != nil",
           "predicate_paths": [
@@ -208,7 +185,7 @@
           ]
         },
         {
-          "id": "b12",
+          "id": "b10",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:1148",
           "cond": "in.Project.ProjectSettings != nil",
           "predicate_paths": [
@@ -216,7 +193,7 @@
           ]
         },
         {
-          "id": "b13",
+          "id": "b11",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:1149",
           "cond": "in.Project.ProjectSettings != nil",
           "predicate_paths": [
@@ -224,7 +201,7 @@
           ]
         },
         {
-          "id": "b16",
+          "id": "b14",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:1158",
           "cond": "in.Project.ArtifactIds != nil",
           "predicate_paths": [
@@ -232,7 +209,7 @@
           ]
         },
         {
-          "id": "b17",
+          "id": "b15",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:1171",
           "cond": "in.Project.SharedWith != nil",
           "predicate_paths": [
@@ -240,7 +217,7 @@
           ]
         },
         {
-          "id": "b18",
+          "id": "b16",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:1172",
           "cond": "in.Project.SharedWith != nil",
           "predicate_paths": [
@@ -248,7 +225,7 @@
           ]
         },
         {
-          "id": "b19",
+          "id": "b17",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:246",
           "cond": "in.CustomSchemaSpec.Drop != nil",
           "predicate_paths": [
@@ -256,7 +233,7 @@
           ]
         },
         {
-          "id": "b20",
+          "id": "b18",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:247",
           "cond": "in.CustomSchemaSpec.Drop != nil",
           "predicate_paths": [
@@ -264,7 +241,7 @@
           ]
         },
         {
-          "id": "b22",
+          "id": "b20",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/project.pb.validator.go:65",
           "cond": "in.Project != nil",
           "predicate_paths": [
@@ -272,7 +249,7 @@
           ]
         },
         {
-          "id": "b23",
+          "id": "b21",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/project.pb.validator.go:66",
           "cond": "in.Project != nil",
           "predicate_paths": [
@@ -280,7 +257,7 @@
           ]
         },
         {
-          "id": "b24",
+          "id": "b22",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/project.pb.validator.go:70",
           "cond": "in.CustomSchemaSpec != nil",
           "predicate_paths": [
@@ -288,7 +265,7 @@
           ]
         },
         {
-          "id": "b25",
+          "id": "b23",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/project.pb.validator.go:71",
           "cond": "in.CustomSchemaSpec != nil",
           "predicate_paths": [
@@ -296,7 +273,7 @@
           ]
         },
         {
-          "id": "b26",
+          "id": "b24",
           "at": "internal/serverv2/update_project_helper.go:114",
           "cond": "in.Project.ProjectSettings == nil",
           "predicate_paths": [
@@ -304,7 +281,7 @@
           ]
         },
         {
-          "id": "b27",
+          "id": "b25",
           "at": "internal/serverv2/update_project_helper.go:115",
           "cond": "in.Project.ProjectSettings.AllowedObjectTypes == nil",
           "predicate_paths": [
@@ -312,7 +289,7 @@
           ]
         },
         {
-          "id": "b31",
+          "id": "b29",
           "at": "internal/serverv2/update_project.go:24",
           "cond": "in != nil",
           "predicate_paths": [
@@ -330,6 +307,7 @@
         {
           "field": "stage",
           "fuzzy_suggestions": [
+            "in.Project.Stage.StageId",
             "in.StageValidationOptions"
           ]
         }
@@ -369,8 +347,7 @@
         "kind": "rpc",
         "target": "TryLock",
         "via_paths": [
-          "in.Id",
-          "in.Id.Partition"
+          "in.Id"
         ],
         "at": "internal/serverv2/crud.go:224"
       },
@@ -378,8 +355,7 @@
         "kind": "rpc",
         "target": "Remove",
         "via_paths": [
-          "in.Id",
-          "in.Id.Partition"
+          "in.Id"
         ],
         "at": "internal/serverv2/crud.go:230"
       },
@@ -421,8 +397,7 @@
         "target": "GetStageDiagram",
         "via_paths": [
           "in",
-          "in.Id",
-          "in.Id.Partition"
+          "in.Id"
         ],
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:71"
       },
@@ -431,8 +406,7 @@
         "target": "GetCustomStage",
         "via_paths": [
           "in",
-          "in.Id",
-          "in.Id.Partition"
+          "in.Id"
         ],
         "at": "internal/serverv2/create_project.go:257"
       }
@@ -466,5 +440,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateProject` (HTTP operation `ProjectsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomSchemaSpec.Drop\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.Id.Components\n  - in.Id.CustomCompositeSchemas\n  - in.Id.CustomFields\n  - in.Id.Partition\n  - in.Id.PartitionType\n  - in.Id.ServiceType\n  - in.Id.StockCompositeSchemas\n  - in.Id.StockFields\n  - in.Id.UnselectedFields\n  - in.Id.compositeTypes\n  - in.Id.customFieldMap\n  - in.Project.ArtifactIds.IdValues\n  - in.Project.Description.Value\n  - in.Project.MemberIds.IdValues\n  - in.Project.Name.Value\n  - in.Project.OwnedByIds.IdValues\n  - in.Project.ProjectSettings.AllowedObjectTypes.Int64Values\n  - in.Project.SharedWith.Values\n  - in.Project.Stage.StageId.Components\n  - in.Project.Stage.StageId.Partition\n  - in.Project.Stage.StageId.PartitionType\n  - in.Project.Stage.StageId.ServiceType\n  - in.Project.TagIds.IdValues\n  - in.StageValidationOptions\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Id.Partition != \"\"\n  - in.Project.Stage.StageId == nil\n  - in.Project.Stage.StageId.Partition != \"\"\n  - in.Project.Stage.StageId != nil\n  - in.Project.Stage.StageId|in.Project.Stage.StageId.Partition\n  - in.Project.Name != nil\n  - in.Project.Description != nil\n  - in.Project.OwnedByIds != nil\n  - in.Project.MemberIds != nil\n  - in.Project.TagIds != nil\n  - in.Project.ProjectSettings != nil\n  - in.Project.ProjectSettings != nil\n  - in.Project.ArtifactIds != nil\n  - in.Project.SharedWith != nil\n  - in.Project.SharedWith != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.Project != nil\n  - in.Project != nil\n  - in.CustomSchemaSpec != nil\n  - in.CustomSchemaSpec != nil\n  - in.Project.ProjectSettings == nil\n  - in.Project.ProjectSettings.AllowedObjectTypes == nil\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n  - test field `stage` -> suggestions ['in.StageValidationOptions']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateProject` (HTTP operation `ProjectsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomSchemaSpec.Drop\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.Id.CustomCompositeSchemas\n  - in.Id.CustomFields\n  - in.Id.StockCompositeSchemas\n  - in.Id.StockFields\n  - in.Id.UnselectedFields\n  - in.Id.compositeTypes\n  - in.Id.customFieldMap\n  - in.Project.ArtifactIds.IdValues\n  - in.Project.Description.Value\n  - in.Project.MemberIds.IdValues\n  - in.Project.Name.Value\n  - in.Project.OwnedByIds.IdValues\n  - in.Project.ProjectSettings.AllowedObjectTypes.Int64Values\n  - in.Project.SharedWith.Values\n  - in.Project.Stage.StageId\n  - in.Project.TagIds.IdValues\n  - in.StageValidationOptions\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Project.Stage.StageId == nil\n  - in.Project.Stage.StageId != nil\n  - in.Project.Stage.StageId\n  - in.Project.Name != nil\n  - in.Project.Description != nil\n  - in.Project.OwnedByIds != nil\n  - in.Project.MemberIds != nil\n  - in.Project.TagIds != nil\n  - in.Project.ProjectSettings != nil\n  - in.Project.ProjectSettings != nil\n  - in.Project.ArtifactIds != nil\n  - in.Project.SharedWith != nil\n  - in.Project.SharedWith != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.Project != nil\n  - in.Project != nil\n  - in.CustomSchemaSpec != nil\n  - in.CustomSchemaSpec != nil\n  - in.Project.ProjectSettings == nil\n  - in.Project.ProjectSettings.AllowedObjectTypes == nil\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n  - test field `stage` -> suggestions ['in.Project.Stage.StageId', 'in.StageValidationOptions']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

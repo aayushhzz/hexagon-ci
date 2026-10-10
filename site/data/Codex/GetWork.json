@@ -33,20 +33,20 @@
       "coverage_pct": 22.2
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 9,
-      "covered_count": 0,
-      "coverage_pct": 0,
+      "leaf_fields_read_by_rpc": 3,
+      "covered_count": 1,
+      "coverage_pct": 33.3,
       "request_fields_set_by_tests": 5,
-      "set_by_positive_tests": 0,
-      "set_by_negative_tests": 0,
+      "set_by_positive_tests": 1,
+      "set_by_negative_tests": 1,
       "by_depth": {
         "top_level": {
-          "total": 1,
-          "set": 0,
-          "pct": 0
+          "total": 3,
+          "set": 1,
+          "pct": 33.3
         },
         "nested": {
-          "total": 8,
+          "total": 0,
           "set": 0,
           "pct": 0
         },
@@ -56,31 +56,44 @@
           "pct": 0
         }
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.Id",
+          "match": "exact",
+          "by_tests": [
+            "Admin - Should be able to get an issue",
+            "CheckIfGroupIsAssigned",
+            "CheckIfGroupIsAssignedLoop",
+            "CheckIfGroupIsAssignedLoopPart1",
+            "CheckIfGroupIsAssignedLoopPart2",
+            "CheckIfGroupIsAssignedLoopPart3",
+            "CreateTicketPart1",
+            "CreateTicketPart2",
+            "CreateTicketPart3",
+            "DefaultGet",
+            "Get by id",
+            "Platform user should be able to perform all CRUD operations",
+            "Unsets milestone on all referencing issues when milestone is deleted"
+          ]
+        }
+      ],
       "gaps": [
-        "in.DevOid.Components",
-        "in.DevOid.Partition",
-        "in.DevOid.PartitionType",
-        "in.DevOid.ServiceType",
-        "in.Id.Components",
-        "in.Id.Partition",
-        "in.Id.PartitionType",
-        "in.Id.ServiceType",
+        "in.DevOid",
         "in.UpdateCache"
       ]
     },
     "branches": {
-      "total": 19,
+      "total": 17,
       "happy_path_reached": true,
       "reachable_on_happy_path": 16,
       "present_arm_exercised": 10,
-      "present_arm_pct": 52.6,
+      "present_arm_pct": 58.8,
       "absent_arm_exercised": 16,
       "absent_arm_pct": 100,
       "negative_arm_exercised": 10,
-      "negative_arm_pct": 52.6,
+      "negative_arm_pct": 58.8,
       "both_arms_exercised": 10,
-      "coverage_pct": 52.6,
+      "coverage_pct": 58.8,
       "by_origin": {
         "service": {
           "total": 3,
@@ -101,12 +114,12 @@
           "absent_arm_exercised": 4
         },
         "library": {
-          "total": 12,
+          "total": 10,
           "reachable_on_happy_path": 10,
           "present_arm_exercised": 8,
-          "present_arm_pct": 66.7,
+          "present_arm_pct": 80,
           "negative_arm_exercised": 8,
-          "negative_arm_pct": 66.7,
+          "negative_arm_pct": 80,
           "absent_arm_exercised": 10
         }
       },
@@ -120,23 +133,7 @@
           ]
         },
         {
-          "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.DevOid.Partition != \"\"",
-          "predicate_paths": [
-            "in.DevOid.Partition"
-          ]
-        },
-        {
-          "id": "b4",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.Id.Partition != \"\"",
-          "predicate_paths": [
-            "in.Id.Partition"
-          ]
-        },
-        {
-          "id": "b12",
+          "id": "b10",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:117",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
@@ -144,15 +141,15 @@
           ]
         },
         {
-          "id": "b13",
+          "id": "b11",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:124",
-          "cond": "in.DevOid|in.DevOid.Partition",
+          "cond": "in.DevOid",
           "predicate_paths": [
             "in.DevOid"
           ]
         },
         {
-          "id": "b16",
+          "id": "b14",
           "at": "internal/serverv2/get_work.go:38",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
@@ -160,7 +157,7 @@
           ]
         },
         {
-          "id": "b17",
+          "id": "b15",
           "at": "internal/serverv2/get_work.go:41",
           "cond": "in != nil",
           "predicate_paths": [
@@ -168,15 +165,15 @@
           ]
         },
         {
-          "id": "b18",
+          "id": "b16",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:667",
-          "cond": "in.DevOid|in.DevOid.Partition != objType",
+          "cond": "in.DevOid != objType",
           "predicate_paths": [
             "in.DevOid"
           ]
         },
         {
-          "id": "b19",
+          "id": "b17",
           "at": "internal/serverv2/get_work.go:73",
           "cond": "in.UpdateCache",
           "predicate_paths": [
@@ -192,10 +189,6 @@
           "fuzzy_suggestions": null
         },
         {
-          "field": "id",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "ownedby",
           "fuzzy_suggestions": null
         },
@@ -205,12 +198,7 @@
         },
         {
           "field": "type",
-          "fuzzy_suggestions": [
-            "in.DevOid.PartitionType",
-            "in.DevOid.ServiceType",
-            "in.Id.PartitionType",
-            "in.Id.ServiceType"
-          ]
+          "fuzzy_suggestions": null
         }
       ]
     },
@@ -449,8 +437,7 @@
         "kind": "rpc",
         "target": "GetAggregatedSchema",
         "via_paths": [
-          "in.DevOid",
-          "in.DevOid.Partition"
+          "in.DevOid"
         ],
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
       },
@@ -458,8 +445,7 @@
         "kind": "rpc",
         "target": "DecryptText",
         "via_paths": [
-          "in.DevOid",
-          "in.DevOid.Partition"
+          "in.DevOid"
         ],
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/encryption/decryption.go:95"
       },
@@ -467,8 +453,7 @@
         "kind": "rpc",
         "target": "DecryptBytes",
         "via_paths": [
-          "in.DevOid",
-          "in.DevOid.Partition"
+          "in.DevOid"
         ],
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/encryption/decryption.go:118"
       }
@@ -482,5 +467,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetWork` (HTTP operation `WorksGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid.Components\n  - in.DevOid.Partition\n  - in.DevOid.PartitionType\n  - in.DevOid.ServiceType\n  - in.Id.Components\n  - in.Id.Partition\n  - in.Id.PartitionType\n  - in.Id.ServiceType\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid.Partition != \"\"\n  - in.Id.Partition != \"\"\n  - in.DevOid == nil\n  - in.DevOid|in.DevOid.Partition\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid|in.DevOid.Partition != objType\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `ownedby` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions ['in.DevOid.PartitionType', 'in.DevOid.ServiceType', 'in.Id.PartitionType', 'in.Id.ServiceType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetWork` (HTTP operation `WorksGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions []\n  - test field `ownedby` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

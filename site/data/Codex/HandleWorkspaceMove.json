@@ -11,7 +11,7 @@
       "coverage_pct": 0
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 12,
+      "leaf_fields_read_by_rpc": 3,
       "covered_count": 0,
       "coverage_pct": 0,
       "request_fields_set_by_tests": 0,
@@ -19,12 +19,12 @@
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 0,
+          "total": 3,
           "set": 0,
           "pct": 0
         },
         "nested": {
-          "total": 12,
+          "total": 0,
           "set": 0,
           "pct": 0
         },
@@ -36,22 +36,13 @@
       },
       "covered": null,
       "gaps": [
-        "in.NewAccountId.Components",
-        "in.NewAccountId.Partition",
-        "in.NewAccountId.PartitionType",
-        "in.NewAccountId.ServiceType",
-        "in.OldAccountId.Components",
-        "in.OldAccountId.Partition",
-        "in.OldAccountId.PartitionType",
-        "in.OldAccountId.ServiceType",
-        "in.RevOrgId.Components",
-        "in.RevOrgId.Partition",
-        "in.RevOrgId.PartitionType",
-        "in.RevOrgId.ServiceType"
+        "in.NewAccountId",
+        "in.OldAccountId",
+        "in.RevOrgId"
       ]
     },
     "branches": {
-      "total": 13,
+      "total": 10,
       "happy_path_reached": false,
       "reachable_on_happy_path": 9,
       "present_arm_exercised": 0,
@@ -82,7 +73,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 6,
+          "total": 3,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -102,14 +93,6 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.RevOrgId.Partition != \"\"",
-          "predicate_paths": [
-            "in.RevOrgId.Partition"
-          ]
-        },
-        {
-          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
           "cond": "in.NewAccountId == nil",
           "predicate_paths": [
@@ -117,15 +100,7 @@
           ]
         },
         {
-          "id": "b4",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.NewAccountId.Partition != \"\"",
-          "predicate_paths": [
-            "in.NewAccountId.Partition"
-          ]
-        },
-        {
-          "id": "b5",
+          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
           "cond": "in.OldAccountId == nil",
           "predicate_paths": [
@@ -133,15 +108,7 @@
           ]
         },
         {
-          "id": "b6",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.OldAccountId.Partition != \"\"",
-          "predicate_paths": [
-            "in.OldAccountId.Partition"
-          ]
-        },
-        {
-          "id": "b7",
+          "id": "b4",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1850",
           "cond": "in.RevOrgId == nil",
           "predicate_paths": [
@@ -149,15 +116,15 @@
           ]
         },
         {
-          "id": "b8",
+          "id": "b5",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1857",
-          "cond": "in.RevOrgId|in.RevOrgId.Partition",
+          "cond": "in.RevOrgId",
           "predicate_paths": [
             "in.RevOrgId"
           ]
         },
         {
-          "id": "b9",
+          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1860",
           "cond": "in.NewAccountId == nil",
           "predicate_paths": [
@@ -165,15 +132,15 @@
           ]
         },
         {
-          "id": "b10",
+          "id": "b7",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1867",
-          "cond": "in.NewAccountId|in.NewAccountId.Partition",
+          "cond": "in.NewAccountId",
           "predicate_paths": [
             "in.NewAccountId"
           ]
         },
         {
-          "id": "b11",
+          "id": "b8",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1870",
           "cond": "in.OldAccountId == nil",
           "predicate_paths": [
@@ -181,15 +148,15 @@
           ]
         },
         {
-          "id": "b12",
+          "id": "b9",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1877",
-          "cond": "in.OldAccountId|in.OldAccountId.Partition",
+          "cond": "in.OldAccountId",
           "predicate_paths": [
             "in.OldAccountId"
           ]
         },
         {
-          "id": "b13",
+          "id": "b10",
           "at": "internal/serverv2/move_revorg.go:58",
           "cond": "in != nil",
           "predicate_paths": [
@@ -218,5 +185,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `HandleWorkspaceMove` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.NewAccountId.Components\n  - in.NewAccountId.Partition\n  - in.NewAccountId.PartitionType\n  - in.NewAccountId.ServiceType\n  - in.OldAccountId.Components\n  - in.OldAccountId.Partition\n  - in.OldAccountId.PartitionType\n  - in.OldAccountId.ServiceType\n  - in.RevOrgId.Components\n  - in.RevOrgId.Partition\n  - in.RevOrgId.PartitionType\n  - in.RevOrgId.ServiceType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.RevOrgId == nil\n  - in.RevOrgId.Partition != \"\"\n  - in.NewAccountId == nil\n  - in.NewAccountId.Partition != \"\"\n  - in.OldAccountId == nil\n  - in.OldAccountId.Partition != \"\"\n  - in.RevOrgId == nil\n  - in.RevOrgId|in.RevOrgId.Partition\n  - in.NewAccountId == nil\n  - in.NewAccountId|in.NewAccountId.Partition\n  - in.OldAccountId == nil\n  - in.OldAccountId|in.OldAccountId.Partition\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `HandleWorkspaceMove` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.NewAccountId\n  - in.OldAccountId\n  - in.RevOrgId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.RevOrgId == nil\n  - in.NewAccountId == nil\n  - in.OldAccountId == nil\n  - in.RevOrgId == nil\n  - in.RevOrgId\n  - in.NewAccountId == nil\n  - in.NewAccountId\n  - in.OldAccountId == nil\n  - in.OldAccountId\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

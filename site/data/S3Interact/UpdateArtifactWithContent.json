@@ -11,7 +11,7 @@
       "coverage_pct": 0
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 6,
+      "leaf_fields_read_by_rpc": 3,
       "covered_count": 0,
       "coverage_pct": 0,
       "request_fields_set_by_tests": 0,
@@ -19,12 +19,12 @@
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 1,
+          "total": 2,
           "set": 0,
           "pct": 0
         },
         "nested": {
-          "total": 5,
+          "total": 1,
           "set": 0,
           "pct": 0
         },
@@ -36,16 +36,13 @@
       },
       "covered": null,
       "gaps": [
-        "in.ArtifactId.Components",
-        "in.ArtifactId.Partition",
-        "in.ArtifactId.PartitionType",
-        "in.ArtifactId.ServiceType",
+        "in.ArtifactId",
         "in.Content",
         "in.Headers.ContentDisposition"
       ]
     },
     "branches": {
-      "total": 8,
+      "total": 7,
       "happy_path_reached": false,
       "reachable_on_happy_path": 6,
       "present_arm_exercised": 0,
@@ -76,7 +73,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 3,
+          "total": 2,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -96,22 +93,14 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.ArtifactId.Partition != \"\"",
-          "predicate_paths": [
-            "in.ArtifactId.Partition"
-          ]
-        },
-        {
-          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
-          "cond": "in.ArtifactId|in.ArtifactId.Partition == *ObjectTypeArtifact",
+          "cond": "in.ArtifactId == *ObjectTypeArtifact",
           "predicate_paths": [
             "in.ArtifactId"
           ]
         },
         {
-          "id": "b4",
+          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:749",
           "cond": "in.ArtifactId == nil",
           "predicate_paths": [
@@ -119,15 +108,15 @@
           ]
         },
         {
-          "id": "b5",
+          "id": "b4",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:756",
-          "cond": "in.ArtifactId|in.ArtifactId.Partition",
+          "cond": "in.ArtifactId",
           "predicate_paths": [
             "in.ArtifactId"
           ]
         },
         {
-          "id": "b6",
+          "id": "b5",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:765",
           "cond": "in.Headers != nil",
           "predicate_paths": [
@@ -135,7 +124,7 @@
           ]
         },
         {
-          "id": "b7",
+          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:766",
           "cond": "in.Headers != nil",
           "predicate_paths": [
@@ -143,7 +132,7 @@
           ]
         },
         {
-          "id": "b8",
+          "id": "b7",
           "at": "internal/server/update_artifact_with_content.go:29",
           "cond": "in != nil",
           "predicate_paths": [
@@ -181,5 +170,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateArtifactWithContent` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ArtifactId.Components\n  - in.ArtifactId.Partition\n  - in.ArtifactId.PartitionType\n  - in.ArtifactId.ServiceType\n  - in.Content\n  - in.Headers.ContentDisposition\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ArtifactId == nil\n  - in.ArtifactId.Partition != \"\"\n  - in.ArtifactId|in.ArtifactId.Partition == *ObjectTypeArtifact\n  - in.ArtifactId == nil\n  - in.ArtifactId|in.ArtifactId.Partition\n  - in.Headers != nil\n  - in.Headers != nil\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateArtifactWithContent` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ArtifactId\n  - in.Content\n  - in.Headers.ContentDisposition\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ArtifactId == nil\n  - in.ArtifactId == *ObjectTypeArtifact\n  - in.ArtifactId == nil\n  - in.ArtifactId\n  - in.Headers != nil\n  - in.Headers != nil\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

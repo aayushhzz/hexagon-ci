@@ -104,12 +104,12 @@ func (p pathSet) sorted() []string {
 
 // analyzer runs field-sensitive taint for one entrypoint.
 type analyzer struct {
-	l       *loaded
-	dir     string
-	cur     *Provenance
-	inputs  map[string]map[string]bool // path -> set of kinds
-	seenBr  map[string]bool
-	seenSk  map[string]bool
+	l         *loaded
+	dir       string
+	cur       *Provenance
+	inputs    map[string]map[string]bool // path -> set of kinds
+	seenBr    map[string]bool
+	seenSk    map[string]bool
 	seenErr   map[string]bool
 	visited   map[string]bool            // fn+seed signature guard (cycle breaker)
 	summaries map[string]map[int]pathSet // fn+seed signature -> result taint
@@ -118,12 +118,12 @@ type analyzer struct {
 
 func (l *loaded) analyze(ep entrypoint, dir string) *Provenance {
 	a := &analyzer{
-		l:       l,
-		dir:     dir,
-		cur:     &Provenance{RPC: ep.rpcName, Func: ep.fn.String(), RequestType: typeStr(ep.requestType), ResponseType: typeStr(ep.responseType)},
-		inputs:  map[string]map[string]bool{},
-		seenBr:  map[string]bool{},
-		seenSk:  map[string]bool{},
+		l:         l,
+		dir:       dir,
+		cur:       &Provenance{RPC: ep.rpcName, Func: ep.fn.String(), RequestType: typeStr(ep.requestType), ResponseType: typeStr(ep.responseType)},
+		inputs:    map[string]map[string]bool{},
+		seenBr:    map[string]bool{},
+		seenSk:    map[string]bool{},
 		seenErr:   map[string]bool{},
 		visited:   map[string]bool{},
 		summaries: map[string]map[int]pathSet{},
@@ -264,13 +264,15 @@ func (a *analyzer) step(fn *ssa.Function, instr ssa.Instruction, taint map[ssa.V
 		if src, ok := taint[v.X]; ok {
 			st := underlyingStruct(v.X.Type())
 			if st != nil && v.Field < st.NumFields() {
-				if isProtoType(v.X.Type()) {
+				if isProtoType(v.X.Type()) && !isOpaqueIDType(v.X.Type()) {
 					res := src.appendField(st.Field(v.Field).Name())
 					a.markInput(res, "read")
 					return set(v, res)
 				}
-				// Non-proto struct (stdlib/DON internals): keep reachability for
-				// sinks but stop expanding request access paths.
+				// Non-proto struct (stdlib internals) or an opaque identifier
+				// (DON): keep reachability for sinks but stop expanding request
+				// access paths, so DON encoding fields (partition, service_type,
+				// ...) are not counted as separately testable inputs.
 				return set(v, containerize(src))
 			}
 		}
@@ -278,7 +280,7 @@ func (a *analyzer) step(fn *ssa.Function, instr ssa.Instruction, taint map[ssa.V
 		if src, ok := taint[v.X]; ok {
 			st := underlyingStruct(v.X.Type())
 			if st != nil && v.Field < st.NumFields() {
-				if isProtoType(v.X.Type()) {
+				if isProtoType(v.X.Type()) && !isOpaqueIDType(v.X.Type()) {
 					res := src.appendField(st.Field(v.Field).Name())
 					a.markInput(res, "read")
 					return set(v, res)
@@ -659,6 +661,24 @@ func isPlumbing(fn *ssa.Function) bool {
 		return true
 	}
 	return false
+}
+
+// isOpaqueIDType reports whether t is a structured identifier whose sub-fields
+// are encoding internals, not independently testable request inputs. A DON
+// (devrev object name) proto is the canonical case: callers supply one id
+// string, which marshals into partition/service_type/components. We collapse
+// such a type to a single opaque leaf instead of expanding its fields.
+func isOpaqueIDType(t types.Type) bool {
+	named, ok := deref(t).(*types.Named)
+	if !ok || named.Obj() == nil {
+		return false
+	}
+	name := named.Obj().Name()
+	pkg := ""
+	if named.Obj().Pkg() != nil {
+		pkg = named.Obj().Pkg().Path()
+	}
+	return name == "DONProto" && (strings.Contains(pkg, "/don") || strings.Contains(pkg, "/donv2"))
 }
 
 // isProtoType reports whether t is a generated protobuf message. Field reads on

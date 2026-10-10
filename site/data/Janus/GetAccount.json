@@ -32,12 +32,12 @@
       "coverage_pct": 22.2
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 8,
-      "covered_count": 4,
-      "coverage_pct": 50,
+      "leaf_fields_read_by_rpc": 5,
+      "covered_count": 1,
+      "coverage_pct": 20,
       "request_fields_set_by_tests": 1,
-      "set_by_positive_tests": 4,
-      "set_by_negative_tests": 4,
+      "set_by_positive_tests": 1,
+      "set_by_negative_tests": 1,
       "by_depth": {
         "top_level": {
           "total": 2,
@@ -45,43 +45,19 @@
           "pct": 0
         },
         "nested": {
-          "total": 2,
-          "set": 0,
-          "pct": 0
+          "total": 3,
+          "set": 1,
+          "pct": 33.3
         },
         "deep": {
-          "total": 4,
-          "set": 4,
-          "pct": 100
+          "total": 0,
+          "set": 0,
+          "pct": 0
         }
       },
       "covered": [
         {
-          "path": "in.AccountIdentifier.AccountDon.Components",
-          "match": "alias",
-          "by_tests": [
-            "Get account",
-            "Get account with invalid id"
-          ]
-        },
-        {
-          "path": "in.AccountIdentifier.AccountDon.Partition",
-          "match": "alias",
-          "by_tests": [
-            "Get account",
-            "Get account with invalid id"
-          ]
-        },
-        {
-          "path": "in.AccountIdentifier.AccountDon.PartitionType",
-          "match": "alias",
-          "by_tests": [
-            "Get account",
-            "Get account with invalid id"
-          ]
-        },
-        {
-          "path": "in.AccountIdentifier.AccountDon.ServiceType",
+          "path": "in.AccountIdentifier.AccountDon",
           "match": "alias",
           "by_tests": [
             "Get account",
@@ -97,17 +73,17 @@
       ]
     },
     "branches": {
-      "total": 22,
+      "total": 21,
       "happy_path_reached": true,
       "reachable_on_happy_path": 10,
-      "present_arm_exercised": 9,
-      "present_arm_pct": 40.9,
+      "present_arm_exercised": 8,
+      "present_arm_pct": 38.1,
       "absent_arm_exercised": 10,
       "absent_arm_pct": 100,
-      "negative_arm_exercised": 9,
-      "negative_arm_pct": 40.9,
+      "negative_arm_exercised": 8,
+      "negative_arm_pct": 38.1,
       "both_arms_exercised": 0,
-      "coverage_pct": 40.9,
+      "coverage_pct": 38.1,
       "by_origin": {
         "service": {
           "total": 15,
@@ -128,18 +104,18 @@
           "absent_arm_exercised": 2
         },
         "library": {
-          "total": 3,
+          "total": 2,
           "reachable_on_happy_path": 0,
-          "present_arm_exercised": 3,
+          "present_arm_exercised": 2,
           "present_arm_pct": 100,
-          "negative_arm_exercised": 3,
+          "negative_arm_exercised": 2,
           "negative_arm_pct": 100,
           "absent_arm_exercised": 0
         }
       },
       "gaps": [
         {
-          "id": "b5",
+          "id": "b4",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1336",
           "cond": "in.AccountIdentifier == nil",
           "predicate_paths": [
@@ -147,7 +123,7 @@
           ]
         },
         {
-          "id": "b6",
+          "id": "b5",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1339",
           "cond": "in.AccountIdentifier != nil",
           "predicate_paths": [
@@ -155,7 +131,7 @@
           ]
         },
         {
-          "id": "b10",
+          "id": "b9",
           "at": "internal/service/account.go:91",
           "cond": "in.AccountIdentifier == nil",
           "predicate_paths": [
@@ -163,7 +139,7 @@
           ]
         },
         {
-          "id": "b12",
+          "id": "b11",
           "at": "internal/service/account.go:109",
           "cond": "in.AccountIdentifier.Domain != \"\"",
           "predicate_paths": [
@@ -171,7 +147,7 @@
           ]
         },
         {
-          "id": "b13",
+          "id": "b12",
           "at": "internal/service/account.go:90",
           "cond": "in.ResolvePrimary",
           "predicate_paths": [
@@ -179,7 +155,7 @@
           ]
         },
         {
-          "id": "b14",
+          "id": "b13",
           "at": "internal/service/account.go:117",
           "cond": "in.AccountIdentifier.ExternalRef != nil",
           "predicate_paths": [
@@ -187,7 +163,7 @@
           ]
         },
         {
-          "id": "b15",
+          "id": "b14",
           "at": "internal/service/account.go:1032",
           "cond": "in != nil",
           "predicate_paths": [
@@ -195,7 +171,7 @@
           ]
         },
         {
-          "id": "b16",
+          "id": "b15",
           "at": "internal/service/account.go:1036",
           "cond": "in.ResolvePrimary",
           "predicate_paths": [
@@ -203,7 +179,7 @@
           ]
         },
         {
-          "id": "b17",
+          "id": "b16",
           "at": "internal/service/account.go:1036",
           "cond": "in.IncludeArchived",
           "predicate_paths": [
@@ -211,7 +187,7 @@
           ]
         },
         {
-          "id": "b19",
+          "id": "b18",
           "at": "internal/service/account.go:1052",
           "cond": "in.ResolvePrimary",
           "predicate_paths": [
@@ -219,7 +195,7 @@
           ]
         },
         {
-          "id": "b20",
+          "id": "b19",
           "at": "internal/service/account.go:1063",
           "cond": "in.IncludeArchived",
           "predicate_paths": [
@@ -227,7 +203,7 @@
           ]
         },
         {
-          "id": "b21",
+          "id": "b20",
           "at": "internal/service/account.go:1081",
           "cond": "in.ResolvePrimary",
           "predicate_paths": [
@@ -235,7 +211,7 @@
           ]
         },
         {
-          "id": "b22",
+          "id": "b21",
           "at": "internal/service/account.go:1080",
           "cond": "in.IncludeArchived",
           "predicate_paths": [
@@ -309,8 +285,7 @@
         "kind": "rpc",
         "target": "AccountExists",
         "via_paths": [
-          "in.AccountIdentifier.AccountDon",
-          "in.AccountIdentifier.AccountDon.Partition"
+          "in.AccountIdentifier.AccountDon"
         ],
         "at": "internal/service/account.go:1057"
       },
@@ -318,8 +293,7 @@
         "kind": "rpc",
         "target": "Lock",
         "via_paths": [
-          "in.AccountIdentifier.AccountDon",
-          "in.AccountIdentifier.AccountDon.Partition"
+          "in.AccountIdentifier.AccountDon"
         ],
         "at": "internal/service/common.go:319"
       }

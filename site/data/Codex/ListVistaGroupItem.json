@@ -30,22 +30,22 @@
       "coverage_pct": 12.5
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 37,
+      "leaf_fields_read_by_rpc": 34,
       "covered_count": 1,
-      "coverage_pct": 2.7,
+      "coverage_pct": 2.9,
       "request_fields_set_by_tests": 1,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 5,
+          "total": 6,
           "set": 0,
           "pct": 0
         },
         "nested": {
-          "total": 20,
+          "total": 16,
           "set": 1,
-          "pct": 5
+          "pct": 6.3
         },
         "deep": {
           "total": 12,
@@ -63,10 +63,7 @@
         }
       ],
       "gaps": [
-        "in.DevOid.Components",
-        "in.DevOid.Partition",
-        "in.DevOid.PartitionType",
-        "in.DevOid.ServiceType",
+        "in.DevOid",
         "in.Filter.CreatedByAgentId",
         "in.Filter.CreatedByAgentIdOp",
         "in.Filter.CreatedById",
@@ -102,7 +99,7 @@
       ]
     },
     "branches": {
-      "total": 76,
+      "total": 75,
       "happy_path_reached": true,
       "reachable_on_happy_path": 10,
       "present_arm_exercised": 0,
@@ -133,7 +130,7 @@
           "absent_arm_exercised": 6
         },
         "library": {
-          "total": 3,
+          "total": 2,
           "reachable_on_happy_path": 2,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -153,14 +150,6 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.DevOid.Partition != \"\"",
-          "predicate_paths": [
-            "in.DevOid.Partition"
-          ]
-        },
-        {
-          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:5974",
           "cond": "in.Filter.CreatedByIdOp != nil",
           "predicate_paths": [
@@ -168,7 +157,7 @@
           ]
         },
         {
-          "id": "b4",
+          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:5986",
           "cond": "in.Filter.ModifiedByIdOp != nil",
           "predicate_paths": [
@@ -176,7 +165,7 @@
           ]
         },
         {
-          "id": "b5",
+          "id": "b4",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:5998",
           "cond": "in.Filter.CreatedByAgentIdOp != nil",
           "predicate_paths": [
@@ -184,7 +173,7 @@
           ]
         },
         {
-          "id": "b6",
+          "id": "b5",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:6039",
           "cond": "in.Filter.SyncMetadataOp != nil",
           "predicate_paths": [
@@ -192,7 +181,7 @@
           ]
         },
         {
-          "id": "b7",
+          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1144",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
@@ -200,15 +189,15 @@
           ]
         },
         {
-          "id": "b8",
+          "id": "b7",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1151",
-          "cond": "in.DevOid|in.DevOid.Partition",
+          "cond": "in.DevOid",
           "predicate_paths": [
             "in.DevOid"
           ]
         },
         {
-          "id": "b9",
+          "id": "b8",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1154",
           "cond": "in.Filter != nil",
           "predicate_paths": [
@@ -216,7 +205,7 @@
           ]
         },
         {
-          "id": "b10",
+          "id": "b9",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1155",
           "cond": "in.Filter != nil",
           "predicate_paths": [
@@ -224,7 +213,7 @@
           ]
         },
         {
-          "id": "b11",
+          "id": "b10",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1159",
           "cond": "in.Page >= 0",
           "predicate_paths": [
@@ -232,7 +221,7 @@
           ]
         },
         {
-          "id": "b12",
+          "id": "b11",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:1162",
           "cond": "in.PerPage >= 0",
           "predicate_paths": [
@@ -240,7 +229,7 @@
           ]
         },
         {
-          "id": "b13",
+          "id": "b12",
           "at": "internal/serverv2/list_vista_group_item.go:28",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
@@ -248,7 +237,7 @@
           ]
         },
         {
-          "id": "b14",
+          "id": "b13",
           "at": "internal/serverv2/list_vista_group_item.go:31",
           "cond": "in != nil",
           "predicate_paths": [
@@ -256,15 +245,15 @@
           ]
         },
         {
-          "id": "b15",
+          "id": "b14",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:667",
-          "cond": "in.DevOid|in.DevOid.Partition != objType",
+          "cond": "in.DevOid != objType",
           "predicate_paths": [
             "in.DevOid"
           ]
         },
         {
-          "id": "b16",
+          "id": "b15",
           "at": "internal/filterv2/vista_group_items.gen.go:140",
           "cond": "in.Filter.CreatedDate != nil",
           "predicate_paths": [
@@ -272,7 +261,7 @@
           ]
         },
         {
-          "id": "b17",
+          "id": "b16",
           "at": "internal/filterv2/vista_group_items.gen.go:129",
           "cond": "in.Filter.CreatedByIdOp == 4",
           "predicate_paths": [
@@ -280,7 +269,7 @@
           ]
         },
         {
-          "id": "b18",
+          "id": "b17",
           "at": "internal/filterv2/vista_group_items.gen.go:117",
           "cond": "in.Filter.CreatedByIdOp == 3",
           "predicate_paths": [
@@ -288,7 +277,7 @@
           ]
         },
         {
-          "id": "b19",
+          "id": "b18",
           "at": "internal/filterv2/vista_group_items.gen.go:119",
           "cond": "in.Filter.CreatedByIdOp == 4",
           "predicate_paths": [
@@ -296,7 +285,7 @@
           ]
         },
         {
-          "id": "b20",
+          "id": "b19",
           "at": "internal/filterv2/vista_group_items.gen.go:119",
           "cond": "in.Filter.CreatedByIdOp == 2",
           "predicate_paths": [
@@ -304,7 +293,7 @@
           ]
         },
         {
-          "id": "b21",
+          "id": "b20",
           "at": "internal/filterv2/vista_group_items.gen.go:131",
           "cond": "in.Filter.CreatedByIdOp == 5",
           "predicate_paths": [
@@ -312,7 +301,7 @@
           ]
         },
         {
-          "id": "b22",
+          "id": "b21",
           "at": "internal/filterv2/vista_group_items.gen.go:133",
           "cond": "in.Filter.CreatedByIdOp == 2",
           "predicate_paths": [
@@ -320,7 +309,7 @@
           ]
         },
         {
-          "id": "b23",
+          "id": "b22",
           "at": "internal/filterv2/vista_group_items.gen.go:133",
           "cond": "in.Filter.CreatedByIdOp == 1",
           "predicate_paths": [
@@ -328,7 +317,7 @@
           ]
         },
         {
-          "id": "b24",
+          "id": "b23",
           "at": "internal/filterv2/vista_group_items.gen.go:133",
           "cond": "in.Filter.CreatedByIdOp == 3",
           "predicate_paths": [
@@ -336,7 +325,7 @@
           ]
         },
         {
-          "id": "b25",
+          "id": "b24",
           "at": "internal/filterv2/vista_group_items.gen.go:143",
           "cond": "in.Filter.CreatedDate.After != nil",
           "predicate_paths": [
@@ -344,7 +333,7 @@
           ]
         },
         {
-          "id": "b26",
+          "id": "b25",
           "at": "internal/filterv2/vista_group_items.gen.go:150",
           "cond": "in.Filter.CreatedDate.Before != nil",
           "predicate_paths": [
@@ -352,7 +341,7 @@
           ]
         },
         {
-          "id": "b27",
+          "id": "b26",
           "at": "internal/filterv2/vista_group_items.gen.go:157",
           "cond": "in.Filter.CreatedDate.DatePreset != nil",
           "predicate_paths": [
@@ -360,7 +349,7 @@
           ]
         },
         {
-          "id": "b28",
+          "id": "b27",
           "at": "internal/filterv2/vista_group_items.gen.go:158",
           "cond": "in.Filter.CreatedDate.After != nil",
           "predicate_paths": [
@@ -368,7 +357,7 @@
           ]
         },
         {
-          "id": "b29",
+          "id": "b28",
           "at": "",
           "cond": "in.Filter.CreatedDate.DatePreset.Type",
           "predicate_paths": [
@@ -376,7 +365,7 @@
           ]
         },
         {
-          "id": "b30",
+          "id": "b29",
           "at": "internal/filterv2/vista_group_items.gen.go:158",
           "cond": "in.Filter.CreatedDate.Before != nil",
           "predicate_paths": [
@@ -384,7 +373,7 @@
           ]
         },
         {
-          "id": "b31",
+          "id": "b30",
           "at": "internal/filterv2/vista_group_items.gen.go:264",
           "cond": "in.Filter.ModifiedDate != nil",
           "predicate_paths": [
@@ -392,7 +381,7 @@
           ]
         },
         {
-          "id": "b32",
+          "id": "b31",
           "at": "internal/filterv2/vista_group_items.gen.go:253",
           "cond": "in.Filter.ModifiedByIdOp == 4",
           "predicate_paths": [
@@ -400,7 +389,7 @@
           ]
         },
         {
-          "id": "b33",
+          "id": "b32",
           "at": "internal/filterv2/vista_group_items.gen.go:241",
           "cond": "in.Filter.ModifiedByIdOp == 3",
           "predicate_paths": [
@@ -408,7 +397,7 @@
           ]
         },
         {
-          "id": "b34",
+          "id": "b33",
           "at": "internal/filterv2/vista_group_items.gen.go:243",
           "cond": "in.Filter.ModifiedByIdOp == 4",
           "predicate_paths": [
@@ -416,7 +405,7 @@
           ]
         },
         {
-          "id": "b35",
+          "id": "b34",
           "at": "internal/filterv2/vista_group_items.gen.go:243",
           "cond": "in.Filter.ModifiedByIdOp == 2",
           "predicate_paths": [
@@ -424,7 +413,7 @@
           ]
         },
         {
-          "id": "b36",
+          "id": "b35",
           "at": "internal/filterv2/vista_group_items.gen.go:255",
           "cond": "in.Filter.ModifiedByIdOp == 5",
           "predicate_paths": [
@@ -432,7 +421,7 @@
           ]
         },
         {
-          "id": "b37",
+          "id": "b36",
           "at": "internal/filterv2/vista_group_items.gen.go:257",
           "cond": "in.Filter.ModifiedByIdOp == 2",
           "predicate_paths": [
@@ -440,7 +429,7 @@
           ]
         },
         {
-          "id": "b38",
+          "id": "b37",
           "at": "internal/filterv2/vista_group_items.gen.go:257",
           "cond": "in.Filter.ModifiedByIdOp == 1",
           "predicate_paths": [
@@ -448,7 +437,7 @@
           ]
         },
         {
-          "id": "b39",
+          "id": "b38",
           "at": "internal/filterv2/vista_group_items.gen.go:257",
           "cond": "in.Filter.ModifiedByIdOp == 3",
           "predicate_paths": [
@@ -456,7 +445,7 @@
           ]
         },
         {
-          "id": "b40",
+          "id": "b39",
           "at": "internal/filterv2/vista_group_items.gen.go:267",
           "cond": "in.Filter.ModifiedDate.After != nil",
           "predicate_paths": [
@@ -464,7 +453,7 @@
           ]
         },
         {
-          "id": "b41",
+          "id": "b40",
           "at": "internal/filterv2/vista_group_items.gen.go:274",
           "cond": "in.Filter.ModifiedDate.Before != nil",
           "predicate_paths": [
@@ -472,7 +461,7 @@
           ]
         },
         {
-          "id": "b42",
+          "id": "b41",
           "at": "internal/filterv2/vista_group_items.gen.go:281",
           "cond": "in.Filter.ModifiedDate.DatePreset != nil",
           "predicate_paths": [
@@ -480,7 +469,7 @@
           ]
         },
         {
-          "id": "b43",
+          "id": "b42",
           "at": "internal/filterv2/vista_group_items.gen.go:282",
           "cond": "in.Filter.ModifiedDate.After != nil",
           "predicate_paths": [
@@ -488,7 +477,7 @@
           ]
         },
         {
-          "id": "b44",
+          "id": "b43",
           "at": "",
           "cond": "in.Filter.ModifiedDate.DatePreset.Type",
           "predicate_paths": [
@@ -496,7 +485,7 @@
           ]
         },
         {
-          "id": "b45",
+          "id": "b44",
           "at": "internal/filterv2/vista_group_items.gen.go:282",
           "cond": "in.Filter.ModifiedDate.Before != nil",
           "predicate_paths": [
@@ -504,7 +493,7 @@
           ]
         },
         {
-          "id": "b46",
+          "id": "b45",
           "at": "internal/filterv2/vista_group_items.gen.go:377",
           "cond": "in.Filter.CreatedByAgentIdOp == 4",
           "predicate_paths": [
@@ -512,7 +501,7 @@
           ]
         },
         {
-          "id": "b47",
+          "id": "b46",
           "at": "internal/filterv2/vista_group_items.gen.go:365",
           "cond": "in.Filter.CreatedByAgentIdOp == 3",
           "predicate_paths": [
@@ -520,7 +509,7 @@
           ]
         },
         {
-          "id": "b48",
+          "id": "b47",
           "at": "internal/filterv2/vista_group_items.gen.go:367",
           "cond": "in.Filter.CreatedByAgentIdOp == 4",
           "predicate_paths": [
@@ -528,7 +517,7 @@
           ]
         },
         {
-          "id": "b49",
+          "id": "b48",
           "at": "internal/filterv2/vista_group_items.gen.go:367",
           "cond": "in.Filter.CreatedByAgentIdOp == 2",
           "predicate_paths": [
@@ -536,7 +525,7 @@
           ]
         },
         {
-          "id": "b50",
+          "id": "b49",
           "at": "internal/filterv2/vista_group_items.gen.go:379",
           "cond": "in.Filter.CreatedByAgentIdOp == 5",
           "predicate_paths": [
@@ -544,7 +533,7 @@
           ]
         },
         {
-          "id": "b51",
+          "id": "b50",
           "at": "internal/filterv2/vista_group_items.gen.go:381",
           "cond": "in.Filter.CreatedByAgentIdOp == 2",
           "predicate_paths": [
@@ -552,7 +541,7 @@
           ]
         },
         {
-          "id": "b52",
+          "id": "b51",
           "at": "internal/filterv2/vista_group_items.gen.go:381",
           "cond": "in.Filter.CreatedByAgentIdOp == 1",
           "predicate_paths": [
@@ -560,7 +549,7 @@
           ]
         },
         {
-          "id": "b53",
+          "id": "b52",
           "at": "internal/filterv2/vista_group_items.gen.go:381",
           "cond": "in.Filter.CreatedByAgentIdOp == 3",
           "predicate_paths": [
@@ -568,7 +557,7 @@
           ]
         },
         {
-          "id": "b54",
+          "id": "b53",
           "at": "internal/filterv2/vista_group_items.gen.go:421",
           "cond": "in.Filter.StartDate != nil",
           "predicate_paths": [
@@ -576,7 +565,7 @@
           ]
         },
         {
-          "id": "b55",
+          "id": "b54",
           "at": "internal/filterv2/vista_group_items.gen.go:424",
           "cond": "in.Filter.StartDate.After != nil",
           "predicate_paths": [
@@ -584,7 +573,7 @@
           ]
         },
         {
-          "id": "b56",
+          "id": "b55",
           "at": "internal/filterv2/vista_group_items.gen.go:512",
           "cond": "in.Filter.EndDate != nil",
           "predicate_paths": [
@@ -592,7 +581,7 @@
           ]
         },
         {
-          "id": "b57",
+          "id": "b56",
           "at": "internal/filterv2/vista_group_items.gen.go:431",
           "cond": "in.Filter.StartDate.Before != nil",
           "predicate_paths": [
@@ -600,7 +589,7 @@
           ]
         },
         {
-          "id": "b58",
+          "id": "b57",
           "at": "internal/filterv2/vista_group_items.gen.go:438",
           "cond": "in.Filter.StartDate.DatePreset != nil",
           "predicate_paths": [
@@ -608,7 +597,7 @@
           ]
         },
         {
-          "id": "b59",
+          "id": "b58",
           "at": "internal/filterv2/vista_group_items.gen.go:439",
           "cond": "in.Filter.StartDate.After != nil",
           "predicate_paths": [
@@ -616,7 +605,7 @@
           ]
         },
         {
-          "id": "b60",
+          "id": "b59",
           "at": "",
           "cond": "in.Filter.StartDate.DatePreset.Type",
           "predicate_paths": [
@@ -624,7 +613,7 @@
           ]
         },
         {
-          "id": "b61",
+          "id": "b60",
           "at": "internal/filterv2/vista_group_items.gen.go:439",
           "cond": "in.Filter.StartDate.Before != nil",
           "predicate_paths": [
@@ -632,7 +621,7 @@
           ]
         },
         {
-          "id": "b62",
+          "id": "b61",
           "at": "internal/filterv2/vista_group_items.gen.go:515",
           "cond": "in.Filter.EndDate.After != nil",
           "predicate_paths": [
@@ -640,7 +629,7 @@
           ]
         },
         {
-          "id": "b63",
+          "id": "b62",
           "at": "internal/filterv2/vista_group_items.gen.go:522",
           "cond": "in.Filter.EndDate.Before != nil",
           "predicate_paths": [
@@ -648,7 +637,7 @@
           ]
         },
         {
-          "id": "b64",
+          "id": "b63",
           "at": "internal/filterv2/vista_group_items.gen.go:529",
           "cond": "in.Filter.EndDate.DatePreset != nil",
           "predicate_paths": [
@@ -656,7 +645,7 @@
           ]
         },
         {
-          "id": "b65",
+          "id": "b64",
           "at": "internal/filterv2/vista_group_items.gen.go:530",
           "cond": "in.Filter.EndDate.After != nil",
           "predicate_paths": [
@@ -664,7 +653,7 @@
           ]
         },
         {
-          "id": "b66",
+          "id": "b65",
           "at": "",
           "cond": "in.Filter.EndDate.DatePreset.Type",
           "predicate_paths": [
@@ -672,7 +661,7 @@
           ]
         },
         {
-          "id": "b67",
+          "id": "b66",
           "at": "internal/filterv2/vista_group_items.gen.go:530",
           "cond": "in.Filter.EndDate.Before != nil",
           "predicate_paths": [
@@ -680,7 +669,7 @@
           ]
         },
         {
-          "id": "b68",
+          "id": "b67",
           "at": "internal/filterv2/vista_group_items.gen.go:638",
           "cond": "in.Filter.SyncMetadataOp == 3",
           "predicate_paths": [
@@ -688,7 +677,7 @@
           ]
         },
         {
-          "id": "b69",
+          "id": "b68",
           "at": "internal/filterv2/vista_group_items.gen.go:714",
           "cond": "in.Filter.SyncMetadataOp == 4",
           "predicate_paths": [
@@ -696,7 +685,7 @@
           ]
         },
         {
-          "id": "b70",
+          "id": "b69",
           "at": "internal/filterv2/vista_group_items.gen.go:672",
           "cond": "in.Filter.SyncMetadataOp == 2",
           "predicate_paths": [
@@ -704,7 +693,7 @@
           ]
         },
         {
-          "id": "b71",
+          "id": "b70",
           "at": "internal/filterv2/vista_group_items.gen.go:672",
           "cond": "in.Filter.SyncMetadataOp == 4",
           "predicate_paths": [
@@ -712,7 +701,7 @@
           ]
         },
         {
-          "id": "b72",
+          "id": "b71",
           "at": "internal/filterv2/vista_group_items.gen.go:716",
           "cond": "in.Filter.SyncMetadataOp == 5",
           "predicate_paths": [
@@ -720,7 +709,7 @@
           ]
         },
         {
-          "id": "b73",
+          "id": "b72",
           "at": "internal/filterv2/vista_group_items.gen.go:718",
           "cond": "in.Filter.SyncMetadataOp == 2",
           "predicate_paths": [
@@ -728,7 +717,7 @@
           ]
         },
         {
-          "id": "b74",
+          "id": "b73",
           "at": "internal/filterv2/vista_group_items.gen.go:718",
           "cond": "in.Filter.SyncMetadataOp == 1",
           "predicate_paths": [
@@ -736,7 +725,7 @@
           ]
         },
         {
-          "id": "b75",
+          "id": "b74",
           "at": "internal/filterv2/vista_group_items.gen.go:718",
           "cond": "in.Filter.SyncMetadataOp == 3",
           "predicate_paths": [
@@ -744,7 +733,7 @@
           ]
         },
         {
-          "id": "b76",
+          "id": "b75",
           "at": "internal/serverv2/list_vista_group_item.go:75",
           "cond": "in.IncludeItems",
           "predicate_paths": [
@@ -984,5 +973,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListVistaGroupItem` (HTTP operation `VistasGroupsList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid.Components\n  - in.DevOid.Partition\n  - in.DevOid.PartitionType\n  - in.DevOid.ServiceType\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.EndDate.After\n  - in.Filter.EndDate.Before\n  - in.Filter.EndDate.DatePreset.Type\n  - in.Filter.ExternalSourceData\n  - in.Filter.GroupObjectType\n  - in.Filter.InferredParts\n  - in.Filter.IsSystem\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.StagedInfo\n  - in.Filter.StartDate.After\n  - in.Filter.StartDate.Before\n  - in.Filter.StartDate.DatePreset.Type\n  - in.Filter.State\n  - in.Filter.SyncMetadata\n  - in.Filter.SyncMetadataOp\n  - in.Filter.Type\n  - in.IncludeItems\n  - in.Page\n  - in.PerPage\n  - in.SkipTotal\n  - in.SortBy\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid.Partition != \"\"\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.SyncMetadataOp != nil\n  - in.DevOid == nil\n  - in.DevOid|in.DevOid.Partition\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Page >= 0\n  - in.PerPage >= 0\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid|in.DevOid.Partition != objType\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 5\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 1\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.ModifiedDate != nil\n  - in.Filter.ModifiedByIdOp == 4\n  - in.Filter.ModifiedByIdOp == 3\n  - in.Filter.ModifiedByIdOp == 4\n  - in.Filter.ModifiedByIdOp == 2\n  - in.Filter.ModifiedByIdOp == 5\n  - in.Filter.ModifiedByIdOp == 2\n  - in.Filter.ModifiedByIdOp == 1\n  - in.Filter.ModifiedByIdOp == 3\n  - in.Filter.ModifiedDate.After != nil\n  - (+36 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListVistaGroupItem` (HTTP operation `VistasGroupsList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.EndDate.After\n  - in.Filter.EndDate.Before\n  - in.Filter.EndDate.DatePreset.Type\n  - in.Filter.ExternalSourceData\n  - in.Filter.GroupObjectType\n  - in.Filter.InferredParts\n  - in.Filter.IsSystem\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.StagedInfo\n  - in.Filter.StartDate.After\n  - in.Filter.StartDate.Before\n  - in.Filter.StartDate.DatePreset.Type\n  - in.Filter.State\n  - in.Filter.SyncMetadata\n  - in.Filter.SyncMetadataOp\n  - in.Filter.Type\n  - in.IncludeItems\n  - in.Page\n  - in.PerPage\n  - in.SkipTotal\n  - in.SortBy\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.SyncMetadataOp != nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Page >= 0\n  - in.PerPage >= 0\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 5\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 1\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.ModifiedDate != nil\n  - in.Filter.ModifiedByIdOp == 4\n  - in.Filter.ModifiedByIdOp == 3\n  - in.Filter.ModifiedByIdOp == 4\n  - in.Filter.ModifiedByIdOp == 2\n  - in.Filter.ModifiedByIdOp == 5\n  - in.Filter.ModifiedByIdOp == 2\n  - in.Filter.ModifiedByIdOp == 1\n  - in.Filter.ModifiedByIdOp == 3\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.Before != nil\n  - (+35 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

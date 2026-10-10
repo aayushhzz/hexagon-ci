@@ -32,20 +32,20 @@
       "coverage_pct": 11.1
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 6,
-      "covered_count": 0,
-      "coverage_pct": 0,
+      "leaf_fields_read_by_rpc": 3,
+      "covered_count": 1,
+      "coverage_pct": 33.3,
       "request_fields_set_by_tests": 5,
-      "set_by_positive_tests": 0,
+      "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 0,
-          "set": 0,
-          "pct": 0
+          "total": 1,
+          "set": 1,
+          "pct": 100
         },
         "nested": {
-          "total": 4,
+          "total": 0,
           "set": 0,
           "pct": 0
         },
@@ -55,28 +55,37 @@
           "pct": 0
         }
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.Id",
+          "match": "exact",
+          "by_tests": [
+            "Returns 404 for non-existent milestone",
+            "Returns 404 when updating a deleted milestone",
+            "Updates description",
+            "Updates due_date",
+            "Updates status through all transitions",
+            "Updates title"
+          ]
+        }
+      ],
       "gaps": [
-        "in.Id.Components",
-        "in.Id.Partition",
-        "in.Id.PartitionType",
-        "in.Id.ServiceType",
         "in.Milestone.Description.Value",
         "in.Milestone.Title.Value"
       ]
     },
     "branches": {
-      "total": 8,
+      "total": 7,
       "happy_path_reached": true,
       "reachable_on_happy_path": 4,
       "present_arm_exercised": 4,
-      "present_arm_pct": 50,
+      "present_arm_pct": 57.1,
       "absent_arm_exercised": 2,
       "absent_arm_pct": 50,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 50,
+      "coverage_pct": 57.1,
       "by_origin": {
         "service": {
           "total": 1,
@@ -97,10 +106,10 @@
           "absent_arm_exercised": 2
         },
         "library": {
-          "total": 2,
+          "total": 1,
           "reachable_on_happy_path": 1,
           "present_arm_exercised": 1,
-          "present_arm_pct": 50,
+          "present_arm_pct": 100,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 0
@@ -108,15 +117,7 @@
       },
       "gaps": [
         {
-          "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.Id.Partition != \"\"",
-          "predicate_paths": [
-            "in.Id.Partition"
-          ]
-        },
-        {
-          "id": "b6",
+          "id": "b5",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/milestone.pb.validator.go:53",
           "cond": "in.Milestone != nil",
           "predicate_paths": [
@@ -124,7 +125,7 @@
           ]
         },
         {
-          "id": "b7",
+          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/milestone.pb.validator.go:54",
           "cond": "in.Milestone != nil",
           "predicate_paths": [
@@ -132,7 +133,7 @@
           ]
         },
         {
-          "id": "b8",
+          "id": "b7",
           "at": "internal/serverv2/update_milestone.go:22",
           "cond": "in != nil",
           "predicate_paths": [
@@ -149,10 +150,6 @@
         },
         {
           "field": "duedate",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "id",
           "fuzzy_suggestions": null
         },
         {
@@ -242,5 +239,5 @@
     "errors": [],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateMilestone` (HTTP operation `MilestonesUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Id.Components\n  - in.Id.Partition\n  - in.Id.PartitionType\n  - in.Id.ServiceType\n  - in.Milestone.Description.Value\n  - in.Milestone.Title.Value\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Id.Partition != \"\"\n  - in.Milestone != nil\n  - in.Milestone != nil\n  - in != nil\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `duedate` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `title` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateMilestone` (HTTP operation `MilestonesUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Milestone.Description.Value\n  - in.Milestone.Title.Value\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Milestone != nil\n  - in.Milestone != nil\n  - in != nil\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `duedate` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `title` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

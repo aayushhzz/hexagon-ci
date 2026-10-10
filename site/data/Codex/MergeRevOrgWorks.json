@@ -11,7 +11,7 @@
       "coverage_pct": 0
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 8,
+      "leaf_fields_read_by_rpc": 2,
       "covered_count": 0,
       "coverage_pct": 0,
       "request_fields_set_by_tests": 0,
@@ -19,12 +19,12 @@
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 0,
+          "total": 2,
           "set": 0,
           "pct": 0
         },
         "nested": {
-          "total": 8,
+          "total": 0,
           "set": 0,
           "pct": 0
         },
@@ -36,18 +36,12 @@
       },
       "covered": null,
       "gaps": [
-        "in.PrimaryRevOrgId.Components",
-        "in.PrimaryRevOrgId.Partition",
-        "in.PrimaryRevOrgId.PartitionType",
-        "in.PrimaryRevOrgId.ServiceType",
-        "in.SecondaryRevOrgId.Components",
-        "in.SecondaryRevOrgId.Partition",
-        "in.SecondaryRevOrgId.PartitionType",
-        "in.SecondaryRevOrgId.ServiceType"
+        "in.PrimaryRevOrgId",
+        "in.SecondaryRevOrgId"
       ]
     },
     "branches": {
-      "total": 22,
+      "total": 20,
       "happy_path_reached": false,
       "reachable_on_happy_path": 19,
       "present_arm_exercised": 0,
@@ -78,7 +72,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 11,
+          "total": 9,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -98,14 +92,6 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.PrimaryRevOrgId.Partition != \"\"",
-          "predicate_paths": [
-            "in.PrimaryRevOrgId.Partition"
-          ]
-        },
-        {
-          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
           "cond": "in.SecondaryRevOrgId == nil",
           "predicate_paths": [
@@ -113,15 +99,7 @@
           ]
         },
         {
-          "id": "b4",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:641",
-          "cond": "in.SecondaryRevOrgId.Partition != \"\"",
-          "predicate_paths": [
-            "in.SecondaryRevOrgId.Partition"
-          ]
-        },
-        {
-          "id": "b5",
+          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:870",
           "cond": "in.PrimaryRevOrgId == nil",
           "predicate_paths": [
@@ -129,15 +107,15 @@
           ]
         },
         {
-          "id": "b6",
+          "id": "b4",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:877",
-          "cond": "in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition",
+          "cond": "in.PrimaryRevOrgId",
           "predicate_paths": [
             "in.PrimaryRevOrgId"
           ]
         },
         {
-          "id": "b7",
+          "id": "b5",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:880",
           "cond": "in.SecondaryRevOrgId == nil",
           "predicate_paths": [
@@ -145,41 +123,59 @@
           ]
         },
         {
-          "id": "b8",
+          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:887",
-          "cond": "in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition",
+          "cond": "in.SecondaryRevOrgId",
+          "predicate_paths": [
+            "in.SecondaryRevOrgId"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:593",
+          "cond": "in.PrimaryRevOrgId == nil",
+          "predicate_paths": [
+            "in.PrimaryRevOrgId"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:593",
+          "cond": "in.SecondaryRevOrgId == nil",
           "predicate_paths": [
             "in.SecondaryRevOrgId"
           ]
         },
         {
           "id": "b9",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:593",
-          "cond": "in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition == nil",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/utils.go:3600",
+          "cond": "in.PrimaryRevOrgId",
           "predicate_paths": [
             "in.PrimaryRevOrgId"
           ]
         },
         {
           "id": "b10",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:593",
-          "cond": "in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition == nil",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/db/mongo_helper.go:306",
+          "cond": "in.PrimaryRevOrgId|in.SecondaryRevOrgId == nil",
           "predicate_paths": [
+            "in.PrimaryRevOrgId",
             "in.SecondaryRevOrgId"
           ]
         },
         {
           "id": "b11",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/utils.go:3600",
-          "cond": "in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition",
+          "at": "",
+          "cond": "in.PrimaryRevOrgId|in.SecondaryRevOrgId",
           "predicate_paths": [
-            "in.PrimaryRevOrgId"
+            "in.PrimaryRevOrgId",
+            "in.SecondaryRevOrgId"
           ]
         },
         {
           "id": "b12",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/db/mongo_helper.go:306",
-          "cond": "in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition == nil",
+          "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/mongo/errors.go:173",
+          "cond": "in.PrimaryRevOrgId|in.SecondaryRevOrgId != nil",
           "predicate_paths": [
             "in.PrimaryRevOrgId",
             "in.SecondaryRevOrgId"
@@ -187,8 +183,8 @@
         },
         {
           "id": "b13",
-          "at": "",
-          "cond": "in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/error.go:135",
+          "cond": "in.PrimaryRevOrgId|in.SecondaryRevOrgId == nil",
           "predicate_paths": [
             "in.PrimaryRevOrgId",
             "in.SecondaryRevOrgId"
@@ -196,8 +192,8 @@
         },
         {
           "id": "b14",
-          "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/mongo/errors.go:173",
-          "cond": "in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition != nil",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/error.go:230",
+          "cond": "in.PrimaryRevOrgId|in.SecondaryRevOrgId == nil",
           "predicate_paths": [
             "in.PrimaryRevOrgId",
             "in.SecondaryRevOrgId"
@@ -205,8 +201,8 @@
         },
         {
           "id": "b15",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/error.go:135",
-          "cond": "in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition == nil",
+          "at": "internal/common/errors.go:106",
+          "cond": "in.PrimaryRevOrgId|in.SecondaryRevOrgId == nil",
           "predicate_paths": [
             "in.PrimaryRevOrgId",
             "in.SecondaryRevOrgId"
@@ -214,8 +210,8 @@
         },
         {
           "id": "b16",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/error.go:230",
-          "cond": "in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition == nil",
+          "at": "internal/common/errors.go:146",
+          "cond": "in.PrimaryRevOrgId|in.SecondaryRevOrgId",
           "predicate_paths": [
             "in.PrimaryRevOrgId",
             "in.SecondaryRevOrgId"
@@ -223,8 +219,8 @@
         },
         {
           "id": "b17",
-          "at": "internal/common/errors.go:106",
-          "cond": "in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition == nil",
+          "at": "internal/common/errors.go:182",
+          "cond": "in.PrimaryRevOrgId|in.SecondaryRevOrgId",
           "predicate_paths": [
             "in.PrimaryRevOrgId",
             "in.SecondaryRevOrgId"
@@ -232,24 +228,6 @@
         },
         {
           "id": "b18",
-          "at": "internal/common/errors.go:146",
-          "cond": "in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition",
-          "predicate_paths": [
-            "in.PrimaryRevOrgId",
-            "in.SecondaryRevOrgId"
-          ]
-        },
-        {
-          "id": "b19",
-          "at": "internal/common/errors.go:182",
-          "cond": "in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition",
-          "predicate_paths": [
-            "in.PrimaryRevOrgId",
-            "in.SecondaryRevOrgId"
-          ]
-        },
-        {
-          "id": "b20",
           "at": "internal/serverv2/merge_rev_org_works.go:69",
           "cond": "in != nil",
           "predicate_paths": [
@@ -257,18 +235,18 @@
           ]
         },
         {
-          "id": "b21",
+          "id": "b19",
           "at": "internal/serverv2/merge_rev_org_works.go:98",
-          "cond": "in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition != in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition",
+          "cond": "in.PrimaryRevOrgId != in.SecondaryRevOrgId",
           "predicate_paths": [
             "in.PrimaryRevOrgId",
             "in.SecondaryRevOrgId"
           ]
         },
         {
-          "id": "b22",
+          "id": "b20",
           "at": "internal/serverv2/merge_rev_org_works.go:190",
-          "cond": "in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition != nil",
+          "cond": "in.PrimaryRevOrgId|in.SecondaryRevOrgId != nil",
           "predicate_paths": [
             "in.PrimaryRevOrgId",
             "in.SecondaryRevOrgId"
@@ -291,8 +269,7 @@
         "kind": "rpc",
         "target": "GetRevOrg",
         "via_paths": [
-          "in.PrimaryRevOrgId",
-          "in.PrimaryRevOrgId.Partition"
+          "in.PrimaryRevOrgId"
         ],
         "at": "internal/serverv2/merge_rev_org_works.go:35"
       },
@@ -300,8 +277,7 @@
         "kind": "rpc",
         "target": "SetError",
         "via_paths": [
-          "in.PrimaryRevOrgId",
-          "in.PrimaryRevOrgId.Partition"
+          "in.PrimaryRevOrgId"
         ],
         "at": "internal/common/errors.go:214"
       },
@@ -310,9 +286,7 @@
         "target": "HasErrorCode",
         "via_paths": [
           "in.PrimaryRevOrgId",
-          "in.PrimaryRevOrgId.Partition",
-          "in.SecondaryRevOrgId",
-          "in.SecondaryRevOrgId.Partition"
+          "in.SecondaryRevOrgId"
         ],
         "at": "internal/common/errors.go:155"
       },
@@ -321,9 +295,7 @@
         "target": "HasErrorLabel",
         "via_paths": [
           "in.PrimaryRevOrgId",
-          "in.PrimaryRevOrgId.Partition",
-          "in.SecondaryRevOrgId",
-          "in.SecondaryRevOrgId.Partition"
+          "in.SecondaryRevOrgId"
         ],
         "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/mongo/errors.go:174"
       }
@@ -337,5 +309,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MergeRevOrgWorks` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.PrimaryRevOrgId.Components\n  - in.PrimaryRevOrgId.Partition\n  - in.PrimaryRevOrgId.PartitionType\n  - in.PrimaryRevOrgId.ServiceType\n  - in.SecondaryRevOrgId.Components\n  - in.SecondaryRevOrgId.Partition\n  - in.SecondaryRevOrgId.PartitionType\n  - in.SecondaryRevOrgId.ServiceType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.PrimaryRevOrgId == nil\n  - in.PrimaryRevOrgId.Partition != \"\"\n  - in.SecondaryRevOrgId == nil\n  - in.SecondaryRevOrgId.Partition != \"\"\n  - in.PrimaryRevOrgId == nil\n  - in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition\n  - in.SecondaryRevOrgId == nil\n  - in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition\n  - in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition == nil\n  - in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition == nil\n  - in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition\n  - in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition == nil\n  - in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition\n  - in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition != nil\n  - in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition == nil\n  - in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition == nil\n  - in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition == nil\n  - in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition\n  - in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition\n  - in != nil\n  - in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition != in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition\n  - in.PrimaryRevOrgId|in.PrimaryRevOrgId.Partition|in.SecondaryRevOrgId|in.SecondaryRevOrgId.Partition != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MergeRevOrgWorks` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.PrimaryRevOrgId\n  - in.SecondaryRevOrgId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.PrimaryRevOrgId == nil\n  - in.SecondaryRevOrgId == nil\n  - in.PrimaryRevOrgId == nil\n  - in.PrimaryRevOrgId\n  - in.SecondaryRevOrgId == nil\n  - in.SecondaryRevOrgId\n  - in.PrimaryRevOrgId == nil\n  - in.SecondaryRevOrgId == nil\n  - in.PrimaryRevOrgId\n  - in.PrimaryRevOrgId|in.SecondaryRevOrgId == nil\n  - in.PrimaryRevOrgId|in.SecondaryRevOrgId\n  - in.PrimaryRevOrgId|in.SecondaryRevOrgId != nil\n  - in.PrimaryRevOrgId|in.SecondaryRevOrgId == nil\n  - in.PrimaryRevOrgId|in.SecondaryRevOrgId == nil\n  - in.PrimaryRevOrgId|in.SecondaryRevOrgId == nil\n  - in.PrimaryRevOrgId|in.SecondaryRevOrgId\n  - in.PrimaryRevOrgId|in.SecondaryRevOrgId\n  - in != nil\n  - in.PrimaryRevOrgId != in.SecondaryRevOrgId\n  - in.PrimaryRevOrgId|in.SecondaryRevOrgId != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

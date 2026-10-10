@@ -11,7 +11,7 @@
       "coverage_pct": 0
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 8,
+      "leaf_fields_read_by_rpc": 2,
       "covered_count": 0,
       "coverage_pct": 0,
       "request_fields_set_by_tests": 0,
@@ -19,12 +19,12 @@
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 0,
+          "total": 2,
           "set": 0,
           "pct": 0
         },
         "nested": {
-          "total": 8,
+          "total": 0,
           "set": 0,
           "pct": 0
         },
@@ -36,18 +36,12 @@
       },
       "covered": null,
       "gaps": [
-        "in.RevOrgId.Components",
-        "in.RevOrgId.Partition",
-        "in.RevOrgId.PartitionType",
-        "in.RevOrgId.ServiceType",
-        "in.TargetAccountId.Components",
-        "in.TargetAccountId.Partition",
-        "in.TargetAccountId.PartitionType",
-        "in.TargetAccountId.ServiceType"
+        "in.RevOrgId",
+        "in.TargetAccountId"
       ]
     },
     "branches": {
-      "total": 8,
+      "total": 6,
       "happy_path_reached": false,
       "reachable_on_happy_path": 6,
       "present_arm_exercised": 0,
@@ -78,7 +72,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 4,
+          "total": 2,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -98,14 +92,6 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.RevOrgId.Partition != \"\"",
-          "predicate_paths": [
-            "in.RevOrgId.Partition"
-          ]
-        },
-        {
-          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
           "cond": "in.TargetAccountId == nil",
           "predicate_paths": [
@@ -113,15 +99,7 @@
           ]
         },
         {
-          "id": "b4",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.TargetAccountId.Partition != \"\"",
-          "predicate_paths": [
-            "in.TargetAccountId.Partition"
-          ]
-        },
-        {
-          "id": "b5",
+          "id": "b3",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2387",
           "cond": "in.RevOrgId == nil",
           "predicate_paths": [
@@ -129,15 +107,15 @@
           ]
         },
         {
-          "id": "b6",
+          "id": "b4",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2394",
-          "cond": "in.RevOrgId|in.RevOrgId.Partition",
+          "cond": "in.RevOrgId",
           "predicate_paths": [
             "in.RevOrgId"
           ]
         },
         {
-          "id": "b7",
+          "id": "b5",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2397",
           "cond": "in.TargetAccountId == nil",
           "predicate_paths": [
@@ -145,9 +123,9 @@
           ]
         },
         {
-          "id": "b8",
+          "id": "b6",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2404",
-          "cond": "in.TargetAccountId|in.TargetAccountId.Partition",
+          "cond": "in.TargetAccountId",
           "predicate_paths": [
             "in.TargetAccountId"
           ]
@@ -169,8 +147,7 @@
         "kind": "rpc",
         "target": "Lock",
         "via_paths": [
-          "in.RevOrgId",
-          "in.RevOrgId.Partition"
+          "in.RevOrgId"
         ],
         "at": "internal/service/cache.go:317"
       },
@@ -178,8 +155,7 @@
         "kind": "rpc",
         "target": "RemoveRevOrgWithExternalRef",
         "via_paths": [
-          "in.RevOrgId",
-          "in.RevOrgId.Partition"
+          "in.RevOrgId"
         ],
         "at": "internal/service/cache.go:326"
       }
@@ -203,5 +179,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MoveRevOrg` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.RevOrgId.Components\n  - in.RevOrgId.Partition\n  - in.RevOrgId.PartitionType\n  - in.RevOrgId.ServiceType\n  - in.TargetAccountId.Components\n  - in.TargetAccountId.Partition\n  - in.TargetAccountId.PartitionType\n  - in.TargetAccountId.ServiceType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.RevOrgId == nil\n  - in.RevOrgId.Partition != \"\"\n  - in.TargetAccountId == nil\n  - in.TargetAccountId.Partition != \"\"\n  - in.RevOrgId == nil\n  - in.RevOrgId|in.RevOrgId.Partition\n  - in.TargetAccountId == nil\n  - in.TargetAccountId|in.TargetAccountId.Partition\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInvalidRevOrgFilter\n  - errRevOrgNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MoveRevOrg` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.RevOrgId\n  - in.TargetAccountId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.RevOrgId == nil\n  - in.TargetAccountId == nil\n  - in.RevOrgId == nil\n  - in.RevOrgId\n  - in.TargetAccountId == nil\n  - in.TargetAccountId\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInvalidRevOrgFilter\n  - errRevOrgNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

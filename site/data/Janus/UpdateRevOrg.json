@@ -35,9 +35,9 @@
       "coverage_pct": 20
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 12,
+      "leaf_fields_read_by_rpc": 9,
       "covered_count": 1,
-      "coverage_pct": 8.3,
+      "coverage_pct": 11.1,
       "request_fields_set_by_tests": 5,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
@@ -48,12 +48,12 @@
           "pct": 0
         },
         "nested": {
-          "total": 6,
+          "total": 7,
           "set": 1,
-          "pct": 16.7
+          "pct": 14.3
         },
         "deep": {
-          "total": 6,
+          "total": 2,
           "set": 0,
           "pct": 0
         }
@@ -71,10 +71,7 @@
       ],
       "gaps": [
         "in.OrgIdentifier.OrgDisplayId",
-        "in.OrgIdentifier.OrgDon.Components",
-        "in.OrgIdentifier.OrgDon.Partition",
-        "in.OrgIdentifier.OrgDon.PartitionType",
-        "in.OrgIdentifier.OrgDon.ServiceType",
+        "in.OrgIdentifier.OrgDon",
         "in.OrgIdentifier.OrgExternalId",
         "in.OrgIdentifier.OrgExternalIdIssuer",
         "in.RevOrg.Account",
@@ -84,17 +81,17 @@
       ]
     },
     "branches": {
-      "total": 11,
+      "total": 10,
       "happy_path_reached": true,
       "reachable_on_happy_path": 1,
       "present_arm_exercised": 1,
-      "present_arm_pct": 9.1,
+      "present_arm_pct": 10,
       "absent_arm_exercised": 1,
       "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 9.1,
+      "coverage_pct": 10,
       "by_origin": {
         "service": {
           "total": 9,
@@ -115,7 +112,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 2,
+          "total": 1,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -135,14 +132,6 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:641",
-          "cond": "in.OrgIdentifier.OrgDon.Partition != \"\"",
-          "predicate_paths": [
-            "in.OrgIdentifier.OrgDon.Partition"
-          ]
-        },
-        {
-          "id": "b3",
           "at": "internal/service/revorg.go:1316",
           "cond": "in.OrgIdentifier == nil",
           "predicate_paths": [
@@ -150,7 +139,7 @@
           ]
         },
         {
-          "id": "b4",
+          "id": "b3",
           "at": "internal/service/revorg.go:1321",
           "cond": "in.OrgIdentifier.OrgDon != nil",
           "predicate_paths": [
@@ -158,7 +147,7 @@
           ]
         },
         {
-          "id": "b5",
+          "id": "b4",
           "at": "internal/service/revorg.go:1278",
           "cond": "in.OrgIdentifier.OrgExternalIdIssuer != \"\"",
           "predicate_paths": [
@@ -166,7 +155,7 @@
           ]
         },
         {
-          "id": "b6",
+          "id": "b5",
           "at": "internal/service/revorg.go:1279",
           "cond": "**t51 == in.OrgIdentifier.OrgExternalIdIssuer",
           "predicate_paths": [
@@ -174,7 +163,7 @@
           ]
         },
         {
-          "id": "b7",
+          "id": "b6",
           "at": "internal/service/revorg.go:1281",
           "cond": "**t68 == in.OrgIdentifier.OrgExternalIdIssuer",
           "predicate_paths": [
@@ -182,7 +171,7 @@
           ]
         },
         {
-          "id": "b9",
+          "id": "b8",
           "at": "internal/service/revorg.go:1551",
           "cond": "in.RevOrg.ExternalOid != \"\"",
           "predicate_paths": [
@@ -190,7 +179,7 @@
           ]
         },
         {
-          "id": "b10",
+          "id": "b9",
           "at": "internal/service/revorg.go:1560",
           "cond": "in.RevOrg.ExternalOid != nil",
           "predicate_paths": [
@@ -198,7 +187,7 @@
           ]
         },
         {
-          "id": "b11",
+          "id": "b10",
           "at": "internal/service/revorg.go:465",
           "cond": "in.RevOrg.Account != nil",
           "predicate_paths": [
@@ -363,5 +352,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateRevOrg` (HTTP operation `RevOrgsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 404, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon.Components\n  - in.OrgIdentifier.OrgDon.Partition\n  - in.OrgIdentifier.OrgDon.PartitionType\n  - in.OrgIdentifier.OrgDon.ServiceType\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevOrg.Account\n  - in.RevOrg.ExternalOid\n  - in.RevOrg.PhoneNumbers.StringValues\n  - in.RevOrg.SharedWith.Values\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier.OrgDon.Partition != \"\"\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevOrg.ExternalOid != \"\"\n  - in.RevOrg.ExternalOid != nil\n  - in.RevOrg.Account != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidRevOrgFilter\n  - errPhoneNumberInvalid\n  - errRevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `environment` -> suggestions []\n  - test field `externalref` -> suggestions []\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateRevOrg` (HTTP operation `RevOrgsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 404, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevOrg.Account\n  - in.RevOrg.ExternalOid\n  - in.RevOrg.PhoneNumbers.StringValues\n  - in.RevOrg.SharedWith.Values\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevOrg.ExternalOid != \"\"\n  - in.RevOrg.ExternalOid != nil\n  - in.RevOrg.Account != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidRevOrgFilter\n  - errPhoneNumberInvalid\n  - errRevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `environment` -> suggestions []\n  - test field `externalref` -> suggestions []\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }
