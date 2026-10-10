@@ -152,6 +152,102 @@ func TestRebuildToFileIsDeterministicAndPreservesLastGraphOnParseError(t *testin
 	}
 }
 
+func TestCompactGraphRoundTripAndMixedFormatPlanning(t *testing.T) {
+	root := t.TempDir()
+	writeFixture(t, root, "go.mod", "module example.com/demo\n\ngo 1.24.0\n")
+	writeFixture(t, root, "lib/leaf.go", "package lib\nfunc Leaf() {}\n")
+	writeFixture(t, root, "app/start.go", "package app\nimport \"example.com/demo/lib\"\nfunc Start() { lib.Leaf(); missing() }\n")
+	writeFixture(t, root, "app/start_test.go", "package app\nimport \"testing\"\nfunc TestFlow(t *testing.T) { Start() }\n")
+	writeFixture(t, root, "other/other_test.go", "package other\nimport \"testing\"\nfunc TestOther(t *testing.T) {}\n")
+	namedPath := filepath.Join(t.TempDir(), "base.json.gz")
+	named, err := hexagon.RebuildToFile(root, namedPath, []string{"alt"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	compactPath := filepath.Join(t.TempDir(), "head.hgc.gz")
+	var stdout, stderr bytes.Buffer
+	if err := runCLI(context.Background(), []string{"graph", root, "--go-tags", "alt", "--output", compactPath}, &stdout, &stderr); err != nil {
+		t.Fatalf("compact CLI build failed: %v, stderr: %s", err, stderr.String())
+	}
+	first, err := os.ReadFile(compactPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	compact, err := hexagon.ReadCompactGraph(compactPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	expanded, err := compact.ToGraph()
+	if err != nil || !reflect.DeepEqual(named, expanded) {
+		t.Fatalf("compact graph differs from graph v2: %v", err)
+	}
+	index, err := hexagon.NewCompactIndex(compact)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for root, want := range named.Tests {
+		view, err := index.TestGraph(root)
+		if err != nil || !reflect.DeepEqual(view, want) {
+			t.Fatalf("named view %s differs: %v", root, err)
+		}
+	}
+	if _, err := hexagon.RebuildCompactToFile(root, compactPath, []string{"alt"}); err != nil {
+		t.Fatal(err)
+	}
+	second, err := os.ReadFile(compactPath)
+	if err != nil || !bytes.Equal(first, second) {
+		t.Fatalf("identical compact graph builds differed: %v", err)
+	}
+	baseline, err := hexagon.PlanFileChanges(named, []string{"lib/leaf.go"}, named)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, pair := range [][2]string{{compactPath, namedPath}, {namedPath, compactPath}, {compactPath, compactPath}} {
+		plan, err := hexagon.PlanGraphFiles(pair[0], []string{"lib/leaf.go"}, pair[1])
+		if err != nil || !reflect.DeepEqual(plan, baseline) {
+			t.Fatalf("plan for %v differs: plan=%+v, err=%v", pair, plan, err)
+		}
+	}
+	if !baseline.RunFullSuite || !reflect.DeepEqual(baseline.CandidateTests, []string{"app/start_test.go::TestFlow"}) {
+		t.Fatalf("compact selection did not preserve safe fallback and candidate: %+v", baseline)
+	}
+	stdout.Reset()
+	if err := runCLI(context.Background(), []string{"plan", compactPath, "--changed-file", "lib/leaf.go", "--previous-graph", namedPath}, &stdout, &stderr); err != nil {
+		t.Fatalf("compact CLI plan failed: %v", err)
+	}
+	var cliPlan hexagon.ImpactPlan
+	if err := json.Unmarshal(stdout.Bytes(), &cliPlan); err != nil || !reflect.DeepEqual(cliPlan, *baseline) {
+		t.Fatalf("compact CLI plan differs: %+v, err=%v", cliPlan, err)
+	}
+	if err := os.Remove(filepath.Join(root, "lib/leaf.go")); err != nil {
+		t.Fatal(err)
+	}
+	deletedPath := filepath.Join(t.TempDir(), "deleted.hgc.gz")
+	if _, err := hexagon.RebuildCompactToFile(root, deletedPath, []string{"alt"}); err != nil {
+		t.Fatal(err)
+	}
+	currentNamed, err := hexagon.BuildGraph(root, []string{"alt"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	wantDeleted, err := hexagon.PlanFileChanges(currentNamed, []string{"lib/leaf.go"}, named)
+	if err != nil {
+		t.Fatal(err)
+	}
+	gotDeleted, err := hexagon.PlanGraphFiles(deletedPath, []string{"lib/leaf.go"}, namedPath)
+	if err != nil || !reflect.DeepEqual(gotDeleted, wantDeleted) {
+		t.Fatalf("compact current/JSON previous lost deleted-file candidates: plan=%+v, want=%+v, err=%v", gotDeleted, wantDeleted, err)
+	}
+	writeFixture(t, root, "app/broken.go", "package app\nfunc Broken( {\n")
+	if _, err := hexagon.RebuildCompactToFile(root, compactPath, nil); err == nil {
+		t.Fatal("malformed source replaced the last complete compact graph")
+	}
+	afterFailure, err := os.ReadFile(compactPath)
+	if err != nil || !bytes.Equal(first, afterFailure) {
+		t.Fatalf("failed compact rebuild replaced the prior artifact: %v", err)
+	}
+}
+
 func TestRunTestsUsesGoFullSuiteAndRejectsUnknownPlanVersions(t *testing.T) {
 	root := t.TempDir()
 	writeFixture(t, root, "go.mod", "module example.com/demo\n\ngo 1.24.0\n")

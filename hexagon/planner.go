@@ -3,6 +3,7 @@ package hexagon
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"os"
 	"sort"
 )
@@ -30,6 +31,99 @@ func PlanFileChanges(current *Graph, changedFiles []string, previous *Graph) (*I
 	if current == nil || current.FormatVersion != graphFormatVersion || current.Language != "go" {
 		return nil, fmt.Errorf("current graph must be a supported Go format v2 graph")
 	}
+	var before *planningSnapshot
+	if previous != nil {
+		before = snapshotFromNamed(previous)
+	}
+	return planFileChanges(snapshotFromNamed(current), changedFiles, before)
+}
+
+type planningSnapshot struct {
+	sourceFingerprint string
+	context           BuildContext
+	files             []FileMetadata
+	nodes             []GraphNode
+	roots             []string
+	forEachNode       func(string, func(string) bool) error
+}
+
+func snapshotFromNamed(graph *Graph) *planningSnapshot {
+	roots := make([]string, 0, len(graph.Tests))
+	for root := range graph.Tests {
+		roots = append(roots, root)
+	}
+	return &planningSnapshot{
+		sourceFingerprint: graph.SourceFingerprint, context: graph.AnalysisContext,
+		files: graph.Files, nodes: graph.Nodes, roots: roots,
+		forEachNode: func(root string, visit func(string) bool) error {
+			for _, node := range graph.Tests[root].Nodes {
+				if !visit(node) {
+					break
+				}
+			}
+			return nil
+		},
+	}
+}
+
+func snapshotFromCompact(graph *CompactGraph) (*planningSnapshot, error) {
+	index, err := NewCompactIndex(graph)
+	if err != nil {
+		return nil, err
+	}
+	roots := make([]string, 0, len(graph.Tests))
+	for _, test := range graph.Tests {
+		roots = append(roots, graph.Nodes[test.Root].ID)
+	}
+	return &planningSnapshot{
+		sourceFingerprint: graph.SourceFingerprint, context: graph.AnalysisContext,
+		files: graph.Files, nodes: graph.Nodes, roots: roots,
+		forEachNode: func(root string, visit func(string) bool) error {
+			return index.forEachTestNode(root, func(id uint32) bool { return visit(graph.Nodes[id].ID) })
+		},
+	}, nil
+}
+
+// PlanGraphFiles reads either graph-v2 JSON or a compact snapshot on each side.
+// Compact test views are visited directly without expanding all views.
+func PlanGraphFiles(currentFile string, changedFiles []string, previousFile string) (*ImpactPlan, error) {
+	current, err := readPlanningSnapshot(currentFile)
+	if err != nil {
+		return nil, err
+	}
+	var previous *planningSnapshot
+	if previousFile != "" {
+		previous, err = readPlanningSnapshot(previousFile)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return planFileChanges(current, changedFiles, previous)
+}
+
+func readPlanningSnapshot(filename string) (*planningSnapshot, error) {
+	file, err := os.Open(filename)
+	if err != nil {
+		return nil, err
+	}
+	header := make([]byte, len(compactMagic))
+	_, readErr := io.ReadFull(file, header)
+	_ = file.Close()
+	if readErr == nil && string(header[:3]) == "HGC" {
+		graph, err := ReadCompactGraph(filename)
+		if err != nil {
+			return nil, err
+		}
+		return snapshotFromCompact(graph)
+	}
+	graph, err := ReadGraph(filename)
+	if err != nil {
+		return nil, err
+	}
+	return snapshotFromNamed(graph), nil
+}
+
+func planFileChanges(current *planningSnapshot, changedFiles []string, previous *planningSnapshot) (*ImpactPlan, error) {
 	changed := make(map[string]bool, len(changedFiles))
 	for _, filename := range changedFiles {
 		if filename != "" {
@@ -39,19 +133,19 @@ func PlanFileChanges(current *Graph, changedFiles []string, previous *Graph) (*I
 	if len(changed) == 0 {
 		return nil, fmt.Errorf("at least one changed file is required")
 	}
-	currentRoots := make(map[string]bool, len(current.Tests))
-	for root := range current.Tests {
+	currentRoots := make(map[string]bool, len(current.roots))
+	for _, root := range current.roots {
 		currentRoots[root] = true
 	}
 	candidates := make(map[string]bool)
-	for _, snapshot := range []*Graph{current, previous} {
+	for _, snapshot := range []*planningSnapshot{current, previous} {
 		if snapshot == nil {
 			continue
 		}
-		files := make(map[string]FileMetadata, len(snapshot.Files))
-		nodePaths := make(map[string]string, len(snapshot.Nodes))
+		files := make(map[string]FileMetadata, len(snapshot.files))
+		nodePaths := make(map[string]string, len(snapshot.nodes))
 		reverseImports := make(map[string]map[string]bool)
-		for _, file := range snapshot.Files {
+		for _, file := range snapshot.files {
 			files[file.Path] = file
 			for _, imported := range file.Imports {
 				if reverseImports[imported] == nil {
@@ -60,7 +154,7 @@ func PlanFileChanges(current *Graph, changedFiles []string, previous *Graph) (*I
 				reverseImports[imported][file.Package] = true
 			}
 		}
-		for _, node := range snapshot.Nodes {
+		for _, node := range snapshot.nodes {
 			nodePaths[node.ID] = node.Path
 		}
 		affected := make(map[string]bool)
@@ -81,7 +175,7 @@ func PlanFileChanges(current *Graph, changedFiles []string, previous *Graph) (*I
 				}
 			}
 		}
-		for root, view := range snapshot.Tests {
+		for _, root := range snapshot.roots {
 			if !currentRoots[root] {
 				continue
 			}
@@ -90,11 +184,14 @@ func PlanFileChanges(current *Graph, changedFiles []string, previous *Graph) (*I
 				candidates[root] = true
 				continue
 			}
-			for _, nodeID := range view.Nodes {
+			if err := snapshot.forEachNode(root, func(nodeID string) bool {
 				if changed[nodePaths[nodeID]] {
 					candidates[root] = true
-					break
+					return false
 				}
+				return true
+			}); err != nil {
+				return nil, err
 			}
 		}
 	}
@@ -108,11 +205,11 @@ func PlanFileChanges(current *Graph, changedFiles []string, previous *Graph) (*I
 		candidateList = append(candidateList, candidate)
 	}
 	sort.Strings(candidateList)
-	tags := append([]string{}, current.AnalysisContext.BuildTags...)
+	tags := append([]string{}, current.context.BuildTags...)
 	return &ImpactPlan{
 		FormatVersion: planFormatVersion, Language: "go",
-		SourceFingerprint: current.SourceFingerprint, ChangedFiles: changedList,
-		CandidateTests: candidateList, BuildTags: tags, AnalysisContext: current.AnalysisContext, RunFullSuite: true,
+		SourceFingerprint: current.sourceFingerprint, ChangedFiles: changedList,
+		CandidateTests: candidateList, BuildTags: tags, AnalysisContext: current.context, RunFullSuite: true,
 		Reason: fullSuiteReason,
 	}, nil
 }
