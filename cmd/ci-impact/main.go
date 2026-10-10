@@ -29,6 +29,7 @@ func run(args []string, stdout, stderr io.Writer) error {
 	diffPath := flags.String("diff", "", "zero-context Git unified diff path")
 	summaryPath := flags.String("summary", "", "optional GitHub Actions summary file")
 	outputPath := flags.String("output", "", "optional GitHub Actions step output file")
+	requireStrictSubset := flags.Bool("require-strict-subset", false, "fail before running tests unless candidates form a non-empty strict subset")
 	if err := flags.Parse(args); err != nil {
 		return err
 	}
@@ -70,6 +71,11 @@ func run(args []string, stdout, stderr io.Writer) error {
 	if _, err := fmt.Fprintf(stdout, "Impact plan (diagnostic candidates; full suite remains required):\n%s\n", planJSON); err != nil {
 		return err
 	}
+	if *requireStrictSubset {
+		if err := checkStrictSubset(plan, len(headGraph.Tests)); err != nil {
+			return err
+		}
+	}
 
 	runStart := time.Now()
 	runErr := hexagon.RunCandidateTests(context.Background(), *repository, headGraph, plan, stdout, stderr)
@@ -89,6 +95,20 @@ func run(args []string, stdout, stderr io.Writer) error {
 		return err
 	}
 	return runErr
+}
+
+func checkStrictSubset(plan *hexagon.ImpactPlan, headTests int) error {
+	if plan == nil || len(plan.CandidateTests) == 0 || len(plan.CandidateTests) >= headTests {
+		return fmt.Errorf("strict candidate subset unavailable: selected %d of %d test roots; no candidate tests run", candidateCount(plan), headTests)
+	}
+	return nil
+}
+
+func candidateCount(plan *hexagon.ImpactPlan) int {
+	if plan == nil {
+		return 0
+	}
+	return len(plan.CandidateTests)
 }
 
 func formatSummary(plan *hexagon.ImpactPlan, baseTests, headTests int, analysisDuration, runDuration time.Duration, runErr error) string {
