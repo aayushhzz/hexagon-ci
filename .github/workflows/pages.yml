@@ -7,7 +7,6 @@ on:
       - surya/provenance
     paths:
       - "site/**"
-      - "provenance/results/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -27,14 +26,9 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Regenerate site data from results
-        run: python3 site/gen_site_data.py
-
+      # site/data is committed and is the source of truth for the deployed site.
+      # Regeneration needs the raw provenance dumps (gitignored); run
+      # site/gen_site_data.py locally after results/reproduce.sh instead.
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
