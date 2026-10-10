@@ -62,6 +62,9 @@ type FieldCoverage struct {
 	CoveredCount        int            `json:"covered_count"`
 	CoveragePct         float64        `json:"coverage_pct"`
 	ExercisedByTests    int            `json:"request_fields_set_by_tests"`
+	SetByPositiveTests  int            `json:"set_by_positive_tests"`
+	SetByNegativeTests  int            `json:"set_by_negative_tests"`
+	ByDepth             DepthBands     `json:"by_depth"`
 	Covered             []CoveredField `json:"covered"`
 	Gaps                []string       `json:"gaps"`
 }
@@ -72,11 +75,38 @@ type CoveredField struct {
 	ByTests []string `json:"by_tests"`
 }
 
+// DepthBand is field coverage within one request-tree depth band.
+type DepthBand struct {
+	Total int     `json:"total"`
+	Set   int     `json:"set"`
+	Pct   float64 `json:"pct"`
+}
+
+// DepthBands splits leaf request fields by nesting depth under the request:
+// top-level (in.X), nested (in.X.Y), deep (in.X.Y.Z...). Depth also encodes
+// validator guard nesting, which the branch metrics use.
+type DepthBands struct {
+	TopLevel DepthBand `json:"top_level"`
+	Nested   DepthBand `json:"nested"`
+	Deep     DepthBand `json:"deep"`
+}
+
+// BranchCoverage reports outcome-aware coverage of input-gated validation
+// branches. Each branch has two arms: present (gating field set, validation
+// runs, can fail) and absent (gating field nil, skipped on the happy path).
 type BranchCoverage struct {
-	Total          int      `json:"total"`
-	InputExercised int      `json:"input_exercised"`
-	CoveragePct    float64  `json:"coverage_pct"`
-	Gaps           []Branch `json:"gaps"`
+	Total            int      `json:"total"`
+	HappyPathReached bool     `json:"happy_path_reached"`
+	ReachableOnHappy int      `json:"reachable_on_happy_path"`
+	PresentArm       int      `json:"present_arm_exercised"`
+	PresentArmPct    float64  `json:"present_arm_pct"`
+	AbsentArm        int      `json:"absent_arm_exercised"`
+	AbsentArmPct     float64  `json:"absent_arm_pct"`
+	NegativeArm      int      `json:"negative_arm_exercised"`
+	NegativeArmPct   float64  `json:"negative_arm_pct"`
+	BothArms         int      `json:"both_arms_exercised"`
+	CoveragePct      float64  `json:"coverage_pct"` // present arm over total (headline)
+	Gaps             []Branch `json:"gaps"`
 }
 
 // Anomalies surfaces HTTP-body vs RPC-request field mismatches for review.
@@ -219,7 +249,9 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 	if of == nil {
 		rep.Unmapped = true
 		rep.Fields.Gaps = leaves
+		rep.Fields.ByDepth = depthTotals(leaves)
 		rep.Branches.Gaps = append([]Branch{}, p.Branches...)
+		rep.Branches.ReachableOnHappy = reachableOnHappyCount(p.Branches)
 		documented := statusSpec[op]
 		rep.Status = statusCoverage(documented, map[int]bool{})
 		return rep
@@ -238,15 +270,12 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 	rep.Status = statusCoverage(statusSpec[op], asserted)
 	rep.Fields.ExercisedByTests = len(of.fieldsSet)
 
-	// Normalized index of test-set fields: canonical name -> original -> tests.
-	normFields := map[string]map[string]map[string]bool{}
-	for leaf, tests := range of.fieldsSet {
-		c := canon(leaf)
-		if normFields[c] == nil {
-			normFields[c] = map[string]map[string]bool{}
-		}
-		normFields[c][leaf] = tests
-	}
+	// Normalized indexes of test-set fields: canonical name -> original -> tests.
+	// normAll = every test; normPos = success-asserting tests; normNeg =
+	// error-asserting (4xx/5xx) tests. These drive positive vs negative coverage.
+	normAll := buildNorm(of.Tests, func(testFact) bool { return true })
+	normPos := buildNorm(of.Tests, isPositiveTest)
+	normNeg := buildNorm(of.Tests, isNegativeTest)
 	// Alias fragments: canonical test-field name -> canonical path components of
 	// the mapped RPC field. A value may be a dotted path (e.g.
 	// AccountIdentifier.AccountDon) that credits any leaf beneath it.
@@ -255,26 +284,57 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 		aliasFrags[canon(k)] = canonComponents(v)
 	}
 
-	// Field coverage over RPC leaf paths.
+	// Field coverage over RPC leaf paths, bucketed by request-tree depth and
+	// split into positive (set by a success test) and negative (set by an error
+	// test) input coverage.
 	for _, path := range leaves {
-		if tests, ok := matchPath(path, normFields, aliasFrags); ok {
-			rep.Fields.Covered = append(rep.Fields.Covered, CoveredField{Path: path, Match: tests.kind, ByTests: tests.tests})
+		band := bandFor(path, &rep.Fields.ByDepth)
+		band.Total++
+		if m, ok := matchPath(path, normAll, aliasFrags); ok {
+			rep.Fields.Covered = append(rep.Fields.Covered, CoveredField{Path: path, Match: m.kind, ByTests: m.tests})
+			band.Set++
+			if _, ok := matchPath(path, normPos, aliasFrags); ok {
+				rep.Fields.SetByPositiveTests++
+			}
+			if _, ok := matchPath(path, normNeg, aliasFrags); ok {
+				rep.Fields.SetByNegativeTests++
+			}
 		} else {
 			rep.Fields.Gaps = append(rep.Fields.Gaps, path)
 		}
 	}
 	rep.Fields.CoveredCount = len(rep.Fields.Covered)
 	rep.Fields.CoveragePct = pct(rep.Fields.CoveredCount, rep.Fields.LeafFieldsReadByRPC)
+	finalizeBands(&rep.Fields.ByDepth)
 
-	// Branch coverage.
+	// Branch coverage (outcome-aware). happy_path_reached is an RPC-level signal:
+	// if a success test invoked the RPC at all, the top-level validator guards ran
+	// their absent (skip) arm.
+	rep.Branches.HappyPathReached = of.success
 	for _, b := range p.Branches {
-		if branchInputsExercised(b, normFields, aliasFrags) {
-			rep.Branches.InputExercised++
+		oc := classifyBranch(b, normAll, normNeg, aliasFrags, rep.Tests)
+		if oc.reachableOnHappy {
+			rep.Branches.ReachableOnHappy++
+		}
+		if oc.present {
+			rep.Branches.PresentArm++
 		} else {
 			rep.Branches.Gaps = append(rep.Branches.Gaps, b)
 		}
+		if oc.absent {
+			rep.Branches.AbsentArm++
+		}
+		if oc.negative {
+			rep.Branches.NegativeArm++
+		}
+		if oc.present && oc.absent {
+			rep.Branches.BothArms++
+		}
 	}
-	rep.Branches.CoveragePct = pct(rep.Branches.InputExercised, rep.Branches.Total)
+	rep.Branches.PresentArmPct = pct(rep.Branches.PresentArm, rep.Branches.Total)
+	rep.Branches.AbsentArmPct = pct(rep.Branches.AbsentArm, rep.Branches.ReachableOnHappy)
+	rep.Branches.NegativeArmPct = pct(rep.Branches.NegativeArm, rep.Branches.Total)
+	rep.Branches.CoveragePct = rep.Branches.PresentArmPct
 
 	// Anomaly detection: test fields that match no RPC leaf (likely renames).
 	rpcLeaves := map[string][]string{} // canonical leaf -> full paths
@@ -389,16 +449,155 @@ func mergeTests(byOrig map[string]map[string]bool) []string {
 	return sortedKeys(seen)
 }
 
-func branchInputsExercised(b Branch, normFields map[string]map[string]map[string]bool, aliasFrags map[string][]string) bool {
+// branchOutcome captures which arms of an input-gated branch tests exercise.
+type branchOutcome struct {
+	reachableOnHappy bool // guard is top-level, so its absent arm runs on an empty request
+	present          bool // a test set every gating field (validation arm runs)
+	absent           bool // the skip arm is reached on the happy path
+	negative         bool // a gating field is set by an error-asserting test
+}
+
+// classifyBranch determines the exercised arms of one branch. A branch is
+// reachable-on-happy only when its gating field is top-level (depth 1): deeper
+// guards live inside submessage validators that run only if the parent is set,
+// which our top-level test-field extraction cannot yet confirm (conservative).
+func classifyBranch(b Branch, normAll, normNeg map[string]map[string]map[string]bool, aliasFrags map[string][]string, tests int) branchOutcome {
 	if len(b.PredicatePaths) == 0 {
-		return false
+		return branchOutcome{}
 	}
+	maxDepth := 0
+	present, negative := true, true
 	for _, pth := range b.PredicatePaths {
-		if _, ok := matchPath(pth, normFields, aliasFrags); !ok {
-			return false
+		if d := pathDepth(pth); d > maxDepth {
+			maxDepth = d
+		}
+		m, ok := matchPath(pth, normAll, aliasFrags)
+		if !ok {
+			present = false
+		}
+		if _, okn := matchPath(pth, normNeg, aliasFrags); !okn {
+			negative = false
+		}
+		_ = m
+	}
+	oc := branchOutcome{reachableOnHappy: maxDepth == 1, present: present, negative: negative}
+	if oc.reachableOnHappy && tests > 0 {
+		// The absent (skip) arm is taken whenever a test invokes the RPC without
+		// setting the gating field. If some gating field is left unset by at least
+		// one test, the absent arm ran.
+		for _, pth := range b.PredicatePaths {
+			if leafSetCount(pth, normAll, aliasFrags) < tests {
+				oc.absent = true
+				break
+			}
 		}
 	}
-	return true
+	return oc
+}
+
+// leafSetCount returns how many distinct tests set the field at path.
+func leafSetCount(path string, normAll map[string]map[string]map[string]bool, aliasFrags map[string][]string) int {
+	if m, ok := matchPath(path, normAll, aliasFrags); ok {
+		return len(m.tests)
+	}
+	return 0
+}
+
+// buildNorm indexes test-set fields (canonical -> original -> test names) over
+// the tests passing keep.
+func buildNorm(tests []testFact, keep func(testFact) bool) map[string]map[string]map[string]bool {
+	idx := map[string]map[string]map[string]bool{}
+	for _, t := range tests {
+		if !keep(t) {
+			continue
+		}
+		for _, fld := range t.Fields {
+			c := canon(fld)
+			orig := strings.ToLower(fld)
+			if idx[c] == nil {
+				idx[c] = map[string]map[string]bool{}
+			}
+			if idx[c][orig] == nil {
+				idx[c][orig] = map[string]bool{}
+			}
+			idx[c][orig][t.Name] = true
+		}
+	}
+	return idx
+}
+
+func isNegativeTest(t testFact) bool {
+	for _, s := range t.Status {
+		if s >= 400 {
+			return true
+		}
+	}
+	return false
+}
+
+func isPositiveTest(t testFact) bool {
+	if t.Success {
+		return true
+	}
+	for _, s := range t.Status {
+		if s >= 200 && s < 300 {
+			return true
+		}
+	}
+	return false
+}
+
+// pathDepth is the number of components below the request root (in.X -> 1).
+func pathDepth(path string) int {
+	if d := len(canonComponents(path)) - 1; d > 0 {
+		return d
+	}
+	return 0
+}
+
+// bandFor returns the depth band a leaf path belongs to.
+func bandFor(path string, d *DepthBands) *DepthBand {
+	switch pathDepth(path) {
+	case 1:
+		return &d.TopLevel
+	case 2:
+		return &d.Nested
+	default:
+		return &d.Deep
+	}
+}
+
+func finalizeBands(d *DepthBands) {
+	d.TopLevel.Pct = pct(d.TopLevel.Set, d.TopLevel.Total)
+	d.Nested.Pct = pct(d.Nested.Set, d.Nested.Total)
+	d.Deep.Pct = pct(d.Deep.Set, d.Deep.Total)
+}
+
+// depthTotals buckets leaves by depth without any coverage (unmapped RPCs).
+func depthTotals(leaves []string) DepthBands {
+	var d DepthBands
+	for _, path := range leaves {
+		bandFor(path, &d).Total++
+	}
+	finalizeBands(&d)
+	return d
+}
+
+// reachableOnHappyCount counts top-level (depth-1) input-gated branches.
+func reachableOnHappyCount(branches []Branch) int {
+	n := 0
+	for _, b := range branches {
+		maxDepth := 0
+		for _, pth := range b.PredicatePaths {
+			if d := pathDepth(pth); d > maxDepth {
+				maxDepth = d
+			}
+		}
+		if maxDepth == 1 {
+			n++
+		}
+	}
+	return n
 }
 
 // fuzzySuggest returns RPC leaf paths heuristically related to an unmatched
