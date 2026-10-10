@@ -287,10 +287,12 @@ func (a *analyzer) step(fn *ssa.Function, instr ssa.Instruction, taint map[ssa.V
 			}
 		}
 	case *ssa.UnOp:
-		if v.Op == token.MUL { // load *p
-			if src, ok := taint[v.X]; ok {
-				return set(v, src)
-			}
+		// Any unary op (load *p, logical !, negation, ^) yields a value derived
+		// from its operand, so taint flows through. Restricting this to loads
+		// dropped taint on predicates like `!in.ResolvePrimary`, hiding real
+		// service-logic branches that gate on them.
+		if src, ok := taint[v.X]; ok {
+			return set(v, src)
 		}
 	case *ssa.Phi:
 		grew := false
