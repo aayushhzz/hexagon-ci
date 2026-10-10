@@ -95,7 +95,6 @@ It writes:
 
 - `results/janus-provenance-all.json` full provenance for all 160 RPCs
 - `results/janus-coverage-all.json` full coverage report for all 160 RPCs
-- `results/per-rpc/<RPC>.json` 10 representative single-RPC provenance files
 - `results/SUMMARY.md` human-readable coverage table + totals
 
 Summarize the full coverage JSON:
