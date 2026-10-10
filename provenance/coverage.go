@@ -95,18 +95,67 @@ type DepthBands struct {
 // branches. Each branch has two arms: present (gating field set, validation
 // runs, can fail) and absent (gating field nil, skipped on the happy path).
 type BranchCoverage struct {
-	Total            int      `json:"total"`
-	HappyPathReached bool     `json:"happy_path_reached"`
-	ReachableOnHappy int      `json:"reachable_on_happy_path"`
-	PresentArm       int      `json:"present_arm_exercised"`
-	PresentArmPct    float64  `json:"present_arm_pct"`
-	AbsentArm        int      `json:"absent_arm_exercised"`
-	AbsentArmPct     float64  `json:"absent_arm_pct"`
-	NegativeArm      int      `json:"negative_arm_exercised"`
-	NegativeArmPct   float64  `json:"negative_arm_pct"`
-	BothArms         int      `json:"both_arms_exercised"`
-	CoveragePct      float64  `json:"coverage_pct"` // present arm over total (headline)
-	Gaps             []Branch `json:"gaps"`
+	Total            int           `json:"total"`
+	HappyPathReached bool          `json:"happy_path_reached"`
+	ReachableOnHappy int           `json:"reachable_on_happy_path"`
+	PresentArm       int           `json:"present_arm_exercised"`
+	PresentArmPct    float64       `json:"present_arm_pct"`
+	AbsentArm        int           `json:"absent_arm_exercised"`
+	AbsentArmPct     float64       `json:"absent_arm_pct"`
+	NegativeArm      int           `json:"negative_arm_exercised"`
+	NegativeArmPct   float64       `json:"negative_arm_pct"`
+	BothArms         int           `json:"both_arms_exercised"`
+	CoveragePct      float64       `json:"coverage_pct"` // present arm over total (headline)
+	ByOrigin         BranchOrigins `json:"by_origin"`
+	Gaps             []Branch      `json:"gaps"`
+}
+
+// BranchArmCounts is outcome-aware branch coverage for one origin bucket.
+type BranchArmCounts struct {
+	Total            int     `json:"total"`
+	ReachableOnHappy int     `json:"reachable_on_happy_path"`
+	PresentArm       int     `json:"present_arm_exercised"`
+	PresentArmPct    float64 `json:"present_arm_pct"`
+	NegativeArm      int     `json:"negative_arm_exercised"`
+	NegativeArmPct   float64 `json:"negative_arm_pct"`
+	AbsentArm        int     `json:"absent_arm_exercised"`
+}
+
+// BranchOrigins splits branches by where the code lives: service (the analyzed
+// module's own logic, what we care about most), generated (proto .pb /
+// .pb.validator nil-guards), and library (other dependency code). This keeps
+// generated validator noise from drowning out real service-logic branches.
+type BranchOrigins struct {
+	Service   BranchArmCounts `json:"service"`
+	Generated BranchArmCounts `json:"generated"`
+	Library   BranchArmCounts `json:"library"`
+}
+
+func (o *BranchOrigins) bucket(origin string) *BranchArmCounts {
+	switch origin {
+	case "service":
+		return &o.Service
+	case "generated":
+		return &o.Generated
+	default:
+		return &o.Library
+	}
+}
+
+func (c *BranchArmCounts) finalize() {
+	c.PresentArmPct = pct(c.PresentArm, c.Total)
+	c.NegativeArmPct = pct(c.NegativeArm, c.Total)
+}
+
+// branchOrigin classifies a branch by its source location.
+func branchOrigin(at string) string {
+	if strings.Contains(at, ".pb.validator.go") || strings.Contains(at, ".pb.go") {
+		return "generated"
+	}
+	if strings.Contains(at, "/pkg/mod/") {
+		return "library"
+	}
+	return "service"
 }
 
 // Anomalies surfaces HTTP-body vs RPC-request field mismatches for review.
@@ -252,6 +301,9 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 		rep.Fields.ByDepth = depthTotals(leaves)
 		rep.Branches.Gaps = append([]Branch{}, p.Branches...)
 		rep.Branches.ReachableOnHappy = reachableOnHappyCount(p.Branches)
+		for _, b := range p.Branches {
+			rep.Branches.ByOrigin.bucket(branchOrigin(b.At)).Total++
+		}
 		documented := statusSpec[op]
 		rep.Status = statusCoverage(documented, map[int]bool{})
 		return rep
@@ -313,24 +365,33 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 	rep.Branches.HappyPathReached = of.success
 	for _, b := range p.Branches {
 		oc := classifyBranch(b, normAll, normNeg, aliasFrags, rep.Tests)
+		ob := rep.Branches.ByOrigin.bucket(branchOrigin(b.At))
+		ob.Total++
 		if oc.reachableOnHappy {
 			rep.Branches.ReachableOnHappy++
+			ob.ReachableOnHappy++
 		}
 		if oc.present {
 			rep.Branches.PresentArm++
+			ob.PresentArm++
 		} else {
 			rep.Branches.Gaps = append(rep.Branches.Gaps, b)
 		}
 		if oc.absent {
 			rep.Branches.AbsentArm++
+			ob.AbsentArm++
 		}
 		if oc.negative {
 			rep.Branches.NegativeArm++
+			ob.NegativeArm++
 		}
 		if oc.present && oc.absent {
 			rep.Branches.BothArms++
 		}
 	}
+	rep.Branches.ByOrigin.Service.finalize()
+	rep.Branches.ByOrigin.Generated.finalize()
+	rep.Branches.ByOrigin.Library.finalize()
 	rep.Branches.PresentArmPct = pct(rep.Branches.PresentArm, rep.Branches.Total)
 	rep.Branches.AbsentArmPct = pct(rep.Branches.AbsentArm, rep.Branches.ReachableOnHappy)
 	rep.Branches.NegativeArmPct = pct(rep.Branches.NegativeArm, rep.Branches.Total)
