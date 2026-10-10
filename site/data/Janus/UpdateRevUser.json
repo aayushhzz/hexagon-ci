@@ -83,15 +83,44 @@
     "branches": {
       "total": 17,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 2,
+      "reachable_on_happy_path": 1,
       "present_arm_exercised": 2,
       "present_arm_pct": 11.8,
-      "absent_arm_exercised": 2,
+      "absent_arm_exercised": 1,
       "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
       "coverage_pct": 11.8,
+      "by_origin": {
+        "service": {
+          "total": 15,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 13.3,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 1
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 2,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
       "gaps": [
         {
           "id": "b1",
@@ -192,9 +221,9 @@
         {
           "id": "b14",
           "at": "internal/service/revuser.go:1787",
-          "cond": "in.RevUser",
+          "cond": "in.RevUser.UnsetFieldMask.Paths",
           "predicate_paths": [
-            "in.RevUser"
+            "in.RevUser.UnsetFieldMask.Paths"
           ]
         },
         {
@@ -326,5 +355,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateRevUser` (HTTP operation `RevUsersUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsJanusAsyncFlow\n  - in.RevUser.ExternalRefs.StringValues\n  - in.RevUser.ExternalUid\n  - in.RevUser.State\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.UserIdentifier.UserDon.Components\n  - in.UserIdentifier.UserDon.Partition\n  - in.UserIdentifier.UserDon.PartitionType\n  - in.UserIdentifier.UserDon.ServiceType\n  - in.UserIdentifier.UserExternalId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon.Partition != \"\"\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon == nil\n  - in.RevUser.State != 0\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.IsJanusAsyncFlow\n  - in.RevUser\n  - in.RevUser.ExternalUid != nil\n  - in.RevUser.ExternalRefs != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errRevUserEmailUpdateForbidden\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `applicableprincipaltype` -> suggestions []\n  - test field `assign` -> suggestions []\n  - test field `body` -> suggestions []\n  - test field `createroles` -> suggestions []\n  - test field `customfields` -> suggestions []\n  - test field `customschemaspec` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `revoke` -> suggestions []\n  - test field `role` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions ['in.UserIdentifier.UserDon.PartitionType', 'in.UserIdentifier.UserDon.ServiceType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateRevUser` (HTTP operation `RevUsersUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsJanusAsyncFlow\n  - in.RevUser.ExternalRefs.StringValues\n  - in.RevUser.ExternalUid\n  - in.RevUser.State\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.UserIdentifier.UserDon.Components\n  - in.UserIdentifier.UserDon.Partition\n  - in.UserIdentifier.UserDon.PartitionType\n  - in.UserIdentifier.UserDon.ServiceType\n  - in.UserIdentifier.UserExternalId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon.Partition != \"\"\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon == nil\n  - in.RevUser.State != 0\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.IsJanusAsyncFlow\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.ExternalUid != nil\n  - in.RevUser.ExternalRefs != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errRevUserEmailUpdateForbidden\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `applicableprincipaltype` -> suggestions []\n  - test field `assign` -> suggestions []\n  - test field `body` -> suggestions []\n  - test field `createroles` -> suggestions []\n  - test field `customfields` -> suggestions []\n  - test field `customschemaspec` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `revoke` -> suggestions []\n  - test field `role` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions ['in.UserIdentifier.UserDon.PartitionType', 'in.UserIdentifier.UserDon.ServiceType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }
