@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -26,31 +27,47 @@ func main() {
 		fieldMap   = flag.String("field-map", "fieldmap.json", "field-map JSON file (HTTP->RPC field names); missing file is ignored")
 		scaffold   = flag.String("emit-fieldmap-scaffold", "", "write a field-map scaffold from anomalies to this path and exit coverage")
 		statusSpec = flag.String("status-spec", "", "generated oapi-codegen client.go for documented HTTP statuses (auto-located under -cover if empty)")
+		timing     = flag.Bool("timing", false, "print phase timings (load+ssa, enumerate, analyze) to stderr")
 	)
 	flag.Parse()
+
+	phase := func(label string, start time.Time) {
+		if *timing {
+			fmt.Fprintf(os.Stderr, "[timing] %-18s %v\n", label, time.Since(start).Round(time.Millisecond))
+		}
+	}
 
 	absDir, err := filepath.Abs(*dir)
 	if err != nil {
 		fail(err)
 	}
+	tLoad := time.Now()
 	l, err := load(absDir, splitCSV(*patterns))
 	if err != nil {
 		fail(err)
 	}
+	phase("load+ssa", tLoad)
 	spec := serverSpec{ifacePkg: *ifacePkg, ifaceName: *ifaceNm, implPkg: *implPkg, implName: *implNm}
 	filter := map[string]bool{}
 	for _, n := range splitCSV(*only) {
 		filter[n] = true
 	}
+	tEnum := time.Now()
 	eps, err := l.enumerate(spec, filter)
 	if err != nil {
 		fail(err)
 	}
+	phase("enumerate", tEnum)
 	sort.Slice(eps, func(i, j int) bool { return eps[i].rpcName < eps[j].rpcName })
 
+	tAnalyze := time.Now()
 	results := make([]*Provenance, 0, len(eps))
 	for _, ep := range eps {
 		results = append(results, l.analyze(ep, absDir))
+	}
+	phase("analyze", tAnalyze)
+	if *timing {
+		fmt.Fprintf(os.Stderr, "[timing] %-18s %d\n", "rpcs", len(results))
 	}
 
 	var payload any

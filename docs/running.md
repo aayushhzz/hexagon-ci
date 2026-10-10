@@ -139,6 +139,7 @@ print('mapped %d/%d, aggregate field cov %.1f%%'%(len(m),len(c),100*tc/tl))"
 | `-field-map` | `fieldmap.json` | reviewable HTTP->RPC field map file (missing file ignored) |
 | `-field-alias` | none | inline HTTP->RPC field renames (quick form of the map) |
 | `-emit-fieldmap-scaffold` | off | write a field-map scaffold from anomalies and exit |
+| `-timing` | off | print phase timings (load+ssa, enumerate, analyze) to stderr |
 
 For a non-janus service, point the interface/impl flags at that server type.
 
