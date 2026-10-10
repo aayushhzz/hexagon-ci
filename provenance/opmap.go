@@ -12,7 +12,9 @@ import (
 type opMapFile struct {
 	Service     string            `json:"service"`
 	ByOperation map[string]string `json:"by_operation"`
-	Unresolved  map[string]string `json:"unresolved"`
+	// Unresolved is informational only (operations seen but not mapped); its
+	// shape varies by generator, so accept any JSON and ignore it.
+	Unresolved json.RawMessage `json:"unresolved"`
 }
 
 // loadOpMap reads by_operation from an op-map JSON file. A missing file yields

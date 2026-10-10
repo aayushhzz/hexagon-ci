@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-# Reproduce the full-janus provenance and coverage artifacts in this folder.
+# Reproduce provenance + coverage artifacts for every service in services.json.
 # Deterministic: re-running overwrites the JSON with byte-identical output.
+# Per-service source dirs come from env vars (see services.json dir_env),
+# falling back to the committed defaults. Lifejacket test suite via LIFEJACKET.
 set -euo pipefail
 
-JANUS="${JANUS:-/Users/devrev/janus}"
 LIFEJACKET="${LIFEJACKET:-/Users/devrev/lifejacket}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 PROV="$HERE/.."
@@ -11,21 +12,34 @@ PROV="$HERE/.."
 cd "$PROV"
 go build -o /tmp/prov .
 
-# 1. Full per-RPC provenance for every janus RPC.
-/tmp/prov -dir "$JANUS" -out "$HERE/janus-provenance-all.json"
+# Drive the per-service runs from the manifest so the site and the artifacts
+# stay in lockstep. slug = lowercased service name (file prefix).
+python3 - "$PROV" "$HERE" "$LIFEJACKET" <<'PY'
+import json, os, subprocess, sys
 
-# 2. Full coverage: every RPC intersected with the whole lifejacket test suite.
-/tmp/prov -dir "$JANUS" -cover "$LIFEJACKET/testcases" -out "$HERE/janus-coverage-all.json"
+prov_dir, here, lifejacket = sys.argv[1], sys.argv[2], sys.argv[3]
+manifest = json.load(open(os.path.join(prov_dir, "services.json")))
+testcases = os.path.join(lifejacket, "testcases")
 
-# 3. Ten representative per-RPC provenance files (mix of verbs/resources).
-reps="CreateAccount,GetDevOrg,UpdateDevUser,CreateRevOrg,MergeAccounts,CreateTeam,UpdateRevOrg,CreateRevUser,GetAccount,ListDevUsers"
-mkdir -p "$HERE/per-rpc"
-/tmp/prov -dir "$JANUS" -only "$reps" -out /tmp/reps.json
-python3 - "$HERE" <<'PY'
-import json,sys,os
-here=sys.argv[1]
-for p in json.load(open('/tmp/reps.json'))['provenance']:
-    open(os.path.join(here,'per-rpc','%s.json'%p['rpc']),'w').write(json.dumps(p,indent=2))
+for svc in manifest["services"]:
+    slug = svc["name"].lower()
+    src = os.environ.get(svc["dir_env"], svc["dir_default"])
+    base = [
+        "/tmp/prov",
+        "-dir", src,
+        "-patterns", svc["patterns"],
+        "-iface-pkg", svc["iface_pkg"],
+        "-iface", svc["iface"],
+        "-impl-pkg", svc["impl_pkg"],
+        "-impl", svc["impl"],
+        "-op-map-file", svc.get("op_map_file", ""),
+        "-field-map", svc.get("field_map_file", ""),
+    ]
+    prov_out = os.path.join(here, f"{slug}-provenance-all.json")
+    cov_out = os.path.join(here, f"{slug}-coverage-all.json")
+    subprocess.run(base + ["-out", prov_out], check=True)
+    subprocess.run(base + ["-cover", testcases, "-out", cov_out], check=True)
+    print(f"  {svc['name']}: {prov_out}, {cov_out}")
 PY
 
 echo "done: artifacts in $HERE"

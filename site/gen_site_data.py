@@ -16,6 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 RESULTS = ROOT / "provenance" / "results"
+MANIFEST = ROOT / "provenance" / "services.json"
 OUT = Path(__file__).resolve().parent / "data"
 
 
@@ -110,16 +111,12 @@ def summary_row(entry):
     }
 
 
-def main():
-    cov = load("janus-coverage-all.json")
-    prov = load("janus-provenance-all.json")
-    service = cov.get("service", "janus")
+def build_service(service, cov, prov):
+    """Emit index.json + per-RPC detail for one service, return its services.json row."""
     prov_by_rpc = {p["rpc"]: p for p in prov.get("provenance", [])}
-
     entries = sorted(cov.get("coverage", []), key=lambda e: e["rpc"])
     mapped = [e for e in entries if not e.get("unmapped", False)]
 
-    # Service aggregates.
     def agg(key, sub):
         return sum((e.get(key) or {}).get(sub, 0) or 0 for e in mapped)
 
@@ -155,18 +152,6 @@ def main():
     svc_dir = OUT / service
     svc_dir.mkdir(parents=True, exist_ok=True)
 
-    services = [{
-        "service": service,
-        "rpcs": totals["rpcs"],
-        "mapped": totals["mapped"],
-        "field_pct": totals["field_pct"],
-        "present_pct": totals["present_pct"],
-        "negative_pct": totals["negative_pct"],
-        "status_pct": totals["status_pct"],
-        "anomalies": totals["anomalies"],
-    }]
-    (OUT / "services.json").write_text(json.dumps({"services": services}, indent=2), encoding="utf-8")
-
     index = {"service": service, "totals": totals, "rpcs": [summary_row(e) for e in entries]}
     (svc_dir / "index.json").write_text(json.dumps(index, indent=2), encoding="utf-8")
 
@@ -188,6 +173,35 @@ def main():
         (svc_dir / f"{e['rpc']}.json").write_text(json.dumps(detail, indent=2), encoding="utf-8")
 
     print(f"wrote {len(entries)} RPC files for service '{service}' to {svc_dir}")
+    return {
+        "service": service,
+        "rpcs": totals["rpcs"],
+        "mapped": totals["mapped"],
+        "field_pct": totals["field_pct"],
+        "present_pct": totals["present_pct"],
+        "negative_pct": totals["negative_pct"],
+        "status_pct": totals["status_pct"],
+        "anomalies": totals["anomalies"],
+    }
+
+
+def main():
+    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    OUT.mkdir(parents=True, exist_ok=True)
+    services = []
+    for svc in manifest["services"]:
+        slug = svc["name"].lower()
+        cov_path = RESULTS / f"{slug}-coverage-all.json"
+        prov_path = RESULTS / f"{slug}-provenance-all.json"
+        if not cov_path.exists() or not prov_path.exists():
+            print(f"skip {svc['name']}: missing {cov_path.name} or {prov_path.name}")
+            continue
+        cov = json.loads(cov_path.read_text(encoding="utf-8"))
+        prov = json.loads(prov_path.read_text(encoding="utf-8"))
+        services.append(build_service(svc["name"], cov, prov))
+    services.sort(key=lambda s: s["service"].lower())
+    (OUT / "services.json").write_text(json.dumps({"services": services}, indent=2), encoding="utf-8")
+    print(f"wrote services.json with {len(services)} services")
 
 
 if __name__ == "__main__":
