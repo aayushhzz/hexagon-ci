@@ -1,248 +1,802 @@
 "use strict";
 
+/* Lifejacket Coverage — static provenance + test-coverage explorer.
+   Vanilla JS, hash-routed, no runtime dependencies. All metrics are static
+   reachability intersected with test inputs/assertions, not executed coverage. */
+
 const app = document.getElementById("app");
 const crumbs = document.getElementById("crumbs");
 
-// ---- helpers ----
-const el = (html) => { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstChild; };
-const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const pctFloat = (v) => (v == null ? 0 : v);
+/* ----------------------------------------------------------------------------
+   Safety helpers
+   - esc(): escape every value interpolated into innerHTML.
+   - attr(): escape for attribute context (adds quote/apostrophe).
+   - All data (service names, RPC names, hash segments, JSON values) flows
+     through these before touching the DOM.
+---------------------------------------------------------------------------- */
+function esc(s) {
+  return String(s == null ? "" : s).replace(/[&<>"']/g, (c) => (
+    { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
+  ));
+}
+const attr = esc;
+
+async function getJSON(path) {
+  const res = await fetch(path, { cache: "no-cache" });
+  if (!res.ok) throw new Error(`${res.status} loading ${path}`);
+  return res.json();
+}
+
+/* ----------------------------------------------------------------------------
+   Metric formatting with honest denominators.
+
+   A percentage is only meaningful when the denominator is a real, known count.
+   - mapped RPC, denominator > 0  -> real percentage.
+   - mapped RPC, denominator == 0 -> "n/a" (the actual denominator is known to
+     be zero: e.g. the RPC reads no leaf request fields, so there is nothing to
+     cover; a 0% would be misleading).
+   - unmapped RPC -> coverage is undefined, never a verified zero; shown as "Not measured".
+---------------------------------------------------------------------------- */
+function fmtPct(num, den, { unmapped = false } = {}) {
+  if (unmapped) return { kind: "unknown", text: "Not measured", pct: null };
+  if (!den || den <= 0) return { kind: "na", text: "n/a", pct: null };
+  const pct = (100 * num) / den;
+  return { kind: "value", text: pct.toFixed(1) + "%", pct };
+}
 
 function barClass(pct) {
+  if (pct == null) return "na";
   if (pct >= 70) return "good";
   if (pct >= 30) return "warn";
   return "bad";
 }
 
-function pctCell(pct, label) {
-  const p = pctFloat(pct);
-  return `<div class="pctcell"><span>${p.toFixed(1)}%</span><div class="bar mini ${barClass(p)}"><span style="width:${Math.min(p, 100)}%"></span></div></div>`
-    + (label ? `<div class="muted" style="font-size:11px;text-align:right">${esc(label)}</div>` : "");
+/* A percentage cell for tables: value + mini bar, or n/a / dash. */
+function pctCell(res, { ratio = "" } = {}) {
+  if (res.kind === "unknown") {
+    return `<span class="pctcell"><span class="pv na" title="Not linked to any test, so this is not measured">Not measured</span></span>`;
+  }
+  if (res.kind === "na") {
+    return `<span class="pctcell"><span class="pv na" title="${attr(ratio || "Nothing to measure here")}">n/a</span><span class="bar na" aria-hidden="true"></span></span>`;
+  }
+  const w = Math.max(0, Math.min(100, res.pct));
+  return `<span class="pctcell"><span class="pv">${esc(res.text)}</span>`
+    + `<span class="bar ${barClass(res.pct)}" aria-hidden="true"><span style="width:${w}%"></span></span></span>`;
 }
 
-async function getJSON(path) {
-  const res = await fetch(path, { cache: "no-cache" });
-  if (!res.ok) throw new Error(`${path}: ${res.status}`);
-  return res.json();
+/* Help tooltip — keyboard-focusable (tabindex) and tap-friendly (focus-within).
+   Grounded directly in docs/running.md descriptions. */
+function help(text) {
+  return `<span class="help" tabindex="0" role="note" aria-label="${attr(text)}">i<span class="help-text">${esc(text)}</span></span>`;
 }
+
+const HELP = {
+  field: "The share of the RPC's input fields that at least one test fills in. We count only leaf fields (the deepest fields that actually hold a value), not the container fields above them.",
+  present: "Checks where a test supplies the input the check looks at. Supplying the input suggests the check is reached. It does not prove the check ran, and a supplied value is not the same as an invalid one.",
+  negative: "Checks that a test exercises with an input expected to fail (the test asserts a 4xx or 5xx error response).",
+  absent: "Checks that are skipped when the input is left out, confirmed by a passing test. A test that sends an empty request can cover these without supplying any input.",
+  status: "The share of an operation's documented HTTP response codes that a test checks for. The ones with no test (for example an unchecked 403) are the gaps worth closing.",
+  anomalies: "HTTP request fields that did not line up one-to-one with an RPC input field. These are rename suggestions for a person to review. Nothing is changed automatically.",
+  tests: "The Lifejacket tests that are linked to this RPC's operation.",
+  depth: "Input coverage broken down by how deeply nested each field is, so a few important top-level fields are not hidden among large optional sub-sections.",
+  mapped: "Test-linked means a test could be matched to this RPC's operation. Not linked means no test could be matched (the RPC is internal or admin, or its operation name could not be derived). A not-linked RPC shows 'Not measured' rather than a real zero, and does not mean no tests exist for it.",
+};
 
 function setCrumbs(parts) {
-  crumbs.innerHTML = parts
-    .map((p, i) => (p.href ? `<a href="${p.href}">${esc(p.text)}</a>` : `<span>${esc(p.text)}</span>`) + (i < parts.length - 1 ? '<span class="sep">/</span>' : ""))
-    .join("");
-}
-
-function card(label, value, sub) {
-  return `<div class="card"><div class="label">${esc(label)}</div><div class="value">${esc(value)}${sub ? ` <small>${esc(sub)}</small>` : ""}</div></div>`;
-}
-
-function originRows(byOrigin) {
-  const order = [["service", "service logic"], ["generated", "generated (validators)"], ["library", "library"]];
-  return order.map(([key, label]) => {
-    const o = byOrigin[key] || {};
-    const emph = key === "service" ? ' style="font-weight:600"' : "";
-    return `<div class="kv"${emph}><span class="k">${label}: present / negative</span>`
-      + `<span>${o.present_arm_exercised || 0}/${o.total || 0} (${(o.present_arm_pct || 0).toFixed(1)}%)`
-      + ` &middot; ${o.negative_arm_exercised || 0} (${(o.negative_arm_pct || 0).toFixed(1)}%)</span></div>`;
+  crumbs.innerHTML = parts.map((p, i) => {
+    const sep = i < parts.length - 1 ? '<span class="sep" aria-hidden="true">/</span>' : "";
+    if (p.href) return `<a href="${attr(p.href)}">${esc(p.text)}</a>${sep}`;
+    return `<span class="current" aria-current="page">${esc(p.text)}</span>${sep}`;
   }).join("");
 }
 
-// ---- views ----
-async function viewServices() {
+function stateCard(title, msg, { back = true } = {}) {
+  return `<div class="state"><h3>${esc(title)}</h3>`
+    + `<p class="state-msg">${msg}</p>`
+    + (back ? `<p class="state-actions"><a class="btn-back" href="#/">Back to services</a></p>` : "")
+    + `</div>`;
+}
+function loadingCard(label) {
+  return `<div class="state"><p class="state-msg skeleton">Loading ${esc(label)}</p></div>`;
+}
+
+/* ----------------------------------------------------------------------------
+   Persisted service view state (search / filter / sort) across drilldown.
+   Keyed per service so navigating RPC -> back restores the user's view.
+---------------------------------------------------------------------------- */
+const svcViews = Object.create(null);
+function viewStateFor(svc) {
+  if (!svcViews[svc]) {
+    svcViews[svc] = { q: "", scope: "mapped", quick: new Set(), sort: "rpc", dir: 1 };
+  }
+  return svcViews[svc];
+}
+
+/* ----------------------------------------------------------------------------
+   Stale async route guard. Each route() bumps the token; async work checks it
+   so a slow fetch for a route the user already left never overwrites the view.
+---------------------------------------------------------------------------- */
+let routeToken = 0;
+
+/* ============================ Services view ============================ */
+async function viewServices(token) {
   setCrumbs([{ text: "Services" }]);
-  app.innerHTML = `<div class="loading">Loading services...</div>`;
+  app.innerHTML = loadingCard("services");
   const data = await getJSON("data/services.json");
-  const list = data.services.map((s) => `
-    <a class="service-card" href="#/${encodeURIComponent(s.service)}">
-      <div class="name">${esc(s.service)}</div>
-      <div class="muted">${s.rpcs} RPCs &middot; ${s.mapped} mapped</div>
-      <div class="cards" style="margin-top:12px">
-        ${miniStat("field", s.field_pct)}
-        ${miniStat("branch present", s.present_pct)}
-        ${miniStat("negative", s.negative_pct)}
-        ${miniStat("status", s.status_pct)}
+  if (token !== routeToken) return;
+
+  const services = (data.services || []).slice().sort((a, b) => a.service.localeCompare(b.service));
+  const cards = services.map((s) => {
+    // Service aggregates are precomputed percentages over mapped RPCs only.
+    const mm = (label, pct, key) => {
+      const b = barClass(pct);
+      return `<div class="metric-mini">
+        <div class="mm-top"><span class="mm-label">${esc(label)} ${help(HELP[key])}</span>
+          <span class="mm-value">${pct.toFixed(1)}%</span></div>
+        <div class="bar ${b}" aria-hidden="true"><span style="width:${Math.max(0, Math.min(100, pct))}%"></span></div>
+      </div>`;
+    };
+    return `<a class="service-card" href="#/${encodeURIComponent(s.service)}">
+      <div class="svc-name">${esc(s.service)}</div>
+      <div class="svc-meta">${esc(s.rpcs)} RPCs (backend operations) &middot; ${esc(s.mapped)} test-linked &middot; ${esc(s.anomalies)} inputs missing from tests</div>
+      <div class="service-metrics">
+        ${mm("Inputs covered", s.field_pct, "field")}
+        ${mm("Checks with input supplied", s.present_pct, "present")}
+        ${mm("Checks with error tests", s.negative_pct, "negative")}
+        ${mm("Response codes checked", s.status_pct, "status")}
       </div>
-    </a>`).join("");
-  app.innerHTML = `<h1>Services</h1><p class="sub">Backend services analyzed for input/branch/status coverage.</p>${list}`;
-}
-
-function miniStat(label, pct) {
-  const p = pctFloat(pct);
-  return `<div class="card" style="padding:10px"><div class="label">${esc(label)}</div><div class="value" style="font-size:18px">${p.toFixed(1)}%</div><div class="bar ${barClass(p)}"><span style="width:${Math.min(p, 100)}%"></span></div></div>`;
-}
-
-let serviceState = { rows: [], svc: "", q: "", onlyMapped: true, sort: "rpc", dir: 1 };
-
-async function viewService(svc) {
-  setCrumbs([{ text: "Services", href: "#/" }, { text: svc }]);
-  app.innerHTML = `<div class="loading">Loading ${esc(svc)}...</div>`;
-  const data = await getJSON(`data/${encodeURIComponent(svc)}/index.json`);
-  const t = data.totals;
-  serviceState = { rows: data.rpcs, svc, q: "", onlyMapped: true, sort: "rpc", dir: 1 };
-
-  const totals = `
-    <div class="cards">
-      ${card("RPCs", t.rpcs, `${t.mapped} mapped`)}
-      ${card("Field cov", t.field_pct + "%", `${t.field_covered}/${t.field_total}`)}
-      ${card("Branch present", t.present_pct + "%", `${t.present_arm}/${t.branch_total}`)}
-      ${card("Branch negative", t.negative_pct + "%", `${t.negative_arm}/${t.branch_total}`)}
-      ${card("Absent arm", t.absent_pct + "%", `${t.absent_arm}/${t.reachable_on_happy}`)}
-      ${card("Status cov", t.status_pct + "%", `${t.status_asserted}/${t.status_documented}`)}
-      ${card("Anomalies", t.anomalies, "field mismatches")}
-    </div>`;
+    </a>`;
+  }).join("");
 
   app.innerHTML = `
-    <h1>${esc(svc)}</h1>
-    <p class="sub">${t.mapped} of ${t.rpcs} RPCs are exercised by the test suite. The rest are unmapped (internal or no matching operation).</p>
-    ${totals}
-    <h2>RPCs</h2>
-    <div class="toolbar">
-      <input id="q" type="search" placeholder="Filter RPCs..." />
-      <label><input id="onlyMapped" type="checkbox" checked /> mapped only</label>
+    <div class="page-head">
+      <p class="eyebrow">Code and test comparison</p>
+      <h1>Lifejacket coverage across services</h1>
+      <p class="lede">For each backend RPC (a backend operation), this compares what the code reads and
+      checks against the inputs and checks its linked Lifejacket tests supply. Pick a service to see its
+      RPCs, where tests reach, and the gaps to close.</p>
     </div>
-    <div id="tbl"></div>`;
-
-  document.getElementById("q").addEventListener("input", (e) => { serviceState.q = e.target.value.toLowerCase(); renderTable(); });
-  document.getElementById("onlyMapped").addEventListener("change", (e) => { serviceState.onlyMapped = e.target.checked; renderTable(); });
-  renderTable();
+    <div class="callout accent">
+      These numbers compare service code with Lifejacket test inputs and checks. They do not show results
+      from a test run. Each service number counts only its test-linked RPCs. Not-linked internal RPCs are
+      left out of the total rather than counted as zero.
+    </div>
+    <div class="service-grid">${cards || '<p class="empty-inline">No services found.</p>'}</div>`;
+  bindHelp();
 }
 
-function renderTable() {
-  const s = serviceState;
-  let rows = s.rows.filter((r) => (!s.onlyMapped || !r.unmapped) && (r.rpc.toLowerCase().includes(s.q) || (r.operation || "").toLowerCase().includes(s.q)));
-  rows.sort((a, b) => {
-    let x = a[s.sort], y = b[s.sort];
-    if (typeof x === "string") { x = x.toLowerCase(); y = (y || "").toLowerCase(); }
-    return (x < y ? -1 : x > y ? 1 : 0) * s.dir;
+/* ============================ Service view ============================ */
+async function viewService(svc, token) {
+  setCrumbs([{ text: "Services", href: "#/" }, { text: svc }]);
+  app.innerHTML = loadingCard(svc);
+  const data = await getJSON(`data/${encodeURIComponent(svc)}/index.json`);
+  if (token !== routeToken) return;
+
+  const t = data.totals;
+  const rows = data.rpcs || [];
+  const vs = viewStateFor(svc);
+
+  const stat = (label, res, sub, key) => {
+    const valClass = res.kind === "value" ? "" : "na";
+    return `<div class="stat">
+      <div class="stat-label">${esc(label)} ${key ? help(HELP[key]) : ""}</div>
+      <div class="stat-value ${valClass}">${esc(res.text)}</div>
+      <div class="stat-sub">${esc(sub)}</div>
+    </div>`;
+  };
+
+  const fieldRes = fmtPct(t.field_covered, t.field_total);
+  const presentRes = fmtPct(t.present_arm, t.branch_total);
+  const negRes = fmtPct(t.negative_arm, t.branch_total);
+  const absentRes = fmtPct(t.absent_arm, t.reachable_on_happy);
+  const statusRes = fmtPct(t.status_asserted, t.status_documented);
+
+  app.innerHTML = `
+    <div class="page-head">
+      <p class="eyebrow">Service</p>
+      <h1>${esc(svc)}</h1>
+      <p class="lede">${esc(t.mapped)} of ${esc(t.rpcs)} RPCs (backend operations) are linked to a Lifejacket test.
+      The remaining ${esc(t.unmapped)} are not linked (internal or admin RPCs, or operations whose name could
+      not be derived) and are left out of the numbers below.</p>
+    </div>
+
+    <div class="callout">
+      These numbers compare service code with Lifejacket test inputs and checks. They do not show results from
+      a test run. The service totals count only its test-linked RPCs. A not-linked RPC has no linked tests and
+      shows "Not measured" rather than a real zero; this does not mean no tests exist for it.
+    </div>
+
+    <div class="stat-strip">
+      ${stat("RPCs", { kind: "value", text: String(t.rpcs) }, `${t.mapped} test-linked / ${t.unmapped} not linked`)}
+      ${stat("Inputs covered", fieldRes, `${t.field_covered} / ${t.field_total} input fields`, "field")}
+      ${stat("Checks with input supplied", presentRes, `${t.present_arm} / ${t.branch_total} checks`, "present")}
+      ${stat("Checks with error tests", negRes, `${t.negative_arm} / ${t.branch_total} checks`, "negative")}
+      ${stat("Checks skipped when input is omitted", absentRes, `${t.absent_arm} / ${t.reachable_on_happy} checks`, "absent")}
+      ${stat("Response codes checked", statusRes, `${t.status_asserted} / ${t.status_documented} documented`, "status")}
+      ${stat("Inputs missing from tests", { kind: "value", text: String(t.anomalies) }, "Request fields that did not line up with an input", "anomalies")}
+    </div>
+
+    <h2 class="flush">RPCs (backend operations)</h2>
+    <p class="section-note">Search, filter, and sort. Your view stays the same while you open an RPC and come back.</p>
+
+    <div class="toolbar" role="search">
+      <div class="search">
+        <label class="vh" for="q">Filter RPCs</label>
+        <input id="q" type="search" placeholder="Search RPC or operation name..." autocomplete="off" />
+      </div>
+      <div class="filter-group" role="group" aria-label="Scope">
+        <button class="seg" data-scope="mapped" type="button">Test-linked</button>
+        <button class="seg" data-scope="unmapped" type="button">Not linked</button>
+        <button class="seg" data-scope="all" type="button">All</button>
+      </div>
+      <div class="chip-filters" role="group" aria-label="Quick filters">
+        <button class="toggle-chip" data-quick="fieldgaps" type="button" aria-pressed="false">Inputs missing from tests</button>
+        <button class="toggle-chip" data-quick="neggaps" type="button" aria-pressed="false">No error tests</button>
+        <button class="toggle-chip" data-quick="anomalies" type="button" aria-pressed="false">Needs mapping review</button>
+      </div>
+    </div>
+
+    <div id="tbl" aria-live="polite"></div>`;
+
+  // Restore persisted controls.
+  const qInput = document.getElementById("q");
+  qInput.value = vs.q;
+  syncScopeButtons(svc);
+  syncQuickButtons(svc);
+
+  qInput.addEventListener("input", (e) => { vs.q = e.target.value; renderTable(svc, rows); });
+  document.querySelectorAll(".seg[data-scope]").forEach((b) => b.addEventListener("click", () => {
+    vs.scope = b.dataset.scope; syncScopeButtons(svc); renderTable(svc, rows);
+  }));
+  document.querySelectorAll(".toggle-chip[data-quick]").forEach((b) => b.addEventListener("click", () => {
+    const k = b.dataset.quick;
+    if (vs.quick.has(k)) vs.quick.delete(k); else vs.quick.add(k);
+    syncQuickButtons(svc); renderTable(svc, rows);
+  }));
+
+  renderTable(svc, rows);
+  bindHelp();
+}
+
+function syncScopeButtons(svc) {
+  const vs = viewStateFor(svc);
+  document.querySelectorAll(".seg[data-scope]").forEach((b) =>
+    b.setAttribute("aria-pressed", String(b.dataset.scope === vs.scope)));
+}
+function syncQuickButtons(svc) {
+  const vs = viewStateFor(svc);
+  document.querySelectorAll(".toggle-chip[data-quick]").forEach((b) =>
+    b.setAttribute("aria-pressed", String(vs.quick.has(b.dataset.quick))));
+}
+
+function renderTable(svc, allRows) {
+  const vs = viewStateFor(svc);
+  const q = vs.q.trim().toLowerCase();
+
+  let rows = allRows.filter((r) => {
+    if (vs.scope === "mapped" && r.unmapped) return false;
+    if (vs.scope === "unmapped" && !r.unmapped) return false;
+    if (q && !(r.rpc.toLowerCase().includes(q) || (r.operation || "").toLowerCase().includes(q))) return false;
+    if (vs.quick.has("fieldgaps") && !(r.gap_count > 0)) return false;
+    if (vs.quick.has("neggaps") && !(!r.unmapped && r.negative_pct === 0 && r.field_total > 0)) return false;
+    if (vs.quick.has("anomalies") && !(r.anomaly_count > 0)) return false;
+    return true;
   });
-  const head = (key, label, num) => `<th class="${num ? "num" : ""}" data-sort="${key}">${esc(label)}${s.sort === key ? (s.dir > 0 ? " ▲" : " ▼") : ""}</th>`;
-  const body = rows.map((r) => `
-    <tr class="row" data-rpc="${esc(r.rpc)}">
-      <td><a href="#/${encodeURIComponent(s.svc)}/${encodeURIComponent(r.rpc)}">${esc(r.rpc)}</a>${r.unmapped ? ' <span class="tag unmapped">unmapped</span>' : ""}</td>
-      <td class="muted">${esc(r.operation)}</td>
-      <td class="num">${r.tests}</td>
-      <td class="num">${pctCell(r.field_pct)}</td>
-      <td class="num">${pctCell(r.svc_present_pct)}</td>
-      <td class="num">${pctCell(r.svc_negative_pct)}</td>
-      <td class="num">${pctCell(r.status_pct)}</td>
-      <td class="num">${r.anomaly_count || ""}</td>
-    </tr>`).join("");
+
+  const dir = vs.dir;
+  rows.sort((a, b) => {
+    let x = a[vs.sort], y = b[vs.sort];
+    if (x == null) x = typeof y === "number" ? -1 : "";
+    if (y == null) y = typeof x === "number" ? -1 : "";
+    if (typeof x === "string") { x = x.toLowerCase(); y = String(y).toLowerCase(); }
+    return (x < y ? -1 : x > y ? 1 : 0) * dir;
+  });
+
+  const sortBtn = (key, label, num) => {
+    const active = vs.sort === key;
+    const ariaSort = active ? (dir > 0 ? "ascending" : "descending") : "none";
+    return `<th class="${num ? "num" : ""}" aria-sort="${ariaSort}" scope="col">
+      <button class="sort-btn" data-sort="${attr(key)}" type="button">
+        <span>${esc(label)}</span><span class="sort-ind" aria-hidden="true"></span>
+      </button></th>`;
+  };
+
+  const body = rows.map((r) => {
+    const unmapped = !!r.unmapped;
+    const tag = unmapped
+      ? '<span class="tag unmapped" title="No test could be linked to this operation">not linked</span>'
+      : "";
+    const ratio = (c, t) => `${c}/${t}`;
+    const fieldRes = fmtPct(r.field_covered, r.field_total, { unmapped });
+    // present/negative/status come pre-divided as percentages; treat as value unless unmapped.
+    const pv = (pct) => unmapped ? { kind: "unknown", text: "Not measured", pct: null } : { kind: "value", text: pct.toFixed(1) + "%", pct };
+    const href = `#/${encodeURIComponent(svc)}/${encodeURIComponent(r.rpc)}`;
+    return `<tr>
+      <td><a class="rpc-link" href="${attr(href)}">${esc(r.rpc)}</a> ${tag}</td>
+      <td>${r.operation ? `<span class="op">${esc(r.operation)}</span>` : '<span class="empty-inline">No operation link</span>'}</td>
+      <td class="num">${esc(r.tests)}</td>
+      <td class="num">${pctCell(fieldRes, { ratio: ratio(r.field_covered, r.field_total) })}</td>
+      <td class="num">${pctCell(pv(r.present_pct))}</td>
+      <td class="num">${pctCell(pv(r.negative_pct))}</td>
+      <td class="num">${pctCell(unmapped && r.status_pct === 0 ? { kind: "unknown", text: "Not measured" } : pv(r.status_pct))}</td>
+      <td class="num">${r.anomaly_count ? esc(r.anomaly_count) : '<span class="muted">0</span>'}</td>
+    </tr>`;
+  }).join("");
+
+  const empty = `<tr><td colspan="8"><p class="empty-inline" style="text-align:center;padding:20px">No RPCs match the current search and filters.</p></td></tr>`;
+
   document.getElementById("tbl").innerHTML = `
+    <div class="table-wrap">
     <table>
       <thead><tr>
-        ${head("rpc", "RPC")}${head("operation", "operation")}${head("tests", "tests", true)}
-        ${head("field_pct", "field", true)}${head("svc_present_pct", "svc present", true)}
-        ${head("svc_negative_pct", "svc negative", true)}${head("status_pct", "status", true)}${head("anomaly_count", "anom", true)}
+        ${sortBtn("rpc", "RPC")}
+        ${sortBtn("operation", "Operation")}
+        ${sortBtn("tests", "Tests", true)}
+        ${sortBtn("field_pct", "Inputs covered", true)}
+        ${sortBtn("present_pct", "Input supplied", true)}
+        ${sortBtn("negative_pct", "Error tests", true)}
+        ${sortBtn("status_pct", "Response codes", true)}
+        ${sortBtn("anomaly_count", "Missing inputs", true)}
       </tr></thead>
-      <tbody>${body || `<tr><td colspan="8" class="muted">no matches</td></tr>`}</tbody>
+      <tbody>${body || empty}</tbody>
     </table>
-    <p class="muted" style="font-size:12px;margin-top:8px">${rows.length} shown</p>`;
-  document.querySelectorAll("th[data-sort]").forEach((th) => th.addEventListener("click", () => {
-    const key = th.dataset.sort;
-    if (s.sort === key) s.dir *= -1; else { s.sort = key; s.dir = (key === "rpc" || key === "operation") ? 1 : -1; }
-    renderTable();
-  }));
-  document.querySelectorAll("tr.row").forEach((tr) => tr.addEventListener("click", (e) => {
-    if (e.target.tagName === "A") return;
-    location.hash = `#/${encodeURIComponent(s.svc)}/${encodeURIComponent(tr.dataset.rpc)}`;
+    </div>
+    <p class="rows-note">${rows.length} RPC${rows.length === 1 ? "" : "s"} shown. The columns apply to test-linked RPCs only.
+    Not-linked rows show <code>Not measured</code> because there is nothing to measure, which is not the same as zero.</p>`;
+
+  document.querySelectorAll(".sort-btn[data-sort]").forEach((btn) => btn.addEventListener("click", () => {
+    const key = btn.dataset.sort;
+    if (vs.sort === key) vs.dir *= -1;
+    else { vs.sort = key; vs.dir = (key === "rpc" || key === "operation") ? 1 : -1; }
+    renderTable(svc, allRows);
   }));
 }
 
-async function viewRpc(svc, rpc) {
-  setCrumbs([{ text: "Services", href: "#/" }, { text: svc, href: `#/${encodeURIComponent(svc)}` }, { text: rpc }]);
-  app.innerHTML = `<div class="loading">Loading ${esc(rpc)}...</div>`;
+/* ============================ RPC detail view ============================ */
+async function viewRpc(svc, rpc, token) {
+  setCrumbs([
+    { text: "Services", href: "#/" },
+    { text: svc, href: `#/${encodeURIComponent(svc)}` },
+    { text: rpc },
+  ]);
+  app.innerHTML = loadingCard(rpc);
   const d = await getJSON(`data/${encodeURIComponent(svc)}/${encodeURIComponent(rpc)}.json`);
-  const c = d.coverage, f = c.fields || {}, b = c.branches || {}, st = c.status || {};
+  if (token !== routeToken) return;
+
+  const c = d.coverage || {};
+  const prov = d.provenance || {};
+  const f = c.fields || {};
+  const b = c.branches || {};
+  const st = c.status || {};
   const depth = f.by_depth || {};
+  const unmapped = !!c.unmapped;
 
-  const statusChips = (st.documented || []).map((code) => {
-    const hit = (st.asserted || []).includes(code);
-    return `<span class="chip ${hit ? "good" : "bad"}">${code}</span>`;
-  }).join("") || '<span class="muted">none documented</span>';
+  const leaf = f.leaf_fields_read_by_rpc || 0;
+  const covered = f.covered_count || 0;
+  const fieldRes = fmtPct(covered, leaf, { unmapped });
 
-  const depthRow = (name, band) => band ? `<div class="kv"><span class="k">${name}</span><span>${band.set}/${band.total} (${(band.pct || 0).toFixed(0)}%)</span></div>` : "";
-
-  const fieldGaps = (f.gaps || []);
-  const branchGaps = (b.gaps || []).map((x) => x.cond);
+  // ---- sections (for jump nav + counts) ----
+  const fieldGaps = f.gaps || [];
+  const branchGaps = b.gaps || [];
+  const coveredFields = f.covered || [];
   const anomalies = (c.anomalies || {}).unmatched_test_fields || [];
-  const errors = (d.provenance.errors || []).filter((e) => e.symbol).map((e) => e.symbol);
-  const uniqErrors = [...new Set(errors)].sort();
+  const testFacts = c.test_facts || [];
+  const sinks = prov.sinks || [];
+  const errorsRaw = prov.errors || [];
+  const unresolved = prov.unresolved || [];
+  const documented = st.documented || [];
 
-  app.innerHTML = `
-    <h1>${esc(rpc)} ${c.unmapped ? '<span class="tag unmapped">unmapped</span>' : ""}</h1>
-    <p class="sub">operation <code>${esc(c.operation || "-")}</code> &middot; ${c.tests || 0} test(s) &middot; <code>${esc(d.provenance.func || "")}</code></p>
+  // ---- header + mapping note ----
+  const mapTag = unmapped
+    ? '<span class="tag unmapped">not linked</span>'
+    : '<span class="tag mapped">test-linked</span>';
 
-    <div class="metricgrid">
-      <div class="panel">
-        <h3>Input fields</h3>
-        <div class="kv"><span class="k">covered</span><span>${f.covered_count || 0}/${f.leaf_fields_read_by_rpc || 0} (${(f.coverage_pct || 0).toFixed(1)}%)</span></div>
-        <div class="kv"><span class="k">set by positive tests</span><span>${f.set_by_positive_tests || 0}</span></div>
-        <div class="kv"><span class="k">set by negative tests</span><span>${f.set_by_negative_tests || 0}</span></div>
-        ${depthRow("top-level", depth.top_level)}
-        ${depthRow("nested", depth.nested)}
-        ${depthRow("deep", depth.deep)}
-      </div>
-      <div class="panel">
-        <h3>Branches (service logic emphasised)</h3>
-        <div class="kv"><span class="k">total (all origins)</span><span>${b.total || 0}</span></div>
-        <div class="kv"><span class="k">happy path reached</span><span>${b.happy_path_reached ? "yes" : "no"}</span></div>
-        ${originRows(b.by_origin || {})}
-        <div class="kv"><span class="k">absent arm (happy path)</span><span>${b.absent_arm_exercised || 0}/${b.reachable_on_happy_path || 0} (${(b.absent_arm_pct || 0).toFixed(1)}%)</span></div>
-        <div class="kv"><span class="k">both arms</span><span>${b.both_arms_exercised || 0}</span></div>
-      </div>
-    </div>
+  const unmappedNote = unmapped ? `
+    <div class="callout">
+      No test could be linked to this RPC (it is an internal or admin RPC, or its operation name could not be
+      derived). The information below is read from the code, but there are no linked tests to compare against,
+      so test coverage cannot be measured here. This does not mean no tests exist for it. Read the input and check counts as
+      the surface that would need tests, not as a real zero.
+    </div>` : "";
 
-    <h2>HTTP statuses</h2>
-    <div class="panel"><div class="chips">${statusChips}</div>
-      <p class="muted" style="font-size:12px;margin-top:10px">green = asserted by a test, red = documented but untested.</p></div>
+  // nothing-to-measure note for test-linked RPCs that read no input fields
+  const zeroFieldNote = (!unmapped && leaf === 0) ? `
+    <div class="callout">
+      This RPC reads no input fields directly, so there is nothing to cover and "Inputs covered" shows n/a
+      rather than 0%. The check and response-code sections below still apply.
+    </div>` : "";
 
-    <h2>Gaps</h2>
-    <div class="metricgrid">
-      <div class="panel"><h3>Field gaps (${fieldGaps.length})</h3>
-        ${fieldGaps.length ? `<ul class="gaps">${fieldGaps.map((g) => `<li>${esc(g)}</li>`).join("")}</ul>` : '<p class="muted">none</p>'}</div>
-      <div class="panel"><h3>Branch gaps (${branchGaps.length})</h3>
-        ${branchGaps.length ? `<ul class="gaps">${branchGaps.map((g) => `<li>${esc(g)}</li>`).join("")}</ul>` : '<p class="muted">none</p>'}</div>
-    </div>
+  // ---- input field coverage: depth breakdown ----
+  const depthRow = (name, band, key) => {
+    if (!band || !band.total) return "";
+    const res = fmtPct(band.set, band.total, { unmapped });
+    return `<div class="kv depth-row">
+      <span class="k">${esc(name)}</span>
+      <span class="v ${res.kind !== "value" ? "na" : ""}">${esc(res.text)} <small>${band.set}/${band.total}</small></span>
+    </div>`;
+  };
 
-    ${anomalies.length ? `<h2>Anomalies</h2><div class="panel">${anomalies.map((a) => `<div class="kv"><span class="k">${esc(a.field)}</span><span>${esc((a.fuzzy_suggestions || []).join(", ") || "no suggestion")}</span></div>`).join("")}</div>` : ""}
+  const depthLegend = {
+    top_level: "top-level (in.X)",
+    nested: "nested (in.X.Y)",
+    deep: "deep (in.X.Y.Z…)",
+  };
 
-    ${uniqErrors.length ? `<h2>Error symbols (${uniqErrors.length})</h2><div class="panel"><div class="chips">${uniqErrors.map((e) => `<span class="chip">${esc(e)}</span>`).join("")}</div></div>` : ""}
-
-    <h2>Offload test generation to an agent</h2>
-    <div class="panel prompt">
-      <button class="copybtn" id="copyPrompt">Copy</button>
-      <textarea id="promptText" readonly>${esc(d.agent_prompt)}</textarea>
-    </div>
-
-    <h2>Raw data</h2>
+  const fieldPanel = `
     <div class="panel">
-      <details><summary>coverage JSON</summary><pre class="json">${esc(JSON.stringify(c, null, 2))}</pre></details>
-      <details><summary>provenance (sinks / errors / unresolved)</summary><pre class="json">${esc(JSON.stringify(d.provenance, null, 2))}</pre></details>
+      <h3>Input coverage ${help(HELP.field)}</h3>
+      <div class="kv-list">
+        <div class="kv"><span class="k">Input fields covered</span>
+          <span class="v ${fieldRes.kind !== "value" ? "na" : ""}">${esc(fieldRes.text)} <small>${covered}/${leaf}</small></span></div>
+        <div class="kv"><span class="k">Filled by tests expecting success</span><span class="v">${f.set_by_positive_tests || 0}</span></div>
+        <div class="kv"><span class="k">Filled by error tests</span><span class="v">${f.set_by_negative_tests || 0}</span></div>
+        <div class="kv"><span class="k">By depth ${help(HELP.depth)}</span><span class="v"></span></div>
+        ${depthRow(depthLegend.top_level, depth.top_level)}
+        ${depthRow(depthLegend.nested, depth.nested)}
+        ${depthRow(depthLegend.deep, depth.deep)}
+      </div>
     </div>`;
 
+  const branchPanel = `
+    <div class="panel">
+      <h3>Input checks</h3>
+      <div class="kv-list">
+        <div class="kv"><span class="k">Checks that read an input</span><span class="v">${b.total || 0}</span></div>
+        <div class="kv"><span class="k">Has a test expecting success</span><span class="v">${b.happy_path_reached ? "yes" : "no"}</span></div>
+        <div class="kv"><span class="k">Checks with input supplied ${help(HELP.present)}</span>
+          <span class="v">${esc(fmtPct(b.present_arm_exercised || 0, b.total || 0, { unmapped }).text)} <small>${b.present_arm_exercised || 0}/${b.total || 0}</small></span></div>
+        <div class="kv"><span class="k">Checks with error tests ${help(HELP.negative)}</span>
+          <span class="v">${esc(fmtPct(b.negative_arm_exercised || 0, b.total || 0, { unmapped }).text)} <small>${b.negative_arm_exercised || 0}/${b.total || 0}</small></span></div>
+        <div class="kv"><span class="k">Checks skipped when input is omitted ${help(HELP.absent)}</span>
+          <span class="v">${esc(fmtPct(b.absent_arm_exercised || 0, b.reachable_on_happy_path || 0, { unmapped }).text)} <small>${b.absent_arm_exercised || 0}/${b.reachable_on_happy_path || 0}</small></span></div>
+        <div class="kv"><span class="k">Checks tested with and without input</span><span class="v">${b.both_arms_exercised || 0}</span></div>
+      </div>
+    </div>`;
+
+  // ---- HTTP statuses: explicit asserted / missing (not just colour) ----
+  const asserted = new Set(st.asserted || []);
+  const statusRows = documented.length ? documented.map((code) => {
+    const hit = asserted.has(code);
+    return `<tr>
+      <td class="code">${esc(code)}</td>
+      <td><span class="status-state ${hit ? "asserted" : "missing"}">
+        <span class="dot" aria-hidden="true"></span>${hit ? "Checked by a test" : "Documented, not checked"}
+      </span></td>
+    </tr>`;
+  }).join("") : "";
+  const statusSection = `
+    <h2 id="s-status">HTTP response codes ${help(HELP.status)}</h2>
+    <p class="section-note">The documented response codes come from the generated client spec. Each row says
+    whether a test checks for it. The "not checked" rows (for example an unchecked 403) are the gaps to close.</p>
+    ${documented.length ? `<div class="panel" style="padding:0">
+      <table class="status-table">
+        <thead><tr><th scope="col">Response code</th><th scope="col">Checked by a test</th></tr></thead>
+        <tbody>${statusRows}</tbody>
+      </table></div>`
+      : `<div class="panel"><p class="empty-inline">No HTTP response codes are documented for this operation${unmapped ? " (not linked to any test)." : "."}</p></div>`}`;
+
+  // ---- covered field evidence ----
+  const coveredSection = `
+    <h2 id="s-covered">Covered inputs and evidence</h2>
+    <p class="section-note">Input fields that at least one linked test fills in, with the tests that fill them.
+    <code>alias</code> means the match came through a reviewed HTTP-to-RPC field-map entry rather than an exact name.</p>
+    <div class="panel" style="padding:0">
+      ${coveredFields.length ? coveredFields.map((cf) => `
+        <div class="evidence-item">
+          <div class="ev-path">${esc(cf.path)}</div>
+          <div class="ev-meta">match: <span class="badge ${cf.match === "alias" ? "match-alias" : ""}">${esc(cf.match || "exact")}</span></div>
+          <div class="ev-tests">${(cf.by_tests || []).map((tn) => `<span class="badge">${esc(tn)}</span>`).join("") || '<span class="empty-inline">no named test</span>'}</div>
+        </div>`).join("")
+        : `<div class="evidence-item"><p class="empty-inline">No covered input fields${unmapped ? " (not linked to any test)." : "."}</p></div>`}
+    </div>`;
+
+  // ---- field gaps ----
+  const fieldGapSection = `
+    <h2 id="s-fieldgaps">Inputs missing from tests <span class="muted">(${fieldGaps.length})</span></h2>
+    <p class="section-note">Input fields the RPC reads but no linked test fills in. This is the list to add tests for.
+    Paths start at <code>in</code> (the RPC request); dots follow nested fields and <code>[*]</code> means any repeated element.
+    These are paths read from the code, not descriptions of what the field means. Check the related code before writing a test.</p>
+    ${fieldGaps.length ? `<ul class="gap-list scroll">${fieldGaps.map((g) => `
+      <li class="gap-item"><span class="gap-cond">${esc(g)}</span></li>`).join("")}</ul>`
+      : `<div class="panel"><p class="empty-inline">No inputs are missing from tests.</p></div>`}`;
+
+  // ---- branch gaps with source location + predicate paths ----
+  const branchGapSection = `
+    <h2 id="s-branchgaps">Checks missing test inputs <span class="muted">(${branchGaps.length})</span></h2>
+    <p class="section-note">Checks that read an input, where no linked test supplies that input.
+    Each shows the condition, its source location, and the request paths the check reads. Add a test that fills those paths.
+    Check the code first to decide on a valid or invalid value and the response you expect. Supplying an input is not the same as supplying an invalid one.</p>
+    ${branchGaps.length ? `<ul class="gap-list scroll">${branchGaps.map((g) => `
+      <li class="gap-item">
+        <span class="gap-cond">${esc(g.cond || "(condition unavailable)")}</span>
+        ${g.at ? `<div class="gap-at">${esc(g.at)}</div>` : ""}
+        ${(g.predicate_paths && g.predicate_paths.length) ? `<div class="gap-paths">reads ${g.predicate_paths.map((p) => `<code>${esc(p)}</code>`).join(" ")}</div>` : ""}
+      </li>`).join("")}</ul>`
+      : `<div class="panel"><p class="empty-inline">No checks are missing test inputs.</p></div>`}`;
+
+  // ---- sinks (where request data goes) ----
+  const SINK_LABELS = {
+    db_read: "database read",
+    db_write: "database write",
+    rpc: "service call",
+    interface: "interface call",
+    dispatch: "interface call",
+    opaque: "analysis stops here",
+  };
+  const sinkLabel = (k) => SINK_LABELS[k] || (k || "destination");
+  const sinkSection = `
+    <h2 id="s-sinks">Where request data goes <span class="muted">(${sinks.length})</span></h2>
+    <p class="section-note">Where the request data ends up: a database read or write, a call to another service,
+    an interface call, or a point where the analysis stops. Each one lists the request paths that flow into it.</p>
+    ${sinks.length ? `<div class="panel" style="padding:0">${sinks.map((s) => `
+      <div class="sink-item">
+        <div class="sink-head">
+          <span class="sink-kind ${esc((s.kind || "").replace(/[^a-z_]/gi, ""))}">${esc(sinkLabel(s.kind))}</span>
+          <span class="sink-target">${esc(s.target || "(unnamed)")}</span>
+        </div>
+        ${s.at ? `<div class="sink-at">${esc(s.at)}</div>` : ""}
+        ${(s.via_paths && s.via_paths.length) ? `<div class="sink-paths">via ${s.via_paths.slice(0, 24).map((p) => `<code>${esc(p)}</code>`).join(" ")}${s.via_paths.length > 24 ? ` <span class="muted">+${s.via_paths.length - 24} more</span>` : ""}</div>` : ""}
+      </div>`).join("")}</div>`
+      : `<div class="panel"><p class="empty-inline">No destinations recorded for this RPC.</p></div>`}`;
+
+  // ---- error symbols ----
+  const errSection = (() => {
+    if (!errorsRaw.length) return "";
+    const tainted = errorsRaw.filter((e) => e.symbol && e.tainted);
+    const untainted = errorsRaw.filter((e) => e.symbol && !e.tainted);
+    const chipsOf = (arr, cls) => [...new Set(arr.map((e) => e.symbol))].sort()
+      .map((sym) => `<span class="chip ${cls}">${esc(sym)}</span>`).join("");
+    return `
+      <h2 id="s-errors">Error exits <span class="muted">(${new Set(errorsRaw.filter(e=>e.symbol).map(e=>e.symbol)).size})</span></h2>
+      <p class="section-note">Errors this RPC can return. The first group is linked to the request inputs and is
+      a good starting point for error tests. The rest are reachable but are not driven directly by request inputs.</p>
+      <div class="panel stack">
+        <div><div class="ev-meta" style="margin-bottom:8px">Errors linked to request inputs (${new Set(tainted.map(e=>e.symbol)).size})</div>
+          <div class="chips">${chipsOf(tainted, "tainted") || '<span class="empty-inline">none</span>'}</div></div>
+        <div><div class="ev-meta" style="margin:8px 0">Other reachable errors (${new Set(untainted.map(e=>e.symbol)).size})</div>
+          <div class="chips">${chipsOf(untainted, "untainted") || '<span class="empty-inline">none</span>'}</div></div>
+      </div>`;
+  })();
+
+  // ---- anomalies (human-reviewed mapping suggestions) ----
+  const anomalySection = anomalies.length ? `
+    <h2 id="s-anomalies">Mapping review <span class="muted">(${anomalies.length})</span> ${help(HELP.anomalies)}</h2>
+    <p class="section-note">HTTP request fields that did not line up one-to-one with an RPC input field. These are
+    suggestions for a person to confirm in <code>fieldmap.json</code>. Nothing is renamed automatically.
+    A field with no suggestion may simply be ignored by the RPC.</p>
+    <div class="panel" style="padding:0">
+      ${anomalies.map((a) => `
+        <div class="anomaly-item">
+          <div class="anomaly-field">${esc(a.field)}</div>
+          <div class="anomaly-sugg">${(a.fuzzy_suggestions && a.fuzzy_suggestions.length)
+            ? "possible RPC paths: " + a.fuzzy_suggestions.map((s) => `<code>${esc(s)}</code>`).join("")
+            : '<span class="anomaly-none">No suggestion available. Check the service code before adding a mapping.</span>'}</div>
+        </div>`).join("")}
+    </div>` : "";
+
+  // ---- test facts (expandable) ----
+  const testFactSection = `
+    <h2 id="s-tests">Linked tests <span class="muted">(${testFacts.length})</span> ${help(HELP.tests)}</h2>
+    <p class="section-note">The Lifejacket tests linked to this RPC, with the inputs each one fills in, the
+    response codes it checks for, and whether it expects success.</p>
+    ${testFacts.length ? testFacts.map((tf) => {
+      const pos = tf.asserts_success;
+      const fieldsSet = tf.fields_set || [];
+      const statuses = tf.statuses || [];
+      const neg = statuses.some((code) => Number(code) >= 400 && Number(code) < 600);
+      const assertionLabel = pos ? "expects success" : neg ? "expects an error response" : "no outcome found";
+      const labels = tf.labels || [];
+      return `<details class="testfact">
+        <summary>
+          <span class="tf-name">${esc(tf.name || "(unnamed test)")}</span>
+          <span class="tf-assert"><span class="pill ${pos ? "pos" : neg ? "neg" : ""}">${assertionLabel}</span></span>
+        </summary>
+        <div class="tf-body stack">
+          <div class="ev-meta mono" style="word-break:break-all">${esc(tf.file || "")}</div>
+          ${labels.length ? `<div class="tf-labels">${labels.map((l) => `<span class="tf-label">${esc(l)}</span>`).join("")}</div>` : ""}
+          <div><span class="muted">inputs filled in:</span> ${fieldsSet.length ? fieldsSet.map((x) => `<code>${esc(x)}</code>`).join(" ") : '<span class="empty-inline">none (for example a test that sends an empty request)</span>'}</div>
+          <div><span class="muted">response codes checked:</span> ${statuses.length ? statuses.map((s) => `<span class="chip">${esc(s)}</span>`).join(" ") : '<span class="empty-inline">none stated</span>'}</div>
+        </div>
+      </details>`;
+    }).join("")
+      : `<div class="panel"><p class="empty-inline">No linked tests${unmapped ? " (not linked to any test)." : "."}</p></div>`}`;
+
+  // ---- agent prompt ----
+  const promptSection = `
+    <h2 id="s-prompt">Hand off to a test-writing agent</h2>
+    <p class="section-note">A ready-to-paste brief listing the gaps above. Copying it does not change anything.
+    It is the same prompt stored with this RPC.</p>
+    <div class="prompt-wrap">
+      <div class="prompt-bar">
+        <span class="pb-label">Agent prompt</span>
+        <button class="copybtn" id="copyPrompt" type="button">Copy prompt</button>
+      </div>
+      <label class="vh" for="promptText">Agent prompt text</label>
+      <textarea id="promptText" readonly spellcheck="false">${esc(d.agent_prompt || "")}</textarea>
+      <p class="copy-hint" id="copyHint">The prompt describes gaps to close; it does not run or modify tests.</p>
+    </div>`;
+
+  // ---- raw data fallback ----
+  const rawSection = `
+    <h2 id="s-raw">Raw data</h2>
+    <p class="section-note">The underlying JSON, in case a section above does not show what you need.</p>
+    <details class="raw"><summary>Coverage JSON</summary><pre class="json">${esc(JSON.stringify(c, null, 2))}</pre></details>
+    <details class="raw"><summary>Code analysis JSON</summary><pre class="json">${esc(JSON.stringify(prov, null, 2))}</pre></details>`;
+
+  // ---- unresolved note ----
+  const unresolvedNote = unresolved.length ? `
+    <div class="callout">
+      ${unresolved.length} point${unresolved.length === 1 ? "" : "s"} where the analysis could not follow the
+      request data any further (for example a call with several possible targets, or a called function the
+      analysis could not read). At these points it stops rather than dropping the data. See the provenance JSON below.
+    </div>` : "";
+
+  // ---- jump nav ----
+  const jnItems = [
+    ["s-overview", "Overview", null],
+    ["s-status", "Response codes", documented.length],
+    ["s-covered", "Covered inputs", coveredFields.length],
+    ["s-fieldgaps", "Inputs missing from tests", fieldGaps.length],
+    ["s-branchgaps", "Checks missing test inputs", branchGaps.length],
+    ["s-sinks", "Where request data goes", sinks.length],
+    errorsRaw.length ? ["s-errors", "Error exits", new Set(errorsRaw.filter(e=>e.symbol).map(e=>e.symbol)).size] : null,
+    anomalies.length ? ["s-anomalies", "Mapping review", anomalies.length] : null,
+    ["s-tests", "Linked tests", testFacts.length],
+    ["s-prompt", "Agent handoff", null],
+    ["s-raw", "Raw data", null],
+  ].filter(Boolean);
+
+  const jumpNav = `<nav class="jumpnav" aria-label="On this page"><h3>On this page</h3>
+    <ol>${jnItems.map(([id, label, count]) => `<li><a href="#${id}" data-jump="${attr(id)}">
+      <span>${esc(label)}</span>${count != null ? `<span class="jn-count">${esc(count)}</span>` : ""}</a></li>`).join("")}</ol></nav>`;
+
+  app.innerHTML = `
+    <div class="page-head">
+      <p class="eyebrow">${esc(svc)} &middot; RPC (backend operation)</p>
+      <h1>${esc(rpc)} ${mapTag}</h1>
+      <p class="lede">
+        ${c.operation ? `operation <code>${esc(c.operation)}</code> &middot; ` : ""}
+        ${esc(c.tests || 0)} linked test${(c.tests || 0) === 1 ? "" : "s"}
+        ${prov.func ? `<br><span class="rpc-type">${esc(prov.func)}</span>` : ""}
+        ${prov.request_type ? `<br><span class="rpc-type">${esc(prov.request_type)} → ${esc(prov.response_type || "?")}</span>` : ""}
+      </p>
+    </div>
+
+    ${unmappedNote}${zeroFieldNote}${unresolvedNote}
+
+    <div class="detail-layout">
+      ${jumpNav}
+      <div class="detail-main">
+        <h2 id="s-overview" class="flush">Overview</h2>
+        <p class="section-note">These numbers compare this operation's code with the inputs and checks written in its tests.
+        Supplying an input suggests a code check can be reached; it does not confirm that check ran or passed.</p>
+        <div class="panel-grid">${fieldPanel}${branchPanel}</div>
+        ${statusSection}
+        ${coveredSection}
+        ${fieldGapSection}
+        ${branchGapSection}
+        ${sinkSection}
+        ${errSection}
+        ${anomalySection}
+        ${testFactSection}
+        ${promptSection}
+        ${rawSection}
+      </div>
+    </div>`;
+
+  bindHelp();
+  bindCopy();
+  bindJump();
+}
+
+/* ---- clipboard with explicit failure handling ---- */
+function bindCopy() {
   const btn = document.getElementById("copyPrompt");
+  const ta = document.getElementById("promptText");
+  const hint = document.getElementById("copyHint");
+  if (!btn || !ta) return;
+  const reset = () => {
+    setTimeout(() => {
+      btn.textContent = "Copy prompt";
+      btn.classList.remove("done", "failed");
+    }, 1800);
+  };
   btn.addEventListener("click", async () => {
-    const text = document.getElementById("promptText").value;
-    try { await navigator.clipboard.writeText(text); } catch (_) {
-      const ta = document.getElementById("promptText"); ta.focus(); ta.select(); document.execCommand("copy");
+    const text = ta.value;
+    let ok = false;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+        ok = true;
+      }
+    } catch (_) { ok = false; }
+    if (!ok) {
+      // Fallback: select the textarea and try execCommand.
+      try {
+        ta.focus(); ta.select();
+        ok = document.execCommand && document.execCommand("copy");
+      } catch (_) { ok = false; }
     }
-    btn.textContent = "Copied"; btn.classList.add("done");
-    setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("done"); }, 1500);
+    if (ok) {
+      btn.textContent = "Copied";
+      btn.classList.add("done");
+      if (hint) hint.textContent = "Copied to clipboard.";
+    } else {
+      btn.textContent = "Copy failed";
+      btn.classList.add("failed");
+      ta.focus(); ta.select();
+      if (hint) hint.textContent = "Could not copy automatically. The text is selected, so press Ctrl/Cmd+C.";
+    }
+    reset();
   });
 }
 
-// ---- router ----
-async function route() {
-  const hash = location.hash.replace(/^#\/?/, "");
-  const parts = hash.split("/").filter(Boolean).map(decodeURIComponent);
+/* ---- smooth-ish in-page jump that also moves focus for a11y ---- */
+function bindJump() {
+  document.querySelectorAll("a[data-jump]").forEach((a) => a.addEventListener("click", (e) => {
+    const id = a.dataset.jump;
+    const target = document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    target.setAttribute("tabindex", "-1");
+    target.focus({ preventScroll: true });
+    history.replaceState(null, "", location.hash.split("#").slice(0, 2).join("#") + "#" + id);
+  }));
+}
+
+/* ---- help tooltips: ensure focus-within works on touch (toggle on click) ---- */
+function bindHelp() {
+  document.querySelectorAll(".help").forEach((h) => {
+    h.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); h.focus(); });
+    h.addEventListener("keydown", (e) => { if (e.key === "Escape") h.blur(); });
+  });
+}
+
+/* ============================ Router ============================ */
+function parseHash() {
+  // Strip a trailing in-page anchor (#s-xxx) appended by jump links.
+  let raw = location.hash.replace(/^#\/?/, "");
+  const extra = raw.indexOf("#");
+  if (extra !== -1) raw = raw.slice(0, extra);
   try {
-    if (parts.length === 0) await viewServices();
-    else if (parts.length === 1) await viewService(parts[0]);
-    else await viewRpc(parts[0], parts[1]);
-  } catch (e) {
-    app.innerHTML = `<div class="panel"><h3>Could not load</h3><p class="muted">${esc(e.message)}</p><p><a href="#/">Back to services</a></p></div>`;
+    return raw.split("/").filter(Boolean).map((seg) => {
+      try { return decodeURIComponent(seg); } catch (_) { return seg; }
+    });
+  } catch (_) {
+    return null; // malformed
   }
-  window.scrollTo(0, 0);
+}
+
+async function route() {
+  const token = ++routeToken;
+  const parts = parseHash();
+
+  if (parts === null) {
+    app.innerHTML = stateCard("That link looks malformed",
+      "The address could not be read. Start from the services list.");
+    return;
+  }
+
+  try {
+    if (parts.length === 0) await viewServices(token);
+    else if (parts.length === 1) await viewService(parts[0], token);
+    else await viewRpc(parts[0], parts[1], token);
+  } catch (e) {
+    if (token !== routeToken) return; // superseded by a newer navigation
+    const msg = String((e && e.message) || e);
+    const notFound = /\b404\b/.test(msg);
+    app.innerHTML = stateCard(
+      notFound ? "Not found" : "Could not load",
+      notFound
+        ? "No data exists for this path. It may be an unknown service or RPC name."
+        : `Something went wrong while loading this view.<br><code>${esc(msg)}</code>`
+    );
+  }
+  if (token === routeToken) {
+    app.focus({ preventScroll: true });
+    window.scrollTo(0, 0);
+  }
 }
 
 window.addEventListener("hashchange", route);
