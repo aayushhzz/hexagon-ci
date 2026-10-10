@@ -16,6 +16,8 @@ func plan(repository string, changedFiles []string, previous *hexagon.Graph) (*h
 }
 ```
 
+For function-level change impact, callers can pass structured Git hunk data to `PlanDiff` (or compact snapshots to `PlanCompactDiff`). The planner maps old and new ranges to inclusive function spans, walks reverse caller edges to test roots, and returns sorted unique candidates. Raw unified-diff parsing stays in the CI adapter at `cmd/ci-impact`; the library accepts `ParsedDiff`. Plans still set `run_full_suite=true`.
+
 Build the CLI and rebuild a Go repository graph:
 
 ```sh

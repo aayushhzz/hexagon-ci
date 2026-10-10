@@ -36,9 +36,53 @@ func RunTests(ctx context.Context, repository string, plan *ImpactPlan, stdout, 
 		return runGoTest(ctx, repository, testArgs(plan.BuildTags, "./..."), stdout, stderr)
 	}
 	for _, packageName := range sortedPackageNames(packages) {
-		pattern := "^(?:" + strings.Join(packages[packageName], "|") + ")$"
+		pattern := "^(" + strings.Join(packages[packageName], "|") + ")$"
 		args := testArgs(plan.BuildTags, packageName)
 		args = append(args, "-run", pattern)
+		if err := runGoTest(ctx, repository, args, stdout, stderr); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// RunCandidateTests executes the planner's candidate roots as an explicit
+// diagnostic comparison. It intentionally ignores RunFullSuite; callers must
+// retain RunTests or another full-suite check as the safety baseline. The graph
+// must be freshly built from repository and must be the graph used to create plan.
+func RunCandidateTests(ctx context.Context, repository string, graph *Graph, plan *ImpactPlan, stdout, stderr io.Writer) error {
+	if err := validatePlan(plan); err != nil {
+		return err
+	}
+	if stdout == nil || stderr == nil {
+		return fmt.Errorf("test runner output streams are required")
+	}
+	if err := rejectUnsupportedGOFLAGS(); err != nil {
+		return err
+	}
+	if graph == nil || graph.FormatVersion != graphFormatVersion || graph.Language != "go" ||
+		graph.SourceFingerprint != plan.SourceFingerprint || !sameBuildContext(graph.AnalysisContext, plan.AnalysisContext) {
+		return fmt.Errorf("candidate plan does not match the supplied current Go graph")
+	}
+	if len(plan.CandidateTests) == 0 {
+		return nil
+	}
+	for _, candidate := range plan.CandidateTests {
+		if _, exists := graph.Tests[candidate]; !exists {
+			return fmt.Errorf("candidate test root %q is absent from the supplied current Go graph", candidate)
+		}
+	}
+	packages, err := selectedTestPackages(plan.CandidateTests)
+	if err != nil {
+		return err
+	}
+	for _, packageName := range sortedPackageNames(packages) {
+		pattern := "^(" + strings.Join(packages[packageName], "|") + ")$"
+		args := []string{"test", "-count=1", "-v"}
+		if normalized := normalizedTags(plan.BuildTags); len(normalized) > 0 {
+			args = append(args, "-tags="+strings.Join(normalized, ","))
+		}
+		args = append(args, "-run", pattern, packageName)
 		if err := runGoTest(ctx, repository, args, stdout, stderr); err != nil {
 			return err
 		}

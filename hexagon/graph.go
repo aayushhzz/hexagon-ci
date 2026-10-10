@@ -21,7 +21,7 @@ import (
 	"github.com/aayushhzz/hexagon-ci/hexagon/internal/gosource"
 )
 
-//go:embed graph.go compact.go planner.go internal/gosource/analyzer.go
+//go:embed graph.go compact.go planner.go diff_planner.go internal/gosource/analyzer.go
 var analyzerSources embed.FS
 
 const graphFormatVersion = 2
@@ -576,7 +576,7 @@ func fingerprint(sources map[string][]byte) string {
 
 func analyzerFingerprint() (string, error) {
 	hash := sha256.New()
-	paths := []string{"graph.go", "compact.go", "planner.go", "internal/gosource/analyzer.go"}
+	paths := []string{"graph.go", "compact.go", "planner.go", "diff_planner.go", "internal/gosource/analyzer.go"}
 	for _, path := range paths {
 		content, err := analyzerSources.ReadFile(path)
 		if err != nil {

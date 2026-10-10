@@ -275,6 +275,34 @@ func TestRunTestsUsesGoFullSuiteAndRejectsUnknownPlanVersions(t *testing.T) {
 	}
 }
 
+func TestRunCandidateTestsExecutesOnlyCandidateRootsDespiteFullSuiteFlag(t *testing.T) {
+	root := t.TempDir()
+	writeFixture(t, root, "go.mod", "module example.com/candidates\n\ngo 1.24.0\n")
+	writeFixture(t, root, "app/app.go", "package app\nfunc Value() int { return 42 }\n")
+	writeFixture(t, root, "app/app_test.go", "package app\nimport \"testing\"\nfunc TestChosen(t *testing.T) { t.Log(\"candidate-ran\") }\nfunc TestOther(t *testing.T) { t.Fatal(\"unselected-test-ran\") }\n")
+	graph, err := hexagon.BuildGraph(root, nil)
+	if err != nil {
+		t.Fatalf("BuildGraph() error = %v", err)
+	}
+	plan := &hexagon.ImpactPlan{
+		FormatVersion: 1, Language: "go", SourceFingerprint: graph.SourceFingerprint,
+		ChangedFiles: []string{"app/app.go"}, CandidateTests: []string{"app/app_test.go::TestChosen"},
+		AnalysisContext: graph.AnalysisContext, RunFullSuite: true,
+	}
+	var stdout, stderr bytes.Buffer
+	if err := hexagon.RunCandidateTests(context.Background(), root, graph, plan, &stdout, &stderr); err != nil {
+		t.Fatalf("RunCandidateTests() error = %v\nstdout: %s\nstderr: %s", err, stdout.String(), stderr.String())
+	}
+	if !strings.Contains(stdout.String(), "candidate-ran") || strings.Contains(stdout.String()+stderr.String(), "unselected-test-ran") {
+		t.Fatalf("candidate runner did not isolate planned roots: stdout=%q stderr=%q", stdout.String(), stderr.String())
+	}
+
+	plan.SourceFingerprint = "stale"
+	if err := hexagon.RunCandidateTests(context.Background(), root, graph, plan, &stdout, &stderr); err == nil {
+		t.Fatal("RunCandidateTests() accepted a plan that does not match the graph")
+	}
+}
+
 func TestRunTestsRequiresCompletenessBeforeSelectiveExecution(t *testing.T) {
 	root := t.TempDir()
 	writeFixture(t, root, "go.mod", "module example.com/demo\n\ngo 1.24.0\n")
