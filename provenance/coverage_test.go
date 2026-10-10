@@ -245,3 +245,101 @@ type AccountsCreateResponse struct {
 		})
 	}
 }
+
+func TestPathDepth(t *testing.T) {
+	cases := map[string]int{
+		"in.SearchQuery":                   1,
+		"in.PageParams.Page":               2,
+		"in.UserFilter.DevUserFilter.Apps": 3,
+		"in":                               0,
+	}
+	for path, want := range cases {
+		if got := pathDepth(path); got != want {
+			t.Errorf("pathDepth(%q)=%d want %d", path, got, want)
+		}
+	}
+}
+
+func TestDepthBandsBucketing(t *testing.T) {
+	leaves := []string{"in.A", "in.B", "in.X.Y", "in.P.Q.R", "in.P.Q.S"}
+	d := depthTotals(leaves)
+	if d.TopLevel.Total != 2 || d.Nested.Total != 1 || d.Deep.Total != 2 {
+		t.Fatalf("bands = top %d nested %d deep %d", d.TopLevel.Total, d.Nested.Total, d.Deep.Total)
+	}
+}
+
+func TestPositiveNegativeTest(t *testing.T) {
+	cases := []struct {
+		name     string
+		tf       testFact
+		positive bool
+		negative bool
+	}{
+		{"success bool", testFact{Success: true}, true, false},
+		{"200", testFact{Status: []int{200}}, true, false},
+		{"400", testFact{Status: []int{400}}, false, true},
+		{"201 and 400", testFact{Status: []int{201, 400}}, true, true},
+		{"none", testFact{}, false, false},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			if got := isPositiveTest(c.tf); got != c.positive {
+				t.Errorf("isPositiveTest=%v want %v", got, c.positive)
+			}
+			if got := isNegativeTest(c.tf); got != c.negative {
+				t.Errorf("isNegativeTest=%v want %v", got, c.negative)
+			}
+		})
+	}
+}
+
+func TestBuildNormFilters(t *testing.T) {
+	tests := []testFact{
+		{Name: "ok", Fields: []string{"DisplayName"}, Status: []int{200}, Success: true},
+		{Name: "bad", Fields: []string{"Id"}, Status: []int{400}},
+	}
+	neg := buildNorm(tests, isNegativeTest)
+	if _, ok := neg["id"]; !ok {
+		t.Errorf("expected negative index to contain id, got %v", neg)
+	}
+	if _, ok := neg["displayname"]; ok {
+		t.Errorf("positive-only field displayname should not be in negative index")
+	}
+}
+
+func TestClassifyBranch(t *testing.T) {
+	// Id set by both a success (200) and an error (400) test at top level.
+	tests := []testFact{
+		{Name: "ok", Fields: []string{"Id"}, Status: []int{200}, Success: true},
+		{Name: "bad", Fields: []string{"Id"}, Status: []int{400}},
+	}
+	normAll := buildNorm(tests, func(testFact) bool { return true })
+	normNeg := buildNorm(tests, isNegativeTest)
+
+	t.Run("top-level set by positive and negative", func(t *testing.T) {
+		b := Branch{PredicatePaths: []string{"in.Id"}}
+		oc := classifyBranch(b, normAll, normNeg, nil, 2)
+		if !oc.reachableOnHappy || !oc.present || !oc.negative {
+			t.Fatalf("got %+v", oc)
+		}
+	})
+	t.Run("deep guard not reachable on happy and unset", func(t *testing.T) {
+		b := Branch{PredicatePaths: []string{"in.Filter.Deep.Field"}}
+		oc := classifyBranch(b, normAll, normNeg, nil, 2)
+		if oc.reachableOnHappy || oc.present || oc.absent {
+			t.Fatalf("deep unset guard should be inert, got %+v", oc)
+		}
+	})
+	t.Run("top-level unset guard: absent arm on happy path", func(t *testing.T) {
+		b := Branch{PredicatePaths: []string{"in.SkipTotal"}}
+		oc := classifyBranch(b, normAll, normNeg, nil, 2)
+		if !oc.reachableOnHappy || oc.present || !oc.absent {
+			t.Fatalf("got %+v", oc)
+		}
+	})
+	t.Run("no predicate paths", func(t *testing.T) {
+		if oc := classifyBranch(Branch{}, normAll, normNeg, nil, 2); oc.present || oc.absent || oc.negative {
+			t.Fatalf("empty branch should be inert, got %+v", oc)
+		}
+	})
+}
