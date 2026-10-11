@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "CreateWork",
     "operation": "WorksCreate",
-    "tests": 67,
+    "tests": 123,
     "status": {
       "documented": [
         201,
@@ -33,11 +33,11 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 190,
-      "covered_count": 28,
-      "coverage_pct": 14.7,
-      "request_fields_set_by_tests": 75,
-      "set_by_positive_tests": 28,
-      "set_by_negative_tests": 20,
+      "covered_count": 37,
+      "coverage_pct": 19.5,
+      "request_fields_set_by_tests": 102,
+      "set_by_positive_tests": 37,
+      "set_by_negative_tests": 21,
       "by_depth": {
         "top_level": {
           "total": 8,
@@ -46,19 +46,19 @@
         },
         "nested": {
           "total": 35,
-          "set": 9,
-          "pct": 25.7
+          "set": 10,
+          "pct": 28.6
         },
         "deep": {
           "total": 147,
-          "set": 17,
-          "pct": 11.6
+          "set": 25,
+          "pct": 17
         }
       },
       "representative": {
         "units": 190,
-        "covered": 28,
-        "pct": 14.7,
+        "covered": 37,
+        "pct": 19.5,
         "collapsed_types": [
           "api.CustomSchemaSpec"
         ]
@@ -68,17 +68,43 @@
           "path": "in.Id",
           "match": "exact",
           "by_tests": [
+            "Admin - Should be able to delete an issue",
+            "Admin - Should be able to get an issue",
             "ClassifyIssue",
             "CreateTicketPart1",
             "CreateTicketPart2",
             "CreateTicketPart3",
             "Creates ticket roles for RevUsers with stock and custom actor caveats through role set create and update",
+            "DefaultDelete",
+            "DefaultGet",
+            "Delete by id",
+            "External stakeholders access works through public API for project visibility",
+            "Get by id",
+            "Get subscribers with rev user token",
             "MetricActionExecute on Frozen Ticket",
+            "Should perform complete CRUD lifecycle for a ticket",
+            "Should successfully clone a ticket and verify the cloned ticket",
+            "Should successfully export tickets to CSV and JSON",
+            "Should successfully merge tickets from different source channels",
+            "Should successfully merge two tickets and verify merged ticket",
+            "Should validate CSAT is not triggered to duplicate ticket owners when tickets are merged",
+            "Should validate negative scenarios for ticket merging with different workspaces",
+            "Should validate no communication is allowed from merged and closed tickets across channels",
+            "Should verify file attachment content matches original using SHA256",
+            "Successfully moved items between vista groups",
+            "Team coordinates work management through comprehensive operations",
             "Test1",
             "Update with email channel",
             "Update with only required fields",
             "Update with required fields",
             "Updates survey aggregation on a frozen ticket using service account context",
+            "Updates timeline entries via internal API",
+            "User retrieves and manages individual work items throughout project lifecycle",
+            "Validates works operations reliability through repeated API testing",
+            "With account, amount and forecast category",
+            "With invalid account",
+            "With invalid fields",
+            "With owners",
             "Workflow runs termination: using exit signal",
             "WorksUpdate rejects incompatible subtype changes",
             "WorksUpdate rejects incompatible subtype or space changes",
@@ -97,6 +123,7 @@
             "should create and activate the TSE Logic workflow",
             "should create and activate the workflow as per the template",
             "should create workflow with issue created trigger that classifies the issue",
+            "should successfully parts list contributors for a given part",
             "should trigger the workflow when enhancement tags are updated",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
           ]
@@ -107,6 +134,7 @@
           "by_tests": [
             "Updates survey aggregation on a frozen ticket using service account context",
             "resumes the resolution metric instead of restarting when a resolved ticket is reopened with the flag enabled",
+            "should successfully parts list contributors for a given part",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
           ]
         },
@@ -116,6 +144,7 @@
           "by_tests": [
             "Updates survey aggregation on a frozen ticket using service account context",
             "resumes the resolution metric instead of restarting when a resolved ticket is reopened with the flag enabled",
+            "should successfully parts list contributors for a given part",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
           ]
         },
@@ -132,6 +161,7 @@
           "by_tests": [
             "Updates survey aggregation on a frozen ticket using service account context",
             "resumes the resolution metric instead of restarting when a resolved ticket is reopened with the flag enabled",
+            "should successfully parts list contributors for a given part",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
           ]
         },
@@ -141,10 +171,30 @@
           "by_tests": [
             "ClassifyIssue",
             "Creates ticket roles for RevUsers with stock and custom actor caveats through role set create and update",
+            "Creates timeline entries via internal API",
+            "Creates timeline entries via public API",
+            "External stakeholders access works through public API for project visibility",
+            "Get subscribers with rev user token",
+            "Lists timeline entries via internal API",
             "RequestOnIssueID",
             "Should create a test issue manually for retrieval tests",
             "Should create a test ticket manually for retrieval tests",
+            "Should perform complete CRUD lifecycle for a ticket",
+            "Should successfully clone a ticket and verify the cloned ticket",
+            "Should successfully export tickets to CSV and JSON",
+            "Should successfully link a ticket to an issue and verify the link",
+            "Should successfully link an opportunity to a ticket and verify the link",
+            "Should successfully merge tickets from different source channels",
+            "Should successfully merge two tickets and verify merged ticket",
+            "Should validate CSAT is not triggered to duplicate ticket owners when tickets are merged",
+            "Should validate negative scenarios for ticket merging with different workspaces",
+            "Should validate no communication is allowed from merged and closed tickets across channels",
+            "Should verify file attachment content matches original using SHA256",
+            "Team coordinates work management through comprehensive operations",
             "Test1",
+            "Updates timeline entries via internal API",
+            "User retrieves and manages individual work items throughout project lifecycle",
+            "Validates works operations reliability through repeated API testing",
             "Workflow runs termination: using exit signal",
             "agents and automations admin can rerun a workflow run",
             "platform user cannot rerun a workflow run and receives 403",
@@ -157,7 +207,13 @@
             "should create and activate the TCD notifier workflow with group membership check",
             "should create and activate the TSE Logic workflow",
             "should create and activate the workflow as per the template",
+            "should create tickets and group by parts without sorting",
+            "should create tickets with a single owner, verify creation and test pagination",
+            "should create tickets with a single owner, verify creation, test pagination, and sorting",
+            "should create tickets with multiple owners, group them, and verify group order",
+            "should create tickets, group by parts, and sort by created date",
             "should create workflow with issue created trigger that classifies the issue",
+            "should groupby stage and verify tickets",
             "should trigger the workflow when enhancement tags are updated",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
           ]
@@ -182,6 +238,7 @@
           "by_tests": [
             "Updates survey aggregation on a frozen ticket using service account context",
             "resumes the resolution metric instead of restarting when a resolved ticket is reopened with the flag enabled",
+            "should successfully parts list contributors for a given part",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
           ]
         },
@@ -189,15 +246,26 @@
           "path": "in.Ticket.Tags",
           "match": "exact",
           "by_tests": [
+            "Admin - Should be able to delete an issue",
+            "Admin - Should be able to get an issue",
             "Create with only required fields",
+            "DefaultDelete",
+            "DefaultGet",
+            "Delete by id",
+            "Get by id",
+            "Get without id",
             "OwnedByMissing",
             "PartsMissing",
+            "Should perform complete CRUD lifecycle for a ticket",
+            "Should successfully clone a ticket and verify the cloned ticket",
+            "Should successfully export tickets to CSV and JSON",
             "Title",
             "Type",
             "Update with only required fields",
             "Update with required fields",
             "WithOnlyRequiredFields",
             "Without Applies To Part",
+            "Without ID",
             "Without Owned By",
             "Without Title",
             "Without Type",
@@ -220,6 +288,8 @@
           "path": "in.Ticket.Title",
           "match": "exact",
           "by_tests": [
+            "Admin - Should be able to delete an issue",
+            "Admin - Should be able to get an issue",
             "Assigns milestone on WorksCreate",
             "ClassifyIssue",
             "Create with email source channel",
@@ -230,24 +300,65 @@
             "CreateTicketPart2",
             "CreateTicketPart3",
             "Creates ticket roles for RevUsers with stock and custom actor caveats through role set create and update",
+            "Creates timeline entries via internal API",
+            "Creates timeline entries via public API",
+            "DefaultDelete",
+            "DefaultGet",
+            "Delete by id",
             "Emits create event",
+            "External stakeholders access works through public API for project visibility",
             "Fails WorksCreate with milestone from a different Enhancement",
+            "Get by id",
+            "Get subscribers with rev user token",
+            "Get without id",
+            "Lists timeline entries via internal API",
+            "MetricActionExecute Out Of Order Complete With Restart",
+            "MetricActionExecute Out Of Order Pause",
+            "MetricActionExecute Out Of Order Start",
             "MetricActionExecute on Frozen Ticket",
+            "Missing Account",
+            "Missing Owned By",
             "OwnedByMissing",
             "PartsMissing",
             "RequestOnIssueID",
             "Should create a test issue manually for retrieval tests",
             "Should create a test ticket manually for retrieval tests",
+            "Should create a ticket with different states",
+            "Should handle ticket creation with minimal fields",
+            "Should perform complete CRUD lifecycle for a ticket",
+            "Should successfully clone a ticket and verify the cloned ticket",
+            "Should successfully export tickets to CSV and JSON",
+            "Should successfully link a ticket to an issue and verify the link",
+            "Should successfully link an opportunity to a ticket and verify the link",
+            "Should successfully merge tickets from different source channels",
+            "Should successfully merge two tickets and verify merged ticket",
+            "Should validate CSAT is not triggered to duplicate ticket owners when tickets are merged",
+            "Should validate negative scenarios for ticket merging with different workspaces",
+            "Should validate no communication is allowed from merged and closed tickets across channels",
+            "Should verify file attachment content matches original using SHA256",
+            "Successfully moved items between vista groups",
+            "Team coordinates work management through comprehensive operations",
             "Test1",
             "Type",
             "Update with email channel",
             "Update with only required fields",
             "Update with required fields",
             "Updates survey aggregation on a frozen ticket using service account context",
+            "Updates timeline entries via internal API",
+            "User retrieves and manages individual work items throughout project lifecycle",
+            "Validates works operations reliability through repeated API testing",
+            "With account, amount and forecast category",
+            "With additional fields",
+            "With invalid account",
+            "With invalid fields",
+            "With only required fields",
+            "With owners",
             "WithOnlyRequiredFields",
             "Without Applies To Part",
+            "Without ID",
             "Without Owned By",
             "Without Type",
+            "Without required fields",
             "Workflow runs termination: using exit signal",
             "WorksExport",
             "WorksExportAsync",
@@ -275,9 +386,25 @@
             "should create and activate the TCD notifier workflow with group membership check",
             "should create and activate the TSE Logic workflow",
             "should create and activate the workflow as per the template",
+            "should create tickets and group by parts without sorting",
+            "should create tickets with a single owner, verify creation and test pagination",
+            "should create tickets with a single owner, verify creation, test pagination, and sorting",
+            "should create tickets with multiple owners, group them, and verify group order",
+            "should create tickets, group by parts, and sort by created date",
             "should create workflow with issue created trigger that classifies the issue",
+            "should groupby stage and verify tickets",
+            "should return 400 for bad request",
+            "should successfully make a summarize list request and receive summary",
+            "should successfully parts list contributors for a given part",
             "should trigger the workflow when enhancement tags are updated",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
+          ]
+        },
+        {
+          "path": "in.Ticket.Visibility",
+          "match": "exact",
+          "by_tests": [
+            "Should validate no communication is allowed from merged and closed tickets across channels"
           ]
         },
         {
@@ -286,10 +413,30 @@
           "by_tests": [
             "ClassifyIssue",
             "Creates ticket roles for RevUsers with stock and custom actor caveats through role set create and update",
+            "Creates timeline entries via internal API",
+            "Creates timeline entries via public API",
+            "External stakeholders access works through public API for project visibility",
+            "Get subscribers with rev user token",
+            "Lists timeline entries via internal API",
             "RequestOnIssueID",
             "Should create a test issue manually for retrieval tests",
             "Should create a test ticket manually for retrieval tests",
+            "Should perform complete CRUD lifecycle for a ticket",
+            "Should successfully clone a ticket and verify the cloned ticket",
+            "Should successfully export tickets to CSV and JSON",
+            "Should successfully link a ticket to an issue and verify the link",
+            "Should successfully link an opportunity to a ticket and verify the link",
+            "Should successfully merge tickets from different source channels",
+            "Should successfully merge two tickets and verify merged ticket",
+            "Should validate CSAT is not triggered to duplicate ticket owners when tickets are merged",
+            "Should validate negative scenarios for ticket merging with different workspaces",
+            "Should validate no communication is allowed from merged and closed tickets across channels",
+            "Should verify file attachment content matches original using SHA256",
+            "Team coordinates work management through comprehensive operations",
             "Test1",
+            "Updates timeline entries via internal API",
+            "User retrieves and manages individual work items throughout project lifecycle",
+            "Validates works operations reliability through repeated API testing",
             "Workflow runs termination: using exit signal",
             "agents and automations admin can rerun a workflow run",
             "platform user cannot rerun a workflow run and receives 403",
@@ -302,9 +449,29 @@
             "should create and activate the TCD notifier workflow with group membership check",
             "should create and activate the TSE Logic workflow",
             "should create and activate the workflow as per the template",
+            "should create tickets and group by parts without sorting",
+            "should create tickets with a single owner, verify creation and test pagination",
+            "should create tickets with a single owner, verify creation, test pagination, and sorting",
+            "should create tickets with multiple owners, group them, and verify group order",
+            "should create tickets, group by parts, and sort by created date",
             "should create workflow with issue created trigger that classifies the issue",
+            "should groupby stage and verify tickets",
             "should trigger the workflow when enhancement tags are updated",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Issue.EventContext.Source",
+          "match": "exact",
+          "by_tests": [
+            "Successfully moved items between vista groups"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Issue.ExternalRef",
+          "match": "exact",
+          "by_tests": [
+            "Get subscribers with rev user token"
           ]
         },
         {
@@ -341,6 +508,8 @@
           "path": "in.WorkOneof.Issue.Title",
           "match": "exact",
           "by_tests": [
+            "Admin - Should be able to delete an issue",
+            "Admin - Should be able to get an issue",
             "Assigns milestone on WorksCreate",
             "ClassifyIssue",
             "Create with email source channel",
@@ -351,24 +520,65 @@
             "CreateTicketPart2",
             "CreateTicketPart3",
             "Creates ticket roles for RevUsers with stock and custom actor caveats through role set create and update",
+            "Creates timeline entries via internal API",
+            "Creates timeline entries via public API",
+            "DefaultDelete",
+            "DefaultGet",
+            "Delete by id",
             "Emits create event",
+            "External stakeholders access works through public API for project visibility",
             "Fails WorksCreate with milestone from a different Enhancement",
+            "Get by id",
+            "Get subscribers with rev user token",
+            "Get without id",
+            "Lists timeline entries via internal API",
+            "MetricActionExecute Out Of Order Complete With Restart",
+            "MetricActionExecute Out Of Order Pause",
+            "MetricActionExecute Out Of Order Start",
             "MetricActionExecute on Frozen Ticket",
+            "Missing Account",
+            "Missing Owned By",
             "OwnedByMissing",
             "PartsMissing",
             "RequestOnIssueID",
             "Should create a test issue manually for retrieval tests",
             "Should create a test ticket manually for retrieval tests",
+            "Should create a ticket with different states",
+            "Should handle ticket creation with minimal fields",
+            "Should perform complete CRUD lifecycle for a ticket",
+            "Should successfully clone a ticket and verify the cloned ticket",
+            "Should successfully export tickets to CSV and JSON",
+            "Should successfully link a ticket to an issue and verify the link",
+            "Should successfully link an opportunity to a ticket and verify the link",
+            "Should successfully merge tickets from different source channels",
+            "Should successfully merge two tickets and verify merged ticket",
+            "Should validate CSAT is not triggered to duplicate ticket owners when tickets are merged",
+            "Should validate negative scenarios for ticket merging with different workspaces",
+            "Should validate no communication is allowed from merged and closed tickets across channels",
+            "Should verify file attachment content matches original using SHA256",
+            "Successfully moved items between vista groups",
+            "Team coordinates work management through comprehensive operations",
             "Test1",
             "Type",
             "Update with email channel",
             "Update with only required fields",
             "Update with required fields",
             "Updates survey aggregation on a frozen ticket using service account context",
+            "Updates timeline entries via internal API",
+            "User retrieves and manages individual work items throughout project lifecycle",
+            "Validates works operations reliability through repeated API testing",
+            "With account, amount and forecast category",
+            "With additional fields",
+            "With invalid account",
+            "With invalid fields",
+            "With only required fields",
+            "With owners",
             "WithOnlyRequiredFields",
             "Without Applies To Part",
+            "Without ID",
             "Without Owned By",
             "Without Type",
+            "Without required fields",
             "Workflow runs termination: using exit signal",
             "WorksExport",
             "WorksExportAsync",
@@ -396,7 +606,16 @@
             "should create and activate the TCD notifier workflow with group membership check",
             "should create and activate the TSE Logic workflow",
             "should create and activate the workflow as per the template",
+            "should create tickets and group by parts without sorting",
+            "should create tickets with a single owner, verify creation and test pagination",
+            "should create tickets with a single owner, verify creation, test pagination, and sorting",
+            "should create tickets with multiple owners, group them, and verify group order",
+            "should create tickets, group by parts, and sort by created date",
             "should create workflow with issue created trigger that classifies the issue",
+            "should groupby stage and verify tickets",
+            "should return 400 for bad request",
+            "should successfully make a summarize list request and receive summary",
+            "should successfully parts list contributors for a given part",
             "should trigger the workflow when enhancement tags are updated",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
           ]
@@ -407,10 +626,30 @@
           "by_tests": [
             "ClassifyIssue",
             "Creates ticket roles for RevUsers with stock and custom actor caveats through role set create and update",
+            "Creates timeline entries via internal API",
+            "Creates timeline entries via public API",
+            "External stakeholders access works through public API for project visibility",
+            "Get subscribers with rev user token",
+            "Lists timeline entries via internal API",
             "RequestOnIssueID",
             "Should create a test issue manually for retrieval tests",
             "Should create a test ticket manually for retrieval tests",
+            "Should perform complete CRUD lifecycle for a ticket",
+            "Should successfully clone a ticket and verify the cloned ticket",
+            "Should successfully export tickets to CSV and JSON",
+            "Should successfully link a ticket to an issue and verify the link",
+            "Should successfully link an opportunity to a ticket and verify the link",
+            "Should successfully merge tickets from different source channels",
+            "Should successfully merge two tickets and verify merged ticket",
+            "Should validate CSAT is not triggered to duplicate ticket owners when tickets are merged",
+            "Should validate negative scenarios for ticket merging with different workspaces",
+            "Should validate no communication is allowed from merged and closed tickets across channels",
+            "Should verify file attachment content matches original using SHA256",
+            "Team coordinates work management through comprehensive operations",
             "Test1",
+            "Updates timeline entries via internal API",
+            "User retrieves and manages individual work items throughout project lifecycle",
+            "Validates works operations reliability through repeated API testing",
             "Workflow runs termination: using exit signal",
             "agents and automations admin can rerun a workflow run",
             "platform user cannot rerun a workflow run and receives 403",
@@ -423,9 +662,29 @@
             "should create and activate the TCD notifier workflow with group membership check",
             "should create and activate the TSE Logic workflow",
             "should create and activate the workflow as per the template",
+            "should create tickets and group by parts without sorting",
+            "should create tickets with a single owner, verify creation and test pagination",
+            "should create tickets with a single owner, verify creation, test pagination, and sorting",
+            "should create tickets with multiple owners, group them, and verify group order",
+            "should create tickets, group by parts, and sort by created date",
             "should create workflow with issue created trigger that classifies the issue",
+            "should groupby stage and verify tickets",
             "should trigger the workflow when enhancement tags are updated",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Opportunity.EventContext.Source",
+          "match": "exact",
+          "by_tests": [
+            "Successfully moved items between vista groups"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Opportunity.ExternalRef",
+          "match": "exact",
+          "by_tests": [
+            "Get subscribers with rev user token"
           ]
         },
         {
@@ -462,6 +721,8 @@
           "path": "in.WorkOneof.Opportunity.Title",
           "match": "exact",
           "by_tests": [
+            "Admin - Should be able to delete an issue",
+            "Admin - Should be able to get an issue",
             "Assigns milestone on WorksCreate",
             "ClassifyIssue",
             "Create with email source channel",
@@ -472,24 +733,65 @@
             "CreateTicketPart2",
             "CreateTicketPart3",
             "Creates ticket roles for RevUsers with stock and custom actor caveats through role set create and update",
+            "Creates timeline entries via internal API",
+            "Creates timeline entries via public API",
+            "DefaultDelete",
+            "DefaultGet",
+            "Delete by id",
             "Emits create event",
+            "External stakeholders access works through public API for project visibility",
             "Fails WorksCreate with milestone from a different Enhancement",
+            "Get by id",
+            "Get subscribers with rev user token",
+            "Get without id",
+            "Lists timeline entries via internal API",
+            "MetricActionExecute Out Of Order Complete With Restart",
+            "MetricActionExecute Out Of Order Pause",
+            "MetricActionExecute Out Of Order Start",
             "MetricActionExecute on Frozen Ticket",
+            "Missing Account",
+            "Missing Owned By",
             "OwnedByMissing",
             "PartsMissing",
             "RequestOnIssueID",
             "Should create a test issue manually for retrieval tests",
             "Should create a test ticket manually for retrieval tests",
+            "Should create a ticket with different states",
+            "Should handle ticket creation with minimal fields",
+            "Should perform complete CRUD lifecycle for a ticket",
+            "Should successfully clone a ticket and verify the cloned ticket",
+            "Should successfully export tickets to CSV and JSON",
+            "Should successfully link a ticket to an issue and verify the link",
+            "Should successfully link an opportunity to a ticket and verify the link",
+            "Should successfully merge tickets from different source channels",
+            "Should successfully merge two tickets and verify merged ticket",
+            "Should validate CSAT is not triggered to duplicate ticket owners when tickets are merged",
+            "Should validate negative scenarios for ticket merging with different workspaces",
+            "Should validate no communication is allowed from merged and closed tickets across channels",
+            "Should verify file attachment content matches original using SHA256",
+            "Successfully moved items between vista groups",
+            "Team coordinates work management through comprehensive operations",
             "Test1",
             "Type",
             "Update with email channel",
             "Update with only required fields",
             "Update with required fields",
             "Updates survey aggregation on a frozen ticket using service account context",
+            "Updates timeline entries via internal API",
+            "User retrieves and manages individual work items throughout project lifecycle",
+            "Validates works operations reliability through repeated API testing",
+            "With account, amount and forecast category",
+            "With additional fields",
+            "With invalid account",
+            "With invalid fields",
+            "With only required fields",
+            "With owners",
             "WithOnlyRequiredFields",
             "Without Applies To Part",
+            "Without ID",
             "Without Owned By",
             "Without Type",
+            "Without required fields",
             "Workflow runs termination: using exit signal",
             "WorksExport",
             "WorksExportAsync",
@@ -517,7 +819,16 @@
             "should create and activate the TCD notifier workflow with group membership check",
             "should create and activate the TSE Logic workflow",
             "should create and activate the workflow as per the template",
+            "should create tickets and group by parts without sorting",
+            "should create tickets with a single owner, verify creation and test pagination",
+            "should create tickets with a single owner, verify creation, test pagination, and sorting",
+            "should create tickets with multiple owners, group them, and verify group order",
+            "should create tickets, group by parts, and sort by created date",
             "should create workflow with issue created trigger that classifies the issue",
+            "should groupby stage and verify tickets",
+            "should return 400 for bad request",
+            "should successfully make a summarize list request and receive summary",
+            "should successfully parts list contributors for a given part",
             "should trigger the workflow when enhancement tags are updated",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
           ]
@@ -528,10 +839,30 @@
           "by_tests": [
             "ClassifyIssue",
             "Creates ticket roles for RevUsers with stock and custom actor caveats through role set create and update",
+            "Creates timeline entries via internal API",
+            "Creates timeline entries via public API",
+            "External stakeholders access works through public API for project visibility",
+            "Get subscribers with rev user token",
+            "Lists timeline entries via internal API",
             "RequestOnIssueID",
             "Should create a test issue manually for retrieval tests",
             "Should create a test ticket manually for retrieval tests",
+            "Should perform complete CRUD lifecycle for a ticket",
+            "Should successfully clone a ticket and verify the cloned ticket",
+            "Should successfully export tickets to CSV and JSON",
+            "Should successfully link a ticket to an issue and verify the link",
+            "Should successfully link an opportunity to a ticket and verify the link",
+            "Should successfully merge tickets from different source channels",
+            "Should successfully merge two tickets and verify merged ticket",
+            "Should validate CSAT is not triggered to duplicate ticket owners when tickets are merged",
+            "Should validate negative scenarios for ticket merging with different workspaces",
+            "Should validate no communication is allowed from merged and closed tickets across channels",
+            "Should verify file attachment content matches original using SHA256",
+            "Team coordinates work management through comprehensive operations",
             "Test1",
+            "Updates timeline entries via internal API",
+            "User retrieves and manages individual work items throughout project lifecycle",
+            "Validates works operations reliability through repeated API testing",
             "Workflow runs termination: using exit signal",
             "agents and automations admin can rerun a workflow run",
             "platform user cannot rerun a workflow run and receives 403",
@@ -544,9 +875,29 @@
             "should create and activate the TCD notifier workflow with group membership check",
             "should create and activate the TSE Logic workflow",
             "should create and activate the workflow as per the template",
+            "should create tickets and group by parts without sorting",
+            "should create tickets with a single owner, verify creation and test pagination",
+            "should create tickets with a single owner, verify creation, test pagination, and sorting",
+            "should create tickets with multiple owners, group them, and verify group order",
+            "should create tickets, group by parts, and sort by created date",
             "should create workflow with issue created trigger that classifies the issue",
+            "should groupby stage and verify tickets",
             "should trigger the workflow when enhancement tags are updated",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Task.EventContext.Source",
+          "match": "exact",
+          "by_tests": [
+            "Successfully moved items between vista groups"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Task.ExternalRef",
+          "match": "exact",
+          "by_tests": [
+            "Get subscribers with rev user token"
           ]
         },
         {
@@ -583,6 +934,8 @@
           "path": "in.WorkOneof.Task.Title",
           "match": "exact",
           "by_tests": [
+            "Admin - Should be able to delete an issue",
+            "Admin - Should be able to get an issue",
             "Assigns milestone on WorksCreate",
             "ClassifyIssue",
             "Create with email source channel",
@@ -593,24 +946,65 @@
             "CreateTicketPart2",
             "CreateTicketPart3",
             "Creates ticket roles for RevUsers with stock and custom actor caveats through role set create and update",
+            "Creates timeline entries via internal API",
+            "Creates timeline entries via public API",
+            "DefaultDelete",
+            "DefaultGet",
+            "Delete by id",
             "Emits create event",
+            "External stakeholders access works through public API for project visibility",
             "Fails WorksCreate with milestone from a different Enhancement",
+            "Get by id",
+            "Get subscribers with rev user token",
+            "Get without id",
+            "Lists timeline entries via internal API",
+            "MetricActionExecute Out Of Order Complete With Restart",
+            "MetricActionExecute Out Of Order Pause",
+            "MetricActionExecute Out Of Order Start",
             "MetricActionExecute on Frozen Ticket",
+            "Missing Account",
+            "Missing Owned By",
             "OwnedByMissing",
             "PartsMissing",
             "RequestOnIssueID",
             "Should create a test issue manually for retrieval tests",
             "Should create a test ticket manually for retrieval tests",
+            "Should create a ticket with different states",
+            "Should handle ticket creation with minimal fields",
+            "Should perform complete CRUD lifecycle for a ticket",
+            "Should successfully clone a ticket and verify the cloned ticket",
+            "Should successfully export tickets to CSV and JSON",
+            "Should successfully link a ticket to an issue and verify the link",
+            "Should successfully link an opportunity to a ticket and verify the link",
+            "Should successfully merge tickets from different source channels",
+            "Should successfully merge two tickets and verify merged ticket",
+            "Should validate CSAT is not triggered to duplicate ticket owners when tickets are merged",
+            "Should validate negative scenarios for ticket merging with different workspaces",
+            "Should validate no communication is allowed from merged and closed tickets across channels",
+            "Should verify file attachment content matches original using SHA256",
+            "Successfully moved items between vista groups",
+            "Team coordinates work management through comprehensive operations",
             "Test1",
             "Type",
             "Update with email channel",
             "Update with only required fields",
             "Update with required fields",
             "Updates survey aggregation on a frozen ticket using service account context",
+            "Updates timeline entries via internal API",
+            "User retrieves and manages individual work items throughout project lifecycle",
+            "Validates works operations reliability through repeated API testing",
+            "With account, amount and forecast category",
+            "With additional fields",
+            "With invalid account",
+            "With invalid fields",
+            "With only required fields",
+            "With owners",
             "WithOnlyRequiredFields",
             "Without Applies To Part",
+            "Without ID",
             "Without Owned By",
             "Without Type",
+            "Without required fields",
             "Workflow runs termination: using exit signal",
             "WorksExport",
             "WorksExportAsync",
@@ -638,7 +1032,16 @@
             "should create and activate the TCD notifier workflow with group membership check",
             "should create and activate the TSE Logic workflow",
             "should create and activate the workflow as per the template",
+            "should create tickets and group by parts without sorting",
+            "should create tickets with a single owner, verify creation and test pagination",
+            "should create tickets with a single owner, verify creation, test pagination, and sorting",
+            "should create tickets with multiple owners, group them, and verify group order",
+            "should create tickets, group by parts, and sort by created date",
             "should create workflow with issue created trigger that classifies the issue",
+            "should groupby stage and verify tickets",
+            "should return 400 for bad request",
+            "should successfully make a summarize list request and receive summary",
+            "should successfully parts list contributors for a given part",
             "should trigger the workflow when enhancement tags are updated",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
           ]
@@ -649,10 +1052,30 @@
           "by_tests": [
             "ClassifyIssue",
             "Creates ticket roles for RevUsers with stock and custom actor caveats through role set create and update",
+            "Creates timeline entries via internal API",
+            "Creates timeline entries via public API",
+            "External stakeholders access works through public API for project visibility",
+            "Get subscribers with rev user token",
+            "Lists timeline entries via internal API",
             "RequestOnIssueID",
             "Should create a test issue manually for retrieval tests",
             "Should create a test ticket manually for retrieval tests",
+            "Should perform complete CRUD lifecycle for a ticket",
+            "Should successfully clone a ticket and verify the cloned ticket",
+            "Should successfully export tickets to CSV and JSON",
+            "Should successfully link a ticket to an issue and verify the link",
+            "Should successfully link an opportunity to a ticket and verify the link",
+            "Should successfully merge tickets from different source channels",
+            "Should successfully merge two tickets and verify merged ticket",
+            "Should validate CSAT is not triggered to duplicate ticket owners when tickets are merged",
+            "Should validate negative scenarios for ticket merging with different workspaces",
+            "Should validate no communication is allowed from merged and closed tickets across channels",
+            "Should verify file attachment content matches original using SHA256",
+            "Team coordinates work management through comprehensive operations",
             "Test1",
+            "Updates timeline entries via internal API",
+            "User retrieves and manages individual work items throughout project lifecycle",
+            "Validates works operations reliability through repeated API testing",
             "Workflow runs termination: using exit signal",
             "agents and automations admin can rerun a workflow run",
             "platform user cannot rerun a workflow run and receives 403",
@@ -665,9 +1088,29 @@
             "should create and activate the TCD notifier workflow with group membership check",
             "should create and activate the TSE Logic workflow",
             "should create and activate the workflow as per the template",
+            "should create tickets and group by parts without sorting",
+            "should create tickets with a single owner, verify creation and test pagination",
+            "should create tickets with a single owner, verify creation, test pagination, and sorting",
+            "should create tickets with multiple owners, group them, and verify group order",
+            "should create tickets, group by parts, and sort by created date",
             "should create workflow with issue created trigger that classifies the issue",
+            "should groupby stage and verify tickets",
             "should trigger the workflow when enhancement tags are updated",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Ticket.EventContext.Source",
+          "match": "exact",
+          "by_tests": [
+            "Successfully moved items between vista groups"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Ticket.ExternalRef",
+          "match": "exact",
+          "by_tests": [
+            "Get subscribers with rev user token"
           ]
         },
         {
@@ -711,6 +1154,8 @@
           "path": "in.WorkOneof.Ticket.Title",
           "match": "exact",
           "by_tests": [
+            "Admin - Should be able to delete an issue",
+            "Admin - Should be able to get an issue",
             "Assigns milestone on WorksCreate",
             "ClassifyIssue",
             "Create with email source channel",
@@ -721,24 +1166,65 @@
             "CreateTicketPart2",
             "CreateTicketPart3",
             "Creates ticket roles for RevUsers with stock and custom actor caveats through role set create and update",
+            "Creates timeline entries via internal API",
+            "Creates timeline entries via public API",
+            "DefaultDelete",
+            "DefaultGet",
+            "Delete by id",
             "Emits create event",
+            "External stakeholders access works through public API for project visibility",
             "Fails WorksCreate with milestone from a different Enhancement",
+            "Get by id",
+            "Get subscribers with rev user token",
+            "Get without id",
+            "Lists timeline entries via internal API",
+            "MetricActionExecute Out Of Order Complete With Restart",
+            "MetricActionExecute Out Of Order Pause",
+            "MetricActionExecute Out Of Order Start",
             "MetricActionExecute on Frozen Ticket",
+            "Missing Account",
+            "Missing Owned By",
             "OwnedByMissing",
             "PartsMissing",
             "RequestOnIssueID",
             "Should create a test issue manually for retrieval tests",
             "Should create a test ticket manually for retrieval tests",
+            "Should create a ticket with different states",
+            "Should handle ticket creation with minimal fields",
+            "Should perform complete CRUD lifecycle for a ticket",
+            "Should successfully clone a ticket and verify the cloned ticket",
+            "Should successfully export tickets to CSV and JSON",
+            "Should successfully link a ticket to an issue and verify the link",
+            "Should successfully link an opportunity to a ticket and verify the link",
+            "Should successfully merge tickets from different source channels",
+            "Should successfully merge two tickets and verify merged ticket",
+            "Should validate CSAT is not triggered to duplicate ticket owners when tickets are merged",
+            "Should validate negative scenarios for ticket merging with different workspaces",
+            "Should validate no communication is allowed from merged and closed tickets across channels",
+            "Should verify file attachment content matches original using SHA256",
+            "Successfully moved items between vista groups",
+            "Team coordinates work management through comprehensive operations",
             "Test1",
             "Type",
             "Update with email channel",
             "Update with only required fields",
             "Update with required fields",
             "Updates survey aggregation on a frozen ticket using service account context",
+            "Updates timeline entries via internal API",
+            "User retrieves and manages individual work items throughout project lifecycle",
+            "Validates works operations reliability through repeated API testing",
+            "With account, amount and forecast category",
+            "With additional fields",
+            "With invalid account",
+            "With invalid fields",
+            "With only required fields",
+            "With owners",
             "WithOnlyRequiredFields",
             "Without Applies To Part",
+            "Without ID",
             "Without Owned By",
             "Without Type",
+            "Without required fields",
             "Workflow runs termination: using exit signal",
             "WorksExport",
             "WorksExportAsync",
@@ -766,7 +1252,16 @@
             "should create and activate the TCD notifier workflow with group membership check",
             "should create and activate the TSE Logic workflow",
             "should create and activate the workflow as per the template",
+            "should create tickets and group by parts without sorting",
+            "should create tickets with a single owner, verify creation and test pagination",
+            "should create tickets with a single owner, verify creation, test pagination, and sorting",
+            "should create tickets with multiple owners, group them, and verify group order",
+            "should create tickets, group by parts, and sort by created date",
             "should create workflow with issue created trigger that classifies the issue",
+            "should groupby stage and verify tickets",
+            "should return 400 for bad request",
+            "should successfully make a summarize list request and receive summary",
+            "should successfully parts list contributors for a given part",
             "should trigger the workflow when enhancement tags are updated",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
           ]
@@ -804,15 +1299,12 @@
         "in.Ticket.SourceChannelV2",
         "in.Ticket.SourceChannelV2Instance",
         "in.Ticket.SpaceId",
-        "in.Ticket.Visibility",
         "in.WorkOneof.Issue.AppliesToPartId",
         "in.WorkOneof.Issue.AppliesToVersionIds",
         "in.WorkOneof.Issue.ArtifactIds",
         "in.WorkOneof.Issue.DevelopedWith",
         "in.WorkOneof.Issue.DevrevCopy.OriginId",
         "in.WorkOneof.Issue.DevrevCopy.OriginOrgId",
-        "in.WorkOneof.Issue.EventContext.Source",
-        "in.WorkOneof.Issue.ExternalRef",
         "in.WorkOneof.Issue.ExternalSourceData.CreatedById",
         "in.WorkOneof.Issue.ExternalSourceData.ModifiedById",
         "in.WorkOneof.Issue.MilestoneId",
@@ -849,8 +1341,6 @@
         "in.WorkOneof.Opportunity.CustomerBudget",
         "in.WorkOneof.Opportunity.DevrevCopy.OriginId",
         "in.WorkOneof.Opportunity.DevrevCopy.OriginOrgId",
-        "in.WorkOneof.Opportunity.EventContext.Source",
-        "in.WorkOneof.Opportunity.ExternalRef",
         "in.WorkOneof.Opportunity.ExternalSourceData.CreatedById",
         "in.WorkOneof.Opportunity.ExternalSourceData.ModifiedById",
         "in.WorkOneof.Opportunity.ForecastCategory",
@@ -878,8 +1368,6 @@
         "in.WorkOneof.Task.ArtifactIds",
         "in.WorkOneof.Task.DevrevCopy.OriginId",
         "in.WorkOneof.Task.DevrevCopy.OriginOrgId",
-        "in.WorkOneof.Task.EventContext.Source",
-        "in.WorkOneof.Task.ExternalRef",
         "in.WorkOneof.Task.ExternalSourceData.CreatedById",
         "in.WorkOneof.Task.ExternalSourceData.ModifiedById",
         "in.WorkOneof.Task.OwnedByIds",
@@ -906,8 +1394,6 @@
         "in.WorkOneof.Ticket.ChannelsV2Instances",
         "in.WorkOneof.Ticket.DevrevCopy.OriginId",
         "in.WorkOneof.Ticket.DevrevCopy.OriginOrgId",
-        "in.WorkOneof.Ticket.EventContext.Source",
-        "in.WorkOneof.Ticket.ExternalRef",
         "in.WorkOneof.Ticket.ExternalSourceData.CreatedById",
         "in.WorkOneof.Ticket.ExternalSourceData.ModifiedById",
         "in.WorkOneof.Ticket.OwnedByAgentId",
@@ -941,29 +1427,29 @@
       "total": 754,
       "happy_path_reached": true,
       "reachable_on_happy_path": 76,
-      "present_arm_exercised": 75,
-      "present_arm_pct": 9.9,
+      "present_arm_exercised": 92,
+      "present_arm_pct": 12.2,
       "absent_arm_exercised": 76,
       "absent_arm_pct": 100,
-      "negative_arm_exercised": 41,
-      "negative_arm_pct": 5.4,
+      "negative_arm_exercised": 42,
+      "negative_arm_pct": 5.6,
       "both_arms_exercised": 20,
-      "coverage_pct": 9.9,
+      "coverage_pct": 12.2,
       "by_origin": {
         "service": {
           "total": 98,
           "reachable_on_happy_path": 25,
-          "present_arm_exercised": 11,
-          "present_arm_pct": 11.2,
-          "negative_arm_exercised": 4,
-          "negative_arm_pct": 4.1,
+          "present_arm_exercised": 12,
+          "present_arm_pct": 12.2,
+          "negative_arm_exercised": 5,
+          "negative_arm_pct": 5.1,
           "absent_arm_exercised": 25
         },
         "generated": {
           "total": 467,
           "reachable_on_happy_path": 17,
-          "present_arm_exercised": 53,
-          "present_arm_pct": 11.3,
+          "present_arm_exercised": 69,
+          "present_arm_pct": 14.8,
           "negative_arm_exercised": 28,
           "negative_arm_pct": 6,
           "absent_arm_exercised": 17
@@ -1185,14 +1671,6 @@
           "cond": "in.Ticket.NeedsResponse == nil",
           "predicate_paths": [
             "in.Ticket.NeedsResponse"
-          ]
-        },
-        {
-          "id": "b27",
-          "at": "internal/serverv2/create_work.go:1039",
-          "cond": "in.Ticket.Visibility == nil",
-          "predicate_paths": [
-            "in.Ticket.Visibility"
           ]
         },
         {
@@ -2036,22 +2514,6 @@
           ]
         },
         {
-          "id": "b152",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:10403",
-          "cond": "in.WorkOneof.Ticket.ExternalRef != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Ticket.ExternalRef"
-          ]
-        },
-        {
-          "id": "b153",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:10410",
-          "cond": "in.WorkOneof.Ticket.ExternalRef != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Ticket.ExternalRef"
-          ]
-        },
-        {
           "id": "b155",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:10436",
           "cond": "in.WorkOneof.Ticket.SyncMetadata != nil",
@@ -2724,22 +3186,6 @@
           ]
         },
         {
-          "id": "b244",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:12229",
-          "cond": "in.WorkOneof.Issue.ExternalRef != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Issue.ExternalRef"
-          ]
-        },
-        {
-          "id": "b245",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:12236",
-          "cond": "in.WorkOneof.Issue.ExternalRef != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Issue.ExternalRef"
-          ]
-        },
-        {
           "id": "b247",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:12262",
           "cond": "in.WorkOneof.Issue.SyncMetadata != nil",
@@ -3297,22 +3743,6 @@
           "cond": "in.WorkOneof.Task.ReportedById",
           "predicate_paths": [
             "in.WorkOneof.Task.ReportedById"
-          ]
-        },
-        {
-          "id": "b320",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:13605",
-          "cond": "in.WorkOneof.Task.ExternalRef != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Task.ExternalRef"
-          ]
-        },
-        {
-          "id": "b321",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:13612",
-          "cond": "in.WorkOneof.Task.ExternalRef != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Task.ExternalRef"
           ]
         },
         {
@@ -4044,22 +4474,6 @@
           ]
         },
         {
-          "id": "b417",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:14762",
-          "cond": "in.WorkOneof.Opportunity.ExternalRef != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Opportunity.ExternalRef"
-          ]
-        },
-        {
-          "id": "b418",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:14769",
-          "cond": "in.WorkOneof.Opportunity.ExternalRef != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Opportunity.ExternalRef"
-          ]
-        },
-        {
           "id": "b420",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:14795",
           "cond": "in.WorkOneof.Opportunity.SyncMetadata != nil",
@@ -4489,22 +4903,6 @@
           "cond": "in.WorkOneof.Ticket.ReportedById",
           "predicate_paths": [
             "in.WorkOneof.Ticket.ReportedById"
-          ]
-        },
-        {
-          "id": "b482",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:1864",
-          "cond": "in.WorkOneof.Ticket.ExternalRef != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Ticket.ExternalRef"
-          ]
-        },
-        {
-          "id": "b483",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:1867",
-          "cond": "in.WorkOneof.Ticket.ExternalRef != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Ticket.ExternalRef"
           ]
         },
         {
@@ -4940,22 +5338,6 @@
           ]
         },
         {
-          "id": "b545",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:2882",
-          "cond": "in.WorkOneof.Issue.ExternalRef != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Issue.ExternalRef"
-          ]
-        },
-        {
-          "id": "b546",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:2885",
-          "cond": "in.WorkOneof.Issue.ExternalRef != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Issue.ExternalRef"
-          ]
-        },
-        {
           "id": "b549",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:2901",
           "cond": "in.WorkOneof.Issue.SyncMetadata != nil",
@@ -5313,22 +5695,6 @@
           "cond": "in.WorkOneof.Task.ReportedById",
           "predicate_paths": [
             "in.WorkOneof.Task.ReportedById"
-          ]
-        },
-        {
-          "id": "b597",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:3649",
-          "cond": "in.WorkOneof.Task.ExternalRef != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Task.ExternalRef"
-          ]
-        },
-        {
-          "id": "b598",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:3652",
-          "cond": "in.WorkOneof.Task.ExternalRef != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Task.ExternalRef"
           ]
         },
         {
@@ -5753,22 +6119,6 @@
           "cond": "in.WorkOneof.Opportunity.ReportedById",
           "predicate_paths": [
             "in.WorkOneof.Opportunity.ReportedById"
-          ]
-        },
-        {
-          "id": "b657",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:4316",
-          "cond": "in.WorkOneof.Opportunity.ExternalRef != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Opportunity.ExternalRef"
-          ]
-        },
-        {
-          "id": "b658",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:4319",
-          "cond": "in.WorkOneof.Opportunity.ExternalRef != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Opportunity.ExternalRef"
           ]
         },
         {
@@ -6485,6 +6835,14 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
+          "field": "account",
+          "fuzzy_suggestions": [
+            "in.Ticket.AccountId",
+            "in.WorkOneof.Opportunity.AccountId",
+            "in.WorkOneof.Ticket.AccountId"
+          ]
+        },
+        {
           "field": "action",
           "fuzzy_suggestions": [
             "in.WorkOneof.Issue.Reactions",
@@ -6524,6 +6882,16 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "artifacts",
+          "fuzzy_suggestions": [
+            "in.Ticket.ArtifactIds",
+            "in.WorkOneof.Issue.ArtifactIds",
+            "in.WorkOneof.Opportunity.ArtifactIds",
+            "in.WorkOneof.Task.ArtifactIds",
+            "in.WorkOneof.Ticket.ArtifactIds"
+          ]
+        },
+        {
           "field": "assign",
           "fuzzy_suggestions": null
         },
@@ -6555,6 +6923,10 @@
           ]
         },
         {
+          "field": "configurationset",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "createroles",
           "fuzzy_suggestions": null
         },
@@ -6582,12 +6954,52 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "displayname",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "email",
           "fuzzy_suggestions": null
         },
         {
           "field": "eventdate",
           "fuzzy_suggestions": null
+        },
+        {
+          "field": "expiresin",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "externalrefs",
+          "fuzzy_suggestions": [
+            "in.WorkOneof.Issue.ExternalRef",
+            "in.WorkOneof.Opportunity.ExternalRef",
+            "in.WorkOneof.Task.ExternalRef",
+            "in.WorkOneof.Ticket.ExternalRef"
+          ]
+        },
+        {
+          "field": "filename",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "filesize",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "filetype",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "first",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "groupby",
+          "fuzzy_suggestions": [
+            "in.Ticket.Group",
+            "in.WorkOneof.Ticket.Group"
+          ]
         },
         {
           "field": "guideline",
@@ -6602,6 +7014,25 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "items",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "labels",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "limit",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "limitpergroup",
+          "fuzzy_suggestions": [
+            "in.Ticket.Group",
+            "in.WorkOneof.Ticket.Group"
+          ]
+        },
+        {
           "field": "manifest",
           "fuzzy_suggestions": null
         },
@@ -6611,6 +7042,10 @@
         },
         {
           "field": "membertype",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "mergewith",
           "fuzzy_suggestions": null
         },
         {
@@ -6631,6 +7066,10 @@
         },
         {
           "field": "objectid",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "objects",
           "fuzzy_suggestions": null
         },
         {
@@ -6655,6 +7094,10 @@
         },
         {
           "field": "parent",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "parentid",
           "fuzzy_suggestions": null
         },
         {
@@ -6683,6 +7126,24 @@
         },
         {
           "field": "referencekey",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "reportedby",
+          "fuzzy_suggestions": [
+            "in.Ticket.ReportedByIds",
+            "in.WorkOneof.Issue.ReportedById",
+            "in.WorkOneof.Issue.ReportedByIds",
+            "in.WorkOneof.Opportunity.ReportedById",
+            "in.WorkOneof.Opportunity.ReportedByIds",
+            "in.WorkOneof.Task.ReportedById",
+            "in.WorkOneof.Task.ReportedByIds",
+            "in.WorkOneof.Ticket.ReportedById",
+            "in.WorkOneof.Ticket.ReportedByIds"
+          ]
+        },
+        {
+          "field": "requestedtokentype",
           "fuzzy_suggestions": null
         },
         {
@@ -6744,6 +7205,10 @@
           ]
         },
         {
+          "field": "sortby",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "sourcecodeartifact",
           "fuzzy_suggestions": [
             "in.WorkOneof.Issue.EventContext.Source",
@@ -6753,11 +7218,21 @@
           ]
         },
         {
+          "field": "subscribers",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "summarysection",
           "fuzzy_suggestions": null
         },
         {
           "field": "survey",
+          "fuzzy_suggestions": [
+            "in.WorkOneof.Ticket.SurveysAggregation"
+          ]
+        },
+        {
+          "field": "surveys",
           "fuzzy_suggestions": [
             "in.WorkOneof.Ticket.SurveysAggregation"
           ]
@@ -6778,6 +7253,10 @@
         },
         {
           "field": "timestamp",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "tokenhint",
           "fuzzy_suggestions": null
         },
         {
@@ -6976,6 +7455,30 @@
           "StatusCode",
           "Work",
           "Work.AsIssue"
+        ]
+      },
+      {
+        "name": "should successfully parts list contributors for a given part",
+        "file": "api/v2_internal/parts/crud/parts_contributors_list_test.go",
+        "labels": null,
+        "fields_set": [
+          "AppliesToPart",
+          "Description",
+          "Id",
+          "Name",
+          "OwnedBy",
+          "Stage",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Contributors",
+          "Contributors.AsDevUserSummary",
+          "StatusCode"
         ]
       },
       {
@@ -7192,6 +7695,81 @@
         ]
       },
       {
+        "name": "MetricActionExecute Out Of Order Start",
+        "file": "api/v2_internal/smart_trackers/smart_trackers_test.go",
+        "labels": [
+          "INTERNAL_METRIC_ACTION_EXECUTE",
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "Action",
+          "AppliesToPart",
+          "EventDate",
+          "Metric",
+          "Object",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "MetricActionExecute Out Of Order Complete With Restart",
+        "file": "api/v2_internal/smart_trackers/smart_trackers_test.go",
+        "labels": [
+          "INTERNAL_METRIC_ACTION_EXECUTE",
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "Action",
+          "AppliesToPart",
+          "EventDate",
+          "Metric",
+          "Object",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "MetricActionExecute Out Of Order Pause",
+        "file": "api/v2_internal/smart_trackers/smart_trackers_test.go",
+        "labels": [
+          "INTERNAL_METRIC_ACTION_EXECUTE",
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "Action",
+          "AppliesToPart",
+          "EventDate",
+          "Metric",
+          "Object",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
         "name": "returns 200 for valid execute with seeded snap-in and issue",
         "file": "api/v2_internal/snap_kit/snap_kit_action_execute_test.go",
         "labels": null,
@@ -7288,6 +7866,44 @@
         ]
       },
       {
+        "name": "should successfully make a summarize list request and receive summary",
+        "file": "api/v2_internal/summarize_list/summarize_list_test.go",
+        "labels": null,
+        "fields_set": [
+          "AppliesToPart",
+          "Objects",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Summary"
+        ]
+      },
+      {
+        "name": "should return 400 for bad request",
+        "file": "api/v2_internal/summarize_list/summarize_list_test.go",
+        "labels": null,
+        "fields_set": [
+          "AppliesToPart",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
         "name": "Updates survey aggregation on a frozen ticket using service account context",
         "file": "api/v2_internal/surveys/crud/survey_service_account_test.go",
         "labels": [
@@ -7348,6 +7964,40 @@
         ]
       },
       {
+        "name": "Get subscribers with rev user token",
+        "file": "api/v2_internal/timeline/subscribers_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "Account",
+          "AppliesToPart",
+          "Body",
+          "DisplayName",
+          "Email",
+          "ExpiresIn",
+          "ExternalRef",
+          "ExternalRefs",
+          "Id",
+          "ReportedBy",
+          "RequestedTokenType",
+          "Subscribers",
+          "Title",
+          "TokenHint",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "AccessToken",
+          "Account",
+          "Account.Id",
+          "RevUser",
+          "RevUser.Id",
+          "StatusCode"
+        ]
+      },
+      {
         "name": "RequestOnIssueID",
         "file": "api/v2_internal/user_privileges/crud/user_privileges_test.go",
         "labels": null,
@@ -7368,6 +8018,31 @@
           "StatusCode",
           "Work",
           "Work.AsIssue"
+        ]
+      },
+      {
+        "name": "Successfully moved items between vista groups",
+        "file": "api/v2_internal/vista_groups/vistas_groups_move_test.go",
+        "labels": null,
+        "fields_set": [
+          "AppliesToPart",
+          "Id",
+          "Items",
+          "Name",
+          "OwnedBy",
+          "ParentId",
+          "Source",
+          "Target",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "GetVistaGroup",
+          "StatusCode"
         ]
       },
       {
@@ -7545,6 +8220,67 @@
         ]
       },
       {
+        "name": "Admin - Should be able to delete an issue",
+        "file": "api/v2_internal/work/issues/crud/delete_works_test.go",
+        "labels": [
+          "POSITIVE",
+          "ADMIN"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Id",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Admin - Should be able to get an issue",
+        "file": "api/v2_internal/work/issues/crud/get_work_test.go",
+        "labels": [
+          "POSITIVE",
+          "ADMIN"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Id",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsIssue"
+        ]
+      },
+      {
+        "name": "Without ID",
+        "file": "api/v2_internal/work/issues/crud/get_work_test.go",
+        "labels": null,
+        "fields_set": [
+          "AppliesToPart",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
         "name": "sets display_id_alias from space key on create and updates prefix when space changes",
         "file": "api/v2_internal/work/issues/crud/issue_spaces_test.go",
         "labels": [
@@ -7710,6 +8446,86 @@
         ]
       },
       {
+        "name": "With only required fields",
+        "file": "api/v2_internal/work/opportunities/create_opportunity_test.go",
+        "labels": [
+          "POSITIVE",
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With additional fields",
+        "file": "api/v2_internal/work/opportunities/create_opportunity_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Missing Title",
+        "file": "api/v2_internal/work/opportunities/create_opportunity_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "OwnedBy",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Missing Account",
+        "file": "api/v2_internal/work/opportunities/create_opportunity_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Missing Owned By",
+        "file": "api/v2_internal/work/opportunities/create_opportunity_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
         "name": "does not scope an opportunity to a space through the REST create or update path",
         "file": "api/v2_internal/work/opportunities/opportunity_spaces_test.go",
         "labels": [
@@ -7730,6 +8546,106 @@
         ],
         "asserts_success": true,
         "response_fields_asserted": null
+      },
+      {
+        "name": "With account, amount and forecast category",
+        "file": "api/v2_internal/work/opportunities/update_opportunity_test.go",
+        "labels": [
+          "POSITIVE",
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "Id",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "With owners",
+        "file": "api/v2_internal/work/opportunities/update_opportunity_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "Id",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Without required fields",
+        "file": "api/v2_internal/work/opportunities/update_opportunity_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "With invalid account",
+        "file": "api/v2_internal/work/opportunities/update_opportunity_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "Id",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "With invalid fields",
+        "file": "api/v2_internal/work/opportunities/update_opportunity_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "Id",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
       },
       {
         "name": "Create with only required fields",
@@ -7781,6 +8697,63 @@
           "Work",
           "Work.AsTicket"
         ]
+      },
+      {
+        "name": "Delete by id",
+        "file": "api/v2_internal/work/tickets/crud/delete_ticket_test.go",
+        "labels": null,
+        "fields_set": [
+          "AppliesToPart",
+          "Id",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Get by id",
+        "file": "api/v2_internal/work/tickets/crud/get_ticket_test.go",
+        "labels": [
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Id",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsTicket"
+        ]
+      },
+      {
+        "name": "Get without id",
+        "file": "api/v2_internal/work/tickets/crud/get_ticket_test.go",
+        "labels": null,
+        "fields_set": [
+          "AppliesToPart",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": null
       },
       {
         "name": "rev user should be able to create a ticket without login",
@@ -8460,6 +9433,760 @@
         "response_fields_asserted": [
           "Part",
           "Part.ValueByDiscriminator",
+          "Work",
+          "Work.AsTicket"
+        ]
+      },
+      {
+        "name": "DefaultDelete",
+        "file": "api/v2_public/works/crud/delete_works_test.go",
+        "labels": [
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Id",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "DefaultDelete",
+        "file": "api/v2_public/works/crud/delete_works_test.go",
+        "labels": [
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Id",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "DefaultGet",
+        "file": "api/v2_public/works/crud/get_work_test.go",
+        "labels": [
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Id",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsIssue"
+        ]
+      },
+      {
+        "name": "DefaultGet",
+        "file": "api/v2_public/works/crud/get_work_test.go",
+        "labels": [
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Id",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsTicket"
+        ]
+      },
+      {
+        "name": "DefaultGet",
+        "file": "api/v2_public/works/crud/get_work_test.go",
+        "labels": null,
+        "fields_set": [
+          "AppliesToPart",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Creates timeline entries via public API",
+        "file": "e2e/smoke_test_case/timeline_management/timeline_management_test.go",
+        "labels": [
+          "SMOKE",
+          "PUBLIC_TIMELINE_ENTRIES_CREATE"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Description",
+          "Name",
+          "Object",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "TimelineEntry",
+          "TimelineEntry.AsTimelineComment"
+        ]
+      },
+      {
+        "name": "Lists timeline entries via internal API",
+        "file": "e2e/smoke_test_case/timeline_management/timeline_management_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_TIMELINE_ENTRIES_LIST"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Description",
+          "Name",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Creates timeline entries via internal API",
+        "file": "e2e/smoke_test_case/timeline_management/timeline_management_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_TIMELINE_ENTRIES_CREATE"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Description",
+          "Name",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Updates timeline entries via internal API",
+        "file": "e2e/smoke_test_case/timeline_management/timeline_management_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_TIMELINE_ENTRIES_UPDATE"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Description",
+          "Id",
+          "Name",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "TimelineEntry",
+          "TimelineEntry.AsTimelineComment"
+        ]
+      },
+      {
+        "name": "User retrieves and manages individual work items throughout project lifecycle",
+        "file": "e2e/smoke_test_case/works_management/works_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_WORKS_GET",
+          "PUBLIC_WORKS_LIST",
+          "INTERNAL_WORKS_UPDATE"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Description",
+          "Id",
+          "Limit",
+          "Name",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsTicket",
+          "Works"
+        ]
+      },
+      {
+        "name": "Team coordinates work management through comprehensive operations",
+        "file": "e2e/smoke_test_case/works_management/works_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_WORKS_GET",
+          "INTERNAL_WORKS_UPDATE"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Description",
+          "Id",
+          "Name",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsTicket"
+        ]
+      },
+      {
+        "name": "External stakeholders access works through public API for project visibility",
+        "file": "e2e/smoke_test_case/works_management/works_test.go",
+        "labels": [
+          "SMOKE",
+          "PUBLIC_WORKS_LIST",
+          "PUBLIC_WORKS_UPDATE"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Description",
+          "Id",
+          "Limit",
+          "Name",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Works"
+        ]
+      },
+      {
+        "name": "Validates works operations reliability through repeated API testing",
+        "file": "e2e/smoke_test_case/works_management/works_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_WORKS_GET",
+          "INTERNAL_WORKS_UPDATE"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Description",
+          "Id",
+          "Name",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsTicket"
+        ]
+      },
+      {
+        "name": "should groupby stage and verify tickets",
+        "file": "e2e/ticktes_user_journey/tickets_grouping_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "GroupBy",
+          "Limit",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Groups"
+        ]
+      },
+      {
+        "name": "should create tickets and group by parts without sorting",
+        "file": "e2e/ticktes_user_journey/tickets_grouping_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "GroupBy",
+          "Limit",
+          "LimitPerGroup",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Groups"
+        ]
+      },
+      {
+        "name": "should create tickets, group by parts, and sort by created date",
+        "file": "e2e/ticktes_user_journey/tickets_grouping_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "GroupBy",
+          "Limit",
+          "LimitPerGroup",
+          "OwnedBy",
+          "SortBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Groups"
+        ]
+      },
+      {
+        "name": "should create tickets with multiple owners, group them, and verify group order",
+        "file": "e2e/ticktes_user_journey/tickets_grouping_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "GroupBy",
+          "Limit",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Groups",
+          "Works"
+        ]
+      },
+      {
+        "name": "should create tickets with a single owner, verify creation and test pagination",
+        "file": "e2e/ticktes_user_journey/tickets_grouping_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "should create tickets with a single owner, verify creation, test pagination, and sorting",
+        "file": "e2e/ticktes_user_journey/tickets_grouping_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should successfully merge two tickets and verify merged ticket",
+        "file": "e2e/ticktes_user_journey/tickets_merging_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Id",
+          "MergeWith",
+          "Name",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should validate negative scenarios for ticket merging with different workspaces",
+        "file": "e2e/ticktes_user_journey/tickets_merging_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Id",
+          "MergeWith",
+          "Name",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should successfully merge tickets from different source channels",
+        "file": "e2e/ticktes_user_journey/tickets_merging_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Id",
+          "MergeWith",
+          "Name",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should validate no communication is allowed from merged and closed tickets across channels",
+        "file": "e2e/ticktes_user_journey/tickets_merging_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Id",
+          "Labels",
+          "MergeWith",
+          "Name",
+          "Object",
+          "OwnedBy",
+          "Title",
+          "Type",
+          "Visibility"
+        ],
+        "statuses": [
+          200,
+          201,
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "TimelineEntries"
+        ]
+      },
+      {
+        "name": "Should validate CSAT is not triggered to duplicate ticket owners when tickets are merged",
+        "file": "e2e/ticktes_user_journey/tickets_merging_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Id",
+          "MergeWith",
+          "Name",
+          "OwnedBy",
+          "Surveys",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Object",
+          "StatusCode",
+          "Survey",
+          "Survey.Id",
+          "SurveyResponses"
+        ]
+      },
+      {
+        "name": "Should perform complete CRUD lifecycle for a ticket",
+        "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Id",
+          "Name",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Tag",
+          "Tag.Id"
+        ]
+      },
+      {
+        "name": "Should create a ticket with different states",
+        "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should handle ticket creation with minimal fields",
+        "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should successfully clone a ticket and verify the cloned ticket",
+        "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Id",
+          "Name",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Tag",
+          "Tag.Id"
+        ]
+      },
+      {
+        "name": "Should successfully export tickets to CSV and JSON",
+        "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "First",
+          "Id",
+          "Name",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Id",
+          "Tag",
+          "Tag.Id",
+          "Works"
+        ]
+      },
+      {
+        "name": "Should successfully link a ticket to an issue and verify the link",
+        "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should successfully link an opportunity to a ticket and verify the link",
+        "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should verify file attachment content matches original using SHA256",
+        "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Artifacts",
+          "Body",
+          "ConfigurationSet",
+          "FileName",
+          "FileSize",
+          "FileType",
+          "Id",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Body",
+          "Body.Close",
+          "Id",
+          "StatusCode",
+          "Url",
           "Work",
           "Work.AsTicket"
         ]
@@ -9544,5 +11271,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateWork` (HTTP operation `WorksCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.CreateEmbeddedTasks\n  - in.CreateLinks\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.IsSystemUpdate\n  - in.Issue.DisplayIdAlias\n  - in.Issue.OwnedByIds\n  - in.Issue.SpaceId\n  - in.Issue.SprintState\n  - in.Opportunity.DisplayIdAlias\n  - in.Opportunity.SpaceId\n  - in.Ticket.AccountId\n  - in.Ticket.AppliesToPartId\n  - in.Ticket.ArtifactIds\n  - in.Ticket.BrandId\n  - in.Ticket.Channels\n  - in.Ticket.ChannelsV2\n  - in.Ticket.CustomSchemaFragmentIds\n  - in.Ticket.IsFrozen\n  - in.Ticket.IsSpam\n  - in.Ticket.NeedsResponse\n  - in.Ticket.OwnedByIds\n  - in.Ticket.ReportedByIds\n  - in.Ticket.RevOid\n  - in.Ticket.SlaId\n  - in.Ticket.SourceChannel\n  - in.Ticket.SourceChannelV2\n  - in.Ticket.SourceChannelV2Instance\n  - in.Ticket.SpaceId\n  - in.Ticket.Visibility\n  - in.WorkOneof.Issue.AppliesToPartId\n  - in.WorkOneof.Issue.AppliesToVersionIds\n  - in.WorkOneof.Issue.ArtifactIds\n  - in.WorkOneof.Issue.DevelopedWith\n  - in.WorkOneof.Issue.DevrevCopy.OriginId\n  - in.WorkOneof.Issue.DevrevCopy.OriginOrgId\n  - in.WorkOneof.Issue.EventContext.Source\n  - in.WorkOneof.Issue.ExternalRef\n  - in.WorkOneof.Issue.ExternalSourceData.CreatedById\n  - in.WorkOneof.Issue.ExternalSourceData.ModifiedById\n  - in.WorkOneof.Issue.MilestoneId\n  - in.WorkOneof.Issue.OwnedByIds\n  - in.WorkOneof.Issue.Priority\n  - in.WorkOneof.Issue.ProjectId\n  - in.WorkOneof.Issue.Reactions\n  - in.WorkOneof.Issue.ReleaseVersionIds\n  - in.WorkOneof.Issue.ReportedById\n  - in.WorkOneof.Issue.ReportedByIds\n  - in.WorkOneof.Issue.SharedWith\n  - in.WorkOneof.Issue.SlaId\n  - in.WorkOneof.Issue.SpaceId\n  - in.WorkOneof.Issue.SprintId\n  - in.WorkOneof.Issue.SprintState\n  - in.WorkOneof.Issue.Stage.StageId\n  - in.WorkOneof.Issue.StagedInfo.SyncInUnresolvedFields\n  - in.WorkOneof.Issue.StagedInfo.SyncOutUnresolvedFields\n  - in.WorkOneof.Issue.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.WorkOneof.Issue.SyncMetadata.LastSyncIn.SyncUnitId\n  - (+102 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.WorkOneof\n  - in.WorkOneof.Ticket.WorkType == 5\n  - in.WorkOneof.Issue.WorkType == 2\n  - in.WorkOneof.Task.WorkType == 4\n  - in.WorkOneof.Opportunity.WorkType == 6\n  - in.ActorId == nil\n  - in.DevOid == nil\n  - in.DevOid != objType\n  - in.DevOid == nil\n  - in.DevOid == *ObjectTypeCustomObject\n  - in.DevOid == nil\n  - in.Ticket.ReportedByIds == nil\n  - in.DevOid\n  - in.DevOid|in.Ticket.ReportedByIds == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid != nil\n  - in.DevOid\n  - in.ActorId != *ObjectTypeRevUser\n  - in.Ticket.AppliesToPartId != nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.IsSpam == nil\n  - in.Ticket.IsFrozen == nil\n  - in.Ticket.NeedsResponse == nil\n  - in.Ticket.Visibility == nil\n  - in.Ticket.SourceChannel == nil\n  - in.Ticket.SourceChannel == *t59\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.BrandId|in.Ticket.SourceChannelV2Instance|in.Ticket.SpaceId == nil\n  - in.Ticket.ChannelsV2 != nil\n  - in.Ticket.Channels != nil\n  - in.Ticket.SourceChannelV2 != nil\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.SourceChannel == *t43\n  - in.Ticket.SourceChannel == *t54\n  - in.Ticket.SourceChannel == *t57\n  - in.Ticket.SourceChannel == *t60\n  - in.Ticket.SourceChannel == *t63\n  - (+639 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - EOF\n  - ErrActAsByNotFound\n  - ErrActAsNotFound\n  - ErrAuth0UserNotFound\n  - ErrAuthContextNotFound\n  - ErrCorruptedDocument\n  - ErrDecodeToNil\n  - ErrDocumentTooLarge\n  - ErrElementNotFound\n  - ErrEmptyKey\n  - ErrEmptyWriteConcern\n  - ErrInconsistent\n  - ErrInvalidDocumentSequenceStyle\n  - ErrNegativeMaxTime\n  - ErrNegativeW\n  - ErrNegativeWTimeout\n  - ErrNilRegistry\n  - ErrNilType\n  - ErrNonDocument\n  - ErrNonPrimaryReadPref\n  - ErrParseServiceContext\n  - ErrParseUserContext\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ErrServiceContextNotFound\n  - ErrSessionEnded\n  - ErrSubjectNotFound\n  - ErrSurfaceIDNotFound\n  - ErrSvcAccNotFound\n  - ErrUserContextNotFound\n  - ErrWrongClient\n  - ObjectTypeInvalid\n  - ObjectTypeIssue\n  - ObjectTypeOpportunity\n  - ObjectTypeTask\n  - ObjectTypeTicket\n  - dNaN\n  - dNegInf\n  - dPosInf\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `action` -> suggestions ['in.WorkOneof.Issue.Reactions', 'in.WorkOneof.Opportunity.Reactions', 'in.WorkOneof.Task.Reactions', 'in.WorkOneof.Ticket.Reactions']\n  - test field `actionid` -> suggestions []\n  - test field `actions` -> suggestions ['in.WorkOneof.Issue.Reactions', 'in.WorkOneof.Opportunity.Reactions', 'in.WorkOneof.Task.Reactions', 'in.WorkOneof.Ticket.Reactions']\n  - test field `applicableprincipaltype` -> suggestions []\n  - test field `appliestopart` -> suggestions ['in.Ticket.AppliesToPartId', 'in.WorkOneof.Issue.AppliesToPartId', 'in.WorkOneof.Task.AppliesToPartId', 'in.WorkOneof.Ticket.AppliesToPartId']\n  - test field `appname` -> suggestions []\n  - test field `assign` -> suggestions []\n  - test field `baseobject` -> suggestions []\n  - test field `blockid` -> suggestions []\n  - test field `categories` -> suggestions []\n  - test field `channel` -> suggestions ['in.Ticket.Channels', 'in.Ticket.ChannelsV2', 'in.Ticket.SourceChannel', 'in.Ticket.SourceChannelV2', 'in.Ticket.SourceChannelV2Instance', 'in.WorkOneof.Ticket.Channels', 'in.WorkOneof.Ticket.ChannelsV2', 'in.WorkOneof.Ticket.ChannelsV2Instances', 'in.WorkOneof.Ticket.SourceChannelV2', 'in.WorkOneof.Ticket.SourceChannelV2Instance']\n  - test field `createroles` -> suggestions []\n  - test field `customschemaspec` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `dispatchedchannels` -> suggestions ['in.Ticket.Channels', 'in.WorkOneof.Ticket.Channels']\n  - test field `dispatchedto` -> suggestions []\n  - test field `dispatchid` -> suggestions []\n  - test field `email` -> suggestions []\n  - test field `eventdate` -> suggestions []\n  - test field `guideline` -> suggestions []\n  - test field `inputvalues` -> suggestions []\n  - test field `issue` -> suggestions []\n  - test field `manifest` -> suggestions []\n  - test field `member` -> suggestions []\n  - test field `membertype` -> suggestions []\n  - test field `metric` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `notes` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `objectid` -> suggestions []\n  - test field `operation` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Issue.OwnedByIds', 'in.Ticket.OwnedByIds', 'in.WorkOneof.Issue.OwnedByIds', 'in.WorkOneof.Opportunity.OwnedByIds', 'in.WorkOneof.Task.OwnedByIds', 'in.WorkOneof.Ticket.OwnedByAgentId', 'in.WorkOneof.Ticket.OwnedByIds']\n  - test field `owner` -> suggestions []\n  - test field `parent` -> suggestions []\n  - test field `parentrun` -> suggestions []\n  - test field `payload` -> suggestions []\n  - test field `previoussteps` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `reason` -> suggestions []\n  - test field `recipient` -> suggestions []\n  - test field `referencekey` -> suggestions []\n  - test field `response` -> suggestions ['in.Ticket.NeedsResponse']\n  - test field `responsechannel` -> suggestions []\n  - test field `responsescore` -> suggestions []\n  - test field `revoke` -> suggestions []\n  - test field `role` -> suggestions []\n  - test field `schema` -> suggestions ['in.Ticket.CustomSchemaFragmentIds']\n  - test field `slug` -> suggestions []\n  - test field `snapin` -> suggestions []\n  - test field `snapinactionname` -> suggestions []\n  - test field `snapinpackage` -> suggestions []\n  - test field `snapinversion` -> suggestions []\n  - test field `snapkitbody` -> suggestions ['in.Ticket.Body', 'in.WorkOneof.Issue.Body', 'in.WorkOneof.Opportunity.Body', 'in.WorkOneof.Task.Body', 'in.WorkOneof.Ticket.Body']\n  - test field `sourcecodeartifact` -> suggestions ['in.WorkOneof.Issue.EventContext.Source', 'in.WorkOneof.Opportunity.EventContext.Source', 'in.WorkOneof.Task.EventContext.Source', 'in.WorkOneof.Ticket.EventContext.Source']\n  - test field `summarysection` -> suggestions []\n  - test field `survey` -> suggestions ['in.WorkOneof.Ticket.SurveysAggregation']\n  - test field `target` -> suggestions ['in.WorkOneof.Ticket.TargetLocale']\n  - test field `targetclosedate` -> suggestions []\n  - test field `ticket` -> suggestions []\n  - test field `timestamp` -> suggestions []\n  - test field `type` -> suggestions ['in.WorkOneof.Issue.WorkType', 'in.WorkOneof.Opportunity.WorkType', 'in.WorkOneof.Task.WorkType', 'in.WorkOneof.Ticket.WorkType']\n  - test field `uimetadata` -> suggestions []\n  - test field `version` -> suggestions ['in.WorkOneof.Issue.AppliesToVersionIds', 'in.WorkOneof.Issue.ReleaseVersionIds', 'in.WorkOneof.Task.AppliesToVersionIds', 'in.WorkOneof.Ticket.AppliesToVersionIds']\n  - test field `workflow` -> suggestions []\n  - test field `workflowrunid` -> suggestions []\n  - test field `workflowversion` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateWork` (HTTP operation `WorksCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.CreateEmbeddedTasks\n  - in.CreateLinks\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.IsSystemUpdate\n  - in.Issue.DisplayIdAlias\n  - in.Issue.OwnedByIds\n  - in.Issue.SpaceId\n  - in.Issue.SprintState\n  - in.Opportunity.DisplayIdAlias\n  - in.Opportunity.SpaceId\n  - in.Ticket.AccountId\n  - in.Ticket.AppliesToPartId\n  - in.Ticket.ArtifactIds\n  - in.Ticket.BrandId\n  - in.Ticket.Channels\n  - in.Ticket.ChannelsV2\n  - in.Ticket.CustomSchemaFragmentIds\n  - in.Ticket.IsFrozen\n  - in.Ticket.IsSpam\n  - in.Ticket.NeedsResponse\n  - in.Ticket.OwnedByIds\n  - in.Ticket.ReportedByIds\n  - in.Ticket.RevOid\n  - in.Ticket.SlaId\n  - in.Ticket.SourceChannel\n  - in.Ticket.SourceChannelV2\n  - in.Ticket.SourceChannelV2Instance\n  - in.Ticket.SpaceId\n  - in.WorkOneof.Issue.AppliesToPartId\n  - in.WorkOneof.Issue.AppliesToVersionIds\n  - in.WorkOneof.Issue.ArtifactIds\n  - in.WorkOneof.Issue.DevelopedWith\n  - in.WorkOneof.Issue.DevrevCopy.OriginId\n  - in.WorkOneof.Issue.DevrevCopy.OriginOrgId\n  - in.WorkOneof.Issue.ExternalSourceData.CreatedById\n  - in.WorkOneof.Issue.ExternalSourceData.ModifiedById\n  - in.WorkOneof.Issue.MilestoneId\n  - in.WorkOneof.Issue.OwnedByIds\n  - in.WorkOneof.Issue.Priority\n  - in.WorkOneof.Issue.ProjectId\n  - in.WorkOneof.Issue.Reactions\n  - in.WorkOneof.Issue.ReleaseVersionIds\n  - in.WorkOneof.Issue.ReportedById\n  - in.WorkOneof.Issue.ReportedByIds\n  - in.WorkOneof.Issue.SharedWith\n  - in.WorkOneof.Issue.SlaId\n  - in.WorkOneof.Issue.SpaceId\n  - in.WorkOneof.Issue.SprintId\n  - in.WorkOneof.Issue.SprintState\n  - in.WorkOneof.Issue.Stage.StageId\n  - in.WorkOneof.Issue.StagedInfo.SyncInUnresolvedFields\n  - in.WorkOneof.Issue.StagedInfo.SyncOutUnresolvedFields\n  - in.WorkOneof.Issue.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.WorkOneof.Issue.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.WorkOneof.Issue.SyncMetadata.LastSyncOut.SyncHistoryId\n  - in.WorkOneof.Issue.SyncMetadata.LastSyncOut.SyncUnitId\n  - in.WorkOneof.Issue.SyncMetadata.SyncedByDevUsers\n  - (+93 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.WorkOneof\n  - in.WorkOneof.Ticket.WorkType == 5\n  - in.WorkOneof.Issue.WorkType == 2\n  - in.WorkOneof.Task.WorkType == 4\n  - in.WorkOneof.Opportunity.WorkType == 6\n  - in.ActorId == nil\n  - in.DevOid == nil\n  - in.DevOid != objType\n  - in.DevOid == nil\n  - in.DevOid == *ObjectTypeCustomObject\n  - in.DevOid == nil\n  - in.Ticket.ReportedByIds == nil\n  - in.DevOid\n  - in.DevOid|in.Ticket.ReportedByIds == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid != nil\n  - in.DevOid\n  - in.ActorId != *ObjectTypeRevUser\n  - in.Ticket.AppliesToPartId != nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.IsSpam == nil\n  - in.Ticket.IsFrozen == nil\n  - in.Ticket.NeedsResponse == nil\n  - in.Ticket.SourceChannel == nil\n  - in.Ticket.SourceChannel == *t59\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.BrandId|in.Ticket.SourceChannelV2Instance|in.Ticket.SpaceId == nil\n  - in.Ticket.ChannelsV2 != nil\n  - in.Ticket.Channels != nil\n  - in.Ticket.SourceChannelV2 != nil\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.SourceChannel == *t43\n  - in.Ticket.SourceChannel == *t54\n  - in.Ticket.SourceChannel == *t57\n  - in.Ticket.SourceChannel == *t60\n  - in.Ticket.SourceChannel == *t63\n  - in.Ticket.SpaceId == nil\n  - (+622 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - EOF\n  - ErrActAsByNotFound\n  - ErrActAsNotFound\n  - ErrAuth0UserNotFound\n  - ErrAuthContextNotFound\n  - ErrCorruptedDocument\n  - ErrDecodeToNil\n  - ErrDocumentTooLarge\n  - ErrElementNotFound\n  - ErrEmptyKey\n  - ErrEmptyWriteConcern\n  - ErrInconsistent\n  - ErrInvalidDocumentSequenceStyle\n  - ErrNegativeMaxTime\n  - ErrNegativeW\n  - ErrNegativeWTimeout\n  - ErrNilRegistry\n  - ErrNilType\n  - ErrNonDocument\n  - ErrNonPrimaryReadPref\n  - ErrParseServiceContext\n  - ErrParseUserContext\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ErrServiceContextNotFound\n  - ErrSessionEnded\n  - ErrSubjectNotFound\n  - ErrSurfaceIDNotFound\n  - ErrSvcAccNotFound\n  - ErrUserContextNotFound\n  - ErrWrongClient\n  - ObjectTypeInvalid\n  - ObjectTypeIssue\n  - ObjectTypeOpportunity\n  - ObjectTypeTask\n  - ObjectTypeTicket\n  - dNaN\n  - dNegInf\n  - dPosInf\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `account` -> suggestions ['in.Ticket.AccountId', 'in.WorkOneof.Opportunity.AccountId', 'in.WorkOneof.Ticket.AccountId']\n  - test field `action` -> suggestions ['in.WorkOneof.Issue.Reactions', 'in.WorkOneof.Opportunity.Reactions', 'in.WorkOneof.Task.Reactions', 'in.WorkOneof.Ticket.Reactions']\n  - test field `actionid` -> suggestions []\n  - test field `actions` -> suggestions ['in.WorkOneof.Issue.Reactions', 'in.WorkOneof.Opportunity.Reactions', 'in.WorkOneof.Task.Reactions', 'in.WorkOneof.Ticket.Reactions']\n  - test field `applicableprincipaltype` -> suggestions []\n  - test field `appliestopart` -> suggestions ['in.Ticket.AppliesToPartId', 'in.WorkOneof.Issue.AppliesToPartId', 'in.WorkOneof.Task.AppliesToPartId', 'in.WorkOneof.Ticket.AppliesToPartId']\n  - test field `appname` -> suggestions []\n  - test field `artifacts` -> suggestions ['in.Ticket.ArtifactIds', 'in.WorkOneof.Issue.ArtifactIds', 'in.WorkOneof.Opportunity.ArtifactIds', 'in.WorkOneof.Task.ArtifactIds', 'in.WorkOneof.Ticket.ArtifactIds']\n  - test field `assign` -> suggestions []\n  - test field `baseobject` -> suggestions []\n  - test field `blockid` -> suggestions []\n  - test field `categories` -> suggestions []\n  - test field `channel` -> suggestions ['in.Ticket.Channels', 'in.Ticket.ChannelsV2', 'in.Ticket.SourceChannel', 'in.Ticket.SourceChannelV2', 'in.Ticket.SourceChannelV2Instance', 'in.WorkOneof.Ticket.Channels', 'in.WorkOneof.Ticket.ChannelsV2', 'in.WorkOneof.Ticket.ChannelsV2Instances', 'in.WorkOneof.Ticket.SourceChannelV2', 'in.WorkOneof.Ticket.SourceChannelV2Instance']\n  - test field `configurationset` -> suggestions []\n  - test field `createroles` -> suggestions []\n  - test field `customschemaspec` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `dispatchedchannels` -> suggestions ['in.Ticket.Channels', 'in.WorkOneof.Ticket.Channels']\n  - test field `dispatchedto` -> suggestions []\n  - test field `dispatchid` -> suggestions []\n  - test field `displayname` -> suggestions []\n  - test field `email` -> suggestions []\n  - test field `eventdate` -> suggestions []\n  - test field `expiresin` -> suggestions []\n  - test field `externalrefs` -> suggestions ['in.WorkOneof.Issue.ExternalRef', 'in.WorkOneof.Opportunity.ExternalRef', 'in.WorkOneof.Task.ExternalRef', 'in.WorkOneof.Ticket.ExternalRef']\n  - test field `filename` -> suggestions []\n  - test field `filesize` -> suggestions []\n  - test field `filetype` -> suggestions []\n  - test field `first` -> suggestions []\n  - test field `groupby` -> suggestions ['in.Ticket.Group', 'in.WorkOneof.Ticket.Group']\n  - test field `guideline` -> suggestions []\n  - test field `inputvalues` -> suggestions []\n  - test field `issue` -> suggestions []\n  - test field `items` -> suggestions []\n  - test field `labels` -> suggestions []\n  - test field `limit` -> suggestions []\n  - test field `limitpergroup` -> suggestions ['in.Ticket.Group', 'in.WorkOneof.Ticket.Group']\n  - test field `manifest` -> suggestions []\n  - test field `member` -> suggestions []\n  - test field `membertype` -> suggestions []\n  - test field `mergewith` -> suggestions []\n  - test field `metric` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `notes` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `objectid` -> suggestions []\n  - test field `objects` -> suggestions []\n  - test field `operation` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Issue.OwnedByIds', 'in.Ticket.OwnedByIds', 'in.WorkOneof.Issue.OwnedByIds', 'in.WorkOneof.Opportunity.OwnedByIds', 'in.WorkOneof.Task.OwnedByIds', 'in.WorkOneof.Ticket.OwnedByAgentId', 'in.WorkOneof.Ticket.OwnedByIds']\n  - test field `owner` -> suggestions []\n  - test field `parent` -> suggestions []\n  - test field `parentid` -> suggestions []\n  - test field `parentrun` -> suggestions []\n  - test field `payload` -> suggestions []\n  - test field `previoussteps` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `reason` -> suggestions []\n  - test field `recipient` -> suggestions []\n  - test field `referencekey` -> suggestions []\n  - test field `reportedby` -> suggestions ['in.Ticket.ReportedByIds', 'in.WorkOneof.Issue.ReportedById', 'in.WorkOneof.Issue.ReportedByIds', 'in.WorkOneof.Opportunity.ReportedById', 'in.WorkOneof.Opportunity.ReportedByIds', 'in.WorkOneof.Task.ReportedById', 'in.WorkOneof.Task.ReportedByIds', 'in.WorkOneof.Ticket.ReportedById', 'in.WorkOneof.Ticket.ReportedByIds']\n  - test field `requestedtokentype` -> suggestions []\n  - test field `response` -> suggestions ['in.Ticket.NeedsResponse']\n  - test field `responsechannel` -> suggestions []\n  - test field `responsescore` -> suggestions []\n  - test field `revoke` -> suggestions []\n  - test field `role` -> suggestions []\n  - test field `schema` -> suggestions ['in.Ticket.CustomSchemaFragmentIds']\n  - test field `slug` -> suggestions []\n  - test field `snapin` -> suggestions []\n  - test field `snapinactionname` -> suggestions []\n  - test field `snapinpackage` -> suggestions []\n  - test field `snapinversion` -> suggestions []\n  - test field `snapkitbody` -> suggestions ['in.Ticket.Body', 'in.WorkOneof.Issue.Body', 'in.WorkOneof.Opportunity.Body', 'in.WorkOneof.Task.Body', 'in.WorkOneof.Ticket.Body']\n  - test field `sortby` -> suggestions []\n  - test field `sourcecodeartifact` -> suggestions ['in.WorkOneof.Issue.EventContext.Source', 'in.WorkOneof.Opportunity.EventContext.Source', 'in.WorkOneof.Task.EventContext.Source', 'in.WorkOneof.Ticket.EventContext.Source']\n  - test field `subscribers` -> suggestions []\n  - test field `summarysection` -> suggestions []\n  - test field `survey` -> suggestions ['in.WorkOneof.Ticket.SurveysAggregation']\n  - test field `surveys` -> suggestions ['in.WorkOneof.Ticket.SurveysAggregation']\n  - test field `target` -> suggestions ['in.WorkOneof.Ticket.TargetLocale']\n  - test field `targetclosedate` -> suggestions []\n  - test field `ticket` -> suggestions []\n  - test field `timestamp` -> suggestions []\n  - test field `tokenhint` -> suggestions []\n  - test field `type` -> suggestions ['in.WorkOneof.Issue.WorkType', 'in.WorkOneof.Opportunity.WorkType', 'in.WorkOneof.Task.WorkType', 'in.WorkOneof.Ticket.WorkType']\n  - test field `uimetadata` -> suggestions []\n  - test field `version` -> suggestions ['in.WorkOneof.Issue.AppliesToVersionIds', 'in.WorkOneof.Issue.ReleaseVersionIds', 'in.WorkOneof.Task.AppliesToVersionIds', 'in.WorkOneof.Ticket.AppliesToVersionIds']\n  - test field `workflow` -> suggestions []\n  - test field `workflowrunid` -> suggestions []\n  - test field `workflowversion` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

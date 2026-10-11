@@ -221,8 +221,12 @@ type UnmatchedField struct {
 	Suggestion []string `json:"fuzzy_suggestions"`
 }
 
-// extractLifejacket parses every *_test.go under root and aggregates per-operation facts.
+// extractLifejacket parses every *_test.go under root and aggregates per-operation
+// facts. The enclosing test module is indexed once so request objects handed to
+// helpers in other packages can be traced.
 func extractLifejacket(root string) (map[string]*opFacts, error) {
+	moduleRoot, modulePath := findModuleRoot(root)
+	ri := buildRepoIndex(moduleRoot, modulePath)
 	fset := token.NewFileSet()
 	ops := map[string]*opFacts{}
 	err := filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
@@ -232,22 +236,30 @@ func extractLifejacket(root string) (map[string]*opFacts, error) {
 		if d.IsDir() || !strings.HasSuffix(path, "_test.go") {
 			return nil
 		}
-		f, perr := parser.ParseFile(fset, path, nil, 0)
-		if perr != nil {
-			return nil // skip unparseable files, stay deterministic on the rest
+		f := (*ast.File)(nil)
+		if ri != nil {
+			f = ri.fileByPath[path]
+		}
+		if f == nil {
+			var perr error
+			f, perr = parser.ParseFile(fset, path, nil, 0)
+			if perr != nil {
+				return nil // skip unparseable files, stay deterministic on the rest
+			}
 		}
 		rel := path
 		if r, e := filepath.Rel(root, path); e == nil {
 			rel = r
 		}
-		collectTests(f, rel, ops)
+		collectTests(f, rel, ops, ri)
 		return nil
 	})
 	return ops, err
 }
 
 // collectTests walks a file for Ginkgo It blocks that issue requests.
-func collectTests(f *ast.File, file string, ops map[string]*opFacts) {
+func collectTests(f *ast.File, file string, ops map[string]*opFacts, ri *repoIndex) {
+	parents := buildParents(f)
 	ast.Inspect(f, func(n ast.Node) bool {
 		call, ok := n.(*ast.CallExpr)
 		if !ok || !isIdent(call.Fun, "It") || len(call.Args) < 2 {
@@ -270,9 +282,17 @@ func collectTests(f *ast.File, file string, ops map[string]*opFacts) {
 			return true
 		}
 		calledOps, fields, statuses, success := scanItBody(body)
+		// Follow the request object handed to MakeRequest across the test module
+		// (enclosing setup, same-package and cross-package helpers), which both
+		// discovers the operation a helper issues and the fields set on the
+		// object before it is sent.
+		setup := enclosingSetup(body, parents)
+		extraOps, extraFields := ri.traceIt(body, setup, f)
+		calledOps = mergeOps(calledOps, extraOps)
 		if len(calledOps) == 0 {
 			return true // not a request-issuing test
 		}
+		fields = append(fields, extraFields...)
 		respFields := scanResponseFields(body)
 		tf := testFact{Name: name, File: file, Labels: labels, Fields: sortedUniq(fields), Status: sortedUniqInt(statuses), Success: success, RespFields: sortedUniq(respFields)}
 		// A single It may issue several requests: an action plus verification
@@ -313,6 +333,24 @@ func collectTests(f *ast.File, file string, ops map[string]*opFacts) {
 		}
 		return true
 	})
+}
+
+// mergeOps returns the union of two operation lists, preserving first-seen order.
+func mergeOps(a, b []string) []string {
+	if len(b) == 0 {
+		return a
+	}
+	seen := make(map[string]bool, len(a)+len(b))
+	out := make([]string, 0, len(a)+len(b))
+	for _, group := range [][]string{a, b} {
+		for _, s := range group {
+			if !seen[s] {
+				seen[s] = true
+				out = append(out, s)
+			}
+		}
+	}
+	return out
 }
 
 // scanItBody extracts the operations called, request fields set, asserted

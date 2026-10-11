@@ -37,7 +37,7 @@
       "leaf_fields_read_by_rpc": 2,
       "covered_count": 1,
       "coverage_pct": 50,
-      "request_fields_set_by_tests": 27,
+      "request_fields_set_by_tests": 28,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 1,
       "by_depth": {
@@ -294,6 +294,10 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "tags",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "text",
           "fuzzy_suggestions": null
         },
@@ -505,7 +509,12 @@
           "ADMIN"
         ],
         "fields_set": [
-          "Id"
+          "AppliesToPart",
+          "Id",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
         ],
         "statuses": null,
         "asserts_success": true,
@@ -529,7 +538,12 @@
         "file": "api/v2_internal/work/tickets/crud/delete_ticket_test.go",
         "labels": null,
         "fields_set": [
-          "Id"
+          "AppliesToPart",
+          "Id",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
         ],
         "statuses": null,
         "asserts_success": true,
@@ -641,7 +655,12 @@
           "GINKGO_PR_SANITY"
         ],
         "fields_set": [
-          "Id"
+          "AppliesToPart",
+          "Id",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
         ],
         "statuses": null,
         "asserts_success": true,
@@ -654,7 +673,12 @@
           "GINKGO_PR_SANITY"
         ],
         "fields_set": [
-          "Id"
+          "AppliesToPart",
+          "Id",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
         ],
         "statuses": null,
         "asserts_success": true,
@@ -748,5 +772,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteWork` (HTTP operation `WorksDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `action` -> suggestions []\n  - test field `applicableprincipaltype` -> suggestions []\n  - test field `appliestopart` -> suggestions []\n  - test field `assign` -> suggestions []\n  - test field `body` -> suggestions []\n  - test field `contentdescriptor` -> suggestions []\n  - test field `createroles` -> suggestions []\n  - test field `customfields` -> suggestions []\n  - test field `customschemaspec` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `email` -> suggestions []\n  - test field `eventdate` -> suggestions []\n  - test field `metric` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `ownedby` -> suggestions []\n  - test field `payload` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `reason` -> suggestions []\n  - test field `revoke` -> suggestions []\n  - test field `role` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `text` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions []\n  - test field `usecase` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteWork` (HTTP operation `WorksDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `action` -> suggestions []\n  - test field `applicableprincipaltype` -> suggestions []\n  - test field `appliestopart` -> suggestions []\n  - test field `assign` -> suggestions []\n  - test field `body` -> suggestions []\n  - test field `contentdescriptor` -> suggestions []\n  - test field `createroles` -> suggestions []\n  - test field `customfields` -> suggestions []\n  - test field `customschemaspec` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `email` -> suggestions []\n  - test field `eventdate` -> suggestions []\n  - test field `metric` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `ownedby` -> suggestions []\n  - test field `payload` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `reason` -> suggestions []\n  - test field `revoke` -> suggestions []\n  - test field `role` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `tags` -> suggestions []\n  - test field `text` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions []\n  - test field `usecase` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

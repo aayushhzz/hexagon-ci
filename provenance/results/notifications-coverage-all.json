@@ -1018,7 +1018,7 @@
         "leaf_fields_read_by_rpc": 14,
         "covered_count": 2,
         "coverage_pct": 14.3,
-        "request_fields_set_by_tests": 9,
+        "request_fields_set_by_tests": 12,
         "set_by_positive_tests": 2,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -1226,7 +1226,15 @@
       "anomalies": {
         "unmatched_test_fields": [
           {
+            "field": "body",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "filter",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "id",
             "fuzzy_suggestions": null
           },
           {
@@ -1235,6 +1243,10 @@
           },
           {
             "field": "object",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "ownedbyids",
             "fuzzy_suggestions": null
           },
           {
@@ -1376,10 +1388,14 @@
           "file": "api/v2_internal/notifications/notifications_mark_test.go",
           "labels": null,
           "fields_set": [
+            "Body",
             "Filter",
+            "Id",
+            "OwnedByIds",
             "ParentIds",
             "State",
-            "States"
+            "States",
+            "Type"
           ],
           "statuses": [
             200,
@@ -1396,10 +1412,14 @@
           "file": "api/v2_internal/notifications/notifications_mark_test.go",
           "labels": null,
           "fields_set": [
+            "Body",
             "Filter",
+            "Id",
+            "OwnedByIds",
             "ParentIds",
             "State",
             "States",
+            "Type",
             "Types"
           ],
           "statuses": [
@@ -1437,7 +1457,7 @@
     {
       "rpc": "MarkInboxNotifications",
       "operation": "NotificationsMark,UserInteractionsUpdate",
-      "tests": 6,
+      "tests": 8,
       "status": {
         "documented": null,
         "asserted": [
@@ -1454,7 +1474,7 @@
         "leaf_fields_read_by_rpc": 2,
         "covered_count": 0,
         "coverage_pct": 0,
-        "request_fields_set_by_tests": 10,
+        "request_fields_set_by_tests": 17,
         "set_by_positive_tests": 0,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -1558,11 +1578,27 @@
       "anomalies": {
         "unmatched_test_fields": [
           {
+            "field": "body",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "filter",
             "fuzzy_suggestions": null
           },
           {
+            "field": "groupby",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "id",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "object",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "ownedbyids",
             "fuzzy_suggestions": null
           },
           {
@@ -1571,6 +1607,14 @@
           },
           {
             "field": "parentids",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "parenttypes",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "priorities",
             "fuzzy_suggestions": null
           },
           {
@@ -1590,6 +1634,10 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "type",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "types",
             "fuzzy_suggestions": null
           },
@@ -1605,8 +1653,12 @@
           "file": "api/v2_internal/notifications/notifications_mark_test.go",
           "labels": null,
           "fields_set": [
+            "Body",
             "Filter",
-            "State"
+            "Id",
+            "OwnedByIds",
+            "State",
+            "Type"
           ],
           "statuses": [
             400
@@ -1621,10 +1673,14 @@
           "file": "api/v2_internal/notifications/notifications_mark_test.go",
           "labels": null,
           "fields_set": [
+            "Body",
             "Filter",
+            "Id",
+            "OwnedByIds",
             "ParentIds",
             "State",
-            "States"
+            "States",
+            "Type"
           ],
           "statuses": [
             200,
@@ -1641,10 +1697,14 @@
           "file": "api/v2_internal/notifications/notifications_mark_test.go",
           "labels": null,
           "fields_set": [
+            "Body",
             "Filter",
+            "Id",
+            "OwnedByIds",
             "ParentIds",
             "State",
             "States",
+            "Type",
             "Types"
           ],
           "statuses": [
@@ -1679,6 +1739,50 @@
             "Entries.LastComments",
             "Entries.LastComments.Body",
             "Entries.Unread"
+          ]
+        },
+        {
+          "name": "marks notification as read when testUser opens the DM with actor1",
+          "file": "e2e/computer_multiplayer/computer_multiplayer_activity_test.go",
+          "labels": null,
+          "fields_set": [
+            "GroupBy",
+            "ParentIds",
+            "ParentTypes",
+            "Priorities",
+            "RecordId",
+            "States",
+            "Types",
+            "Unread"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "testUser receives notifications and left nav updates when actor1 shares computer chat",
+          "file": "e2e/computer_multiplayer/computer_multiplayer_activity_test.go",
+          "labels": null,
+          "fields_set": [
+            "GroupBy",
+            "ParentIds",
+            "ParentTypes",
+            "Priorities",
+            "RecordId",
+            "States",
+            "Types",
+            "Unread"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
           ]
         },
         {

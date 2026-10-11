@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "GroupWorks",
     "operation": "WorksGroupPost",
-    "tests": 6,
+    "tests": 63,
     "status": {
       "documented": [
         200,
@@ -16,10 +16,10 @@
         503
       ],
       "asserted": [
-        200
+        200,
+        400
       ],
       "missing": [
-        400,
         401,
         403,
         413,
@@ -27,15 +27,15 @@
         500,
         503
       ],
-      "coverage_pct": 12.5
+      "coverage_pct": 25
     },
     "fields": {
       "leaf_fields_read_by_rpc": 126,
       "covered_count": 2,
       "coverage_pct": 1.6,
-      "request_fields_set_by_tests": 9,
+      "request_fields_set_by_tests": 24,
       "set_by_positive_tests": 2,
-      "set_by_negative_tests": 0,
+      "set_by_negative_tests": 1,
       "by_depth": {
         "top_level": {
           "total": 13,
@@ -67,8 +67,37 @@
           "path": "in.GroupBy",
           "match": "exact",
           "by_tests": [
+            "Custom Fields - Boolean",
+            "Custom Fields - Devuser - caveat option user equalsTo",
+            "Custom Fields - Double",
+            "Custom Fields - Number",
+            "Custom Fields - Part - caveat option Parts equalsTo",
+            "Custom Fields - customer",
             "Development team coordinates issue resolution",
+            "Group by forecast category - With invalid account filter",
+            "Group by forecast category - With invalid type",
+            "Should be able to group the tickets",
+            "Should be able to group tickets",
+            "Should only allow reading tickets in queued stage",
             "Support team manages customer tickets throughout resolution process",
+            "With account filter",
+            "With invalid group by",
+            "With new group and custom role - caveat option Customer account belongs to",
+            "With new group and custom role - caveat option Customer account equalsTo",
+            "With new group and custom role - caveat option Customer account not equalsTo",
+            "With new group and custom role - caveat option Ticket group EqualsTo ",
+            "With new group and custom role - caveat option Ticket group belongs to",
+            "With new group and custom role - caveat option Ticket group not EqualsTo ",
+            "With new group and custom role - caveat option Ticket workspace belongs to ",
+            "With new group and custom role - caveat option Ticket workspace equals to ",
+            "With new group and custom role - caveat option Ticket workspace not equals to ",
+            "With new group and custom role - caveat option unverified user ",
+            "With new group and custom role - caveat option user belongs to reporters ",
+            "With new group and custom role - caveat option user equalsTo  ",
+            "With new group and custom role - caveat option user not equalsTo  ",
+            "With new group and custom role - caveat option verified user ",
+            "With new group and custom role - without caveat ",
+            "With type filter",
             "should create tickets and group by parts without sorting",
             "should create tickets with multiple owners, group them, and verify group order",
             "should create tickets, group by parts, and sort by created date",
@@ -216,11 +245,11 @@
       "reachable_on_happy_path": 65,
       "present_arm_exercised": 7,
       "present_arm_pct": 3.7,
-      "absent_arm_exercised": 61,
-      "absent_arm_pct": 93.8,
-      "negative_arm_exercised": 0,
-      "negative_arm_pct": 0,
-      "both_arms_exercised": 3,
+      "absent_arm_exercised": 65,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 4,
+      "negative_arm_pct": 2.1,
+      "both_arms_exercised": 7,
       "coverage_pct": 3.7,
       "by_origin": {
         "service": {
@@ -228,9 +257,9 @@
           "reachable_on_happy_path": 30,
           "present_arm_exercised": 7,
           "present_arm_pct": 18.4,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
-          "absent_arm_exercised": 26
+          "negative_arm_exercised": 4,
+          "negative_arm_pct": 10.5,
+          "absent_arm_exercised": 30
         },
         "generated": {
           "total": 140,
@@ -1793,6 +1822,23 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "caveats",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "createsubtype",
+          "fuzzy_suggestions": [
+            "in.Filter.IssueFilter.Subtype",
+            "in.Filter.OpportunityFilter.Subtype",
+            "in.Filter.TaskFilter.Subtype",
+            "in.Filter.TicketFilter.Subtype"
+          ]
+        },
+        {
+          "field": "description",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "limit",
           "fuzzy_suggestions": null
         },
@@ -1804,11 +1850,67 @@
           ]
         },
         {
+          "field": "mfzusertype",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "name",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "objecttype",
+          "fuzzy_suggestions": [
+            "in.ObjectTypes"
+          ]
+        },
+        {
+          "field": "opportunity",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "ownedby",
           "fuzzy_suggestions": [
             "in.Filter.OwnedByIds",
             "in.Filter.OwnedByIdsOp",
             "in.Filter.TicketFilter.OwnedByAgentId"
+          ]
+        },
+        {
+          "field": "privileges",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "revorg",
+          "fuzzy_suggestions": [
+            "in.Filter.IssueFilter.RevOrgIds",
+            "in.Filter.IssueFilter.RevOrgIdsOp"
+          ]
+        },
+        {
+          "field": "revuser",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "rolecategory",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "superdevorg",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "targetsubtype",
+          "fuzzy_suggestions": [
+            "in.Filter.IssueFilter.Subtype",
+            "in.Filter.OpportunityFilter.Subtype",
+            "in.Filter.TaskFilter.Subtype",
+            "in.Filter.TicketFilter.Subtype"
+          ]
+        },
+        {
+          "field": "ticket",
+          "fuzzy_suggestions": [
+            "in.CustomFilter.TicketFilters"
           ]
         },
         {
@@ -1829,10 +1931,844 @@
             "in.Filter.WorkType",
             "in.ObjectTypes"
           ]
+        },
+        {
+          "field": "user",
+          "fuzzy_suggestions": null
         }
       ]
     },
     "test_facts": [
+      {
+        "name": "Custom Fields - Double",
+        "file": "api/v2_internal/work/issues/crud/custom_objects/group_issue_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Boolean",
+        "file": "api/v2_internal/work/issues/crud/custom_objects/group_issue_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Number",
+        "file": "api/v2_internal/work/issues/crud/custom_objects/group_issue_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - customer",
+        "file": "api/v2_internal/work/issues/crud/custom_objects/group_issue_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Part - caveat option Parts equalsTo",
+        "file": "api/v2_internal/work/issues/crud/custom_objects/group_issue_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Devuser - caveat option user equalsTo",
+        "file": "api/v2_internal/work/issues/crud/custom_objects/group_issue_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo  ",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Double",
+        "file": "api/v2_internal/work/opportunities/custom_objects/group_opportunity_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Boolean",
+        "file": "api/v2_internal/work/opportunities/custom_objects/group_opportunity_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Number",
+        "file": "api/v2_internal/work/opportunities/custom_objects/group_opportunity_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - customer",
+        "file": "api/v2_internal/work/opportunities/custom_objects/group_opportunity_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Devuser - caveat option user equalsTo",
+        "file": "api/v2_internal/work/opportunities/custom_objects/group_opportunity_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With type filter",
+        "file": "api/v2_internal/work/opportunities/group_opportunity_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With account filter",
+        "file": "api/v2_internal/work/opportunities/group_opportunity_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Opportunity",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Group by forecast category - With invalid type",
+        "file": "api/v2_internal/work/opportunities/group_opportunity_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With invalid group by",
+        "file": "api/v2_internal/work/opportunities/group_opportunity_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Group by forecast category - With invalid account filter",
+        "file": "api/v2_internal/work/opportunities/group_opportunity_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Opportunity",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With caveat option user not equalsTo",
+        "file": "api/v2_internal/work/opportunities/mfz/group_opportunity_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With caveat option user not equalsTo",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should be able to group the tickets",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should be able to group tickets",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - without caveat ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option user equalsTo  ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Customer account equalsTo",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Customer account belongs to",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket workspace equals to ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket workspace belongs to ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option verified user ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option user not equalsTo  ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option unverified user ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option user belongs to reporters ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket group not EqualsTo ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket group EqualsTo ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket group belongs to",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Customer account not equalsTo",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket workspace not equals to ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "GroupBy",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
       {
         "name": "Development team coordinates issue resolution",
         "file": "e2e/smoke_test_case/works_management/works_issues_test.go",
@@ -1878,6 +2814,30 @@
           "StatusCode",
           "Works"
         ]
+      },
+      {
+        "name": "Should only allow reading tickets in queued stage",
+        "file": "e2e/ticktes_user_journey/mfz_tickets_test/mfz_tickets_test.go",
+        "labels": [
+          "UAT",
+          "DEV_USER"
+        ],
+        "fields_set": [
+          "CreateSubType",
+          "Description",
+          "GroupBy",
+          "Name",
+          "ObjectType",
+          "OwnedBy",
+          "TargetSubtype",
+          "Ticket",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": null
       },
       {
         "name": "should groupby stage and verify tickets",
@@ -2531,5 +3491,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GroupWorks` (HTTP operation `WorksGroupPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomFilter.IssueFilters\n  - in.CustomFilter.TaskFilters\n  - in.CustomFilter.TicketFilters\n  - in.DevOid\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SearchQuery\n  - in.ExcludeWorkIds\n  - in.Filter.ActualCloseDateOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.DeprecatedCreatedByAgentId\n  - in.Filter.DeprecatedCreatedByAgentIdOp\n  - in.Filter.ExternalSourceData\n  - in.Filter.IssueFilter.AccountIds\n  - in.Filter.IssueFilter.AccountIdsOp\n  - in.Filter.IssueFilter.ActualStartDateOp\n  - in.Filter.IssueFilter.AppliesToPartId\n  - in.Filter.IssueFilter.AppliesToPartIdOp\n  - in.Filter.IssueFilter.AppliesToVersionIds\n  - in.Filter.IssueFilter.Apps\n  - in.Filter.IssueFilter.AppsOp\n  - in.Filter.IssueFilter.DevelopedWith\n  - in.Filter.IssueFilter.LastCodeActivityOp\n  - in.Filter.IssueFilter.MilestoneId\n  - in.Filter.IssueFilter.MilestoneIdOp\n  - in.Filter.IssueFilter.Priority\n  - in.Filter.IssueFilter.ProjectId\n  - in.Filter.IssueFilter.ProjectIdOp\n  - in.Filter.IssueFilter.ReleaseVersionIds\n  - in.Filter.IssueFilter.RevOrgIds\n  - in.Filter.IssueFilter.RevOrgIdsOp\n  - in.Filter.IssueFilter.SlaId\n  - in.Filter.IssueFilter.SlaSummary\n  - in.Filter.IssueFilter.SprintId\n  - in.Filter.IssueFilter.SprintIdOp\n  - in.Filter.IssueFilter.SprintState\n  - in.Filter.IssueFilter.SprintStateOp\n  - in.Filter.IssueFilter.Subtype\n  - in.Filter.IssueFilter.SubtypeOp\n  - in.Filter.IssueFilter.TargetStartDateOp\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.OpportunityFilter.AccountId\n  - in.Filter.OpportunityFilter.AccountIdOp\n  - in.Filter.OpportunityFilter.AnnualContractValue\n  - in.Filter.OpportunityFilter.Apps\n  - in.Filter.OpportunityFilter.AppsOp\n  - in.Filter.OpportunityFilter.Budget\n  - in.Filter.OpportunityFilter.ContactIds\n  - in.Filter.OpportunityFilter.ContactIdsOp\n  - in.Filter.OpportunityFilter.ForecastCategory\n  - in.Filter.OpportunityFilter.Priority\n  - in.Filter.OpportunityFilter.Subtype\n  - in.Filter.OpportunityFilter.SubtypeOp\n  - in.Filter.OpportunityFilter.Value\n  - in.Filter.OwnedByIds\n  - (+64 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.SortBy == nil\n  - in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.SortBy != 0\n  - in.DevOid|in.SortBy == nil\n  - in.Filter.TicketFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.TicketFilter.RevOidOp|in.SortBy != nil\n  - in.Filter.TicketFilter.AccountIdOp|in.SortBy != nil\n  - in.Filter.TicketFilter.GroupOp|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsOp|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsV2Op|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsV2InstancesOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SurveysAggregationOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SentimentOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.TicketFilter.AppsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.RevOrgIdsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AccountIdsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SprintIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SprintStateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.ProjectIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.MilestoneIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.TargetStartDateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.ActualStartDateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.LastCodeActivityOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AppsOp|in.SortBy != nil\n  - in.Filter.TaskFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.TaskFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.TaskFilter.AppsOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.AccountIdOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.ContactIdsOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.AppsOp|in.SortBy != nil\n  - in.Filter.CreatedByIdOp|in.SortBy != nil\n  - in.Filter.ModifiedByIdOp|in.SortBy != nil\n  - in.Filter.CreatedByAgentIdOp|in.SortBy != nil\n  - in.Filter.ReportedByIdsOp|in.SortBy != nil\n  - in.Filter.OwnedByIdsOp|in.SortBy != nil\n  - in.Filter.TargetCloseDateOp|in.SortBy != nil\n  - in.Filter.ActualCloseDateOp|in.SortBy != nil\n  - (+142 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions ['in.Filter.IssueFilter.AppliesToPartId', 'in.Filter.IssueFilter.AppliesToPartIdOp', 'in.Filter.TaskFilter.AppliesToPartId', 'in.Filter.TaskFilter.AppliesToPartIdOp', 'in.Filter.TicketFilter.AppliesToPartId', 'in.Filter.TicketFilter.AppliesToPartIdOp']\n  - test field `body` -> suggestions []\n  - test field `limit` -> suggestions []\n  - test field `limitpergroup` -> suggestions ['in.Filter.TicketFilter.Group', 'in.PerGroup']\n  - test field `ownedby` -> suggestions ['in.Filter.OwnedByIds', 'in.Filter.OwnedByIdsOp', 'in.Filter.TicketFilter.OwnedByAgentId']\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions ['in.Filter.IssueFilter.Subtype', 'in.Filter.IssueFilter.SubtypeOp', 'in.Filter.OpportunityFilter.Subtype', 'in.Filter.OpportunityFilter.SubtypeOp', 'in.Filter.TaskFilter.Subtype', 'in.Filter.TaskFilter.SubtypeOp', 'in.Filter.TicketFilter.Subtype', 'in.Filter.TicketFilter.SubtypeOp', 'in.Filter.WorkType', 'in.ObjectTypes']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GroupWorks` (HTTP operation `WorksGroupPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomFilter.IssueFilters\n  - in.CustomFilter.TaskFilters\n  - in.CustomFilter.TicketFilters\n  - in.DevOid\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SearchQuery\n  - in.ExcludeWorkIds\n  - in.Filter.ActualCloseDateOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.DeprecatedCreatedByAgentId\n  - in.Filter.DeprecatedCreatedByAgentIdOp\n  - in.Filter.ExternalSourceData\n  - in.Filter.IssueFilter.AccountIds\n  - in.Filter.IssueFilter.AccountIdsOp\n  - in.Filter.IssueFilter.ActualStartDateOp\n  - in.Filter.IssueFilter.AppliesToPartId\n  - in.Filter.IssueFilter.AppliesToPartIdOp\n  - in.Filter.IssueFilter.AppliesToVersionIds\n  - in.Filter.IssueFilter.Apps\n  - in.Filter.IssueFilter.AppsOp\n  - in.Filter.IssueFilter.DevelopedWith\n  - in.Filter.IssueFilter.LastCodeActivityOp\n  - in.Filter.IssueFilter.MilestoneId\n  - in.Filter.IssueFilter.MilestoneIdOp\n  - in.Filter.IssueFilter.Priority\n  - in.Filter.IssueFilter.ProjectId\n  - in.Filter.IssueFilter.ProjectIdOp\n  - in.Filter.IssueFilter.ReleaseVersionIds\n  - in.Filter.IssueFilter.RevOrgIds\n  - in.Filter.IssueFilter.RevOrgIdsOp\n  - in.Filter.IssueFilter.SlaId\n  - in.Filter.IssueFilter.SlaSummary\n  - in.Filter.IssueFilter.SprintId\n  - in.Filter.IssueFilter.SprintIdOp\n  - in.Filter.IssueFilter.SprintState\n  - in.Filter.IssueFilter.SprintStateOp\n  - in.Filter.IssueFilter.Subtype\n  - in.Filter.IssueFilter.SubtypeOp\n  - in.Filter.IssueFilter.TargetStartDateOp\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.OpportunityFilter.AccountId\n  - in.Filter.OpportunityFilter.AccountIdOp\n  - in.Filter.OpportunityFilter.AnnualContractValue\n  - in.Filter.OpportunityFilter.Apps\n  - in.Filter.OpportunityFilter.AppsOp\n  - in.Filter.OpportunityFilter.Budget\n  - in.Filter.OpportunityFilter.ContactIds\n  - in.Filter.OpportunityFilter.ContactIdsOp\n  - in.Filter.OpportunityFilter.ForecastCategory\n  - in.Filter.OpportunityFilter.Priority\n  - in.Filter.OpportunityFilter.Subtype\n  - in.Filter.OpportunityFilter.SubtypeOp\n  - in.Filter.OpportunityFilter.Value\n  - in.Filter.OwnedByIds\n  - (+64 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.SortBy == nil\n  - in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.SortBy != 0\n  - in.DevOid|in.SortBy == nil\n  - in.Filter.TicketFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.TicketFilter.RevOidOp|in.SortBy != nil\n  - in.Filter.TicketFilter.AccountIdOp|in.SortBy != nil\n  - in.Filter.TicketFilter.GroupOp|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsOp|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsV2Op|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsV2InstancesOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SurveysAggregationOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SentimentOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.TicketFilter.AppsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.RevOrgIdsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AccountIdsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SprintIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SprintStateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.ProjectIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.MilestoneIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.TargetStartDateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.ActualStartDateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.LastCodeActivityOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AppsOp|in.SortBy != nil\n  - in.Filter.TaskFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.TaskFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.TaskFilter.AppsOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.AccountIdOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.ContactIdsOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.AppsOp|in.SortBy != nil\n  - in.Filter.CreatedByIdOp|in.SortBy != nil\n  - in.Filter.ModifiedByIdOp|in.SortBy != nil\n  - in.Filter.CreatedByAgentIdOp|in.SortBy != nil\n  - in.Filter.ReportedByIdsOp|in.SortBy != nil\n  - in.Filter.OwnedByIdsOp|in.SortBy != nil\n  - in.Filter.TargetCloseDateOp|in.SortBy != nil\n  - in.Filter.ActualCloseDateOp|in.SortBy != nil\n  - (+142 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions ['in.Filter.IssueFilter.AppliesToPartId', 'in.Filter.IssueFilter.AppliesToPartIdOp', 'in.Filter.TaskFilter.AppliesToPartId', 'in.Filter.TaskFilter.AppliesToPartIdOp', 'in.Filter.TicketFilter.AppliesToPartId', 'in.Filter.TicketFilter.AppliesToPartIdOp']\n  - test field `body` -> suggestions []\n  - test field `caveats` -> suggestions []\n  - test field `createsubtype` -> suggestions ['in.Filter.IssueFilter.Subtype', 'in.Filter.OpportunityFilter.Subtype', 'in.Filter.TaskFilter.Subtype', 'in.Filter.TicketFilter.Subtype']\n  - test field `description` -> suggestions []\n  - test field `limit` -> suggestions []\n  - test field `limitpergroup` -> suggestions ['in.Filter.TicketFilter.Group', 'in.PerGroup']\n  - test field `mfzusertype` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `objecttype` -> suggestions ['in.ObjectTypes']\n  - test field `opportunity` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Filter.OwnedByIds', 'in.Filter.OwnedByIdsOp', 'in.Filter.TicketFilter.OwnedByAgentId']\n  - test field `privileges` -> suggestions []\n  - test field `revorg` -> suggestions ['in.Filter.IssueFilter.RevOrgIds', 'in.Filter.IssueFilter.RevOrgIdsOp']\n  - test field `revuser` -> suggestions []\n  - test field `rolecategory` -> suggestions []\n  - test field `superdevorg` -> suggestions []\n  - test field `targetsubtype` -> suggestions ['in.Filter.IssueFilter.Subtype', 'in.Filter.OpportunityFilter.Subtype', 'in.Filter.TaskFilter.Subtype', 'in.Filter.TicketFilter.Subtype']\n  - test field `ticket` -> suggestions ['in.CustomFilter.TicketFilters']\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions ['in.Filter.IssueFilter.Subtype', 'in.Filter.IssueFilter.SubtypeOp', 'in.Filter.OpportunityFilter.Subtype', 'in.Filter.OpportunityFilter.SubtypeOp', 'in.Filter.TaskFilter.Subtype', 'in.Filter.TaskFilter.SubtypeOp', 'in.Filter.TicketFilter.Subtype', 'in.Filter.TicketFilter.SubtypeOp', 'in.Filter.WorkType', 'in.ObjectTypes']\n  - test field `user` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

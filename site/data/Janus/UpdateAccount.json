@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "UpdateAccount",
     "operation": "AccountsUpdate",
-    "tests": 4,
+    "tests": 11,
     "status": {
       "documented": [
         200,
@@ -38,7 +38,7 @@
       "leaf_fields_read_by_rpc": 11,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 17,
+      "request_fields_set_by_tests": 21,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -86,20 +86,20 @@
       "total": 16,
       "happy_path_reached": true,
       "reachable_on_happy_path": 3,
-      "present_arm_exercised": 2,
-      "present_arm_pct": 12.5,
+      "present_arm_exercised": 5,
+      "present_arm_pct": 31.3,
       "absent_arm_exercised": 3,
       "absent_arm_pct": 100,
       "negative_arm_exercised": 2,
       "negative_arm_pct": 12.5,
       "both_arms_exercised": 0,
-      "coverage_pct": 12.5,
+      "coverage_pct": 31.3,
       "by_origin": {
         "service": {
           "total": 15,
           "reachable_on_happy_path": 3,
-          "present_arm_exercised": 2,
-          "present_arm_pct": 13.3,
+          "present_arm_exercised": 5,
+          "present_arm_pct": 33.3,
           "negative_arm_exercised": 2,
           "negative_arm_pct": 13.3,
           "absent_arm_exercised": 3
@@ -211,30 +211,6 @@
           "predicate_paths": [
             "in"
           ]
-        },
-        {
-          "id": "b13",
-          "at": "internal/service/account_validations.go:205",
-          "cond": "in.Account.Websites != nil",
-          "predicate_paths": [
-            "in.Account.Websites"
-          ]
-        },
-        {
-          "id": "b14",
-          "at": "internal/service/account_validations.go:213",
-          "cond": "in.Account.Domains != nil",
-          "predicate_paths": [
-            "in.Account.Domains"
-          ]
-        },
-        {
-          "id": "b15",
-          "at": "internal/service/account_validations.go:221",
-          "cond": "in.Account.ExternalRefs != nil",
-          "predicate_paths": [
-            "in.Account.ExternalRefs"
-          ]
         }
       ]
     },
@@ -258,6 +234,18 @@
           "field": "displayname",
           "fuzzy_suggestions": [
             "in.UniqueDisplayNameSuffix"
+          ]
+        },
+        {
+          "field": "domains",
+          "fuzzy_suggestions": [
+            "in.AccountIdentifier.Domain"
+          ]
+        },
+        {
+          "field": "externalrefs",
+          "fuzzy_suggestions": [
+            "in.AccountIdentifier.ExternalRef"
           ]
         },
         {
@@ -311,6 +299,10 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "tier",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "title",
           "fuzzy_suggestions": null
         },
@@ -323,12 +315,124 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "websites",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "workflow",
           "fuzzy_suggestions": null
         }
       ]
     },
     "test_facts": [
+      {
+        "name": "Update account",
+        "file": "api/v2_internal/accounts/accounts_update_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ACCOUNTS_UPDATE"
+        ],
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Domains",
+          "ExternalRefs",
+          "Id",
+          "Tier",
+          "Websites"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Update account with conflicting fields",
+        "file": "api/v2_internal/accounts/accounts_update_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ACCOUNTS_UPDATE"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "ExternalRefs",
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Update account with only required fields",
+        "file": "api/v2_internal/accounts/accounts_update_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ACCOUNTS_UPDATE",
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Update account with invalid fields",
+        "file": "api/v2_internal/accounts/accounts_update_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ACCOUNTS_UPDATE"
+        ],
+        "fields_set": [
+          "Id",
+          "Tier"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Update account without required fields",
+        "file": "api/v2_internal/accounts/accounts_update_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ACCOUNTS_UPDATE"
+        ],
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Update account with empty fields",
+        "file": "api/v2_internal/accounts/accounts_update_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ACCOUNTS_UPDATE"
+        ],
+        "fields_set": [
+          "ExternalRefs",
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Update account with invalid id",
+        "file": "api/v2_internal/accounts/accounts_update_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ACCOUNTS_UPDATE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
       {
         "name": "Use a rev_user role on an account shared_with \u2014 expect 400",
         "file": "api/v2_internal/accounts/shared_with/account_shared_with_test.go",
@@ -494,5 +598,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateAccount` (HTTP operation `AccountsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 404, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Account.DisplayName.Value\n  - in.Account.Domains.StringValues\n  - in.Account.ExternalRefs.StringValues\n  - in.Account.PhoneNumbers.StringValues\n  - in.Account.SharedWith.Values\n  - in.Account.Tags.Values\n  - in.Account.Websites.StringValues\n  - in.AccountIdentifier.AccountDon\n  - in.AccountIdentifier.Domain\n  - in.AccountIdentifier.ExternalRef\n  - in.UniqueDisplayNameSuffix\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountIdentifier.AccountDon == nil\n  - in.AccountIdentifier == nil\n  - in.AccountIdentifier.AccountDon != nil\n  - in.AccountIdentifier.Domain != \"\"\n  - in.AccountIdentifier.ExternalRef != nil\n  - in.Account.Websites.StringValues\n  - in.Account.Domains.StringValues\n  - in.Account.ExternalRefs.StringValues\n  - in.UniqueDisplayNameSuffix == nil\n  - in.UniqueDisplayNameSuffix != nil\n  - in\n  - in.Account.Websites != nil\n  - in.Account.Domains != nil\n  - in.Account.ExternalRefs != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errAccountDisplayNameAlreadyExists\n  - errAccountEmptyDisplayName\n  - errAccountNotFound\n  - errDomainAlreadyExists\n  - errEmptyExternalRefs\n  - errInputContainsDuplicateDomains\n  - errInputContainsDuplicateExternalRefs\n  - errInputContainsDuplicateWebsites\n  - errInputContainsNotAcceptableDomains\n  - errInputContainsNotAcceptableWebsites\n  - errPhoneNumberInvalid\n  - errWebsiteAlreadyExists\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `displayname` -> suggestions ['in.UniqueDisplayNameSuffix']\n  - test field `id` -> suggestions []\n  - test field `inputvalues` -> suggestions ['in.Account.DisplayName.Value', 'in.Account.SharedWith.Values', 'in.Account.Tags.Values']\n  - test field `name` -> suggestions ['in.UniqueDisplayNameSuffix']\n  - test field `object` -> suggestions []\n  - test field `operation` -> suggestions []\n  - test field `previoussteps` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `referencekey` -> suggestions []\n  - test field `rolesetassignmentinfo` -> suggestions []\n  - test field `sharedwith` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions []\n  - test field `uimetadata` -> suggestions []\n  - test field `workflow` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateAccount` (HTTP operation `AccountsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 404, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Account.DisplayName.Value\n  - in.Account.Domains.StringValues\n  - in.Account.ExternalRefs.StringValues\n  - in.Account.PhoneNumbers.StringValues\n  - in.Account.SharedWith.Values\n  - in.Account.Tags.Values\n  - in.Account.Websites.StringValues\n  - in.AccountIdentifier.AccountDon\n  - in.AccountIdentifier.Domain\n  - in.AccountIdentifier.ExternalRef\n  - in.UniqueDisplayNameSuffix\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountIdentifier.AccountDon == nil\n  - in.AccountIdentifier == nil\n  - in.AccountIdentifier.AccountDon != nil\n  - in.AccountIdentifier.Domain != \"\"\n  - in.AccountIdentifier.ExternalRef != nil\n  - in.Account.Websites.StringValues\n  - in.Account.Domains.StringValues\n  - in.Account.ExternalRefs.StringValues\n  - in.UniqueDisplayNameSuffix == nil\n  - in.UniqueDisplayNameSuffix != nil\n  - in\n\nError symbols this RPC can return (candidate negative assertions):\n  - errAccountDisplayNameAlreadyExists\n  - errAccountEmptyDisplayName\n  - errAccountNotFound\n  - errDomainAlreadyExists\n  - errEmptyExternalRefs\n  - errInputContainsDuplicateDomains\n  - errInputContainsDuplicateExternalRefs\n  - errInputContainsDuplicateWebsites\n  - errInputContainsNotAcceptableDomains\n  - errInputContainsNotAcceptableWebsites\n  - errPhoneNumberInvalid\n  - errWebsiteAlreadyExists\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `displayname` -> suggestions ['in.UniqueDisplayNameSuffix']\n  - test field `domains` -> suggestions ['in.AccountIdentifier.Domain']\n  - test field `externalrefs` -> suggestions ['in.AccountIdentifier.ExternalRef']\n  - test field `id` -> suggestions []\n  - test field `inputvalues` -> suggestions ['in.Account.DisplayName.Value', 'in.Account.SharedWith.Values', 'in.Account.Tags.Values']\n  - test field `name` -> suggestions ['in.UniqueDisplayNameSuffix']\n  - test field `object` -> suggestions []\n  - test field `operation` -> suggestions []\n  - test field `previoussteps` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `referencekey` -> suggestions []\n  - test field `rolesetassignmentinfo` -> suggestions []\n  - test field `sharedwith` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `tier` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions []\n  - test field `uimetadata` -> suggestions []\n  - test field `websites` -> suggestions []\n  - test field `workflow` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

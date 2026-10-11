@@ -392,7 +392,7 @@ func _() {
 		t.Fatal(err)
 	}
 	ops := map[string]*opFacts{}
-	collectTests(f, "x_test.go", ops)
+	collectTests(f, "x_test.go", ops, nil)
 
 	for _, op := range []string{"DevUsersActivate", "DevUsersGetPost"} {
 		of := ops[op]
@@ -466,5 +466,119 @@ func _() {
 	}
 	if got["Stage"] {
 		t.Errorf("empty assignment (Stage = nil) must not count; got %v", fields)
+	}
+}
+
+// TestTracedRequestFieldsFromSetupAndHelper covers tracing the request object
+// passed to MakeRequest across the enclosing BeforeEach and a same-package
+// helper that takes it by pointer, and confirms fields on a different object are
+// not attributed.
+func TestTracedRequestFieldsFromSetupAndHelper(t *testing.T) {
+	dir := t.TempDir()
+	src := `package x
+
+func buildReq(req *apiv2.WorksCountPostJSONRequestBody) {
+	req.Ticket.Subtype = &sub
+	req.Filter.WorkType = &wt
+}
+
+var _ = Describe("count", func() {
+	var req apiv2.WorksCountPostJSONRequestBody
+	var other apiv2.WorksCountPostJSONRequestBody
+
+	BeforeEach(func() {
+		req = apiv2.WorksCountPostJSONRequestBody{Type: &types}
+		other = apiv2.WorksCountPostJSONRequestBody{Unrelated: &u}
+		buildReq(&req)
+	})
+
+	It("counts", func() {
+		http_utils.MakeRequest(ctx, ClientV2.WorksCountPost, req, &resp)
+	})
+})
+`
+	if err := os.WriteFile(filepath.Join(dir, "x_test.go"), []byte(src), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	ops, err := extractLifejacket(dir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	of := ops["WorksCountPost"]
+	if of == nil {
+		t.Fatal("WorksCountPost was not linked")
+	}
+	got := map[string]bool{}
+	for _, tf := range of.Tests {
+		for _, f := range tf.Fields {
+			got[f] = true
+		}
+	}
+	for _, want := range []string{"Type", "Subtype", "WorkType"} {
+		if !got[want] {
+			t.Errorf("missing traced field %q; got %v", want, got)
+		}
+	}
+	if got["Unrelated"] {
+		t.Errorf("fields of an unrelated object must not be attributed; got %v", got)
+	}
+}
+
+// TestTracedRequestFieldsAcrossPackages covers discovering the operation a
+// cross-package helper issues and the fields set on the request object it is
+// handed.
+func TestTracedRequestFieldsAcrossPackages(t *testing.T) {
+	dir := t.TempDir()
+	if err := os.WriteFile(filepath.Join(dir, "go.mod"), []byte("module example.com/t\n\ngo 1.20\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	helperDir := filepath.Join(dir, "helper")
+	if err := os.MkdirAll(helperDir, 0o755); err != nil {
+		t.Fatal(err)
+	}
+	helper := `package helper
+
+func Do(ctx context.Context, req *pkg.WorksCountPostJSONRequestBody) {
+	http_utils.MakeRequest(ctx, client.WorksCountPost, req, &resp)
+}
+`
+	if err := os.WriteFile(filepath.Join(helperDir, "helper.go"), []byte(helper), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	test := `package t
+
+import helper "example.com/t/helper"
+
+var _ = Describe("d", func() {
+	var req pkg.WorksCountPostJSONRequestBody
+
+	BeforeEach(func() {
+		req = pkg.WorksCountPostJSONRequestBody{Type: &types}
+	})
+
+	It("counts", func() {
+		helper.Do(ctx, req)
+	})
+})
+`
+	if err := os.WriteFile(filepath.Join(dir, "t_test.go"), []byte(test), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	ops, err := extractLifejacket(dir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	of := ops["WorksCountPost"]
+	if of == nil {
+		t.Fatal("WorksCountPost was not discovered via the cross-package helper")
+	}
+	got := map[string]bool{}
+	for _, tf := range of.Tests {
+		for _, f := range tf.Fields {
+			got[f] = true
+		}
+	}
+	if !got["Type"] {
+		t.Errorf("missing traced field Type from enclosing setup; got %v", got)
 	}
 }

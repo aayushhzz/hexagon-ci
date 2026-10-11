@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "MarkInboxNotifications",
     "operation": "NotificationsMark,UserInteractionsUpdate",
-    "tests": 6,
+    "tests": 8,
     "status": {
       "documented": null,
       "asserted": [
@@ -20,7 +20,7 @@
       "leaf_fields_read_by_rpc": 2,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 10,
+      "request_fields_set_by_tests": 17,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -124,11 +124,27 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
+          "field": "body",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "filter",
           "fuzzy_suggestions": null
         },
         {
+          "field": "groupby",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "object",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "ownedbyids",
           "fuzzy_suggestions": null
         },
         {
@@ -137,6 +153,14 @@
         },
         {
           "field": "parentids",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "parenttypes",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "priorities",
           "fuzzy_suggestions": null
         },
         {
@@ -156,6 +180,10 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "type",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "types",
           "fuzzy_suggestions": null
         },
@@ -171,8 +199,12 @@
         "file": "api/v2_internal/notifications/notifications_mark_test.go",
         "labels": null,
         "fields_set": [
+          "Body",
           "Filter",
-          "State"
+          "Id",
+          "OwnedByIds",
+          "State",
+          "Type"
         ],
         "statuses": [
           400
@@ -187,10 +219,14 @@
         "file": "api/v2_internal/notifications/notifications_mark_test.go",
         "labels": null,
         "fields_set": [
+          "Body",
           "Filter",
+          "Id",
+          "OwnedByIds",
           "ParentIds",
           "State",
-          "States"
+          "States",
+          "Type"
         ],
         "statuses": [
           200,
@@ -207,10 +243,14 @@
         "file": "api/v2_internal/notifications/notifications_mark_test.go",
         "labels": null,
         "fields_set": [
+          "Body",
           "Filter",
+          "Id",
+          "OwnedByIds",
           "ParentIds",
           "State",
           "States",
+          "Type",
           "Types"
         ],
         "statuses": [
@@ -245,6 +285,50 @@
           "Entries.LastComments",
           "Entries.LastComments.Body",
           "Entries.Unread"
+        ]
+      },
+      {
+        "name": "marks notification as read when testUser opens the DM with actor1",
+        "file": "e2e/computer_multiplayer/computer_multiplayer_activity_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "ParentIds",
+          "ParentTypes",
+          "Priorities",
+          "RecordId",
+          "States",
+          "Types",
+          "Unread"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "testUser receives notifications and left nav updates when actor1 shares computer chat",
+        "file": "e2e/computer_multiplayer/computer_multiplayer_activity_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "ParentIds",
+          "ParentTypes",
+          "Priorities",
+          "RecordId",
+          "States",
+          "Types",
+          "Unread"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
         ]
       },
       {
@@ -312,5 +396,5 @@
     "errors": [],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MarkInboxNotifications` (HTTP operation `NotificationsMark,UserInteractionsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Entries\n  - in.UserDon\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in == nil\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `filter` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `panel` -> suggestions []\n  - test field `parentids` -> suggestions []\n  - test field `recordid` -> suggestions []\n  - test field `state` -> suggestions []\n  - test field `states` -> suggestions []\n  - test field `timestamp` -> suggestions []\n  - test field `types` -> suggestions []\n  - test field `unread` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MarkInboxNotifications` (HTTP operation `NotificationsMark,UserInteractionsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Entries\n  - in.UserDon\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in == nil\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `body` -> suggestions []\n  - test field `filter` -> suggestions []\n  - test field `groupby` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `ownedbyids` -> suggestions []\n  - test field `panel` -> suggestions []\n  - test field `parentids` -> suggestions []\n  - test field `parenttypes` -> suggestions []\n  - test field `priorities` -> suggestions []\n  - test field `recordid` -> suggestions []\n  - test field `state` -> suggestions []\n  - test field `states` -> suggestions []\n  - test field `timestamp` -> suggestions []\n  - test field `type` -> suggestions []\n  - test field `types` -> suggestions []\n  - test field `unread` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -2457,7 +2457,7 @@
     {
       "rpc": "CountAccounts",
       "operation": "AccountsCount",
-      "tests": 1,
+      "tests": 2,
       "status": {
         "documented": [
           200,
@@ -2485,9 +2485,9 @@
       },
       "fields": {
         "leaf_fields_read_by_rpc": 65,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
+        "covered_count": 5,
+        "coverage_pct": 7.7,
+        "request_fields_set_by_tests": 5,
         "set_by_positive_tests": 0,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -2498,32 +2498,64 @@
           },
           "nested": {
             "total": 10,
-            "set": 0,
-            "pct": 0
+            "set": 1,
+            "pct": 10
           },
           "deep": {
             "total": 54,
-            "set": 0,
-            "pct": 0
+            "set": 4,
+            "pct": 7.4
           }
         },
         "representative": {
           "units": 2,
-          "covered": 0,
-          "pct": 0,
+          "covered": 1,
+          "pct": 50,
           "collapsed_types": [
             "api.ListOrgsFilter"
           ]
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.Filters.AccountFilter.Domains",
+            "match": "exact",
+            "by_tests": [
+              "Count accounts with filters"
+            ]
+          },
+          {
+            "path": "in.Filters.AccountFilter.DomainsOp",
+            "match": "exact",
+            "by_tests": [
+              "Count accounts with filters"
+            ]
+          },
+          {
+            "path": "in.Filters.AccountFilter.ExternalRefs",
+            "match": "exact",
+            "by_tests": [
+              "Count accounts with filters"
+            ]
+          },
+          {
+            "path": "in.Filters.AccountFilter.ExternalRefsOp",
+            "match": "exact",
+            "by_tests": [
+              "Count accounts with filters"
+            ]
+          },
+          {
+            "path": "in.Filters.DisplayName",
+            "match": "exact",
+            "by_tests": [
+              "Count accounts with filters"
+            ]
+          }
+        ],
         "gaps": [
           "in.Filters.AccountFilter.Apps",
           "in.Filters.AccountFilter.AppsOp",
           "in.Filters.AccountFilter.CustomFields.Fields",
-          "in.Filters.AccountFilter.Domains",
-          "in.Filters.AccountFilter.DomainsOp",
-          "in.Filters.AccountFilter.ExternalRefs",
-          "in.Filters.AccountFilter.ExternalRefsOp",
           "in.Filters.AccountFilter.ExternalSourceData",
           "in.Filters.AccountFilter.Industry",
           "in.Filters.AccountFilter.IndustryOp",
@@ -2553,7 +2585,6 @@
           "in.Filters.CreatedDate.Before",
           "in.Filters.CreatedDate.DatePreset.Type",
           "in.Filters.DevOrgFilter.UeSyncState",
-          "in.Filters.DisplayName",
           "in.Filters.Environment",
           "in.Filters.EnvironmentOp",
           "in.Filters.ModifiedById",
@@ -2588,20 +2619,20 @@
         "total": 345,
         "happy_path_reached": true,
         "reachable_on_happy_path": 1,
-        "present_arm_exercised": 0,
-        "present_arm_pct": 0,
+        "present_arm_exercised": 32,
+        "present_arm_pct": 9.3,
         "absent_arm_exercised": 1,
         "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 0,
+        "coverage_pct": 9.3,
         "by_origin": {
           "service": {
             "total": 341,
             "reachable_on_happy_path": 1,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
+            "present_arm_exercised": 32,
+            "present_arm_pct": 9.4,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 1
@@ -3059,70 +3090,6 @@
             ]
           },
           {
-            "id": "b55",
-            "at": "internal/filter/orgs_search.gen.go:798",
-            "cond": "in.Filters.AccountFilter.DomainsOp == 4",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.DomainsOp"
-            ]
-          },
-          {
-            "id": "b56",
-            "at": "internal/filter/orgs_search.gen.go:785",
-            "cond": "in.Filters.AccountFilter.DomainsOp == 3",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.DomainsOp"
-            ]
-          },
-          {
-            "id": "b57",
-            "at": "internal/filter/orgs_search.gen.go:787",
-            "cond": "in.Filters.AccountFilter.DomainsOp == 2",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.DomainsOp"
-            ]
-          },
-          {
-            "id": "b58",
-            "at": "internal/filter/orgs_search.gen.go:789",
-            "cond": "in.Filters.AccountFilter.DomainsOp == 4",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.DomainsOp"
-            ]
-          },
-          {
-            "id": "b59",
-            "at": "internal/filter/orgs_search.gen.go:800",
-            "cond": "in.Filters.AccountFilter.DomainsOp == 5",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.DomainsOp"
-            ]
-          },
-          {
-            "id": "b60",
-            "at": "internal/filter/orgs_search.gen.go:802",
-            "cond": "in.Filters.AccountFilter.DomainsOp == 2",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.DomainsOp"
-            ]
-          },
-          {
-            "id": "b61",
-            "at": "internal/filter/orgs_search.gen.go:802",
-            "cond": "in.Filters.AccountFilter.DomainsOp == 1",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.DomainsOp"
-            ]
-          },
-          {
-            "id": "b62",
-            "at": "internal/filter/orgs_search.gen.go:802",
-            "cond": "in.Filters.AccountFilter.DomainsOp == 3",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.DomainsOp"
-            ]
-          },
-          {
             "id": "b63",
             "at": "internal/filter/orgs_search.gen.go:816",
             "cond": "in.Filters.AccountFilter.TagsOp == 4",
@@ -3224,70 +3191,6 @@
             "cond": "in.Filters.AccountFilter.TierOp == 3",
             "predicate_paths": [
               "in.Filters.AccountFilter.TierOp"
-            ]
-          },
-          {
-            "id": "b76",
-            "at": "internal/filter/orgs_search.gen.go:877",
-            "cond": "in.Filters.AccountFilter.ExternalRefsOp == 4",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.ExternalRefsOp"
-            ]
-          },
-          {
-            "id": "b77",
-            "at": "internal/filter/orgs_search.gen.go:864",
-            "cond": "in.Filters.AccountFilter.ExternalRefsOp == 3",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.ExternalRefsOp"
-            ]
-          },
-          {
-            "id": "b78",
-            "at": "internal/filter/orgs_search.gen.go:866",
-            "cond": "in.Filters.AccountFilter.ExternalRefsOp == 2",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.ExternalRefsOp"
-            ]
-          },
-          {
-            "id": "b79",
-            "at": "internal/filter/orgs_search.gen.go:868",
-            "cond": "in.Filters.AccountFilter.ExternalRefsOp == 4",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.ExternalRefsOp"
-            ]
-          },
-          {
-            "id": "b80",
-            "at": "internal/filter/orgs_search.gen.go:879",
-            "cond": "in.Filters.AccountFilter.ExternalRefsOp == 5",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.ExternalRefsOp"
-            ]
-          },
-          {
-            "id": "b81",
-            "at": "internal/filter/orgs_search.gen.go:881",
-            "cond": "in.Filters.AccountFilter.ExternalRefsOp == 2",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.ExternalRefsOp"
-            ]
-          },
-          {
-            "id": "b82",
-            "at": "internal/filter/orgs_search.gen.go:881",
-            "cond": "in.Filters.AccountFilter.ExternalRefsOp == 1",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.ExternalRefsOp"
-            ]
-          },
-          {
-            "id": "b83",
-            "at": "internal/filter/orgs_search.gen.go:881",
-            "cond": "in.Filters.AccountFilter.ExternalRefsOp == 3",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.ExternalRefsOp"
             ]
           },
           {
@@ -4419,70 +4322,6 @@
             ]
           },
           {
-            "id": "b225",
-            "at": "internal/filter/orgs.gen.go:968",
-            "cond": "in.Filters.AccountFilter.DomainsOp == 3",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.DomainsOp"
-            ]
-          },
-          {
-            "id": "b226",
-            "at": "internal/filter/orgs.gen.go:990",
-            "cond": "in.Filters.AccountFilter.DomainsOp == 4",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.DomainsOp"
-            ]
-          },
-          {
-            "id": "b227",
-            "at": "internal/filter/orgs.gen.go:973",
-            "cond": "in.Filters.AccountFilter.DomainsOp == 2",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.DomainsOp"
-            ]
-          },
-          {
-            "id": "b228",
-            "at": "internal/filter/orgs.gen.go:978",
-            "cond": "in.Filters.AccountFilter.DomainsOp == 4",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.DomainsOp"
-            ]
-          },
-          {
-            "id": "b229",
-            "at": "internal/filter/orgs.gen.go:992",
-            "cond": "in.Filters.AccountFilter.DomainsOp == 5",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.DomainsOp"
-            ]
-          },
-          {
-            "id": "b230",
-            "at": "internal/filter/orgs.gen.go:994",
-            "cond": "in.Filters.AccountFilter.DomainsOp == 2",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.DomainsOp"
-            ]
-          },
-          {
-            "id": "b231",
-            "at": "internal/filter/orgs.gen.go:994",
-            "cond": "in.Filters.AccountFilter.DomainsOp == 1",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.DomainsOp"
-            ]
-          },
-          {
-            "id": "b232",
-            "at": "internal/filter/orgs.gen.go:994",
-            "cond": "in.Filters.AccountFilter.DomainsOp == 3",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.DomainsOp"
-            ]
-          },
-          {
             "id": "b233",
             "at": "internal/filter/orgs.gen.go:1004",
             "cond": "in.Filters.AccountFilter.TagsOp == 3",
@@ -4608,70 +4447,6 @@
             "cond": "in.Filters.AccountFilter.TierOp == 3",
             "predicate_paths": [
               "in.Filters.AccountFilter.TierOp"
-            ]
-          },
-          {
-            "id": "b249",
-            "at": "internal/filter/orgs.gen.go:1093",
-            "cond": "in.Filters.AccountFilter.ExternalRefsOp == 3",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.ExternalRefsOp"
-            ]
-          },
-          {
-            "id": "b250",
-            "at": "internal/filter/orgs.gen.go:1115",
-            "cond": "in.Filters.AccountFilter.ExternalRefsOp == 4",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.ExternalRefsOp"
-            ]
-          },
-          {
-            "id": "b251",
-            "at": "internal/filter/orgs.gen.go:1098",
-            "cond": "in.Filters.AccountFilter.ExternalRefsOp == 2",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.ExternalRefsOp"
-            ]
-          },
-          {
-            "id": "b252",
-            "at": "internal/filter/orgs.gen.go:1103",
-            "cond": "in.Filters.AccountFilter.ExternalRefsOp == 4",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.ExternalRefsOp"
-            ]
-          },
-          {
-            "id": "b253",
-            "at": "internal/filter/orgs.gen.go:1117",
-            "cond": "in.Filters.AccountFilter.ExternalRefsOp == 5",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.ExternalRefsOp"
-            ]
-          },
-          {
-            "id": "b254",
-            "at": "internal/filter/orgs.gen.go:1119",
-            "cond": "in.Filters.AccountFilter.ExternalRefsOp == 2",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.ExternalRefsOp"
-            ]
-          },
-          {
-            "id": "b255",
-            "at": "internal/filter/orgs.gen.go:1119",
-            "cond": "in.Filters.AccountFilter.ExternalRefsOp == 1",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.ExternalRefsOp"
-            ]
-          },
-          {
-            "id": "b256",
-            "at": "internal/filter/orgs.gen.go:1119",
-            "cond": "in.Filters.AccountFilter.ExternalRefsOp == 3",
-            "predicate_paths": [
-              "in.Filters.AccountFilter.ExternalRefsOp"
             ]
           },
           {
@@ -5419,6 +5194,24 @@
         "unmatched_test_fields": null
       },
       "test_facts": [
+        {
+          "name": "Count accounts with filters",
+          "file": "api/v2_internal/accounts/accounts_count_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ACCOUNTS_COUNT"
+          ],
+          "fields_set": [
+            "DisplayName",
+            "Domains",
+            "DomainsOp",
+            "ExternalRefs",
+            "ExternalRefsOp"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
         {
           "name": "AccountsCount",
           "file": "devorg_sanity_check/entities_count_test.go",
@@ -17415,7 +17208,7 @@
     {
       "rpc": "CreateRevOrg",
       "operation": "RevOrgsCreate",
-      "tests": 14,
+      "tests": 33,
       "status": {
         "documented": [
           201,
@@ -17448,7 +17241,7 @@
         "leaf_fields_read_by_rpc": 5,
         "covered_count": 1,
         "coverage_pct": 20,
-        "request_fields_set_by_tests": 7,
+        "request_fields_set_by_tests": 9,
         "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -17580,11 +17373,19 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "domain",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "environment",
             "fuzzy_suggestions": null
           },
           {
             "field": "externalref",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "id",
             "fuzzy_suggestions": null
           },
           {
@@ -17850,6 +17651,367 @@
           "response_fields_asserted": [
             "StatusCode"
           ]
+        },
+        {
+          "name": "WithOnlyRequiredFields",
+          "file": "api/v2_public/rev_orgs/crud/delete_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Domain",
+            "Environment",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "MissingId",
+          "file": "api/v2_public/rev_orgs/crud/delete_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Domain",
+            "Environment",
+            "ExternalRef"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "UnknownRevOrgId",
+          "file": "api/v2_public/rev_orgs/crud/delete_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Domain",
+            "Environment",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "401WrongPat",
+          "file": "api/v2_public/rev_orgs/crud/delete_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Domain",
+            "Environment",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            401
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "WithOnlyRequiredFields",
+          "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "MissingId",
+          "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "UnknownRevOrgId",
+          "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "401WrongPat",
+          "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            401
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "500ByInvalidPat",
+          "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            500
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "WithAllFields",
+          "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "WithDescription",
+          "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "WithExternalRef",
+          "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "WithEnvironmentAsProduction",
+          "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "WithEnvironmentAsStaging",
+          "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "WithEnvironmentAsTest",
+          "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "MissingId",
+          "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "EmptyBody",
+          "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "401WrongPat",
+          "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            401
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "500ByInvalidPat",
+          "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            500
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
@@ -18000,7 +18162,7 @@
     {
       "rpc": "CreateRevUser",
       "operation": "RevUsersCreate",
-      "tests": 19,
+      "tests": 28,
       "status": {
         "documented": [
           201,
@@ -18016,18 +18178,18 @@
         "asserted": [
           200,
           201,
+          400,
+          401,
           403
         ],
         "missing": [
-          400,
-          401,
           409,
           413,
           429,
           500,
           503
         ],
-        "coverage_pct": 22.2
+        "coverage_pct": 44.4
       },
       "fields": {
         "leaf_fields_read_by_rpc": 11,
@@ -18787,6 +18949,166 @@
             201
           ],
           "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "WithOnlyRequiredFields",
+          "file": "api/v2_internal/rev_users/crud/delete_rev_users_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "MissingId",
+          "file": "api/v2_internal/rev_users/crud/delete_rev_users_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "UnknownRevUserId",
+          "file": "api/v2_internal/rev_users/crud/delete_rev_users_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "401WrongPat",
+          "file": "api/v2_internal/rev_users/crud/delete_rev_users_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            401
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "WithOnlyRequiredFields",
+          "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "MissingId",
+          "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "UnknownRevUserId",
+          "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "401WrongPat",
+          "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            401
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "401ByInvalidPat",
+          "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
+          "labels": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef",
+            "Id"
+          ],
+          "statuses": [
+            401
+          ],
+          "asserts_success": false,
           "response_fields_asserted": [
             "StatusCode"
           ]
@@ -24095,7 +24417,7 @@
         "leaf_fields_read_by_rpc": 6,
         "covered_count": 0,
         "coverage_pct": 0,
-        "request_fields_set_by_tests": 1,
+        "request_fields_set_by_tests": 6,
         "set_by_positive_tests": 0,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -24294,6 +24616,26 @@
       "anomalies": {
         "unmatched_test_fields": [
           {
+            "field": "description",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "displayname",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "domain",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "environment",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "externalref",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "id",
             "fuzzy_suggestions": null
           }
@@ -24328,6 +24670,11 @@
           "file": "api/v2_public/rev_orgs/crud/delete_rev_orgs_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
+            "Domain",
+            "Environment",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -24342,7 +24689,13 @@
           "name": "MissingId",
           "file": "api/v2_public/rev_orgs/crud/delete_rev_orgs_test.go",
           "labels": null,
-          "fields_set": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Domain",
+            "Environment",
+            "ExternalRef"
+          ],
           "statuses": [
             400
           ],
@@ -24356,6 +24709,11 @@
           "file": "api/v2_public/rev_orgs/crud/delete_rev_orgs_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
+            "Domain",
+            "Environment",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -24371,6 +24729,11 @@
           "file": "api/v2_public/rev_orgs/crud/delete_rev_orgs_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
+            "Domain",
+            "Environment",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -24418,7 +24781,7 @@
         "leaf_fields_read_by_rpc": 3,
         "covered_count": 0,
         "coverage_pct": 0,
-        "request_fields_set_by_tests": 1,
+        "request_fields_set_by_tests": 4,
         "set_by_positive_tests": 0,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -24582,6 +24945,18 @@
       "anomalies": {
         "unmatched_test_fields": [
           {
+            "field": "description",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "displayname",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "externalref",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "id",
             "fuzzy_suggestions": null
           }
@@ -24610,6 +24985,9 @@
           "file": "api/v2_internal/rev_users/crud/delete_rev_users_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -24624,7 +25002,11 @@
           "name": "MissingId",
           "file": "api/v2_internal/rev_users/crud/delete_rev_users_test.go",
           "labels": null,
-          "fields_set": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef"
+          ],
           "statuses": [
             400
           ],
@@ -24638,6 +25020,9 @@
           "file": "api/v2_internal/rev_users/crud/delete_rev_users_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -24653,6 +25038,9 @@
           "file": "api/v2_internal/rev_users/crud/delete_rev_users_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -28771,7 +29159,7 @@
         "leaf_fields_read_by_rpc": 6,
         "covered_count": 0,
         "coverage_pct": 0,
-        "request_fields_set_by_tests": 4,
+        "request_fields_set_by_tests": 8,
         "set_by_positive_tests": 0,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -29147,6 +29535,22 @@
       "anomalies": {
         "unmatched_test_fields": [
           {
+            "field": "description",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "displayname",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "environment",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "externalref",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "id",
             "fuzzy_suggestions": null
           },
@@ -29230,6 +29634,10 @@
           "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -29244,7 +29652,12 @@
           "name": "MissingId",
           "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
           "labels": null,
-          "fields_set": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef"
+          ],
           "statuses": [
             400
           ],
@@ -29258,6 +29671,10 @@
           "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -29273,6 +29690,10 @@
           "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -29288,6 +29709,10 @@
           "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -29402,7 +29827,7 @@
         "leaf_fields_read_by_rpc": 8,
         "covered_count": 0,
         "coverage_pct": 0,
-        "request_fields_set_by_tests": 4,
+        "request_fields_set_by_tests": 7,
         "set_by_positive_tests": 0,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -29840,6 +30265,18 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "description",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "displayname",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "externalref",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "id",
             "fuzzy_suggestions": null
           },
@@ -29896,6 +30333,9 @@
           "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -29910,7 +30350,11 @@
           "name": "MissingId",
           "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
           "labels": null,
-          "fields_set": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef"
+          ],
           "statuses": [
             400
           ],
@@ -29924,6 +30368,9 @@
           "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -29939,6 +30386,9 @@
           "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -29954,6 +30404,9 @@
           "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -31774,7 +32227,7 @@
     {
       "rpc": "GroupAccounts",
       "operation": "AccountsGroup",
-      "tests": 2,
+      "tests": 6,
       "status": {
         "documented": [
           200,
@@ -31802,9 +32255,9 @@
       },
       "fields": {
         "leaf_fields_read_by_rpc": 73,
-        "covered_count": 1,
-        "coverage_pct": 1.4,
-        "request_fields_set_by_tests": 1,
+        "covered_count": 3,
+        "coverage_pct": 4.1,
+        "request_fields_set_by_tests": 4,
         "set_by_positive_tests": 0,
         "set_by_negative_tests": 1,
         "by_depth": {
@@ -31820,14 +32273,14 @@
           },
           "deep": {
             "total": 54,
-            "set": 0,
-            "pct": 0
+            "set": 2,
+            "pct": 3.7
           }
         },
         "representative": {
           "units": 6,
-          "covered": 1,
-          "pct": 16.7,
+          "covered": 2,
+          "pct": 33.3,
           "collapsed_types": [
             "api.GroupPaginationParams",
             "api.ListOrgsFilter",
@@ -31839,7 +32292,26 @@
             "path": "in.GroupPageParams.GroupBy",
             "match": "exact",
             "by_tests": [
-              "Group accounts with invalid group by"
+              "Group accounts",
+              "Group accounts with filters",
+              "Group accounts with invalid group by",
+              "Group accounts with limit",
+              "Group accounts with non-existent filters"
+            ]
+          },
+          {
+            "path": "in.OrgFilter.AccountFilter.Domains",
+            "match": "exact",
+            "by_tests": [
+              "Group accounts with filters",
+              "Group accounts with non-existent filters"
+            ]
+          },
+          {
+            "path": "in.OrgFilter.AccountFilter.ExternalRefs",
+            "match": "exact",
+            "by_tests": [
+              "Group accounts with filters"
             ]
           }
         ],
@@ -31852,9 +32324,7 @@
           "in.OrgFilter.AccountFilter.Apps",
           "in.OrgFilter.AccountFilter.AppsOp",
           "in.OrgFilter.AccountFilter.CustomFields.Fields",
-          "in.OrgFilter.AccountFilter.Domains",
           "in.OrgFilter.AccountFilter.DomainsOp",
-          "in.OrgFilter.AccountFilter.ExternalRefs",
           "in.OrgFilter.AccountFilter.ExternalRefsOp",
           "in.OrgFilter.AccountFilter.ExternalSourceData",
           "in.OrgFilter.AccountFilter.Industry",
@@ -33486,9 +33956,60 @@
         "response_links": null
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "limit",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
       "test_facts": [
+        {
+          "name": "Group accounts",
+          "file": "api/v2_internal/accounts/accounts_group_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ACCOUNTS_GROUP"
+          ],
+          "fields_set": [
+            "GroupBy",
+            "Limit"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "Group accounts with limit",
+          "file": "api/v2_internal/accounts/accounts_group_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ACCOUNTS_GROUP"
+          ],
+          "fields_set": [
+            "GroupBy",
+            "Limit"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "Group accounts with filters",
+          "file": "api/v2_internal/accounts/accounts_group_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ACCOUNTS_GROUP"
+          ],
+          "fields_set": [
+            "Domains",
+            "ExternalRefs",
+            "GroupBy"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
         {
           "name": "Group accounts with invalid group by",
           "file": "api/v2_internal/accounts/accounts_group_test.go",
@@ -33502,6 +34023,21 @@
           "statuses": [
             400
           ],
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "Group accounts with non-existent filters",
+          "file": "api/v2_internal/accounts/accounts_group_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ACCOUNTS_GROUP"
+          ],
+          "fields_set": [
+            "Domains",
+            "GroupBy"
+          ],
+          "statuses": null,
           "asserts_success": false,
           "response_fields_asserted": null
         },
@@ -40476,8 +41012,8 @@
     },
     {
       "rpc": "ListAccounts",
-      "operation": "AccountsList,AccountsListPost",
-      "tests": 13,
+      "operation": "AccountsExport,AccountsList,AccountsListPost",
+      "tests": 19,
       "status": {
         "documented": null,
         "asserted": [
@@ -40490,9 +41026,9 @@
       },
       "fields": {
         "leaf_fields_read_by_rpc": 72,
-        "covered_count": 1,
-        "coverage_pct": 1.4,
-        "request_fields_set_by_tests": 11,
+        "covered_count": 4,
+        "coverage_pct": 5.6,
+        "request_fields_set_by_tests": 15,
         "set_by_positive_tests": 1,
         "set_by_negative_tests": 1,
         "by_depth": {
@@ -40503,19 +41039,19 @@
           },
           "nested": {
             "total": 15,
-            "set": 1,
-            "pct": 6.7
+            "set": 2,
+            "pct": 13.3
           },
           "deep": {
             "total": 54,
-            "set": 0,
-            "pct": 0
+            "set": 2,
+            "pct": 3.7
           }
         },
         "representative": {
           "units": 6,
-          "covered": 1,
-          "pct": 16.7,
+          "covered": 2,
+          "pct": 33.3,
           "collapsed_types": [
             "api.ListOrgsFilter",
             "api.PaginationParams",
@@ -40524,11 +41060,36 @@
         },
         "covered": [
           {
+            "path": "in.Filters.AccountFilter.Domains",
+            "match": "exact",
+            "by_tests": [
+              "List accounts with filters"
+            ]
+          },
+          {
+            "path": "in.Filters.AccountFilter.ExternalRefs",
+            "match": "exact",
+            "by_tests": [
+              "List accounts with filters",
+              "List accounts with sort/filter"
+            ]
+          },
+          {
             "path": "in.Filters.DisplayName",
             "match": "exact",
             "by_tests": [
+              "List accounts with filters",
+              "List accounts with sort/filter",
               "rev_user:read and account:read assign/revoke, rev_user:read persists after revoking account:read",
               "service account impersonate scope controls PAT:act-as token creation and API access"
+            ]
+          },
+          {
+            "path": "in.PageParams.SortBy",
+            "match": "exact",
+            "by_tests": [
+              "List accounts with filters",
+              "List accounts with sort/filter"
             ]
           }
         ],
@@ -40539,9 +41100,7 @@
           "in.Filters.AccountFilter.Apps",
           "in.Filters.AccountFilter.AppsOp",
           "in.Filters.AccountFilter.CustomFields.Fields",
-          "in.Filters.AccountFilter.Domains",
           "in.Filters.AccountFilter.DomainsOp",
-          "in.Filters.AccountFilter.ExternalRefs",
           "in.Filters.AccountFilter.ExternalRefsOp",
           "in.Filters.AccountFilter.ExternalSourceData",
           "in.Filters.AccountFilter.Industry",
@@ -40601,7 +41160,6 @@
           "in.Filters.State",
           "in.PageParams.Page",
           "in.PageParams.PerPage",
-          "in.PageParams.SortBy",
           "in.SearchQuery",
           "in.SkipTotal"
         ]
@@ -43599,6 +44157,10 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "first",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "granttype",
             "fuzzy_suggestions": [
               "in.Filters.CreatedDate.DatePreset.Type",
@@ -43639,6 +44201,104 @@
         ]
       },
       "test_facts": [
+        {
+          "name": "List accounts with limit",
+          "file": "api/v2_internal/accounts/accounts_export_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ACCOUNTS_LIST"
+          ],
+          "fields_set": [
+            "First"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "List accounts with filters",
+          "file": "api/v2_internal/accounts/accounts_export_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ACCOUNTS_EXPORT"
+          ],
+          "fields_set": [
+            "DisplayName",
+            "Domains",
+            "ExternalRefs",
+            "SortBy"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "List accounts with sort/filter",
+          "file": "api/v2_internal/accounts/accounts_export_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ACCOUNTS_EXPORT",
+            "GINKGO_PR_SANITY"
+          ],
+          "fields_set": [
+            "DisplayName",
+            "ExternalRefs",
+            "First",
+            "SortBy"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "List accounts with limit",
+          "file": "api/v2_internal/accounts/accounts_list_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ACCOUNTS_LIST"
+          ],
+          "fields_set": [
+            "Limit"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "List accounts with filters",
+          "file": "api/v2_internal/accounts/accounts_list_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ACCOUNTS_LIST",
+            "GINKGO_PR_SANITY"
+          ],
+          "fields_set": [
+            "DisplayName",
+            "Domains",
+            "ExternalRefs",
+            "SortBy"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "List accounts with sort/filter",
+          "file": "api/v2_internal/accounts/accounts_list_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ACCOUNTS_LIST"
+          ],
+          "fields_set": [
+            "DisplayName",
+            "ExternalRefs",
+            "Limit",
+            "SortBy"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
         {
           "name": "should block Rev User from accessing accounts.list",
           "file": "api/v2_internal/gateway/rev_user_allowlist_test.go",
@@ -66908,7 +67568,7 @@
     {
       "rpc": "UpdateAccount",
       "operation": "AccountsUpdate",
-      "tests": 4,
+      "tests": 11,
       "status": {
         "documented": [
           200,
@@ -66943,7 +67603,7 @@
         "leaf_fields_read_by_rpc": 11,
         "covered_count": 0,
         "coverage_pct": 0,
-        "request_fields_set_by_tests": 17,
+        "request_fields_set_by_tests": 21,
         "set_by_positive_tests": 0,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -66991,20 +67651,20 @@
         "total": 16,
         "happy_path_reached": true,
         "reachable_on_happy_path": 3,
-        "present_arm_exercised": 2,
-        "present_arm_pct": 12.5,
+        "present_arm_exercised": 5,
+        "present_arm_pct": 31.3,
         "absent_arm_exercised": 3,
         "absent_arm_pct": 100,
         "negative_arm_exercised": 2,
         "negative_arm_pct": 12.5,
         "both_arms_exercised": 0,
-        "coverage_pct": 12.5,
+        "coverage_pct": 31.3,
         "by_origin": {
           "service": {
             "total": 15,
             "reachable_on_happy_path": 3,
-            "present_arm_exercised": 2,
-            "present_arm_pct": 13.3,
+            "present_arm_exercised": 5,
+            "present_arm_pct": 33.3,
             "negative_arm_exercised": 2,
             "negative_arm_pct": 13.3,
             "absent_arm_exercised": 3
@@ -67116,30 +67776,6 @@
             "predicate_paths": [
               "in"
             ]
-          },
-          {
-            "id": "b13",
-            "at": "internal/service/account_validations.go:205",
-            "cond": "in.Account.Websites != nil",
-            "predicate_paths": [
-              "in.Account.Websites"
-            ]
-          },
-          {
-            "id": "b14",
-            "at": "internal/service/account_validations.go:213",
-            "cond": "in.Account.Domains != nil",
-            "predicate_paths": [
-              "in.Account.Domains"
-            ]
-          },
-          {
-            "id": "b15",
-            "at": "internal/service/account_validations.go:221",
-            "cond": "in.Account.ExternalRefs != nil",
-            "predicate_paths": [
-              "in.Account.ExternalRefs"
-            ]
           }
         ]
       },
@@ -67163,6 +67799,18 @@
             "field": "displayname",
             "fuzzy_suggestions": [
               "in.UniqueDisplayNameSuffix"
+            ]
+          },
+          {
+            "field": "domains",
+            "fuzzy_suggestions": [
+              "in.AccountIdentifier.Domain"
+            ]
+          },
+          {
+            "field": "externalrefs",
+            "fuzzy_suggestions": [
+              "in.AccountIdentifier.ExternalRef"
             ]
           },
           {
@@ -67216,6 +67864,10 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "tier",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "title",
             "fuzzy_suggestions": null
           },
@@ -67228,12 +67880,124 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "websites",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "workflow",
             "fuzzy_suggestions": null
           }
         ]
       },
       "test_facts": [
+        {
+          "name": "Update account",
+          "file": "api/v2_internal/accounts/accounts_update_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ACCOUNTS_UPDATE"
+          ],
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Domains",
+            "ExternalRefs",
+            "Id",
+            "Tier",
+            "Websites"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "Update account with conflicting fields",
+          "file": "api/v2_internal/accounts/accounts_update_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ACCOUNTS_UPDATE"
+          ],
+          "fields_set": [
+            "DisplayName",
+            "ExternalRefs",
+            "Id"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "Update account with only required fields",
+          "file": "api/v2_internal/accounts/accounts_update_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ACCOUNTS_UPDATE",
+            "GINKGO_PR_SANITY"
+          ],
+          "fields_set": [
+            "DisplayName",
+            "Id"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "Update account with invalid fields",
+          "file": "api/v2_internal/accounts/accounts_update_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ACCOUNTS_UPDATE"
+          ],
+          "fields_set": [
+            "Id",
+            "Tier"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "Update account without required fields",
+          "file": "api/v2_internal/accounts/accounts_update_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ACCOUNTS_UPDATE"
+          ],
+          "fields_set": null,
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "Update account with empty fields",
+          "file": "api/v2_internal/accounts/accounts_update_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ACCOUNTS_UPDATE"
+          ],
+          "fields_set": [
+            "ExternalRefs",
+            "Id"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "Update account with invalid id",
+          "file": "api/v2_internal/accounts/accounts_update_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ACCOUNTS_UPDATE"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
         {
           "name": "Use a rev_user role on an account shared_with — expect 400",
           "file": "api/v2_internal/accounts/shared_with/account_shared_with_test.go",
@@ -69174,9 +69938,14 @@
             "by_tests": [
               "401WrongPat",
               "500ByInvalidPat",
+              "EmptyBody",
+              "MissingId",
               "Update RevOrg",
               "WithAllFields",
               "WithDescription",
+              "WithEnvironmentAsProduction",
+              "WithEnvironmentAsStaging",
+              "WithEnvironmentAsTest",
               "WithExternalRef"
             ]
           }
@@ -69386,6 +70155,7 @@
           "fields_set": [
             "Description",
             "DisplayName",
+            "Environment",
             "ExternalRef",
             "Id"
           ],
@@ -69404,6 +70174,8 @@
           "fields_set": [
             "Description",
             "DisplayName",
+            "Environment",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -69419,7 +70191,9 @@
           "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
             "DisplayName",
+            "Environment",
             "ExternalRef",
             "Id"
           ],
@@ -69436,7 +70210,10 @@
           "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
             "Environment",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -69452,7 +70229,10 @@
           "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
             "Environment",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -69468,7 +70248,10 @@
           "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
+            "DisplayName",
             "Environment",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -69484,7 +70267,10 @@
           "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
           "labels": null,
           "fields_set": [
-            "Environment"
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef"
           ],
           "statuses": [
             400
@@ -69498,7 +70284,12 @@
           "name": "EmptyBody",
           "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
           "labels": null,
-          "fields_set": null,
+          "fields_set": [
+            "Description",
+            "DisplayName",
+            "Environment",
+            "ExternalRef"
+          ],
           "statuses": [
             400
           ],
@@ -69512,7 +70303,10 @@
           "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
             "DisplayName",
+            "Environment",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [
@@ -69528,7 +70322,10 @@
           "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
           "labels": null,
           "fields_set": [
+            "Description",
             "DisplayName",
+            "Environment",
+            "ExternalRef",
             "Id"
           ],
           "statuses": [

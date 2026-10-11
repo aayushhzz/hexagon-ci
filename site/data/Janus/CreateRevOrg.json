@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "CreateRevOrg",
     "operation": "RevOrgsCreate",
-    "tests": 14,
+    "tests": 33,
     "status": {
       "documented": [
         201,
@@ -36,7 +36,7 @@
       "leaf_fields_read_by_rpc": 5,
       "covered_count": 1,
       "coverage_pct": 20,
-      "request_fields_set_by_tests": 7,
+      "request_fields_set_by_tests": 9,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -168,11 +168,19 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "domain",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "environment",
           "fuzzy_suggestions": null
         },
         {
           "field": "externalref",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "id",
           "fuzzy_suggestions": null
         },
         {
@@ -438,6 +446,367 @@
         "response_fields_asserted": [
           "StatusCode"
         ]
+      },
+      {
+        "name": "WithOnlyRequiredFields",
+        "file": "api/v2_public/rev_orgs/crud/delete_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Domain",
+          "Environment",
+          "ExternalRef",
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "MissingId",
+        "file": "api/v2_public/rev_orgs/crud/delete_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Domain",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "UnknownRevOrgId",
+        "file": "api/v2_public/rev_orgs/crud/delete_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Domain",
+          "Environment",
+          "ExternalRef",
+          "Id"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "401WrongPat",
+        "file": "api/v2_public/rev_orgs/crud/delete_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Domain",
+          "Environment",
+          "ExternalRef",
+          "Id"
+        ],
+        "statuses": [
+          401
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithOnlyRequiredFields",
+        "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef",
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "MissingId",
+        "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "UnknownRevOrgId",
+        "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef",
+          "Id"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "401WrongPat",
+        "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef",
+          "Id"
+        ],
+        "statuses": [
+          401
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "500ByInvalidPat",
+        "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef",
+          "Id"
+        ],
+        "statuses": [
+          500
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithAllFields",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef",
+          "Id"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithDescription",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef",
+          "Id"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithExternalRef",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef",
+          "Id"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithEnvironmentAsProduction",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef",
+          "Id"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithEnvironmentAsStaging",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef",
+          "Id"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithEnvironmentAsTest",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef",
+          "Id"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "MissingId",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "EmptyBody",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "401WrongPat",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef",
+          "Id"
+        ],
+        "statuses": [
+          401
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "500ByInvalidPat",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef",
+          "Id"
+        ],
+        "statuses": [
+          500
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
       }
     ]
   },
@@ -455,5 +824,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateRevOrg` (HTTP operation `RevOrgsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [403, 409, 413, 429, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsJanusAsyncFlow\n  - in.RevOrg.ExternalOidIssuer\n  - in.RevOrg.PhoneNumbers\n  - in.RevOrg.SharedWith\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.RevOrg.ExternalOidIssuer != nil\n  - in.IsJanusAsyncFlow\n  - in.RevOrg.ExternalOidIssuer\n\nError symbols this RPC can return (candidate negative assertions):\n  - errPhoneNumberInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `displayname` -> suggestions []\n  - test field `environment` -> suggestions []\n  - test field `externalref` -> suggestions []\n  - test field `primaryorg` -> suggestions []\n  - test field `secondaryorg` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateRevOrg` (HTTP operation `RevOrgsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [403, 409, 413, 429, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsJanusAsyncFlow\n  - in.RevOrg.ExternalOidIssuer\n  - in.RevOrg.PhoneNumbers\n  - in.RevOrg.SharedWith\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.RevOrg.ExternalOidIssuer != nil\n  - in.IsJanusAsyncFlow\n  - in.RevOrg.ExternalOidIssuer\n\nError symbols this RPC can return (candidate negative assertions):\n  - errPhoneNumberInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `displayname` -> suggestions []\n  - test field `domain` -> suggestions []\n  - test field `environment` -> suggestions []\n  - test field `externalref` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `primaryorg` -> suggestions []\n  - test field `secondaryorg` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

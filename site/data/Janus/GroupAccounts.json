@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "GroupAccounts",
     "operation": "AccountsGroup",
-    "tests": 2,
+    "tests": 6,
     "status": {
       "documented": [
         200,
@@ -31,9 +31,9 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 73,
-      "covered_count": 1,
-      "coverage_pct": 1.4,
-      "request_fields_set_by_tests": 1,
+      "covered_count": 3,
+      "coverage_pct": 4.1,
+      "request_fields_set_by_tests": 4,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 1,
       "by_depth": {
@@ -49,14 +49,14 @@
         },
         "deep": {
           "total": 54,
-          "set": 0,
-          "pct": 0
+          "set": 2,
+          "pct": 3.7
         }
       },
       "representative": {
         "units": 6,
-        "covered": 1,
-        "pct": 16.7,
+        "covered": 2,
+        "pct": 33.3,
         "collapsed_types": [
           "api.GroupPaginationParams",
           "api.ListOrgsFilter",
@@ -68,7 +68,26 @@
           "path": "in.GroupPageParams.GroupBy",
           "match": "exact",
           "by_tests": [
-            "Group accounts with invalid group by"
+            "Group accounts",
+            "Group accounts with filters",
+            "Group accounts with invalid group by",
+            "Group accounts with limit",
+            "Group accounts with non-existent filters"
+          ]
+        },
+        {
+          "path": "in.OrgFilter.AccountFilter.Domains",
+          "match": "exact",
+          "by_tests": [
+            "Group accounts with filters",
+            "Group accounts with non-existent filters"
+          ]
+        },
+        {
+          "path": "in.OrgFilter.AccountFilter.ExternalRefs",
+          "match": "exact",
+          "by_tests": [
+            "Group accounts with filters"
           ]
         }
       ],
@@ -81,9 +100,7 @@
         "in.OrgFilter.AccountFilter.Apps",
         "in.OrgFilter.AccountFilter.AppsOp",
         "in.OrgFilter.AccountFilter.CustomFields.Fields",
-        "in.OrgFilter.AccountFilter.Domains",
         "in.OrgFilter.AccountFilter.DomainsOp",
-        "in.OrgFilter.AccountFilter.ExternalRefs",
         "in.OrgFilter.AccountFilter.ExternalRefsOp",
         "in.OrgFilter.AccountFilter.ExternalSourceData",
         "in.OrgFilter.AccountFilter.Industry",
@@ -1715,9 +1732,60 @@
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "limit",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
     "test_facts": [
+      {
+        "name": "Group accounts",
+        "file": "api/v2_internal/accounts/accounts_group_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ACCOUNTS_GROUP"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Limit"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Group accounts with limit",
+        "file": "api/v2_internal/accounts/accounts_group_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ACCOUNTS_GROUP"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Limit"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Group accounts with filters",
+        "file": "api/v2_internal/accounts/accounts_group_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ACCOUNTS_GROUP"
+        ],
+        "fields_set": [
+          "Domains",
+          "ExternalRefs",
+          "GroupBy"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
       {
         "name": "Group accounts with invalid group by",
         "file": "api/v2_internal/accounts/accounts_group_test.go",
@@ -1731,6 +1799,21 @@
         "statuses": [
           400
         ],
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Group accounts with non-existent filters",
+        "file": "api/v2_internal/accounts/accounts_group_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ACCOUNTS_GROUP"
+        ],
+        "fields_set": [
+          "Domains",
+          "GroupBy"
+        ],
+        "statuses": null,
         "asserts_success": false,
         "response_fields_asserted": null
       },
@@ -1965,5 +2048,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GroupAccounts` (HTTP operation `AccountsGroup`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [200, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SearchQuery\n  - in.GroupPageParams.PerGroup\n  - in.GroupPageParams.SortBy\n  - in.GroupPageParams.SortGroupKeyBy\n  - in.OrgFilter.AccountFilter.Apps\n  - in.OrgFilter.AccountFilter.AppsOp\n  - in.OrgFilter.AccountFilter.CustomFields.Fields\n  - in.OrgFilter.AccountFilter.Domains\n  - in.OrgFilter.AccountFilter.DomainsOp\n  - in.OrgFilter.AccountFilter.ExternalRefs\n  - in.OrgFilter.AccountFilter.ExternalRefsOp\n  - in.OrgFilter.AccountFilter.ExternalSourceData\n  - in.OrgFilter.AccountFilter.Industry\n  - in.OrgFilter.AccountFilter.IndustryOp\n  - in.OrgFilter.AccountFilter.IngestionChannel\n  - in.OrgFilter.AccountFilter.LeadSource\n  - in.OrgFilter.AccountFilter.LeadSourceOp\n  - in.OrgFilter.AccountFilter.OwnedBy\n  - in.OrgFilter.AccountFilter.OwnedByOp\n  - in.OrgFilter.AccountFilter.SharedWith\n  - in.OrgFilter.AccountFilter.Stage\n  - in.OrgFilter.AccountFilter.StagedInfo\n  - in.OrgFilter.AccountFilter.Subtype\n  - in.OrgFilter.AccountFilter.SubtypeOp\n  - in.OrgFilter.AccountFilter.SyncMetadata\n  - in.OrgFilter.AccountFilter.Tags\n  - in.OrgFilter.AccountFilter.TagsOp\n  - in.OrgFilter.AccountFilter.Tier\n  - in.OrgFilter.AccountFilter.TierOp\n  - in.OrgFilter.AccountFilter.TotalRevenue\n  - in.OrgFilter.AccountFilter.Websites\n  - in.OrgFilter.AccountFilter.WebsitesOp\n  - in.OrgFilter.CreatedByAgentId\n  - in.OrgFilter.CreatedByAgentIdOp\n  - in.OrgFilter.CreatedById\n  - in.OrgFilter.CreatedByIdOp\n  - in.OrgFilter.CreatedDate.After\n  - in.OrgFilter.CreatedDate.Before\n  - in.OrgFilter.CreatedDate.DatePreset.Type\n  - in.OrgFilter.DevOrgFilter.UeSyncState\n  - in.OrgFilter.DisplayName\n  - in.OrgFilter.Environment\n  - in.OrgFilter.EnvironmentOp\n  - in.OrgFilter.ModifiedById\n  - in.OrgFilter.ModifiedByIdOp\n  - in.OrgFilter.ModifiedDate.After\n  - in.OrgFilter.ModifiedDate.Before\n  - in.OrgFilter.ModifiedDate.DatePreset.Type\n  - in.OrgFilter.RevOrgFilter.Account\n  - in.OrgFilter.RevOrgFilter.AccountOp\n  - in.OrgFilter.RevOrgFilter.Apps\n  - in.OrgFilter.RevOrgFilter.AppsOp\n  - in.OrgFilter.RevOrgFilter.CustomFields.Fields\n  - in.OrgFilter.RevOrgFilter.ExternalOid\n  - in.OrgFilter.RevOrgFilter.ExternalOidIssuer\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp\n  - in.OrgFilter.RevOrgFilter.ExternalSourceData\n  - in.OrgFilter.RevOrgFilter.SharedWith\n  - in.OrgFilter.RevOrgFilter.SlaId\n  - (+12 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DqlQuery == nil\n  - in.DqlQuery.SearchQuery != \"\"\n  - in.DqlQuery == nil\n  - in.DqlQuery == nil\n  - in.GroupPageParams.PerGroup < 0\n  - in.GroupPageParams.PerGroup != 0\n  - in.GroupPageParams.PerGroup < 0\n  - in.GroupPageParams.PerGroup > *maxItemsPerGroup\n  - call() * in.GroupPageParams.PerGroup > *maxTotalGroupItems\n  - in.GroupPageParams == nil\n  - in.DqlQuery == nil\n  - in.DqlQuery\n  - in.OrgFilter.RevOrgFilter.CustomFields == nil\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 3\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 4\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 2\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 4\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 5\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 2\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 1\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 3\n  - in.OrgFilter.RevOrgFilter.TagsOp == 3\n  - in.OrgFilter.RevOrgFilter.TagsOp == 4\n  - in.OrgFilter.RevOrgFilter.TagsOp == 2\n  - in.OrgFilter.RevOrgFilter.TagsOp == 4\n  - in.OrgFilter.RevOrgFilter.TagsOp == 5\n  - in.OrgFilter.RevOrgFilter.TagsOp == 2\n  - in.OrgFilter.RevOrgFilter.TagsOp == 1\n  - in.OrgFilter.RevOrgFilter.TagsOp == 3\n  - in.OrgFilter.RevOrgFilter.AccountOp == 4\n  - in.OrgFilter.RevOrgFilter.AccountOp == 3\n  - in.OrgFilter.RevOrgFilter.AccountOp == 4\n  - in.OrgFilter.RevOrgFilter.AccountOp == 2\n  - in.OrgFilter.RevOrgFilter.AccountOp == 5\n  - in.OrgFilter.RevOrgFilter.AccountOp == 2\n  - in.OrgFilter.RevOrgFilter.AccountOp == 1\n  - in.OrgFilter.RevOrgFilter.AccountOp == 3\n  - in.OrgFilter.RevOrgFilter.SubtypeOp == 4\n  - in.OrgFilter.RevOrgFilter.SubtypeOp == 3\n  - in.OrgFilter.RevOrgFilter.SubtypeOp == 4\n  - (+148 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidGroupByInputField\n  - errInvalidGroupParams\n  - errInvalidSortByInputField\n  - orgStateEnumReverseMap\n  - userStateEnumReverseMap\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GroupAccounts` (HTTP operation `AccountsGroup`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [200, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SearchQuery\n  - in.GroupPageParams.PerGroup\n  - in.GroupPageParams.SortBy\n  - in.GroupPageParams.SortGroupKeyBy\n  - in.OrgFilter.AccountFilter.Apps\n  - in.OrgFilter.AccountFilter.AppsOp\n  - in.OrgFilter.AccountFilter.CustomFields.Fields\n  - in.OrgFilter.AccountFilter.DomainsOp\n  - in.OrgFilter.AccountFilter.ExternalRefsOp\n  - in.OrgFilter.AccountFilter.ExternalSourceData\n  - in.OrgFilter.AccountFilter.Industry\n  - in.OrgFilter.AccountFilter.IndustryOp\n  - in.OrgFilter.AccountFilter.IngestionChannel\n  - in.OrgFilter.AccountFilter.LeadSource\n  - in.OrgFilter.AccountFilter.LeadSourceOp\n  - in.OrgFilter.AccountFilter.OwnedBy\n  - in.OrgFilter.AccountFilter.OwnedByOp\n  - in.OrgFilter.AccountFilter.SharedWith\n  - in.OrgFilter.AccountFilter.Stage\n  - in.OrgFilter.AccountFilter.StagedInfo\n  - in.OrgFilter.AccountFilter.Subtype\n  - in.OrgFilter.AccountFilter.SubtypeOp\n  - in.OrgFilter.AccountFilter.SyncMetadata\n  - in.OrgFilter.AccountFilter.Tags\n  - in.OrgFilter.AccountFilter.TagsOp\n  - in.OrgFilter.AccountFilter.Tier\n  - in.OrgFilter.AccountFilter.TierOp\n  - in.OrgFilter.AccountFilter.TotalRevenue\n  - in.OrgFilter.AccountFilter.Websites\n  - in.OrgFilter.AccountFilter.WebsitesOp\n  - in.OrgFilter.CreatedByAgentId\n  - in.OrgFilter.CreatedByAgentIdOp\n  - in.OrgFilter.CreatedById\n  - in.OrgFilter.CreatedByIdOp\n  - in.OrgFilter.CreatedDate.After\n  - in.OrgFilter.CreatedDate.Before\n  - in.OrgFilter.CreatedDate.DatePreset.Type\n  - in.OrgFilter.DevOrgFilter.UeSyncState\n  - in.OrgFilter.DisplayName\n  - in.OrgFilter.Environment\n  - in.OrgFilter.EnvironmentOp\n  - in.OrgFilter.ModifiedById\n  - in.OrgFilter.ModifiedByIdOp\n  - in.OrgFilter.ModifiedDate.After\n  - in.OrgFilter.ModifiedDate.Before\n  - in.OrgFilter.ModifiedDate.DatePreset.Type\n  - in.OrgFilter.RevOrgFilter.Account\n  - in.OrgFilter.RevOrgFilter.AccountOp\n  - in.OrgFilter.RevOrgFilter.Apps\n  - in.OrgFilter.RevOrgFilter.AppsOp\n  - in.OrgFilter.RevOrgFilter.CustomFields.Fields\n  - in.OrgFilter.RevOrgFilter.ExternalOid\n  - in.OrgFilter.RevOrgFilter.ExternalOidIssuer\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp\n  - in.OrgFilter.RevOrgFilter.ExternalSourceData\n  - in.OrgFilter.RevOrgFilter.SharedWith\n  - in.OrgFilter.RevOrgFilter.SlaId\n  - in.OrgFilter.RevOrgFilter.StagedInfo\n  - in.OrgFilter.RevOrgFilter.Subtype\n  - (+10 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DqlQuery == nil\n  - in.DqlQuery.SearchQuery != \"\"\n  - in.DqlQuery == nil\n  - in.DqlQuery == nil\n  - in.GroupPageParams.PerGroup < 0\n  - in.GroupPageParams.PerGroup != 0\n  - in.GroupPageParams.PerGroup < 0\n  - in.GroupPageParams.PerGroup > *maxItemsPerGroup\n  - call() * in.GroupPageParams.PerGroup > *maxTotalGroupItems\n  - in.GroupPageParams == nil\n  - in.DqlQuery == nil\n  - in.DqlQuery\n  - in.OrgFilter.RevOrgFilter.CustomFields == nil\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 3\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 4\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 2\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 4\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 5\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 2\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 1\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp == 3\n  - in.OrgFilter.RevOrgFilter.TagsOp == 3\n  - in.OrgFilter.RevOrgFilter.TagsOp == 4\n  - in.OrgFilter.RevOrgFilter.TagsOp == 2\n  - in.OrgFilter.RevOrgFilter.TagsOp == 4\n  - in.OrgFilter.RevOrgFilter.TagsOp == 5\n  - in.OrgFilter.RevOrgFilter.TagsOp == 2\n  - in.OrgFilter.RevOrgFilter.TagsOp == 1\n  - in.OrgFilter.RevOrgFilter.TagsOp == 3\n  - in.OrgFilter.RevOrgFilter.AccountOp == 4\n  - in.OrgFilter.RevOrgFilter.AccountOp == 3\n  - in.OrgFilter.RevOrgFilter.AccountOp == 4\n  - in.OrgFilter.RevOrgFilter.AccountOp == 2\n  - in.OrgFilter.RevOrgFilter.AccountOp == 5\n  - in.OrgFilter.RevOrgFilter.AccountOp == 2\n  - in.OrgFilter.RevOrgFilter.AccountOp == 1\n  - in.OrgFilter.RevOrgFilter.AccountOp == 3\n  - in.OrgFilter.RevOrgFilter.SubtypeOp == 4\n  - in.OrgFilter.RevOrgFilter.SubtypeOp == 3\n  - in.OrgFilter.RevOrgFilter.SubtypeOp == 4\n  - (+148 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidGroupByInputField\n  - errInvalidGroupParams\n  - errInvalidSortByInputField\n  - orgStateEnumReverseMap\n  - userStateEnumReverseMap\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `limit` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

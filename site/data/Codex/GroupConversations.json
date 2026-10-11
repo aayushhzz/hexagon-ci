@@ -31,11 +31,11 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 85,
-      "covered_count": 1,
-      "coverage_pct": 1.2,
-      "request_fields_set_by_tests": 2,
-      "set_by_positive_tests": 1,
-      "set_by_negative_tests": 1,
+      "covered_count": 8,
+      "coverage_pct": 9.4,
+      "request_fields_set_by_tests": 6,
+      "set_by_positive_tests": 8,
+      "set_by_negative_tests": 8,
       "by_depth": {
         "top_level": {
           "total": 9,
@@ -44,24 +44,80 @@
         },
         "nested": {
           "total": 57,
-          "set": 0,
-          "pct": 0
+          "set": 1,
+          "pct": 1.8
         },
         "deep": {
           "total": 19,
-          "set": 0,
-          "pct": 0
+          "set": 6,
+          "pct": 31.6
         }
       },
       "representative": {
         "units": 10,
-        "covered": 1,
-        "pct": 10,
+        "covered": 2,
+        "pct": 20,
         "collapsed_types": [
           "apiv2.ListConversationsFilter"
         ]
       },
       "covered": [
+        {
+          "path": "in.Filter.ActualCloseDate.DatePreset.Type",
+          "match": "exact",
+          "by_tests": [
+            "Should be able to group conversations",
+            "Should throw error for invalid group by"
+          ]
+        },
+        {
+          "path": "in.Filter.CreatedDate.DatePreset.Type",
+          "match": "exact",
+          "by_tests": [
+            "Should be able to group conversations",
+            "Should throw error for invalid group by"
+          ]
+        },
+        {
+          "path": "in.Filter.FirstResponseTime.DatePreset.Type",
+          "match": "exact",
+          "by_tests": [
+            "Should be able to group conversations",
+            "Should throw error for invalid group by"
+          ]
+        },
+        {
+          "path": "in.Filter.LastExternalMessageDate.DatePreset.Type",
+          "match": "exact",
+          "by_tests": [
+            "Should be able to group conversations",
+            "Should throw error for invalid group by"
+          ]
+        },
+        {
+          "path": "in.Filter.LastMessageTimestamp.DatePreset.Type",
+          "match": "exact",
+          "by_tests": [
+            "Should be able to group conversations",
+            "Should throw error for invalid group by"
+          ]
+        },
+        {
+          "path": "in.Filter.ModifiedDate.DatePreset.Type",
+          "match": "exact",
+          "by_tests": [
+            "Should be able to group conversations",
+            "Should throw error for invalid group by"
+          ]
+        },
+        {
+          "path": "in.Filter.Stage",
+          "match": "exact",
+          "by_tests": [
+            "Should be able to group conversations",
+            "Should throw error for invalid group by"
+          ]
+        },
         {
           "path": "in.GroupBy",
           "match": "exact",
@@ -78,7 +134,6 @@
         "in.Filter.AccountIdOp",
         "in.Filter.ActualCloseDate.After",
         "in.Filter.ActualCloseDate.Before",
-        "in.Filter.ActualCloseDate.DatePreset.Type",
         "in.Filter.AiResolutionStatus",
         "in.Filter.AppliesToPartIds",
         "in.Filter.Apps",
@@ -95,12 +150,10 @@
         "in.Filter.CreatedByIdOp",
         "in.Filter.CreatedDate.After",
         "in.Filter.CreatedDate.Before",
-        "in.Filter.CreatedDate.DatePreset.Type",
         "in.Filter.CustomFields.Fields",
         "in.Filter.ExternalSourceData",
         "in.Filter.FirstResponseTime.After",
         "in.Filter.FirstResponseTime.Before",
-        "in.Filter.FirstResponseTime.DatePreset.Type",
         "in.Filter.Group",
         "in.Filter.HasSpaceId",
         "in.Filter.IsCreatorVerified",
@@ -108,10 +161,8 @@
         "in.Filter.IsSpam",
         "in.Filter.LastExternalMessageDate.After",
         "in.Filter.LastExternalMessageDate.Before",
-        "in.Filter.LastExternalMessageDate.DatePreset.Type",
         "in.Filter.LastMessageTimestamp.After",
         "in.Filter.LastMessageTimestamp.Before",
-        "in.Filter.LastMessageTimestamp.DatePreset.Type",
         "in.Filter.Links",
         "in.Filter.LinksOp",
         "in.Filter.MemberIds",
@@ -119,7 +170,6 @@
         "in.Filter.ModifiedByIdOp",
         "in.Filter.ModifiedDate.After",
         "in.Filter.ModifiedDate.Before",
-        "in.Filter.ModifiedDate.DatePreset.Type",
         "in.Filter.OwnedByAgentId",
         "in.Filter.OwnedByIds",
         "in.Filter.OwnedByIdsOp",
@@ -136,7 +186,6 @@
         "in.Filter.SourceChannelV2",
         "in.Filter.SourceChannelV2Instance",
         "in.Filter.SpacesFilter",
-        "in.Filter.Stage",
         "in.Filter.StagedInfo",
         "in.Filter.State",
         "in.Filter.Status",
@@ -162,22 +211,22 @@
       "total": 371,
       "happy_path_reached": true,
       "reachable_on_happy_path": 29,
-      "present_arm_exercised": 1,
-      "present_arm_pct": 0.3,
+      "present_arm_exercised": 13,
+      "present_arm_pct": 3.5,
       "absent_arm_exercised": 28,
       "absent_arm_pct": 96.6,
-      "negative_arm_exercised": 1,
-      "negative_arm_pct": 0.3,
+      "negative_arm_exercised": 13,
+      "negative_arm_pct": 3.5,
       "both_arms_exercised": 0,
-      "coverage_pct": 0.3,
+      "coverage_pct": 3.5,
       "by_origin": {
         "service": {
           "total": 322,
           "reachable_on_happy_path": 10,
-          "present_arm_exercised": 1,
-          "present_arm_pct": 0.3,
-          "negative_arm_exercised": 1,
-          "negative_arm_pct": 0.3,
+          "present_arm_exercised": 13,
+          "present_arm_pct": 4,
+          "negative_arm_exercised": 13,
+          "negative_arm_pct": 4,
           "absent_arm_exercised": 9
         },
         "generated": {
@@ -513,14 +562,6 @@
           ]
         },
         {
-          "id": "b40",
-          "at": "",
-          "cond": "in.Filter.CreatedDate.DatePreset.Type",
-          "predicate_paths": [
-            "in.Filter.CreatedDate.DatePreset.Type"
-          ]
-        },
-        {
           "id": "b41",
           "at": "internal/filterv2/conversations.gen.go:258",
           "cond": "in.Filter.CreatedDate.Before != nil",
@@ -630,14 +671,6 @@
           "cond": "in.Filter.ModifiedDate.After != nil",
           "predicate_paths": [
             "in.Filter.ModifiedDate.After"
-          ]
-        },
-        {
-          "id": "b55",
-          "at": "",
-          "cond": "in.Filter.ModifiedDate.DatePreset.Type",
-          "predicate_paths": [
-            "in.Filter.ModifiedDate.DatePreset.Type"
           ]
         },
         {
@@ -945,14 +978,6 @@
           ]
         },
         {
-          "id": "b94",
-          "at": "",
-          "cond": "in.Filter.LastMessageTimestamp.DatePreset.Type",
-          "predicate_paths": [
-            "in.Filter.LastMessageTimestamp.DatePreset.Type"
-          ]
-        },
-        {
           "id": "b95",
           "at": "internal/filterv2/conversations.gen.go:715",
           "cond": "in.Filter.LastMessageTimestamp.Before != nil",
@@ -1129,14 +1154,6 @@
           ]
         },
         {
-          "id": "b117",
-          "at": "",
-          "cond": "in.Filter.FirstResponseTime.DatePreset.Type",
-          "predicate_paths": [
-            "in.Filter.FirstResponseTime.DatePreset.Type"
-          ]
-        },
-        {
           "id": "b118",
           "at": "internal/filterv2/conversations.gen.go:907",
           "cond": "in.Filter.FirstResponseTime.Before != nil",
@@ -1185,14 +1202,6 @@
           ]
         },
         {
-          "id": "b124",
-          "at": "",
-          "cond": "in.Filter.ActualCloseDate.DatePreset.Type",
-          "predicate_paths": [
-            "in.Filter.ActualCloseDate.DatePreset.Type"
-          ]
-        },
-        {
           "id": "b125",
           "at": "internal/filterv2/conversations.gen.go:1012",
           "cond": "in.Filter.ActualCloseDate.Before != nil",
@@ -1238,14 +1247,6 @@
           "cond": "in.Filter.LastExternalMessageDate.After != nil",
           "predicate_paths": [
             "in.Filter.LastExternalMessageDate.After"
-          ]
-        },
-        {
-          "id": "b131",
-          "at": "",
-          "cond": "in.Filter.LastExternalMessageDate.DatePreset.Type",
-          "predicate_paths": [
-            "in.Filter.LastExternalMessageDate.DatePreset.Type"
           ]
         },
         {
@@ -1985,14 +1986,6 @@
           ]
         },
         {
-          "id": "b224",
-          "at": "",
-          "cond": "in.DevOid|in.Filter.CreatedDate.DatePreset.Type",
-          "predicate_paths": [
-            "in.Filter.CreatedDate.DatePreset.Type"
-          ]
-        },
-        {
           "id": "b225",
           "at": "internal/filterv2/conversations.gen.go:258",
           "cond": "in.DevOid|in.Filter.CreatedDate.Before != nil",
@@ -2102,14 +2095,6 @@
           "cond": "in.DevOid|in.Filter.ModifiedDate.After != nil",
           "predicate_paths": [
             "in.Filter.ModifiedDate.After"
-          ]
-        },
-        {
-          "id": "b239",
-          "at": "",
-          "cond": "in.DevOid|in.Filter.ModifiedDate.DatePreset.Type",
-          "predicate_paths": [
-            "in.Filter.ModifiedDate.DatePreset.Type"
           ]
         },
         {
@@ -2417,14 +2402,6 @@
           ]
         },
         {
-          "id": "b278",
-          "at": "",
-          "cond": "in.DevOid|in.Filter.LastMessageTimestamp.DatePreset.Type",
-          "predicate_paths": [
-            "in.Filter.LastMessageTimestamp.DatePreset.Type"
-          ]
-        },
-        {
           "id": "b279",
           "at": "internal/filterv2/conversations.gen.go:715",
           "cond": "in.DevOid|in.Filter.LastMessageTimestamp.Before != nil",
@@ -2601,14 +2578,6 @@
           ]
         },
         {
-          "id": "b301",
-          "at": "",
-          "cond": "in.DevOid|in.Filter.FirstResponseTime.DatePreset.Type",
-          "predicate_paths": [
-            "in.Filter.FirstResponseTime.DatePreset.Type"
-          ]
-        },
-        {
           "id": "b302",
           "at": "internal/filterv2/conversations.gen.go:907",
           "cond": "in.DevOid|in.Filter.FirstResponseTime.Before != nil",
@@ -2657,14 +2626,6 @@
           ]
         },
         {
-          "id": "b308",
-          "at": "",
-          "cond": "in.DevOid|in.Filter.ActualCloseDate.DatePreset.Type",
-          "predicate_paths": [
-            "in.Filter.ActualCloseDate.DatePreset.Type"
-          ]
-        },
-        {
           "id": "b309",
           "at": "internal/filterv2/conversations.gen.go:1012",
           "cond": "in.DevOid|in.Filter.ActualCloseDate.Before != nil",
@@ -2710,14 +2671,6 @@
           "cond": "in.DevOid|in.Filter.LastExternalMessageDate.After != nil",
           "predicate_paths": [
             "in.Filter.LastExternalMessageDate.After"
-          ]
-        },
-        {
-          "id": "b315",
-          "at": "",
-          "cond": "in.DevOid|in.Filter.LastExternalMessageDate.DatePreset.Type",
-          "predicate_paths": [
-            "in.Filter.LastExternalMessageDate.DatePreset.Type"
           ]
         },
         {
@@ -3184,6 +3137,16 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
+          "field": "members",
+          "fuzzy_suggestions": [
+            "in.Filter.MemberIds"
+          ]
+        },
+        {
+          "field": "messages",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "stagename",
           "fuzzy_suggestions": [
             "in.Filter.Stage"
@@ -3200,7 +3163,11 @@
         ],
         "fields_set": [
           "GroupBy",
-          "StageName"
+          "Members",
+          "Messages",
+          "Stage",
+          "StageName",
+          "Type"
         ],
         "statuses": [
           200
@@ -3222,7 +3189,11 @@
         ],
         "fields_set": [
           "GroupBy",
-          "StageName"
+          "Members",
+          "Messages",
+          "Stage",
+          "StageName",
+          "Type"
         ],
         "statuses": [
           400
@@ -3418,5 +3389,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GroupConversations` (HTTP operation `ConversationsGroup`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.DqlQuery\n  - in.Filter.AccountId\n  - in.Filter.AccountIdOp\n  - in.Filter.ActualCloseDate.After\n  - in.Filter.ActualCloseDate.Before\n  - in.Filter.ActualCloseDate.DatePreset.Type\n  - in.Filter.AiResolutionStatus\n  - in.Filter.AppliesToPartIds\n  - in.Filter.Apps\n  - in.Filter.AppsOp\n  - in.Filter.BrandId\n  - in.Filter.BroadcastChannels\n  - in.Filter.Channels\n  - in.Filter.ChannelsInstances\n  - in.Filter.ChannelsInstancesOp\n  - in.Filter.ConversationType\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CustomFields.Fields\n  - in.Filter.ExternalSourceData\n  - in.Filter.FirstResponseTime.After\n  - in.Filter.FirstResponseTime.Before\n  - in.Filter.FirstResponseTime.DatePreset.Type\n  - in.Filter.Group\n  - in.Filter.HasSpaceId\n  - in.Filter.IsCreatorVerified\n  - in.Filter.IsFrozen\n  - in.Filter.IsSpam\n  - in.Filter.LastExternalMessageDate.After\n  - in.Filter.LastExternalMessageDate.Before\n  - in.Filter.LastExternalMessageDate.DatePreset.Type\n  - in.Filter.LastMessageTimestamp.After\n  - in.Filter.LastMessageTimestamp.Before\n  - in.Filter.LastMessageTimestamp.DatePreset.Type\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.MemberIds\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.OwnedByAgentId\n  - in.Filter.OwnedByIds\n  - in.Filter.OwnedByIdsOp\n  - in.Filter.ParticipantOids\n  - in.Filter.ParticipantUids\n  - in.Filter.Priority\n  - in.Filter.Sentiment\n  - in.Filter.SentimentOp\n  - in.Filter.Sessions\n  - in.Filter.SlaId\n  - in.Filter.SlaSummary\n  - in.Filter.SourceChannel\n  - (+24 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.ChannelsInstancesOp != nil\n  - in.Filter.SourceChannelOp != nil\n  - in.Filter.OwnedByIdsOp != nil\n  - in.Filter.AccountIdOp != nil\n  - in.Filter.TagsOp != nil\n  - in.Filter.LinksOp != nil\n  - in.Filter.SurveysAggregationOp != nil\n  - in.Filter.SyncMetadataOp != nil\n  - in.Filter.SentimentOp != nil\n  - in.Filter.SubtypeOp != nil\n  - in.Filter.AppsOp != nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.PerGroup >= 0\n  - in.PerGroup <= 100\n  - in.PerPage >= 0\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n  - in.Filter.CustomFields == nil\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 5\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 1\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.DatePreset.Type\n  - (+330 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `stagename` -> suggestions ['in.Filter.Stage']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GroupConversations` (HTTP operation `ConversationsGroup`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.DqlQuery\n  - in.Filter.AccountId\n  - in.Filter.AccountIdOp\n  - in.Filter.ActualCloseDate.After\n  - in.Filter.ActualCloseDate.Before\n  - in.Filter.AiResolutionStatus\n  - in.Filter.AppliesToPartIds\n  - in.Filter.Apps\n  - in.Filter.AppsOp\n  - in.Filter.BrandId\n  - in.Filter.BroadcastChannels\n  - in.Filter.Channels\n  - in.Filter.ChannelsInstances\n  - in.Filter.ChannelsInstancesOp\n  - in.Filter.ConversationType\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CustomFields.Fields\n  - in.Filter.ExternalSourceData\n  - in.Filter.FirstResponseTime.After\n  - in.Filter.FirstResponseTime.Before\n  - in.Filter.Group\n  - in.Filter.HasSpaceId\n  - in.Filter.IsCreatorVerified\n  - in.Filter.IsFrozen\n  - in.Filter.IsSpam\n  - in.Filter.LastExternalMessageDate.After\n  - in.Filter.LastExternalMessageDate.Before\n  - in.Filter.LastMessageTimestamp.After\n  - in.Filter.LastMessageTimestamp.Before\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.MemberIds\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.OwnedByAgentId\n  - in.Filter.OwnedByIds\n  - in.Filter.OwnedByIdsOp\n  - in.Filter.ParticipantOids\n  - in.Filter.ParticipantUids\n  - in.Filter.Priority\n  - in.Filter.Sentiment\n  - in.Filter.SentimentOp\n  - in.Filter.Sessions\n  - in.Filter.SlaId\n  - in.Filter.SlaSummary\n  - in.Filter.SourceChannel\n  - in.Filter.SourceChannelOp\n  - in.Filter.SourceChannelV2\n  - in.Filter.SourceChannelV2Instance\n  - in.Filter.SpacesFilter\n  - in.Filter.StagedInfo\n  - in.Filter.State\n  - (+17 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.ChannelsInstancesOp != nil\n  - in.Filter.SourceChannelOp != nil\n  - in.Filter.OwnedByIdsOp != nil\n  - in.Filter.AccountIdOp != nil\n  - in.Filter.TagsOp != nil\n  - in.Filter.LinksOp != nil\n  - in.Filter.SurveysAggregationOp != nil\n  - in.Filter.SyncMetadataOp != nil\n  - in.Filter.SentimentOp != nil\n  - in.Filter.SubtypeOp != nil\n  - in.Filter.AppsOp != nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.PerGroup >= 0\n  - in.PerGroup <= 100\n  - in.PerPage >= 0\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n  - in.Filter.CustomFields == nil\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 5\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 1\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - (+318 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `members` -> suggestions ['in.Filter.MemberIds']\n  - test field `messages` -> suggestions []\n  - test field `stagename` -> suggestions ['in.Filter.Stage']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

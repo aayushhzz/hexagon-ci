@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "UpdateConversation",
     "operation": "ConversationsUpdate",
-    "tests": 14,
+    "tests": 18,
     "status": {
       "documented": [
         200,
@@ -219,11 +219,11 @@
       "reachable_on_happy_path": 25,
       "present_arm_exercised": 16,
       "present_arm_pct": 7.7,
-      "absent_arm_exercised": 22,
-      "absent_arm_pct": 88,
+      "absent_arm_exercised": 25,
+      "absent_arm_pct": 100,
       "negative_arm_exercised": 12,
       "negative_arm_pct": 5.8,
-      "both_arms_exercised": 0,
+      "both_arms_exercised": 3,
       "coverage_pct": 7.7,
       "by_origin": {
         "service": {
@@ -242,7 +242,7 @@
           "present_arm_pct": 7.1,
           "negative_arm_exercised": 6,
           "negative_arm_pct": 6.1,
-          "absent_arm_exercised": 9
+          "absent_arm_exercised": 11
         },
         "library": {
           "total": 93,
@@ -251,7 +251,7 @@
           "present_arm_pct": 9.7,
           "negative_arm_exercised": 6,
           "negative_arm_pct": 6.5,
-          "absent_arm_exercised": 6
+          "absent_arm_exercised": 7
         }
       },
       "gaps": [
@@ -1879,7 +1879,9 @@
         ],
         "fields_set": [
           "Id",
-          "Title"
+          "Messages",
+          "Title",
+          "Type"
         ],
         "statuses": [
           200
@@ -1900,7 +1902,9 @@
         ],
         "fields_set": [
           "Id",
-          "Stage"
+          "Messages",
+          "Stage",
+          "Type"
         ],
         "statuses": [
           200
@@ -1922,7 +1926,9 @@
         ],
         "fields_set": [
           "AiResolutionStatus",
-          "Id"
+          "Id",
+          "Messages",
+          "Type"
         ],
         "statuses": [
           200
@@ -1939,7 +1945,9 @@
         ],
         "fields_set": [
           "AiResolutionStatus",
-          "Id"
+          "Id",
+          "Messages",
+          "Type"
         ],
         "statuses": [
           403
@@ -1956,7 +1964,9 @@
         ],
         "fields_set": [
           "Id",
-          "Title"
+          "Messages",
+          "Title",
+          "Type"
         ],
         "statuses": [
           200
@@ -1973,7 +1983,9 @@
         ],
         "fields_set": [
           "Id",
-          "Stage"
+          "Messages",
+          "Stage",
+          "Type"
         ],
         "statuses": [
           400
@@ -1992,7 +2004,9 @@
         ],
         "fields_set": [
           "Id",
-          "Stage"
+          "Messages",
+          "Stage",
+          "Type"
         ],
         "statuses": [
           403
@@ -2132,6 +2146,50 @@
           "Conversation.Id",
           "StatusCode"
         ]
+      },
+      {
+        "name": "Should be able to perform all CRUD operations on conversations",
+        "file": "e2e/conversation_user_journey/mfz_conversation_test/mfz_conversation_test.go",
+        "labels": [
+          "UAT"
+        ],
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should be able to create and manage conversations",
+        "file": "e2e/conversation_user_journey/mfz_conversation_test/mfz_conversation_test.go",
+        "labels": [
+          "UAT"
+        ],
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should be able to perform all CRUD operations as DevUser",
+        "file": "e2e/conversation_user_journey/mfz_conversation_test/mfz_conversation_test.go",
+        "labels": [
+          "UAT"
+        ],
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should be able to read and update but not create or delete conversations",
+        "file": "e2e/conversation_user_journey/mfz_conversation_test/mfz_conversation_test.go",
+        "labels": [
+          "UAT"
+        ],
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
       }
     ]
   },

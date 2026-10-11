@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "CountAccounts",
     "operation": "AccountsCount",
-    "tests": 1,
+    "tests": 2,
     "status": {
       "documented": [
         200,
@@ -31,9 +31,9 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 65,
-      "covered_count": 0,
-      "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
+      "covered_count": 5,
+      "coverage_pct": 7.7,
+      "request_fields_set_by_tests": 5,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -44,32 +44,64 @@
         },
         "nested": {
           "total": 10,
-          "set": 0,
-          "pct": 0
+          "set": 1,
+          "pct": 10
         },
         "deep": {
           "total": 54,
-          "set": 0,
-          "pct": 0
+          "set": 4,
+          "pct": 7.4
         }
       },
       "representative": {
         "units": 2,
-        "covered": 0,
-        "pct": 0,
+        "covered": 1,
+        "pct": 50,
         "collapsed_types": [
           "api.ListOrgsFilter"
         ]
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.Filters.AccountFilter.Domains",
+          "match": "exact",
+          "by_tests": [
+            "Count accounts with filters"
+          ]
+        },
+        {
+          "path": "in.Filters.AccountFilter.DomainsOp",
+          "match": "exact",
+          "by_tests": [
+            "Count accounts with filters"
+          ]
+        },
+        {
+          "path": "in.Filters.AccountFilter.ExternalRefs",
+          "match": "exact",
+          "by_tests": [
+            "Count accounts with filters"
+          ]
+        },
+        {
+          "path": "in.Filters.AccountFilter.ExternalRefsOp",
+          "match": "exact",
+          "by_tests": [
+            "Count accounts with filters"
+          ]
+        },
+        {
+          "path": "in.Filters.DisplayName",
+          "match": "exact",
+          "by_tests": [
+            "Count accounts with filters"
+          ]
+        }
+      ],
       "gaps": [
         "in.Filters.AccountFilter.Apps",
         "in.Filters.AccountFilter.AppsOp",
         "in.Filters.AccountFilter.CustomFields.Fields",
-        "in.Filters.AccountFilter.Domains",
-        "in.Filters.AccountFilter.DomainsOp",
-        "in.Filters.AccountFilter.ExternalRefs",
-        "in.Filters.AccountFilter.ExternalRefsOp",
         "in.Filters.AccountFilter.ExternalSourceData",
         "in.Filters.AccountFilter.Industry",
         "in.Filters.AccountFilter.IndustryOp",
@@ -99,7 +131,6 @@
         "in.Filters.CreatedDate.Before",
         "in.Filters.CreatedDate.DatePreset.Type",
         "in.Filters.DevOrgFilter.UeSyncState",
-        "in.Filters.DisplayName",
         "in.Filters.Environment",
         "in.Filters.EnvironmentOp",
         "in.Filters.ModifiedById",
@@ -134,20 +165,20 @@
       "total": 345,
       "happy_path_reached": true,
       "reachable_on_happy_path": 1,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
+      "present_arm_exercised": 32,
+      "present_arm_pct": 9.3,
       "absent_arm_exercised": 1,
       "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 9.3,
       "by_origin": {
         "service": {
           "total": 341,
           "reachable_on_happy_path": 1,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "present_arm_exercised": 32,
+          "present_arm_pct": 9.4,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 1
@@ -605,70 +636,6 @@
           ]
         },
         {
-          "id": "b55",
-          "at": "internal/filter/orgs_search.gen.go:798",
-          "cond": "in.Filters.AccountFilter.DomainsOp == 4",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.DomainsOp"
-          ]
-        },
-        {
-          "id": "b56",
-          "at": "internal/filter/orgs_search.gen.go:785",
-          "cond": "in.Filters.AccountFilter.DomainsOp == 3",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.DomainsOp"
-          ]
-        },
-        {
-          "id": "b57",
-          "at": "internal/filter/orgs_search.gen.go:787",
-          "cond": "in.Filters.AccountFilter.DomainsOp == 2",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.DomainsOp"
-          ]
-        },
-        {
-          "id": "b58",
-          "at": "internal/filter/orgs_search.gen.go:789",
-          "cond": "in.Filters.AccountFilter.DomainsOp == 4",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.DomainsOp"
-          ]
-        },
-        {
-          "id": "b59",
-          "at": "internal/filter/orgs_search.gen.go:800",
-          "cond": "in.Filters.AccountFilter.DomainsOp == 5",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.DomainsOp"
-          ]
-        },
-        {
-          "id": "b60",
-          "at": "internal/filter/orgs_search.gen.go:802",
-          "cond": "in.Filters.AccountFilter.DomainsOp == 2",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.DomainsOp"
-          ]
-        },
-        {
-          "id": "b61",
-          "at": "internal/filter/orgs_search.gen.go:802",
-          "cond": "in.Filters.AccountFilter.DomainsOp == 1",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.DomainsOp"
-          ]
-        },
-        {
-          "id": "b62",
-          "at": "internal/filter/orgs_search.gen.go:802",
-          "cond": "in.Filters.AccountFilter.DomainsOp == 3",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.DomainsOp"
-          ]
-        },
-        {
           "id": "b63",
           "at": "internal/filter/orgs_search.gen.go:816",
           "cond": "in.Filters.AccountFilter.TagsOp == 4",
@@ -770,70 +737,6 @@
           "cond": "in.Filters.AccountFilter.TierOp == 3",
           "predicate_paths": [
             "in.Filters.AccountFilter.TierOp"
-          ]
-        },
-        {
-          "id": "b76",
-          "at": "internal/filter/orgs_search.gen.go:877",
-          "cond": "in.Filters.AccountFilter.ExternalRefsOp == 4",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.ExternalRefsOp"
-          ]
-        },
-        {
-          "id": "b77",
-          "at": "internal/filter/orgs_search.gen.go:864",
-          "cond": "in.Filters.AccountFilter.ExternalRefsOp == 3",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.ExternalRefsOp"
-          ]
-        },
-        {
-          "id": "b78",
-          "at": "internal/filter/orgs_search.gen.go:866",
-          "cond": "in.Filters.AccountFilter.ExternalRefsOp == 2",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.ExternalRefsOp"
-          ]
-        },
-        {
-          "id": "b79",
-          "at": "internal/filter/orgs_search.gen.go:868",
-          "cond": "in.Filters.AccountFilter.ExternalRefsOp == 4",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.ExternalRefsOp"
-          ]
-        },
-        {
-          "id": "b80",
-          "at": "internal/filter/orgs_search.gen.go:879",
-          "cond": "in.Filters.AccountFilter.ExternalRefsOp == 5",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.ExternalRefsOp"
-          ]
-        },
-        {
-          "id": "b81",
-          "at": "internal/filter/orgs_search.gen.go:881",
-          "cond": "in.Filters.AccountFilter.ExternalRefsOp == 2",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.ExternalRefsOp"
-          ]
-        },
-        {
-          "id": "b82",
-          "at": "internal/filter/orgs_search.gen.go:881",
-          "cond": "in.Filters.AccountFilter.ExternalRefsOp == 1",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.ExternalRefsOp"
-          ]
-        },
-        {
-          "id": "b83",
-          "at": "internal/filter/orgs_search.gen.go:881",
-          "cond": "in.Filters.AccountFilter.ExternalRefsOp == 3",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.ExternalRefsOp"
           ]
         },
         {
@@ -1965,70 +1868,6 @@
           ]
         },
         {
-          "id": "b225",
-          "at": "internal/filter/orgs.gen.go:968",
-          "cond": "in.Filters.AccountFilter.DomainsOp == 3",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.DomainsOp"
-          ]
-        },
-        {
-          "id": "b226",
-          "at": "internal/filter/orgs.gen.go:990",
-          "cond": "in.Filters.AccountFilter.DomainsOp == 4",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.DomainsOp"
-          ]
-        },
-        {
-          "id": "b227",
-          "at": "internal/filter/orgs.gen.go:973",
-          "cond": "in.Filters.AccountFilter.DomainsOp == 2",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.DomainsOp"
-          ]
-        },
-        {
-          "id": "b228",
-          "at": "internal/filter/orgs.gen.go:978",
-          "cond": "in.Filters.AccountFilter.DomainsOp == 4",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.DomainsOp"
-          ]
-        },
-        {
-          "id": "b229",
-          "at": "internal/filter/orgs.gen.go:992",
-          "cond": "in.Filters.AccountFilter.DomainsOp == 5",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.DomainsOp"
-          ]
-        },
-        {
-          "id": "b230",
-          "at": "internal/filter/orgs.gen.go:994",
-          "cond": "in.Filters.AccountFilter.DomainsOp == 2",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.DomainsOp"
-          ]
-        },
-        {
-          "id": "b231",
-          "at": "internal/filter/orgs.gen.go:994",
-          "cond": "in.Filters.AccountFilter.DomainsOp == 1",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.DomainsOp"
-          ]
-        },
-        {
-          "id": "b232",
-          "at": "internal/filter/orgs.gen.go:994",
-          "cond": "in.Filters.AccountFilter.DomainsOp == 3",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.DomainsOp"
-          ]
-        },
-        {
           "id": "b233",
           "at": "internal/filter/orgs.gen.go:1004",
           "cond": "in.Filters.AccountFilter.TagsOp == 3",
@@ -2154,70 +1993,6 @@
           "cond": "in.Filters.AccountFilter.TierOp == 3",
           "predicate_paths": [
             "in.Filters.AccountFilter.TierOp"
-          ]
-        },
-        {
-          "id": "b249",
-          "at": "internal/filter/orgs.gen.go:1093",
-          "cond": "in.Filters.AccountFilter.ExternalRefsOp == 3",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.ExternalRefsOp"
-          ]
-        },
-        {
-          "id": "b250",
-          "at": "internal/filter/orgs.gen.go:1115",
-          "cond": "in.Filters.AccountFilter.ExternalRefsOp == 4",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.ExternalRefsOp"
-          ]
-        },
-        {
-          "id": "b251",
-          "at": "internal/filter/orgs.gen.go:1098",
-          "cond": "in.Filters.AccountFilter.ExternalRefsOp == 2",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.ExternalRefsOp"
-          ]
-        },
-        {
-          "id": "b252",
-          "at": "internal/filter/orgs.gen.go:1103",
-          "cond": "in.Filters.AccountFilter.ExternalRefsOp == 4",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.ExternalRefsOp"
-          ]
-        },
-        {
-          "id": "b253",
-          "at": "internal/filter/orgs.gen.go:1117",
-          "cond": "in.Filters.AccountFilter.ExternalRefsOp == 5",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.ExternalRefsOp"
-          ]
-        },
-        {
-          "id": "b254",
-          "at": "internal/filter/orgs.gen.go:1119",
-          "cond": "in.Filters.AccountFilter.ExternalRefsOp == 2",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.ExternalRefsOp"
-          ]
-        },
-        {
-          "id": "b255",
-          "at": "internal/filter/orgs.gen.go:1119",
-          "cond": "in.Filters.AccountFilter.ExternalRefsOp == 1",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.ExternalRefsOp"
-          ]
-        },
-        {
-          "id": "b256",
-          "at": "internal/filter/orgs.gen.go:1119",
-          "cond": "in.Filters.AccountFilter.ExternalRefsOp == 3",
-          "predicate_paths": [
-            "in.Filters.AccountFilter.ExternalRefsOp"
           ]
         },
         {
@@ -2966,6 +2741,24 @@
     },
     "test_facts": [
       {
+        "name": "Count accounts with filters",
+        "file": "api/v2_internal/accounts/accounts_count_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ACCOUNTS_COUNT"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "Domains",
+          "DomainsOp",
+          "ExternalRefs",
+          "ExternalRefsOp"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
         "name": "AccountsCount",
         "file": "devorg_sanity_check/entities_count_test.go",
         "labels": null,
@@ -3032,5 +2825,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CountAccounts` (HTTP operation `AccountsCount`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Filters.AccountFilter.Apps\n  - in.Filters.AccountFilter.AppsOp\n  - in.Filters.AccountFilter.CustomFields.Fields\n  - in.Filters.AccountFilter.Domains\n  - in.Filters.AccountFilter.DomainsOp\n  - in.Filters.AccountFilter.ExternalRefs\n  - in.Filters.AccountFilter.ExternalRefsOp\n  - in.Filters.AccountFilter.ExternalSourceData\n  - in.Filters.AccountFilter.Industry\n  - in.Filters.AccountFilter.IndustryOp\n  - in.Filters.AccountFilter.IngestionChannel\n  - in.Filters.AccountFilter.LeadSource\n  - in.Filters.AccountFilter.LeadSourceOp\n  - in.Filters.AccountFilter.OwnedBy\n  - in.Filters.AccountFilter.OwnedByOp\n  - in.Filters.AccountFilter.SharedWith\n  - in.Filters.AccountFilter.Stage\n  - in.Filters.AccountFilter.StagedInfo\n  - in.Filters.AccountFilter.Subtype\n  - in.Filters.AccountFilter.SubtypeOp\n  - in.Filters.AccountFilter.SyncMetadata\n  - in.Filters.AccountFilter.Tags\n  - in.Filters.AccountFilter.TagsOp\n  - in.Filters.AccountFilter.Tier\n  - in.Filters.AccountFilter.TierOp\n  - in.Filters.AccountFilter.TotalRevenue\n  - in.Filters.AccountFilter.Websites\n  - in.Filters.AccountFilter.WebsitesOp\n  - in.Filters.CreatedByAgentId\n  - in.Filters.CreatedByAgentIdOp\n  - in.Filters.CreatedById\n  - in.Filters.CreatedByIdOp\n  - in.Filters.CreatedDate.After\n  - in.Filters.CreatedDate.Before\n  - in.Filters.CreatedDate.DatePreset.Type\n  - in.Filters.DevOrgFilter.UeSyncState\n  - in.Filters.DisplayName\n  - in.Filters.Environment\n  - in.Filters.EnvironmentOp\n  - in.Filters.ModifiedById\n  - in.Filters.ModifiedByIdOp\n  - in.Filters.ModifiedDate.After\n  - in.Filters.ModifiedDate.Before\n  - in.Filters.ModifiedDate.DatePreset.Type\n  - in.Filters.RevOrgFilter.Account\n  - in.Filters.RevOrgFilter.AccountOp\n  - in.Filters.RevOrgFilter.Apps\n  - in.Filters.RevOrgFilter.AppsOp\n  - in.Filters.RevOrgFilter.CustomFields.Fields\n  - in.Filters.RevOrgFilter.ExternalOid\n  - in.Filters.RevOrgFilter.ExternalOidIssuer\n  - in.Filters.RevOrgFilter.ExternalOidOp\n  - in.Filters.RevOrgFilter.ExternalSourceData\n  - in.Filters.RevOrgFilter.SharedWith\n  - in.Filters.RevOrgFilter.SlaId\n  - in.Filters.RevOrgFilter.StagedInfo\n  - in.Filters.RevOrgFilter.Subtype\n  - in.Filters.RevOrgFilter.SubtypeOp\n  - in.Filters.RevOrgFilter.SyncMetadata\n  - in.Filters.RevOrgFilter.Tags\n  - (+5 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filters.RevOrgFilter.TagsOp == 3\n  - in.Filters.RevOrgFilter.TagsOp == 2\n  - in.Filters.RevOrgFilter.TagsOp == 4\n  - in.Filters.RevOrgFilter.CustomFields == nil\n  - in.Filters.RevOrgFilter.ExternalOidOp == 4\n  - in.Filters.RevOrgFilter.ExternalOidOp == 3\n  - in.Filters.RevOrgFilter.ExternalOidOp == 2\n  - in.Filters.RevOrgFilter.ExternalOidOp == 4\n  - in.Filters.RevOrgFilter.ExternalOidOp == 5\n  - in.Filters.RevOrgFilter.ExternalOidOp == 2\n  - in.Filters.RevOrgFilter.ExternalOidOp == 1\n  - in.Filters.RevOrgFilter.ExternalOidOp == 3\n  - in.Filters.RevOrgFilter.TagsOp == 4\n  - in.Filters.RevOrgFilter.TagsOp == 5\n  - in.Filters.RevOrgFilter.TagsOp == 2\n  - in.Filters.RevOrgFilter.TagsOp == 1\n  - in.Filters.RevOrgFilter.TagsOp == 3\n  - in.Filters.RevOrgFilter.AccountOp == 4\n  - in.Filters.RevOrgFilter.AccountOp == 3\n  - in.Filters.RevOrgFilter.AccountOp == 2\n  - in.Filters.RevOrgFilter.AccountOp == 4\n  - in.Filters.RevOrgFilter.AccountOp == 5\n  - in.Filters.RevOrgFilter.AccountOp == 2\n  - in.Filters.RevOrgFilter.AccountOp == 1\n  - in.Filters.RevOrgFilter.AccountOp == 3\n  - in.Filters.RevOrgFilter.SubtypeOp == 4\n  - in.Filters.RevOrgFilter.SubtypeOp == 3\n  - in.Filters.RevOrgFilter.SubtypeOp == 2\n  - in.Filters.RevOrgFilter.SubtypeOp == 4\n  - in.Filters.RevOrgFilter.SubtypeOp == 5\n  - in.Filters.RevOrgFilter.SubtypeOp == 2\n  - in.Filters.RevOrgFilter.SubtypeOp == 1\n  - in.Filters.RevOrgFilter.SubtypeOp == 3\n  - in.Filters.RevOrgFilter != nil\n  - in.Filters.RevOrgFilter.AppsOp == 4\n  - in.Filters.RevOrgFilter.AppsOp == 3\n  - in.Filters.RevOrgFilter.AppsOp == 2\n  - in.Filters.RevOrgFilter.AppsOp == 4\n  - in.Filters.RevOrgFilter.AppsOp == 5\n  - in.Filters.RevOrgFilter.AppsOp == 2\n  - (+305 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CountAccounts` (HTTP operation `AccountsCount`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Filters.AccountFilter.Apps\n  - in.Filters.AccountFilter.AppsOp\n  - in.Filters.AccountFilter.CustomFields.Fields\n  - in.Filters.AccountFilter.ExternalSourceData\n  - in.Filters.AccountFilter.Industry\n  - in.Filters.AccountFilter.IndustryOp\n  - in.Filters.AccountFilter.IngestionChannel\n  - in.Filters.AccountFilter.LeadSource\n  - in.Filters.AccountFilter.LeadSourceOp\n  - in.Filters.AccountFilter.OwnedBy\n  - in.Filters.AccountFilter.OwnedByOp\n  - in.Filters.AccountFilter.SharedWith\n  - in.Filters.AccountFilter.Stage\n  - in.Filters.AccountFilter.StagedInfo\n  - in.Filters.AccountFilter.Subtype\n  - in.Filters.AccountFilter.SubtypeOp\n  - in.Filters.AccountFilter.SyncMetadata\n  - in.Filters.AccountFilter.Tags\n  - in.Filters.AccountFilter.TagsOp\n  - in.Filters.AccountFilter.Tier\n  - in.Filters.AccountFilter.TierOp\n  - in.Filters.AccountFilter.TotalRevenue\n  - in.Filters.AccountFilter.Websites\n  - in.Filters.AccountFilter.WebsitesOp\n  - in.Filters.CreatedByAgentId\n  - in.Filters.CreatedByAgentIdOp\n  - in.Filters.CreatedById\n  - in.Filters.CreatedByIdOp\n  - in.Filters.CreatedDate.After\n  - in.Filters.CreatedDate.Before\n  - in.Filters.CreatedDate.DatePreset.Type\n  - in.Filters.DevOrgFilter.UeSyncState\n  - in.Filters.Environment\n  - in.Filters.EnvironmentOp\n  - in.Filters.ModifiedById\n  - in.Filters.ModifiedByIdOp\n  - in.Filters.ModifiedDate.After\n  - in.Filters.ModifiedDate.Before\n  - in.Filters.ModifiedDate.DatePreset.Type\n  - in.Filters.RevOrgFilter.Account\n  - in.Filters.RevOrgFilter.AccountOp\n  - in.Filters.RevOrgFilter.Apps\n  - in.Filters.RevOrgFilter.AppsOp\n  - in.Filters.RevOrgFilter.CustomFields.Fields\n  - in.Filters.RevOrgFilter.ExternalOid\n  - in.Filters.RevOrgFilter.ExternalOidIssuer\n  - in.Filters.RevOrgFilter.ExternalOidOp\n  - in.Filters.RevOrgFilter.ExternalSourceData\n  - in.Filters.RevOrgFilter.SharedWith\n  - in.Filters.RevOrgFilter.SlaId\n  - in.Filters.RevOrgFilter.StagedInfo\n  - in.Filters.RevOrgFilter.Subtype\n  - in.Filters.RevOrgFilter.SubtypeOp\n  - in.Filters.RevOrgFilter.SyncMetadata\n  - in.Filters.RevOrgFilter.Tags\n  - in.Filters.RevOrgFilter.TagsOp\n  - in.Filters.RevOrgFilter.Tier\n  - in.Filters.RevOrgFilter.Type\n  - in.Filters.State\n  - in.SearchQuery\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filters.RevOrgFilter.TagsOp == 3\n  - in.Filters.RevOrgFilter.TagsOp == 2\n  - in.Filters.RevOrgFilter.TagsOp == 4\n  - in.Filters.RevOrgFilter.CustomFields == nil\n  - in.Filters.RevOrgFilter.ExternalOidOp == 4\n  - in.Filters.RevOrgFilter.ExternalOidOp == 3\n  - in.Filters.RevOrgFilter.ExternalOidOp == 2\n  - in.Filters.RevOrgFilter.ExternalOidOp == 4\n  - in.Filters.RevOrgFilter.ExternalOidOp == 5\n  - in.Filters.RevOrgFilter.ExternalOidOp == 2\n  - in.Filters.RevOrgFilter.ExternalOidOp == 1\n  - in.Filters.RevOrgFilter.ExternalOidOp == 3\n  - in.Filters.RevOrgFilter.TagsOp == 4\n  - in.Filters.RevOrgFilter.TagsOp == 5\n  - in.Filters.RevOrgFilter.TagsOp == 2\n  - in.Filters.RevOrgFilter.TagsOp == 1\n  - in.Filters.RevOrgFilter.TagsOp == 3\n  - in.Filters.RevOrgFilter.AccountOp == 4\n  - in.Filters.RevOrgFilter.AccountOp == 3\n  - in.Filters.RevOrgFilter.AccountOp == 2\n  - in.Filters.RevOrgFilter.AccountOp == 4\n  - in.Filters.RevOrgFilter.AccountOp == 5\n  - in.Filters.RevOrgFilter.AccountOp == 2\n  - in.Filters.RevOrgFilter.AccountOp == 1\n  - in.Filters.RevOrgFilter.AccountOp == 3\n  - in.Filters.RevOrgFilter.SubtypeOp == 4\n  - in.Filters.RevOrgFilter.SubtypeOp == 3\n  - in.Filters.RevOrgFilter.SubtypeOp == 2\n  - in.Filters.RevOrgFilter.SubtypeOp == 4\n  - in.Filters.RevOrgFilter.SubtypeOp == 5\n  - in.Filters.RevOrgFilter.SubtypeOp == 2\n  - in.Filters.RevOrgFilter.SubtypeOp == 1\n  - in.Filters.RevOrgFilter.SubtypeOp == 3\n  - in.Filters.RevOrgFilter != nil\n  - in.Filters.RevOrgFilter.AppsOp == 4\n  - in.Filters.RevOrgFilter.AppsOp == 3\n  - in.Filters.RevOrgFilter.AppsOp == 2\n  - in.Filters.RevOrgFilter.AppsOp == 4\n  - in.Filters.RevOrgFilter.AppsOp == 5\n  - in.Filters.RevOrgFilter.AppsOp == 2\n  - (+273 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -31,10 +31,10 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 34,
-      "covered_count": 1,
-      "coverage_pct": 2.9,
-      "request_fields_set_by_tests": 1,
-      "set_by_positive_tests": 1,
+      "covered_count": 6,
+      "coverage_pct": 17.6,
+      "request_fields_set_by_tests": 3,
+      "set_by_positive_tests": 6,
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
@@ -44,26 +44,61 @@
         },
         "nested": {
           "total": 16,
-          "set": 1,
-          "pct": 6.3
+          "set": 2,
+          "pct": 12.5
         },
         "deep": {
           "total": 12,
-          "set": 0,
-          "pct": 0
+          "set": 4,
+          "pct": 33.3
         }
       },
       "representative": {
         "units": 26,
-        "covered": 1,
-        "pct": 3.8,
+        "covered": 6,
+        "pct": 23.1,
         "collapsed_types": [
           "proto.DateFilter"
         ]
       },
       "covered": [
         {
+          "path": "in.Filter.CreatedDate.DatePreset.Type",
+          "match": "exact",
+          "by_tests": [
+            "Successfully listed vista group items"
+          ]
+        },
+        {
+          "path": "in.Filter.EndDate.DatePreset.Type",
+          "match": "exact",
+          "by_tests": [
+            "Successfully listed vista group items"
+          ]
+        },
+        {
+          "path": "in.Filter.ModifiedDate.DatePreset.Type",
+          "match": "exact",
+          "by_tests": [
+            "Successfully listed vista group items"
+          ]
+        },
+        {
           "path": "in.Filter.ParentId",
+          "match": "exact",
+          "by_tests": [
+            "Successfully listed vista group items"
+          ]
+        },
+        {
+          "path": "in.Filter.StartDate.DatePreset.Type",
+          "match": "exact",
+          "by_tests": [
+            "Successfully listed vista group items"
+          ]
+        },
+        {
+          "path": "in.Filter.Type",
           "match": "exact",
           "by_tests": [
             "Successfully listed vista group items"
@@ -78,10 +113,8 @@
         "in.Filter.CreatedByIdOp",
         "in.Filter.CreatedDate.After",
         "in.Filter.CreatedDate.Before",
-        "in.Filter.CreatedDate.DatePreset.Type",
         "in.Filter.EndDate.After",
         "in.Filter.EndDate.Before",
-        "in.Filter.EndDate.DatePreset.Type",
         "in.Filter.ExternalSourceData",
         "in.Filter.GroupObjectType",
         "in.Filter.InferredParts",
@@ -90,15 +123,12 @@
         "in.Filter.ModifiedByIdOp",
         "in.Filter.ModifiedDate.After",
         "in.Filter.ModifiedDate.Before",
-        "in.Filter.ModifiedDate.DatePreset.Type",
         "in.Filter.StagedInfo",
         "in.Filter.StartDate.After",
         "in.Filter.StartDate.Before",
-        "in.Filter.StartDate.DatePreset.Type",
         "in.Filter.State",
         "in.Filter.SyncMetadata",
         "in.Filter.SyncMetadataOp",
-        "in.Filter.Type",
         "in.IncludeItems",
         "in.Page",
         "in.PerPage",
@@ -110,20 +140,20 @@
       "total": 75,
       "happy_path_reached": true,
       "reachable_on_happy_path": 10,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
+      "present_arm_exercised": 4,
+      "present_arm_pct": 5.3,
       "absent_arm_exercised": 10,
       "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 5.3,
       "by_origin": {
         "service": {
           "total": 63,
           "reachable_on_happy_path": 2,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "present_arm_exercised": 4,
+          "present_arm_pct": 6.3,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 2
@@ -365,14 +395,6 @@
           ]
         },
         {
-          "id": "b28",
-          "at": "",
-          "cond": "in.Filter.CreatedDate.DatePreset.Type",
-          "predicate_paths": [
-            "in.Filter.CreatedDate.DatePreset.Type"
-          ]
-        },
-        {
           "id": "b29",
           "at": "internal/filterv2/vista_group_items.gen.go:158",
           "cond": "in.Filter.CreatedDate.Before != nil",
@@ -482,14 +504,6 @@
           "cond": "in.Filter.ModifiedDate.After != nil",
           "predicate_paths": [
             "in.Filter.ModifiedDate.After"
-          ]
-        },
-        {
-          "id": "b43",
-          "at": "",
-          "cond": "in.Filter.ModifiedDate.DatePreset.Type",
-          "predicate_paths": [
-            "in.Filter.ModifiedDate.DatePreset.Type"
           ]
         },
         {
@@ -613,14 +627,6 @@
           ]
         },
         {
-          "id": "b59",
-          "at": "",
-          "cond": "in.Filter.StartDate.DatePreset.Type",
-          "predicate_paths": [
-            "in.Filter.StartDate.DatePreset.Type"
-          ]
-        },
-        {
           "id": "b60",
           "at": "internal/filterv2/vista_group_items.gen.go:439",
           "cond": "in.Filter.StartDate.Before != nil",
@@ -658,14 +664,6 @@
           "cond": "in.Filter.EndDate.After != nil",
           "predicate_paths": [
             "in.Filter.EndDate.After"
-          ]
-        },
-        {
-          "id": "b65",
-          "at": "",
-          "cond": "in.Filter.EndDate.DatePreset.Type",
-          "predicate_paths": [
-            "in.Filter.EndDate.DatePreset.Type"
           ]
         },
         {
@@ -770,7 +768,12 @@
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "name",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
     "test_facts": [
       {
@@ -778,7 +781,9 @@
         "file": "api/v2_internal/vista_groups/vistas_groups_list_test.go",
         "labels": null,
         "fields_set": [
-          "ParentId"
+          "Name",
+          "ParentId",
+          "Type"
         ],
         "statuses": [
           200
@@ -1003,5 +1008,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListVistaGroupItem` (HTTP operation `VistasGroupsList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.EndDate.After\n  - in.Filter.EndDate.Before\n  - in.Filter.EndDate.DatePreset.Type\n  - in.Filter.ExternalSourceData\n  - in.Filter.GroupObjectType\n  - in.Filter.InferredParts\n  - in.Filter.IsSystem\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.StagedInfo\n  - in.Filter.StartDate.After\n  - in.Filter.StartDate.Before\n  - in.Filter.StartDate.DatePreset.Type\n  - in.Filter.State\n  - in.Filter.SyncMetadata\n  - in.Filter.SyncMetadataOp\n  - in.Filter.Type\n  - in.IncludeItems\n  - in.Page\n  - in.PerPage\n  - in.SkipTotal\n  - in.SortBy\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.SyncMetadataOp != nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Page >= 0\n  - in.PerPage >= 0\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 5\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 1\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.ModifiedDate != nil\n  - in.Filter.ModifiedByIdOp == 4\n  - in.Filter.ModifiedByIdOp == 3\n  - in.Filter.ModifiedByIdOp == 4\n  - in.Filter.ModifiedByIdOp == 2\n  - in.Filter.ModifiedByIdOp == 5\n  - in.Filter.ModifiedByIdOp == 2\n  - in.Filter.ModifiedByIdOp == 1\n  - in.Filter.ModifiedByIdOp == 3\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.Before != nil\n  - (+35 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListVistaGroupItem` (HTTP operation `VistasGroupsList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.EndDate.After\n  - in.Filter.EndDate.Before\n  - in.Filter.ExternalSourceData\n  - in.Filter.GroupObjectType\n  - in.Filter.InferredParts\n  - in.Filter.IsSystem\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.StagedInfo\n  - in.Filter.StartDate.After\n  - in.Filter.StartDate.Before\n  - in.Filter.State\n  - in.Filter.SyncMetadata\n  - in.Filter.SyncMetadataOp\n  - in.IncludeItems\n  - in.Page\n  - in.PerPage\n  - in.SkipTotal\n  - in.SortBy\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.SyncMetadataOp != nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Page >= 0\n  - in.PerPage >= 0\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 5\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 1\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.ModifiedDate != nil\n  - in.Filter.ModifiedByIdOp == 4\n  - in.Filter.ModifiedByIdOp == 3\n  - in.Filter.ModifiedByIdOp == 4\n  - in.Filter.ModifiedByIdOp == 2\n  - in.Filter.ModifiedByIdOp == 5\n  - in.Filter.ModifiedByIdOp == 2\n  - in.Filter.ModifiedByIdOp == 1\n  - in.Filter.ModifiedByIdOp == 3\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.Before != nil\n  - in.Filter.ModifiedDate.DatePreset != nil\n  - (+31 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `name` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

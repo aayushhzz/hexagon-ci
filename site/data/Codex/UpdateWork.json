@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "UpdateWork",
     "operation": "WorksUpdate",
-    "tests": 38,
+    "tests": 72,
     "status": {
       "documented": [
         200,
@@ -20,6 +20,7 @@
         200,
         201,
         202,
+        204,
         400,
         403
       ],
@@ -37,7 +38,7 @@
       "leaf_fields_read_by_rpc": 173,
       "covered_count": 18,
       "coverage_pct": 10.4,
-      "request_fields_set_by_tests": 58,
+      "request_fields_set_by_tests": 73,
       "set_by_positive_tests": 18,
       "set_by_negative_tests": 1,
       "by_depth": {
@@ -71,11 +72,23 @@
           "match": "exact",
           "by_tests": [
             "Assigns milestone on WorksUpdate",
+            "Custom Fields - Account - caveat option Customer account equalsTo",
+            "Custom Fields - Devuser - caveat option user equalsTo",
+            "Custom Fields - Part - caveat option Parts equalsTo",
+            "Custom Fields - Text",
+            "Custom Fields - Text - No caveat",
+            "Custom Fields - Workspace - caveat option Ticket workspace equals to",
             "Emits update event",
             "External stakeholders access works through public API for project visibility",
             "Fails WorksUpdate with milestone from a different Enhancement",
+            "Fails as a priority is wrong",
+            "MFZ Update Ticket - rev user with new group and custom role - caveat option Customer account not equalsTo",
+            "Marks all notification read based on parent id.",
+            "Marks only few notifications as read.",
             "MetricActionExecute on Frozen Ticket",
+            "Should be able to list tickets",
             "Should list entries for a ticket the user has read access to",
+            "Should perform complete CRUD lifecycle for a ticket",
             "Should verify file attachment content matches original using SHA256",
             "Team coordinates work management through comprehensive operations",
             "Unassigns milestone via WorksUpdate with null",
@@ -93,6 +106,19 @@
             "With account, amount and forecast category",
             "With invalid account",
             "With invalid fields",
+            "With new group and custom role - caveat option Customer account belongs to",
+            "With new group and custom role - caveat option Customer account equalsTo",
+            "With new group and custom role - caveat option Ticket group belongs to",
+            "With new group and custom role - caveat option Ticket group equals to",
+            "With new group and custom role - caveat option Ticket workspace belongs to ",
+            "With new group and custom role - caveat option Ticket workspace equals to ",
+            "With new group and custom role - caveat option Ticket workspace not equals to ",
+            "With new group and custom role - caveat option unverified user ",
+            "With new group and custom role - caveat option user belongs to reporters ",
+            "With new group and custom role - caveat option user equalsTo  ",
+            "With new group and custom role - caveat option user not equalsTo  ",
+            "With new group and custom role - caveat option verified user ",
+            "With new group and custom role - without caveat ",
             "With owners",
             "WorksUpdate rejects incompatible subtype changes",
             "WorksUpdate rejects incompatible subtype or space changes",
@@ -104,6 +130,7 @@
             "should create and activate the TCD notifier workflow with group membership check",
             "should create ticket tag automation workflow when ticket stage is changed",
             "should error out when non-admin user tries to update the masked field",
+            "should successfully parts list contributors for a given part",
             "should trigger the workflow when enhancement tags are updated",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist",
             "should update title as admin to generate a timeline event"
@@ -129,6 +156,7 @@
           "by_tests": [
             "Updates survey aggregation on a frozen ticket using service account context",
             "resumes the resolution metric instead of restarting when a resolved ticket is reopened with the flag enabled",
+            "should successfully parts list contributors for a given part",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
           ]
         },
@@ -156,6 +184,7 @@
           "path": "in.WorkOneof.Issue.Tags",
           "match": "exact",
           "by_tests": [
+            "Should perform complete CRUD lifecycle for a ticket",
             "Update with only required fields",
             "Update with required fields",
             "WorksUpdate rejects incompatible subtype changes",
@@ -189,6 +218,7 @@
           "path": "in.WorkOneof.Opportunity.Tags",
           "match": "exact",
           "by_tests": [
+            "Should perform complete CRUD lifecycle for a ticket",
             "Update with only required fields",
             "Update with required fields",
             "WorksUpdate rejects incompatible subtype changes",
@@ -222,6 +252,7 @@
           "path": "in.WorkOneof.Task.Tags",
           "match": "exact",
           "by_tests": [
+            "Should perform complete CRUD lifecycle for a ticket",
             "Update with only required fields",
             "Update with required fields",
             "WorksUpdate rejects incompatible subtype changes",
@@ -244,6 +275,7 @@
           "by_tests": [
             "Updates survey aggregation on a frozen ticket using service account context",
             "resumes the resolution metric instead of restarting when a resolved ticket is reopened with the flag enabled",
+            "should successfully parts list contributors for a given part",
             "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
           ]
         },
@@ -271,6 +303,7 @@
           "path": "in.WorkOneof.Ticket.Tags",
           "match": "exact",
           "by_tests": [
+            "Should perform complete CRUD lifecycle for a ticket",
             "Update with only required fields",
             "Update with required fields",
             "WorksUpdate rejects incompatible subtype changes",
@@ -443,31 +476,31 @@
       "total": 784,
       "happy_path_reached": true,
       "reachable_on_happy_path": 58,
-      "present_arm_exercised": 57,
-      "present_arm_pct": 7.3,
+      "present_arm_exercised": 67,
+      "present_arm_pct": 8.5,
       "absent_arm_exercised": 58,
       "absent_arm_pct": 100,
-      "negative_arm_exercised": 15,
-      "negative_arm_pct": 1.9,
+      "negative_arm_exercised": 41,
+      "negative_arm_pct": 5.2,
       "both_arms_exercised": 15,
-      "coverage_pct": 7.3,
+      "coverage_pct": 8.5,
       "by_origin": {
         "service": {
           "total": 56,
           "reachable_on_happy_path": 21,
-          "present_arm_exercised": 8,
-          "present_arm_pct": 14.3,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "present_arm_exercised": 10,
+          "present_arm_pct": 17.9,
+          "negative_arm_exercised": 2,
+          "negative_arm_pct": 3.6,
           "absent_arm_exercised": 21
         },
         "generated": {
           "total": 562,
           "reachable_on_happy_path": 21,
-          "present_arm_exercised": 39,
-          "present_arm_pct": 6.9,
-          "negative_arm_exercised": 7,
-          "negative_arm_pct": 1.2,
+          "present_arm_exercised": 47,
+          "present_arm_pct": 8.4,
+          "negative_arm_exercised": 31,
+          "negative_arm_pct": 5.5,
           "absent_arm_exercised": 21
         },
         "library": {
@@ -1071,14 +1104,6 @@
           "cond": "in.WorkOneof.Ticket.ReportedById",
           "predicate_paths": [
             "in.WorkOneof.Ticket.ReportedById"
-          ]
-        },
-        {
-          "id": "b86",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:10855",
-          "cond": "in.WorkOneof.Ticket.OwnedByIds != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Ticket.OwnedByIds"
           ]
         },
         {
@@ -1906,14 +1931,6 @@
           ]
         },
         {
-          "id": "b195",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:12547",
-          "cond": "in.WorkOneof.Issue.OwnedByIds != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Issue.OwnedByIds"
-          ]
-        },
-        {
           "id": "b196",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:12586",
           "cond": "in.WorkOneof.Issue.ArtifactIds != nil",
@@ -2559,14 +2576,6 @@
           "cond": "in.WorkOneof.Task.ReportedById",
           "predicate_paths": [
             "in.WorkOneof.Task.ReportedById"
-          ]
-        },
-        {
-          "id": "b280",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:13771",
-          "cond": "in.WorkOneof.Task.OwnedByIds != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Task.OwnedByIds"
           ]
         },
         {
@@ -3274,14 +3283,6 @@
           ]
         },
         {
-          "id": "b372",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:15039",
-          "cond": "in.WorkOneof.Opportunity.OwnedByIds != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Opportunity.OwnedByIds"
-          ]
-        },
-        {
           "id": "b373",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:15078",
           "cond": "in.WorkOneof.Opportunity.ArtifactIds != nil",
@@ -3847,14 +3848,6 @@
           "cond": "in.WorkOneof.Ticket.ReportedById",
           "predicate_paths": [
             "in.WorkOneof.Ticket.ReportedById"
-          ]
-        },
-        {
-          "id": "b450",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:2113",
-          "cond": "in.WorkOneof.Ticket.OwnedByIds != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Ticket.OwnedByIds"
           ]
         },
         {
@@ -4522,14 +4515,6 @@
           ]
         },
         {
-          "id": "b540",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:3060",
-          "cond": "in.WorkOneof.Issue.OwnedByIds != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Issue.OwnedByIds"
-          ]
-        },
-        {
           "id": "b541",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:3081",
           "cond": "in.WorkOneof.Issue.ArtifactIds != nil",
@@ -5050,14 +5035,6 @@
           ]
         },
         {
-          "id": "b610",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:3750",
-          "cond": "in.WorkOneof.Task.OwnedByIds != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Task.OwnedByIds"
-          ]
-        },
-        {
           "id": "b611",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:3771",
           "cond": "in.WorkOneof.Task.ArtifactIds != nil",
@@ -5503,14 +5480,6 @@
           "cond": "in.WorkOneof.Opportunity.ReportedById",
           "predicate_paths": [
             "in.WorkOneof.Opportunity.ReportedById"
-          ]
-        },
-        {
-          "id": "b671",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:4477",
-          "cond": "in.WorkOneof.Opportunity.OwnedByIds != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Opportunity.OwnedByIds"
           ]
         },
         {
@@ -6138,22 +6107,6 @@
           ]
         },
         {
-          "id": "b764",
-          "at": "internal/serverv2/update_work.go:858",
-          "cond": "in.Ticket.OwnedByIds == nil",
-          "predicate_paths": [
-            "in.Ticket.OwnedByIds"
-          ]
-        },
-        {
-          "id": "b766",
-          "at": "internal/serverv2/update_work.go:870",
-          "cond": "in.Ticket.OwnedByIds != nil",
-          "predicate_paths": [
-            "in.Ticket.OwnedByIds"
-          ]
-        },
-        {
           "id": "b767",
           "at": "internal/serverv2/update_work.go:884",
           "cond": "in.AggregateErrors",
@@ -6367,6 +6320,10 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "caveats",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "channel",
           "fuzzy_suggestions": [
             "in.WorkOneof.Ticket.SourceChannelV2",
@@ -6419,6 +6376,10 @@
         },
         {
           "field": "filetype",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "filter",
           "fuzzy_suggestions": null
         },
         {
@@ -6493,11 +6454,19 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "mfzusertype",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "name",
           "fuzzy_suggestions": null
         },
         {
           "field": "object",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "objecttype",
           "fuzzy_suggestions": null
         },
         {
@@ -6511,11 +6480,23 @@
           ]
         },
         {
+          "field": "ownedbyids",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "owner",
           "fuzzy_suggestions": null
         },
         {
+          "field": "parentids",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "previoussteps",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "privileges",
           "fuzzy_suggestions": null
         },
         {
@@ -6536,6 +6517,18 @@
         },
         {
           "field": "responsescore",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "revorg",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "revuser",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "rolecategory",
           "fuzzy_suggestions": null
         },
         {
@@ -6576,6 +6569,21 @@
           ]
         },
         {
+          "field": "state",
+          "fuzzy_suggestions": [
+            "in.Issue.SprintState",
+            "in.WorkOneof.Issue.SprintState"
+          ]
+        },
+        {
+          "field": "states",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "superdevorg",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "survey",
           "fuzzy_suggestions": null
         },
@@ -6599,11 +6607,19 @@
           ]
         },
         {
+          "field": "types",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "uimetadata",
           "fuzzy_suggestions": null
         },
         {
           "field": "usecase",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "user",
           "fuzzy_suggestions": null
         },
         {
@@ -6753,6 +6769,99 @@
         ]
       },
       {
+        "name": "Fails as a priority is wrong",
+        "file": "api/v2_internal/notifications/notifications_mark_test.go",
+        "labels": null,
+        "fields_set": [
+          "Body",
+          "Filter",
+          "Id",
+          "OwnedByIds",
+          "State",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Marks all notification read based on parent id.",
+        "file": "api/v2_internal/notifications/notifications_mark_test.go",
+        "labels": null,
+        "fields_set": [
+          "Body",
+          "Filter",
+          "Id",
+          "OwnedByIds",
+          "ParentIds",
+          "State",
+          "States",
+          "Type"
+        ],
+        "statuses": [
+          200,
+          204
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Notifications",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Marks only few notifications as read.",
+        "file": "api/v2_internal/notifications/notifications_mark_test.go",
+        "labels": null,
+        "fields_set": [
+          "Body",
+          "Filter",
+          "Id",
+          "OwnedByIds",
+          "ParentIds",
+          "State",
+          "States",
+          "Type",
+          "Types"
+        ],
+        "statuses": [
+          200,
+          204
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Notifications",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should successfully parts list contributors for a given part",
+        "file": "api/v2_internal/parts/crud/parts_contributors_list_test.go",
+        "labels": null,
+        "fields_set": [
+          "AppliesToPart",
+          "Description",
+          "Id",
+          "Name",
+          "OwnedBy",
+          "Stage",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Contributors",
+          "Contributors.AsDevUserSummary",
+          "StatusCode"
+        ]
+      },
+      {
         "name": "MetricActionExecute on Frozen Ticket",
         "file": "api/v2_internal/slas/trackers_test.go",
         "labels": [
@@ -6893,6 +7002,84 @@
         ]
       },
       {
+        "name": "Custom Fields - Text",
+        "file": "api/v2_internal/work/issues/crud/custom_objects/update_issue_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Text - No caveat",
+        "file": "api/v2_internal/work/issues/crud/custom_objects/update_issue_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Part - caveat option Parts equalsTo",
+        "file": "api/v2_internal/work/issues/crud/custom_objects/update_issue_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Devuser - caveat option user equalsTo",
+        "file": "api/v2_internal/work/issues/crud/custom_objects/update_issue_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
         "name": "sets display_id_alias from space key on create and updates prefix when space changes",
         "file": "api/v2_internal/work/issues/crud/issue_spaces_test.go",
         "labels": [
@@ -7030,6 +7217,64 @@
         ]
       },
       {
+        "name": "Custom Fields - Text",
+        "file": "api/v2_internal/work/opportunities/custom_objects/update_opportunity_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Text - No caveat",
+        "file": "api/v2_internal/work/opportunities/custom_objects/update_opportunity_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Devuser - caveat option user equalsTo",
+        "file": "api/v2_internal/work/opportunities/custom_objects/update_opportunity_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
         "name": "does not scope an opportunity to a space through the REST create or update path",
         "file": "api/v2_internal/work/opportunities/opportunity_spaces_test.go",
         "labels": [
@@ -7073,7 +7318,10 @@
           "GINKGO_PR_SANITY"
         ],
         "fields_set": [
-          "Id"
+          "Id",
+          "OwnedBy",
+          "Title",
+          "Type"
         ],
         "statuses": [
           200
@@ -7092,6 +7340,7 @@
         "fields_set": [
           "Id",
           "OwnedBy",
+          "Title",
           "Type"
         ],
         "statuses": [
@@ -7108,7 +7357,11 @@
         "labels": [
           "NEGATIVE"
         ],
-        "fields_set": null,
+        "fields_set": [
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
         "statuses": [
           400
         ],
@@ -7124,7 +7377,10 @@
           "NEGATIVE"
         ],
         "fields_set": [
-          "Id"
+          "Id",
+          "OwnedBy",
+          "Title",
+          "Type"
         ],
         "statuses": [
           400
@@ -7141,7 +7397,10 @@
           "NEGATIVE"
         ],
         "fields_set": [
-          "Id"
+          "Id",
+          "OwnedBy",
+          "Title",
+          "Type"
         ],
         "statuses": [
           400
@@ -7178,6 +7437,459 @@
         "response_fields_asserted": [
           "StatusCode"
         ]
+      },
+      {
+        "name": "Custom Fields - Text",
+        "file": "api/v2_internal/work/tickets/crud/custom_objects/update_ticket_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Text - No caveat",
+        "file": "api/v2_internal/work/tickets/crud/custom_objects/update_ticket_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Part - caveat option Parts equalsTo",
+        "file": "api/v2_internal/work/tickets/crud/custom_objects/update_ticket_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Account - caveat option Customer account equalsTo",
+        "file": "api/v2_internal/work/tickets/crud/custom_objects/update_ticket_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Devuser - caveat option user equalsTo",
+        "file": "api/v2_internal/work/tickets/crud/custom_objects/update_ticket_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Workspace - caveat option Ticket workspace equals to",
+        "file": "api/v2_internal/work/tickets/crud/custom_objects/update_ticket_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should be able to list tickets",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/update_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "MFZUserType",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should be able to list tickets",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/update_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "MFZUserType",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - without caveat ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/update_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option user equalsTo  ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/update_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Customer account equalsTo",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/update_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Customer account belongs to",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/update_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket workspace equals to ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/update_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket workspace belongs to ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/update_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option verified user ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/update_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option user not equalsTo  ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/update_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option user belongs to reporters ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/update_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket group equals to",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/update_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket group belongs to",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/update_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "MFZ Update Ticket - rev user with new group and custom role - caveat option Customer account not equalsTo",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/update_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket workspace not equals to ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/update_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option unverified user ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/update_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "Caveats",
+          "Id",
+          "MFZUserType",
+          "ObjectType",
+          "Privileges",
+          "RevOrg",
+          "RevUser",
+          "RoleCategory",
+          "SuperDevOrg",
+          "Title",
+          "Type",
+          "User"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": null
       },
       {
         "name": "WorksUpdate rejects incompatible subtype changes",
@@ -7240,9 +7952,12 @@
           "INTERNAL_WORKS_UPDATE"
         ],
         "fields_set": [
+          "AppliesToPart",
           "Body",
+          "Description",
           "Id",
           "Limit",
+          "Name",
           "Title",
           "Type"
         ],
@@ -7266,8 +7981,12 @@
           "INTERNAL_WORKS_UPDATE"
         ],
         "fields_set": [
+          "AppliesToPart",
           "Body",
+          "Description",
           "Id",
+          "Name",
+          "Title",
           "Type"
         ],
         "statuses": [
@@ -7289,9 +8008,13 @@
           "PUBLIC_WORKS_UPDATE"
         ],
         "fields_set": [
+          "AppliesToPart",
           "Body",
+          "Description",
           "Id",
           "Limit",
+          "Name",
+          "Title",
           "Type"
         ],
         "statuses": [
@@ -7312,8 +8035,12 @@
           "INTERNAL_WORKS_UPDATE"
         ],
         "fields_set": [
+          "AppliesToPart",
           "Body",
+          "Description",
           "Id",
+          "Name",
+          "Title",
           "Type"
         ],
         "statuses": [
@@ -7324,6 +8051,30 @@
           "StatusCode",
           "Work",
           "Work.AsTicket"
+        ]
+      },
+      {
+        "name": "Should perform complete CRUD lifecycle for a ticket",
+        "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Id",
+          "Name",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Tag",
+          "Tag.Id"
         ]
       },
       {
@@ -7729,5 +8480,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateWork` (HTTP operation `WorksUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.ArtifactOpType\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.IsSystemUpdate\n  - in.Issue.DisplayIdAlias\n  - in.Issue.SpaceId\n  - in.Issue.SprintState\n  - in.Opportunity.Amount.Value\n  - in.Opportunity.AnnualContractValue.Amount.Value\n  - in.Opportunity.AnnualRecurringRevenue.Value\n  - in.Opportunity.Budget.Amount.Value\n  - in.Opportunity.CustomerBudget.Value\n  - in.Opportunity.DisplayIdAlias\n  - in.Opportunity.SpaceId\n  - in.Opportunity.Value.Amount.Value\n  - in.TagOpType\n  - in.Ticket.OwnedByIds.IdValues\n  - in.WorkOneof.Issue.AccountIds.IdValues\n  - in.WorkOneof.Issue.AppliesToPartId\n  - in.WorkOneof.Issue.ArtifactIds.IdValues\n  - in.WorkOneof.Issue.Body.Value\n  - in.WorkOneof.Issue.DevelopedWith.IdValues\n  - in.WorkOneof.Issue.DevrevCopy\n  - in.WorkOneof.Issue.EventContext.Source\n  - in.WorkOneof.Issue.ExternalSourceData.CreatedById\n  - in.WorkOneof.Issue.ExternalSourceData.ModifiedById\n  - in.WorkOneof.Issue.MilestoneId\n  - in.WorkOneof.Issue.OwnedByIds.IdValues\n  - in.WorkOneof.Issue.Priority\n  - in.WorkOneof.Issue.ProjectId\n  - in.WorkOneof.Issue.Reactions.Values\n  - in.WorkOneof.Issue.ReportedById\n  - in.WorkOneof.Issue.ReportedByIds.IdValues\n  - in.WorkOneof.Issue.RevOrgIds.IdValues\n  - in.WorkOneof.Issue.RevScoreMetadata.AccountsViaTickets.IdValues\n  - in.WorkOneof.Issue.RevScoreMetadata.RevOrgsViaPart.Values\n  - in.WorkOneof.Issue.RevScoreMetadata.RevOrgsViaTickets.Values\n  - in.WorkOneof.Issue.SharedWith.Values\n  - in.WorkOneof.Issue.SlaId\n  - in.WorkOneof.Issue.SlaSummary.OrgScheduleId\n  - in.WorkOneof.Issue.SlaSummary.SlaTrackerId\n  - in.WorkOneof.Issue.SlaTrackerId\n  - in.WorkOneof.Issue.SpaceId\n  - in.WorkOneof.Issue.SprintId\n  - in.WorkOneof.Issue.SprintState\n  - in.WorkOneof.Issue.Stage.StageId\n  - in.WorkOneof.Issue.StagedInfo.SyncInUnresolvedFields.Values\n  - in.WorkOneof.Issue.StagedInfo.SyncOutUnresolvedFields.Values\n  - in.WorkOneof.Issue.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.WorkOneof.Issue.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.WorkOneof.Issue.SyncMetadata.LastSyncOut.SyncHistoryId\n  - in.WorkOneof.Issue.SyncMetadata.LastSyncOut.SyncUnitId\n  - in.WorkOneof.Issue.SyncMetadata.SyncedByDevUsers.IdValues\n  - in.WorkOneof.Issue.Title.Value\n  - in.WorkOneof.Issue.UnreadNotificationsMetadata.Ids.IdValues\n  - in.WorkOneof.Opportunity.AccountId\n  - in.WorkOneof.Opportunity.Amount.Value\n  - in.WorkOneof.Opportunity.AnnualContractValue.Amount.Value\n  - (+95 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.DevOid == nil\n  - in.DevOid != objType\n  - in.ActorId\n  - in.ActorId\n  - in.ActorId\n  - in.CustomSchemaSpec.Drop != nil\n  - in.WorkOneof.Ticket.ReportedById == nil\n  - in.WorkOneof.Ticket.ReportedById\n  - in.WorkOneof.Ticket.ReportedById\n  - in.WorkOneof.Ticket.ReportedById\n  - in.WorkOneof.Ticket.UnreadNotificationsMetadata.Ids != nil\n  - in.WorkOneof.Ticket.Stage.StageId == nil\n  - in.WorkOneof.Ticket.Stage.StageId != nil\n  - in.WorkOneof.Ticket.Stage.StageId\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.SyncUnitId == nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.SyncHistoryId == nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.SyncUnitId == nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.SyncHistoryId == nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.SyncUnitId\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.SyncHistoryId\n  - in.WorkOneof.Ticket.SyncMetadata.SyncedByDevUsers != nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncIn != nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncOut != nil\n  - in.WorkOneof.Ticket.StagedInfo.SyncInUnresolvedFields != nil\n  - in.WorkOneof.Ticket.StagedInfo.SyncOutUnresolvedFields != nil\n  - in.WorkOneof.Ticket.ExternalSourceData.CreatedById == nil\n  - in.WorkOneof.Ticket.ExternalSourceData.CreatedById\n  - in.WorkOneof.Ticket.ExternalSourceData.CreatedById\n  - in.WorkOneof.Ticket.ExternalSourceData.CreatedById\n  - in.WorkOneof.Ticket.ExternalSourceData.ModifiedById == nil\n  - in.WorkOneof.Ticket.ExternalSourceData.ModifiedById\n  - in.WorkOneof.Ticket.ExternalSourceData.ModifiedById\n  - in.WorkOneof.Ticket.ExternalSourceData.ModifiedById\n  - (+687 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - dNaN\n  - dNegInf\n  - dPosInf\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `action` -> suggestions []\n  - test field `appliestopart` -> suggestions ['in.WorkOneof.Issue.AppliesToPartId', 'in.WorkOneof.Task.AppliesToPartId', 'in.WorkOneof.Ticket.AppliesToPartId']\n  - test field `appname` -> suggestions []\n  - test field `artifacts` -> suggestions []\n  - test field `baseobject` -> suggestions []\n  - test field `body` -> suggestions []\n  - test field `channel` -> suggestions ['in.WorkOneof.Ticket.SourceChannelV2', 'in.WorkOneof.Ticket.SourceChannelV2Instance']\n  - test field `configurationset` -> suggestions []\n  - test field `contentdescriptor` -> suggestions []\n  - test field `customfields` -> suggestions []\n  - test field `customschemaspec` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `dispatchedchannels` -> suggestions []\n  - test field `dispatchedto` -> suggestions []\n  - test field `dispatchid` -> suggestions []\n  - test field `eventdate` -> suggestions []\n  - test field `filename` -> suggestions []\n  - test field `filesize` -> suggestions []\n  - test field `filetype` -> suggestions []\n  - test field `inputvalues` -> suggestions ['in.Opportunity.Amount.Value', 'in.Opportunity.AnnualContractValue.Amount.Value', 'in.Opportunity.AnnualRecurringRevenue.Value', 'in.Opportunity.Budget.Amount.Value', 'in.Opportunity.CustomerBudget.Value', 'in.Opportunity.Value.Amount.Value', 'in.WorkOneof.Issue.Body.Value', 'in.WorkOneof.Issue.Reactions.Values', 'in.WorkOneof.Issue.RevScoreMetadata.RevOrgsViaPart.Values', 'in.WorkOneof.Issue.RevScoreMetadata.RevOrgsViaTickets.Values', 'in.WorkOneof.Issue.SharedWith.Values', 'in.WorkOneof.Issue.StagedInfo.SyncInUnresolvedFields.Values', 'in.WorkOneof.Issue.StagedInfo.SyncOutUnresolvedFields.Values', 'in.WorkOneof.Issue.Title.Value', 'in.WorkOneof.Opportunity.Amount.Value', 'in.WorkOneof.Opportunity.AnnualContractValue.Amount.Value', 'in.WorkOneof.Opportunity.AnnualContractValue.Currency.Value', 'in.WorkOneof.Opportunity.AnnualRecurringRevenue.Value', 'in.WorkOneof.Opportunity.Body.Value', 'in.WorkOneof.Opportunity.Budget.Amount.Value', 'in.WorkOneof.Opportunity.Budget.Currency.Value', 'in.WorkOneof.Opportunity.CustomerBudget.Value', 'in.WorkOneof.Opportunity.Probability.Value', 'in.WorkOneof.Opportunity.Reactions.Values', 'in.WorkOneof.Opportunity.SharedWith.Values', 'in.WorkOneof.Opportunity.StagedInfo.SyncInUnresolvedFields.Values', 'in.WorkOneof.Opportunity.StagedInfo.SyncOutUnresolvedFields.Values', 'in.WorkOneof.Opportunity.Title.Value', 'in.WorkOneof.Opportunity.Value.Amount.Value', 'in.WorkOneof.Opportunity.Value.Currency.Value', 'in.WorkOneof.Task.Body.Value', 'in.WorkOneof.Task.Reactions.Values', 'in.WorkOneof.Task.StagedInfo.SyncInUnresolvedFields.Values', 'in.WorkOneof.Task.StagedInfo.SyncOutUnresolvedFields.Values', 'in.WorkOneof.Task.Title.Value', 'in.WorkOneof.Ticket.Body.Value', 'in.WorkOneof.Ticket.Channels.Values', 'in.WorkOneof.Ticket.Reactions.Values', 'in.WorkOneof.Ticket.SentimentSummary.Value', 'in.WorkOneof.Ticket.Sessions.Values', 'in.WorkOneof.Ticket.SharedWith.Values', 'in.WorkOneof.Ticket.StagedInfo.SyncInUnresolvedFields.Values', 'in.WorkOneof.Ticket.StagedInfo.SyncOutUnresolvedFields.Values', 'in.WorkOneof.Ticket.SurveysAggregation.Values', 'in.WorkOneof.Ticket.TargetLocale.Value', 'in.WorkOneof.Ticket.Title.Value']\n  - test field `limit` -> suggestions []\n  - test field `manifest` -> suggestions []\n  - test field `member` -> suggestions []\n  - test field `membertype` -> suggestions []\n  - test field `metric` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `operation` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.WorkOneof.Ticket.OwnedByAgentId']\n  - test field `owner` -> suggestions []\n  - test field `previoussteps` -> suggestions []\n  - test field `recipient` -> suggestions []\n  - test field `referencekey` -> suggestions []\n  - test field `response` -> suggestions []\n  - test field `responsechannel` -> suggestions []\n  - test field `responsescore` -> suggestions []\n  - test field `schema` -> suggestions []\n  - test field `slug` -> suggestions []\n  - test field `snapin` -> suggestions []\n  - test field `snapinactionname` -> suggestions []\n  - test field `snapinpackage` -> suggestions []\n  - test field `snapinversion` -> suggestions []\n  - test field `snapkitbody` -> suggestions []\n  - test field `sourcecodeartifact` -> suggestions ['in.WorkOneof.Issue.EventContext.Source', 'in.WorkOneof.Opportunity.EventContext.Source', 'in.WorkOneof.Task.EventContext.Source', 'in.WorkOneof.Ticket.EventContext.Source']\n  - test field `survey` -> suggestions []\n  - test field `targetclosedate` -> suggestions []\n  - test field `text` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions ['in.ArtifactOpType', 'in.TagOpType']\n  - test field `uimetadata` -> suggestions []\n  - test field `usecase` -> suggestions []\n  - test field `workflow` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateWork` (HTTP operation `WorksUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.ArtifactOpType\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.IsSystemUpdate\n  - in.Issue.DisplayIdAlias\n  - in.Issue.SpaceId\n  - in.Issue.SprintState\n  - in.Opportunity.Amount.Value\n  - in.Opportunity.AnnualContractValue.Amount.Value\n  - in.Opportunity.AnnualRecurringRevenue.Value\n  - in.Opportunity.Budget.Amount.Value\n  - in.Opportunity.CustomerBudget.Value\n  - in.Opportunity.DisplayIdAlias\n  - in.Opportunity.SpaceId\n  - in.Opportunity.Value.Amount.Value\n  - in.TagOpType\n  - in.Ticket.OwnedByIds.IdValues\n  - in.WorkOneof.Issue.AccountIds.IdValues\n  - in.WorkOneof.Issue.AppliesToPartId\n  - in.WorkOneof.Issue.ArtifactIds.IdValues\n  - in.WorkOneof.Issue.Body.Value\n  - in.WorkOneof.Issue.DevelopedWith.IdValues\n  - in.WorkOneof.Issue.DevrevCopy\n  - in.WorkOneof.Issue.EventContext.Source\n  - in.WorkOneof.Issue.ExternalSourceData.CreatedById\n  - in.WorkOneof.Issue.ExternalSourceData.ModifiedById\n  - in.WorkOneof.Issue.MilestoneId\n  - in.WorkOneof.Issue.OwnedByIds.IdValues\n  - in.WorkOneof.Issue.Priority\n  - in.WorkOneof.Issue.ProjectId\n  - in.WorkOneof.Issue.Reactions.Values\n  - in.WorkOneof.Issue.ReportedById\n  - in.WorkOneof.Issue.ReportedByIds.IdValues\n  - in.WorkOneof.Issue.RevOrgIds.IdValues\n  - in.WorkOneof.Issue.RevScoreMetadata.AccountsViaTickets.IdValues\n  - in.WorkOneof.Issue.RevScoreMetadata.RevOrgsViaPart.Values\n  - in.WorkOneof.Issue.RevScoreMetadata.RevOrgsViaTickets.Values\n  - in.WorkOneof.Issue.SharedWith.Values\n  - in.WorkOneof.Issue.SlaId\n  - in.WorkOneof.Issue.SlaSummary.OrgScheduleId\n  - in.WorkOneof.Issue.SlaSummary.SlaTrackerId\n  - in.WorkOneof.Issue.SlaTrackerId\n  - in.WorkOneof.Issue.SpaceId\n  - in.WorkOneof.Issue.SprintId\n  - in.WorkOneof.Issue.SprintState\n  - in.WorkOneof.Issue.Stage.StageId\n  - in.WorkOneof.Issue.StagedInfo.SyncInUnresolvedFields.Values\n  - in.WorkOneof.Issue.StagedInfo.SyncOutUnresolvedFields.Values\n  - in.WorkOneof.Issue.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.WorkOneof.Issue.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.WorkOneof.Issue.SyncMetadata.LastSyncOut.SyncHistoryId\n  - in.WorkOneof.Issue.SyncMetadata.LastSyncOut.SyncUnitId\n  - in.WorkOneof.Issue.SyncMetadata.SyncedByDevUsers.IdValues\n  - in.WorkOneof.Issue.Title.Value\n  - in.WorkOneof.Issue.UnreadNotificationsMetadata.Ids.IdValues\n  - in.WorkOneof.Opportunity.AccountId\n  - in.WorkOneof.Opportunity.Amount.Value\n  - in.WorkOneof.Opportunity.AnnualContractValue.Amount.Value\n  - (+95 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.DevOid == nil\n  - in.DevOid != objType\n  - in.ActorId\n  - in.ActorId\n  - in.ActorId\n  - in.CustomSchemaSpec.Drop != nil\n  - in.WorkOneof.Ticket.ReportedById == nil\n  - in.WorkOneof.Ticket.ReportedById\n  - in.WorkOneof.Ticket.ReportedById\n  - in.WorkOneof.Ticket.ReportedById\n  - in.WorkOneof.Ticket.UnreadNotificationsMetadata.Ids != nil\n  - in.WorkOneof.Ticket.Stage.StageId == nil\n  - in.WorkOneof.Ticket.Stage.StageId != nil\n  - in.WorkOneof.Ticket.Stage.StageId\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.SyncUnitId == nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.SyncHistoryId == nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.SyncUnitId == nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.SyncHistoryId == nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.SyncUnitId\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.SyncHistoryId\n  - in.WorkOneof.Ticket.SyncMetadata.SyncedByDevUsers != nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncIn != nil\n  - in.WorkOneof.Ticket.SyncMetadata.LastSyncOut != nil\n  - in.WorkOneof.Ticket.StagedInfo.SyncInUnresolvedFields != nil\n  - in.WorkOneof.Ticket.StagedInfo.SyncOutUnresolvedFields != nil\n  - in.WorkOneof.Ticket.ExternalSourceData.CreatedById == nil\n  - in.WorkOneof.Ticket.ExternalSourceData.CreatedById\n  - in.WorkOneof.Ticket.ExternalSourceData.CreatedById\n  - in.WorkOneof.Ticket.ExternalSourceData.CreatedById\n  - in.WorkOneof.Ticket.ExternalSourceData.ModifiedById == nil\n  - in.WorkOneof.Ticket.ExternalSourceData.ModifiedById\n  - in.WorkOneof.Ticket.ExternalSourceData.ModifiedById\n  - in.WorkOneof.Ticket.ExternalSourceData.ModifiedById\n  - (+677 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - dNaN\n  - dNegInf\n  - dPosInf\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `action` -> suggestions []\n  - test field `appliestopart` -> suggestions ['in.WorkOneof.Issue.AppliesToPartId', 'in.WorkOneof.Task.AppliesToPartId', 'in.WorkOneof.Ticket.AppliesToPartId']\n  - test field `appname` -> suggestions []\n  - test field `artifacts` -> suggestions []\n  - test field `baseobject` -> suggestions []\n  - test field `body` -> suggestions []\n  - test field `caveats` -> suggestions []\n  - test field `channel` -> suggestions ['in.WorkOneof.Ticket.SourceChannelV2', 'in.WorkOneof.Ticket.SourceChannelV2Instance']\n  - test field `configurationset` -> suggestions []\n  - test field `contentdescriptor` -> suggestions []\n  - test field `customfields` -> suggestions []\n  - test field `customschemaspec` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `dispatchedchannels` -> suggestions []\n  - test field `dispatchedto` -> suggestions []\n  - test field `dispatchid` -> suggestions []\n  - test field `eventdate` -> suggestions []\n  - test field `filename` -> suggestions []\n  - test field `filesize` -> suggestions []\n  - test field `filetype` -> suggestions []\n  - test field `filter` -> suggestions []\n  - test field `inputvalues` -> suggestions ['in.Opportunity.Amount.Value', 'in.Opportunity.AnnualContractValue.Amount.Value', 'in.Opportunity.AnnualRecurringRevenue.Value', 'in.Opportunity.Budget.Amount.Value', 'in.Opportunity.CustomerBudget.Value', 'in.Opportunity.Value.Amount.Value', 'in.WorkOneof.Issue.Body.Value', 'in.WorkOneof.Issue.Reactions.Values', 'in.WorkOneof.Issue.RevScoreMetadata.RevOrgsViaPart.Values', 'in.WorkOneof.Issue.RevScoreMetadata.RevOrgsViaTickets.Values', 'in.WorkOneof.Issue.SharedWith.Values', 'in.WorkOneof.Issue.StagedInfo.SyncInUnresolvedFields.Values', 'in.WorkOneof.Issue.StagedInfo.SyncOutUnresolvedFields.Values', 'in.WorkOneof.Issue.Title.Value', 'in.WorkOneof.Opportunity.Amount.Value', 'in.WorkOneof.Opportunity.AnnualContractValue.Amount.Value', 'in.WorkOneof.Opportunity.AnnualContractValue.Currency.Value', 'in.WorkOneof.Opportunity.AnnualRecurringRevenue.Value', 'in.WorkOneof.Opportunity.Body.Value', 'in.WorkOneof.Opportunity.Budget.Amount.Value', 'in.WorkOneof.Opportunity.Budget.Currency.Value', 'in.WorkOneof.Opportunity.CustomerBudget.Value', 'in.WorkOneof.Opportunity.Probability.Value', 'in.WorkOneof.Opportunity.Reactions.Values', 'in.WorkOneof.Opportunity.SharedWith.Values', 'in.WorkOneof.Opportunity.StagedInfo.SyncInUnresolvedFields.Values', 'in.WorkOneof.Opportunity.StagedInfo.SyncOutUnresolvedFields.Values', 'in.WorkOneof.Opportunity.Title.Value', 'in.WorkOneof.Opportunity.Value.Amount.Value', 'in.WorkOneof.Opportunity.Value.Currency.Value', 'in.WorkOneof.Task.Body.Value', 'in.WorkOneof.Task.Reactions.Values', 'in.WorkOneof.Task.StagedInfo.SyncInUnresolvedFields.Values', 'in.WorkOneof.Task.StagedInfo.SyncOutUnresolvedFields.Values', 'in.WorkOneof.Task.Title.Value', 'in.WorkOneof.Ticket.Body.Value', 'in.WorkOneof.Ticket.Channels.Values', 'in.WorkOneof.Ticket.Reactions.Values', 'in.WorkOneof.Ticket.SentimentSummary.Value', 'in.WorkOneof.Ticket.Sessions.Values', 'in.WorkOneof.Ticket.SharedWith.Values', 'in.WorkOneof.Ticket.StagedInfo.SyncInUnresolvedFields.Values', 'in.WorkOneof.Ticket.StagedInfo.SyncOutUnresolvedFields.Values', 'in.WorkOneof.Ticket.SurveysAggregation.Values', 'in.WorkOneof.Ticket.TargetLocale.Value', 'in.WorkOneof.Ticket.Title.Value']\n  - test field `limit` -> suggestions []\n  - test field `manifest` -> suggestions []\n  - test field `member` -> suggestions []\n  - test field `membertype` -> suggestions []\n  - test field `metric` -> suggestions []\n  - test field `mfzusertype` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `objecttype` -> suggestions []\n  - test field `operation` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.WorkOneof.Ticket.OwnedByAgentId']\n  - test field `ownedbyids` -> suggestions []\n  - test field `owner` -> suggestions []\n  - test field `parentids` -> suggestions []\n  - test field `previoussteps` -> suggestions []\n  - test field `privileges` -> suggestions []\n  - test field `recipient` -> suggestions []\n  - test field `referencekey` -> suggestions []\n  - test field `response` -> suggestions []\n  - test field `responsechannel` -> suggestions []\n  - test field `responsescore` -> suggestions []\n  - test field `revorg` -> suggestions []\n  - test field `revuser` -> suggestions []\n  - test field `rolecategory` -> suggestions []\n  - test field `schema` -> suggestions []\n  - test field `slug` -> suggestions []\n  - test field `snapin` -> suggestions []\n  - test field `snapinactionname` -> suggestions []\n  - test field `snapinpackage` -> suggestions []\n  - test field `snapinversion` -> suggestions []\n  - test field `snapkitbody` -> suggestions []\n  - test field `sourcecodeartifact` -> suggestions ['in.WorkOneof.Issue.EventContext.Source', 'in.WorkOneof.Opportunity.EventContext.Source', 'in.WorkOneof.Task.EventContext.Source', 'in.WorkOneof.Ticket.EventContext.Source']\n  - test field `state` -> suggestions ['in.Issue.SprintState', 'in.WorkOneof.Issue.SprintState']\n  - test field `states` -> suggestions []\n  - test field `superdevorg` -> suggestions []\n  - test field `survey` -> suggestions []\n  - test field `targetclosedate` -> suggestions []\n  - test field `text` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions ['in.ArtifactOpType', 'in.TagOpType']\n  - test field `types` -> suggestions []\n  - test field `uimetadata` -> suggestions []\n  - test field `usecase` -> suggestions []\n  - test field `user` -> suggestions []\n  - test field `workflow` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }
