@@ -8,6 +8,49 @@ const app = document.getElementById("app");
 const crumbs = document.getElementById("crumbs");
 
 /* ----------------------------------------------------------------------------
+   Lens: how much of the surface to count.
+   - fullBranches: include generated/library validator branches (default off,
+     so the headline is the service's own logic).
+   - expandMixins: count every nested leaf (default off, so reused mixin
+     subtrees like filters/ids/devrevcopy collapse to one coverable unit).
+   Persisted to localStorage; toggling re-renders the current view.
+---------------------------------------------------------------------------- */
+const LENS = { fullBranches: false, expandMixins: false };
+try {
+  const saved = JSON.parse(localStorage.getItem("lens") || "{}");
+  if (typeof saved.fullBranches === "boolean") LENS.fullBranches = saved.fullBranches;
+  if (typeof saved.expandMixins === "boolean") LENS.expandMixins = saved.expandMixins;
+} catch (e) { /* ignore */ }
+
+// lensField returns the field coverage pair for the active lens.
+function lensField(f) {
+  f = f || {};
+  if (LENS.expandMixins) {
+    return { covered: f.covered_count || 0, total: f.leaf_fields_read_by_rpc || 0, mode: "strict", collapsed: [] };
+  }
+  const r = f.representative || {};
+  return { covered: r.covered || 0, total: r.units || 0, mode: "representative", collapsed: r.collapsed_types || [] };
+}
+
+// lensBranch returns the branch counts for the active lens (service-only by default).
+function lensBranch(b) {
+  b = b || {};
+  if (LENS.fullBranches) {
+    return {
+      total: b.total || 0, present: b.present_arm_exercised || 0,
+      negative: b.negative_arm_exercised || 0, normal: b.absent_arm_exercised || 0,
+      reachable: b.reachable_on_happy_path || 0, both: b.both_arms_exercised || 0, origin: "all",
+    };
+  }
+  const s = (b.by_origin || {}).service || {};
+  return {
+    total: s.total || 0, present: s.present_arm_exercised || 0,
+    negative: s.negative_arm_exercised || 0, normal: s.absent_arm_exercised || 0,
+    reachable: s.reachable_on_happy_path || 0, both: null, origin: "service",
+  };
+}
+
+/* ----------------------------------------------------------------------------
    Safety helpers
    - esc(): escape every value interpolated into innerHTML.
    - attr(): escape for attribute context (adds quote/apostrophe).
@@ -20,6 +63,27 @@ function esc(s) {
   ));
 }
 const attr = esc;
+
+// shortType strips the package prefix from a proto type name for display.
+function shortType(t) {
+  const s = String(t || "");
+  const i = s.lastIndexOf(".");
+  return i >= 0 ? s.slice(i + 1) : s;
+}
+
+// rowFieldPct / rowBranchPct pick the lens-appropriate percentage for a summary row.
+function rowFieldPct(r) { return LENS.expandMixins ? r.field_pct : r.rep_pct; }
+function rowFieldPair(r) {
+  return LENS.expandMixins
+    ? { covered: r.field_covered, total: r.field_total, pct: r.field_pct }
+    : { covered: r.rep_covered, total: r.rep_total, pct: r.rep_pct };
+}
+function rowBranchPct(r) { return LENS.fullBranches ? r.present_pct : r.svc_present_pct; }
+function rowBranchPair(r) {
+  return LENS.fullBranches
+    ? { present: r.present_arm, total: r.branch_total, pct: r.present_pct }
+    : { present: r.svc_present, total: r.svc_branch_total, pct: r.svc_present_pct };
+}
 
 async function getJSON(path) {
   const res = await fetch(path, { cache: "no-cache" });
@@ -143,8 +207,8 @@ async function viewServices(token) {
       <div class="svc-name">${esc(s.service)}</div>
       <div class="svc-meta">${esc(s.rpcs)} RPCs (backend operations) &middot; ${esc(s.mapped)} test-linked &middot; ${esc(s.anomalies)} inputs missing from tests</div>
       <div class="service-metrics">
-        ${mm("Input fields covered", s.field_pct, "field")}
-        ${mm("Branches reached", s.present_pct, "reached")}
+        ${mm("Input fields covered", rowFieldPct(s), "field")}
+        ${mm("Branches reached", rowBranchPct(s), "reached")}
         ${mm("Error paths tested", s.negative_pct, "errorPath")}
         ${mm("Response codes checked", s.status_pct, "status")}
         ${s.dep_used ? mm("Dependency results checked", Math.round(100 * (s.dep_checked || 0) / s.dep_used), "status") : ""}
@@ -199,9 +263,16 @@ async function viewService(svc, token) {
     </div>`;
   };
 
-  const fieldRes = fmtPct(t.field_covered, t.field_total);
-  const presentRes = fmtPct(t.present_arm, t.branch_total);
-  const negRes = fmtPct(t.negative_arm, t.branch_total);
+  const useRep = !LENS.expandMixins;
+  const fieldCov = useRep ? (t.rep_covered || 0) : t.field_covered;
+  const fieldTot = useRep ? (t.rep_total || 0) : t.field_total;
+  const fieldRes = fmtPct(fieldCov, fieldTot);
+  const useSvc = !LENS.fullBranches;
+  const brPresent = useSvc ? (t.svc_present || 0) : t.present_arm;
+  const brTotal = useSvc ? (t.svc_branch_total || 0) : t.branch_total;
+  const brNeg = useSvc ? (t.svc_negative || 0) : t.negative_arm;
+  const presentRes = fmtPct(brPresent, brTotal);
+  const negRes = fmtPct(brNeg, brTotal);
   const absentRes = fmtPct(t.absent_arm, t.reachable_on_happy);
   const statusRes = fmtPct(t.status_asserted, t.status_documented);
 
@@ -222,9 +293,9 @@ async function viewService(svc, token) {
 
     <div class="stat-strip">
       ${stat("RPCs", { kind: "value", text: String(t.rpcs) }, `${t.mapped} test-linked / ${t.unmapped} not linked`)}
-      ${stat("Input fields covered", fieldRes, `${t.field_covered} / ${t.field_total} input fields`, "field")}
-      ${stat("Branches reached", presentRes, `${t.present_arm} / ${t.branch_total} branches`, "reached")}
-      ${stat("Error paths tested", negRes, `${t.negative_arm} / ${t.branch_total} branches`, "errorPath")}
+      ${stat("Input fields covered", fieldRes, `${fieldCov} / ${fieldTot} ${useRep ? "input units" : "input fields"}`, "field")}
+      ${stat("Branches reached", presentRes, `${brPresent} / ${brTotal} ${useSvc ? "service branches" : "branches"}`, "reached")}
+      ${stat("Error paths tested", negRes, `${brNeg} / ${brTotal} ${useSvc ? "service branches" : "branches"}`, "errorPath")}
       ${stat("Normal paths tested", absentRes, `${t.absent_arm} / ${t.reachable_on_happy} branches`, "normalPath")}
       ${stat("Response codes checked", statusRes, `${t.status_asserted} / ${t.status_documented} documented`, "status")}
       ${stat("Calls other services", { kind: "value", text: String(t.dep_rpcs || 0) }, `${t.dep_rpcs_reached || 0} of ${t.dep_rpcs || 0} reached by a test`, "deps")}
@@ -323,7 +394,9 @@ function renderTable(svc, allRows) {
       ? '<span class="tag unmapped" title="No test could be linked to this operation">not linked</span>'
       : "";
     const ratio = (c, t) => `${c}/${t}`;
-    const fieldRes = fmtPct(r.field_covered, r.field_total, { unmapped });
+    const fp = rowFieldPair(r);
+    const bp = rowBranchPair(r);
+    const fieldRes = fmtPct(fp.covered, fp.total, { unmapped });
     // present/negative/status come pre-divided as percentages; treat as value unless unmapped.
     const pv = (pct) => unmapped ? { kind: "unknown", text: "Not measured", pct: null } : { kind: "value", text: pct.toFixed(1) + "%", pct };
     const href = `#/${encodeURIComponent(svc)}/${encodeURIComponent(r.rpc)}`;
@@ -331,9 +404,9 @@ function renderTable(svc, allRows) {
       <td><a class="rpc-link" href="${attr(href)}">${esc(r.rpc)}</a> ${tag}</td>
       <td>${r.operation ? `<span class="op">${esc(r.operation)}</span>` : '<span class="empty-inline">No operation link</span>'}</td>
       <td class="num">${esc(r.tests)}</td>
-      <td class="num">${pctCell(fieldRes, { ratio: ratio(r.field_covered, r.field_total) })}</td>
-      <td class="num">${pctCell(pv(r.present_pct))}</td>
-      <td class="num">${pctCell(pv(r.negative_pct))}</td>
+      <td class="num">${pctCell(fieldRes, { ratio: ratio(fp.covered, fp.total) })}</td>
+      <td class="num">${pctCell(unmapped ? pv(0) : { kind: "value", text: bp.pct.toFixed(1) + "%", pct: bp.pct })}</td>
+      <td class="num">${pctCell(pv(LENS.fullBranches ? r.negative_pct : r.svc_negative_pct))}</td>
       <td class="num">${pctCell(unmapped && r.status_pct === 0 ? { kind: "unknown", text: "Not measured" } : pv(r.status_pct))}</td>
       <td class="num">${r.anomaly_count ? esc(r.anomaly_count) : '<span class="muted">0</span>'}</td>
     </tr>`;
@@ -387,9 +460,11 @@ async function viewRpc(svc, rpc, token) {
   const depth = f.by_depth || {};
   const unmapped = !!c.unmapped;
 
-  const leaf = f.leaf_fields_read_by_rpc || 0;
-  const covered = f.covered_count || 0;
+  const lf = lensField(f);
+  const leaf = lf.total;
+  const covered = lf.covered;
   const fieldRes = fmtPct(covered, leaf, { unmapped });
+  const lb = lensBranch(b);
 
   // ---- sections (for jump nav + counts) ----
   const fieldGaps = f.gaps || [];
@@ -443,12 +518,13 @@ async function viewRpc(svc, rpc, token) {
       <h3>Input field coverage ${help(HELP.field)}</h3>
       <p class="panel-sub">Does a test fill each input the code reads? (the data)</p>
       <div class="kv-list">
-        <div class="kv"><span class="k">Input fields read by the code</span><span class="v">${leaf}</span></div>
+        <div class="kv"><span class="k">${lf.mode === "representative" ? "Input units (mixins collapsed)" : "Input fields read by the code"}</span><span class="v">${leaf}</span></div>
         <div class="kv"><span class="k">Covered (filled by a test)</span>
           <span class="v ${fieldRes.kind !== "value" ? "na" : ""}">${esc(fieldRes.text)} <small>${covered}/${leaf}</small></span></div>
+        ${lf.mode === "representative" && lf.collapsed.length ? `<div class="kv"><span class="k">Collapsed mixin types</span><span class="v"><small>${esc(lf.collapsed.map(shortType).join(", "))}</small></span></div>` : ""}
         <div class="kv"><span class="k">Filled by positive tests</span><span class="v">${f.set_by_positive_tests || 0}</span></div>
         <div class="kv"><span class="k">Filled by negative tests</span><span class="v">${f.set_by_negative_tests || 0}</span></div>
-        <div class="kv"><span class="k">By nesting depth ${help(HELP.depth)}</span><span class="v"></span></div>
+        <div class="kv"><span class="k">By nesting depth (all leaves) ${help(HELP.depth)}</span><span class="v"></span></div>
         ${depthRow(depthLegend.top_level, depth.top_level)}
         ${depthRow(depthLegend.nested, depth.nested)}
         ${depthRow(depthLegend.deep, depth.deep)}
@@ -458,18 +534,18 @@ async function viewRpc(svc, rpc, token) {
   const branchPanel = `
     <div class="panel">
       <h3>Branch coverage</h3>
-      <p class="panel-sub">Does a test exercise each if-condition that reads an input? (the logic)</p>
+      <p class="panel-sub">Does a test exercise each if-condition that reads an input? (${lb.origin === "service" ? "service-logic branches only" : "all branches incl. generated/library"})</p>
       <div class="kv-list">
-        <div class="kv"><span class="k">Input-driven branches (if-conditions)</span><span class="v">${b.total || 0}</span></div>
+        <div class="kv"><span class="k">Input-driven branches (if-conditions)</span><span class="v">${lb.total}</span></div>
         <div class="kv"><span class="k">Reached by a passing request</span><span class="v">${b.happy_path_reached ? "yes" : "no"}</span></div>
         <div class="kv"><span class="k">Reached: a test fills the input ${help(HELP.reached)}</span>
-          <span class="v">${esc(fmtPct(b.present_arm_exercised || 0, b.total || 0, { unmapped }).text)} <small>${b.present_arm_exercised || 0}/${b.total || 0}</small></span></div>
+          <span class="v">${esc(fmtPct(lb.present, lb.total, { unmapped }).text)} <small>${lb.present}/${lb.total}</small></span></div>
         <div class="kv"><span class="k">Error path tested ${help(HELP.errorPath)}</span>
-          <span class="v">${esc(fmtPct(b.negative_arm_exercised || 0, b.total || 0, { unmapped }).text)} <small>${b.negative_arm_exercised || 0}/${b.total || 0}</small></span></div>
+          <span class="v">${esc(fmtPct(lb.negative, lb.total, { unmapped }).text)} <small>${lb.negative}/${lb.total}</small></span></div>
         <div class="kv"><span class="k">Normal path tested ${help(HELP.normalPath)}</span>
-          <span class="v">${esc(fmtPct(b.absent_arm_exercised || 0, b.reachable_on_happy_path || 0, { unmapped }).text)} <small>${b.absent_arm_exercised || 0}/${b.reachable_on_happy_path || 0}</small></span></div>
-        <div class="kv"><span class="k">Both paths tested = branch coverage ${help(HELP.branchBoth)}</span>
-          <span class="v">${esc(fmtPct(b.both_arms_exercised || 0, b.total || 0, { unmapped }).text)} <small>${b.both_arms_exercised || 0}/${b.total || 0}</small></span></div>
+          <span class="v">${esc(fmtPct(lb.normal, lb.reachable, { unmapped }).text)} <small>${lb.normal}/${lb.reachable}</small></span></div>
+        ${lb.both !== null ? `<div class="kv"><span class="k">Both paths tested = branch coverage ${help(HELP.branchBoth)}</span>
+          <span class="v">${esc(fmtPct(lb.both, lb.total, { unmapped }).text)} <small>${lb.both}/${lb.total}</small></span></div>` : ""}
       </div>
     </div>`;
 
@@ -852,4 +928,23 @@ async function route() {
 }
 
 window.addEventListener("hashchange", route);
+
+// Lens toggles: persist and re-render the current view, preserving scroll.
+function wireLens() {
+  const fb = document.getElementById("lens-full-branches");
+  const em = document.getElementById("lens-expand-mixins");
+  if (!fb || !em) return;
+  fb.checked = LENS.fullBranches;
+  em.checked = LENS.expandMixins;
+  const onChange = () => {
+    LENS.fullBranches = fb.checked;
+    LENS.expandMixins = em.checked;
+    try { localStorage.setItem("lens", JSON.stringify(LENS)); } catch (e) { /* ignore */ }
+    const y = window.scrollY;
+    route().then(() => window.scrollTo(0, y));
+  };
+  fb.addEventListener("change", onChange);
+  em.addEventListener("change", onChange);
+}
+wireLens();
 route();

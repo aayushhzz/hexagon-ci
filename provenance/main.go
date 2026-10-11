@@ -175,10 +175,11 @@ func main() {
 			}
 		}
 		reports := make([]CoverageReport, 0, len(results))
+		sharedTypes := detectSharedTypes(results)
 		for _, p := range results {
 			eff := effectiveAliases(fm, p.RPC, aliases)
 			respEff := effectiveResponseAliases(fm, p.RPC)
-			reports = append(reports, buildCoverage(p, byRPC[p.RPC], byRPCOp[p.RPC], eff, respEff, statusMap))
+			reports = append(reports, buildCoverage(p, byRPC[p.RPC], byRPCOp[p.RPC], eff, respEff, statusMap, sharedTypes))
 		}
 		if *scaffold != "" {
 			if err := writeScaffold(*scaffold, reports); err != nil {

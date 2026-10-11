@@ -144,6 +144,13 @@ func (l *loaded) analyze(ep entrypoint, dir string) *Provenance {
 		a.cur.InputPaths = append(a.cur.InputPaths, InputPath{Path: p, Kinds: ks})
 	}
 	sort.Slice(a.cur.InputPaths, func(i, j int) bool { return a.cur.InputPaths[i].Path < a.cur.InputPaths[j].Path })
+	// Tag each path node with the proto type at that node, used downstream to
+	// collapse shared mixin subtrees (devrevcopy, custom_fields, ...).
+	for i := range a.cur.InputPaths {
+		ip := &a.cur.InputPaths[i]
+		comps := splitRel(strings.TrimPrefix(ip.Path, "in"))
+		ip.Type = typeNameOf(typeAtPath(ep.requestType, comps))
+	}
 	l.analyzeOutput(ep, a.cur)
 	return a.cur
 }
@@ -814,6 +821,43 @@ func typeStr(t types.Type) string {
 		return ""
 	}
 	return shortName(t.String())
+}
+
+// typeAtPath resolves the type of the field reached by walking comps (Go field
+// names) from the request type.
+func typeAtPath(root types.Type, comps []string) types.Type {
+	t := root
+	for _, c := range comps {
+		s := structOf(t)
+		if s == nil {
+			return nil
+		}
+		ft, ok := fieldTypeByName(s, c)
+		if !ok {
+			return nil
+		}
+		t = ft
+	}
+	return t
+}
+
+// typeNameOf peels pointer/slice/array/map wrappers and returns the short type
+// name of the underlying element.
+func typeNameOf(t types.Type) string {
+	for {
+		switch x := t.(type) {
+		case *types.Pointer:
+			t = x.Elem()
+		case *types.Slice:
+			t = x.Elem()
+		case *types.Array:
+			t = x.Elem()
+		case *types.Map:
+			t = x.Elem()
+		default:
+			return typeStr(t)
+		}
+	}
 }
 
 func shortName(s string) string {

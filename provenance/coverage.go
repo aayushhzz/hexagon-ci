@@ -104,8 +104,20 @@ type FieldCoverage struct {
 	SetByPositiveTests  int            `json:"set_by_positive_tests"`
 	SetByNegativeTests  int            `json:"set_by_negative_tests"`
 	ByDepth             DepthBands     `json:"by_depth"`
+	Representative      RepCoverage    `json:"representative"`
 	Covered             []CoveredField `json:"covered"`
 	Gaps                []string       `json:"gaps"`
+}
+
+// RepCoverage is "representative" field coverage: shared mixin subtrees
+// (devrevcopy, custom_fields, ids, ...) collapse to a single coverable unit, so
+// one test for a subtree counts rather than demanding every nested leaf. This
+// is the default, less-noisy lens; strict per-leaf numbers remain above.
+type RepCoverage struct {
+	Units          int      `json:"units"`
+	Covered        int      `json:"covered"`
+	Pct            float64  `json:"pct"`
+	CollapsedTypes []string `json:"collapsed_types"`
 }
 
 type CoveredField struct {
@@ -418,7 +430,7 @@ func nameLooksResponse(name string) bool {
 }
 
 // buildCoverage intersects provenance for one RPC with aggregated op facts.
-func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]string, responseAliases map[string]string, statusSpec map[string][]int) CoverageReport {
+func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]string, responseAliases map[string]string, statusSpec map[string][]int, sharedTypes map[string]bool) CoverageReport {
 	rep := CoverageReport{RPC: p.RPC, Operation: op}
 	leaves := leafReadPaths(p)
 	rep.Fields.LeafFieldsReadByRPC = len(leaves)
@@ -428,6 +440,7 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 		rep.Unmapped = true
 		rep.Fields.Gaps = leaves
 		rep.Fields.ByDepth = depthTotals(leaves)
+		rep.Fields.Representative = repCoverage(p, leaves, map[string]bool{}, sharedTypes)
 		rep.Branches.Gaps = append([]Branch{}, p.Branches...)
 		rep.Branches.ReachableOnHappy = reachableOnHappyCount(p.Branches)
 		for _, b := range p.Branches {
@@ -487,6 +500,11 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 	rep.Fields.CoveredCount = len(rep.Fields.Covered)
 	rep.Fields.CoveragePct = pct(rep.Fields.CoveredCount, rep.Fields.LeafFieldsReadByRPC)
 	finalizeBands(&rep.Fields.ByDepth)
+	coveredSet := map[string]bool{}
+	for _, cf := range rep.Fields.Covered {
+		coveredSet[cf.Path] = true
+	}
+	rep.Fields.Representative = repCoverage(p, leaves, coveredSet, sharedTypes)
 
 	// Branch coverage (outcome-aware). happy_path_reached is an RPC-level signal:
 	// if a success test invoked the RPC at all, the top-level validator guards ran
@@ -1030,6 +1048,112 @@ func leafReadPaths(p *Provenance) []string {
 	}
 	sort.Strings(out)
 	return out
+}
+
+// detectSharedTypes flags proto message types reused as internal nodes across
+// many RPCs in one run. These are the mixin/shared types (devrevcopy,
+// custom_fields, id types, ...) that representative coverage collapses. A
+// per-RPC payload object (used by one or few RPCs) stays expanded.
+func detectSharedTypes(all []*Provenance) map[string]bool {
+	rpcsByType := map[string]map[string]bool{}
+	for _, p := range all {
+		if p == nil {
+			continue
+		}
+		for t := range internalNodeTypes(p) {
+			if rpcsByType[t] == nil {
+				rpcsByType[t] = map[string]bool{}
+			}
+			rpcsByType[t][p.RPC] = true
+		}
+	}
+	k := len(all) * 2 / 100
+	if k < 3 {
+		k = 3
+	}
+	shared := map[string]bool{}
+	for t, rpcs := range rpcsByType {
+		if len(rpcs) >= k {
+			shared[t] = true
+		}
+	}
+	return shared
+}
+
+// internalNodeTypes returns the types of non-root nodes that have at least one
+// deeper read path (i.e. message nodes, not scalar leaves) for one RPC.
+func internalNodeTypes(p *Provenance) map[string]bool {
+	typeByPath := map[string]string{}
+	paths := make([]string, 0, len(p.InputPaths))
+	for _, ip := range p.InputPaths {
+		typeByPath[ip.Path] = ip.Type
+		paths = append(paths, ip.Path)
+	}
+	out := map[string]bool{}
+	for _, pa := range paths {
+		if pa == "in" || typeByPath[pa] == "" {
+			continue
+		}
+		for _, q := range paths {
+			if len(q) > len(pa) && strings.HasPrefix(q, pa+".") {
+				out[typeByPath[pa]] = true
+				break
+			}
+		}
+	}
+	return out
+}
+
+// repCoverage computes representative field coverage: each leaf collapses to the
+// outermost ancestor whose type is a shared mixin; non-mixin leaves stay
+// individual. A unit is covered if any of its leaves is covered.
+func repCoverage(p *Provenance, leaves []string, coveredSet, sharedTypes map[string]bool) RepCoverage {
+	typeByPath := map[string]string{}
+	for _, ip := range p.InputPaths {
+		typeByPath[ip.Path] = ip.Type
+	}
+	unitCovered := map[string]bool{}
+	unitType := map[string]string{}
+	for _, leaf := range leaves {
+		key, typ := repUnit(leaf, typeByPath, sharedTypes)
+		if _, seen := unitCovered[key]; !seen {
+			unitCovered[key] = false
+			unitType[key] = typ
+		}
+		if coveredSet[leaf] {
+			unitCovered[key] = true
+		}
+	}
+	collapsed := map[string]bool{}
+	covered := 0
+	for key, ok := range unitCovered {
+		if ok {
+			covered++
+		}
+		if t := unitType[key]; t != "" {
+			collapsed[t] = true
+		}
+	}
+	return RepCoverage{
+		Units:          len(unitCovered),
+		Covered:        covered,
+		Pct:            pct(covered, len(unitCovered)),
+		CollapsedTypes: sortedKeys(collapsed),
+	}
+}
+
+// repUnit returns the representative unit key for a leaf: the outermost ancestor
+// path (closest to the root, excluding the root) whose type is a shared mixin,
+// or the leaf itself when none of its ancestors is shared.
+func repUnit(leaf string, typeByPath map[string]string, sharedTypes map[string]bool) (string, string) {
+	comps := strings.Split(leaf, ".")
+	for i := 2; i <= len(comps); i++ { // i=2 skips the bare root "in"
+		prefix := strings.Join(comps[:i], ".")
+		if i < len(comps) && sharedTypes[typeByPath[prefix]] {
+			return prefix, typeByPath[prefix]
+		}
+	}
+	return leaf, ""
 }
 
 // mapOpToRPC derives the janus RPC name for an API operation, honoring overrides

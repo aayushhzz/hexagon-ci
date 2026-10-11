@@ -174,6 +174,15 @@ beneath them (intermediate message nodes like `in.Account` are excluded).
   out by large optional filter trees.
 - `covered[]` each covered leaf, `match` (`exact` or `alias`), and the tests.
 - `gaps[]` leaf fields no test sets. The actionable add-a-test list.
+- `representative` the default, less-noisy lens. Reused mixin subtrees (filters,
+  id types, devrevcopy, custom_fields, ...) collapse to a single coverable
+  unit, so one test for a subtree counts rather than demanding every nested
+  leaf. A type is treated as a shared mixin when it is reused as an internal
+  node across several RPCs in the run (so a per-RPC payload object stays
+  expanded). `units` / `covered` / `pct` are the collapsed counts and
+  `collapsed_types` lists the mixin types that were folded. The strict per-leaf
+  numbers above remain for when you want them. Each input path also carries its
+  proto `type`, which drives this collapsing.
 
 ### Branch (validation) metrics (`branches`)
 
@@ -201,7 +210,9 @@ path). Metrics are outcome-aware:
   `service` (the analyzed module's own logic, the branches that matter most),
   `generated` (proto `.pb` / `.pb.validator` nil-guards), and `library` (other
   dependency code). Use the `service` bucket to judge how well tests exercise
-  the RPC's real code paths without generated validator noise diluting it.
+  the RPC's real code paths without generated validator noise diluting it. The
+  site defaults its branch headline to this `service` bucket; a view toggle adds
+  back generated/library guards.
 - `gaps[]` branches whose present arm no test exercises.
 
 So an empty-body smoke test reads `happy_path_reached: true`,

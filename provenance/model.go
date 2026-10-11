@@ -29,6 +29,7 @@ type OutputPath struct {
 type InputPath struct {
 	Path  string   `json:"path"`
 	Kinds []string `json:"kinds"`
+	Type  string   `json:"type,omitempty"` // proto type name at this path node (for mixin collapsing)
 }
 
 type Branch struct {

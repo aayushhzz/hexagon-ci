@@ -99,9 +99,15 @@ def summary_row(entry):
         "field_pct": f.get("coverage_pct", 0.0) or 0.0,
         "field_covered": f.get("covered_count", 0) or 0,
         "field_total": f.get("leaf_fields_read_by_rpc", 0) or 0,
+        "rep_pct": (f.get("representative") or {}).get("pct", 0.0) or 0.0,
+        "rep_covered": (f.get("representative") or {}).get("covered", 0) or 0,
+        "rep_total": (f.get("representative") or {}).get("units", 0) or 0,
         "svc_present_pct": svc.get("present_arm_pct", 0.0) or 0.0,
+        "svc_present": svc.get("present_arm_exercised", 0) or 0,
         "svc_negative_pct": svc.get("negative_arm_pct", 0.0) or 0.0,
         "svc_branch_total": svc.get("total", 0) or 0,
+        "present_arm": b.get("present_arm_exercised", 0) or 0,
+        "branch_total": b.get("total", 0) or 0,
         "present_pct": b.get("present_arm_pct", 0.0) or 0.0,
         "negative_pct": b.get("negative_arm_pct", 0.0) or 0.0,
         "status_pct": s.get("coverage_pct", 0.0) or 0.0,
@@ -124,6 +130,12 @@ def build_service(service, cov, prov):
     def agg(key, sub):
         return sum((e.get(key) or {}).get(sub, 0) or 0 for e in mapped)
 
+    def agg_rep(sub):
+        return sum(((e.get("fields") or {}).get("representative") or {}).get(sub, 0) or 0 for e in mapped)
+
+    def agg_svc(sub):
+        return sum((((e.get("branches") or {}).get("by_origin") or {}).get("service") or {}).get(sub, 0) or 0 for e in mapped)
+
     status_doc = sum(len((e.get("status") or {}).get("documented") or []) for e in mapped)
     status_hit = sum(
         len(set((e.get("status") or {}).get("asserted") or []) & set((e.get("status") or {}).get("documented") or []))
@@ -142,11 +154,16 @@ def build_service(service, cov, prov):
         "unmapped": len(entries) - len(mapped),
         "field_covered": agg("fields", "covered_count"),
         "field_total": agg("fields", "leaf_fields_read_by_rpc"),
+        "rep_covered": agg_rep("covered"),
+        "rep_total": agg_rep("units"),
         "present_arm": agg("branches", "present_arm_exercised"),
         "negative_arm": agg("branches", "negative_arm_exercised"),
         "absent_arm": agg("branches", "absent_arm_exercised"),
         "reachable_on_happy": agg("branches", "reachable_on_happy_path"),
         "branch_total": agg("branches", "total"),
+        "svc_present": agg_svc("present_arm_exercised"),
+        "svc_negative": agg_svc("negative_arm_exercised"),
+        "svc_branch_total": agg_svc("total"),
         "status_documented": status_doc,
         "status_asserted": status_hit,
         "anomalies": anomalies_total,
@@ -156,7 +173,10 @@ def build_service(service, cov, prov):
         "dep_checked": dep_checked,
     }
     totals["field_pct"] = pct(totals["field_covered"], totals["field_total"])
+    totals["rep_pct"] = pct(totals["rep_covered"], totals["rep_total"])
     totals["present_pct"] = pct(totals["present_arm"], totals["branch_total"])
+    totals["svc_present_pct"] = pct(totals["svc_present"], totals["svc_branch_total"])
+    totals["svc_negative_pct"] = pct(totals["svc_negative"], totals["svc_branch_total"])
     totals["negative_pct"] = pct(totals["negative_arm"], totals["branch_total"])
     totals["absent_pct"] = pct(totals["absent_arm"], totals["reachable_on_happy"])
     totals["status_pct"] = pct(totals["status_asserted"], totals["status_documented"])
@@ -190,7 +210,9 @@ def build_service(service, cov, prov):
         "rpcs": totals["rpcs"],
         "mapped": totals["mapped"],
         "field_pct": totals["field_pct"],
+        "rep_pct": totals["rep_pct"],
         "present_pct": totals["present_pct"],
+        "svc_present_pct": totals["svc_present_pct"],
         "negative_pct": totals["negative_pct"],
         "status_pct": totals["status_pct"],
         "anomalies": totals["anomalies"],
