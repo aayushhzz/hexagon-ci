@@ -363,7 +363,7 @@ func _() {
 	})
 }`
 	body := parseFirstItBody(t, src)
-	ops, _, _, _ := scanItBody(body)
+	ops, _, _, _, _ := scanItBody(body)
 	want := []string{"DevUsersActivate", "DevUsersGetPost"}
 	if !reflect.DeepEqual(ops, want) {
 		t.Fatalf("scanItBody ops = %v, want %v", ops, want)
@@ -451,7 +451,7 @@ func _() {
 	})
 }`
 	body := parseFirstItBody(t, src)
-	ops, fields, _, _ := scanItBody(body)
+	ops, fields, _, _, _ := scanItBody(body)
 	if len(ops) != 1 || ops[0] != "WorksCountPost" {
 		t.Fatalf("ops = %v, want [WorksCountPost]", ops)
 	}
@@ -629,5 +629,45 @@ func TestServerGatedBranch(t *testing.T) {
 		if got := isServerGatedBranch(Branch{PredicatePaths: tc.paths}); got != tc.want {
 			t.Errorf("isServerGatedBranch(%v) = %v, want %v", tc.paths, got, tc.want)
 		}
+	}
+}
+
+// TestScanItBodyErrorAssertions guards detection of error vs success assertions.
+func TestScanItBodyErrorAssertions(t *testing.T) {
+	cases := []struct {
+		name     string
+		assert   string
+		success  bool
+		negError bool
+	}{
+		{"benil", "Expect(err).To(BeNil())", true, false},
+		{"tonot", "Expect(err).ToNot(BeNil())", false, true},
+		{"not", "Expect(err).To(Not(BeNil()))", false, true},
+		{"haveoccurred", "Expect(err).To(HaveOccurred())", false, true},
+		{"nothaveoccurred", "Expect(err).ToNot(HaveOccurred())", true, false},
+	}
+	for _, tc := range cases {
+		src := "package x\n\nfunc _() {\n\tIt(\"t\", func() {\n\t\thttp_utils.MakeRequest(ctx, ClientV2.WorksCountPost, req, &resp)\n\t\t" + tc.assert + "\n\t})\n}\n"
+		body := parseFirstItBody(t, src)
+		_, _, _, success, negErr := scanItBody(body)
+		if success != tc.success || negErr != tc.negError {
+			t.Errorf("%s (%s): success=%v negError=%v, want success=%v negError=%v", tc.name, tc.assert, success, negErr, tc.success, tc.negError)
+		}
+	}
+}
+
+func TestHTTPStatusCodeSelector(t *testing.T) {
+	src := `package x
+
+func _() {
+	It("t", func() {
+		http_utils.MakeRequest(ctx, ClientV2.WorksCountPost, req, &resp)
+		Expect(http_resp.StatusCode).To(Equal(http.StatusBadRequest))
+	})
+}`
+	body := parseFirstItBody(t, src)
+	_, _, statuses, _, _ := scanItBody(body)
+	if len(statuses) != 1 || statuses[0] != 400 {
+		t.Fatalf("statuses=%v, want [400]", statuses)
 	}
 }

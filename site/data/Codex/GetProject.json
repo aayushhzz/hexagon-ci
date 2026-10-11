@@ -17,19 +17,20 @@
         503
       ],
       "asserted": [
-        200
+        200,
+        201,
+        404
       ],
       "missing": [
         400,
         401,
         403,
-        404,
         413,
         429,
         500,
         503
       ],
-      "coverage_pct": 11.1
+      "coverage_pct": 22.2
     },
     "fields": {
       "leaf_fields_read_by_rpc": 2,
@@ -37,7 +38,7 @@
       "coverage_pct": 50,
       "request_fields_set_by_tests": 1,
       "set_by_positive_tests": 1,
-      "set_by_negative_tests": 0,
+      "set_by_negative_tests": 1,
       "by_depth": {
         "top_level": {
           "total": 2,
@@ -88,8 +89,8 @@
       "present_arm_pct": 75,
       "absent_arm_exercised": 1,
       "absent_arm_pct": 25,
-      "negative_arm_exercised": 0,
-      "negative_arm_pct": 0,
+      "negative_arm_exercised": 2,
+      "negative_arm_pct": 50,
       "both_arms_exercised": 0,
       "coverage_pct": 75,
       "by_origin": {
@@ -107,8 +108,8 @@
           "reachable_on_happy_path": 1,
           "present_arm_exercised": 1,
           "present_arm_pct": 100,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "negative_arm_exercised": 1,
+          "negative_arm_pct": 100,
           "absent_arm_exercised": 0
         },
         "library": {
@@ -116,8 +117,8 @@
           "reachable_on_happy_path": 1,
           "present_arm_exercised": 1,
           "present_arm_pct": 100,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "negative_arm_exercised": 1,
+          "negative_arm_pct": 100,
           "absent_arm_exercised": 0
         }
       },
@@ -218,8 +219,12 @@
         "fields_set": [
           "Id"
         ],
-        "statuses": null,
+        "statuses": [
+          200,
+          404
+        ],
         "asserts_success": true,
+        "asserts_error": false,
         "response_fields_asserted": [
           "StatusCode"
         ]
@@ -231,8 +236,11 @@
         "fields_set": [
           "Id"
         ],
-        "statuses": null,
-        "asserts_success": true,
+        "statuses": [
+          200
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
         "response_fields_asserted": [
           "Project",
           "StatusCode"
@@ -245,8 +253,11 @@
         "fields_set": [
           "Id"
         ],
-        "statuses": null,
+        "statuses": [
+          404
+        ],
         "asserts_success": false,
+        "asserts_error": false,
         "response_fields_asserted": [
           "StatusCode"
         ]
@@ -258,8 +269,12 @@
         "fields_set": [
           "Id"
         ],
-        "statuses": null,
+        "statuses": [
+          200,
+          201
+        ],
         "asserts_success": true,
+        "asserts_error": false,
         "response_fields_asserted": [
           "Project",
           "Project.CustomFields",
@@ -274,8 +289,12 @@
         "fields_set": [
           "Id"
         ],
-        "statuses": null,
+        "statuses": [
+          200,
+          201
+        ],
         "asserts_success": true,
+        "asserts_error": false,
         "response_fields_asserted": [
           "Project",
           "Project.CustomFields",
@@ -318,5 +337,5 @@
     "errors": [],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetProject` (HTTP operation `ProjectsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UpdateCache\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetProject` (HTTP operation `ProjectsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UpdateCache\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

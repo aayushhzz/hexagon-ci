@@ -17,19 +17,19 @@
         503
       ],
       "asserted": [
-        200
+        200,
+        403
       ],
       "missing": [
         400,
         401,
-        403,
         404,
         413,
         429,
         500,
         503
       ],
-      "coverage_pct": 11.1
+      "coverage_pct": 22.2
     },
     "fields": {
       "leaf_fields_read_by_rpc": 4,
@@ -37,7 +37,7 @@
       "coverage_pct": 25,
       "request_fields_set_by_tests": 1,
       "set_by_positive_tests": 1,
-      "set_by_negative_tests": 0,
+      "set_by_negative_tests": 1,
       "by_depth": {
         "top_level": {
           "total": 4,
@@ -90,8 +90,8 @@
       "present_arm_pct": 72.7,
       "absent_arm_exercised": 21,
       "absent_arm_pct": 95.5,
-      "negative_arm_exercised": 0,
-      "negative_arm_pct": 0,
+      "negative_arm_exercised": 15,
+      "negative_arm_pct": 68.2,
       "both_arms_exercised": 15,
       "coverage_pct": 72.7,
       "by_origin": {
@@ -100,8 +100,8 @@
           "reachable_on_happy_path": 16,
           "present_arm_exercised": 12,
           "present_arm_pct": 75,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "negative_arm_exercised": 11,
+          "negative_arm_pct": 68.8,
           "absent_arm_exercised": 15
         },
         "generated": {
@@ -109,8 +109,8 @@
           "reachable_on_happy_path": 2,
           "present_arm_exercised": 1,
           "present_arm_pct": 50,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "negative_arm_exercised": 1,
+          "negative_arm_pct": 50,
           "absent_arm_exercised": 2
         },
         "library": {
@@ -118,8 +118,8 @@
           "reachable_on_happy_path": 4,
           "present_arm_exercised": 3,
           "present_arm_pct": 75,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "negative_arm_exercised": 3,
+          "negative_arm_pct": 75,
           "absent_arm_exercised": 4
         }
       },
@@ -205,8 +205,11 @@
         "fields_set": [
           "ParentId"
         ],
-        "statuses": null,
+        "statuses": [
+          403
+        ],
         "asserts_success": true,
+        "asserts_error": false,
         "response_fields_asserted": [
           "StatusCode"
         ]
@@ -225,6 +228,7 @@
           200
         ],
         "asserts_success": true,
+        "asserts_error": false,
         "response_fields_asserted": [
           "StatusCode"
         ]
@@ -243,6 +247,7 @@
           200
         ],
         "asserts_success": true,
+        "asserts_error": false,
         "response_fields_asserted": [
           "Artifacts",
           "Id",
@@ -265,6 +270,7 @@
           200
         ],
         "asserts_success": true,
+        "asserts_error": false,
         "response_fields_asserted": [
           "Artifacts",
           "Cursor",
@@ -287,6 +293,7 @@
           200
         ],
         "asserts_success": true,
+        "asserts_error": false,
         "response_fields_asserted": [
           "StatusCode"
         ]
@@ -305,6 +312,7 @@
           200
         ],
         "asserts_success": true,
+        "asserts_error": false,
         "response_fields_asserted": [
           "Artifacts",
           "StatusCode"
@@ -335,5 +343,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListArtifacts` (HTTP operation `ArtifactsListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Ancestor\n  - in.ConfigurationSet\n  - in.IncludeChildObjectTypes\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Ancestor == nil\n  - in.Ancestor != nil\n  - in.Ancestor == nil\n  - in.Ancestor != nil\n  - in.Ancestor != nil\n  - in.ConfigurationSet != 0\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListArtifacts` (HTTP operation `ArtifactsListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Ancestor\n  - in.ConfigurationSet\n  - in.IncludeChildObjectTypes\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Ancestor == nil\n  - in.Ancestor != nil\n  - in.Ancestor == nil\n  - in.Ancestor != nil\n  - in.Ancestor != nil\n  - in.ConfigurationSet != 0\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

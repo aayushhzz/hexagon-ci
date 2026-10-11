@@ -9,6 +9,7 @@
       "asserted": [
         200,
         201,
+        400,
         409
       ],
       "missing": [],
@@ -20,7 +21,7 @@
       "coverage_pct": 12.5,
       "request_fields_set_by_tests": 9,
       "set_by_positive_tests": 1,
-      "set_by_negative_tests": 0,
+      "set_by_negative_tests": 1,
       "by_depth": {
         "top_level": {
           "total": 1,
@@ -76,8 +77,8 @@
       "present_arm_pct": 12.5,
       "absent_arm_exercised": 1,
       "absent_arm_pct": 100,
-      "negative_arm_exercised": 0,
-      "negative_arm_pct": 0,
+      "negative_arm_exercised": 2,
+      "negative_arm_pct": 12.5,
       "both_arms_exercised": 0,
       "coverage_pct": 12.5,
       "by_origin": {
@@ -86,8 +87,8 @@
           "reachable_on_happy_path": 1,
           "present_arm_exercised": 2,
           "present_arm_pct": 13.3,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "negative_arm_exercised": 2,
+          "negative_arm_pct": 13.3,
           "absent_arm_exercised": 1
         },
         "generated": {
@@ -285,6 +286,7 @@
         ],
         "statuses": null,
         "asserts_success": true,
+        "asserts_error": false,
         "response_fields_asserted": [
           "RevUser",
           "RevUser.Id"
@@ -304,7 +306,8 @@
         "statuses": [
           409
         ],
-        "asserts_success": true,
+        "asserts_success": false,
+        "asserts_error": true,
         "response_fields_asserted": [
           "RevUser",
           "RevUser.DisplayName",
@@ -320,8 +323,11 @@
           "Id",
           "SharedWith"
         ],
-        "statuses": null,
-        "asserts_success": true,
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
         "response_fields_asserted": [
           "StatusCode"
         ]
@@ -344,7 +350,8 @@
           200,
           201
         ],
-        "asserts_success": true,
+        "asserts_success": false,
+        "asserts_error": true,
         "response_fields_asserted": [
           "RoleSet",
           "RoleSet.Id",
@@ -368,6 +375,7 @@
           201
         ],
         "asserts_success": true,
+        "asserts_error": false,
         "response_fields_asserted": [
           "StatusCode",
           "Workflow",

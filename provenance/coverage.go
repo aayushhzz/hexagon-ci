@@ -18,13 +18,14 @@ import (
 
 // testFact is one Ginkgo It block that issues a request.
 type testFact struct {
-	Name       string   `json:"name"`
-	File       string   `json:"file"`
-	Labels     []string `json:"labels"`
-	Fields     []string `json:"fields_set"`
-	Status     []int    `json:"statuses"`
-	Success    bool     `json:"asserts_success"`
-	RespFields []string `json:"response_fields_asserted"`
+	Name         string   `json:"name"`
+	File         string   `json:"file"`
+	Labels       []string `json:"labels"`
+	Fields       []string `json:"fields_set"`
+	Status       []int    `json:"statuses"`
+	Success      bool     `json:"asserts_success"`
+	AssertsError bool     `json:"asserts_error"`
+	RespFields   []string `json:"response_fields_asserted"`
 }
 
 // opFacts aggregates all tests that call one API operation.
@@ -211,6 +212,41 @@ func branchOrigin(at string) string {
 	return "service"
 }
 
+// httpStatusCodes maps net/http StatusXxx constants to their numeric codes, so
+// assertions written as Equal(http.StatusBadRequest) are captured like
+// Equal(400).
+var httpStatusCodes = map[string]int{
+	"StatusContinue":              100,
+	"StatusOK":                    200,
+	"StatusCreated":               201,
+	"StatusAccepted":              202,
+	"StatusNoContent":             204,
+	"StatusMovedPermanently":      301,
+	"StatusFound":                 302,
+	"StatusNotModified":           304,
+	"StatusBadRequest":            400,
+	"StatusUnauthorized":          401,
+	"StatusForbidden":             403,
+	"StatusNotFound":              404,
+	"StatusMethodNotAllowed":      405,
+	"StatusConflict":              409,
+	"StatusGone":                  410,
+	"StatusRequestEntityTooLarge": 413,
+	"StatusUnsupportedMediaType":  415,
+	"StatusUnprocessableEntity":   422,
+	"StatusTooManyRequests":       429,
+	"StatusInternalServerError":   500,
+	"StatusNotImplemented":        501,
+	"StatusBadGateway":            502,
+	"StatusServiceUnavailable":    503,
+	"StatusGatewayTimeout":        504,
+}
+
+func httpStatusCode(name string) (int, bool) {
+	code, ok := httpStatusCodes[name]
+	return code, ok
+}
+
 // isEnumSwitchBranch reports whether a branch's only request-tied conditions are
 // operator/enum fields (*Op). These are filter-serialization switches over enum
 // values, not input validations, and are reported separately from the validation
@@ -329,7 +365,7 @@ func collectTests(f *ast.File, file string, ops map[string]*opFacts, ri *repoInd
 		if body == nil {
 			return true
 		}
-		bodyOps, bodyFields, statuses, success := scanItBody(body)
+		bodyOps, bodyFields, statuses, success, assertsError := scanItBody(body)
 		setup := enclosingSetup(body, parents)
 		// Fields are attributed per operation: the fields of the request object
 		// that operation's MakeRequest actually sends, traced across the test
@@ -363,7 +399,7 @@ func collectTests(f *ast.File, file string, ops map[string]*opFacts, ri *repoInd
 			of.Tests = append(of.Tests, testFact{
 				Name: name, File: file, Labels: labels,
 				Fields: sortedUniq(opFields[op]), Status: sortedUniqInt(statuses),
-				Success: success, RespFields: sortedResp,
+				Success: success, AssertsError: assertsError, RespFields: sortedResp,
 			})
 			for _, fld := range opFields[op] {
 				leaf := strings.ToLower(fld)
@@ -417,7 +453,7 @@ func mergeOps(a, b []string) []string {
 // ...), since many tests build nested requests imperatively. Commented-out
 // request calls are not part of the AST and so are never seen here; disabled
 // specs (XIt/PIt) are not matched as Its.
-func scanItBody(body *ast.FuncLit) (ops []string, fields []string, statuses []int, success bool) {
+func scanItBody(body *ast.FuncLit) (ops []string, fields []string, statuses []int, success, assertsError bool) {
 	// Pass 1: identify request variables (declared with a request-body type, or
 	// used as the request argument of a MakeRequest call). Done first so field
 	// assignments are captured whether they precede or follow the call.
@@ -442,10 +478,15 @@ func scanItBody(body *ast.FuncLit) (ops []string, fields []string, statuses []in
 		return true
 	})
 
-	// Pass 2: operations, request fields, asserted statuses, success.
+	// Pass 2: operations, request fields, asserted statuses, success/error.
 	hasStatus := false
 	sawBeNil := false
+	sawError := false
 	seen := map[string]bool{}
+	// A matcher wrapped in Not/ToNot/NotTo is a negation: Not(BeNil()) asserts an
+	// error occurred, Not(HaveOccurred()) asserts success.
+	negatedBeNil := map[ast.Node]bool{}
+	negatedHaveOccurred := map[ast.Node]bool{}
 	ast.Inspect(body, func(n ast.Node) bool {
 		switch e := n.(type) {
 		case *ast.CallExpr:
@@ -460,15 +501,38 @@ func scanItBody(body *ast.FuncLit) (ops []string, fields []string, statuses []in
 					}
 				}
 			}
-			switch callName(e.Fun) {
+			name := callName(e.Fun)
+			if (name == "Not" || name == "ToNot" || name == "NotTo") && len(e.Args) == 1 {
+				if inner, ok := e.Args[0].(*ast.CallExpr); ok {
+					switch callName(inner.Fun) {
+					case "BeNil":
+						negatedBeNil[inner] = true
+						sawError = true
+					case "HaveOccurred":
+						negatedHaveOccurred[inner] = true
+						sawBeNil = true // Not(HaveOccurred()) asserts success
+					}
+				}
+			}
+			switch name {
 			case "Equal":
 				if len(e.Args) == 1 {
 					if n, ok := intLit(e.Args[0]); ok && n >= 100 && n < 600 {
 						statuses = append(statuses, n)
+					} else if sel, ok := e.Args[0].(*ast.SelectorExpr); ok {
+						if code, ok := httpStatusCode(sel.Sel.Name); ok {
+							statuses = append(statuses, code)
+						}
 					}
 				}
 			case "BeNil":
-				sawBeNil = true
+				if !negatedBeNil[e] {
+					sawBeNil = true
+				}
+			case "HaveOccurred":
+				if !negatedHaveOccurred[e] {
+					sawError = true
+				}
 			}
 		case *ast.AssignStmt:
 			captureAssignedFields(e, reqVars, &fields)
@@ -487,7 +551,7 @@ func scanItBody(body *ast.FuncLit) (ops []string, fields []string, statuses []in
 	if !hasStatus {
 		statuses = nil
 	}
-	return ops, fields, statuses, sawBeNil
+	return ops, fields, statuses, sawBeNil && !sawError, sawError
 }
 
 // rhsAt returns the right-hand side of an assignment for LHS index i.
@@ -1009,6 +1073,9 @@ func buildNorm(tests []testFact, keep func(testFact) bool) map[string]map[string
 }
 
 func isNegativeTest(t testFact) bool {
+	if t.AssertsError {
+		return true
+	}
 	for _, s := range t.Status {
 		if s >= 400 {
 			return true

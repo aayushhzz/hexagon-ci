@@ -16,10 +16,10 @@
         503
       ],
       "asserted": [
-        200,
         400
       ],
       "missing": [
+        200,
         401,
         403,
         413,
@@ -27,14 +27,14 @@
         500,
         503
       ],
-      "coverage_pct": 25
+      "coverage_pct": 12.5
     },
     "fields": {
       "leaf_fields_read_by_rpc": 71,
       "covered_count": 2,
       "coverage_pct": 2.8,
       "request_fields_set_by_tests": 4,
-      "set_by_positive_tests": 2,
+      "set_by_positive_tests": 0,
       "set_by_negative_tests": 2,
       "by_depth": {
         "top_level": {
@@ -154,7 +154,7 @@
       "total": 31,
       "enum_switch_branches": 152,
       "server_gated_branches": 0,
-      "happy_path_reached": true,
+      "happy_path_reached": false,
       "reachable_on_happy_path": 2,
       "present_arm_exercised": 3,
       "present_arm_pct": 9.7,
@@ -427,7 +427,7 @@
       ],
       "service_count": 0,
       "call_count": 0,
-      "reached_by_test": true,
+      "reached_by_test": false,
       "deps_result_used_in_response": 0,
       "deps_result_checked_by_test": 0,
       "response_links": null
@@ -462,7 +462,8 @@
         "statuses": [
           400
         ],
-        "asserts_success": true,
+        "asserts_success": false,
+        "asserts_error": true,
         "response_fields_asserted": [
           "Groups",
           "StatusCode"
@@ -634,5 +635,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GroupRevOrgs` (HTTP operation `RevOrgsGroup`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.GroupPageParams.PerGroup\n  - in.GroupPageParams.SortBy\n  - in.GroupPageParams.SortGroupKeyBy\n  - in.OrgFilter.AccountFilter.Apps\n  - in.OrgFilter.AccountFilter.AppsOp\n  - in.OrgFilter.AccountFilter.CustomFields.Fields\n  - in.OrgFilter.AccountFilter.Domains\n  - in.OrgFilter.AccountFilter.DomainsOp\n  - in.OrgFilter.AccountFilter.ExternalRefs\n  - in.OrgFilter.AccountFilter.ExternalRefsOp\n  - in.OrgFilter.AccountFilter.ExternalSourceData\n  - in.OrgFilter.AccountFilter.Industry\n  - in.OrgFilter.AccountFilter.IndustryOp\n  - in.OrgFilter.AccountFilter.IngestionChannel\n  - in.OrgFilter.AccountFilter.LeadSource\n  - in.OrgFilter.AccountFilter.LeadSourceOp\n  - in.OrgFilter.AccountFilter.OwnedBy\n  - in.OrgFilter.AccountFilter.OwnedByOp\n  - in.OrgFilter.AccountFilter.SharedWith\n  - in.OrgFilter.AccountFilter.Stage\n  - in.OrgFilter.AccountFilter.StagedInfo\n  - in.OrgFilter.AccountFilter.Subtype\n  - in.OrgFilter.AccountFilter.SubtypeOp\n  - in.OrgFilter.AccountFilter.SyncMetadata\n  - in.OrgFilter.AccountFilter.Tags\n  - in.OrgFilter.AccountFilter.TagsOp\n  - in.OrgFilter.AccountFilter.Tier\n  - in.OrgFilter.AccountFilter.TierOp\n  - in.OrgFilter.AccountFilter.TotalRevenue\n  - in.OrgFilter.AccountFilter.Websites\n  - in.OrgFilter.AccountFilter.WebsitesOp\n  - in.OrgFilter.CreatedByAgentId\n  - in.OrgFilter.CreatedByAgentIdOp\n  - in.OrgFilter.CreatedById\n  - in.OrgFilter.CreatedByIdOp\n  - in.OrgFilter.CreatedDate.After\n  - in.OrgFilter.CreatedDate.Before\n  - in.OrgFilter.CreatedDate.DatePreset.Type\n  - in.OrgFilter.DevOrgFilter.UeSyncState\n  - in.OrgFilter.DisplayName\n  - in.OrgFilter.Environment\n  - in.OrgFilter.EnvironmentOp\n  - in.OrgFilter.ModifiedById\n  - in.OrgFilter.ModifiedByIdOp\n  - in.OrgFilter.ModifiedDate.After\n  - in.OrgFilter.ModifiedDate.Before\n  - in.OrgFilter.ModifiedDate.DatePreset.Type\n  - in.OrgFilter.RevOrgFilter.AccountOp\n  - in.OrgFilter.RevOrgFilter.Apps\n  - in.OrgFilter.RevOrgFilter.AppsOp\n  - in.OrgFilter.RevOrgFilter.CustomFields.Fields\n  - in.OrgFilter.RevOrgFilter.ExternalOid\n  - in.OrgFilter.RevOrgFilter.ExternalOidIssuer\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp\n  - in.OrgFilter.RevOrgFilter.ExternalSourceData\n  - in.OrgFilter.RevOrgFilter.SharedWith\n  - in.OrgFilter.RevOrgFilter.SlaId\n  - in.OrgFilter.RevOrgFilter.StagedInfo\n  - in.OrgFilter.RevOrgFilter.Subtype\n  - in.OrgFilter.RevOrgFilter.SubtypeOp\n  - (+9 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OrgFilter.RevOrgFilter.CustomFields == nil\n  - in.OrgFilter.RevOrgFilter != nil\n  - in.OrgFilter.AccountFilter.CustomFields == nil\n  - in.OrgFilter.AccountFilter != nil\n  - in.OrgFilter.CreatedDate != nil\n  - in.OrgFilter.CreatedDate.After != nil\n  - in.OrgFilter.CreatedDate.Before != nil\n  - in.OrgFilter.CreatedDate.DatePreset != nil\n  - in.OrgFilter.CreatedDate.After != nil\n  - in.OrgFilter.CreatedDate.DatePreset.Type\n  - in.OrgFilter.CreatedDate.Before != nil\n  - in.OrgFilter.ModifiedDate != nil\n  - in.OrgFilter.ModifiedDate.After != nil\n  - in.OrgFilter.ModifiedDate.Before != nil\n  - in.OrgFilter.ModifiedDate.DatePreset != nil\n  - in.OrgFilter.ModifiedDate.After != nil\n  - in.OrgFilter.ModifiedDate.DatePreset.Type\n  - in.OrgFilter.ModifiedDate.Before != nil\n  - in.OrgFilter.DevOrgFilter != nil\n  - in.OrgFilter.RevOrgFilter != nil\n  - in.OrgFilter.AccountFilter != nil\n  - in.GroupPageParams.PerGroup < 0\n  - in.GroupPageParams.PerGroup != 0\n  - in.GroupPageParams.PerGroup < 0\n  - in.GroupPageParams.PerGroup > *maxItemsPerGroup\n  - call() * in.GroupPageParams.PerGroup > *maxTotalGroupItems\n  - in.GroupPageParams == nil\n  - in.GroupPageParams != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidGroupByInputField\n  - errInvalidGroupParams\n  - errInvalidSortByInputField\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `limit` -> suggestions []\n  - test field `limitpergroup` -> suggestions ['in.GroupPageParams.PerGroup']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GroupRevOrgs` (HTTP operation `RevOrgsGroup`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [200, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.GroupPageParams.PerGroup\n  - in.GroupPageParams.SortBy\n  - in.GroupPageParams.SortGroupKeyBy\n  - in.OrgFilter.AccountFilter.Apps\n  - in.OrgFilter.AccountFilter.AppsOp\n  - in.OrgFilter.AccountFilter.CustomFields.Fields\n  - in.OrgFilter.AccountFilter.Domains\n  - in.OrgFilter.AccountFilter.DomainsOp\n  - in.OrgFilter.AccountFilter.ExternalRefs\n  - in.OrgFilter.AccountFilter.ExternalRefsOp\n  - in.OrgFilter.AccountFilter.ExternalSourceData\n  - in.OrgFilter.AccountFilter.Industry\n  - in.OrgFilter.AccountFilter.IndustryOp\n  - in.OrgFilter.AccountFilter.IngestionChannel\n  - in.OrgFilter.AccountFilter.LeadSource\n  - in.OrgFilter.AccountFilter.LeadSourceOp\n  - in.OrgFilter.AccountFilter.OwnedBy\n  - in.OrgFilter.AccountFilter.OwnedByOp\n  - in.OrgFilter.AccountFilter.SharedWith\n  - in.OrgFilter.AccountFilter.Stage\n  - in.OrgFilter.AccountFilter.StagedInfo\n  - in.OrgFilter.AccountFilter.Subtype\n  - in.OrgFilter.AccountFilter.SubtypeOp\n  - in.OrgFilter.AccountFilter.SyncMetadata\n  - in.OrgFilter.AccountFilter.Tags\n  - in.OrgFilter.AccountFilter.TagsOp\n  - in.OrgFilter.AccountFilter.Tier\n  - in.OrgFilter.AccountFilter.TierOp\n  - in.OrgFilter.AccountFilter.TotalRevenue\n  - in.OrgFilter.AccountFilter.Websites\n  - in.OrgFilter.AccountFilter.WebsitesOp\n  - in.OrgFilter.CreatedByAgentId\n  - in.OrgFilter.CreatedByAgentIdOp\n  - in.OrgFilter.CreatedById\n  - in.OrgFilter.CreatedByIdOp\n  - in.OrgFilter.CreatedDate.After\n  - in.OrgFilter.CreatedDate.Before\n  - in.OrgFilter.CreatedDate.DatePreset.Type\n  - in.OrgFilter.DevOrgFilter.UeSyncState\n  - in.OrgFilter.DisplayName\n  - in.OrgFilter.Environment\n  - in.OrgFilter.EnvironmentOp\n  - in.OrgFilter.ModifiedById\n  - in.OrgFilter.ModifiedByIdOp\n  - in.OrgFilter.ModifiedDate.After\n  - in.OrgFilter.ModifiedDate.Before\n  - in.OrgFilter.ModifiedDate.DatePreset.Type\n  - in.OrgFilter.RevOrgFilter.AccountOp\n  - in.OrgFilter.RevOrgFilter.Apps\n  - in.OrgFilter.RevOrgFilter.AppsOp\n  - in.OrgFilter.RevOrgFilter.CustomFields.Fields\n  - in.OrgFilter.RevOrgFilter.ExternalOid\n  - in.OrgFilter.RevOrgFilter.ExternalOidIssuer\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp\n  - in.OrgFilter.RevOrgFilter.ExternalSourceData\n  - in.OrgFilter.RevOrgFilter.SharedWith\n  - in.OrgFilter.RevOrgFilter.SlaId\n  - in.OrgFilter.RevOrgFilter.StagedInfo\n  - in.OrgFilter.RevOrgFilter.Subtype\n  - in.OrgFilter.RevOrgFilter.SubtypeOp\n  - (+9 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OrgFilter.RevOrgFilter.CustomFields == nil\n  - in.OrgFilter.RevOrgFilter != nil\n  - in.OrgFilter.AccountFilter.CustomFields == nil\n  - in.OrgFilter.AccountFilter != nil\n  - in.OrgFilter.CreatedDate != nil\n  - in.OrgFilter.CreatedDate.After != nil\n  - in.OrgFilter.CreatedDate.Before != nil\n  - in.OrgFilter.CreatedDate.DatePreset != nil\n  - in.OrgFilter.CreatedDate.After != nil\n  - in.OrgFilter.CreatedDate.DatePreset.Type\n  - in.OrgFilter.CreatedDate.Before != nil\n  - in.OrgFilter.ModifiedDate != nil\n  - in.OrgFilter.ModifiedDate.After != nil\n  - in.OrgFilter.ModifiedDate.Before != nil\n  - in.OrgFilter.ModifiedDate.DatePreset != nil\n  - in.OrgFilter.ModifiedDate.After != nil\n  - in.OrgFilter.ModifiedDate.DatePreset.Type\n  - in.OrgFilter.ModifiedDate.Before != nil\n  - in.OrgFilter.DevOrgFilter != nil\n  - in.OrgFilter.RevOrgFilter != nil\n  - in.OrgFilter.AccountFilter != nil\n  - in.GroupPageParams.PerGroup < 0\n  - in.GroupPageParams.PerGroup != 0\n  - in.GroupPageParams.PerGroup < 0\n  - in.GroupPageParams.PerGroup > *maxItemsPerGroup\n  - call() * in.GroupPageParams.PerGroup > *maxTotalGroupItems\n  - in.GroupPageParams == nil\n  - in.GroupPageParams != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidGroupByInputField\n  - errInvalidGroupParams\n  - errInvalidSortByInputField\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `limit` -> suggestions []\n  - test field `limitpergroup` -> suggestions ['in.GroupPageParams.PerGroup']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -17,19 +17,19 @@
         503
       ],
       "asserted": [
-        200
+        200,
+        404
       ],
       "missing": [
         400,
         401,
         403,
-        404,
         413,
         429,
         500,
         503
       ],
-      "coverage_pct": 11.1
+      "coverage_pct": 22.2
     },
     "fields": {
       "leaf_fields_read_by_rpc": 3,
@@ -37,7 +37,7 @@
       "coverage_pct": 33.3,
       "request_fields_set_by_tests": 5,
       "set_by_positive_tests": 1,
-      "set_by_negative_tests": 0,
+      "set_by_negative_tests": 1,
       "by_depth": {
         "top_level": {
           "total": 1,
@@ -92,8 +92,8 @@
       "present_arm_pct": 71.4,
       "absent_arm_exercised": 2,
       "absent_arm_pct": 40,
-      "negative_arm_exercised": 0,
-      "negative_arm_pct": 0,
+      "negative_arm_exercised": 4,
+      "negative_arm_pct": 57.1,
       "both_arms_exercised": 0,
       "coverage_pct": 71.4,
       "by_origin": {
@@ -111,8 +111,8 @@
           "reachable_on_happy_path": 3,
           "present_arm_exercised": 3,
           "present_arm_pct": 60,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "negative_arm_exercised": 3,
+          "negative_arm_pct": 60,
           "absent_arm_exercised": 2
         },
         "library": {
@@ -120,8 +120,8 @@
           "reachable_on_happy_path": 1,
           "present_arm_exercised": 1,
           "present_arm_pct": 100,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "negative_arm_exercised": 1,
+          "negative_arm_pct": 100,
           "absent_arm_exercised": 0
         }
       },
@@ -183,8 +183,11 @@
           "Id",
           "Title"
         ],
-        "statuses": null,
+        "statuses": [
+          200
+        ],
         "asserts_success": true,
+        "asserts_error": false,
         "response_fields_asserted": [
           "Milestone",
           "Milestone.Title",
@@ -199,8 +202,11 @@
           "Description",
           "Id"
         ],
-        "statuses": null,
-        "asserts_success": true,
+        "statuses": [
+          200
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
         "response_fields_asserted": [
           "Milestone",
           "Milestone.Description",
@@ -215,8 +221,11 @@
           "DueDate",
           "Id"
         ],
-        "statuses": null,
-        "asserts_success": true,
+        "statuses": [
+          200
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
         "response_fields_asserted": [
           "Milestone",
           "Milestone.DueDate",
@@ -231,8 +240,11 @@
           "Id",
           "Status"
         ],
-        "statuses": null,
-        "asserts_success": true,
+        "statuses": [
+          200
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
         "response_fields_asserted": [
           "Milestone",
           "Milestone.Status",
@@ -248,8 +260,11 @@
           "Id",
           "Title"
         ],
-        "statuses": null,
+        "statuses": [
+          404
+        ],
         "asserts_success": false,
+        "asserts_error": false,
         "response_fields_asserted": [
           "StatusCode"
         ]
@@ -262,8 +277,11 @@
           "Id",
           "Title"
         ],
-        "statuses": null,
+        "statuses": [
+          404
+        ],
         "asserts_success": true,
+        "asserts_error": false,
         "response_fields_asserted": [
           "StatusCode"
         ]
@@ -278,5 +296,5 @@
     "errors": [],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateMilestone` (HTTP operation `MilestonesUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Milestone.Description.Value\n  - in.Milestone.Title.Value\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Milestone != nil\n  - in.Milestone != nil\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `duedate` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `title` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateMilestone` (HTTP operation `MilestonesUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Milestone.Description.Value\n  - in.Milestone.Title.Value\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Milestone != nil\n  - in.Milestone != nil\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `duedate` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `title` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }
