@@ -147,6 +147,7 @@ type DepthBands struct {
 // runs, can fail) and absent (gating field nil, skipped on the happy path).
 type BranchCoverage struct {
 	Total            int           `json:"total"`
+	EnumSwitch       int           `json:"enum_switch_branches"`
 	HappyPathReached bool          `json:"happy_path_reached"`
 	ReachableOnHappy int           `json:"reachable_on_happy_path"`
 	PresentArm       int           `json:"present_arm_exercised"`
@@ -207,6 +208,22 @@ func branchOrigin(at string) string {
 		return "library"
 	}
 	return "service"
+}
+
+// isEnumSwitchBranch reports whether a branch's only request-tied conditions are
+// operator/enum fields (*Op). These are filter-serialization switches over enum
+// values, not input validations, and are reported separately from the validation
+// branch denominator.
+func isEnumSwitchBranch(b Branch) bool {
+	if len(b.PredicatePaths) == 0 {
+		return false
+	}
+	for _, p := range b.PredicatePaths {
+		if !strings.HasSuffix(p, "Op") {
+			return false
+		}
+	}
+	return true
 }
 
 // Anomalies surfaces HTTP-body vs RPC-request field mismatches for review.
@@ -623,16 +640,29 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 	rep := CoverageReport{RPC: p.RPC, Operation: op}
 	leaves := leafReadPaths(p)
 	rep.Fields.LeafFieldsReadByRPC = len(leaves)
-	rep.Branches.Total = len(p.Branches)
+	// Separate operator/enum switch arms from input-validation branches: a branch
+	// whose only request-tied conditions are operator fields (*Op) is a filter
+	// serialization switch over enum values, not an input validation. One test
+	// setting the operator satisfies one arm; counting every arm would drown the
+	// validation branches in mechanical noise. They are counted separately.
+	branches := make([]Branch, 0, len(p.Branches))
+	for _, b := range p.Branches {
+		if isEnumSwitchBranch(b) {
+			rep.Branches.EnumSwitch++
+			continue
+		}
+		branches = append(branches, b)
+	}
+	rep.Branches.Total = len(branches)
 	rep.Dependencies = dependencyCoverage(p, of, responseAliases)
 	if of == nil {
 		rep.Unmapped = true
 		rep.Fields.Gaps = leaves
 		rep.Fields.ByDepth = depthTotals(leaves)
 		rep.Fields.Representative = repCoverage(p, leaves, map[string]bool{}, sharedTypes)
-		rep.Branches.Gaps = append([]Branch{}, p.Branches...)
-		rep.Branches.ReachableOnHappy = reachableOnHappyCount(p.Branches)
-		for _, b := range p.Branches {
+		rep.Branches.Gaps = append([]Branch{}, branches...)
+		rep.Branches.ReachableOnHappy = reachableOnHappyCount(branches)
+		for _, b := range branches {
 			rep.Branches.ByOrigin.bucket(branchOrigin(b.At)).Total++
 		}
 		documented := statusSpec[op]
@@ -699,7 +729,7 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 	// if a success test invoked the RPC at all, the top-level validator guards ran
 	// their absent (skip) arm.
 	rep.Branches.HappyPathReached = of.success
-	for _, b := range p.Branches {
+	for _, b := range branches {
 		oc := classifyBranch(b, normAll, normNeg, aliasFrags, rep.Tests)
 		ob := rep.Branches.ByOrigin.bucket(branchOrigin(b.At))
 		ob.Total++
@@ -862,27 +892,43 @@ func classifyBranch(b Branch, normAll, normNeg map[string]map[string]map[string]
 	if len(b.PredicatePaths) == 0 {
 		return branchOutcome{}
 	}
+	// The request root ("in") is always provided by any test that calls the RPC,
+	// so a nil-check on the request itself (in != nil) is satisfied by every
+	// linked test. Drop the root and classify on the remaining paths.
+	hasRoot := false
+	preds := make([]string, 0, len(b.PredicatePaths))
+	for _, pth := range b.PredicatePaths {
+		if pth == "in" {
+			hasRoot = true
+			continue
+		}
+		preds = append(preds, pth)
+	}
+	if len(preds) == 0 {
+		if hasRoot && tests > 0 {
+			return branchOutcome{reachableOnHappy: true, present: true}
+		}
+		return branchOutcome{}
+	}
 	maxDepth := 0
 	present, negative := true, true
-	for _, pth := range b.PredicatePaths {
+	for _, pth := range preds {
 		if d := pathDepth(pth); d > maxDepth {
 			maxDepth = d
 		}
-		m, ok := matchPath(pth, normAll, aliasFrags)
-		if !ok {
+		if _, ok := matchPath(pth, normAll, aliasFrags); !ok {
 			present = false
 		}
 		if _, okn := matchPath(pth, normNeg, aliasFrags); !okn {
 			negative = false
 		}
-		_ = m
 	}
 	oc := branchOutcome{reachableOnHappy: maxDepth == 1, present: present, negative: negative}
 	if oc.reachableOnHappy && tests > 0 {
 		// The absent (skip) arm is taken whenever a test invokes the RPC without
 		// setting the gating field. If some gating field is left unset by at least
 		// one test, the absent arm ran.
-		for _, pth := range b.PredicatePaths {
+		for _, pth := range preds {
 			if leafSetCount(pth, normAll, aliasFrags) < tests {
 				oc.absent = true
 				break

@@ -582,3 +582,33 @@ var _ = Describe("d", func() {
 		t.Errorf("missing traced field Type from enclosing setup; got %v", got)
 	}
 }
+
+func TestEnumSwitchBranch(t *testing.T) {
+	cases := []struct {
+		paths []string
+		want  bool
+	}{
+		{[]string{"in.Filter.CreatedByIdOp"}, true},
+		{[]string{"in.Filter.CreatedByIdOp", "in.Filter.CreatedById"}, false},
+		{[]string{"in.Filter.CreatedById"}, false},
+		{nil, false},
+	}
+	for _, tc := range cases {
+		if got := isEnumSwitchBranch(Branch{PredicatePaths: tc.paths}); got != tc.want {
+			t.Errorf("isEnumSwitchBranch(%v) = %v, want %v", tc.paths, got, tc.want)
+		}
+	}
+}
+
+// TestClassifyBranchRootPresence: a nil-check on the request itself is satisfied
+// by any linked test.
+func TestClassifyBranchRootPresence(t *testing.T) {
+	norm := buildNorm(nil, func(testFact) bool { return true })
+	oc := classifyBranch(Branch{PredicatePaths: []string{"in"}}, norm, norm, nil, 3)
+	if !oc.present || !oc.reachableOnHappy {
+		t.Fatalf("root nil-check should be present with tests, got %+v", oc)
+	}
+	if oc := classifyBranch(Branch{PredicatePaths: []string{"in"}}, norm, norm, nil, 0); oc.present {
+		t.Fatalf("root nil-check with no tests should not be present, got %+v", oc)
+	}
+}

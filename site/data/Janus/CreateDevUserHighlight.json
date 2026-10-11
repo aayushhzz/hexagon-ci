@@ -71,22 +71,23 @@
     },
     "branches": {
       "total": 13,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 7,
-      "present_arm_exercised": 2,
-      "present_arm_pct": 15.4,
+      "reachable_on_happy_path": 8,
+      "present_arm_exercised": 3,
+      "present_arm_pct": 23.1,
       "absent_arm_exercised": 5,
-      "absent_arm_pct": 71.4,
+      "absent_arm_pct": 62.5,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 15.4,
+      "coverage_pct": 23.1,
       "by_origin": {
         "service": {
           "total": 5,
-          "reachable_on_happy_path": 1,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 20,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 1
@@ -157,14 +158,6 @@
           "cond": "in.DevUserId == \"\"",
           "predicate_paths": [
             "in.DevUserId"
-          ]
-        },
-        {
-          "id": "b9",
-          "at": "internal/service/devuser.go:3606",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -377,5 +370,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateDevUserHighlight` (HTTP operation `DevUsersHighlightCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUserId\n  - in.Highlight.EndDate\n  - in.Highlight.HighlightId\n  - in.Highlight.Message\n  - in.Highlight.StartDate\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUserId == nil\n  - in.Highlight.HighlightId == nil\n  - in.Highlight.Message == nil\n  - in.DevUserId == nil\n  - in.DevUserId\n  - in.DevUserId == \"\"\n  - in != nil\n  - in.DevUserId != *t13\n  - **t89 == in.Highlight.HighlightId\n  - in.Highlight.StartDate != nil\n  - in.Highlight.EndDate != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errCacheUnavailable\n  - errInternalCacheTransientError\n  - errReadingMongoCollection\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `highlight` -> suggestions ['in.Highlight.HighlightId']\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateDevUserHighlight` (HTTP operation `DevUsersHighlightCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUserId\n  - in.Highlight.EndDate\n  - in.Highlight.HighlightId\n  - in.Highlight.Message\n  - in.Highlight.StartDate\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUserId == nil\n  - in.Highlight.HighlightId == nil\n  - in.Highlight.Message == nil\n  - in.DevUserId == nil\n  - in.DevUserId\n  - in.DevUserId == \"\"\n  - in.DevUserId != *t13\n  - **t89 == in.Highlight.HighlightId\n  - in.Highlight.StartDate != nil\n  - in.Highlight.EndDate != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errCacheUnavailable\n  - errInternalCacheTransientError\n  - errReadingMongoCollection\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `highlight` -> suggestions ['in.Highlight.HighlightId']\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

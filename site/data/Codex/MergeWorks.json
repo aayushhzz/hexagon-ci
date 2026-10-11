@@ -71,22 +71,23 @@
     },
     "branches": {
       "total": 16,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 15,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
+      "reachable_on_happy_path": 16,
+      "present_arm_exercised": 1,
+      "present_arm_pct": 6.3,
       "absent_arm_exercised": 15,
-      "absent_arm_pct": 100,
+      "absent_arm_pct": 93.8,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 6.3,
       "by_origin": {
         "service": {
           "total": 4,
-          "reachable_on_happy_path": 3,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 4,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 25,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 3
@@ -213,14 +214,6 @@
           "cond": "donv2.DON).String() == in.PrimaryWork",
           "predicate_paths": [
             "in.PrimaryWork"
-          ]
-        },
-        {
-          "id": "b14",
-          "at": "internal/serverv2/merge_works.go:34",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -468,5 +461,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MergeWorks` (HTTP operation `WorksMerge`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Actor\n  - in.DevOid\n  - in.Dryrun\n  - in.PrimaryWork\n  - in.SecondaryWorks\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.Actor == nil\n  - in.Actor\n  - in.Actor\n  - in.Actor\n  - in.PrimaryWork == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.Actor == nil\n  - in.Actor\n  - in.PrimaryWork == nil\n  - in.PrimaryWork\n  - donv2.DON).String() == in.PrimaryWork\n  - in != nil\n  - in.PrimaryWork != *ObjectTypeTicket\n  - in.Dryrun\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n  - test field `mergewith` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MergeWorks` (HTTP operation `WorksMerge`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Actor\n  - in.DevOid\n  - in.Dryrun\n  - in.PrimaryWork\n  - in.SecondaryWorks\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.Actor == nil\n  - in.Actor\n  - in.Actor\n  - in.Actor\n  - in.PrimaryWork == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.Actor == nil\n  - in.Actor\n  - in.PrimaryWork == nil\n  - in.PrimaryWork\n  - donv2.DON).String() == in.PrimaryWork\n  - in.PrimaryWork != *ObjectTypeTicket\n  - in.Dryrun\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n  - test field `mergewith` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

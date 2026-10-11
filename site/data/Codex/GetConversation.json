@@ -84,22 +84,23 @@
     },
     "branches": {
       "total": 9,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 8,
-      "present_arm_exercised": 3,
-      "present_arm_pct": 33.3,
+      "reachable_on_happy_path": 9,
+      "present_arm_exercised": 4,
+      "present_arm_pct": 44.4,
       "absent_arm_exercised": 5,
-      "absent_arm_pct": 62.5,
+      "absent_arm_pct": 55.6,
       "negative_arm_exercised": 3,
       "negative_arm_pct": 33.3,
       "both_arms_exercised": 0,
-      "coverage_pct": 33.3,
+      "coverage_pct": 44.4,
       "by_origin": {
         "service": {
           "total": 3,
-          "reachable_on_happy_path": 2,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 3,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 33.3,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 2
@@ -154,14 +155,6 @@
           "cond": "in.DevOid == nil",
           "predicate_paths": [
             "in.DevOid"
-          ]
-        },
-        {
-          "id": "b8",
-          "at": "internal/serverv2/get_conversation.go:34",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -538,5 +531,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetConversation` (HTTP operation `ConversationsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in != nil\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetConversation` (HTTP operation `ConversationsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -196,22 +196,23 @@
     },
     "branches": {
       "total": 35,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 34,
-      "present_arm_exercised": 18,
-      "present_arm_pct": 51.4,
+      "reachable_on_happy_path": 35,
+      "present_arm_exercised": 19,
+      "present_arm_pct": 54.3,
       "absent_arm_exercised": 34,
-      "absent_arm_pct": 100,
+      "absent_arm_pct": 97.1,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 18,
-      "coverage_pct": 51.4,
+      "coverage_pct": 54.3,
       "by_origin": {
         "service": {
           "total": 21,
-          "reachable_on_happy_path": 20,
-          "present_arm_exercised": 14,
-          "present_arm_pct": 66.7,
+          "reachable_on_happy_path": 21,
+          "present_arm_exercised": 15,
+          "present_arm_pct": 71.4,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 20
@@ -322,14 +323,6 @@
           "cond": "in.FileEncoding != \"\"",
           "predicate_paths": [
             "in.FileEncoding"
-          ]
-        },
-        {
-          "id": "b27",
-          "at": "internal/server/upload.go:181",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -1794,5 +1787,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetUploadUrl` (HTTP operation `ArtifactsPrepare,ArtifactsUploadCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.DevOid\n  - in.FileEncoding\n  - in.Headers.ContentDisposition\n  - in.IsChunkedUpload\n  - in.SkipFileConstrains\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId\n  - in.ActorId\n  - in.ActorId\n  - in.DevOid == nil\n  - in.ActorId == nil\n  - in.ActorId\n  - in.DevOid == nil\n  - in.DevOid\n  - in.ActorId\n  - in.FileEncoding != \"\"\n  - in != nil\n  - in.IsChunkedUpload\n  - in.SkipFileConstrains\n  - in.ActorId != *ObjectTypeRevUser\n  - in.FileEncoding != \"\"\n  - in.IsChunkedUpload\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrInvalidMediaParameter\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n  - errDuplicateParamName\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `actor` -> suggestions ['in.ActorId']\n  - test field `headers` -> suggestions []\n  - test field `partsize` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetUploadUrl` (HTTP operation `ArtifactsPrepare,ArtifactsUploadCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.DevOid\n  - in.FileEncoding\n  - in.Headers.ContentDisposition\n  - in.IsChunkedUpload\n  - in.SkipFileConstrains\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId\n  - in.ActorId\n  - in.ActorId\n  - in.DevOid == nil\n  - in.ActorId == nil\n  - in.ActorId\n  - in.DevOid == nil\n  - in.DevOid\n  - in.ActorId\n  - in.FileEncoding != \"\"\n  - in.IsChunkedUpload\n  - in.SkipFileConstrains\n  - in.ActorId != *ObjectTypeRevUser\n  - in.FileEncoding != \"\"\n  - in.IsChunkedUpload\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrInvalidMediaParameter\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n  - errDuplicateParamName\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `actor` -> suggestions ['in.ActorId']\n  - test field `headers` -> suggestions []\n  - test field `partsize` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

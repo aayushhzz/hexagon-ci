@@ -70,22 +70,23 @@
     },
     "branches": {
       "total": 8,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 7,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
+      "reachable_on_happy_path": 8,
+      "present_arm_exercised": 1,
+      "present_arm_pct": 12.5,
       "absent_arm_exercised": 7,
-      "absent_arm_pct": 100,
+      "absent_arm_pct": 87.5,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 12.5,
       "by_origin": {
         "service": {
           "total": 3,
-          "reachable_on_happy_path": 2,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 3,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 33.3,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 2
@@ -164,14 +165,6 @@
           "cond": "in.IsSystemDelete",
           "predicate_paths": [
             "in.IsSystemDelete"
-          ]
-        },
-        {
-          "id": "b8",
-          "at": "internal/service/account.go:1226",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         }
       ]
@@ -308,5 +301,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteAccount` (HTTP operation `AccountsDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountId\n  - in.IsSystemDelete\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountId == nil\n  - in.AccountId == nil\n  - in.AccountId\n  - in.AccountId == \"\"\n  - in.AccountId != nil\n  - in.AccountId == nil\n  - in.IsSystemDelete\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errAccountNotFound\n  - errInvalidSortByInputField\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteAccount` (HTTP operation `AccountsDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountId\n  - in.IsSystemDelete\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountId == nil\n  - in.AccountId == nil\n  - in.AccountId\n  - in.AccountId == \"\"\n  - in.AccountId != nil\n  - in.AccountId == nil\n  - in.IsSystemDelete\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errAccountNotFound\n  - errInvalidSortByInputField\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -93,22 +93,23 @@
     },
     "branches": {
       "total": 14,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 12,
-      "present_arm_exercised": 4,
-      "present_arm_pct": 28.6,
+      "reachable_on_happy_path": 14,
+      "present_arm_exercised": 6,
+      "present_arm_pct": 42.9,
       "absent_arm_exercised": 8,
-      "absent_arm_pct": 66.7,
+      "absent_arm_pct": 57.1,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 28.6,
+      "coverage_pct": 42.9,
       "by_origin": {
         "service": {
           "total": 10,
-          "reachable_on_happy_path": 8,
-          "present_arm_exercised": 4,
-          "present_arm_pct": 40,
+          "reachable_on_happy_path": 10,
+          "present_arm_exercised": 6,
+          "present_arm_pct": 60,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 4
@@ -158,14 +159,6 @@
           ]
         },
         {
-          "id": "b4",
-          "at": "internal/service/devuser.go:2353",
-          "cond": "in == nil",
-          "predicate_paths": [
-            "in"
-          ]
-        },
-        {
           "id": "b5",
           "at": "internal/service/devuser.go:2356",
           "cond": "in.Auth0UserId != \"\"",
@@ -179,14 +172,6 @@
           "cond": "in.DevUserId == \"\"",
           "predicate_paths": [
             "in.DevUserId"
-          ]
-        },
-        {
-          "id": "b11",
-          "at": "internal/service/devuser.go:2386",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -367,5 +352,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `LinkExternalIdentity` (HTTP operation `DevUsersIdentitiesLink`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Auth0UserId.Value\n  - in.DevUserId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUserId == nil\n  - in.DevUserId != nil\n  - in.DevUserId\n  - in == nil\n  - in.Auth0UserId != \"\"\n  - in.DevUserId == \"\"\n  - in != nil\n  - in.DevUserId != nil\n  - in.Auth0UserId != \"\"\n  - in.DevUserId == *t43\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInvalidArguments\n  - errInvalidAuthContextDevUid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `devuser` -> suggestions ['in.DevUserId']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `LinkExternalIdentity` (HTTP operation `DevUsersIdentitiesLink`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Auth0UserId.Value\n  - in.DevUserId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUserId == nil\n  - in.DevUserId != nil\n  - in.DevUserId\n  - in.Auth0UserId != \"\"\n  - in.DevUserId == \"\"\n  - in.DevUserId != nil\n  - in.Auth0UserId != \"\"\n  - in.DevUserId == *t43\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInvalidArguments\n  - errInvalidAuthContextDevUid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `devuser` -> suggestions ['in.DevUserId']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

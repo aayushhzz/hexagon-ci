@@ -72,22 +72,23 @@
     },
     "branches": {
       "total": 8,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 7,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
+      "reachable_on_happy_path": 8,
+      "present_arm_exercised": 1,
+      "present_arm_pct": 12.5,
       "absent_arm_exercised": 7,
-      "absent_arm_pct": 100,
+      "absent_arm_pct": 87.5,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 12.5,
       "by_origin": {
         "service": {
           "total": 5,
-          "reachable_on_happy_path": 4,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 5,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 20,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 4
@@ -134,14 +135,6 @@
           "cond": "in.UeSyncState != nil",
           "predicate_paths": [
             "in.UeSyncState"
-          ]
-        },
-        {
-          "id": "b4",
-          "at": "internal/service/devorg.go:1512",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -312,5 +305,5 @@
     "errors": [],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListDevOrgs` (HTTP operation `DevOrgsList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.PageParams.SortBy\n  - in.UeSyncState\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.PageParams != nil\n  - in.PageParams != nil\n  - in.UeSyncState != nil\n  - in != nil\n  - in.PageParams == nil\n  - in.UeSyncState != nil\n  - in.UeSyncState != nil\n  - *t184 != in.UeSyncState\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListDevOrgs` (HTTP operation `DevOrgsList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.PageParams.SortBy\n  - in.UeSyncState\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.PageParams != nil\n  - in.PageParams != nil\n  - in.UeSyncState != nil\n  - in.PageParams == nil\n  - in.UeSyncState != nil\n  - in.UeSyncState != nil\n  - *t184 != in.UeSyncState\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

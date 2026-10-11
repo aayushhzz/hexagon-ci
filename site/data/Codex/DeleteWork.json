@@ -89,22 +89,23 @@
     },
     "branches": {
       "total": 16,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 15,
-      "present_arm_exercised": 10,
-      "present_arm_pct": 62.5,
+      "reachable_on_happy_path": 16,
+      "present_arm_exercised": 11,
+      "present_arm_pct": 68.8,
       "absent_arm_exercised": 15,
-      "absent_arm_pct": 100,
+      "absent_arm_pct": 93.8,
       "negative_arm_exercised": 10,
       "negative_arm_pct": 62.5,
       "both_arms_exercised": 10,
-      "coverage_pct": 62.5,
+      "coverage_pct": 68.8,
       "by_origin": {
         "service": {
           "total": 2,
-          "reachable_on_happy_path": 1,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 50,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 1
@@ -159,14 +160,6 @@
           "cond": "in.DevOid == nil",
           "predicate_paths": [
             "in.DevOid"
-          ]
-        },
-        {
-          "id": "b15",
-          "at": "internal/serverv2/delete_work.go:37",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -594,5 +587,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteWork` (HTTP operation `WorksDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteWork` (HTTP operation `WorksDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in.DevOid != objType\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

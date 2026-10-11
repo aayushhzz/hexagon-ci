@@ -130,22 +130,23 @@
     },
     "branches": {
       "total": 23,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 5,
-      "present_arm_exercised": 8,
-      "present_arm_pct": 34.8,
+      "reachable_on_happy_path": 6,
+      "present_arm_exercised": 9,
+      "present_arm_pct": 39.1,
       "absent_arm_exercised": 5,
-      "absent_arm_pct": 100,
+      "absent_arm_pct": 83.3,
       "negative_arm_exercised": 8,
       "negative_arm_pct": 34.8,
       "both_arms_exercised": 0,
-      "coverage_pct": 34.8,
+      "coverage_pct": 39.1,
       "by_origin": {
         "service": {
           "total": 6,
-          "reachable_on_happy_path": 0,
-          "present_arm_exercised": 2,
-          "present_arm_pct": 33.3,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 3,
+          "present_arm_pct": 50,
           "negative_arm_exercised": 2,
           "negative_arm_pct": 33.3,
           "absent_arm_exercised": 0
@@ -281,14 +282,6 @@
           "predicate_paths": [
             "in.CodeChange"
           ]
-        },
-        {
-          "id": "b23",
-          "at": "internal/serverv2/create_code_change.go:47",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
-          ]
         }
       ]
     },
@@ -402,5 +395,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateCodeChange` (HTTP operation `CodeChangesCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CodeChange.ClosedDate\n  - in.CodeChange.CommitId\n  - in.CodeChange.CustomFields\n  - in.CodeChange.FilteredLoc.FileCount\n  - in.CodeChange.FilteredLoc.LinesAdded\n  - in.CodeChange.FilteredLoc.LinesDeleted\n  - in.CodeChange.FilteredLoc.LinesModified\n  - in.CodeChange.TargetBranch\n  - in.CodeChange.TotalLoc.FileCount\n  - in.CodeChange.TotalLoc.LinesAdded\n  - in.CodeChange.TotalLoc.LinesDeleted\n  - in.CodeChange.TotalLoc.LinesModified\n  - in.CustomSchemaSpec.Drop\n  - in.CustomSchemaSpec.ValidateRequiredFields\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.CodeChange.TotalLoc != nil\n  - in.CodeChange.TotalLoc != nil\n  - in.CodeChange.FilteredLoc != nil\n  - in.CodeChange.FilteredLoc != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CodeChange != nil\n  - in.CodeChange != nil\n  - in.CustomSchemaSpec != nil\n  - in.CustomSchemaSpec != nil\n  - in.CodeChange.TotalLoc != nil\n  - in.CodeChange.FilteredLoc != nil\n  - in.CodeChange.ClosedDate != nil\n  - in.CodeChange|in.CodeChange.Branch|in.CodeChange.CommitId|in.CodeChange.Description|in.CodeChange.ExternalIdentifier|in.CodeChange.FilteredLoc|in.CodeChange.FilteredLoc.FileCount|in.CodeChange.FilteredLoc.LinesAdded|in.CodeChange.FilteredLoc.LinesDeleted|in.CodeChange.FilteredLoc.LinesModified|in.CodeChange.RepoUrl|in.CodeChange.TargetBranch|in.CodeChange.Title|in.CodeChange.TotalLoc|in.CodeChange.TotalLoc.FileCount|in.CodeChange.TotalLoc.LinesAdded|in.CodeChange.TotalLoc.LinesDeleted|in.CodeChange.TotalLoc.LinesModified == nil\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateCodeChange` (HTTP operation `CodeChangesCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CodeChange.ClosedDate\n  - in.CodeChange.CommitId\n  - in.CodeChange.CustomFields\n  - in.CodeChange.FilteredLoc.FileCount\n  - in.CodeChange.FilteredLoc.LinesAdded\n  - in.CodeChange.FilteredLoc.LinesDeleted\n  - in.CodeChange.FilteredLoc.LinesModified\n  - in.CodeChange.TargetBranch\n  - in.CodeChange.TotalLoc.FileCount\n  - in.CodeChange.TotalLoc.LinesAdded\n  - in.CodeChange.TotalLoc.LinesDeleted\n  - in.CodeChange.TotalLoc.LinesModified\n  - in.CustomSchemaSpec.Drop\n  - in.CustomSchemaSpec.ValidateRequiredFields\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.CodeChange.TotalLoc != nil\n  - in.CodeChange.TotalLoc != nil\n  - in.CodeChange.FilteredLoc != nil\n  - in.CodeChange.FilteredLoc != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CodeChange != nil\n  - in.CodeChange != nil\n  - in.CustomSchemaSpec != nil\n  - in.CustomSchemaSpec != nil\n  - in.CodeChange.TotalLoc != nil\n  - in.CodeChange.FilteredLoc != nil\n  - in.CodeChange.ClosedDate != nil\n  - in.CodeChange|in.CodeChange.Branch|in.CodeChange.CommitId|in.CodeChange.Description|in.CodeChange.ExternalIdentifier|in.CodeChange.FilteredLoc|in.CodeChange.FilteredLoc.FileCount|in.CodeChange.FilteredLoc.LinesAdded|in.CodeChange.FilteredLoc.LinesDeleted|in.CodeChange.FilteredLoc.LinesModified|in.CodeChange.RepoUrl|in.CodeChange.TargetBranch|in.CodeChange.Title|in.CodeChange.TotalLoc|in.CodeChange.TotalLoc.FileCount|in.CodeChange.TotalLoc.LinesAdded|in.CodeChange.TotalLoc.LinesDeleted|in.CodeChange.TotalLoc.LinesModified == nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -243,22 +243,23 @@
     },
     "branches": {
       "total": 69,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 9,
-      "present_arm_exercised": 31,
-      "present_arm_pct": 44.9,
+      "reachable_on_happy_path": 10,
+      "present_arm_exercised": 32,
+      "present_arm_pct": 46.4,
       "absent_arm_exercised": 6,
-      "absent_arm_pct": 66.7,
+      "absent_arm_pct": 60,
       "negative_arm_exercised": 30,
       "negative_arm_pct": 43.5,
       "both_arms_exercised": 2,
-      "coverage_pct": 44.9,
+      "coverage_pct": 46.4,
       "by_origin": {
         "service": {
           "total": 20,
-          "reachable_on_happy_path": 2,
-          "present_arm_exercised": 12,
-          "present_arm_pct": 60,
+          "reachable_on_happy_path": 3,
+          "present_arm_exercised": 13,
+          "present_arm_pct": 65,
           "negative_arm_exercised": 11,
           "negative_arm_pct": 55,
           "absent_arm_exercised": 2
@@ -529,14 +530,6 @@
           "cond": "in.CustomSchemaSpec != nil",
           "predicate_paths": [
             "in.CustomSchemaSpec"
-          ]
-        },
-        {
-          "id": "b50",
-          "at": "internal/service/team_validations.go:176",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -891,5 +884,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateTeam` (HTTP operation `TeamsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomSchemaSpec.Drop\n  - in.Team.Description\n  - in.Team.DevrevCopy\n  - in.Team.EnabledFeatures.Values\n  - in.Team.Icon.Stock.PaletteColor\n  - in.Team.Icon.Stock.Shape\n  - in.Team.Key.Value\n  - in.Team.SyncMetadata.LastSyncIn.Status\n  - in.Team.SyncMetadata.LastSyncOut.Status\n  - in.Team.SyncMetadata.SyncedByDevUsers.IdValues\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Team.Icon.Stock != nil\n  - in.Team.Icon.Stock != nil\n  - in.Team.Icon.ArtifactId != nil\n  - in.Team.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.Team.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.Team.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.Team.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - in.Team.SyncMetadata.SyncedByDevUsers != nil\n  - in.Team.SyncMetadata.LastSyncIn != nil\n  - in.Team.SyncMetadata.LastSyncIn != nil\n  - in.Team.SyncMetadata.LastSyncOut != nil\n  - in.Team.SyncMetadata.LastSyncOut != nil\n  - in.Team.ExternalSourceData.CreatedById != nil\n  - in.Team.ExternalSourceData.ModifiedById != nil\n  - in.Team.Icon != nil\n  - in.Team.Key.Value\n  - in.Team.Icon != nil\n  - in.Team.EnabledFeatures != nil\n  - in.Team.EnabledFeatures != nil\n  - in.Team.SyncMetadata != nil\n  - in.Team.SyncMetadata != nil\n  - in.Team.ExternalSourceData != nil\n  - in.Team.ExternalSourceData != nil\n  - in.Team.DevrevCopy != nil\n  - in.Team.DevrevCopy != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.Team != nil\n  - in.Team != nil\n  - in.CustomSchemaSpec != nil\n  - in.CustomSchemaSpec != nil\n  - in != nil\n  - in.Team.Icon.ArtifactId != nil\n  - in.Team.Icon.Stock == nil\n  - in.Team.Icon == nil\n  - in.Team.Icon.Stock != nil\n  - in.Team.Description != nil\n  - in.Team.EnabledFeatures != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `key` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateTeam` (HTTP operation `TeamsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomSchemaSpec.Drop\n  - in.Team.Description\n  - in.Team.DevrevCopy\n  - in.Team.EnabledFeatures.Values\n  - in.Team.Icon.Stock.PaletteColor\n  - in.Team.Icon.Stock.Shape\n  - in.Team.Key.Value\n  - in.Team.SyncMetadata.LastSyncIn.Status\n  - in.Team.SyncMetadata.LastSyncOut.Status\n  - in.Team.SyncMetadata.SyncedByDevUsers.IdValues\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Team.Icon.Stock != nil\n  - in.Team.Icon.Stock != nil\n  - in.Team.Icon.ArtifactId != nil\n  - in.Team.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.Team.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.Team.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.Team.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - in.Team.SyncMetadata.SyncedByDevUsers != nil\n  - in.Team.SyncMetadata.LastSyncIn != nil\n  - in.Team.SyncMetadata.LastSyncIn != nil\n  - in.Team.SyncMetadata.LastSyncOut != nil\n  - in.Team.SyncMetadata.LastSyncOut != nil\n  - in.Team.ExternalSourceData.CreatedById != nil\n  - in.Team.ExternalSourceData.ModifiedById != nil\n  - in.Team.Icon != nil\n  - in.Team.Key.Value\n  - in.Team.Icon != nil\n  - in.Team.EnabledFeatures != nil\n  - in.Team.EnabledFeatures != nil\n  - in.Team.SyncMetadata != nil\n  - in.Team.SyncMetadata != nil\n  - in.Team.ExternalSourceData != nil\n  - in.Team.ExternalSourceData != nil\n  - in.Team.DevrevCopy != nil\n  - in.Team.DevrevCopy != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.Team != nil\n  - in.Team != nil\n  - in.CustomSchemaSpec != nil\n  - in.CustomSchemaSpec != nil\n  - in.Team.Icon.ArtifactId != nil\n  - in.Team.Icon.Stock == nil\n  - in.Team.Icon == nil\n  - in.Team.Icon.Stock != nil\n  - in.Team.Description != nil\n  - in.Team.EnabledFeatures != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `key` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

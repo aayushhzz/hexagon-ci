@@ -102,22 +102,23 @@
     },
     "branches": {
       "total": 33,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 17,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
+      "reachable_on_happy_path": 18,
+      "present_arm_exercised": 1,
+      "present_arm_pct": 3,
       "absent_arm_exercised": 17,
-      "absent_arm_pct": 100,
+      "absent_arm_pct": 94.4,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 3,
       "by_origin": {
         "service": {
           "total": 21,
-          "reachable_on_happy_path": 17,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 18,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 4.8,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 17
@@ -324,14 +325,6 @@
           "cond": "in.Strategy == \"okta\"",
           "predicate_paths": [
             "in.Strategy"
-          ]
-        },
-        {
-          "id": "b24",
-          "at": "internal/service/devorg_connections.go:441",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -642,5 +635,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateDevOrgAuthConnection` (HTTP operation `DevOrgAuthConnectionsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AzureAdOptions.ClientId\n  - in.AzureAdOptions.ClientSecret\n  - in.AzureAdOptions.Domain\n  - in.GoogleAppsOptions.ClientId\n  - in.GoogleAppsOptions.ClientSecret\n  - in.GoogleAppsOptions.TenantDomain\n  - in.OidcOptions.ClientId\n  - in.OidcOptions.ClientSecret\n  - in.OidcOptions.Issuer\n  - in.OktaOptions.ClientId\n  - in.OktaOptions.ClientSecret\n  - in.OktaOptions.Domain\n  - in.OptionsOneof.AzureAdOptions\n  - in.OptionsOneof.GoogleAppsOptions\n  - in.OptionsOneof.OidcOptions\n  - in.OptionsOneof.OktaOptions\n  - in.OptionsOneof.SamlOptions.FieldsMap\n  - in.SamlOptions.ConnectionName\n  - in.SamlOptions.FieldsMap.Email\n  - in.SamlOptions.FieldsMap.UserId\n  - in.SamlOptions.SignInEndpoint\n  - in.SamlOptions.SigningCert\n  - in.Strategy\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OptionsOneof.SamlOptions.FieldsMap != nil\n  - in.OptionsOneof.SamlOptions.FieldsMap != nil\n  - in.OptionsOneof\n  - in.OptionsOneof.OidcOptions != nil\n  - in.OptionsOneof.OidcOptions != nil\n  - in.OptionsOneof.SamlOptions != nil\n  - in.OptionsOneof.SamlOptions != nil\n  - in.OptionsOneof.GoogleAppsOptions != nil\n  - in.OptionsOneof.GoogleAppsOptions != nil\n  - in.OptionsOneof.AzureAdOptions != nil\n  - in.OptionsOneof.AzureAdOptions != nil\n  - in.OptionsOneof.OktaOptions != nil\n  - in.OptionsOneof.OktaOptions != nil\n  - in.Strategy == \"oidc\"\n  - in.OidcOptions == nil\n  - in.SamlOptions == nil\n  - in.Strategy == \"samlp\"\n  - in.GoogleAppsOptions == nil\n  - in.Strategy == \"google-apps\"\n  - in.AzureAdOptions == nil\n  - in.Strategy == \"waad\"\n  - in.OktaOptions == nil\n  - in.Strategy == \"okta\"\n  - in != nil\n  - in.Strategy == \"samlp\"\n  - in.Strategy == \"oidc\"\n  - in.SamlOptions.FieldsMap != nil\n  - in.Strategy == \"samlp\"\n  - in.Strategy == \"google-apps\"\n  - in.SamlOptions.FieldsMap.Email != \"\"\n  - in.SamlOptions.FieldsMap.UserId != \"\"\n  - in.Strategy == \"waad\"\n  - in.Strategy == \"okta\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContextDevOid\n  - errInvalidStrategy\n  - errInvalidStrategyOptions\n  - errInvalidStrategyType\n  - errMaxEnterpriseConnectionLimitReached\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `type` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateDevOrgAuthConnection` (HTTP operation `DevOrgAuthConnectionsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AzureAdOptions.ClientId\n  - in.AzureAdOptions.ClientSecret\n  - in.AzureAdOptions.Domain\n  - in.GoogleAppsOptions.ClientId\n  - in.GoogleAppsOptions.ClientSecret\n  - in.GoogleAppsOptions.TenantDomain\n  - in.OidcOptions.ClientId\n  - in.OidcOptions.ClientSecret\n  - in.OidcOptions.Issuer\n  - in.OktaOptions.ClientId\n  - in.OktaOptions.ClientSecret\n  - in.OktaOptions.Domain\n  - in.OptionsOneof.AzureAdOptions\n  - in.OptionsOneof.GoogleAppsOptions\n  - in.OptionsOneof.OidcOptions\n  - in.OptionsOneof.OktaOptions\n  - in.OptionsOneof.SamlOptions.FieldsMap\n  - in.SamlOptions.ConnectionName\n  - in.SamlOptions.FieldsMap.Email\n  - in.SamlOptions.FieldsMap.UserId\n  - in.SamlOptions.SignInEndpoint\n  - in.SamlOptions.SigningCert\n  - in.Strategy\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OptionsOneof.SamlOptions.FieldsMap != nil\n  - in.OptionsOneof.SamlOptions.FieldsMap != nil\n  - in.OptionsOneof\n  - in.OptionsOneof.OidcOptions != nil\n  - in.OptionsOneof.OidcOptions != nil\n  - in.OptionsOneof.SamlOptions != nil\n  - in.OptionsOneof.SamlOptions != nil\n  - in.OptionsOneof.GoogleAppsOptions != nil\n  - in.OptionsOneof.GoogleAppsOptions != nil\n  - in.OptionsOneof.AzureAdOptions != nil\n  - in.OptionsOneof.AzureAdOptions != nil\n  - in.OptionsOneof.OktaOptions != nil\n  - in.OptionsOneof.OktaOptions != nil\n  - in.Strategy == \"oidc\"\n  - in.OidcOptions == nil\n  - in.SamlOptions == nil\n  - in.Strategy == \"samlp\"\n  - in.GoogleAppsOptions == nil\n  - in.Strategy == \"google-apps\"\n  - in.AzureAdOptions == nil\n  - in.Strategy == \"waad\"\n  - in.OktaOptions == nil\n  - in.Strategy == \"okta\"\n  - in.Strategy == \"samlp\"\n  - in.Strategy == \"oidc\"\n  - in.SamlOptions.FieldsMap != nil\n  - in.Strategy == \"samlp\"\n  - in.Strategy == \"google-apps\"\n  - in.SamlOptions.FieldsMap.Email != \"\"\n  - in.SamlOptions.FieldsMap.UserId != \"\"\n  - in.Strategy == \"waad\"\n  - in.Strategy == \"okta\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContextDevOid\n  - errInvalidStrategy\n  - errInvalidStrategyOptions\n  - errInvalidStrategyType\n  - errMaxEnterpriseConnectionLimitReached\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `type` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -75,22 +75,23 @@
     },
     "branches": {
       "total": 13,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 5,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
+      "reachable_on_happy_path": 6,
+      "present_arm_exercised": 1,
+      "present_arm_pct": 7.7,
       "absent_arm_exercised": 5,
-      "absent_arm_pct": 100,
+      "absent_arm_pct": 83.3,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 7.7,
       "by_origin": {
         "service": {
           "total": 8,
-          "reachable_on_happy_path": 3,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 4,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 12.5,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 3
@@ -201,14 +202,6 @@
           "cond": "in.AllowDefaultRevorgDeletion",
           "predicate_paths": [
             "in.AllowDefaultRevorgDeletion"
-          ]
-        },
-        {
-          "id": "b12",
-          "at": "internal/service/revorg.go:321",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -347,5 +340,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteRevOrg` (HTTP operation `RevOrgsDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AllowDefaultRevorgDeletion\n  - in.IsSystemDelete\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier != nil\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.OrgIdentifier.OrgExternalIdIssuer\n  - in.AllowDefaultRevorgDeletion\n  - in != nil\n  - in.IsSystemDelete\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInvalidRevOrgFilter\n  - errRevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteRevOrg` (HTTP operation `RevOrgsDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AllowDefaultRevorgDeletion\n  - in.IsSystemDelete\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier != nil\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.OrgIdentifier.OrgExternalIdIssuer\n  - in.AllowDefaultRevorgDeletion\n  - in.IsSystemDelete\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInvalidRevOrgFilter\n  - errRevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

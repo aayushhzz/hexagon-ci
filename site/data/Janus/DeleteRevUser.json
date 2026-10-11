@@ -72,22 +72,23 @@
     },
     "branches": {
       "total": 9,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 3,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
+      "reachable_on_happy_path": 4,
+      "present_arm_exercised": 1,
+      "present_arm_pct": 11.1,
       "absent_arm_exercised": 3,
-      "absent_arm_pct": 100,
+      "absent_arm_pct": 75,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 11.1,
       "by_origin": {
         "service": {
           "total": 4,
-          "reachable_on_happy_path": 1,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 25,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 1
@@ -174,14 +175,6 @@
           "cond": "in.IsSystemDelete",
           "predicate_paths": [
             "in.IsSystemDelete"
-          ]
-        },
-        {
-          "id": "b9",
-          "at": "internal/service/revuser.go:1170",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         }
       ]
@@ -296,5 +289,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteRevUser` (HTTP operation `RevUsersDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsSystemDelete\n  - in.UserIdentifier.UserDon\n  - in.UserIdentifier.UserExternalId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon\n  - in.UserIdentifier == nil\n  - in.UserIdentifier != nil\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon == nil\n  - in.IsSystemDelete\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteRevUser` (HTTP operation `RevUsersDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsSystemDelete\n  - in.UserIdentifier.UserDon\n  - in.UserIdentifier.UserExternalId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon\n  - in.UserIdentifier == nil\n  - in.UserIdentifier != nil\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon == nil\n  - in.IsSystemDelete\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

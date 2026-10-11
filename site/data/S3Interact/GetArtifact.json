@@ -98,22 +98,23 @@
     },
     "branches": {
       "total": 21,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 13,
-      "present_arm_exercised": 8,
-      "present_arm_pct": 38.1,
+      "reachable_on_happy_path": 14,
+      "present_arm_exercised": 9,
+      "present_arm_pct": 42.9,
       "absent_arm_exercised": 13,
-      "absent_arm_pct": 100,
+      "absent_arm_pct": 92.9,
       "negative_arm_exercised": 5,
       "negative_arm_pct": 23.8,
       "both_arms_exercised": 8,
-      "coverage_pct": 38.1,
+      "coverage_pct": 42.9,
       "by_origin": {
         "service": {
           "total": 8,
-          "reachable_on_happy_path": 6,
-          "present_arm_exercised": 1,
-          "present_arm_pct": 12.5,
+          "reachable_on_happy_path": 7,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 25,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 6
@@ -184,14 +185,6 @@
           "cond": "in.Version.ModifiedBy",
           "predicate_paths": [
             "in.Version.ModifiedBy"
-          ]
-        },
-        {
-          "id": "b14",
-          "at": "internal/server/get_artifact.go:38",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -1058,5 +1051,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetArtifact` (HTTP operation `ArtifactsDownload,ArtifactsGet,ArtifactsGetPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccessToken\n  - in.RequireVersionInformation\n  - in.SkipPresignedUrlGeneration\n  - in.Version.ModifiedBy\n  - in.Version.VersionId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Version.ModifiedBy == nil\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy != nil\n  - in.Version.ModifiedBy\n  - in != nil\n  - in.RequireVersionInformation != nil\n  - in.AccessToken != \"\"\n  - in.AccessToken == api.Artifact).GetAccessToken()\n  - in.AccessToken == api.File).GetKey()\n  - in.SkipPresignedUrlGeneration\n  - in.Version.VersionId != \"\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `key` -> suggestions []\n  - test field `version` -> suggestions ['in.RequireVersionInformation', 'in.Version.VersionId']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetArtifact` (HTTP operation `ArtifactsDownload,ArtifactsGet,ArtifactsGetPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccessToken\n  - in.RequireVersionInformation\n  - in.SkipPresignedUrlGeneration\n  - in.Version.ModifiedBy\n  - in.Version.VersionId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Version.ModifiedBy == nil\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy != nil\n  - in.Version.ModifiedBy\n  - in.RequireVersionInformation != nil\n  - in.AccessToken != \"\"\n  - in.AccessToken == api.Artifact).GetAccessToken()\n  - in.AccessToken == api.File).GetKey()\n  - in.SkipPresignedUrlGeneration\n  - in.Version.VersionId != \"\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `key` -> suggestions []\n  - test field `version` -> suggestions ['in.RequireVersionInformation', 'in.Version.VersionId']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

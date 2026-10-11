@@ -84,22 +84,23 @@
     },
     "branches": {
       "total": 15,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 3,
-      "present_arm_exercised": 1,
-      "present_arm_pct": 6.7,
+      "reachable_on_happy_path": 4,
+      "present_arm_exercised": 2,
+      "present_arm_pct": 13.3,
       "absent_arm_exercised": 2,
-      "absent_arm_pct": 66.7,
+      "absent_arm_pct": 50,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 6.7,
+      "coverage_pct": 13.3,
       "by_origin": {
         "service": {
           "total": 12,
-          "reachable_on_happy_path": 0,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 8.3,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 0
@@ -213,14 +214,6 @@
           ]
         },
         {
-          "id": "b13",
-          "at": "internal/serverv2/update_vista_group_item.go:324",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
-          ]
-        },
-        {
           "id": "b14",
           "at": "internal/serverv2/update_vista_group_item.go:360",
           "cond": "in.VistaGroupItem.StartDate != nil",
@@ -331,5 +324,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateVistaGroupItem` (HTTP operation `VistasGroupsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.DevOid\n  - in.VistaGroupItem.CustomView.TableColumns.Values\n  - in.VistaGroupItem.EndDate\n  - in.VistaGroupItem.Filter\n  - in.VistaGroupItem.Parent\n  - in.VistaGroupItem.StartDate\n  - in.VistaGroupItem.State\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.VistaGroupItem.Filter != nil\n  - in.DevOid == nil\n  - in.ActorId == nil\n  - in.VistaGroupItem.Filter != nil\n  - in.VistaGroupItem.Filter != nil\n  - in.VistaGroupItem.Filter == nil\n  - in.VistaGroupItem.StartDate == nil\n  - in.VistaGroupItem.StartDate != nil\n  - in.VistaGroupItem.EndDate != nil\n  - in.VistaGroupItem.EndDate == nil\n  - in.VistaGroupItem.Parent != nil\n  - in != nil\n  - in.VistaGroupItem.StartDate != nil\n  - in.VistaGroupItem.EndDate != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `name` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateVistaGroupItem` (HTTP operation `VistasGroupsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.DevOid\n  - in.VistaGroupItem.CustomView.TableColumns.Values\n  - in.VistaGroupItem.EndDate\n  - in.VistaGroupItem.Filter\n  - in.VistaGroupItem.Parent\n  - in.VistaGroupItem.StartDate\n  - in.VistaGroupItem.State\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.VistaGroupItem.Filter != nil\n  - in.DevOid == nil\n  - in.ActorId == nil\n  - in.VistaGroupItem.Filter != nil\n  - in.VistaGroupItem.Filter != nil\n  - in.VistaGroupItem.Filter == nil\n  - in.VistaGroupItem.StartDate == nil\n  - in.VistaGroupItem.StartDate != nil\n  - in.VistaGroupItem.EndDate != nil\n  - in.VistaGroupItem.EndDate == nil\n  - in.VistaGroupItem.Parent != nil\n  - in.VistaGroupItem.StartDate != nil\n  - in.VistaGroupItem.EndDate != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `name` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

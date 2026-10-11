@@ -94,25 +94,26 @@
       ]
     },
     "branches": {
-      "total": 8,
+      "total": 7,
+      "enum_switch_branches": 1,
       "happy_path_reached": true,
       "reachable_on_happy_path": 3,
       "present_arm_exercised": 2,
-      "present_arm_pct": 25,
+      "present_arm_pct": 28.6,
       "absent_arm_exercised": 1,
       "absent_arm_pct": 33.3,
       "negative_arm_exercised": 2,
-      "negative_arm_pct": 25,
+      "negative_arm_pct": 28.6,
       "both_arms_exercised": 0,
-      "coverage_pct": 25,
+      "coverage_pct": 28.6,
       "by_origin": {
         "service": {
-          "total": 8,
+          "total": 7,
           "reachable_on_happy_path": 3,
           "present_arm_exercised": 2,
-          "present_arm_pct": 25,
+          "present_arm_pct": 28.6,
           "negative_arm_exercised": 2,
-          "negative_arm_pct": 25,
+          "negative_arm_pct": 28.6,
           "absent_arm_exercised": 1
         },
         "generated": {
@@ -141,14 +142,6 @@
           "cond": "in.Filter == nil",
           "predicate_paths": [
             "in.Filter"
-          ]
-        },
-        {
-          "id": "b2",
-          "at": "internal/infra/db/notification_repository.go:369",
-          "cond": "in.Filter.ParentTypeOp == 1",
-          "predicate_paths": [
-            "in.Filter.ParentTypeOp"
           ]
         },
         {
@@ -247,5 +240,5 @@
     "errors": [],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CountInboxNotifications` (HTTP operation `NotificationsCountPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Filter.ActorDons\n  - in.Filter.LastNotificationTimestamp.TimestampFrom\n  - in.Filter.LastNotificationTimestamp.TimestampTo\n  - in.Filter.NotificationIds\n  - in.Filter.ParentDons\n  - in.Filter.ParentTypeOp\n  - in.Filter.ParentTypes\n  - in.Filter.Priorities\n  - in.Filter.States\n  - in.Filter.UserParticipationFilter.Activities\n  - in.Filter.UserParticipationFilter.Visibilities\n  - in.UserDon\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter == nil\n  - in.Filter.ParentTypeOp == 1\n  - in.Filter.LastNotificationTimestamp != nil\n  - in.Filter.LastNotificationTimestamp.TimestampFrom >= 0\n  - in.Filter.UserParticipationFilter != nil\n  - in.Filter.LastNotificationTimestamp.TimestampTo > 0\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `parentids` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CountInboxNotifications` (HTTP operation `NotificationsCountPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Filter.ActorDons\n  - in.Filter.LastNotificationTimestamp.TimestampFrom\n  - in.Filter.LastNotificationTimestamp.TimestampTo\n  - in.Filter.NotificationIds\n  - in.Filter.ParentDons\n  - in.Filter.ParentTypeOp\n  - in.Filter.ParentTypes\n  - in.Filter.Priorities\n  - in.Filter.States\n  - in.Filter.UserParticipationFilter.Activities\n  - in.Filter.UserParticipationFilter.Visibilities\n  - in.UserDon\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter == nil\n  - in.Filter.LastNotificationTimestamp != nil\n  - in.Filter.LastNotificationTimestamp.TimestampFrom >= 0\n  - in.Filter.UserParticipationFilter != nil\n  - in.Filter.LastNotificationTimestamp.TimestampTo > 0\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `parentids` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -94,22 +94,23 @@
     },
     "branches": {
       "total": 17,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 16,
-      "present_arm_exercised": 10,
-      "present_arm_pct": 58.8,
+      "reachable_on_happy_path": 17,
+      "present_arm_exercised": 11,
+      "present_arm_pct": 64.7,
       "absent_arm_exercised": 16,
-      "absent_arm_pct": 100,
+      "absent_arm_pct": 94.1,
       "negative_arm_exercised": 10,
       "negative_arm_pct": 58.8,
       "both_arms_exercised": 10,
-      "coverage_pct": 58.8,
+      "coverage_pct": 64.7,
       "by_origin": {
         "service": {
           "total": 3,
-          "reachable_on_happy_path": 2,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 3,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 33.3,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 2
@@ -164,14 +165,6 @@
           "cond": "in.DevOid == nil",
           "predicate_paths": [
             "in.DevOid"
-          ]
-        },
-        {
-          "id": "b15",
-          "at": "internal/serverv2/get_work.go:41",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -1015,5 +1008,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetWork` (HTTP operation `WebhooksFetch,WorksGet,WorksGetPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `object` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetWork` (HTTP operation `WebhooksFetch,WorksGet,WorksGetPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in.DevOid != objType\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `object` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

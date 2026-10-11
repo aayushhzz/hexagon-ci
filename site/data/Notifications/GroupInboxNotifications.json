@@ -111,23 +111,24 @@
       ]
     },
     "branches": {
-      "total": 19,
+      "total": 18,
+      "enum_switch_branches": 1,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 9,
-      "present_arm_exercised": 1,
-      "present_arm_pct": 5.3,
+      "reachable_on_happy_path": 14,
+      "present_arm_exercised": 6,
+      "present_arm_pct": 33.3,
       "absent_arm_exercised": 9,
-      "absent_arm_pct": 100,
+      "absent_arm_pct": 64.3,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 1,
-      "coverage_pct": 5.3,
+      "coverage_pct": 33.3,
       "by_origin": {
         "service": {
-          "total": 9,
+          "total": 8,
           "reachable_on_happy_path": 4,
           "present_arm_exercised": 1,
-          "present_arm_pct": 11.1,
+          "present_arm_pct": 12.5,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 4
@@ -143,9 +144,9 @@
         },
         "library": {
           "total": 10,
-          "reachable_on_happy_path": 5,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 10,
+          "present_arm_exercised": 5,
+          "present_arm_pct": 50,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 5
@@ -158,14 +159,6 @@
           "cond": "in.Filter == nil",
           "predicate_paths": [
             "in.Filter"
-          ]
-        },
-        {
-          "id": "b2",
-          "at": "internal/infra/db/notification_repository.go:369",
-          "cond": "in.Filter.ParentTypeOp == 1",
-          "predicate_paths": [
-            "in.Filter.ParentTypeOp"
           ]
         },
         {
@@ -233,52 +226,12 @@
           ]
         },
         {
-          "id": "b11",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260929155325-ebf6eb96f2c5/db/group_item_helpers.go:118",
-          "cond": "in < 0",
-          "predicate_paths": [
-            "in"
-          ]
-        },
-        {
-          "id": "b12",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260929155325-ebf6eb96f2c5/db/group_item_helpers.go:121",
-          "cond": "in == 0",
-          "predicate_paths": [
-            "in"
-          ]
-        },
-        {
-          "id": "b13",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260929155325-ebf6eb96f2c5/db/group_item_helpers.go:126",
-          "cond": "in != 0",
-          "predicate_paths": [
-            "in"
-          ]
-        },
-        {
-          "id": "b14",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260929155325-ebf6eb96f2c5/db/group_item_helpers.go:127",
-          "cond": "in <= 0",
-          "predicate_paths": [
-            "in"
-          ]
-        },
-        {
           "id": "b15",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260929155325-ebf6eb96f2c5/db/group_item_helpers.go:134",
           "cond": "in * in.PerGroup > *maxTotalGroupItems",
           "predicate_paths": [
             "in",
             "in.PerGroup"
-          ]
-        },
-        {
-          "id": "b16",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260929155325-ebf6eb96f2c5/db/group_item_helpers.go:127",
-          "cond": "in > *maxGroupsPerPage",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -446,5 +399,5 @@
     "errors": [],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GroupInboxNotifications` (HTTP operation `NotificationsGroupPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Filter.ActorDons\n  - in.Filter.LastNotificationTimestamp.TimestampFrom\n  - in.Filter.LastNotificationTimestamp.TimestampTo\n  - in.Filter.NotificationIds\n  - in.Filter.ParentDons\n  - in.Filter.ParentTypeOp\n  - in.Filter.ParentTypes\n  - in.Filter.UserParticipationFilter.Activities\n  - in.Filter.UserParticipationFilter.Visibilities\n  - in.GroupSortBy\n  - in.PerGroup\n  - in.SortBy\n  - in.UserDon\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter == nil\n  - in.Filter.ParentTypeOp == 1\n  - in.Filter.LastNotificationTimestamp != nil\n  - in.Filter.LastNotificationTimestamp.TimestampFrom >= 0\n  - in.Filter.UserParticipationFilter != nil\n  - in.Filter.LastNotificationTimestamp.TimestampTo > 0\n  - in.PerGroup < 0\n  - in.PerGroup != 0\n  - in.PerGroup < 0\n  - in.PerGroup > *maxItemsPerGroup\n  - in < 0\n  - in == 0\n  - in != 0\n  - in <= 0\n  - in * in.PerGroup > *maxTotalGroupItems\n  - in > *maxGroupsPerPage\n  - in.Filter != nil\n  - in.UserDon == nil\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `parentids` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GroupInboxNotifications` (HTTP operation `NotificationsGroupPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Filter.ActorDons\n  - in.Filter.LastNotificationTimestamp.TimestampFrom\n  - in.Filter.LastNotificationTimestamp.TimestampTo\n  - in.Filter.NotificationIds\n  - in.Filter.ParentDons\n  - in.Filter.ParentTypeOp\n  - in.Filter.ParentTypes\n  - in.Filter.UserParticipationFilter.Activities\n  - in.Filter.UserParticipationFilter.Visibilities\n  - in.GroupSortBy\n  - in.PerGroup\n  - in.SortBy\n  - in.UserDon\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter == nil\n  - in.Filter.LastNotificationTimestamp != nil\n  - in.Filter.LastNotificationTimestamp.TimestampFrom >= 0\n  - in.Filter.UserParticipationFilter != nil\n  - in.Filter.LastNotificationTimestamp.TimestampTo > 0\n  - in.PerGroup < 0\n  - in.PerGroup != 0\n  - in.PerGroup < 0\n  - in.PerGroup > *maxItemsPerGroup\n  - in * in.PerGroup > *maxTotalGroupItems\n  - in.Filter != nil\n  - in.UserDon == nil\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `parentids` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

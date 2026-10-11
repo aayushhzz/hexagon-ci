@@ -54,16 +54,17 @@
     },
     "branches": {
       "total": 1,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 0,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
+      "reachable_on_happy_path": 1,
+      "present_arm_exercised": 1,
+      "present_arm_pct": 100,
       "absent_arm_exercised": 0,
       "absent_arm_pct": 0,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 100,
       "by_origin": {
         "service": {
           "total": 0,
@@ -85,24 +86,15 @@
         },
         "library": {
           "total": 1,
-          "reachable_on_happy_path": 0,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 100,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 0
         }
       },
-      "gaps": [
-        {
-          "id": "b1",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/notifications-client@v0.0.0-20260907111245-4644358f186d/common/error.go:184",
-          "cond": "in == nil",
-          "predicate_paths": [
-            "in"
-          ]
-        }
-      ]
+      "gaps": null
     },
     "dependencies": {
       "services": [
@@ -322,5 +314,5 @@
     "errors": [],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MarkInboxNotifications` (HTTP operation `NotificationsMark,UserInteractionsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Entries\n  - in.UserDon\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in == nil\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `filter` -> suggestions []\n  - test field `panel` -> suggestions []\n  - test field `recordid` -> suggestions []\n  - test field `state` -> suggestions []\n  - test field `timestamp` -> suggestions []\n  - test field `unread` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MarkInboxNotifications` (HTTP operation `NotificationsMark,UserInteractionsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Entries\n  - in.UserDon\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - none\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `filter` -> suggestions []\n  - test field `panel` -> suggestions []\n  - test field `recordid` -> suggestions []\n  - test field `state` -> suggestions []\n  - test field `timestamp` -> suggestions []\n  - test field `unread` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

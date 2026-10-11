@@ -79,22 +79,23 @@
     },
     "branches": {
       "total": 15,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 14,
-      "present_arm_exercised": 9,
-      "present_arm_pct": 60,
+      "reachable_on_happy_path": 15,
+      "present_arm_exercised": 10,
+      "present_arm_pct": 66.7,
       "absent_arm_exercised": 5,
-      "absent_arm_pct": 35.7,
+      "absent_arm_pct": 33.3,
       "negative_arm_exercised": 9,
       "negative_arm_pct": 60,
       "both_arms_exercised": 0,
-      "coverage_pct": 60,
+      "coverage_pct": 66.7,
       "by_origin": {
         "service": {
           "total": 6,
-          "reachable_on_happy_path": 5,
-          "present_arm_exercised": 3,
-          "present_arm_pct": 50,
+          "reachable_on_happy_path": 6,
+          "present_arm_exercised": 4,
+          "present_arm_pct": 66.7,
           "negative_arm_exercised": 3,
           "negative_arm_pct": 50,
           "absent_arm_exercised": 2
@@ -149,14 +150,6 @@
           "cond": "in.DevOid == nil",
           "predicate_paths": [
             "in.DevOid"
-          ]
-        },
-        {
-          "id": "b8",
-          "at": "internal/serverv2/get_vista_group_item.go:23",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -262,5 +255,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetVistaGroupItem` (HTTP operation `VistasGroupsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in != nil\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetVistaGroupItem` (HTTP operation `VistasGroupsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

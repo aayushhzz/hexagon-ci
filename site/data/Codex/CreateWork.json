@@ -1135,22 +1135,23 @@
     },
     "branches": {
       "total": 754,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 76,
-      "present_arm_exercised": 29,
-      "present_arm_pct": 3.8,
+      "reachable_on_happy_path": 83,
+      "present_arm_exercised": 36,
+      "present_arm_pct": 4.8,
       "absent_arm_exercised": 76,
-      "absent_arm_pct": 100,
+      "absent_arm_pct": 91.6,
       "negative_arm_exercised": 26,
       "negative_arm_pct": 3.4,
       "both_arms_exercised": 3,
-      "coverage_pct": 3.8,
+      "coverage_pct": 4.8,
       "by_origin": {
         "service": {
           "total": 98,
-          "reachable_on_happy_path": 25,
-          "present_arm_exercised": 2,
-          "present_arm_pct": 2,
+          "reachable_on_happy_path": 32,
+          "present_arm_exercised": 9,
+          "present_arm_pct": 9.2,
           "negative_arm_exercised": 2,
           "negative_arm_pct": 2,
           "absent_arm_exercised": 25
@@ -6635,14 +6636,6 @@
           ]
         },
         {
-          "id": "b710",
-          "at": "internal/serverv2/create_work.go:114",
-          "cond": "in|in.ActorId|in.DevOid != nil",
-          "predicate_paths": [
-            "in"
-          ]
-        },
-        {
           "id": "b711",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:579",
           "cond": "in.ActorId|in.DevOid == nil",
@@ -6812,14 +6805,6 @@
           ]
         },
         {
-          "id": "b734",
-          "at": "internal/serverv2/create_work.go:383",
-          "cond": "in|in.ActorId|in.DevOid != nil",
-          "predicate_paths": [
-            "in"
-          ]
-        },
-        {
           "id": "b735",
           "at": "internal/serverv2/create_work.go:375",
           "cond": "in.ActorId|in.DevOid != nil",
@@ -6841,14 +6826,6 @@
           "cond": "in.Ticket.SourceChannelV2 == nil",
           "predicate_paths": [
             "in.Ticket.SourceChannelV2"
-          ]
-        },
-        {
-          "id": "b738",
-          "at": "internal/serverv2/create_work.go:426",
-          "cond": "in|in.ActorId|in.DevOid != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -6885,14 +6862,6 @@
           ]
         },
         {
-          "id": "b743",
-          "at": "internal/serverv2/create_work.go:494",
-          "cond": "in|in.ActorId|in.DevOid != nil",
-          "predicate_paths": [
-            "in"
-          ]
-        },
-        {
           "id": "b744",
           "at": "internal/serverv2/create_work.go:498",
           "cond": "in.Issue.SprintState != 0",
@@ -6914,22 +6883,6 @@
           "cond": "in.Opportunity.DisplayIdAlias != \"\"",
           "predicate_paths": [
             "in.Opportunity.DisplayIdAlias"
-          ]
-        },
-        {
-          "id": "b747",
-          "at": "internal/serverv2/create_work.go:543",
-          "cond": "in|in.ActorId|in.DevOid != nil",
-          "predicate_paths": [
-            "in"
-          ]
-        },
-        {
-          "id": "b748",
-          "at": "internal/serverv2/create_work.go:549",
-          "cond": "in|in.ActorId|in.DevOid != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -6963,14 +6916,6 @@
           "predicate_paths": [
             "in.DevOid",
             "in.Id"
-          ]
-        },
-        {
-          "id": "b753",
-          "at": "internal/serverv2/create_work.go:756",
-          "cond": "in|in.ActorId|in.DevOid != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -10734,5 +10679,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateWork` (HTTP operation `WorksCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.CreateEmbeddedTasks\n  - in.CreateLinks\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.Id\n  - in.IsSystemUpdate\n  - in.Issue.DisplayIdAlias\n  - in.Issue.OwnedByIds\n  - in.Issue.SpaceId\n  - in.Issue.SprintState\n  - in.Issue.Stage\n  - in.Opportunity.DisplayIdAlias\n  - in.Opportunity.SpaceId\n  - in.Opportunity.Stage\n  - in.StageValidationOptions\n  - in.Task.Stage\n  - in.Ticket.AccountId\n  - in.Ticket.AppliesToPartId\n  - in.Ticket.ArtifactIds\n  - in.Ticket.BrandId\n  - in.Ticket.Channels\n  - in.Ticket.ChannelsV2\n  - in.Ticket.CustomFields\n  - in.Ticket.CustomSchemaFragmentIds\n  - in.Ticket.Group\n  - in.Ticket.IsFrozen\n  - in.Ticket.IsSpam\n  - in.Ticket.NeedsResponse\n  - in.Ticket.OwnedByIds\n  - in.Ticket.ReportedByIds\n  - in.Ticket.RevOid\n  - in.Ticket.SlaId\n  - in.Ticket.SourceChannel\n  - in.Ticket.SourceChannelV2\n  - in.Ticket.SourceChannelV2Instance\n  - in.Ticket.SpaceId\n  - in.Ticket.Stage\n  - in.Ticket.Visibility\n  - in.WorkOneof.Issue.AppliesToPartId\n  - in.WorkOneof.Issue.AppliesToVersionIds\n  - in.WorkOneof.Issue.ArtifactIds\n  - in.WorkOneof.Issue.DevelopedWith\n  - in.WorkOneof.Issue.DevrevCopy.OriginId\n  - in.WorkOneof.Issue.DevrevCopy.OriginOrgId\n  - in.WorkOneof.Issue.EventContext.Source\n  - in.WorkOneof.Issue.ExternalRef\n  - in.WorkOneof.Issue.ExternalSourceData.CreatedById\n  - in.WorkOneof.Issue.ExternalSourceData.ModifiedById\n  - in.WorkOneof.Issue.MilestoneId\n  - in.WorkOneof.Issue.OwnedByIds\n  - in.WorkOneof.Issue.Priority\n  - in.WorkOneof.Issue.ProjectId\n  - in.WorkOneof.Issue.Reactions\n  - in.WorkOneof.Issue.ReleaseVersionIds\n  - in.WorkOneof.Issue.ReportedById\n  - in.WorkOneof.Issue.ReportedByIds\n  - in.WorkOneof.Issue.SharedWith\n  - in.WorkOneof.Issue.SlaId\n  - (+119 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.WorkOneof\n  - in.WorkOneof.Ticket.WorkType == 5\n  - in.WorkOneof.Issue.WorkType == 2\n  - in.WorkOneof.Task.WorkType == 4\n  - in.WorkOneof.Opportunity.WorkType == 6\n  - in.ActorId == nil\n  - in.DevOid == nil\n  - in.DevOid != objType\n  - in.DevOid == nil\n  - in.DevOid == *ObjectTypeCustomObject\n  - in.DevOid == nil\n  - in.Ticket.ReportedByIds == nil\n  - in.DevOid\n  - in.DevOid|in.Ticket.ReportedByIds == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid != nil\n  - in.DevOid\n  - in.ActorId != *ObjectTypeRevUser\n  - in.Ticket.AppliesToPartId != nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.IsSpam == nil\n  - in.Ticket.IsFrozen == nil\n  - in.Ticket.NeedsResponse == nil\n  - in.Ticket.Visibility == nil\n  - in.Ticket.SourceChannel == nil\n  - in.Ticket.SourceChannel == *t59\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.BrandId|in.Ticket.Group|in.Ticket.SpaceId|in.Ticket.Tags == nil\n  - in.Ticket.BrandId|in.Ticket.SourceChannelV2Instance|in.Ticket.SpaceId == nil\n  - in.Ticket.ChannelsV2 != nil\n  - in.Ticket.Channels != nil\n  - in.Ticket.SourceChannelV2 != nil\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.SourceChannel == *t43\n  - in.Ticket.SourceChannel == *t54\n  - in.Ticket.SourceChannel == *t57\n  - in.Ticket.SourceChannel == *t60\n  - (+685 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - EOF\n  - ErrActAsByNotFound\n  - ErrActAsNotFound\n  - ErrAuth0UserNotFound\n  - ErrAuthContextNotFound\n  - ErrCorruptedDocument\n  - ErrDecodeToNil\n  - ErrDocumentTooLarge\n  - ErrElementNotFound\n  - ErrEmptyKey\n  - ErrEmptyWriteConcern\n  - ErrInconsistent\n  - ErrInvalidDocumentSequenceStyle\n  - ErrNegativeMaxTime\n  - ErrNegativeW\n  - ErrNegativeWTimeout\n  - ErrNilRegistry\n  - ErrNilType\n  - ErrNonDocument\n  - ErrNonPrimaryReadPref\n  - ErrParseServiceContext\n  - ErrParseUserContext\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ErrServiceContextNotFound\n  - ErrSessionEnded\n  - ErrSubjectNotFound\n  - ErrSurfaceIDNotFound\n  - ErrSvcAccNotFound\n  - ErrUserContextNotFound\n  - ErrWrongClient\n  - ObjectTypeInvalid\n  - ObjectTypeIssue\n  - ObjectTypeOpportunity\n  - ObjectTypeTask\n  - ObjectTypeTicket\n  - dNaN\n  - dNegInf\n  - dPosInf\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions ['in.Ticket.AppliesToPartId', 'in.WorkOneof.Issue.AppliesToPartId', 'in.WorkOneof.Task.AppliesToPartId', 'in.WorkOneof.Ticket.AppliesToPartId']\n  - test field `customschemaspec` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Issue.OwnedByIds', 'in.Ticket.OwnedByIds', 'in.WorkOneof.Issue.OwnedByIds', 'in.WorkOneof.Opportunity.OwnedByIds', 'in.WorkOneof.Task.OwnedByIds', 'in.WorkOneof.Ticket.OwnedByAgentId', 'in.WorkOneof.Ticket.OwnedByIds']\n  - test field `reportedby` -> suggestions ['in.Ticket.ReportedByIds', 'in.WorkOneof.Issue.ReportedById', 'in.WorkOneof.Issue.ReportedByIds', 'in.WorkOneof.Opportunity.ReportedById', 'in.WorkOneof.Opportunity.ReportedByIds', 'in.WorkOneof.Task.ReportedById', 'in.WorkOneof.Task.ReportedByIds', 'in.WorkOneof.Ticket.ReportedById', 'in.WorkOneof.Ticket.ReportedByIds']\n  - test field `type` -> suggestions ['in.WorkOneof.Issue.WorkType', 'in.WorkOneof.Opportunity.WorkType', 'in.WorkOneof.Task.WorkType', 'in.WorkOneof.Ticket.WorkType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateWork` (HTTP operation `WorksCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.CreateEmbeddedTasks\n  - in.CreateLinks\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.Id\n  - in.IsSystemUpdate\n  - in.Issue.DisplayIdAlias\n  - in.Issue.OwnedByIds\n  - in.Issue.SpaceId\n  - in.Issue.SprintState\n  - in.Issue.Stage\n  - in.Opportunity.DisplayIdAlias\n  - in.Opportunity.SpaceId\n  - in.Opportunity.Stage\n  - in.StageValidationOptions\n  - in.Task.Stage\n  - in.Ticket.AccountId\n  - in.Ticket.AppliesToPartId\n  - in.Ticket.ArtifactIds\n  - in.Ticket.BrandId\n  - in.Ticket.Channels\n  - in.Ticket.ChannelsV2\n  - in.Ticket.CustomFields\n  - in.Ticket.CustomSchemaFragmentIds\n  - in.Ticket.Group\n  - in.Ticket.IsFrozen\n  - in.Ticket.IsSpam\n  - in.Ticket.NeedsResponse\n  - in.Ticket.OwnedByIds\n  - in.Ticket.ReportedByIds\n  - in.Ticket.RevOid\n  - in.Ticket.SlaId\n  - in.Ticket.SourceChannel\n  - in.Ticket.SourceChannelV2\n  - in.Ticket.SourceChannelV2Instance\n  - in.Ticket.SpaceId\n  - in.Ticket.Stage\n  - in.Ticket.Visibility\n  - in.WorkOneof.Issue.AppliesToPartId\n  - in.WorkOneof.Issue.AppliesToVersionIds\n  - in.WorkOneof.Issue.ArtifactIds\n  - in.WorkOneof.Issue.DevelopedWith\n  - in.WorkOneof.Issue.DevrevCopy.OriginId\n  - in.WorkOneof.Issue.DevrevCopy.OriginOrgId\n  - in.WorkOneof.Issue.EventContext.Source\n  - in.WorkOneof.Issue.ExternalRef\n  - in.WorkOneof.Issue.ExternalSourceData.CreatedById\n  - in.WorkOneof.Issue.ExternalSourceData.ModifiedById\n  - in.WorkOneof.Issue.MilestoneId\n  - in.WorkOneof.Issue.OwnedByIds\n  - in.WorkOneof.Issue.Priority\n  - in.WorkOneof.Issue.ProjectId\n  - in.WorkOneof.Issue.Reactions\n  - in.WorkOneof.Issue.ReleaseVersionIds\n  - in.WorkOneof.Issue.ReportedById\n  - in.WorkOneof.Issue.ReportedByIds\n  - in.WorkOneof.Issue.SharedWith\n  - in.WorkOneof.Issue.SlaId\n  - (+119 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.WorkOneof\n  - in.WorkOneof.Ticket.WorkType == 5\n  - in.WorkOneof.Issue.WorkType == 2\n  - in.WorkOneof.Task.WorkType == 4\n  - in.WorkOneof.Opportunity.WorkType == 6\n  - in.ActorId == nil\n  - in.DevOid == nil\n  - in.DevOid != objType\n  - in.DevOid == nil\n  - in.DevOid == *ObjectTypeCustomObject\n  - in.DevOid == nil\n  - in.Ticket.ReportedByIds == nil\n  - in.DevOid\n  - in.DevOid|in.Ticket.ReportedByIds == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid != nil\n  - in.DevOid\n  - in.ActorId != *ObjectTypeRevUser\n  - in.Ticket.AppliesToPartId != nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.IsSpam == nil\n  - in.Ticket.IsFrozen == nil\n  - in.Ticket.NeedsResponse == nil\n  - in.Ticket.Visibility == nil\n  - in.Ticket.SourceChannel == nil\n  - in.Ticket.SourceChannel == *t59\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.BrandId|in.Ticket.Group|in.Ticket.SpaceId|in.Ticket.Tags == nil\n  - in.Ticket.BrandId|in.Ticket.SourceChannelV2Instance|in.Ticket.SpaceId == nil\n  - in.Ticket.ChannelsV2 != nil\n  - in.Ticket.Channels != nil\n  - in.Ticket.SourceChannelV2 != nil\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.SourceChannel == *t43\n  - in.Ticket.SourceChannel == *t54\n  - in.Ticket.SourceChannel == *t57\n  - in.Ticket.SourceChannel == *t60\n  - (+678 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - EOF\n  - ErrActAsByNotFound\n  - ErrActAsNotFound\n  - ErrAuth0UserNotFound\n  - ErrAuthContextNotFound\n  - ErrCorruptedDocument\n  - ErrDecodeToNil\n  - ErrDocumentTooLarge\n  - ErrElementNotFound\n  - ErrEmptyKey\n  - ErrEmptyWriteConcern\n  - ErrInconsistent\n  - ErrInvalidDocumentSequenceStyle\n  - ErrNegativeMaxTime\n  - ErrNegativeW\n  - ErrNegativeWTimeout\n  - ErrNilRegistry\n  - ErrNilType\n  - ErrNonDocument\n  - ErrNonPrimaryReadPref\n  - ErrParseServiceContext\n  - ErrParseUserContext\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ErrServiceContextNotFound\n  - ErrSessionEnded\n  - ErrSubjectNotFound\n  - ErrSurfaceIDNotFound\n  - ErrSvcAccNotFound\n  - ErrUserContextNotFound\n  - ErrWrongClient\n  - ObjectTypeInvalid\n  - ObjectTypeIssue\n  - ObjectTypeOpportunity\n  - ObjectTypeTask\n  - ObjectTypeTicket\n  - dNaN\n  - dNegInf\n  - dPosInf\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions ['in.Ticket.AppliesToPartId', 'in.WorkOneof.Issue.AppliesToPartId', 'in.WorkOneof.Task.AppliesToPartId', 'in.WorkOneof.Ticket.AppliesToPartId']\n  - test field `customschemaspec` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Issue.OwnedByIds', 'in.Ticket.OwnedByIds', 'in.WorkOneof.Issue.OwnedByIds', 'in.WorkOneof.Opportunity.OwnedByIds', 'in.WorkOneof.Task.OwnedByIds', 'in.WorkOneof.Ticket.OwnedByAgentId', 'in.WorkOneof.Ticket.OwnedByIds']\n  - test field `reportedby` -> suggestions ['in.Ticket.ReportedByIds', 'in.WorkOneof.Issue.ReportedById', 'in.WorkOneof.Issue.ReportedByIds', 'in.WorkOneof.Opportunity.ReportedById', 'in.WorkOneof.Opportunity.ReportedByIds', 'in.WorkOneof.Task.ReportedById', 'in.WorkOneof.Task.ReportedByIds', 'in.WorkOneof.Ticket.ReportedById', 'in.WorkOneof.Ticket.ReportedByIds']\n  - test field `type` -> suggestions ['in.WorkOneof.Issue.WorkType', 'in.WorkOneof.Opportunity.WorkType', 'in.WorkOneof.Task.WorkType', 'in.WorkOneof.Ticket.WorkType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

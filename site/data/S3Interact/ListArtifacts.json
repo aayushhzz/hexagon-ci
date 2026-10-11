@@ -82,22 +82,23 @@
     },
     "branches": {
       "total": 22,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 21,
-      "present_arm_exercised": 15,
-      "present_arm_pct": 68.2,
+      "reachable_on_happy_path": 22,
+      "present_arm_exercised": 16,
+      "present_arm_pct": 72.7,
       "absent_arm_exercised": 21,
-      "absent_arm_pct": 100,
+      "absent_arm_pct": 95.5,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 15,
-      "coverage_pct": 68.2,
+      "coverage_pct": 72.7,
       "by_origin": {
         "service": {
           "total": 16,
-          "reachable_on_happy_path": 15,
-          "present_arm_exercised": 11,
-          "present_arm_pct": 68.8,
+          "reachable_on_happy_path": 16,
+          "present_arm_exercised": 12,
+          "present_arm_pct": 75,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 15
@@ -160,14 +161,6 @@
           "cond": "in.Ancestor != nil",
           "predicate_paths": [
             "in.Ancestor"
-          ]
-        },
-        {
-          "id": "b19",
-          "at": "internal/server/list_artifact.go:44",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -341,5 +334,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListArtifacts` (HTTP operation `ArtifactsListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Ancestor\n  - in.ConfigurationSet\n  - in.IncludeChildObjectTypes\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Ancestor == nil\n  - in.Ancestor != nil\n  - in.Ancestor == nil\n  - in.Ancestor != nil\n  - in.Ancestor != nil\n  - in != nil\n  - in.ConfigurationSet != 0\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListArtifacts` (HTTP operation `ArtifactsListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Ancestor\n  - in.ConfigurationSet\n  - in.IncludeChildObjectTypes\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Ancestor == nil\n  - in.Ancestor != nil\n  - in.Ancestor == nil\n  - in.Ancestor != nil\n  - in.Ancestor != nil\n  - in.ConfigurationSet != 0\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

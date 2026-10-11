@@ -78,22 +78,23 @@
     },
     "branches": {
       "total": 19,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 11,
-      "present_arm_exercised": 7,
-      "present_arm_pct": 36.8,
+      "reachable_on_happy_path": 12,
+      "present_arm_exercised": 8,
+      "present_arm_pct": 42.1,
       "absent_arm_exercised": 11,
-      "absent_arm_pct": 100,
+      "absent_arm_pct": 91.7,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 7,
-      "coverage_pct": 36.8,
+      "coverage_pct": 42.1,
       "by_origin": {
         "service": {
           "total": 7,
-          "reachable_on_happy_path": 5,
-          "present_arm_exercised": 1,
-          "present_arm_pct": 14.3,
+          "reachable_on_happy_path": 6,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 28.6,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 5
@@ -164,14 +165,6 @@
           "cond": "in.Version.ModifiedBy",
           "predicate_paths": [
             "in.Version.ModifiedBy"
-          ]
-        },
-        {
-          "id": "b13",
-          "at": "internal/server/download.go:22",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -693,5 +686,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetDownloadUrl` (HTTP operation `ArtifactsLocate,QuotesGeneratePdf`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Name\n  - in.PreferDownload\n  - in.Preview\n  - in.Version.ModifiedBy\n  - in.Version.VersionId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Version.ModifiedBy == nil\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy != nil\n  - in.Version.ModifiedBy\n  - in != nil\n  - in.Name == \"\"\n  - in.Preview\n  - in.Name == **t53\n  - in.Name == **t74\n  - in.Version.VersionId != \"\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `version` -> suggestions ['in.Version.VersionId']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetDownloadUrl` (HTTP operation `ArtifactsLocate,QuotesGeneratePdf`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Name\n  - in.PreferDownload\n  - in.Preview\n  - in.Version.ModifiedBy\n  - in.Version.VersionId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Version.ModifiedBy == nil\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy != nil\n  - in.Version.ModifiedBy\n  - in.Name == \"\"\n  - in.Preview\n  - in.Name == **t53\n  - in.Name == **t74\n  - in.Version.VersionId != \"\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `version` -> suggestions ['in.Version.VersionId']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

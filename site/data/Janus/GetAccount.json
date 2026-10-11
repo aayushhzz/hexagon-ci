@@ -80,22 +80,23 @@
     },
     "branches": {
       "total": 21,
+      "enum_switch_branches": 0,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 10,
-      "present_arm_exercised": 8,
-      "present_arm_pct": 38.1,
+      "reachable_on_happy_path": 11,
+      "present_arm_exercised": 9,
+      "present_arm_pct": 42.9,
       "absent_arm_exercised": 10,
-      "absent_arm_pct": 100,
+      "absent_arm_pct": 90.9,
       "negative_arm_exercised": 8,
       "negative_arm_pct": 38.1,
       "both_arms_exercised": 0,
-      "coverage_pct": 38.1,
+      "coverage_pct": 42.9,
       "by_origin": {
         "service": {
           "total": 15,
-          "reachable_on_happy_path": 8,
-          "present_arm_exercised": 4,
-          "present_arm_pct": 26.7,
+          "reachable_on_happy_path": 9,
+          "present_arm_exercised": 5,
+          "present_arm_pct": 33.3,
           "negative_arm_exercised": 4,
           "negative_arm_pct": 26.7,
           "absent_arm_exercised": 8
@@ -166,14 +167,6 @@
           "cond": "in.AccountIdentifier.ExternalRef != nil",
           "predicate_paths": [
             "in.AccountIdentifier.ExternalRef"
-          ]
-        },
-        {
-          "id": "b14",
-          "at": "internal/service/account.go:1032",
-          "cond": "in != nil",
-          "predicate_paths": [
-            "in"
           ]
         },
         {
@@ -336,5 +329,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetAccount` (HTTP operation `AccountsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountIdentifier.Domain\n  - in.AccountIdentifier.ExternalRef\n  - in.IncludeArchived\n  - in.ResolvePrimary\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountIdentifier == nil\n  - in.AccountIdentifier != nil\n  - in.AccountIdentifier == nil\n  - in.AccountIdentifier.Domain != \"\"\n  - in.ResolvePrimary\n  - in.AccountIdentifier.ExternalRef != nil\n  - in != nil\n  - in.ResolvePrimary\n  - in.IncludeArchived\n  - in.ResolvePrimary\n  - in.IncludeArchived\n  - in.ResolvePrimary\n  - in.IncludeArchived\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetAccount` (HTTP operation `AccountsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountIdentifier.Domain\n  - in.AccountIdentifier.ExternalRef\n  - in.IncludeArchived\n  - in.ResolvePrimary\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountIdentifier == nil\n  - in.AccountIdentifier != nil\n  - in.AccountIdentifier == nil\n  - in.AccountIdentifier.Domain != \"\"\n  - in.ResolvePrimary\n  - in.AccountIdentifier.ExternalRef != nil\n  - in.ResolvePrimary\n  - in.IncludeArchived\n  - in.ResolvePrimary\n  - in.IncludeArchived\n  - in.ResolvePrimary\n  - in.IncludeArchived\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }
