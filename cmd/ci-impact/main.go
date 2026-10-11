@@ -30,11 +30,12 @@ func run(args []string, stdout, stderr io.Writer) error {
 	summaryPath := flags.String("summary", "", "optional GitHub Actions summary file")
 	outputPath := flags.String("output", "", "optional GitHub Actions step output file")
 	requireStrictSubset := flags.Bool("require-strict-subset", false, "fail before running tests unless candidates form a non-empty strict subset")
+	requireCandidatePackage := flags.String("require-candidate-package", "", "fail before running tests unless a candidate root is in this package or a nested package")
 	if err := flags.Parse(args); err != nil {
 		return err
 	}
 	if flags.NArg() != 0 || *repository == "" || *baseRepository == "" || *diffPath == "" {
-		return fmt.Errorf("usage: ci-impact --repository <head> --base-repository <base> --diff <unified.diff> [--summary <file>]")
+		return fmt.Errorf("usage: ci-impact --repository <head> --base-repository <base> --diff <unified.diff> [--require-strict-subset] [--require-candidate-package <path>] [--summary <file>]")
 	}
 
 	diffFile, err := os.Open(*diffPath)
@@ -76,6 +77,9 @@ func run(args []string, stdout, stderr io.Writer) error {
 			return err
 		}
 	}
+	if err := checkRequiredCandidatePackage(plan, *requireCandidatePackage); err != nil {
+		return err
+	}
 
 	runStart := time.Now()
 	runErr := hexagon.RunCandidateTests(context.Background(), *repository, headGraph, plan, stdout, stderr)
@@ -102,6 +106,26 @@ func checkStrictSubset(plan *hexagon.ImpactPlan, headTests int) error {
 		return fmt.Errorf("strict candidate subset unavailable: selected %d of %d test roots; no candidate tests run", candidateCount(plan), headTests)
 	}
 	return nil
+}
+
+func checkRequiredCandidatePackage(plan *hexagon.ImpactPlan, requiredPackage string) error {
+	if requiredPackage == "" {
+		return nil
+	}
+	if plan != nil {
+		requiredPath := filepath.ToSlash(filepath.Clean(requiredPackage))
+		for _, candidate := range plan.CandidateTests {
+			file, _, ok := strings.Cut(candidate, "::")
+			if !ok {
+				continue
+			}
+			candidatePath := filepath.ToSlash(filepath.Dir(filepath.FromSlash(file)))
+			if candidatePath == requiredPath || strings.HasPrefix(candidatePath, requiredPath+"/") {
+				return nil
+			}
+		}
+	}
+	return fmt.Errorf("required candidate package %q is not selected; no candidate tests run", requiredPackage)
 }
 
 func candidateCount(plan *hexagon.ImpactPlan) int {

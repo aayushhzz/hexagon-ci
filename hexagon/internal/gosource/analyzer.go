@@ -91,11 +91,12 @@ type typeRef struct {
 }
 
 type resolver struct {
-	index    map[string][]string
-	packages map[string]map[string]bool
-	types    map[string]map[string]bool
-	module   string
-	returns  map[string]typeRef
+	index      map[string][]string
+	packages   map[string]map[string]bool
+	types      map[string]map[string]bool
+	module     string
+	returns    map[string][]typeRef
+	rpcServers map[typeRef][]typeRef
 }
 
 func packageKey(filename, packageName string) string {
@@ -306,9 +307,13 @@ base:
 		}
 	case *ast.SelectorExpr:
 		if ident, ok := value.X.(*ast.Ident); ok && !fn.Shadowed[ident.Name] {
-			pkg := localImport(r.module, fn.File.Imports[ident.Name], r.packages)
+			importPath := fn.File.Imports[ident.Name]
+			pkg := localImport(r.module, importPath, r.packages)
 			if r.types[pkg][value.Sel.Name] {
 				return typeRef{pkg, value.Sel.Name}
+			}
+			if importPath != "" && pkg == "" && importPath != r.module && !strings.HasPrefix(importPath, r.module+"/") {
+				return typeRef{"@" + importPath, value.Sel.Name}
 			}
 		}
 	}
@@ -328,7 +333,10 @@ func (r resolver) expressionType(expr ast.Expr, fn function) typeRef {
 		return r.declaredType(value.Type, fn)
 	case *ast.CallExpr:
 		if target := r.resolve(value.Fun, fn); target != "" {
-			return r.returns[target]
+			if results := r.returns[target]; len(results) == 1 {
+				return results[0]
+			}
+			return typeRef{}
 		}
 		return r.declaredType(value.Fun, fn) // A conversion to a known local type.
 	}
@@ -368,10 +376,18 @@ func (r resolver) localBindings(fn function) map[string]typeRef {
 			switch item := n.(type) {
 			case *ast.AssignStmt:
 				if item.Tok == token.DEFINE {
+					var results []typeRef
+					if len(item.Rhs) == 1 {
+						if call, ok := item.Rhs[0].(*ast.CallExpr); ok {
+							results = r.returns[r.resolve(call.Fun, fn)]
+						}
+					}
 					for i, lhs := range item.Lhs {
 						if ident, ok := lhs.(*ast.Ident); ok {
 							typ := typeRef{}
-							if i < len(item.Rhs) && len(item.Lhs) == len(item.Rhs) {
+							if len(results) == len(item.Lhs) {
+								typ = results[i]
+							} else if i < len(item.Rhs) && len(item.Lhs) == len(item.Rhs) {
 								typ = r.expressionType(item.Rhs[i], fn)
 							}
 							add(ident.Name, typ)
@@ -421,6 +437,13 @@ func (r resolver) resolve(expr ast.Expr, fn function) string {
 		return unique(r.index, fn.Package, value.Name)
 	case *ast.SelectorExpr:
 		if typ := r.expressionType(value.X, fn); typ != (typeRef{}) {
+			if strings.HasPrefix(typ.Package, "@") && strings.HasSuffix(typ.Name, "Client") {
+				servers := r.rpcServers[typ]
+				if len(servers) == 1 {
+					server := servers[0]
+					return unique(r.index, server.Package, server.Name+"."+value.Sel.Name)
+				}
+			}
 			return unique(r.index, typ.Package, typ.Name+"."+value.Sel.Name)
 		}
 		if qualifier, ok := value.X.(*ast.Ident); ok {
@@ -569,11 +592,70 @@ func build(sources map[string][]byte, root string, tags []string) (output, error
 		}
 	}
 
-	r := resolver{index: index, packages: packages, types: types, module: module, returns: make(map[string]typeRef)}
+	r := resolver{index: index, packages: packages, types: types, module: module,
+		returns: make(map[string][]typeRef), rpcServers: make(map[typeRef][]typeRef)}
+	// A compile-time server interface assertion identifies which local receiver
+	// handles calls on the generated client interface from the same import path.
+	for i := range files {
+		file := &files[i]
+		for _, decl := range file.AST.Decls {
+			general, ok := decl.(*ast.GenDecl)
+			if !ok || general.Tok != token.VAR {
+				continue
+			}
+			for _, spec := range general.Specs {
+				value, ok := spec.(*ast.ValueSpec)
+				if !ok || len(value.Names) != 1 || value.Names[0].Name != "_" || len(value.Values) != 1 {
+					continue
+				}
+				iface, ok := value.Type.(*ast.SelectorExpr)
+				if !ok || !strings.HasSuffix(iface.Sel.Name, "Server") {
+					continue
+				}
+				alias, ok := iface.X.(*ast.Ident)
+				if !ok || file.Imports[alias.Name] == "" {
+					continue
+				}
+				conversion, ok := value.Values[0].(*ast.CallExpr)
+				if !ok || len(conversion.Args) != 1 {
+					continue
+				}
+				nilValue, ok := conversion.Args[0].(*ast.Ident)
+				if !ok || nilValue.Name != "nil" {
+					continue
+				}
+				pointer, ok := unwrap(conversion.Fun).(*ast.StarExpr)
+				if !ok {
+					continue
+				}
+				receiver, ok := pointer.X.(*ast.Ident)
+				if !ok || !types[file.Package][receiver.Name] {
+					continue
+				}
+				client := typeRef{"@" + file.Imports[alias.Name], strings.TrimSuffix(iface.Sel.Name, "Server") + "Client"}
+				server := typeRef{file.Package, receiver.Name}
+				found := false
+				for _, existing := range r.rpcServers[client] {
+					found = found || existing == server
+				}
+				if !found {
+					r.rpcServers[client] = append(r.rpcServers[client], server)
+				}
+			}
+		}
+	}
 	for _, fn := range functions {
 		fields := fn.Decl.Type.Results
-		if fields != nil && len(fields.List) == 1 && len(fields.List[0].Names) <= 1 {
-			r.returns[fn.Node.ID] = r.declaredType(fields.List[0].Type, fn)
+		if fields != nil {
+			for _, field := range fields.List {
+				count := len(field.Names)
+				if count == 0 {
+					count = 1
+				}
+				for range count {
+					r.returns[fn.Node.ID] = append(r.returns[fn.Node.ID], r.declaredType(field.Type, fn))
+				}
+			}
 		}
 	}
 	for i := range functions {

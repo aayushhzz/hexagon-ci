@@ -31,3 +31,45 @@ func TestCheckStrictSubset(t *testing.T) {
 		})
 	}
 }
+
+func TestCheckRequiredCandidatePackage(t *testing.T) {
+	tests := []struct {
+		name       string
+		candidates []string
+		required   string
+		wantError  bool
+	}{
+		{
+			name:       "required package is selected",
+			candidates: []string{"test/workflows_test/list_workflows_test.go::TestListWorkflowsWithSearchQuery"},
+			required:   "test/workflows_test",
+		},
+		{
+			name:       "package prefix does not count as a match",
+			candidates: []string{"test/workflows_test_helpers/helpers_test.go::TestHelper"},
+			required:   "test/workflows_test",
+			wantError:  true,
+		},
+		{
+			name:       "missing package fails before tests run",
+			candidates: []string{"internal/workflowserver/list_workflows_test.go::TestWorkflowsRegistry_ListWorkflows"},
+			required:   "test/workflows_test",
+			wantError:  true,
+		},
+		{
+			name:       "empty requirement is disabled",
+			candidates: []string{"internal/workflowserver/list_workflows_test.go::TestWorkflowsRegistry_ListWorkflows"},
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			err := checkRequiredCandidatePackage(&hexagon.ImpactPlan{CandidateTests: test.candidates}, test.required)
+			if (err != nil) != test.wantError {
+				t.Fatalf("checkRequiredCandidatePackage() error = %v, want error %t", err, test.wantError)
+			}
+			if test.wantError && !strings.Contains(err.Error(), "no candidate tests run") {
+				t.Fatalf("missing no-execution reason: %v", err)
+			}
+		})
+	}
+}

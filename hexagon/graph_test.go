@@ -31,6 +31,94 @@ func TestAnalyzedRepositoryRejectsChangesBeforePublication(t *testing.T) {
 	}
 }
 
+func TestExternalGRPCClientCallReachesAssertedServerMethod(t *testing.T) {
+	root := t.TempDir()
+	files := map[string]string{
+		"go.mod": "module example.com/demo\n\ngo 1.24.0\n",
+		"server/server.go": `package server
+import api "example.com/generated/workflows"
+type Registry struct{}
+var _ api.WorkflowsServiceServer = (*Registry)(nil)
+func (*Registry) ListWorkflows() {}
+`,
+		"client/client.go": `package client
+import api "example.com/generated/workflows"
+func GetClient() (api.WorkflowsServiceClient, func()) { return nil, nil }
+`,
+		"e2e/e2e_test.go": `package e2e
+import (
+	"testing"
+	api "example.com/generated/workflows"
+	other "example.com/other/workflows"
+	"example.com/demo/client"
+)
+func check(c api.WorkflowsServiceClient) { c.ListWorkflows() }
+func TestWorkflow(t *testing.T) {
+	c, close := client.GetClient()
+	_ = close
+	c.ListWorkflows()
+}
+func TestTypedHelper(t *testing.T) {
+	var c api.WorkflowsServiceClient
+	check(c)
+}
+func TestOtherService(t *testing.T) {
+	var c other.WorkflowsServiceClient
+	c.ListWorkflows()
+}
+`,
+	}
+	for name, contents := range files {
+		filename := filepath.Join(root, filepath.FromSlash(name))
+		if err := os.MkdirAll(filepath.Dir(filename), 0o755); err != nil {
+			t.Fatal(err)
+		}
+		if err := os.WriteFile(filename, []byte(contents), 0o644); err != nil {
+			t.Fatal(err)
+		}
+	}
+	graph, err := BuildGraph(root, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	contains := func(root, node string) bool {
+		for _, candidate := range graph.Tests[root].Nodes {
+			if candidate == node {
+				return true
+			}
+		}
+		return false
+	}
+	handler := "server/server.go::Registry.ListWorkflows"
+	if !contains("e2e/e2e_test.go::TestWorkflow", handler) {
+		t.Fatalf("gRPC E2E root did not reach %s", handler)
+	}
+	if !contains("e2e/e2e_test.go::TestTypedHelper", handler) {
+		t.Fatalf("typed helper root did not reach %s", handler)
+	}
+	if contains("e2e/e2e_test.go::TestOtherService", handler) {
+		t.Fatalf("unrelated gRPC client incorrectly reached %s", handler)
+	}
+	// Two implementations of one server interface cannot be mapped to a
+	// particular handler without more evidence.
+	ambiguous := `package server
+import api "example.com/generated/workflows"
+type OtherRegistry struct{}
+var _ api.WorkflowsServiceServer = (*OtherRegistry)(nil)
+func (*OtherRegistry) ListWorkflows() {}
+`
+	if err := os.WriteFile(filepath.Join(root, "server", "other.go"), []byte(ambiguous), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	graph, err = BuildGraph(root, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if contains("e2e/e2e_test.go::TestWorkflow", handler) || contains("e2e/e2e_test.go::TestWorkflow", "server/other.go::OtherRegistry.ListWorkflows") {
+		t.Fatal("ambiguous service implementations must remain unresolved")
+	}
+}
+
 func TestFunctionLineSpansRoundTripThroughGraphFormats(t *testing.T) {
 	root := t.TempDir()
 	if err := os.WriteFile(filepath.Join(root, "go.mod"), []byte("module example.com/spans\n\ngo 1.24.0\n"), 0o644); err != nil {
