@@ -2,21 +2,42 @@
   "service": "Janus",
   "coverage": {
     "rpc": "CreateDevOrg",
-    "operation": "",
-    "tests": 0,
+    "operation": "DevOrgsCreate",
+    "tests": 1,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        201,
+        400,
+        401,
+        403,
+        409,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        201,
+        409
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 22.2
     },
     "fields": {
       "leaf_fields_read_by_rpc": 13,
-      "covered_count": 0,
-      "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
-      "set_by_positive_tests": 0,
-      "set_by_negative_tests": 0,
+      "covered_count": 2,
+      "coverage_pct": 15.4,
+      "request_fields_set_by_tests": 9,
+      "set_by_positive_tests": 2,
+      "set_by_negative_tests": 2,
       "by_depth": {
         "top_level": {
           "total": 1,
@@ -25,8 +46,8 @@
         },
         "nested": {
           "total": 11,
-          "set": 0,
-          "pct": 0
+          "set": 2,
+          "pct": 18.2
         },
         "deep": {
           "total": 1,
@@ -36,16 +57,29 @@
       },
       "representative": {
         "units": 13,
-        "covered": 0,
-        "pct": 0,
+        "covered": 2,
+        "pct": 15.4,
         "collapsed_types": []
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.DevOrg.DevSlug",
+          "match": "exact",
+          "by_tests": [
+            "CreateDevOrg across region"
+          ]
+        },
+        {
+          "path": "in.DevOrg.DisplayName",
+          "match": "exact",
+          "by_tests": [
+            "CreateDevOrg across region"
+          ]
+        }
+      ],
       "gaps": [
         "in.DevOrg.AllowedEmailDomain",
         "in.DevOrg.AllowedEmailDomains",
-        "in.DevOrg.DevSlug",
-        "in.DevOrg.DisplayName",
         "in.DevOrg.PhoneNumbers",
         "in.DevOrg.PlatformRevOrgMetadata.AccountDeDupDomain",
         "in.DevOrgIdPrefix",
@@ -59,25 +93,25 @@
     },
     "branches": {
       "total": 12,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 4,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
-      "negative_arm_exercised": 0,
-      "negative_arm_pct": 0,
+      "present_arm_exercised": 6,
+      "present_arm_pct": 50,
+      "absent_arm_exercised": 4,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 6,
+      "negative_arm_pct": 50,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 50,
       "by_origin": {
         "service": {
           "total": 11,
-          "reachable_on_happy_path": 0,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "reachable_on_happy_path": 4,
+          "present_arm_exercised": 5,
+          "present_arm_pct": 45.5,
+          "negative_arm_exercised": 5,
+          "negative_arm_pct": 45.5,
+          "absent_arm_exercised": 4
         },
         "generated": {
           "total": 0,
@@ -91,65 +125,25 @@
         "library": {
           "total": 1,
           "reachable_on_happy_path": 0,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 100,
+          "negative_arm_exercised": 1,
+          "negative_arm_pct": 100,
           "absent_arm_exercised": 0
         }
       },
       "gaps": [
         {
-          "id": "b1",
-          "at": "internal/service/devorg.go:356",
-          "cond": "in.DevOrg.DevSlug == \"\"",
-          "predicate_paths": [
-            "in.DevOrg.DevSlug"
-          ]
-        },
-        {
-          "id": "b2",
-          "at": "internal/service/devorg.go:378",
-          "cond": "in.DevOrg.DevSlug",
-          "predicate_paths": [
-            "in.DevOrg.DevSlug"
-          ]
-        },
-        {
           "id": "b3",
-          "at": "internal/service/devorg.go:277",
+          "at": "internal/service/devorg.go:248",
           "cond": "in.DevOrg == nil",
           "predicate_paths": [
             "in.DevOrg"
           ]
         },
         {
-          "id": "b4",
-          "at": "internal/service/devorg.go:277",
-          "cond": "in.DevOrg.DisplayName == nil",
-          "predicate_paths": [
-            "in.DevOrg.DisplayName"
-          ]
-        },
-        {
-          "id": "b5",
-          "at": "/Users/devrev/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.1.darwin-arm64/src/slices/slices.go:98",
-          "cond": "in.DevOrg.DevSlug == *t4",
-          "predicate_paths": [
-            "in.DevOrg.DevSlug"
-          ]
-        },
-        {
-          "id": "b6",
-          "at": "internal/service/devorg.go:289",
-          "cond": "in.DevOrg.DevSlug",
-          "predicate_paths": [
-            "in.DevOrg.DevSlug"
-          ]
-        },
-        {
           "id": "b7",
-          "at": "internal/service/devorg.go:410",
+          "at": "internal/service/devorg.go:381",
           "cond": "in.ServicePlan != nil",
           "predicate_paths": [
             "in.ServicePlan"
@@ -157,23 +151,15 @@
         },
         {
           "id": "b8",
-          "at": "internal/service/devorg.go:436",
+          "at": "internal/service/devorg.go:407",
           "cond": "in.DevOrg.AllowedEmailDomains",
           "predicate_paths": [
             "in.DevOrg.AllowedEmailDomains"
           ]
         },
         {
-          "id": "b9",
-          "at": "internal/service/devorg.go:458",
-          "cond": "in.DevOrg.DevSlug",
-          "predicate_paths": [
-            "in.DevOrg.DevSlug"
-          ]
-        },
-        {
           "id": "b10",
-          "at": "internal/service/devorg.go:466",
+          "at": "internal/service/devorg.go:437",
           "cond": "in.DevOrg.AllowedEmailDomain != \"\"",
           "predicate_paths": [
             "in.DevOrg.AllowedEmailDomain"
@@ -181,7 +167,7 @@
         },
         {
           "id": "b11",
-          "at": "internal/service/devorg.go:491",
+          "at": "internal/service/devorg.go:462",
           "cond": "in.Utm != nil",
           "predicate_paths": [
             "in.Utm"
@@ -189,7 +175,7 @@
         },
         {
           "id": "b12",
-          "at": "internal/service/devorg.go:511",
+          "at": "internal/service/devorg.go:482",
           "cond": "in.DevOrgIdPrefix != nil",
           "predicate_paths": [
             "in.DevOrgIdPrefix"
@@ -202,16 +188,84 @@
       "datastore_calls": [],
       "service_count": 0,
       "call_count": 0,
-      "reached_by_test": false,
+      "reached_by_test": true,
       "deps_result_used_in_response": 0,
       "deps_result_checked_by_test": 0,
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "environment",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "expiresin",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "givedomainaccess",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "granttype",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "requestedtokentype",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "slug",
+          "fuzzy_suggestions": [
+            "in.DevOrg.DevSlug"
+          ]
+        },
+        {
+          "field": "tokenhint",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "CreateDevOrg across region",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEV_ORGS_CREATE",
+          "INTERNAL_DEV_ORGS_PUBLIC_INFO",
+          "INTERNAL_DEV_ORGS_LIST",
+          "INTERNAL_DEVUSERS_POST_LOGIN"
+        ],
+        "fields_set": [
+          "DevSlug",
+          "DisplayName",
+          "Environment",
+          "ExpiresIn",
+          "GiveDomainAccess",
+          "GrantType",
+          "RequestedTokenType",
+          "Slug",
+          "TokenHint"
+        ],
+        "statuses": [
+          409
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "AccessToken",
+          "Body",
+          "DevOrg",
+          "DevOrg.Auth0OrgId",
+          "DevOrg.DevSlug",
+          "DevOrg.DisplayId",
+          "DevOrg.Id",
+          "DevOrgs",
+          "Id",
+          "StatusCode"
+        ]
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/janus/internal/service.Janus).CreateDevOrg",
@@ -236,31 +290,31 @@
       },
       {
         "symbol": "errInvalidJWTToken",
-        "at": "internal/service/devorg.go:401",
+        "at": "internal/service/devorg.go:372",
         "tainted": false
       },
       {
         "symbol": "errInvalidAuthContextEmail",
-        "at": "internal/service/devorg.go:432",
+        "at": "internal/service/devorg.go:403",
         "tainted": true
       },
       {
         "symbol": "errMaxDevOrgsPerUserReached",
-        "at": "internal/service/devorg.go:447",
+        "at": "internal/service/devorg.go:418",
         "tainted": true
       },
       {
         "symbol": "errDisplayNameLengthTooShort",
-        "at": "internal/service/devorg.go:454",
+        "at": "internal/service/devorg.go:425",
         "tainted": true
       },
       {
         "symbol": "errDevSlugInvalid",
-        "at": "internal/service/devorg.go:459",
+        "at": "internal/service/devorg.go:430",
         "tainted": true
       }
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateDevOrg` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOrg.AllowedEmailDomain\n  - in.DevOrg.AllowedEmailDomains\n  - in.DevOrg.DevSlug\n  - in.DevOrg.DisplayName\n  - in.DevOrg.PhoneNumbers\n  - in.DevOrg.PlatformRevOrgMetadata.AccountDeDupDomain\n  - in.DevOrgIdPrefix\n  - in.ServicePlan.ServicePlanLineItems\n  - in.Utm.Campaign\n  - in.Utm.Content\n  - in.Utm.Medium\n  - in.Utm.Source\n  - in.Utm.Term\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOrg.DevSlug == \"\"\n  - in.DevOrg.DevSlug\n  - in.DevOrg == nil\n  - in.DevOrg.DisplayName == nil\n  - in.DevOrg.DevSlug == *t4\n  - in.DevOrg.DevSlug\n  - in.ServicePlan != nil\n  - in.DevOrg.AllowedEmailDomains\n  - in.DevOrg.DevSlug\n  - in.DevOrg.AllowedEmailDomain != \"\"\n  - in.Utm != nil\n  - in.DevOrgIdPrefix != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevSlugInvalid\n  - errDisplayNameLengthTooShort\n  - errDomainBasedAccessNotAllowed\n  - errInternalServiceError\n  - errInvalidAuthContextEmail\n  - errInvalidJWTToken\n  - errMaxDevOrgsPerUserReached\n  - errPhoneNumberInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateDevOrg` (HTTP operation `DevOrgsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOrg.AllowedEmailDomain\n  - in.DevOrg.AllowedEmailDomains\n  - in.DevOrg.PhoneNumbers\n  - in.DevOrg.PlatformRevOrgMetadata.AccountDeDupDomain\n  - in.DevOrgIdPrefix\n  - in.ServicePlan.ServicePlanLineItems\n  - in.Utm.Campaign\n  - in.Utm.Content\n  - in.Utm.Medium\n  - in.Utm.Source\n  - in.Utm.Term\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOrg == nil\n  - in.ServicePlan != nil\n  - in.DevOrg.AllowedEmailDomains\n  - in.DevOrg.AllowedEmailDomain != \"\"\n  - in.Utm != nil\n  - in.DevOrgIdPrefix != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevSlugInvalid\n  - errDisplayNameLengthTooShort\n  - errDomainBasedAccessNotAllowed\n  - errInternalServiceError\n  - errInvalidAuthContextEmail\n  - errInvalidJWTToken\n  - errMaxDevOrgsPerUserReached\n  - errPhoneNumberInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `environment` -> suggestions []\n  - test field `expiresin` -> suggestions []\n  - test field `givedomainaccess` -> suggestions []\n  - test field `granttype` -> suggestions []\n  - test field `requestedtokentype` -> suggestions []\n  - test field `slug` -> suggestions ['in.DevOrg.DevSlug']\n  - test field `tokenhint` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

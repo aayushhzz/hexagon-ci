@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "GetWork",
     "operation": "WebhooksFetch,WorksGet,WorksGetPost",
-    "tests": 29,
+    "tests": 36,
     "status": {
       "documented": null,
       "asserted": [
@@ -19,7 +19,7 @@
       "leaf_fields_read_by_rpc": 3,
       "covered_count": 1,
       "coverage_pct": 33.3,
-      "request_fields_set_by_tests": 41,
+      "request_fields_set_by_tests": 56,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 1,
       "by_depth": {
@@ -65,18 +65,25 @@
             "Delete ticket with shared_with set \u2014 returns 200; members can no longer get it",
             "FetchWebhook",
             "Get by id",
+            "MetricActionExecute on Frozen Ticket",
             "Platform user should be able to perform all CRUD operations",
+            "Should successfully convert a conversation to a ticket",
+            "Should verify file attachment content matches original using SHA256",
             "Team coordinates work management through comprehensive operations",
             "Unsets milestone on all referencing issues when milestone is deleted",
             "Updates survey aggregation on a frozen ticket using service account context",
+            "User retrieves and manages individual work items throughout project lifecycle",
             "Validates works operations reliability through repeated API testing",
             "With Id",
             "With invalid id",
+            "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation",
             "should create and activate the TCD notifier workflow with group membership check",
             "should create and activate the TSE Logic workflow",
             "should create ticket tag automation workflow when ticket stage is changed",
             "should return masked custom field value when the masked user reads the issue",
-            "should return unmasked custom field value when admin reads the issue"
+            "should return unmasked custom field value when admin reads the issue",
+            "should trigger the workflow when enhancement tags are updated",
+            "should trigger the workflow when ticket stage is updated to awaiting_product_assist"
           ]
         }
       ],
@@ -129,7 +136,7 @@
       "gaps": [
         {
           "id": "b1",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
             "in.DevOid"
@@ -137,7 +144,7 @@
         },
         {
           "id": "b10",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:117",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:117",
           "cond": "in.DevOid == nil",
           "predicate_paths": [
             "in.DevOid"
@@ -145,7 +152,7 @@
         },
         {
           "id": "b11",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/codex.pb.validator.go:124",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:124",
           "cond": "in.DevOid",
           "predicate_paths": [
             "in.DevOid"
@@ -169,7 +176,7 @@
         },
         {
           "id": "b16",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:667",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:653",
           "cond": "in.DevOid != objType",
           "predicate_paths": [
             "in.DevOid"
@@ -212,7 +219,19 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
+          "field": "action",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "appliestopart",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "appliestoparts",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "artifacts",
           "fuzzy_suggestions": null
         },
         {
@@ -225,6 +244,14 @@
         },
         {
           "field": "channel",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "configurationset",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "convertto",
           "fuzzy_suggestions": null
         },
         {
@@ -244,11 +271,31 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "eventdate",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "filename",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "filesize",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "filetype",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "group",
           "fuzzy_suggestions": null
         },
         {
           "field": "inputvalues",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "limit",
           "fuzzy_suggestions": null
         },
         {
@@ -260,7 +307,19 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "members",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "membertype",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "messages",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "metric",
           "fuzzy_suggestions": null
         },
         {
@@ -336,6 +395,10 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "sourcechannel",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "sourcecodeartifact",
           "fuzzy_suggestions": null
         },
@@ -349,6 +412,10 @@
         },
         {
           "field": "survey",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "tags",
           "fuzzy_suggestions": null
         },
         {
@@ -573,6 +640,38 @@
         ]
       },
       {
+        "name": "MetricActionExecute on Frozen Ticket",
+        "file": "api/v2_internal/slas/trackers_test.go",
+        "labels": [
+          "INTERNAL_METRIC_ACTION_EXECUTE",
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "Action",
+          "AppliesToPart",
+          "EventDate",
+          "Id",
+          "Metric",
+          "Object",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "AccessToken",
+          "Part",
+          "Part.AsProduct",
+          "StatusCode",
+          "Work",
+          "Work.AsTicket"
+        ]
+      },
+      {
         "name": "Admin - Should be able to get an issue",
         "file": "api/v2_internal/work/issues/crud/get_work_test.go",
         "labels": [
@@ -591,6 +690,29 @@
           "Work",
           "Work.AsIssue"
         ]
+      },
+      {
+        "name": "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation",
+        "file": "api/v2_internal/work/issues/crud/issue_spaces_test.go",
+        "labels": [
+          "POSITIVE",
+          "ADMIN",
+          "INTERNAL_WORKS_CREATE"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Id",
+          "OwnedBy",
+          "Tags",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": null
       },
       {
         "name": "With Id",
@@ -741,6 +863,33 @@
         ]
       },
       {
+        "name": "User retrieves and manages individual work items throughout project lifecycle",
+        "file": "e2e/smoke_test_case/works_management/works_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_WORKS_GET",
+          "PUBLIC_WORKS_LIST",
+          "INTERNAL_WORKS_UPDATE"
+        ],
+        "fields_set": [
+          "Body",
+          "Id",
+          "Limit",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsTicket",
+          "Works"
+        ]
+      },
+      {
         "name": "Team coordinates work management through comprehensive operations",
         "file": "e2e/smoke_test_case/works_management/works_test.go",
         "labels": [
@@ -805,6 +954,81 @@
         ]
       },
       {
+        "name": "Should verify file attachment content matches original using SHA256",
+        "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Artifacts",
+          "Body",
+          "ConfigurationSet",
+          "FileName",
+          "FileSize",
+          "FileType",
+          "Id",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Body",
+          "Body.Close",
+          "Id",
+          "StatusCode",
+          "Url",
+          "Work",
+          "Work.AsTicket"
+        ]
+      },
+      {
+        "name": "Should successfully convert a conversation to a ticket",
+        "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToParts",
+          "ConvertTo",
+          "Id",
+          "Members",
+          "Messages",
+          "Name",
+          "SourceChannel",
+          "Stage",
+          "Type"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversation.Id",
+          "Conversation.Links",
+          "Job",
+          "Job.Id",
+          "Job.JobCategory",
+          "Job.MetadataList",
+          "Job.Progress",
+          "Job.State",
+          "Job.Title",
+          "StatusCode",
+          "Tag",
+          "Tag.Id",
+          "Work"
+        ]
+      },
+      {
         "name": "should create ticket tag automation workflow when ticket stage is changed",
         "file": "e2e/workflow_uat_automation/workflow_node_test.go",
         "labels": [
@@ -838,6 +1062,90 @@
           "Work.AsTicket",
           "Workflow",
           "Workflow.Id",
+          "WorkflowStep",
+          "WorkflowStep.Id"
+        ]
+      },
+      {
+        "name": "should trigger the workflow when enhancement tags are updated",
+        "file": "e2e/workflow_uat_automation/workflow_uat_test.go",
+        "labels": [
+          "UAT"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Description",
+          "Id",
+          "InputValues",
+          "Name",
+          "Operation",
+          "OwnedBy",
+          "PreviousSteps",
+          "ReferenceKey",
+          "Status",
+          "Tags",
+          "Title",
+          "Type",
+          "UiMetadata",
+          "Workflow"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Tag",
+          "Tag.Id",
+          "Work",
+          "Work.AsIssue",
+          "Workflow",
+          "Workflow.Id",
+          "WorkflowRuns",
+          "WorkflowStep",
+          "WorkflowStep.Id"
+        ]
+      },
+      {
+        "name": "should trigger the workflow when ticket stage is updated to awaiting_product_assist",
+        "file": "e2e/workflow_uat_automation/workflow_uat_test.go",
+        "labels": [
+          "UAT"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Description",
+          "Id",
+          "InputValues",
+          "Name",
+          "Operation",
+          "OwnedBy",
+          "PreviousSteps",
+          "ReferenceKey",
+          "Stage",
+          "Status",
+          "Tags",
+          "Title",
+          "Type",
+          "Workflow"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Tag",
+          "Tag.Id",
+          "Work",
+          "Work.AsTicket",
+          "Workflow",
+          "Workflow.Id",
+          "WorkflowRuns",
           "WorkflowStep",
           "WorkflowStep.Id"
         ]
@@ -1048,7 +1356,7 @@
         "via_paths": [
           "in.DevOid"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260701100938-401162ec7707/lib/get_aggregated_schema_helper.go:288"
       },
       {
         "kind": "rpc",
@@ -1056,7 +1364,7 @@
         "via_paths": [
           "in.DevOid"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/encryption/decryption.go:95"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/encryption/decryption.go:95"
       },
       {
         "kind": "rpc",
@@ -1064,17 +1372,17 @@
         "via_paths": [
           "in.DevOid"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/encryption/decryption.go:118"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/encryption/decryption.go:118"
       }
     ],
     "errors": [
       {
         "symbol": "ObjectTypeInvalid",
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:446",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:432",
         "tainted": false
       }
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetWork` (HTTP operation `WebhooksFetch,WorksGet,WorksGetPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions []\n  - test field `baseobject` -> suggestions []\n  - test field `body` -> suggestions []\n  - test field `channel` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `dispatchedchannels` -> suggestions []\n  - test field `dispatchedto` -> suggestions []\n  - test field `dispatchid` -> suggestions []\n  - test field `group` -> suggestions []\n  - test field `inputvalues` -> suggestions []\n  - test field `manifest` -> suggestions []\n  - test field `member` -> suggestions []\n  - test field `membertype` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `operation` -> suggestions []\n  - test field `ownedby` -> suggestions []\n  - test field `owner` -> suggestions []\n  - test field `previoussteps` -> suggestions []\n  - test field `recipient` -> suggestions []\n  - test field `referencekey` -> suggestions []\n  - test field `response` -> suggestions []\n  - test field `responsechannel` -> suggestions []\n  - test field `responsescore` -> suggestions []\n  - test field `schema` -> suggestions []\n  - test field `slug` -> suggestions []\n  - test field `snapin` -> suggestions []\n  - test field `snapinactionname` -> suggestions []\n  - test field `snapinpackage` -> suggestions []\n  - test field `snapinversion` -> suggestions []\n  - test field `snapkitbody` -> suggestions []\n  - test field `sourcecodeartifact` -> suggestions []\n  - test field `stage` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `survey` -> suggestions []\n  - test field `targetclosedate` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions []\n  - test field `uimetadata` -> suggestions []\n  - test field `workflow` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetWork` (HTTP operation `WebhooksFetch,WorksGet,WorksGetPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `action` -> suggestions []\n  - test field `appliestopart` -> suggestions []\n  - test field `appliestoparts` -> suggestions []\n  - test field `artifacts` -> suggestions []\n  - test field `baseobject` -> suggestions []\n  - test field `body` -> suggestions []\n  - test field `channel` -> suggestions []\n  - test field `configurationset` -> suggestions []\n  - test field `convertto` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `dispatchedchannels` -> suggestions []\n  - test field `dispatchedto` -> suggestions []\n  - test field `dispatchid` -> suggestions []\n  - test field `eventdate` -> suggestions []\n  - test field `filename` -> suggestions []\n  - test field `filesize` -> suggestions []\n  - test field `filetype` -> suggestions []\n  - test field `group` -> suggestions []\n  - test field `inputvalues` -> suggestions []\n  - test field `limit` -> suggestions []\n  - test field `manifest` -> suggestions []\n  - test field `member` -> suggestions []\n  - test field `members` -> suggestions []\n  - test field `membertype` -> suggestions []\n  - test field `messages` -> suggestions []\n  - test field `metric` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `operation` -> suggestions []\n  - test field `ownedby` -> suggestions []\n  - test field `owner` -> suggestions []\n  - test field `previoussteps` -> suggestions []\n  - test field `recipient` -> suggestions []\n  - test field `referencekey` -> suggestions []\n  - test field `response` -> suggestions []\n  - test field `responsechannel` -> suggestions []\n  - test field `responsescore` -> suggestions []\n  - test field `schema` -> suggestions []\n  - test field `slug` -> suggestions []\n  - test field `snapin` -> suggestions []\n  - test field `snapinactionname` -> suggestions []\n  - test field `snapinpackage` -> suggestions []\n  - test field `snapinversion` -> suggestions []\n  - test field `snapkitbody` -> suggestions []\n  - test field `sourcechannel` -> suggestions []\n  - test field `sourcecodeartifact` -> suggestions []\n  - test field `stage` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `survey` -> suggestions []\n  - test field `tags` -> suggestions []\n  - test field `targetclosedate` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions []\n  - test field `uimetadata` -> suggestions []\n  - test field `workflow` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

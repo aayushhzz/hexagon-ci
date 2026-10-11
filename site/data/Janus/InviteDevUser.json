@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "InviteDevUser",
     "operation": "DevOrgsInvitesCreate,UserInvitationUpdate",
-    "tests": 2,
+    "tests": 3,
     "status": {
       "documented": null,
       "asserted": [
@@ -49,6 +49,7 @@
           "match": "exact",
           "by_tests": [
             "CreateDevuInvite",
+            "Invite a DevUser 2",
             "UpdateDevuInvite"
           ]
         }
@@ -154,6 +155,30 @@
         ]
       },
       {
+        "name": "Invite a DevUser 2",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEV_ORG_INVITE_CREATE",
+          "INTERNAL_DEV_ORGS_INVITES_LIST",
+          "INTERNAL_DEVUSERS_INVITATIONS_LIST",
+          "INTERNAL_DEV_ORGS_INVITES_COUNT"
+        ],
+        "fields_set": [
+          "Email"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Count",
+          "Invites",
+          "Invites.Email",
+          "Invites.State",
+          "StatusCode"
+        ]
+      },
+      {
         "name": "UpdateDevuInvite",
         "file": "api/v2_internal/devu_invites/devuinvites_crud_test.go",
         "labels": [
@@ -205,7 +230,7 @@
           "in.InviterName",
           "in.Licenses"
         ],
-        "at": "internal/service/devorg.go:140"
+        "at": "internal/service/devorg.go:130"
       },
       {
         "kind": "db",
@@ -215,7 +240,7 @@
           "in.InviterName",
           "in.Licenses"
         ],
-        "at": "internal/service/devorg.go:149"
+        "at": "internal/service/devorg.go:139"
       },
       {
         "kind": "db",
@@ -225,7 +250,7 @@
           "in.InviterName",
           "in.Licenses"
         ],
-        "at": "internal/service/cache.go:147"
+        "at": "internal/service/cache.go:146"
       },
       {
         "kind": "db",
@@ -235,7 +260,7 @@
           "in.InviterName",
           "in.Licenses"
         ],
-        "at": "internal/service/devorg.go:170"
+        "at": "internal/service/devorg.go:159"
       },
       {
         "kind": "rpc",
@@ -261,7 +286,7 @@
       },
       {
         "symbol": "errDevOrgNotFound",
-        "at": "internal/service/devorg.go:186",
+        "at": "internal/service/devorg.go:99",
         "tainted": false
       },
       {

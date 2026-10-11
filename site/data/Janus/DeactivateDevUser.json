@@ -2,38 +2,22 @@
   "service": "Janus",
   "coverage": {
     "rpc": "DeactivateDevUser",
-    "operation": "DevUsersSelfDelete",
-    "tests": 1,
+    "operation": "DevUsersDeactivate,DevUsersSelfDelete",
+    "tests": 2,
     "status": {
-      "documented": [
-        200,
-        400,
-        401,
-        403,
-        413,
-        429,
-        500,
-        503
-      ],
+      "documented": null,
       "asserted": [
         200,
         400
       ],
-      "missing": [
-        401,
-        403,
-        413,
-        429,
-        500,
-        503
-      ],
-      "coverage_pct": 25
+      "missing": [],
+      "coverage_pct": 0
     },
     "fields": {
       "leaf_fields_read_by_rpc": 1,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
+      "request_fields_set_by_tests": 1,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -110,7 +94,7 @@
       "gaps": [
         {
           "id": "b1",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3623",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/utils.go:3622",
           "cond": "in.DevUid.Value",
           "predicate_paths": [
             "in.DevUid.Value"
@@ -118,7 +102,7 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:291",
           "cond": "in.DevUid.Value == \"\"",
           "predicate_paths": [
             "in.DevUid.Value"
@@ -176,9 +160,33 @@
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
     "test_facts": [
+      {
+        "name": "DevUsers Deactivate",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEVUSERS_DEACTIVATE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevUser",
+          "DevUser.State",
+          "StatusCode"
+        ]
+      },
       {
         "name": "DevUser self delete",
         "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
@@ -224,7 +232,7 @@
         "via_paths": [
           "in.DevUid.Value"
         ],
-        "at": "internal/service/cache.go:299"
+        "at": "internal/service/cache.go:298"
       },
       {
         "kind": "db",
@@ -240,7 +248,7 @@
         "via_paths": [
           "in.DevUid.Value"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/upgrade_object_v2.go:211"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/upgrade_object_v2.go:211"
       },
       {
         "kind": "rpc",
@@ -288,7 +296,7 @@
         "via_paths": [
           "in.DevUid.Value"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
       },
       {
         "kind": "rpc",
@@ -330,22 +338,22 @@
       },
       {
         "symbol": "ErrNilArguments",
-        "at": "/Users/devrev/go/pkg/mod/dario.cat/mergo@v1.0.2/mergo.go:68",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:68",
         "tainted": false
       },
       {
         "symbol": "ErrNotSupported",
-        "at": "/Users/devrev/go/pkg/mod/dario.cat/mergo@v1.0.2/mergo.go:73",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:73",
         "tainted": false
       },
       {
         "symbol": "ErrNonPointerArgument",
-        "at": "/Users/devrev/go/pkg/mod/dario.cat/mergo@v1.0.2/merge.go:376",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/merge.go:376",
         "tainted": false
       },
       {
         "symbol": "ErrDifferentArgumentsTypes",
-        "at": "/Users/devrev/go/pkg/mod/dario.cat/mergo@v1.0.2/merge.go:393",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/merge.go:393",
         "tainted": false
       },
       {
@@ -406,5 +414,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeactivateDevUser` (HTTP operation `DevUsersSelfDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUid.Value\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUid.Value\n  - in.DevUid.Value == \"\"\n  - in.DevUid != nil\n  - in.DevUid.Value != *t35\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - errCacheUnavailable\n  - errDeleteOrDeactivateCallForLastActiveUser\n  - errEmailAlreadyExists\n  - errInternalCacheTransientError\n  - errInvalidInputEmail\n  - errInvalidStatusDescription\n  - errInvalidStatusExpiry\n  - errOldVersionOfSchemaFragments\n  - errPhoneNumberInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n  - errStateIssueForEmailUpdate\n  - errTermsAndConditionsResetError\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeactivateDevUser` (HTTP operation `DevUsersDeactivate,DevUsersSelfDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUid.Value\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUid.Value\n  - in.DevUid.Value == \"\"\n  - in.DevUid != nil\n  - in.DevUid.Value != *t35\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - errCacheUnavailable\n  - errDeleteOrDeactivateCallForLastActiveUser\n  - errEmailAlreadyExists\n  - errInternalCacheTransientError\n  - errInvalidInputEmail\n  - errInvalidStatusDescription\n  - errInvalidStatusExpiry\n  - errOldVersionOfSchemaFragments\n  - errPhoneNumberInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n  - errStateIssueForEmailUpdate\n  - errTermsAndConditionsResetError\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

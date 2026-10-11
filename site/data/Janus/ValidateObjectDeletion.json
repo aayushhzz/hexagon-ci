@@ -2,34 +2,16 @@
   "service": "Janus",
   "coverage": {
     "rpc": "ValidateObjectDeletion",
-    "operation": "AccountsDeleteValidate",
-    "tests": 1,
+    "operation": "AccountsDeleteValidate,RevOrgsDeleteValidate",
+    "tests": 2,
     "status": {
-      "documented": [
-        200,
-        400,
-        401,
-        403,
-        404,
-        413,
-        429,
-        500,
-        503
-      ],
+      "documented": null,
       "asserted": [
         200,
         400
       ],
-      "missing": [
-        401,
-        403,
-        404,
-        413,
-        429,
-        500,
-        503
-      ],
-      "coverage_pct": 22.2
+      "missing": [],
+      "coverage_pct": 0
     },
     "fields": {
       "leaf_fields_read_by_rpc": 1,
@@ -110,7 +92,7 @@
       "gaps": [
         {
           "id": "b1",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
           "cond": "in.ObjectId == nil",
           "predicate_paths": [
             "in.ObjectId"
@@ -118,7 +100,7 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:291",
           "cond": "in.ObjectId == \"\"",
           "predicate_paths": [
             "in.ObjectId"
@@ -190,6 +172,29 @@
           "IsSupported",
           "StatusCode"
         ]
+      },
+      {
+        "name": "Delete a RevOrg",
+        "file": "api/v2_internal/identity_flows/revorg_apis_test.go",
+        "labels": [
+          "INTERNAL_REVORGS_DELETE",
+          "INTERNAL_REVORGS_DELETE_VALIDATE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "IsSupported",
+          "RevOrg",
+          "RevOrg.Account",
+          "RevOrg.Account.GetId",
+          "RevOrg.GetId",
+          "StatusCode"
+        ]
       }
     ]
   },
@@ -201,7 +206,7 @@
     "errors": [
       {
         "symbol": "ObjectTypeInvalid",
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:446",
         "tainted": false
       },
       {
@@ -222,5 +227,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ValidateObjectDeletion` (HTTP operation `AccountsDeleteValidate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ObjectId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ObjectId == nil\n  - in.ObjectId == \"\"\n  - in.ObjectId == nil\n  - in.ObjectId == *ObjectTypeRevOrg\n  - in.ObjectId == *ObjectTypeAccount\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInvalidRevOrgFilter\n  - errInvalidSortByInputField\n  - errRevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ValidateObjectDeletion` (HTTP operation `AccountsDeleteValidate,RevOrgsDeleteValidate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ObjectId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ObjectId == nil\n  - in.ObjectId == \"\"\n  - in.ObjectId == nil\n  - in.ObjectId == *ObjectTypeRevOrg\n  - in.ObjectId == *ObjectTypeAccount\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInvalidRevOrgFilter\n  - errInvalidSortByInputField\n  - errRevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

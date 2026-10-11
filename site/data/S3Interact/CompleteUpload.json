@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "CompleteUpload",
     "operation": "ArtifactsUploadComplete",
-    "tests": 14,
+    "tests": 21,
     "status": {
       "documented": [
         200,
@@ -33,7 +33,7 @@
       "leaf_fields_read_by_rpc": 3,
       "covered_count": 2,
       "coverage_pct": 66.7,
-      "request_fields_set_by_tests": 7,
+      "request_fields_set_by_tests": 8,
       "set_by_positive_tests": 2,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -64,8 +64,11 @@
           "path": "in.Cursor",
           "match": "exact",
           "by_tests": [
+            "100 MiB multi-part upload create next complete",
+            "Actor field does not override created_by",
             "Another member cursor cannot advance a different upload",
             "Another tenant cannot advance upload session",
+            "Another tenant cannot get or locate completed artifact",
             "Complete rejects total size over configuration_set limit",
             "Complete with parent_id outside tenant should fail",
             "Complete without uploading all declared parts should fail",
@@ -75,16 +78,21 @@
             "Invalid cursor signature is rejected on next and complete",
             "Invalid cursor values are rejected",
             "Missing id or cursor on next complete should fail",
+            "Multi-part upload create next complete",
             "Next and complete after complete should fail",
             "Non-final part under 5 MiB should fail on complete",
-            "Requests without authentication are rejected"
+            "Requests without authentication are rejected",
+            "Single-part upload create PUT complete",
+            "Three-part upload create next next complete",
+            "parent_id on complete attaches artifact to parent"
           ]
         },
         {
           "path": "in.ParentId",
           "match": "exact",
           "by_tests": [
-            "Complete with parent_id outside tenant should fail"
+            "Complete with parent_id outside tenant should fail",
+            "parent_id on complete attaches artifact to parent"
           ]
         }
       ],
@@ -136,7 +144,7 @@
       "gaps": [
         {
           "id": "b1",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
           "cond": "in.ArtifactId == nil",
           "predicate_paths": [
             "in.ArtifactId"
@@ -144,7 +152,7 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
           "cond": "in.ArtifactId == *ObjectTypeArtifact",
           "predicate_paths": [
             "in.ArtifactId"
@@ -152,7 +160,7 @@
         },
         {
           "id": "b4",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:425",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:425",
           "cond": "in.ArtifactId == nil",
           "predicate_paths": [
             "in.ArtifactId"
@@ -160,7 +168,7 @@
         },
         {
           "id": "b5",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:432",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:432",
           "cond": "in.ArtifactId",
           "predicate_paths": [
             "in.ArtifactId"
@@ -168,7 +176,7 @@
         },
         {
           "id": "b7",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:667",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:667",
           "cond": "in.ArtifactId != objType",
           "predicate_paths": [
             "in.ArtifactId"
@@ -176,7 +184,7 @@
         },
         {
           "id": "b10",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3600",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3600",
           "cond": "in.ArtifactId",
           "predicate_paths": [
             "in.ArtifactId"
@@ -184,7 +192,7 @@
         },
         {
           "id": "b11",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:659",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:659",
           "cond": "in.ArtifactId",
           "predicate_paths": [
             "in.ArtifactId"
@@ -192,7 +200,7 @@
         },
         {
           "id": "b12",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3620",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3620",
           "cond": "in.ArtifactId",
           "predicate_paths": [
             "in.ArtifactId"
@@ -229,6 +237,10 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
+          "field": "actor",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "configurationset",
           "fuzzy_suggestions": null
         },
@@ -251,6 +263,160 @@
       ]
     },
     "test_facts": [
+      {
+        "name": "Single-part upload create PUT complete",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+          "INTERNAL_ARTIFACTS_GET",
+          "INTERNAL_ARTIFACTS_LOCATE"
+        ],
+        "fields_set": [
+          "Cursor",
+          "FileName",
+          "FileType",
+          "Id",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Artifact",
+          "Artifact.Id",
+          "Body",
+          "Body.Close",
+          "Cursor",
+          "GetUrl",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Multi-part upload create next complete",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "Cursor",
+          "FileName",
+          "FileType",
+          "Id",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Body",
+          "Body.Close",
+          "Cursor",
+          "GetUrl",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Three-part upload create next next complete",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "Cursor",
+          "FileName",
+          "FileType",
+          "Id",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Body",
+          "Body.Close",
+          "Cursor",
+          "GetUrl",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "100 MiB multi-part upload create next complete",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+          "INTERNAL_ARTIFACTS_GET",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "Cursor",
+          "FileName",
+          "FileType",
+          "Id",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Artifact",
+          "Artifact.File",
+          "Artifact.File.Size",
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "parent_id on complete attaches artifact to parent",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+          "INTERNAL_ARTIFACTS_LIST"
+        ],
+        "fields_set": [
+          "Cursor",
+          "FileName",
+          "FileType",
+          "Id",
+          "ParentId",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Artifacts",
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
       {
         "name": "Dev user can create and complete upload",
         "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
@@ -526,6 +692,37 @@
         ]
       },
       {
+        "name": "Actor field does not override created_by",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+          "INTERNAL_ARTIFACTS_GET"
+        ],
+        "fields_set": [
+          "Actor",
+          "Cursor",
+          "FileName",
+          "FileType",
+          "Id",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Artifact",
+          "Artifact.CreatedBy",
+          "Artifact.CreatedBy.AsDevUserSummary",
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
         "name": "Complete with parent_id outside tenant should fail",
         "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
         "labels": [
@@ -602,6 +799,32 @@
           "StatusCode",
           "Url"
         ]
+      },
+      {
+        "name": "Another tenant cannot get or locate completed artifact",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_GET",
+          "INTERNAL_ARTIFACTS_LOCATE"
+        ],
+        "fields_set": [
+          "Cursor",
+          "FileName",
+          "FileType",
+          "Id",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
       }
     ]
   },
@@ -613,11 +836,11 @@
     "errors": [
       {
         "symbol": "ObjectTypeInvalid",
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
         "tainted": false
       }
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CompleteUpload` (HTTP operation `ArtifactsUploadComplete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ArtifactId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ArtifactId == nil\n  - in.ArtifactId == *ObjectTypeArtifact\n  - in.ArtifactId == nil\n  - in.ArtifactId\n  - in.ArtifactId != objType\n  - in.ArtifactId\n  - in.ArtifactId\n  - in.ArtifactId\n  - in.ArtifactId == \"\"\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `configurationset` -> suggestions []\n  - test field `filename` -> suggestions []\n  - test field `filetype` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `partsize` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CompleteUpload` (HTTP operation `ArtifactsUploadComplete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ArtifactId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ArtifactId == nil\n  - in.ArtifactId == *ObjectTypeArtifact\n  - in.ArtifactId == nil\n  - in.ArtifactId\n  - in.ArtifactId != objType\n  - in.ArtifactId\n  - in.ArtifactId\n  - in.ArtifactId\n  - in.ArtifactId == \"\"\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `actor` -> suggestions []\n  - test field `configurationset` -> suggestions []\n  - test field `filename` -> suggestions []\n  - test field `filetype` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `partsize` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

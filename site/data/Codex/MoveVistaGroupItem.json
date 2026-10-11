@@ -2,26 +2,47 @@
   "service": "Codex",
   "coverage": {
     "rpc": "MoveVistaGroupItem",
-    "operation": "",
-    "tests": 0,
+    "operation": "VistasGroupItemsMove",
+    "tests": 1,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 11.1
     },
     "fields": {
       "leaf_fields_read_by_rpc": 6,
-      "covered_count": 0,
-      "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
-      "set_by_positive_tests": 0,
+      "covered_count": 3,
+      "coverage_pct": 50,
+      "request_fields_set_by_tests": 4,
+      "set_by_positive_tests": 3,
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
           "total": 6,
-          "set": 0,
-          "pct": 0
+          "set": 3,
+          "pct": 50
         },
         "nested": {
           "total": 0,
@@ -36,41 +57,60 @@
       },
       "representative": {
         "units": 6,
-        "covered": 0,
-        "pct": 0,
+        "covered": 3,
+        "pct": 50,
         "collapsed_types": []
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.Items",
+          "match": "exact",
+          "by_tests": [
+            "Successfully moved items between vista groups"
+          ]
+        },
+        {
+          "path": "in.Source",
+          "match": "exact",
+          "by_tests": [
+            "Successfully moved items between vista groups"
+          ]
+        },
+        {
+          "path": "in.Target",
+          "match": "exact",
+          "by_tests": [
+            "Successfully moved items between vista groups"
+          ]
+        }
+      ],
       "gaps": [
         "in.ActorId",
         "in.AggregateErrors",
-        "in.DevOid",
-        "in.Items",
-        "in.Source",
-        "in.Target"
+        "in.DevOid"
       ]
     },
     "branches": {
       "total": 12,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 11,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
+      "present_arm_exercised": 8,
+      "present_arm_pct": 66.7,
+      "absent_arm_exercised": 3,
+      "absent_arm_pct": 27.3,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 66.7,
       "by_origin": {
         "service": {
           "total": 10,
-          "reachable_on_happy_path": 0,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 9,
+          "present_arm_exercised": 7,
+          "present_arm_pct": 70,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 2
         },
         "generated": {
           "total": 0,
@@ -83,45 +123,21 @@
         },
         "library": {
           "total": 2,
-          "reachable_on_happy_path": 0,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 50,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 1
         }
       },
       "gaps": [
         {
           "id": "b1",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
           "cond": "in.ActorId == nil",
           "predicate_paths": [
             "in.ActorId"
-          ]
-        },
-        {
-          "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
-          "cond": "in.Target == nil",
-          "predicate_paths": [
-            "in.Target"
-          ]
-        },
-        {
-          "id": "b3",
-          "at": "internal/common/vista_validation.go:59",
-          "cond": "in.Target == nil",
-          "predicate_paths": [
-            "in.Target"
-          ]
-        },
-        {
-          "id": "b4",
-          "at": "internal/common/vista_validation.go:62",
-          "cond": "in.Target != *ObjectTypeVistaGroupItem",
-          "predicate_paths": [
-            "in.Target"
           ]
         },
         {
@@ -141,51 +157,11 @@
           ]
         },
         {
-          "id": "b7",
-          "at": "internal/serverv2/move_vista_group_item.go:56",
-          "cond": "in.Target != nil",
-          "predicate_paths": [
-            "in.Target"
-          ]
-        },
-        {
-          "id": "b8",
-          "at": "internal/serverv2/move_vista_group_item.go:76",
-          "cond": "donv2.DONProto).String() == in.Target",
-          "predicate_paths": [
-            "in.Target"
-          ]
-        },
-        {
           "id": "b9",
           "at": "internal/serverv2/move_vista_group_item.go:113",
           "cond": "in != nil",
           "predicate_paths": [
             "in"
-          ]
-        },
-        {
-          "id": "b10",
-          "at": "internal/serverv2/move_vista_group_item.go:151",
-          "cond": "in.Source != nil",
-          "predicate_paths": [
-            "in.Source"
-          ]
-        },
-        {
-          "id": "b11",
-          "at": "internal/serverv2/move_vista_group_item.go:142",
-          "cond": "donv2.DONProto).String() == in.Target",
-          "predicate_paths": [
-            "in.Target"
-          ]
-        },
-        {
-          "id": "b12",
-          "at": "internal/serverv2/move_vista_group_item.go:151",
-          "cond": "in.Target != nil",
-          "predicate_paths": [
-            "in.Target"
           ]
         }
       ]
@@ -215,16 +191,40 @@
       "datastore_calls": [],
       "service_count": 3,
       "call_count": 4,
-      "reached_by_test": false,
+      "reached_by_test": true,
       "deps_result_used_in_response": 0,
       "deps_result_checked_by_test": 0,
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "Successfully moved items between vista groups",
+        "file": "api/v2_internal/vista_groups/vistas_groups_move_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Items",
+          "Source",
+          "Target"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "GetVistaGroup",
+          "StatusCode"
+        ]
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/codex/internal/serverv2.Codex).MoveVistaGroupItem",
@@ -253,7 +253,7 @@
         "via_paths": [
           "in.DevOid"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260701100938-401162ec7707/lib/get_aggregated_schema_helper.go:288"
       },
       {
         "kind": "rpc",
@@ -261,7 +261,7 @@
         "via_paths": [
           "in.DevOid"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/encryption/decryption.go:95"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/encryption/decryption.go:95"
       },
       {
         "kind": "rpc",
@@ -269,22 +269,22 @@
         "via_paths": [
           "in.DevOid"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/encryption/decryption.go:118"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/encryption/decryption.go:118"
       }
     ],
     "errors": [
       {
         "symbol": "ErrAuthorizationTokenMissing",
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/user/user.go:407",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/user/user.go:407",
         "tainted": false
       },
       {
         "symbol": "ObjectTypeInvalid",
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:446",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:432",
         "tainted": false
       }
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MoveVistaGroupItem` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.DevOid\n  - in.Items\n  - in.Source\n  - in.Target\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.Target == nil\n  - in.Target == nil\n  - in.Target != *ObjectTypeVistaGroupItem\n  - in.ActorId == *ObjectTypeSysUser\n  - in.ActorId == *ObjectTypeSysUser\n  - in.Target != nil\n  - donv2.DONProto).String() == in.Target\n  - in != nil\n  - in.Source != nil\n  - donv2.DONProto).String() == in.Target\n  - in.Target != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrAuthorizationTokenMissing\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MoveVistaGroupItem` (HTTP operation `VistasGroupItemsMove`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId == *ObjectTypeSysUser\n  - in.ActorId == *ObjectTypeSysUser\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrAuthorizationTokenMissing\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "GetProject",
     "operation": "ProjectsGet",
-    "tests": 4,
+    "tests": 5,
     "status": {
       "documented": [
         200,
@@ -66,6 +66,7 @@
           "path": "in.Id",
           "match": "exact",
           "by_tests": [
+            "Deletes a project, soft-deletes it from get, and 404s on a non-existent project",
             "Gets an existing project with fields matching creation",
             "Persists a custom field across Create \u2192 Get",
             "Returns 404 for a non-existent project",
@@ -226,6 +227,19 @@
     },
     "test_facts": [
       {
+        "name": "Deletes a project, soft-deletes it from get, and 404s on a non-existent project",
+        "file": "api/v2_internal/projects/crud/delete_project_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
         "name": "Gets an existing project with fields matching creation",
         "file": "api/v2_internal/projects/crud/get_project_test.go",
         "labels": null,
@@ -309,7 +323,7 @@
         "via_paths": [
           "in.Id"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/upgrade_object_v2.go:211"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260701100938-401162ec7707/lib/upgrade_object_v2.go:211"
       },
       {
         "kind": "rpc",
@@ -317,7 +331,7 @@
         "via_paths": [
           "in.Id"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260701100938-401162ec7707/lib/get_aggregated_schema_helper.go:288"
       }
     ],
     "errors": [],

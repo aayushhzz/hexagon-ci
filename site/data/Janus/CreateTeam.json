@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "CreateTeam",
     "operation": "TeamsCreate",
-    "tests": 13,
+    "tests": 25,
     "status": {
       "documented": [
         201,
@@ -17,6 +17,7 @@
         503
       ],
       "asserted": [
+        200,
         201,
         400,
         403,
@@ -32,12 +33,12 @@
       "coverage_pct": 44.4
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 35,
-      "covered_count": 4,
-      "coverage_pct": 11.4,
-      "request_fields_set_by_tests": 5,
-      "set_by_positive_tests": 3,
-      "set_by_negative_tests": 2,
+      "leaf_fields_read_by_rpc": 34,
+      "covered_count": 14,
+      "coverage_pct": 41.2,
+      "request_fields_set_by_tests": 7,
+      "set_by_positive_tests": 14,
+      "set_by_negative_tests": 12,
       "by_depth": {
         "top_level": {
           "total": 1,
@@ -50,15 +51,15 @@
           "pct": 42.9
         },
         "deep": {
-          "total": 27,
-          "set": 0,
-          "pct": 0
+          "total": 26,
+          "set": 10,
+          "pct": 38.5
         }
       },
       "representative": {
-        "units": 27,
-        "covered": 4,
-        "pct": 14.8,
+        "units": 26,
+        "covered": 12,
+        "pct": 46.2,
         "collapsed_types": [
           "api.CreateDevrevCopy",
           "api.CreateExternalSourceDataComp",
@@ -72,7 +73,8 @@
           "path": "in.DryRun",
           "match": "exact",
           "by_tests": [
-            "DryRunCreateInvalidKey"
+            "DryRunCreateInvalidKey",
+            "DryRunCreateValid"
           ]
         },
         {
@@ -83,16 +85,130 @@
           ]
         },
         {
+          "path": "in.Team.DevrevCopy.OriginId.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "ArchiveAlreadyArchivedTeam",
+            "ArchiveFailsWhenSpaceManagementDisabled",
+            "ArchiveTeamArchivesBackingSpace",
+            "ArchiveTeamArchivesLinkedGroup",
+            "ArchiveTeamSuccessfully",
+            "ListFiltersByArchivedStatus",
+            "NoAccessUserCannotArchive",
+            "RegularUserCannotArchive",
+            "UpdateArchivedTeamFails",
+            "WithDuplicateKeyFromAnotherTeam"
+          ]
+        },
+        {
+          "path": "in.Team.DevrevCopy.OriginOrgId.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "ArchiveAlreadyArchivedTeam",
+            "ArchiveFailsWhenSpaceManagementDisabled",
+            "ArchiveTeamArchivesBackingSpace",
+            "ArchiveTeamArchivesLinkedGroup",
+            "ArchiveTeamSuccessfully",
+            "ListFiltersByArchivedStatus",
+            "NoAccessUserCannotArchive",
+            "RegularUserCannotArchive",
+            "UpdateArchivedTeamFails",
+            "WithDuplicateKeyFromAnotherTeam"
+          ]
+        },
+        {
+          "path": "in.Team.ExternalSourceData.CreatedById.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "ArchiveAlreadyArchivedTeam",
+            "ArchiveFailsWhenSpaceManagementDisabled",
+            "ArchiveTeamArchivesBackingSpace",
+            "ArchiveTeamArchivesLinkedGroup",
+            "ArchiveTeamSuccessfully",
+            "ListFiltersByArchivedStatus",
+            "NoAccessUserCannotArchive",
+            "RegularUserCannotArchive",
+            "UpdateArchivedTeamFails",
+            "WithDuplicateKeyFromAnotherTeam"
+          ]
+        },
+        {
+          "path": "in.Team.ExternalSourceData.ModifiedById.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "ArchiveAlreadyArchivedTeam",
+            "ArchiveFailsWhenSpaceManagementDisabled",
+            "ArchiveTeamArchivesBackingSpace",
+            "ArchiveTeamArchivesLinkedGroup",
+            "ArchiveTeamSuccessfully",
+            "ListFiltersByArchivedStatus",
+            "NoAccessUserCannotArchive",
+            "RegularUserCannotArchive",
+            "UpdateArchivedTeamFails",
+            "WithDuplicateKeyFromAnotherTeam"
+          ]
+        },
+        {
+          "path": "in.Team.GroupId.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "ArchiveAlreadyArchivedTeam",
+            "ArchiveFailsWhenSpaceManagementDisabled",
+            "ArchiveTeamArchivesBackingSpace",
+            "ArchiveTeamArchivesLinkedGroup",
+            "ArchiveTeamSuccessfully",
+            "ListFiltersByArchivedStatus",
+            "NoAccessUserCannotArchive",
+            "RegularUserCannotArchive",
+            "UpdateArchivedTeamFails",
+            "WithDuplicateKeyFromAnotherTeam"
+          ]
+        },
+        {
+          "path": "in.Team.Icon.ArtifactId.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "ArchiveAlreadyArchivedTeam",
+            "ArchiveFailsWhenSpaceManagementDisabled",
+            "ArchiveTeamArchivesBackingSpace",
+            "ArchiveTeamArchivesLinkedGroup",
+            "ArchiveTeamSuccessfully",
+            "ListFiltersByArchivedStatus",
+            "NoAccessUserCannotArchive",
+            "RegularUserCannotArchive",
+            "UpdateArchivedTeamFails",
+            "WithDuplicateKeyFromAnotherTeam"
+          ]
+        },
+        {
           "path": "in.Team.Key",
           "match": "exact",
           "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "ArchiveAlreadyArchivedTeam",
+            "ArchiveFailsWhenSpaceManagementDisabled",
+            "ArchiveTeamArchivesBackingSpace",
+            "ArchiveTeamArchivesLinkedGroup",
+            "ArchiveTeamSuccessfully",
             "CreateFailsWhenSpaceManagementDisabled",
             "DryRunCreateInvalidKey",
+            "DryRunCreateValid",
             "GroupCanBecomeTeamAfterHierarchyEstablished",
+            "ListFiltersByArchivedStatus",
+            "NoAccessUserCannotArchive",
             "NoAccessUserCannotCreate",
+            "RegularUserCannotArchive",
             "RegularUserCannotCreate",
+            "UpdateArchivedTeamFails",
             "WithDuplicateGroup",
             "WithDuplicateKey",
+            "WithDuplicateKeyFromAnotherTeam",
             "WithGroupID",
             "WithInvalidKeyFormatLowercase",
             "WithInvalidKeyFormatTooLong",
@@ -107,6 +223,74 @@
           "by_tests": [
             "WithNameAndDescription"
           ]
+        },
+        {
+          "path": "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "ArchiveAlreadyArchivedTeam",
+            "ArchiveFailsWhenSpaceManagementDisabled",
+            "ArchiveTeamArchivesBackingSpace",
+            "ArchiveTeamArchivesLinkedGroup",
+            "ArchiveTeamSuccessfully",
+            "ListFiltersByArchivedStatus",
+            "NoAccessUserCannotArchive",
+            "RegularUserCannotArchive",
+            "UpdateArchivedTeamFails",
+            "WithDuplicateKeyFromAnotherTeam"
+          ]
+        },
+        {
+          "path": "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "ArchiveAlreadyArchivedTeam",
+            "ArchiveFailsWhenSpaceManagementDisabled",
+            "ArchiveTeamArchivesBackingSpace",
+            "ArchiveTeamArchivesLinkedGroup",
+            "ArchiveTeamSuccessfully",
+            "ListFiltersByArchivedStatus",
+            "NoAccessUserCannotArchive",
+            "RegularUserCannotArchive",
+            "UpdateArchivedTeamFails",
+            "WithDuplicateKeyFromAnotherTeam"
+          ]
+        },
+        {
+          "path": "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "ArchiveAlreadyArchivedTeam",
+            "ArchiveFailsWhenSpaceManagementDisabled",
+            "ArchiveTeamArchivesBackingSpace",
+            "ArchiveTeamArchivesLinkedGroup",
+            "ArchiveTeamSuccessfully",
+            "ListFiltersByArchivedStatus",
+            "NoAccessUserCannotArchive",
+            "RegularUserCannotArchive",
+            "UpdateArchivedTeamFails",
+            "WithDuplicateKeyFromAnotherTeam"
+          ]
+        },
+        {
+          "path": "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "ArchiveAlreadyArchivedTeam",
+            "ArchiveFailsWhenSpaceManagementDisabled",
+            "ArchiveTeamArchivesBackingSpace",
+            "ArchiveTeamArchivesLinkedGroup",
+            "ArchiveTeamSuccessfully",
+            "ListFiltersByArchivedStatus",
+            "NoAccessUserCannotArchive",
+            "RegularUserCannotArchive",
+            "UpdateArchivedTeamFails",
+            "WithDuplicateKeyFromAnotherTeam"
+          ]
         }
       ],
       "gaps": [
@@ -115,16 +299,10 @@
         "in.CustomSchemaSpec.ValidateRequiredFields",
         "in.Team.CustomFields.Fields",
         "in.Team.DevrevCopy.LastSyncedDate",
-        "in.Team.DevrevCopy.OriginId.Id",
-        "in.Team.DevrevCopy.OriginOrgId.Id",
         "in.Team.EnabledFeatures",
         "in.Team.ExternalSourceData.ClosedDate",
-        "in.Team.ExternalSourceData.CreatedById.Id",
         "in.Team.ExternalSourceData.CreatedDate",
-        "in.Team.ExternalSourceData.ModifiedById.Id",
         "in.Team.ExternalSourceData.ModifiedDate",
-        "in.Team.GroupId.Id",
-        "in.Team.Icon.ArtifactId.Id",
         "in.Team.Icon.Stock.PaletteColor",
         "in.Team.Icon.Stock.Shape",
         "in.Team.SyncMetadata.ExternalRecordId",
@@ -132,14 +310,9 @@
         "in.Team.SyncMetadata.ExternalReference",
         "in.Team.SyncMetadata.LastSyncIn.Status",
         "in.Team.SyncMetadata.LastSyncIn.SyncDate",
-        "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
-        "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
         "in.Team.SyncMetadata.LastSyncOut.Status",
         "in.Team.SyncMetadata.LastSyncOut.SyncDate",
-        "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
-        "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
         "in.Team.SyncMetadata.OriginSystem",
-        "in.Team.SyncMetadata.OriginSystemInstanceId",
         "in.Team.SyncMetadata.SyncedByDevUsers"
       ]
     },
@@ -147,55 +320,47 @@
       "total": 107,
       "happy_path_reached": true,
       "reachable_on_happy_path": 13,
-      "present_arm_exercised": 15,
-      "present_arm_pct": 14,
+      "present_arm_exercised": 35,
+      "present_arm_pct": 32.7,
       "absent_arm_exercised": 13,
       "absent_arm_pct": 100,
-      "negative_arm_exercised": 13,
-      "negative_arm_pct": 12.1,
+      "negative_arm_exercised": 33,
+      "negative_arm_pct": 30.8,
       "both_arms_exercised": 4,
-      "coverage_pct": 14,
+      "coverage_pct": 32.7,
       "by_origin": {
         "service": {
           "total": 55,
           "reachable_on_happy_path": 6,
-          "present_arm_exercised": 12,
-          "present_arm_pct": 21.8,
-          "negative_arm_exercised": 10,
-          "negative_arm_pct": 18.2,
+          "present_arm_exercised": 16,
+          "present_arm_pct": 29.1,
+          "negative_arm_exercised": 14,
+          "negative_arm_pct": 25.5,
           "absent_arm_exercised": 6
         },
         "generated": {
           "total": 42,
           "reachable_on_happy_path": 4,
-          "present_arm_exercised": 3,
-          "present_arm_pct": 7.1,
-          "negative_arm_exercised": 3,
-          "negative_arm_pct": 7.1,
+          "present_arm_exercised": 12,
+          "present_arm_pct": 28.6,
+          "negative_arm_exercised": 12,
+          "negative_arm_pct": 28.6,
           "absent_arm_exercised": 4
         },
         "library": {
           "total": 10,
           "reachable_on_happy_path": 3,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "present_arm_exercised": 7,
+          "present_arm_pct": 70,
+          "negative_arm_exercised": 7,
+          "negative_arm_pct": 70,
           "absent_arm_exercised": 3
         }
       },
       "gaps": [
         {
-          "id": "b1",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
-          "cond": "in.Team.Icon.ArtifactId.Id == *ObjectTypeArtifact",
-          "predicate_paths": [
-            "in.Team.Icon.ArtifactId.Id"
-          ]
-        },
-        {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:1704",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1704",
           "cond": "in.Team.Icon.Stock != nil",
           "predicate_paths": [
             "in.Team.Icon.Stock"
@@ -203,7 +368,7 @@
         },
         {
           "id": "b3",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:1705",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1705",
           "cond": "in.Team.Icon.Stock != nil",
           "predicate_paths": [
             "in.Team.Icon.Stock"
@@ -211,23 +376,15 @@
         },
         {
           "id": "b4",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:1709",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1709",
           "cond": "in.Team.Icon.ArtifactId != nil",
           "predicate_paths": [
             "in.Team.Icon.ArtifactId"
           ]
         },
         {
-          "id": "b5",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:1714",
-          "cond": "in.Team.Icon.ArtifactId.Id",
-          "predicate_paths": [
-            "in.Team.Icon.ArtifactId.Id"
-          ]
-        },
-        {
           "id": "b6",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2031",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2031",
           "cond": "in.Team.SyncMetadata.LastSyncIn.SyncUnitId != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncIn.SyncUnitId"
@@ -235,31 +392,15 @@
         },
         {
           "id": "b7",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2040",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2040",
           "cond": "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId"
           ]
         },
         {
-          "id": "b8",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2036",
-          "cond": "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
-          "predicate_paths": [
-            "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id"
-          ]
-        },
-        {
-          "id": "b9",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2045",
-          "cond": "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
-          "predicate_paths": [
-            "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id"
-          ]
-        },
-        {
           "id": "b10",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2163",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2163",
           "cond": "in.Team.SyncMetadata.LastSyncOut.SyncUnitId != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncOut.SyncUnitId"
@@ -267,31 +408,15 @@
         },
         {
           "id": "b11",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2172",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2172",
           "cond": "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId"
           ]
         },
         {
-          "id": "b12",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2168",
-          "cond": "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
-          "predicate_paths": [
-            "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id"
-          ]
-        },
-        {
-          "id": "b13",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2177",
-          "cond": "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
-          "predicate_paths": [
-            "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id"
-          ]
-        },
-        {
           "id": "b14",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:1905",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1905",
           "cond": "in.Team.SyncMetadata.LastSyncIn != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncIn"
@@ -299,7 +424,7 @@
         },
         {
           "id": "b15",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:1906",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1906",
           "cond": "in.Team.SyncMetadata.LastSyncIn != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncIn"
@@ -307,7 +432,7 @@
         },
         {
           "id": "b16",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:1910",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1910",
           "cond": "in.Team.SyncMetadata.LastSyncOut != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncOut"
@@ -315,63 +440,15 @@
         },
         {
           "id": "b17",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:1911",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1911",
           "cond": "in.Team.SyncMetadata.LastSyncOut != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncOut"
           ]
         },
         {
-          "id": "b18",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
-          "cond": "in.Team.ExternalSourceData.CreatedById.Id",
-          "predicate_paths": [
-            "in.Team.ExternalSourceData.CreatedById.Id"
-          ]
-        },
-        {
-          "id": "b19",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
-          "cond": "in.Team.ExternalSourceData.CreatedById.Id",
-          "predicate_paths": [
-            "in.Team.ExternalSourceData.CreatedById.Id"
-          ]
-        },
-        {
-          "id": "b20",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
-          "cond": "in.Team.ExternalSourceData.CreatedById.Id",
-          "predicate_paths": [
-            "in.Team.ExternalSourceData.CreatedById.Id"
-          ]
-        },
-        {
-          "id": "b21",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
-          "cond": "in.Team.ExternalSourceData.ModifiedById.Id",
-          "predicate_paths": [
-            "in.Team.ExternalSourceData.ModifiedById.Id"
-          ]
-        },
-        {
-          "id": "b22",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
-          "cond": "in.Team.ExternalSourceData.ModifiedById.Id",
-          "predicate_paths": [
-            "in.Team.ExternalSourceData.ModifiedById.Id"
-          ]
-        },
-        {
-          "id": "b23",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
-          "cond": "in.Team.ExternalSourceData.ModifiedById.Id",
-          "predicate_paths": [
-            "in.Team.ExternalSourceData.ModifiedById.Id"
-          ]
-        },
-        {
           "id": "b24",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2450",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2450",
           "cond": "in.Team.ExternalSourceData.CreatedById != nil",
           "predicate_paths": [
             "in.Team.ExternalSourceData.CreatedById"
@@ -379,31 +456,15 @@
         },
         {
           "id": "b25",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2459",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2459",
           "cond": "in.Team.ExternalSourceData.ModifiedById != nil",
           "predicate_paths": [
             "in.Team.ExternalSourceData.ModifiedById"
           ]
         },
         {
-          "id": "b26",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2455",
-          "cond": "in.Team.ExternalSourceData.CreatedById.Id",
-          "predicate_paths": [
-            "in.Team.ExternalSourceData.CreatedById.Id"
-          ]
-        },
-        {
-          "id": "b27",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2464",
-          "cond": "in.Team.ExternalSourceData.ModifiedById.Id",
-          "predicate_paths": [
-            "in.Team.ExternalSourceData.ModifiedById.Id"
-          ]
-        },
-        {
           "id": "b28",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2626",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2626",
           "cond": "in.Team.DevrevCopy.OriginId != nil",
           "predicate_paths": [
             "in.Team.DevrevCopy.OriginId"
@@ -411,23 +472,15 @@
         },
         {
           "id": "b29",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2631",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2631",
           "cond": "in.Team.DevrevCopy.OriginOrgId != nil",
           "predicate_paths": [
             "in.Team.DevrevCopy.OriginOrgId"
           ]
         },
         {
-          "id": "b30",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2636",
-          "cond": "in.Team.DevrevCopy.OriginOrgId.Id",
-          "predicate_paths": [
-            "in.Team.DevrevCopy.OriginOrgId.Id"
-          ]
-        },
-        {
           "id": "b34",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3743",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3722",
           "cond": "in.Team.GroupId != nil",
           "predicate_paths": [
             "in.Team.GroupId"
@@ -435,23 +488,15 @@
         },
         {
           "id": "b36",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3752",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3731",
           "cond": "in.Team.Icon != nil",
           "predicate_paths": [
             "in.Team.Icon"
           ]
         },
         {
-          "id": "b37",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3748",
-          "cond": "in.Team.GroupId.Id",
-          "predicate_paths": [
-            "in.Team.GroupId.Id"
-          ]
-        },
-        {
           "id": "b38",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3753",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3732",
           "cond": "in.Team.Icon != nil",
           "predicate_paths": [
             "in.Team.Icon"
@@ -459,7 +504,7 @@
         },
         {
           "id": "b39",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3762",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3741",
           "cond": "in.Team.SyncMetadata != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata"
@@ -467,7 +512,7 @@
         },
         {
           "id": "b40",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3763",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3742",
           "cond": "in.Team.SyncMetadata != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata"
@@ -475,7 +520,7 @@
         },
         {
           "id": "b41",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3767",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3746",
           "cond": "in.Team.ExternalSourceData != nil",
           "predicate_paths": [
             "in.Team.ExternalSourceData"
@@ -483,7 +528,7 @@
         },
         {
           "id": "b42",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3768",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3747",
           "cond": "in.Team.ExternalSourceData != nil",
           "predicate_paths": [
             "in.Team.ExternalSourceData"
@@ -491,7 +536,7 @@
         },
         {
           "id": "b43",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3772",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3751",
           "cond": "in.Team.DevrevCopy != nil",
           "predicate_paths": [
             "in.Team.DevrevCopy"
@@ -499,7 +544,7 @@
         },
         {
           "id": "b44",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3773",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3752",
           "cond": "in.Team.DevrevCopy != nil",
           "predicate_paths": [
             "in.Team.DevrevCopy"
@@ -507,7 +552,7 @@
         },
         {
           "id": "b45",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:246",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:246",
           "cond": "in.CustomSchemaSpec.Drop != nil",
           "predicate_paths": [
             "in.CustomSchemaSpec.Drop"
@@ -515,7 +560,7 @@
         },
         {
           "id": "b46",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:247",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:247",
           "cond": "in.CustomSchemaSpec.Drop != nil",
           "predicate_paths": [
             "in.CustomSchemaSpec.Drop"
@@ -523,7 +568,7 @@
         },
         {
           "id": "b47",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2927",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2913",
           "cond": "in.Team != nil",
           "predicate_paths": [
             "in.Team"
@@ -531,7 +576,7 @@
         },
         {
           "id": "b48",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2928",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2914",
           "cond": "in.Team != nil",
           "predicate_paths": [
             "in.Team"
@@ -539,7 +584,7 @@
         },
         {
           "id": "b49",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2932",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2918",
           "cond": "in.CustomSchemaSpec != nil",
           "predicate_paths": [
             "in.CustomSchemaSpec"
@@ -547,7 +592,7 @@
         },
         {
           "id": "b50",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2933",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2919",
           "cond": "in.CustomSchemaSpec != nil",
           "predicate_paths": [
             "in.CustomSchemaSpec"
@@ -562,35 +607,11 @@
           ]
         },
         {
-          "id": "b53",
-          "at": "internal/service/team_validations.go:129",
-          "cond": "in.Team.GroupId.Id",
-          "predicate_paths": [
-            "in.Team.GroupId.Id"
-          ]
-        },
-        {
           "id": "b56",
           "at": "internal/service/team_validations.go:290",
           "cond": "in.Team.GroupId != nil",
           "predicate_paths": [
             "in.Team.GroupId"
-          ]
-        },
-        {
-          "id": "b57",
-          "at": "internal/service/team_validations.go:290",
-          "cond": "in.Team.GroupId.Id != \"\"",
-          "predicate_paths": [
-            "in.Team.GroupId.Id"
-          ]
-        },
-        {
-          "id": "b58",
-          "at": "internal/service/team_validations.go:162",
-          "cond": "in.Team.GroupId.Id",
-          "predicate_paths": [
-            "in.Team.GroupId.Id"
           ]
         },
         {
@@ -639,14 +660,6 @@
           "cond": "in.Team.GroupId != nil",
           "predicate_paths": [
             "in.Team.GroupId"
-          ]
-        },
-        {
-          "id": "b71",
-          "at": "internal/service/team_validations.go:450",
-          "cond": "in.Team.GroupId.Id != \"\"",
-          "predicate_paths": [
-            "in.Team.GroupId.Id"
           ]
         },
         {
@@ -707,7 +720,7 @@
         },
         {
           "id": "b80",
-          "at": "internal/collection/sync_in.gen.go:257",
+          "at": "internal/collection/sync_in.gen.go:258",
           "cond": "in.Team.SyncMetadata.LastSyncIn.SyncDate != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncIn.SyncDate"
@@ -715,7 +728,7 @@
         },
         {
           "id": "b81",
-          "at": "internal/collection/sync_in.gen.go:263",
+          "at": "internal/collection/sync_in.gen.go:264",
           "cond": "in.Team.SyncMetadata.LastSyncIn.SyncUnitId != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncIn.SyncUnitId"
@@ -723,7 +736,7 @@
         },
         {
           "id": "b82",
-          "at": "internal/collection/sync_in.gen.go:271",
+          "at": "internal/collection/sync_in.gen.go:272",
           "cond": "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId"
@@ -731,7 +744,7 @@
         },
         {
           "id": "b83",
-          "at": "internal/collection/sync_out.gen.go:257",
+          "at": "internal/collection/sync_out.gen.go:258",
           "cond": "in.Team.SyncMetadata.LastSyncOut.SyncDate != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncOut.SyncDate"
@@ -739,7 +752,7 @@
         },
         {
           "id": "b84",
-          "at": "internal/collection/sync_out.gen.go:263",
+          "at": "internal/collection/sync_out.gen.go:264",
           "cond": "in.Team.SyncMetadata.LastSyncOut.SyncUnitId != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncOut.SyncUnitId"
@@ -747,7 +760,7 @@
         },
         {
           "id": "b85",
-          "at": "internal/collection/sync_out.gen.go:271",
+          "at": "internal/collection/sync_out.gen.go:272",
           "cond": "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId"
@@ -755,7 +768,7 @@
         },
         {
           "id": "b86",
-          "at": "internal/collection/sync_metadata.gen.go:420",
+          "at": "internal/collection/sync_metadata.gen.go:393",
           "cond": "in.Team.SyncMetadata.SyncedByDevUsers != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.SyncedByDevUsers"
@@ -763,7 +776,7 @@
         },
         {
           "id": "b87",
-          "at": "internal/collection/sync_metadata.gen.go:432",
+          "at": "internal/collection/sync_metadata.gen.go:405",
           "cond": "in.Team.SyncMetadata.LastSyncIn != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncIn"
@@ -771,7 +784,7 @@
         },
         {
           "id": "b88",
-          "at": "internal/collection/sync_metadata.gen.go:439",
+          "at": "internal/collection/sync_metadata.gen.go:412",
           "cond": "in.Team.SyncMetadata.LastSyncOut != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncOut"
@@ -779,7 +792,7 @@
         },
         {
           "id": "b89",
-          "at": "internal/collection/external_source_data_comp.gen.go:290",
+          "at": "internal/collection/external_source_data_comp.gen.go:291",
           "cond": "in.Team.ExternalSourceData.CreatedDate != nil",
           "predicate_paths": [
             "in.Team.ExternalSourceData.CreatedDate"
@@ -787,7 +800,7 @@
         },
         {
           "id": "b90",
-          "at": "internal/collection/external_source_data_comp.gen.go:294",
+          "at": "internal/collection/external_source_data_comp.gen.go:295",
           "cond": "in.Team.ExternalSourceData.ModifiedDate != nil",
           "predicate_paths": [
             "in.Team.ExternalSourceData.ModifiedDate"
@@ -795,7 +808,7 @@
         },
         {
           "id": "b91",
-          "at": "internal/collection/external_source_data_comp.gen.go:298",
+          "at": "internal/collection/external_source_data_comp.gen.go:299",
           "cond": "in.Team.ExternalSourceData.ClosedDate != nil",
           "predicate_paths": [
             "in.Team.ExternalSourceData.ClosedDate"
@@ -803,7 +816,7 @@
         },
         {
           "id": "b92",
-          "at": "internal/collection/external_source_data_comp.gen.go:302",
+          "at": "internal/collection/external_source_data_comp.gen.go:303",
           "cond": "in.Team.ExternalSourceData.CreatedById != nil",
           "predicate_paths": [
             "in.Team.ExternalSourceData.CreatedById"
@@ -811,7 +824,7 @@
         },
         {
           "id": "b93",
-          "at": "internal/collection/external_source_data_comp.gen.go:310",
+          "at": "internal/collection/external_source_data_comp.gen.go:311",
           "cond": "in.Team.ExternalSourceData.ModifiedById != nil",
           "predicate_paths": [
             "in.Team.ExternalSourceData.ModifiedById"
@@ -819,7 +832,7 @@
         },
         {
           "id": "b94",
-          "at": "internal/collection/devrev_copy.gen.go:232",
+          "at": "internal/collection/devrev_copy.gen.go:233",
           "cond": "in.Team.DevrevCopy.OriginId != nil",
           "predicate_paths": [
             "in.Team.DevrevCopy.OriginId"
@@ -827,7 +840,7 @@
         },
         {
           "id": "b95",
-          "at": "internal/collection/devrev_copy.gen.go:240",
+          "at": "internal/collection/devrev_copy.gen.go:241",
           "cond": "in.Team.DevrevCopy.OriginOrgId != nil",
           "predicate_paths": [
             "in.Team.DevrevCopy.OriginOrgId"
@@ -835,7 +848,7 @@
         },
         {
           "id": "b96",
-          "at": "internal/collection/devrev_copy.gen.go:248",
+          "at": "internal/collection/devrev_copy.gen.go:249",
           "cond": "in.Team.DevrevCopy.LastSyncedDate != nil",
           "predicate_paths": [
             "in.Team.DevrevCopy.LastSyncedDate"
@@ -843,7 +856,7 @@
         },
         {
           "id": "b97",
-          "at": "internal/collection/team.gen.go:1316",
+          "at": "internal/collection/team.gen.go:1317",
           "cond": "in.Team.GroupId != nil",
           "predicate_paths": [
             "in.Team.GroupId"
@@ -851,7 +864,7 @@
         },
         {
           "id": "b98",
-          "at": "internal/collection/team.gen.go:1324",
+          "at": "internal/collection/team.gen.go:1325",
           "cond": "in.Team.Icon != nil",
           "predicate_paths": [
             "in.Team.Icon"
@@ -859,7 +872,7 @@
         },
         {
           "id": "b99",
-          "at": "internal/collection/team.gen.go:1333",
+          "at": "internal/collection/team.gen.go:1334",
           "cond": "in.Team.EnabledFeatures != nil",
           "predicate_paths": [
             "in.Team.EnabledFeatures"
@@ -867,7 +880,7 @@
         },
         {
           "id": "b100",
-          "at": "internal/collection/team.gen.go:1341",
+          "at": "internal/collection/team.gen.go:1342",
           "cond": "in.Team.SyncMetadata != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata"
@@ -875,7 +888,7 @@
         },
         {
           "id": "b101",
-          "at": "internal/collection/team.gen.go:1348",
+          "at": "internal/collection/team.gen.go:1349",
           "cond": "in.Team.ExternalSourceData != nil",
           "predicate_paths": [
             "in.Team.ExternalSourceData"
@@ -883,7 +896,7 @@
         },
         {
           "id": "b102",
-          "at": "internal/collection/team.gen.go:1355",
+          "at": "internal/collection/team.gen.go:1356",
           "cond": "in.Team.DevrevCopy != nil",
           "predicate_paths": [
             "in.Team.DevrevCopy"
@@ -891,24 +904,24 @@
         },
         {
           "id": "b103",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:4628",
-          "cond": "in.Team|in.Team.Description|in.Team.DevrevCopy|in.Team.DevrevCopy.OriginId.Id|in.Team.DevrevCopy.OriginOrgId.Id|in.Team.ExternalSourceData|in.Team.ExternalSourceData.CreatedById.Id|in.Team.ExternalSourceData.ModifiedById.Id|in.Team.GroupId.Id|in.Team.Icon|in.Team.Icon.ArtifactId.Id|in.Team.Icon.Stock|in.Team.Key|in.Team.Name|in.Team.SyncMetadata|in.Team.SyncMetadata.ExternalRecordId|in.Team.SyncMetadata.ExternalRecordType|in.Team.SyncMetadata.ExternalReference|in.Team.SyncMetadata.LastSyncIn|in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id|in.Team.SyncMetadata.LastSyncOut|in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id|in.Team.SyncMetadata.OriginSystem|in.Team.SyncMetadata.OriginSystemInstanceId",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/utils.go:4627",
+          "cond": "in.Team|in.Team.Description|in.Team.DevrevCopy|in.Team.DevrevCopy.OriginId.Id|in.Team.DevrevCopy.OriginOrgId.Id|in.Team.ExternalSourceData|in.Team.ExternalSourceData.CreatedById.Id|in.Team.ExternalSourceData.ModifiedById.Id|in.Team.GroupId.Id|in.Team.Icon|in.Team.Icon.ArtifactId.Id|in.Team.Icon.Stock|in.Team.Key|in.Team.Name|in.Team.SyncMetadata|in.Team.SyncMetadata.ExternalRecordId|in.Team.SyncMetadata.ExternalRecordType|in.Team.SyncMetadata.ExternalReference|in.Team.SyncMetadata.LastSyncIn|in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id|in.Team.SyncMetadata.LastSyncOut|in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id|in.Team.SyncMetadata.OriginSystem",
           "predicate_paths": [
             "in.Team"
           ]
         },
         {
           "id": "b104",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:862",
-          "cond": "in.Team|in.Team.Description|in.Team.DevrevCopy|in.Team.DevrevCopy.OriginId.Id|in.Team.DevrevCopy.OriginOrgId.Id|in.Team.ExternalSourceData|in.Team.ExternalSourceData.CreatedById.Id|in.Team.ExternalSourceData.ModifiedById.Id|in.Team.GroupId.Id|in.Team.Icon|in.Team.Icon.ArtifactId.Id|in.Team.Icon.Stock|in.Team.Key|in.Team.Name|in.Team.SyncMetadata|in.Team.SyncMetadata.ExternalRecordId|in.Team.SyncMetadata.ExternalRecordType|in.Team.SyncMetadata.ExternalReference|in.Team.SyncMetadata.LastSyncIn|in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id|in.Team.SyncMetadata.LastSyncOut|in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id|in.Team.SyncMetadata.OriginSystem|in.Team.SyncMetadata.OriginSystemInstanceId != nil",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:862",
+          "cond": "in.Team|in.Team.Description|in.Team.DevrevCopy|in.Team.DevrevCopy.OriginId.Id|in.Team.DevrevCopy.OriginOrgId.Id|in.Team.ExternalSourceData|in.Team.ExternalSourceData.CreatedById.Id|in.Team.ExternalSourceData.ModifiedById.Id|in.Team.GroupId.Id|in.Team.Icon|in.Team.Icon.ArtifactId.Id|in.Team.Icon.Stock|in.Team.Key|in.Team.Name|in.Team.SyncMetadata|in.Team.SyncMetadata.ExternalRecordId|in.Team.SyncMetadata.ExternalRecordType|in.Team.SyncMetadata.ExternalReference|in.Team.SyncMetadata.LastSyncIn|in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id|in.Team.SyncMetadata.LastSyncOut|in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id|in.Team.SyncMetadata.OriginSystem != nil",
           "predicate_paths": [
             "in.Team"
           ]
         },
         {
           "id": "b105",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_fields.go:160",
-          "cond": "in.Team|in.Team.Description|in.Team.DevrevCopy|in.Team.DevrevCopy.OriginId.Id|in.Team.DevrevCopy.OriginOrgId.Id|in.Team.ExternalSourceData|in.Team.ExternalSourceData.CreatedById.Id|in.Team.ExternalSourceData.ModifiedById.Id|in.Team.GroupId.Id|in.Team.Icon|in.Team.Icon.ArtifactId.Id|in.Team.Icon.Stock|in.Team.Key|in.Team.Name|in.Team.SyncMetadata|in.Team.SyncMetadata.ExternalRecordId|in.Team.SyncMetadata.ExternalRecordType|in.Team.SyncMetadata.ExternalReference|in.Team.SyncMetadata.LastSyncIn|in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id|in.Team.SyncMetadata.LastSyncOut|in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id|in.Team.SyncMetadata.OriginSystem|in.Team.SyncMetadata.OriginSystemInstanceId != nil",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_fields.go:160",
+          "cond": "in.Team|in.Team.Description|in.Team.DevrevCopy|in.Team.DevrevCopy.OriginId.Id|in.Team.DevrevCopy.OriginOrgId.Id|in.Team.ExternalSourceData|in.Team.ExternalSourceData.CreatedById.Id|in.Team.ExternalSourceData.ModifiedById.Id|in.Team.GroupId.Id|in.Team.Icon|in.Team.Icon.ArtifactId.Id|in.Team.Icon.Stock|in.Team.Key|in.Team.Name|in.Team.SyncMetadata|in.Team.SyncMetadata.ExternalRecordId|in.Team.SyncMetadata.ExternalRecordType|in.Team.SyncMetadata.ExternalReference|in.Team.SyncMetadata.LastSyncIn|in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id|in.Team.SyncMetadata.LastSyncOut|in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id|in.Team.SyncMetadata.OriginSystem != nil",
           "predicate_paths": [
             "in.Team"
           ]
@@ -916,7 +929,7 @@
         {
           "id": "b107",
           "at": "internal/service/team.go:277",
-          "cond": "in.Team|in.Team.Description|in.Team.DevrevCopy|in.Team.DevrevCopy.OriginId.Id|in.Team.DevrevCopy.OriginOrgId.Id|in.Team.ExternalSourceData|in.Team.ExternalSourceData.CreatedById.Id|in.Team.ExternalSourceData.ModifiedById.Id|in.Team.GroupId.Id|in.Team.Icon|in.Team.Icon.ArtifactId.Id|in.Team.Icon.Stock|in.Team.Key|in.Team.Name|in.Team.SyncMetadata|in.Team.SyncMetadata.ExternalRecordId|in.Team.SyncMetadata.ExternalRecordType|in.Team.SyncMetadata.ExternalReference|in.Team.SyncMetadata.LastSyncIn|in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id|in.Team.SyncMetadata.LastSyncOut|in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id|in.Team.SyncMetadata.OriginSystem|in.Team.SyncMetadata.OriginSystemInstanceId != nil",
+          "cond": "in.Team|in.Team.Description|in.Team.DevrevCopy|in.Team.DevrevCopy.OriginId.Id|in.Team.DevrevCopy.OriginOrgId.Id|in.Team.ExternalSourceData|in.Team.ExternalSourceData.CreatedById.Id|in.Team.ExternalSourceData.ModifiedById.Id|in.Team.GroupId.Id|in.Team.Icon|in.Team.Icon.ArtifactId.Id|in.Team.Icon.Stock|in.Team.Key|in.Team.Name|in.Team.SyncMetadata|in.Team.SyncMetadata.ExternalRecordId|in.Team.SyncMetadata.ExternalRecordType|in.Team.SyncMetadata.ExternalReference|in.Team.SyncMetadata.LastSyncIn|in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id|in.Team.SyncMetadata.LastSyncOut|in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id|in.Team.SyncMetadata.OriginSystem != nil",
           "predicate_paths": [
             "in.Team"
           ]
@@ -966,6 +979,10 @@
       "unmatched_test_fields": [
         {
           "field": "group",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "isarchived",
           "fuzzy_suggestions": null
         }
       ]
@@ -1050,6 +1067,25 @@
           "Team.Name",
           "Team.Space",
           "Team.Space.Id"
+        ]
+      },
+      {
+        "name": "DryRunCreateValid",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "DryRun",
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Teams"
         ]
       },
       {
@@ -1214,6 +1250,237 @@
         "response_fields_asserted": [
           "StatusCode"
         ]
+      },
+      {
+        "name": "AllKeysUniqueAcrossTeams",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "WithDuplicateKeyFromAnotherTeam",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          201,
+          409
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "ArchiveTeamSuccessfully",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id",
+          "Team.IsArchived"
+        ]
+      },
+      {
+        "name": "ArchiveTeamArchivesBackingSpace",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Space",
+          "Space.IsArchived",
+          "StatusCode",
+          "Team",
+          "Team.Id",
+          "Team.Space",
+          "Team.Space.Id"
+        ]
+      },
+      {
+        "name": "ArchiveTeamArchivesLinkedGroup",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Group",
+          "Group.IsArchived",
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "ListFiltersByArchivedStatus",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "IsArchived",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id",
+          "Teams"
+        ]
+      },
+      {
+        "name": "ArchiveAlreadyArchivedTeam",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201,
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "UpdateArchivedTeamFails",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201,
+          403
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "RegularUserCannotArchive",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          201,
+          403
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "NoAccessUserCannotArchive",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          201,
+          403
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "ArchiveFailsWhenSpaceManagementDisabled",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          201,
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
       }
     ]
   },
@@ -1260,7 +1527,7 @@
         "via_paths": [
           "in.Team.GroupId"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/upgrade_object_v2.go:211"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/upgrade_object_v2.go:211"
       },
       {
         "kind": "rpc",
@@ -1268,7 +1535,7 @@
         "via_paths": [
           "in.Team.GroupId"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
       },
       {
         "kind": "rpc",
@@ -1306,8 +1573,7 @@
           "in.Team.SyncMetadata.LastSyncOut",
           "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
           "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
-          "in.Team.SyncMetadata.OriginSystem",
-          "in.Team.SyncMetadata.OriginSystemInstanceId"
+          "in.Team.SyncMetadata.OriginSystem"
         ],
         "at": "internal/db/init.go:55"
       },
@@ -1339,8 +1605,7 @@
           "in.Team.SyncMetadata.LastSyncOut",
           "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
           "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
-          "in.Team.SyncMetadata.OriginSystem",
-          "in.Team.SyncMetadata.OriginSystemInstanceId"
+          "in.Team.SyncMetadata.OriginSystem"
         ],
         "at": "mfz/service/seed_space_defaults.go:54"
       },
@@ -1372,8 +1637,7 @@
           "in.Team.SyncMetadata.LastSyncOut",
           "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
           "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
-          "in.Team.SyncMetadata.OriginSystem",
-          "in.Team.SyncMetadata.OriginSystemInstanceId"
+          "in.Team.SyncMetadata.OriginSystem"
         ],
         "at": "mfz/service/seed_space_defaults.go:217"
       },
@@ -1405,8 +1669,7 @@
           "in.Team.SyncMetadata.LastSyncOut",
           "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
           "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
-          "in.Team.SyncMetadata.OriginSystem",
-          "in.Team.SyncMetadata.OriginSystemInstanceId"
+          "in.Team.SyncMetadata.OriginSystem"
         ],
         "at": "mfz/service/seed_space_defaults.go:310"
       },
@@ -1438,8 +1701,7 @@
           "in.Team.SyncMetadata.LastSyncOut",
           "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
           "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
-          "in.Team.SyncMetadata.OriginSystem",
-          "in.Team.SyncMetadata.OriginSystemInstanceId"
+          "in.Team.SyncMetadata.OriginSystem"
         ],
         "at": "mfz/service/seed_space_defaults.go:340"
       },
@@ -1471,8 +1733,7 @@
           "in.Team.SyncMetadata.LastSyncOut",
           "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
           "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
-          "in.Team.SyncMetadata.OriginSystem",
-          "in.Team.SyncMetadata.OriginSystemInstanceId"
+          "in.Team.SyncMetadata.OriginSystem"
         ],
         "at": "mfz/service/apply_role.go:404"
       },
@@ -1504,8 +1765,7 @@
           "in.Team.SyncMetadata.LastSyncOut",
           "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
           "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
-          "in.Team.SyncMetadata.OriginSystem",
-          "in.Team.SyncMetadata.OriginSystemInstanceId"
+          "in.Team.SyncMetadata.OriginSystem"
         ],
         "at": "mfz/service/common.go:760"
       },
@@ -1537,8 +1797,7 @@
           "in.Team.SyncMetadata.LastSyncOut",
           "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
           "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
-          "in.Team.SyncMetadata.OriginSystem",
-          "in.Team.SyncMetadata.OriginSystemInstanceId"
+          "in.Team.SyncMetadata.OriginSystem"
         ],
         "at": "mfz/service/apply_role.go:485"
       },
@@ -1570,10 +1829,9 @@
           "in.Team.SyncMetadata.LastSyncOut",
           "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
           "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
-          "in.Team.SyncMetadata.OriginSystem",
-          "in.Team.SyncMetadata.OriginSystemInstanceId"
+          "in.Team.SyncMetadata.OriginSystem"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20261009072728-77f29de93ed7/mfz/cache/cache.go:1091"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/cache.go:1067"
       },
       {
         "kind": "db",
@@ -1603,10 +1861,9 @@
           "in.Team.SyncMetadata.LastSyncOut",
           "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
           "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
-          "in.Team.SyncMetadata.OriginSystem",
-          "in.Team.SyncMetadata.OriginSystemInstanceId"
+          "in.Team.SyncMetadata.OriginSystem"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20261009072728-77f29de93ed7/mfz/cache/cache.go:438"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/cache.go:432"
       },
       {
         "kind": "rpc",
@@ -1636,10 +1893,9 @@
           "in.Team.SyncMetadata.LastSyncOut",
           "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
           "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
-          "in.Team.SyncMetadata.OriginSystem",
-          "in.Team.SyncMetadata.OriginSystemInstanceId"
+          "in.Team.SyncMetadata.OriginSystem"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20261009072728-77f29de93ed7/mfz/cache/roles.go:455"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/roles.go:455"
       },
       {
         "kind": "db",
@@ -1669,10 +1925,9 @@
           "in.Team.SyncMetadata.LastSyncOut",
           "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
           "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
-          "in.Team.SyncMetadata.OriginSystem",
-          "in.Team.SyncMetadata.OriginSystemInstanceId"
+          "in.Team.SyncMetadata.OriginSystem"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20261009072728-77f29de93ed7/mfz/cache/roles.go:445"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/roles.go:445"
       },
       {
         "kind": "rpc",
@@ -1702,8 +1957,7 @@
           "in.Team.SyncMetadata.LastSyncOut",
           "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
           "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
-          "in.Team.SyncMetadata.OriginSystem",
-          "in.Team.SyncMetadata.OriginSystemInstanceId"
+          "in.Team.SyncMetadata.OriginSystem"
         ],
         "at": "internal/service/space.go:257"
       }
@@ -1711,7 +1965,7 @@
     "errors": [
       {
         "symbol": "ObjectTypeInvalid",
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:446",
         "tainted": false
       },
       {
@@ -1727,5 +1981,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateTeam` (HTTP operation `TeamsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomSchemaSpec.Drop\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.Team.CustomFields.Fields\n  - in.Team.DevrevCopy.LastSyncedDate\n  - in.Team.DevrevCopy.OriginId.Id\n  - in.Team.DevrevCopy.OriginOrgId.Id\n  - in.Team.EnabledFeatures\n  - in.Team.ExternalSourceData.ClosedDate\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.CreatedDate\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.ExternalSourceData.ModifiedDate\n  - in.Team.GroupId.Id\n  - in.Team.Icon.ArtifactId.Id\n  - in.Team.Icon.Stock.PaletteColor\n  - in.Team.Icon.Stock.Shape\n  - in.Team.SyncMetadata.ExternalRecordId\n  - in.Team.SyncMetadata.ExternalRecordType\n  - in.Team.SyncMetadata.ExternalReference\n  - in.Team.SyncMetadata.LastSyncIn.Status\n  - in.Team.SyncMetadata.LastSyncIn.SyncDate\n  - in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id\n  - in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id\n  - in.Team.SyncMetadata.LastSyncOut.Status\n  - in.Team.SyncMetadata.LastSyncOut.SyncDate\n  - in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id\n  - in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id\n  - in.Team.SyncMetadata.OriginSystem\n  - in.Team.SyncMetadata.OriginSystemInstanceId\n  - in.Team.SyncMetadata.SyncedByDevUsers\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Team.Icon.ArtifactId.Id == *ObjectTypeArtifact\n  - in.Team.Icon.Stock != nil\n  - in.Team.Icon.Stock != nil\n  - in.Team.Icon.ArtifactId != nil\n  - in.Team.Icon.ArtifactId.Id\n  - in.Team.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.Team.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id\n  - in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id\n  - in.Team.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.Team.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id\n  - in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id\n  - in.Team.SyncMetadata.LastSyncIn != nil\n  - in.Team.SyncMetadata.LastSyncIn != nil\n  - in.Team.SyncMetadata.LastSyncOut != nil\n  - in.Team.SyncMetadata.LastSyncOut != nil\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.ExternalSourceData.CreatedById != nil\n  - in.Team.ExternalSourceData.ModifiedById != nil\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.DevrevCopy.OriginId != nil\n  - in.Team.DevrevCopy.OriginOrgId != nil\n  - in.Team.DevrevCopy.OriginOrgId.Id\n  - in.Team.GroupId != nil\n  - in.Team.Icon != nil\n  - in.Team.GroupId.Id\n  - in.Team.Icon != nil\n  - in.Team.SyncMetadata != nil\n  - in.Team.SyncMetadata != nil\n  - in.Team.ExternalSourceData != nil\n  - in.Team.ExternalSourceData != nil\n  - in.Team.DevrevCopy != nil\n  - in.Team.DevrevCopy != nil\n  - (+52 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errOldVersionOfSchemaFragments\n  - errSchemaRegistryUnimplementedEnvironment\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `group` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateTeam` (HTTP operation `TeamsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomSchemaSpec.Drop\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.Team.CustomFields.Fields\n  - in.Team.DevrevCopy.LastSyncedDate\n  - in.Team.EnabledFeatures\n  - in.Team.ExternalSourceData.ClosedDate\n  - in.Team.ExternalSourceData.CreatedDate\n  - in.Team.ExternalSourceData.ModifiedDate\n  - in.Team.Icon.Stock.PaletteColor\n  - in.Team.Icon.Stock.Shape\n  - in.Team.SyncMetadata.ExternalRecordId\n  - in.Team.SyncMetadata.ExternalRecordType\n  - in.Team.SyncMetadata.ExternalReference\n  - in.Team.SyncMetadata.LastSyncIn.Status\n  - in.Team.SyncMetadata.LastSyncIn.SyncDate\n  - in.Team.SyncMetadata.LastSyncOut.Status\n  - in.Team.SyncMetadata.LastSyncOut.SyncDate\n  - in.Team.SyncMetadata.OriginSystem\n  - in.Team.SyncMetadata.SyncedByDevUsers\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Team.Icon.Stock != nil\n  - in.Team.Icon.Stock != nil\n  - in.Team.Icon.ArtifactId != nil\n  - in.Team.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.Team.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.Team.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.Team.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - in.Team.SyncMetadata.LastSyncIn != nil\n  - in.Team.SyncMetadata.LastSyncIn != nil\n  - in.Team.SyncMetadata.LastSyncOut != nil\n  - in.Team.SyncMetadata.LastSyncOut != nil\n  - in.Team.ExternalSourceData.CreatedById != nil\n  - in.Team.ExternalSourceData.ModifiedById != nil\n  - in.Team.DevrevCopy.OriginId != nil\n  - in.Team.DevrevCopy.OriginOrgId != nil\n  - in.Team.GroupId != nil\n  - in.Team.Icon != nil\n  - in.Team.Icon != nil\n  - in.Team.SyncMetadata != nil\n  - in.Team.SyncMetadata != nil\n  - in.Team.ExternalSourceData != nil\n  - in.Team.ExternalSourceData != nil\n  - in.Team.DevrevCopy != nil\n  - in.Team.DevrevCopy != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.Team != nil\n  - in.Team != nil\n  - in.CustomSchemaSpec != nil\n  - in.CustomSchemaSpec != nil\n  - in.Team.GroupId != nil\n  - in.Team.GroupId != nil\n  - in.Team.Icon.ArtifactId != nil\n  - in.Team.Icon.Stock == nil\n  - in.Team.Icon == nil\n  - in.Team.Icon.Stock != nil\n  - in.Team.GroupId != nil\n  - in.Team.GroupId != nil\n  - in != nil\n  - in.Team.CustomFields == nil\n  - (+32 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errOldVersionOfSchemaFragments\n  - errSchemaRegistryUnimplementedEnvironment\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `group` -> suggestions []\n  - test field `isarchived` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "ArchiveTeam",
     "operation": "TeamsArchive",
-    "tests": 7,
+    "tests": 11,
     "status": {
       "documented": [
         200,
@@ -36,7 +36,7 @@
       "leaf_fields_read_by_rpc": 1,
       "covered_count": 1,
       "coverage_pct": 100,
-      "request_fields_set_by_tests": 3,
+      "request_fields_set_by_tests": 4,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 1,
       "by_depth": {
@@ -69,9 +69,13 @@
           "by_tests": [
             "ArchiveAlreadyArchivedTeam",
             "ArchiveFailsWhenSpaceManagementDisabled",
+            "ArchiveTeamArchivesBackingSpace",
+            "ArchiveTeamArchivesLinkedGroup",
             "ArchiveTeamSuccessfully",
+            "ListFiltersByArchivedStatus",
             "NoAccessUserCannotArchive",
             "RegularUserCannotArchive",
+            "UpdateArchivedTeamFails",
             "WithInvalidId",
             "WithNonExistentId"
           ]
@@ -157,6 +161,10 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "isarchived",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "key",
           "fuzzy_suggestions": null
         }
@@ -185,6 +193,74 @@
         ]
       },
       {
+        "name": "ArchiveTeamArchivesBackingSpace",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Space",
+          "Space.IsArchived",
+          "StatusCode",
+          "Team",
+          "Team.Id",
+          "Team.Space",
+          "Team.Space.Id"
+        ]
+      },
+      {
+        "name": "ArchiveTeamArchivesLinkedGroup",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Group",
+          "Group.IsArchived",
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "ListFiltersByArchivedStatus",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "IsArchived",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id",
+          "Teams"
+        ]
+      },
+      {
         "name": "ArchiveAlreadyArchivedTeam",
         "file": "api/v2_internal/teams/teams_crud_test.go",
         "labels": null,
@@ -197,6 +273,27 @@
           200,
           201,
           400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "UpdateArchivedTeamFails",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201,
+          403
         ],
         "asserts_success": true,
         "response_fields_asserted": [
@@ -330,7 +427,7 @@
     "errors": [
       {
         "symbol": "ObjectTypeInvalid",
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:446",
         "tainted": false
       },
       {
@@ -356,5 +453,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ArchiveTeam` (HTTP operation `TeamsArchive`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - none\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errCacheUnavailable\n  - errInternalCacheTransientError\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `group` -> suggestions []\n  - test field `key` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ArchiveTeam` (HTTP operation `TeamsArchive`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - none\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errCacheUnavailable\n  - errInternalCacheTransientError\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `group` -> suggestions []\n  - test field `isarchived` -> suggestions []\n  - test field `key` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

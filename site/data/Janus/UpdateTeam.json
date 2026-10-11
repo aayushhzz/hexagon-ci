@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "UpdateTeam",
     "operation": "TeamsUpdate",
-    "tests": 10,
+    "tests": 12,
     "status": {
       "documented": [
         200,
@@ -38,7 +38,7 @@
       "covered_count": 11,
       "coverage_pct": 55,
       "request_fields_set_by_tests": 10,
-      "set_by_positive_tests": 10,
+      "set_by_positive_tests": 11,
       "set_by_negative_tests": 9,
       "by_depth": {
         "top_level": {
@@ -72,14 +72,17 @@
           "path": "in.DryRun",
           "match": "exact",
           "by_tests": [
-            "DryRunUpdateInvalidKey"
+            "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid"
           ]
         },
         {
           "path": "in.Id",
           "match": "exact",
           "by_tests": [
+            "AllKeysUniqueAcrossTeams",
             "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid",
             "NoAccessUserCannotUpdate",
             "RegularUserCannotUpdate",
             "UpdateArchivedTeamFails",
@@ -102,7 +105,9 @@
           "path": "in.Team.ExternalSourceData.CreatedById.Id",
           "match": "exact",
           "by_tests": [
+            "AllKeysUniqueAcrossTeams",
             "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid",
             "NoAccessUserCannotUpdate",
             "RegularUserCannotUpdate",
             "UpdateArchivedTeamFails",
@@ -118,7 +123,9 @@
           "path": "in.Team.ExternalSourceData.ModifiedById.Id",
           "match": "exact",
           "by_tests": [
+            "AllKeysUniqueAcrossTeams",
             "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid",
             "NoAccessUserCannotUpdate",
             "RegularUserCannotUpdate",
             "UpdateArchivedTeamFails",
@@ -134,7 +141,9 @@
           "path": "in.Team.Icon.ArtifactId.Id",
           "match": "exact",
           "by_tests": [
+            "AllKeysUniqueAcrossTeams",
             "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid",
             "NoAccessUserCannotUpdate",
             "RegularUserCannotUpdate",
             "UpdateArchivedTeamFails",
@@ -157,7 +166,9 @@
           "path": "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
           "match": "exact",
           "by_tests": [
+            "AllKeysUniqueAcrossTeams",
             "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid",
             "NoAccessUserCannotUpdate",
             "RegularUserCannotUpdate",
             "UpdateArchivedTeamFails",
@@ -173,7 +184,9 @@
           "path": "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
           "match": "exact",
           "by_tests": [
+            "AllKeysUniqueAcrossTeams",
             "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid",
             "NoAccessUserCannotUpdate",
             "RegularUserCannotUpdate",
             "UpdateArchivedTeamFails",
@@ -189,7 +202,9 @@
           "path": "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
           "match": "exact",
           "by_tests": [
+            "AllKeysUniqueAcrossTeams",
             "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid",
             "NoAccessUserCannotUpdate",
             "RegularUserCannotUpdate",
             "UpdateArchivedTeamFails",
@@ -205,7 +220,9 @@
           "path": "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
           "match": "exact",
           "by_tests": [
+            "AllKeysUniqueAcrossTeams",
             "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid",
             "NoAccessUserCannotUpdate",
             "RegularUserCannotUpdate",
             "UpdateArchivedTeamFails",
@@ -274,7 +291,7 @@
       "gaps": [
         {
           "id": "b3",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:1721",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1721",
           "cond": "in.Team.Icon.Stock != nil",
           "predicate_paths": [
             "in.Team.Icon.Stock"
@@ -282,7 +299,7 @@
         },
         {
           "id": "b4",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:1722",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1722",
           "cond": "in.Team.Icon.Stock != nil",
           "predicate_paths": [
             "in.Team.Icon.Stock"
@@ -290,7 +307,7 @@
         },
         {
           "id": "b5",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:1726",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1726",
           "cond": "in.Team.Icon.ArtifactId != nil",
           "predicate_paths": [
             "in.Team.Icon.ArtifactId"
@@ -298,7 +315,7 @@
         },
         {
           "id": "b7",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2055",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2055",
           "cond": "in.Team.SyncMetadata.LastSyncIn.SyncUnitId != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncIn.SyncUnitId"
@@ -306,7 +323,7 @@
         },
         {
           "id": "b8",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2064",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2064",
           "cond": "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId"
@@ -314,7 +331,7 @@
         },
         {
           "id": "b11",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2187",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2187",
           "cond": "in.Team.SyncMetadata.LastSyncOut.SyncUnitId != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncOut.SyncUnitId"
@@ -322,7 +339,7 @@
         },
         {
           "id": "b12",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2196",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2196",
           "cond": "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId"
@@ -330,7 +347,7 @@
         },
         {
           "id": "b15",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:1918",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1918",
           "cond": "in.Team.SyncMetadata.SyncedByDevUsers != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.SyncedByDevUsers"
@@ -338,7 +355,7 @@
         },
         {
           "id": "b16",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:1931",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1931",
           "cond": "in.Team.SyncMetadata.LastSyncIn != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncIn"
@@ -346,7 +363,7 @@
         },
         {
           "id": "b17",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:1932",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1932",
           "cond": "in.Team.SyncMetadata.LastSyncIn != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncIn"
@@ -354,7 +371,7 @@
         },
         {
           "id": "b18",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:1936",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1936",
           "cond": "in.Team.SyncMetadata.LastSyncOut != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncOut"
@@ -362,7 +379,7 @@
         },
         {
           "id": "b19",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:1937",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1937",
           "cond": "in.Team.SyncMetadata.LastSyncOut != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata.LastSyncOut"
@@ -370,7 +387,7 @@
         },
         {
           "id": "b26",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2471",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2471",
           "cond": "in.Team.ExternalSourceData.CreatedById != nil",
           "predicate_paths": [
             "in.Team.ExternalSourceData.CreatedById"
@@ -378,7 +395,7 @@
         },
         {
           "id": "b27",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/composite.pb.validator.go:2480",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2480",
           "cond": "in.Team.ExternalSourceData.ModifiedById != nil",
           "predicate_paths": [
             "in.Team.ExternalSourceData.ModifiedById"
@@ -386,7 +403,7 @@
         },
         {
           "id": "b31",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3796",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3775",
           "cond": "in.Team.Icon != nil",
           "predicate_paths": [
             "in.Team.Icon"
@@ -402,7 +419,7 @@
         },
         {
           "id": "b33",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3797",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3776",
           "cond": "in.Team.Icon != nil",
           "predicate_paths": [
             "in.Team.Icon"
@@ -410,7 +427,7 @@
         },
         {
           "id": "b34",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3801",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3780",
           "cond": "in.Team.EnabledFeatures != nil",
           "predicate_paths": [
             "in.Team.EnabledFeatures"
@@ -418,7 +435,7 @@
         },
         {
           "id": "b35",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3802",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3781",
           "cond": "in.Team.EnabledFeatures != nil",
           "predicate_paths": [
             "in.Team.EnabledFeatures"
@@ -426,7 +443,7 @@
         },
         {
           "id": "b36",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3806",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3785",
           "cond": "in.Team.SyncMetadata != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata"
@@ -434,7 +451,7 @@
         },
         {
           "id": "b37",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3807",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3786",
           "cond": "in.Team.SyncMetadata != nil",
           "predicate_paths": [
             "in.Team.SyncMetadata"
@@ -442,7 +459,7 @@
         },
         {
           "id": "b38",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3811",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3790",
           "cond": "in.Team.ExternalSourceData != nil",
           "predicate_paths": [
             "in.Team.ExternalSourceData"
@@ -450,7 +467,7 @@
         },
         {
           "id": "b39",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3812",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3791",
           "cond": "in.Team.ExternalSourceData != nil",
           "predicate_paths": [
             "in.Team.ExternalSourceData"
@@ -458,7 +475,7 @@
         },
         {
           "id": "b40",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3816",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3795",
           "cond": "in.Team.DevrevCopy != nil",
           "predicate_paths": [
             "in.Team.DevrevCopy"
@@ -466,7 +483,7 @@
         },
         {
           "id": "b41",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/schema.pb.validator.go:3817",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3796",
           "cond": "in.Team.DevrevCopy != nil",
           "predicate_paths": [
             "in.Team.DevrevCopy"
@@ -474,7 +491,7 @@
         },
         {
           "id": "b42",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:246",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:246",
           "cond": "in.CustomSchemaSpec.Drop != nil",
           "predicate_paths": [
             "in.CustomSchemaSpec.Drop"
@@ -482,7 +499,7 @@
         },
         {
           "id": "b43",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:247",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:247",
           "cond": "in.CustomSchemaSpec.Drop != nil",
           "predicate_paths": [
             "in.CustomSchemaSpec.Drop"
@@ -490,7 +507,7 @@
         },
         {
           "id": "b46",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2979",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2965",
           "cond": "in.Team != nil",
           "predicate_paths": [
             "in.Team"
@@ -498,7 +515,7 @@
         },
         {
           "id": "b47",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2980",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2966",
           "cond": "in.Team != nil",
           "predicate_paths": [
             "in.Team"
@@ -506,7 +523,7 @@
         },
         {
           "id": "b48",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2984",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2970",
           "cond": "in.CustomSchemaSpec != nil",
           "predicate_paths": [
             "in.CustomSchemaSpec"
@@ -514,7 +531,7 @@
         },
         {
           "id": "b49",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:2985",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2971",
           "cond": "in.CustomSchemaSpec != nil",
           "predicate_paths": [
             "in.CustomSchemaSpec"
@@ -642,6 +659,25 @@
         ]
       },
       {
+        "name": "DryRunUpdateValid",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "DryRun",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Key"
+        ]
+      },
+      {
         "name": "UpdateKey",
         "file": "api/v2_internal/teams/teams_crud_test.go",
         "labels": null,
@@ -659,6 +695,26 @@
           "Team.Id",
           "Team.Key",
           "Team.KeyChangeHistory"
+        ]
+      },
+      {
+        "name": "AllKeysUniqueAcrossTeams",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
         ]
       },
       {
@@ -836,7 +892,7 @@
         "via_paths": [
           "in.Id"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/upgrade_object_v2.go:211"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/upgrade_object_v2.go:211"
       },
       {
         "kind": "rpc",
@@ -844,13 +900,13 @@
         "via_paths": [
           "in.Id"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
       }
     ],
     "errors": [
       {
         "symbol": "ObjectTypeInvalid",
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:446",
         "tainted": false
       },
       {

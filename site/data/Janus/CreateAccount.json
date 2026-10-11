@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "CreateAccount",
     "operation": "AccountsCreate",
-    "tests": 7,
+    "tests": 12,
     "status": {
       "documented": [
         201,
@@ -19,26 +19,26 @@
       "asserted": [
         200,
         201,
-        400
+        400,
+        403
       ],
       "missing": [
         401,
-        403,
         409,
         413,
         429,
         500,
         503
       ],
-      "coverage_pct": 22.2
+      "coverage_pct": 33.3
     },
     "fields": {
       "leaf_fields_read_by_rpc": 41,
       "covered_count": 12,
       "coverage_pct": 29.3,
-      "request_fields_set_by_tests": 17,
+      "request_fields_set_by_tests": 31,
       "set_by_positive_tests": 12,
-      "set_by_negative_tests": 2,
+      "set_by_negative_tests": 7,
       "by_depth": {
         "top_level": {
           "total": 2,
@@ -74,6 +74,7 @@
           "match": "exact",
           "by_tests": [
             "Create account",
+            "should create a workflow that assigns SDR when an opportunity is created",
             "should create workflow triggered by opportunity creation with automatic timestamp update"
           ]
         },
@@ -81,6 +82,10 @@
           "path": "in.Account.DevrevCopy.OriginId.Id",
           "match": "exact",
           "by_tests": [
+            "Get subscribers with rev user token",
+            "account:all scope required for AccountsDelete",
+            "account:write scope required for AccountsCreate and AccountsUpdate",
+            "should create a workflow that assigns SDR when an opportunity is created",
             "should create workflow triggered by opportunity creation with automatic timestamp update"
           ]
         },
@@ -88,6 +93,10 @@
           "path": "in.Account.DevrevCopy.OriginOrgId.Id",
           "match": "exact",
           "by_tests": [
+            "Get subscribers with rev user token",
+            "account:all scope required for AccountsDelete",
+            "account:write scope required for AccountsCreate and AccountsUpdate",
+            "should create a workflow that assigns SDR when an opportunity is created",
             "should create workflow triggered by opportunity creation with automatic timestamp update"
           ]
         },
@@ -99,6 +108,11 @@
             "Create account with invalid fields",
             "Create account with only required fields",
             "Emits create event",
+            "Get subscribers with rev user token",
+            "account:all scope required for AccountsDelete",
+            "account:write scope required for AccountsCreate and AccountsUpdate",
+            "rev_user:read and account:read assign/revoke, rev_user:read persists after revoking account:read",
+            "should create a workflow that assigns SDR when an opportunity is created",
             "should create workflow triggered by opportunity creation with automatic timestamp update"
           ]
         },
@@ -113,13 +127,18 @@
           "path": "in.Account.ExternalRefs",
           "match": "exact",
           "by_tests": [
-            "Create account"
+            "Create account",
+            "Get subscribers with rev user token"
           ]
         },
         {
           "path": "in.Account.ExternalSourceData.CreatedById.Id",
           "match": "exact",
           "by_tests": [
+            "Get subscribers with rev user token",
+            "account:all scope required for AccountsDelete",
+            "account:write scope required for AccountsCreate and AccountsUpdate",
+            "should create a workflow that assigns SDR when an opportunity is created",
             "should create workflow triggered by opportunity creation with automatic timestamp update"
           ]
         },
@@ -127,6 +146,10 @@
           "path": "in.Account.ExternalSourceData.ModifiedById.Id",
           "match": "exact",
           "by_tests": [
+            "Get subscribers with rev user token",
+            "account:all scope required for AccountsDelete",
+            "account:write scope required for AccountsCreate and AccountsUpdate",
+            "should create a workflow that assigns SDR when an opportunity is created",
             "should create workflow triggered by opportunity creation with automatic timestamp update"
           ]
         },
@@ -141,6 +164,10 @@
           "path": "in.Account.Stage.StageId.Id",
           "match": "exact",
           "by_tests": [
+            "Get subscribers with rev user token",
+            "account:all scope required for AccountsDelete",
+            "account:write scope required for AccountsCreate and AccountsUpdate",
+            "should create a workflow that assigns SDR when an opportunity is created",
             "should create workflow triggered by opportunity creation with automatic timestamp update"
           ]
         },
@@ -196,14 +223,14 @@
       "total": 72,
       "happy_path_reached": true,
       "reachable_on_happy_path": 5,
-      "present_arm_exercised": 14,
-      "present_arm_pct": 19.4,
+      "present_arm_exercised": 16,
+      "present_arm_pct": 22.2,
       "absent_arm_exercised": 5,
       "absent_arm_pct": 100,
-      "negative_arm_exercised": 4,
-      "negative_arm_pct": 5.6,
-      "both_arms_exercised": 0,
-      "coverage_pct": 19.4,
+      "negative_arm_exercised": 8,
+      "negative_arm_pct": 11.1,
+      "both_arms_exercised": 2,
+      "coverage_pct": 22.2,
       "by_origin": {
         "service": {
           "total": 46,
@@ -226,10 +253,10 @@
         "library": {
           "total": 26,
           "reachable_on_happy_path": 2,
-          "present_arm_exercised": 7,
-          "present_arm_pct": 26.9,
-          "negative_arm_exercised": 3,
-          "negative_arm_pct": 11.5,
+          "present_arm_exercised": 9,
+          "present_arm_pct": 34.6,
+          "negative_arm_exercised": 7,
+          "negative_arm_pct": 26.9,
           "absent_arm_exercised": 2
         }
       },
@@ -294,7 +321,7 @@
         },
         {
           "id": "b12",
-          "at": "internal/collection/stage.gen.go:243",
+          "at": "internal/collection/stage.gen.go:244",
           "cond": "in.Account.Stage.StageId != nil",
           "predicate_paths": [
             "in.Account.Stage.StageId"
@@ -302,7 +329,7 @@
         },
         {
           "id": "b13",
-          "at": "/Users/devrev/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.1.darwin-arm64/src/regexp/regexp.go:888",
+          "at": "/Users/asd/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.0.darwin-arm64/src/regexp/regexp.go:888",
           "cond": "in.Account.Revenue.Amount == nil",
           "predicate_paths": [
             "in.Account.Revenue.Amount"
@@ -310,7 +337,7 @@
         },
         {
           "id": "b14",
-          "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:282",
+          "at": "/Users/asd/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:282",
           "cond": "in.Account.Revenue.Amount == \"\"",
           "predicate_paths": [
             "in.Account.Revenue.Amount"
@@ -318,7 +345,7 @@
         },
         {
           "id": "b15",
-          "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:294",
+          "at": "/Users/asd/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:294",
           "cond": "in.Account.Revenue.Amount == \"NaN\"",
           "predicate_paths": [
             "in.Account.Revenue.Amount"
@@ -326,7 +353,7 @@
         },
         {
           "id": "b16",
-          "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:297",
+          "at": "/Users/asd/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:297",
           "cond": "in.Account.Revenue.Amount == \"Inf\"",
           "predicate_paths": [
             "in.Account.Revenue.Amount"
@@ -334,7 +361,7 @@
         },
         {
           "id": "b17",
-          "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:294",
+          "at": "/Users/asd/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:294",
           "cond": "in.Account.Revenue.Amount == \"nan\"",
           "predicate_paths": [
             "in.Account.Revenue.Amount"
@@ -342,7 +369,7 @@
         },
         {
           "id": "b18",
-          "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:297",
+          "at": "/Users/asd/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:297",
           "cond": "in.Account.Revenue.Amount == \"inf\"",
           "predicate_paths": [
             "in.Account.Revenue.Amount"
@@ -350,7 +377,7 @@
         },
         {
           "id": "b19",
-          "at": "internal/collection/money.gen.go:189",
+          "at": "internal/collection/money.gen.go:190",
           "cond": "in.Account.Revenue.Amount != nil",
           "predicate_paths": [
             "in.Account.Revenue.Amount"
@@ -366,7 +393,7 @@
         },
         {
           "id": "b21",
-          "at": "internal/collection/staged_info.gen.go:362",
+          "at": "internal/collection/staged_info.gen.go:363",
           "cond": "in.Account.StagedInfo.UnresolvedFields != nil",
           "predicate_paths": [
             "in.Account.StagedInfo.UnresolvedFields"
@@ -374,7 +401,7 @@
         },
         {
           "id": "b22",
-          "at": "internal/collection/staged_info.gen.go:368",
+          "at": "internal/collection/staged_info.gen.go:369",
           "cond": "in.Account.StagedInfo.SyncInUnresolvedFields != nil",
           "predicate_paths": [
             "in.Account.StagedInfo.SyncInUnresolvedFields"
@@ -382,7 +409,7 @@
         },
         {
           "id": "b23",
-          "at": "internal/collection/staged_info.gen.go:378",
+          "at": "internal/collection/staged_info.gen.go:379",
           "cond": "in.Account.StagedInfo.SyncOutUnresolvedFields != nil",
           "predicate_paths": [
             "in.Account.StagedInfo.SyncOutUnresolvedFields"
@@ -390,7 +417,7 @@
         },
         {
           "id": "b24",
-          "at": "internal/collection/external_source_data_comp.gen.go:290",
+          "at": "internal/collection/external_source_data_comp.gen.go:291",
           "cond": "in.Account.ExternalSourceData.CreatedDate != nil",
           "predicate_paths": [
             "in.Account.ExternalSourceData.CreatedDate"
@@ -398,7 +425,7 @@
         },
         {
           "id": "b25",
-          "at": "internal/collection/external_source_data_comp.gen.go:294",
+          "at": "internal/collection/external_source_data_comp.gen.go:295",
           "cond": "in.Account.ExternalSourceData.ModifiedDate != nil",
           "predicate_paths": [
             "in.Account.ExternalSourceData.ModifiedDate"
@@ -406,7 +433,7 @@
         },
         {
           "id": "b26",
-          "at": "internal/collection/external_source_data_comp.gen.go:298",
+          "at": "internal/collection/external_source_data_comp.gen.go:299",
           "cond": "in.Account.ExternalSourceData.ClosedDate != nil",
           "predicate_paths": [
             "in.Account.ExternalSourceData.ClosedDate"
@@ -414,7 +441,7 @@
         },
         {
           "id": "b27",
-          "at": "internal/collection/external_source_data_comp.gen.go:302",
+          "at": "internal/collection/external_source_data_comp.gen.go:303",
           "cond": "in.Account.ExternalSourceData.CreatedById != nil",
           "predicate_paths": [
             "in.Account.ExternalSourceData.CreatedById"
@@ -422,7 +449,7 @@
         },
         {
           "id": "b28",
-          "at": "internal/collection/external_source_data_comp.gen.go:310",
+          "at": "internal/collection/external_source_data_comp.gen.go:311",
           "cond": "in.Account.ExternalSourceData.ModifiedById != nil",
           "predicate_paths": [
             "in.Account.ExternalSourceData.ModifiedById"
@@ -430,7 +457,7 @@
         },
         {
           "id": "b29",
-          "at": "internal/collection/devrev_copy.gen.go:232",
+          "at": "internal/collection/devrev_copy.gen.go:233",
           "cond": "in.Account.DevrevCopy.OriginId != nil",
           "predicate_paths": [
             "in.Account.DevrevCopy.OriginId"
@@ -438,7 +465,7 @@
         },
         {
           "id": "b30",
-          "at": "internal/collection/devrev_copy.gen.go:240",
+          "at": "internal/collection/devrev_copy.gen.go:241",
           "cond": "in.Account.DevrevCopy.OriginOrgId != nil",
           "predicate_paths": [
             "in.Account.DevrevCopy.OriginOrgId"
@@ -446,7 +473,7 @@
         },
         {
           "id": "b31",
-          "at": "internal/collection/devrev_copy.gen.go:248",
+          "at": "internal/collection/devrev_copy.gen.go:249",
           "cond": "in.Account.DevrevCopy.LastSyncedDate != nil",
           "predicate_paths": [
             "in.Account.DevrevCopy.LastSyncedDate"
@@ -454,7 +481,7 @@
         },
         {
           "id": "b35",
-          "at": "/Users/devrev/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.1.darwin-arm64/src/slices/slices.go:98",
+          "at": "/Users/asd/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.0.darwin-arm64/src/slices/slices.go:98",
           "cond": "in.Account.Industry == *t4",
           "predicate_paths": [
             "in.Account.Industry"
@@ -462,7 +489,7 @@
         },
         {
           "id": "b36",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:2238",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:2238",
           "cond": "in.Account.Industry == nil",
           "predicate_paths": [
             "in.Account.Industry"
@@ -470,7 +497,7 @@
         },
         {
           "id": "b37",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:2246",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:2246",
           "cond": "in.Account.Industry",
           "predicate_paths": [
             "in.Account.Industry"
@@ -478,7 +505,7 @@
         },
         {
           "id": "b38",
-          "at": "/Users/devrev/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.1.darwin-arm64/src/slices/slices.go:98",
+          "at": "/Users/asd/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.0.darwin-arm64/src/slices/slices.go:98",
           "cond": "in.Account.LeadSource == *t4",
           "predicate_paths": [
             "in.Account.LeadSource"
@@ -486,7 +513,7 @@
         },
         {
           "id": "b39",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:2238",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:2238",
           "cond": "in.Account.LeadSource == nil",
           "predicate_paths": [
             "in.Account.LeadSource"
@@ -494,7 +521,7 @@
         },
         {
           "id": "b40",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:2246",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:2246",
           "cond": "in.Account.LeadSource",
           "predicate_paths": [
             "in.Account.LeadSource"
@@ -502,7 +529,7 @@
         },
         {
           "id": "b41",
-          "at": "internal/collection/account.gen.go:2228",
+          "at": "internal/collection/account.gen.go:2165",
           "cond": "in.Account.OwnedBy != nil",
           "predicate_paths": [
             "in.Account.OwnedBy"
@@ -510,7 +537,7 @@
         },
         {
           "id": "b43",
-          "at": "internal/collection/account.gen.go:2246",
+          "at": "internal/collection/account.gen.go:2183",
           "cond": "in.Account.Tags != nil",
           "predicate_paths": [
             "in.Account.Tags"
@@ -518,7 +545,7 @@
         },
         {
           "id": "b44",
-          "at": "internal/collection/account.gen.go:2256",
+          "at": "internal/collection/account.gen.go:2193",
           "cond": "in.Account.ArtifactIds != nil",
           "predicate_paths": [
             "in.Account.ArtifactIds"
@@ -526,7 +553,7 @@
         },
         {
           "id": "b46",
-          "at": "internal/collection/account.gen.go:2276",
+          "at": "internal/collection/account.gen.go:2213",
           "cond": "in.Account.Stage != nil",
           "predicate_paths": [
             "in.Account.Stage"
@@ -534,7 +561,7 @@
         },
         {
           "id": "b48",
-          "at": "internal/collection/account.gen.go:2297",
+          "at": "internal/collection/account.gen.go:2234",
           "cond": "in.Account.Revenue != nil",
           "predicate_paths": [
             "in.Account.Revenue"
@@ -542,7 +569,7 @@
         },
         {
           "id": "b49",
-          "at": "internal/collection/account.gen.go:2306",
+          "at": "internal/collection/account.gen.go:2243",
           "cond": "in.Account.SyncMetadata != nil",
           "predicate_paths": [
             "in.Account.SyncMetadata"
@@ -550,7 +577,7 @@
         },
         {
           "id": "b50",
-          "at": "internal/collection/account.gen.go:2313",
+          "at": "internal/collection/account.gen.go:2250",
           "cond": "in.Account.StagedInfo != nil",
           "predicate_paths": [
             "in.Account.StagedInfo"
@@ -558,7 +585,7 @@
         },
         {
           "id": "b51",
-          "at": "internal/collection/account.gen.go:2320",
+          "at": "internal/collection/account.gen.go:2257",
           "cond": "in.Account.ExternalSourceData != nil",
           "predicate_paths": [
             "in.Account.ExternalSourceData"
@@ -566,7 +593,7 @@
         },
         {
           "id": "b52",
-          "at": "internal/collection/account.gen.go:2327",
+          "at": "internal/collection/account.gen.go:2264",
           "cond": "in.Account.DevrevCopy != nil",
           "predicate_paths": [
             "in.Account.DevrevCopy"
@@ -574,7 +601,7 @@
         },
         {
           "id": "b53",
-          "at": "internal/collection/account.gen.go:2334",
+          "at": "internal/collection/account.gen.go:2271",
           "cond": "in.Account.SharedWith != nil",
           "predicate_paths": [
             "in.Account.SharedWith"
@@ -582,7 +609,7 @@
         },
         {
           "id": "b54",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:26",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:26",
           "cond": "in.Account.Stage.StageId == nil",
           "predicate_paths": [
             "in.Account.Stage.StageId"
@@ -590,7 +617,7 @@
         },
         {
           "id": "b56",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:166",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:166",
           "cond": "in.Account.Stage.StageId == nil",
           "predicate_paths": [
             "in.Account.Stage.StageId"
@@ -598,7 +625,7 @@
         },
         {
           "id": "b57",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:179",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:179",
           "cond": "in.Account.Stage.StageId.IsStart",
           "predicate_paths": [
             "in.Account.Stage.StageId.IsStart"
@@ -606,7 +633,7 @@
         },
         {
           "id": "b59",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:200",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:200",
           "cond": "in.Account.Stage.StageId.IsStart",
           "predicate_paths": [
             "in.Account.Stage.StageId.IsStart"
@@ -614,7 +641,7 @@
         },
         {
           "id": "b60",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:226",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:226",
           "cond": "in.Account.Stage.StageId.IsDeprecated",
           "predicate_paths": [
             "in.Account.Stage.StageId.IsDeprecated"
@@ -683,22 +710,6 @@
           "predicate_paths": [
             "in.Account.Stage.Notes"
           ]
-        },
-        {
-          "id": "b71",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:862",
-          "cond": "in.Account|in.Account.Description|in.Account.DevrevCopy|in.Account.DevrevCopy.OriginId.Id|in.Account.DevrevCopy.OriginOrgId.Id|in.Account.EmployeeCount|in.Account.ExternalSourceData|in.Account.ExternalSourceData.CreatedById.Id|in.Account.ExternalSourceData.ModifiedById.Id|in.Account.Industry|in.Account.LeadSource|in.Account.Revenue|in.Account.Revenue.Amount|in.Account.Revenue.Currency|in.Account.Stage|in.Account.Stage.Notes|in.Account.Stage.StageId.Id|in.Account.StagedInfo|in.Account.StagedInfo.IsStaged|in.Account.SyncMetadata|in.Account.Tier|in.Account.TotalRevenue != nil",
-          "predicate_paths": [
-            "in.Account"
-          ]
-        },
-        {
-          "id": "b72",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_fields.go:160",
-          "cond": "in.Account|in.Account.Description|in.Account.DevrevCopy|in.Account.DevrevCopy.OriginId.Id|in.Account.DevrevCopy.OriginOrgId.Id|in.Account.EmployeeCount|in.Account.ExternalSourceData|in.Account.ExternalSourceData.CreatedById.Id|in.Account.ExternalSourceData.ModifiedById.Id|in.Account.Industry|in.Account.LeadSource|in.Account.Revenue|in.Account.Revenue.Amount|in.Account.Revenue.Currency|in.Account.Stage|in.Account.Stage.Notes|in.Account.Stage.StageId.Id|in.Account.StagedInfo|in.Account.StagedInfo.IsStaged|in.Account.SyncMetadata|in.Account.Tier|in.Account.TotalRevenue != nil",
-          "predicate_paths": [
-            "in.Account"
-          ]
         }
       ]
     },
@@ -729,6 +740,32 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
+          "field": "account",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "appliestopart",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "body",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "email",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "expiresin",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "externalref",
+          "fuzzy_suggestions": [
+            "in.Account.ExternalRefs"
+          ]
+        },
+        {
           "field": "inputvalues",
           "fuzzy_suggestions": null
         },
@@ -748,7 +785,27 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "principal",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "referencekey",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "reportedby",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "requestedtokentype",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "revorg",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "rolesetassignmentinfo",
           "fuzzy_suggestions": null
         },
         {
@@ -756,7 +813,19 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "subscribers",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "title",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "tokenhint",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "type",
           "fuzzy_suggestions": null
         },
         {
@@ -855,6 +924,120 @@
         "response_fields_asserted": null
       },
       {
+        "name": "rev_user:read and account:read assign/revoke, rev_user:read persists after revoking account:read",
+        "file": "api/v2_internal/scopes/crud/scopes_rev_user_account_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ROLE_SETS_CREATE"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "Principal",
+          "RevOrg",
+          "RoleSetAssignmentInfo"
+        ],
+        "statuses": [
+          200,
+          201,
+          403
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Accounts",
+          "ServiceAccount",
+          "ServiceAccount.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "account:write scope required for AccountsCreate and AccountsUpdate",
+        "file": "api/v2_internal/scopes/crud/scopes_rev_user_account_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ROLE_SETS_CREATE"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "Id",
+          "Principal",
+          "RoleSetAssignmentInfo"
+        ],
+        "statuses": [
+          200,
+          201,
+          403
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Account",
+          "Account.Id",
+          "ServiceAccount",
+          "ServiceAccount.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "account:all scope required for AccountsDelete",
+        "file": "api/v2_internal/scopes/crud/scopes_rev_user_account_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ROLE_SETS_CREATE"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "Id",
+          "Principal",
+          "RoleSetAssignmentInfo"
+        ],
+        "statuses": [
+          200,
+          201,
+          403
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Account",
+          "Account.Id",
+          "ServiceAccount",
+          "ServiceAccount.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Get subscribers with rev user token",
+        "file": "api/v2_internal/timeline/subscribers_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "Account",
+          "AppliesToPart",
+          "Body",
+          "DisplayName",
+          "Email",
+          "ExpiresIn",
+          "ExternalRef",
+          "ExternalRefs",
+          "Id",
+          "ReportedBy",
+          "RequestedTokenType",
+          "Subscribers",
+          "Title",
+          "TokenHint",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "AccessToken",
+          "Account",
+          "Account.Id",
+          "RevUser",
+          "RevUser.Id",
+          "StatusCode"
+        ]
+      },
+      {
         "name": "Emits create event",
         "file": "e2e/transformers/janus/janus_test.go",
         "labels": [
@@ -872,6 +1055,42 @@
           "Account",
           "Account.Id",
           "StatusCode"
+        ]
+      },
+      {
+        "name": "should create a workflow that assigns SDR when an opportunity is created",
+        "file": "e2e/workflow_uat_automation/workflow_node_test.go",
+        "labels": [
+          "UAT"
+        ],
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Id",
+          "InputValues",
+          "Name",
+          "Operation",
+          "PreviousSteps",
+          "ReferenceKey",
+          "Status",
+          "Title",
+          "UiMetadata",
+          "Workflow"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Account",
+          "Account.Id",
+          "StatusCode",
+          "Workflow",
+          "Workflow.Id",
+          "WorkflowRuns",
+          "WorkflowStep",
+          "WorkflowStep.Id"
         ]
       },
       {
@@ -960,7 +1179,7 @@
           "in.Account.Tier",
           "in.Account.TotalRevenue"
         ],
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
       }
     ],
     "errors": [
@@ -1026,26 +1245,26 @@
       },
       {
         "symbol": "dNaN",
-        "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:273",
+        "at": "/Users/asd/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:273",
         "tainted": false
       },
       {
         "symbol": "dNaN",
-        "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:295",
+        "at": "/Users/asd/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:295",
         "tainted": true
       },
       {
         "symbol": "dNegInf",
-        "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:299",
+        "at": "/Users/asd/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:299",
         "tainted": true
       },
       {
         "symbol": "dPosInf",
-        "at": "/Users/devrev/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:301",
+        "at": "/Users/asd/go/pkg/mod/go.mongodb.org/mongo-driver@v1.17.9/bson/primitive/decimal.go:301",
         "tainted": true
       }
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateAccount` (HTTP operation `AccountsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Account.ArtifactIds\n  - in.Account.CustomFields.Fields\n  - in.Account.CustomSchemaFragmentIds\n  - in.Account.DevrevCopy.LastSyncedDate\n  - in.Account.EmployeeCount\n  - in.Account.ExternalSourceData.ClosedDate\n  - in.Account.ExternalSourceData.CreatedDate\n  - in.Account.ExternalSourceData.ModifiedDate\n  - in.Account.Industry\n  - in.Account.IngestionChannel\n  - in.Account.LeadSource\n  - in.Account.OwnedBy\n  - in.Account.Revenue.Amount\n  - in.Account.Revenue.Currency\n  - in.Account.SharedWith\n  - in.Account.Stage.Notes\n  - in.Account.Stage.StageId.IsDeprecated\n  - in.Account.Stage.StageId.IsStart\n  - in.Account.StagedInfo.IsStaged\n  - in.Account.StagedInfo.SyncInUnresolvedFields\n  - in.Account.StagedInfo.SyncOutUnresolvedFields\n  - in.Account.StagedInfo.UnresolvedFields\n  - in.Account.SyncMetadata.SyncedByDevUsers\n  - in.Account.Tags\n  - in.Account.TotalRevenue\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.SkipStageTransitionValidation\n  - in.UniqueDisplayNameSuffix\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Account.DisplayName|in.UniqueDisplayNameSuffix == nil\n  - in.UniqueDisplayNameSuffix != nil\n  - in\n  - in.Account.CustomFields == nil\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec == nil\n  - in.Account.CustomFields|in.Account.CustomSchemaFragmentIds\n  - in.Account.Stage.StageId != nil\n  - in.Account.Revenue.Amount == nil\n  - in.Account.Revenue.Amount == \"\"\n  - in.Account.Revenue.Amount == \"NaN\"\n  - in.Account.Revenue.Amount == \"Inf\"\n  - in.Account.Revenue.Amount == \"nan\"\n  - in.Account.Revenue.Amount == \"inf\"\n  - in.Account.Revenue.Amount != nil\n  - in.Account.SyncMetadata.SyncedByDevUsers != nil\n  - in.Account.StagedInfo.UnresolvedFields != nil\n  - in.Account.StagedInfo.SyncInUnresolvedFields != nil\n  - in.Account.StagedInfo.SyncOutUnresolvedFields != nil\n  - in.Account.ExternalSourceData.CreatedDate != nil\n  - in.Account.ExternalSourceData.ModifiedDate != nil\n  - in.Account.ExternalSourceData.ClosedDate != nil\n  - in.Account.ExternalSourceData.CreatedById != nil\n  - in.Account.ExternalSourceData.ModifiedById != nil\n  - in.Account.DevrevCopy.OriginId != nil\n  - in.Account.DevrevCopy.OriginOrgId != nil\n  - in.Account.DevrevCopy.LastSyncedDate != nil\n  - in.Account.Industry == *t4\n  - in.Account.Industry == nil\n  - in.Account.Industry\n  - in.Account.LeadSource == *t4\n  - in.Account.LeadSource == nil\n  - in.Account.LeadSource\n  - in.Account.OwnedBy != nil\n  - in.Account.Tags != nil\n  - in.Account.ArtifactIds != nil\n  - in.Account.Stage != nil\n  - in.Account.Revenue != nil\n  - in.Account.SyncMetadata != nil\n  - in.Account.StagedInfo != nil\n  - (+18 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - dNaN\n  - dNegInf\n  - dPosInf\n  - errAccountDisplayNameAlreadyExists\n  - errAccountEmptyDisplayName\n  - errDomainAlreadyExists\n  - errInputContainsDuplicateDomains\n  - errInputContainsDuplicateExternalRefs\n  - errInputContainsDuplicateWebsites\n  - errInputContainsNotAcceptableDomains\n  - errInputContainsNotAcceptableWebsites\n  - errOldVersionOfSchemaFragments\n  - errPhoneNumberInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n  - errWebsiteAlreadyExists\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `inputvalues` -> suggestions []\n  - test field `name` -> suggestions ['in.Account.DisplayName', 'in.UniqueDisplayNameSuffix']\n  - test field `operation` -> suggestions []\n  - test field `previoussteps` -> suggestions []\n  - test field `referencekey` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `uimetadata` -> suggestions []\n  - test field `workflow` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateAccount` (HTTP operation `AccountsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Account.ArtifactIds\n  - in.Account.CustomFields.Fields\n  - in.Account.CustomSchemaFragmentIds\n  - in.Account.DevrevCopy.LastSyncedDate\n  - in.Account.EmployeeCount\n  - in.Account.ExternalSourceData.ClosedDate\n  - in.Account.ExternalSourceData.CreatedDate\n  - in.Account.ExternalSourceData.ModifiedDate\n  - in.Account.Industry\n  - in.Account.IngestionChannel\n  - in.Account.LeadSource\n  - in.Account.OwnedBy\n  - in.Account.Revenue.Amount\n  - in.Account.Revenue.Currency\n  - in.Account.SharedWith\n  - in.Account.Stage.Notes\n  - in.Account.Stage.StageId.IsDeprecated\n  - in.Account.Stage.StageId.IsStart\n  - in.Account.StagedInfo.IsStaged\n  - in.Account.StagedInfo.SyncInUnresolvedFields\n  - in.Account.StagedInfo.SyncOutUnresolvedFields\n  - in.Account.StagedInfo.UnresolvedFields\n  - in.Account.SyncMetadata.SyncedByDevUsers\n  - in.Account.Tags\n  - in.Account.TotalRevenue\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.SkipStageTransitionValidation\n  - in.UniqueDisplayNameSuffix\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Account.DisplayName|in.UniqueDisplayNameSuffix == nil\n  - in.UniqueDisplayNameSuffix != nil\n  - in\n  - in.Account.CustomFields == nil\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec == nil\n  - in.Account.CustomFields|in.Account.CustomSchemaFragmentIds\n  - in.Account.Stage.StageId != nil\n  - in.Account.Revenue.Amount == nil\n  - in.Account.Revenue.Amount == \"\"\n  - in.Account.Revenue.Amount == \"NaN\"\n  - in.Account.Revenue.Amount == \"Inf\"\n  - in.Account.Revenue.Amount == \"nan\"\n  - in.Account.Revenue.Amount == \"inf\"\n  - in.Account.Revenue.Amount != nil\n  - in.Account.SyncMetadata.SyncedByDevUsers != nil\n  - in.Account.StagedInfo.UnresolvedFields != nil\n  - in.Account.StagedInfo.SyncInUnresolvedFields != nil\n  - in.Account.StagedInfo.SyncOutUnresolvedFields != nil\n  - in.Account.ExternalSourceData.CreatedDate != nil\n  - in.Account.ExternalSourceData.ModifiedDate != nil\n  - in.Account.ExternalSourceData.ClosedDate != nil\n  - in.Account.ExternalSourceData.CreatedById != nil\n  - in.Account.ExternalSourceData.ModifiedById != nil\n  - in.Account.DevrevCopy.OriginId != nil\n  - in.Account.DevrevCopy.OriginOrgId != nil\n  - in.Account.DevrevCopy.LastSyncedDate != nil\n  - in.Account.Industry == *t4\n  - in.Account.Industry == nil\n  - in.Account.Industry\n  - in.Account.LeadSource == *t4\n  - in.Account.LeadSource == nil\n  - in.Account.LeadSource\n  - in.Account.OwnedBy != nil\n  - in.Account.Tags != nil\n  - in.Account.ArtifactIds != nil\n  - in.Account.Stage != nil\n  - in.Account.Revenue != nil\n  - in.Account.SyncMetadata != nil\n  - in.Account.StagedInfo != nil\n  - (+16 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - dNaN\n  - dNegInf\n  - dPosInf\n  - errAccountDisplayNameAlreadyExists\n  - errAccountEmptyDisplayName\n  - errDomainAlreadyExists\n  - errInputContainsDuplicateDomains\n  - errInputContainsDuplicateExternalRefs\n  - errInputContainsDuplicateWebsites\n  - errInputContainsNotAcceptableDomains\n  - errInputContainsNotAcceptableWebsites\n  - errOldVersionOfSchemaFragments\n  - errPhoneNumberInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n  - errWebsiteAlreadyExists\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `account` -> suggestions []\n  - test field `appliestopart` -> suggestions []\n  - test field `body` -> suggestions []\n  - test field `email` -> suggestions []\n  - test field `expiresin` -> suggestions []\n  - test field `externalref` -> suggestions ['in.Account.ExternalRefs']\n  - test field `inputvalues` -> suggestions []\n  - test field `name` -> suggestions ['in.Account.DisplayName', 'in.UniqueDisplayNameSuffix']\n  - test field `operation` -> suggestions []\n  - test field `previoussteps` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `referencekey` -> suggestions []\n  - test field `reportedby` -> suggestions []\n  - test field `requestedtokentype` -> suggestions []\n  - test field `revorg` -> suggestions []\n  - test field `rolesetassignmentinfo` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `subscribers` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `tokenhint` -> suggestions []\n  - test field `type` -> suggestions []\n  - test field `uimetadata` -> suggestions []\n  - test field `workflow` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -2,34 +2,15 @@
   "service": "Janus",
   "coverage": {
     "rpc": "GetDevOrg",
-    "operation": "DevOrgsGetPost",
-    "tests": 4,
+    "operation": "DevOrgsGetPost,DevOrgsSelfGetPost",
+    "tests": 6,
     "status": {
-      "documented": [
-        200,
-        400,
-        401,
-        403,
-        404,
-        413,
-        429,
-        500,
-        503
-      ],
+      "documented": null,
       "asserted": [
         200
       ],
-      "missing": [
-        400,
-        401,
-        403,
-        404,
-        413,
-        429,
-        500,
-        503
-      ],
-      "coverage_pct": 11.1
+      "missing": [],
+      "coverage_pct": 0
     },
     "fields": {
       "leaf_fields_read_by_rpc": 1,
@@ -110,7 +91,7 @@
       "gaps": [
         {
           "id": "b1",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3600",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/utils.go:3599",
           "cond": "in.DevOid",
           "predicate_paths": [
             "in.DevOid"
@@ -118,7 +99,7 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:291",
           "cond": "in.DevOid == \"\"",
           "predicate_paths": [
             "in.DevOid"
@@ -126,7 +107,7 @@
         },
         {
           "id": "b3",
-          "at": "internal/service/devorg.go:1784",
+          "at": "internal/service/devorg.go:1758",
           "cond": "in.DevOid != \"\"",
           "predicate_paths": [
             "in.DevOid"
@@ -134,7 +115,7 @@
         },
         {
           "id": "b4",
-          "at": "internal/service/devorg.go:1787",
+          "at": "internal/service/devorg.go:1761",
           "cond": "in.DevOid == \"\"",
           "predicate_paths": [
             "in.DevOid"
@@ -142,7 +123,7 @@
         },
         {
           "id": "b5",
-          "at": "internal/service/devorg.go:1811",
+          "at": "internal/service/devorg.go:1785",
           "cond": "*t36 != in.DevOid",
           "predicate_paths": [
             "in.DevOid"
@@ -168,6 +149,25 @@
       "unmatched_test_fields": null
     },
     "test_facts": [
+      {
+        "name": "DevUsers Get",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEV_ORGS_GET",
+          "INTERNAL_DEV_ORGS_SELF_GET",
+          "INTERNAL_DEV_ORGS_SELF"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevOrg",
+          "DevOrg.Id",
+          "StatusCode"
+        ]
+      },
       {
         "name": "Dev orgs get by revuser",
         "file": "api/v2_internal/rev_users/crudl_revu_actor/dev_orgs_get_test.go",
@@ -229,6 +229,25 @@
           "DevOrg",
           "StatusCode"
         ]
+      },
+      {
+        "name": "DevUsers Get",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEV_ORGS_GET",
+          "INTERNAL_DEV_ORGS_SELF_GET",
+          "INTERNAL_DEV_ORGS_SELF"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevOrg",
+          "DevOrg.Id",
+          "StatusCode"
+        ]
       }
     ]
   },
@@ -243,7 +262,7 @@
         "via_paths": [
           "in.DevOid"
         ],
-        "at": "internal/service/devorg.go:140"
+        "at": "internal/service/devorg.go:130"
       },
       {
         "kind": "db",
@@ -251,7 +270,7 @@
         "via_paths": [
           "in.DevOid"
         ],
-        "at": "internal/service/devorg.go:149"
+        "at": "internal/service/devorg.go:139"
       },
       {
         "kind": "db",
@@ -259,7 +278,7 @@
         "via_paths": [
           "in.DevOid"
         ],
-        "at": "internal/service/cache.go:147"
+        "at": "internal/service/cache.go:146"
       },
       {
         "kind": "db",
@@ -267,27 +286,27 @@
         "via_paths": [
           "in.DevOid"
         ],
-        "at": "internal/service/devorg.go:170"
+        "at": "internal/service/devorg.go:159"
       }
     ],
     "errors": [
       {
         "symbol": "errDevOrgNotFound",
-        "at": "internal/service/devorg.go:186",
+        "at": "internal/service/devorg.go:99",
         "tainted": false
       },
       {
         "symbol": "errInvalidJWTToken",
-        "at": "internal/service/devorg.go:1789",
+        "at": "internal/service/devorg.go:1763",
         "tainted": true
       },
       {
         "symbol": "errInvalidAuthContextDevOid",
-        "at": "internal/service/devorg.go:1795",
+        "at": "internal/service/devorg.go:1769",
         "tainted": true
       }
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetDevOrg` (HTTP operation `DevOrgsGetPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid\n  - in.DevOid == \"\"\n  - in.DevOid != \"\"\n  - in.DevOid == \"\"\n  - *t36 != in.DevOid\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevOrgNotFound\n  - errInvalidAuthContextDevOid\n  - errInvalidJWTToken\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetDevOrg` (HTTP operation `DevOrgsGetPost,DevOrgsSelfGetPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid\n  - in.DevOid == \"\"\n  - in.DevOid != \"\"\n  - in.DevOid == \"\"\n  - *t36 != in.DevOid\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevOrgNotFound\n  - errInvalidAuthContextDevOid\n  - errInvalidJWTToken\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

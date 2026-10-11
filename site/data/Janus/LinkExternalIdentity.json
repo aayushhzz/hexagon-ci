@@ -2,26 +2,47 @@
   "service": "Janus",
   "coverage": {
     "rpc": "LinkExternalIdentity",
-    "operation": "",
-    "tests": 0,
+    "operation": "DevUsersIdentitiesLink",
+    "tests": 1,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 11.1
     },
     "fields": {
       "leaf_fields_read_by_rpc": 5,
-      "covered_count": 0,
-      "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
-      "set_by_positive_tests": 0,
+      "covered_count": 3,
+      "coverage_pct": 60,
+      "request_fields_set_by_tests": 4,
+      "set_by_positive_tests": 3,
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
           "total": 4,
-          "set": 0,
-          "pct": 0
+          "set": 3,
+          "pct": 75
         },
         "nested": {
           "total": 1,
@@ -36,66 +57,85 @@
       },
       "representative": {
         "units": 5,
-        "covered": 0,
-        "pct": 0,
+        "covered": 3,
+        "pct": 60,
         "collapsed_types": [
           "wrapperspb.StringValue"
         ]
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.DisplayName",
+          "match": "exact",
+          "by_tests": [
+            "Link Unlink Identities"
+          ]
+        },
+        {
+          "path": "in.Id",
+          "match": "exact",
+          "by_tests": [
+            "Link Unlink Identities"
+          ]
+        },
+        {
+          "path": "in.Issuer",
+          "match": "exact",
+          "by_tests": [
+            "Link Unlink Identities"
+          ]
+        }
+      ],
       "gaps": [
         "in.Auth0UserId.Value",
-        "in.DevUserId",
-        "in.DisplayName",
-        "in.Id",
-        "in.Issuer"
+        "in.DevUserId"
       ]
     },
     "branches": {
       "total": 14,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 12,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
+      "present_arm_exercised": 4,
+      "present_arm_pct": 28.6,
+      "absent_arm_exercised": 8,
+      "absent_arm_pct": 66.7,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 28.6,
       "by_origin": {
         "service": {
           "total": 10,
-          "reachable_on_happy_path": 0,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 8,
+          "present_arm_exercised": 4,
+          "present_arm_pct": 40,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 4
         },
         "generated": {
           "total": 2,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 2,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 2
         },
         "library": {
           "total": 2,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 2,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 2
         }
       },
       "gaps": [
         {
           "id": "b1",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
           "cond": "in.DevUserId == nil",
           "predicate_paths": [
             "in.DevUserId"
@@ -103,7 +143,7 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:745",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:745",
           "cond": "in.DevUserId != nil",
           "predicate_paths": [
             "in.DevUserId"
@@ -111,7 +151,7 @@
         },
         {
           "id": "b3",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:750",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:750",
           "cond": "in.DevUserId",
           "predicate_paths": [
             "in.DevUserId"
@@ -134,40 +174,8 @@
           ]
         },
         {
-          "id": "b6",
-          "at": "internal/service/devuser.go:2357",
-          "cond": "in.Id != \"\"",
-          "predicate_paths": [
-            "in.Id"
-          ]
-        },
-        {
-          "id": "b7",
-          "at": "internal/service/devuser.go:2369",
-          "cond": "in.Id == \"\"",
-          "predicate_paths": [
-            "in.Id"
-          ]
-        },
-        {
-          "id": "b8",
-          "at": "internal/service/devuser.go:2357",
-          "cond": "in.Issuer != \"\"",
-          "predicate_paths": [
-            "in.Issuer"
-          ]
-        },
-        {
-          "id": "b9",
-          "at": "internal/service/devuser.go:2369",
-          "cond": "in.Issuer == \"\"",
-          "predicate_paths": [
-            "in.Issuer"
-          ]
-        },
-        {
           "id": "b10",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:291",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:291",
           "cond": "in.DevUserId == \"\"",
           "predicate_paths": [
             "in.DevUserId"
@@ -224,16 +232,47 @@
       ],
       "service_count": 1,
       "call_count": 2,
-      "reached_by_test": false,
+      "reached_by_test": true,
       "deps_result_used_in_response": 0,
       "deps_result_checked_by_test": 0,
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "devuser",
+          "fuzzy_suggestions": [
+            "in.DevUserId"
+          ]
+        }
+      ]
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "Link Unlink Identities",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEVUSERS_IDENTITIES_LINK",
+          "INTERNAL_DEVUSERS_IDENTITIES_UNLINK"
+        ],
+        "fields_set": [
+          "DevUser",
+          "DisplayName",
+          "Id",
+          "Issuer"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevUser",
+          "DevUser.ExternalIdentities",
+          "DevUser.ExternalIdentities.Issuer",
+          "StatusCode"
+        ]
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/janus/internal/service.Janus).LinkExternalIdentity",
@@ -262,7 +301,7 @@
         "via_paths": [
           "in.DevUserId"
         ],
-        "at": "internal/service/cache.go:299"
+        "at": "internal/service/cache.go:298"
       },
       {
         "kind": "db",
@@ -292,7 +331,7 @@
     "errors": [
       {
         "symbol": "ObjectTypeInvalid",
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:446",
         "tainted": false
       },
       {
@@ -328,5 +367,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `LinkExternalIdentity` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Auth0UserId.Value\n  - in.DevUserId\n  - in.DisplayName\n  - in.Id\n  - in.Issuer\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUserId == nil\n  - in.DevUserId != nil\n  - in.DevUserId\n  - in == nil\n  - in.Auth0UserId != \"\"\n  - in.Id != \"\"\n  - in.Id == \"\"\n  - in.Issuer != \"\"\n  - in.Issuer == \"\"\n  - in.DevUserId == \"\"\n  - in != nil\n  - in.DevUserId != nil\n  - in.Auth0UserId != \"\"\n  - in.DevUserId == *t43\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInvalidArguments\n  - errInvalidAuthContextDevUid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `LinkExternalIdentity` (HTTP operation `DevUsersIdentitiesLink`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Auth0UserId.Value\n  - in.DevUserId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUserId == nil\n  - in.DevUserId != nil\n  - in.DevUserId\n  - in == nil\n  - in.Auth0UserId != \"\"\n  - in.DevUserId == \"\"\n  - in != nil\n  - in.DevUserId != nil\n  - in.Auth0UserId != \"\"\n  - in.DevUserId == *t43\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInvalidArguments\n  - errInvalidAuthContextDevUid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `devuser` -> suggestions ['in.DevUserId']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

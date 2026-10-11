@@ -3,10 +3,12 @@
   "coverage": {
     "rpc": "MarkInboxNotifications",
     "operation": "NotificationsMark,UserInteractionsUpdate",
-    "tests": 3,
+    "tests": 6,
     "status": {
       "documented": null,
       "asserted": [
+        200,
+        204,
         400,
         401,
         403
@@ -18,7 +20,7 @@
       "leaf_fields_read_by_rpc": 2,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 3,
+      "request_fields_set_by_tests": 10,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -94,7 +96,7 @@
       "gaps": [
         {
           "id": "b1",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/notifications-client@v0.0.0-20260907111245-4644358f186d/common/error.go:184",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/notifications-client@v0.0.0-20260907111245-4644358f186d/common/error.go:184",
           "cond": "in == nil",
           "predicate_paths": [
             "in"
@@ -126,11 +128,39 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "object",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "panel",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "parentids",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "recordid",
           "fuzzy_suggestions": null
         },
         {
           "field": "state",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "states",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "timestamp",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "types",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "unread",
           "fuzzy_suggestions": null
         }
       ]
@@ -150,6 +180,71 @@
         "asserts_success": true,
         "response_fields_asserted": [
           "StatusCode"
+        ]
+      },
+      {
+        "name": "Marks all notification read based on parent id.",
+        "file": "api/v2_internal/notifications/notifications_mark_test.go",
+        "labels": null,
+        "fields_set": [
+          "Filter",
+          "ParentIds",
+          "State",
+          "States"
+        ],
+        "statuses": [
+          200,
+          204
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Notifications",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Marks only few notifications as read.",
+        "file": "api/v2_internal/notifications/notifications_mark_test.go",
+        "labels": null,
+        "fields_set": [
+          "Filter",
+          "ParentIds",
+          "State",
+          "States",
+          "Types"
+        ],
+        "statuses": [
+          200,
+          204
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Notifications",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should create a DM, post a comment on it, fetch the inbox list successfully and update the inbox list",
+        "file": "api/v2_internal/inbox/inbox_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "Object",
+          "Panel",
+          "RecordId",
+          "Timestamp",
+          "Unread"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Chat",
+          "Chat.AsDm",
+          "Entries",
+          "Entries.LastComments",
+          "Entries.LastComments.Body",
+          "Entries.Unread"
         ]
       },
       {
@@ -217,5 +312,5 @@
     "errors": [],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MarkInboxNotifications` (HTTP operation `NotificationsMark,UserInteractionsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Entries\n  - in.UserDon\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in == nil\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `filter` -> suggestions []\n  - test field `recordid` -> suggestions []\n  - test field `state` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MarkInboxNotifications` (HTTP operation `NotificationsMark,UserInteractionsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Entries\n  - in.UserDon\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in == nil\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `filter` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `panel` -> suggestions []\n  - test field `parentids` -> suggestions []\n  - test field `recordid` -> suggestions []\n  - test field `state` -> suggestions []\n  - test field `states` -> suggestions []\n  - test field `timestamp` -> suggestions []\n  - test field `types` -> suggestions []\n  - test field `unread` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

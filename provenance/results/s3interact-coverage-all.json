@@ -206,7 +206,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.DevOid == nil",
             "predicate_paths": [
               "in.DevOid"
@@ -214,7 +214,7 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.ParentId == nil",
             "predicate_paths": [
               "in.ParentId"
@@ -222,7 +222,7 @@
           },
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:212",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:212",
             "cond": "in.DevOid == nil",
             "predicate_paths": [
               "in.DevOid"
@@ -230,7 +230,7 @@
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:219",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:219",
             "cond": "in.DevOid",
             "predicate_paths": [
               "in.DevOid"
@@ -238,7 +238,7 @@
           },
           {
             "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:225",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:225",
             "cond": "in.ParentId != nil",
             "predicate_paths": [
               "in.ParentId"
@@ -302,7 +302,7 @@
           },
           {
             "id": "b13",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/datapath/mfz/context/context.go:77",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/datapath/mfz/context/context.go:77",
             "cond": "in.ParentId == nil",
             "predicate_paths": [
               "in.ParentId"
@@ -353,7 +353,7 @@
     {
       "rpc": "CompleteUpload",
       "operation": "ArtifactsUploadComplete",
-      "tests": 14,
+      "tests": 21,
       "status": {
         "documented": [
           200,
@@ -383,7 +383,7 @@
         "leaf_fields_read_by_rpc": 3,
         "covered_count": 2,
         "coverage_pct": 66.7,
-        "request_fields_set_by_tests": 7,
+        "request_fields_set_by_tests": 8,
         "set_by_positive_tests": 2,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -414,8 +414,11 @@
             "path": "in.Cursor",
             "match": "exact",
             "by_tests": [
+              "100 MiB multi-part upload create next complete",
+              "Actor field does not override created_by",
               "Another member cursor cannot advance a different upload",
               "Another tenant cannot advance upload session",
+              "Another tenant cannot get or locate completed artifact",
               "Complete rejects total size over configuration_set limit",
               "Complete with parent_id outside tenant should fail",
               "Complete without uploading all declared parts should fail",
@@ -425,16 +428,21 @@
               "Invalid cursor signature is rejected on next and complete",
               "Invalid cursor values are rejected",
               "Missing id or cursor on next complete should fail",
+              "Multi-part upload create next complete",
               "Next and complete after complete should fail",
               "Non-final part under 5 MiB should fail on complete",
-              "Requests without authentication are rejected"
+              "Requests without authentication are rejected",
+              "Single-part upload create PUT complete",
+              "Three-part upload create next next complete",
+              "parent_id on complete attaches artifact to parent"
             ]
           },
           {
             "path": "in.ParentId",
             "match": "exact",
             "by_tests": [
-              "Complete with parent_id outside tenant should fail"
+              "Complete with parent_id outside tenant should fail",
+              "parent_id on complete attaches artifact to parent"
             ]
           }
         ],
@@ -486,7 +494,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
               "in.ArtifactId"
@@ -494,7 +502,7 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
             "cond": "in.ArtifactId == *ObjectTypeArtifact",
             "predicate_paths": [
               "in.ArtifactId"
@@ -502,7 +510,7 @@
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:425",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:425",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
               "in.ArtifactId"
@@ -510,7 +518,7 @@
           },
           {
             "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:432",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:432",
             "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
@@ -518,7 +526,7 @@
           },
           {
             "id": "b7",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:667",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:667",
             "cond": "in.ArtifactId != objType",
             "predicate_paths": [
               "in.ArtifactId"
@@ -526,7 +534,7 @@
           },
           {
             "id": "b10",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3600",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3600",
             "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
@@ -534,7 +542,7 @@
           },
           {
             "id": "b11",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:659",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:659",
             "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
@@ -542,7 +550,7 @@
           },
           {
             "id": "b12",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3620",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3620",
             "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
@@ -579,6 +587,10 @@
       "anomalies": {
         "unmatched_test_fields": [
           {
+            "field": "actor",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "configurationset",
             "fuzzy_suggestions": null
           },
@@ -601,6 +613,160 @@
         ]
       },
       "test_facts": [
+        {
+          "name": "Single-part upload create PUT complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+            "INTERNAL_ARTIFACTS_GET",
+            "INTERNAL_ARTIFACTS_LOCATE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Artifact",
+            "Artifact.Id",
+            "Body",
+            "Body.Close",
+            "Cursor",
+            "GetUrl",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Multi-part upload create next complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "Cursor",
+            "GetUrl",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Three-part upload create next next complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "Cursor",
+            "GetUrl",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "100 MiB multi-part upload create next complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+            "INTERNAL_ARTIFACTS_GET",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Artifact",
+            "Artifact.File",
+            "Artifact.File.Size",
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "parent_id on complete attaches artifact to parent",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+            "INTERNAL_ARTIFACTS_LIST"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "ParentId",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Artifacts",
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
         {
           "name": "Dev user can create and complete upload",
           "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
@@ -876,6 +1042,37 @@
           ]
         },
         {
+          "name": "Actor field does not override created_by",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+            "INTERNAL_ARTIFACTS_GET"
+          ],
+          "fields_set": [
+            "Actor",
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Artifact",
+            "Artifact.CreatedBy",
+            "Artifact.CreatedBy.AsDevUserSummary",
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
           "name": "Complete with parent_id outside tenant should fail",
           "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
           "labels": [
@@ -934,6 +1131,32 @@
             "NEGATIVE",
             "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
             "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Another tenant cannot get or locate completed artifact",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_GET",
+            "INTERNAL_ARTIFACTS_LOCATE"
           ],
           "fields_set": [
             "Cursor",
@@ -1191,7 +1414,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.ActorId == nil",
             "predicate_paths": [
               "in.ActorId"
@@ -1199,7 +1422,7 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -1207,7 +1430,7 @@
           },
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -1215,7 +1438,7 @@
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -1223,7 +1446,7 @@
           },
           {
             "id": "b7",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:47",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:47",
             "cond": "in.ActorId == nil",
             "predicate_paths": [
               "in.ActorId"
@@ -1231,7 +1454,7 @@
           },
           {
             "id": "b8",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:54",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:54",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -1239,7 +1462,7 @@
           },
           {
             "id": "b11",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:67",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:67",
             "cond": "in.Headers != nil",
             "predicate_paths": [
               "in.Headers"
@@ -1247,7 +1470,7 @@
           },
           {
             "id": "b12",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:68",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:68",
             "cond": "in.Headers != nil",
             "predicate_paths": [
               "in.Headers"
@@ -1454,7 +1677,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.ActorId == nil",
             "predicate_paths": [
               "in.ActorId"
@@ -1462,7 +1685,7 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -1470,7 +1693,7 @@
           },
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -1478,7 +1701,7 @@
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -1486,7 +1709,7 @@
           },
           {
             "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.DevOid == nil",
             "predicate_paths": [
               "in.DevOid"
@@ -1494,7 +1717,7 @@
           },
           {
             "id": "b6",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.Artifact.ParentId == nil",
             "predicate_paths": [
               "in.Artifact.ParentId"
@@ -1502,7 +1725,7 @@
           },
           {
             "id": "b7",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:48",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:48",
             "cond": "in.Artifact.File.Name == nil",
             "predicate_paths": [
               "in.Artifact.File.Name"
@@ -1510,7 +1733,7 @@
           },
           {
             "id": "b8",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:54",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:54",
             "cond": "in.Artifact.File.Name != nil",
             "predicate_paths": [
               "in.Artifact.File.Name"
@@ -1518,7 +1741,7 @@
           },
           {
             "id": "b9",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:57",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:57",
             "cond": "in.Artifact.File.Type == nil",
             "predicate_paths": [
               "in.Artifact.File.Type"
@@ -1526,7 +1749,7 @@
           },
           {
             "id": "b10",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:63",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:63",
             "cond": "in.Artifact.File.Type != nil",
             "predicate_paths": [
               "in.Artifact.File.Type"
@@ -1534,7 +1757,7 @@
           },
           {
             "id": "b11",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:66",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:66",
             "cond": "in.Artifact.File.Key == nil",
             "predicate_paths": [
               "in.Artifact.File.Key"
@@ -1542,7 +1765,7 @@
           },
           {
             "id": "b12",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:72",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/composite.pb.validator.go:72",
             "cond": "in.Artifact.File.Encoding != nil",
             "predicate_paths": [
               "in.Artifact.File.Encoding"
@@ -1550,7 +1773,7 @@
           },
           {
             "id": "b13",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:130",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:130",
             "cond": "in.Artifact.ParentId != nil",
             "predicate_paths": [
               "in.Artifact.ParentId"
@@ -1558,7 +1781,7 @@
           },
           {
             "id": "b14",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:135",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:135",
             "cond": "in.Artifact.File != nil",
             "predicate_paths": [
               "in.Artifact.File"
@@ -1566,7 +1789,7 @@
           },
           {
             "id": "b15",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:136",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:136",
             "cond": "in.Artifact.File != nil",
             "predicate_paths": [
               "in.Artifact.File"
@@ -1574,7 +1797,7 @@
           },
           {
             "id": "b16",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:140",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:140",
             "cond": "in.Artifact.Headers != nil",
             "predicate_paths": [
               "in.Artifact.Headers"
@@ -1582,7 +1805,7 @@
           },
           {
             "id": "b17",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:141",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/schema.pb.validator.go:141",
             "cond": "in.Artifact.Headers != nil",
             "predicate_paths": [
               "in.Artifact.Headers"
@@ -1590,7 +1813,7 @@
           },
           {
             "id": "b18",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:18",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:18",
             "cond": "in.ActorId == nil",
             "predicate_paths": [
               "in.ActorId"
@@ -1598,7 +1821,7 @@
           },
           {
             "id": "b19",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:25",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:25",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -1606,7 +1829,7 @@
           },
           {
             "id": "b20",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:28",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:28",
             "cond": "in.DevOid == nil",
             "predicate_paths": [
               "in.DevOid"
@@ -1614,7 +1837,7 @@
           },
           {
             "id": "b21",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:35",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:35",
             "cond": "in.DevOid",
             "predicate_paths": [
               "in.DevOid"
@@ -1622,7 +1845,7 @@
           },
           {
             "id": "b22",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:38",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:38",
             "cond": "in.Artifact == nil",
             "predicate_paths": [
               "in.Artifact"
@@ -1630,7 +1853,7 @@
           },
           {
             "id": "b23",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:41",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:41",
             "cond": "in.Artifact != nil",
             "predicate_paths": [
               "in.Artifact"
@@ -1702,7 +1925,7 @@
           },
           {
             "id": "b32",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:667",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:667",
             "cond": "in.DevOid != objType",
             "predicate_paths": [
               "in.DevOid"
@@ -1710,7 +1933,7 @@
           },
           {
             "id": "b33",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/configset/configset.go:338",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/configset/configset.go:338",
             "cond": "in.Artifact.ConfigurationSet == 0",
             "predicate_paths": [
               "in.Artifact.ConfigurationSet"
@@ -1726,7 +1949,7 @@
           },
           {
             "id": "b35",
-            "at": "/Users/devrev/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:66",
+            "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:66",
             "cond": "in.Artifact|in.Artifact.File|in.Artifact.File.Encoding|in.Artifact.File.Key|in.Artifact.File.Name|in.Artifact.File.Size|in.Artifact.File.Type|in.Artifact.Headers|in.Artifact.Headers.ContentId|in.Artifact.ParentId == nil",
             "predicate_paths": [
               "in.Artifact"
@@ -1841,7 +2064,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/configset/configset.go:338",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/configset/configset.go:338",
             "cond": "in.ConfigurationSet == 0",
             "predicate_paths": [
               "in.ConfigurationSet"
@@ -1984,7 +2207,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:720",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:720",
             "cond": "in.Headers != nil",
             "predicate_paths": [
               "in.Headers"
@@ -1992,7 +2215,7 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:721",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:721",
             "cond": "in.Headers != nil",
             "predicate_paths": [
               "in.Headers"
@@ -2008,7 +2231,7 @@
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/configset/configset.go:338",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/configset/configset.go:338",
             "cond": "in.ConfigurationSet == 0",
             "predicate_paths": [
               "in.ConfigurationSet"
@@ -2157,7 +2380,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:599",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:599",
             "cond": "in.Headers != nil",
             "predicate_paths": [
               "in.Headers"
@@ -2165,7 +2388,7 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:600",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:600",
             "cond": "in.Headers != nil",
             "predicate_paths": [
               "in.Headers"
@@ -2173,7 +2396,7 @@
           },
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/configset/configset.go:338",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/configset/configset.go:338",
             "cond": "in.ConfigurationSet == 0",
             "predicate_paths": [
               "in.ConfigurationSet"
@@ -2334,7 +2557,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.Id == nil",
             "predicate_paths": [
               "in.Id"
@@ -2342,7 +2565,7 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
             "cond": "in.Id == *ObjectTypeArtifact",
             "predicate_paths": [
               "in.Id"
@@ -2350,7 +2573,7 @@
           },
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:246",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:246",
             "cond": "in.Id == nil",
             "predicate_paths": [
               "in.Id"
@@ -2358,7 +2581,7 @@
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:253",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:253",
             "cond": "in.Id",
             "predicate_paths": [
               "in.Id"
@@ -2366,7 +2589,7 @@
           },
           {
             "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:659",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:659",
             "cond": "in.Id",
             "predicate_paths": [
               "in.Id"
@@ -2374,7 +2597,7 @@
           },
           {
             "id": "b6",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3620",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3620",
             "cond": "in.Id",
             "predicate_paths": [
               "in.Id"
@@ -2417,7 +2640,7 @@
     {
       "rpc": "GetArtifact",
       "operation": "ArtifactsDownload,ArtifactsGet,ArtifactsGetPost",
-      "tests": 31,
+      "tests": 40,
       "status": {
         "documented": null,
         "asserted": [
@@ -2432,7 +2655,7 @@
         "leaf_fields_read_by_rpc": 6,
         "covered_count": 1,
         "coverage_pct": 16.7,
-        "request_fields_set_by_tests": 7,
+        "request_fields_set_by_tests": 22,
         "set_by_positive_tests": 1,
         "set_by_negative_tests": 1,
         "by_depth": {
@@ -2465,8 +2688,10 @@
             "by_tests": [
               "100 MiB multi-part upload create next complete",
               "Actor field does not override created_by",
+              "Add an about page with multiple versions and publish it",
               "Another org's owner cannot DOWNLOAD an artifact",
               "Another org's owner cannot GET an artifact",
+              "Another tenant cannot get or locate completed artifact",
               "DevUser should be able to fetch the source code artifact",
               "Download artifact with empty key should return 403",
               "Download artifact with invalid key should return 403",
@@ -2484,7 +2709,14 @@
               "Get with malformed artifact ID should return 400",
               "RevUser cannot download artifact not in their conversation",
               "RevUser should NOT be able to fetch the source code artifact",
+              "Should verify artifact versioning with SHA256 hash verification",
+              "Should verify file attachment content matches original using SHA256",
+              "Should verify markdown file content and bold text formatting",
+              "Should verify uploaded file content matches original using SHA256",
+              "Single-part upload create PUT complete",
               "Unauthenticated download of private (unpublished) article artifact should return 403",
+              "Version Creation",
+              "Version delete",
               "creator can get artifact on own private filesystem",
               "non-creator member can get artifact on shared filesystem",
               "non-creator member cannot get artifact on another users private filesystem",
@@ -2505,20 +2737,20 @@
         "total": 21,
         "happy_path_reached": true,
         "reachable_on_happy_path": 13,
-        "present_arm_exercised": 5,
-        "present_arm_pct": 23.8,
+        "present_arm_exercised": 8,
+        "present_arm_pct": 38.1,
         "absent_arm_exercised": 13,
         "absent_arm_pct": 100,
         "negative_arm_exercised": 5,
         "negative_arm_pct": 23.8,
-        "both_arms_exercised": 5,
-        "coverage_pct": 23.8,
+        "both_arms_exercised": 8,
+        "coverage_pct": 38.1,
         "by_origin": {
           "service": {
             "total": 8,
             "reachable_on_happy_path": 6,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
+            "present_arm_exercised": 1,
+            "present_arm_pct": 12.5,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 6
@@ -2526,8 +2758,8 @@
           "generated": {
             "total": 6,
             "reachable_on_happy_path": 4,
-            "present_arm_exercised": 2,
-            "present_arm_pct": 33.3,
+            "present_arm_exercised": 4,
+            "present_arm_pct": 66.7,
             "negative_arm_exercised": 2,
             "negative_arm_pct": 33.3,
             "absent_arm_exercised": 4
@@ -2545,7 +2777,7 @@
         "gaps": [
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.Version.ModifiedBy == nil",
             "predicate_paths": [
               "in.Version.ModifiedBy"
@@ -2553,7 +2785,7 @@
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
             "cond": "in.Version.ModifiedBy",
             "predicate_paths": [
               "in.Version.ModifiedBy"
@@ -2561,7 +2793,7 @@
           },
           {
             "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
             "cond": "in.Version.ModifiedBy",
             "predicate_paths": [
               "in.Version.ModifiedBy"
@@ -2569,7 +2801,7 @@
           },
           {
             "id": "b6",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
             "cond": "in.Version.ModifiedBy",
             "predicate_paths": [
               "in.Version.ModifiedBy"
@@ -2577,7 +2809,7 @@
           },
           {
             "id": "b7",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:93",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:93",
             "cond": "in.Version.ModifiedBy != nil",
             "predicate_paths": [
               "in.Version.ModifiedBy"
@@ -2585,26 +2817,10 @@
           },
           {
             "id": "b8",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:98",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:98",
             "cond": "in.Version.ModifiedBy",
             "predicate_paths": [
               "in.Version.ModifiedBy"
-            ]
-          },
-          {
-            "id": "b11",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:115",
-            "cond": "in.Version != nil",
-            "predicate_paths": [
-              "in.Version"
-            ]
-          },
-          {
-            "id": "b12",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:116",
-            "cond": "in.Version != nil",
-            "predicate_paths": [
-              "in.Version"
             ]
           },
           {
@@ -2637,14 +2853,6 @@
             "cond": "in.AccessToken == api.Artifact).GetAccessToken()",
             "predicate_paths": [
               "in.AccessToken"
-            ]
-          },
-          {
-            "id": "b18",
-            "at": "internal/server/get_artifact.go:95",
-            "cond": "in.Version != nil",
-            "predicate_paths": [
-              "in.Version"
             ]
           },
           {
@@ -2690,11 +2898,39 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "appliestopart",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "appliestoparts",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "articletype",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "artifacts",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "body",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "configurationset",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "cursor",
             "fuzzy_suggestions": null
           },
           {
             "field": "filename",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "filesize",
             "fuzzy_suggestions": null
           },
           {
@@ -2706,8 +2942,43 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "ownedby",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "parent",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "partsize",
             "fuzzy_suggestions": null
+          },
+          {
+            "field": "publishedversion",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "resource",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "status",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "title",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "type",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "version",
+            "fuzzy_suggestions": [
+              "in.RequireVersionInformation",
+              "in.Version.VersionId"
+            ]
           }
         ]
       },
@@ -3023,6 +3294,59 @@
           ]
         },
         {
+          "name": "Version Creation",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_VERSIONS_PREPARE"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Version delete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_VERSIONS_DELETE"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "GetVersions",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
           "name": "Another org's owner cannot GET an artifact",
           "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
           "labels": [
@@ -3036,6 +3360,39 @@
           "asserts_success": true,
           "response_fields_asserted": [
             "StatusCode"
+          ]
+        },
+        {
+          "name": "Single-part upload create PUT complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+            "INTERNAL_ARTIFACTS_GET",
+            "INTERNAL_ARTIFACTS_LOCATE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Artifact",
+            "Artifact.Id",
+            "Body",
+            "Body.Close",
+            "Cursor",
+            "GetUrl",
+            "Id",
+            "StatusCode",
+            "Url"
           ]
         },
         {
@@ -3095,6 +3452,32 @@
             "Artifact",
             "Artifact.CreatedBy",
             "Artifact.CreatedBy.AsDevUserSummary",
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Another tenant cannot get or locate completed artifact",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_GET",
+            "INTERNAL_ARTIFACTS_LOCATE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
             "Cursor",
             "Id",
             "StatusCode",
@@ -3177,6 +3560,39 @@
           ]
         },
         {
+          "name": "Add an about page with multiple versions and publish it",
+          "file": "api/v2_internal/plug/journeys/kb_test.go",
+          "labels": [
+            "INTERNAL_ARTICLES_CREATE",
+            "POSITIVE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "Id",
+            "OwnedBy",
+            "Parent",
+            "PublishedVersion",
+            "Resource",
+            "Status",
+            "Title"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.GetId",
+            "Article.GetResource",
+            "Article.GetStatus",
+            "StatusCode",
+            "Version",
+            "Version.Version",
+            "Versions"
+          ]
+        },
+        {
           "name": "Get non-existent artifact should return 404",
           "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
           "labels": [
@@ -3234,6 +3650,155 @@
           ]
         },
         {
+          "name": "Should verify uploaded file content matches original using SHA256",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should verify artifact versioning with SHA256 hash verification",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should verify markdown file content and bold text formatting",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should verify file attachment content matches original using SHA256",
+          "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToPart",
+            "Artifacts",
+            "Body",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Title",
+            "Type"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Work",
+            "Work.AsTicket"
+          ]
+        },
+        {
           "name": "DevUser should be able to fetch the source code artifact",
           "file": "api/v2_internal/snap_in/package/mfz/mfz_test.go",
           "labels": [
@@ -3272,7 +3837,7 @@
     {
       "rpc": "GetDownloadUrl",
       "operation": "ArtifactsLocate,QuotesGeneratePdf",
-      "tests": 16,
+      "tests": 20,
       "status": {
         "documented": null,
         "asserted": [
@@ -3286,7 +3851,7 @@
         "leaf_fields_read_by_rpc": 6,
         "covered_count": 1,
         "coverage_pct": 16.7,
-        "request_fields_set_by_tests": 11,
+        "request_fields_set_by_tests": 23,
         "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -3324,6 +3889,10 @@
               "Locate artifact",
               "Locate non-existent artifact should return 404",
               "Multi-part upload create next complete",
+              "Should verify artifact versioning with SHA256 hash verification",
+              "Should verify file attachment content matches original using SHA256",
+              "Should verify markdown file content and bold text formatting",
+              "Should verify uploaded file content matches original using SHA256",
               "Single-part upload create PUT complete",
               "Three-part upload create next next complete",
               "Version Creation",
@@ -3385,7 +3954,7 @@
         "gaps": [
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.Version.ModifiedBy == nil",
             "predicate_paths": [
               "in.Version.ModifiedBy"
@@ -3393,7 +3962,7 @@
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
             "cond": "in.Version.ModifiedBy",
             "predicate_paths": [
               "in.Version.ModifiedBy"
@@ -3401,7 +3970,7 @@
           },
           {
             "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
             "cond": "in.Version.ModifiedBy",
             "predicate_paths": [
               "in.Version.ModifiedBy"
@@ -3409,7 +3978,7 @@
           },
           {
             "id": "b6",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
             "cond": "in.Version.ModifiedBy",
             "predicate_paths": [
               "in.Version.ModifiedBy"
@@ -3417,7 +3986,7 @@
           },
           {
             "id": "b7",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:93",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:93",
             "cond": "in.Version.ModifiedBy != nil",
             "predicate_paths": [
               "in.Version.ModifiedBy"
@@ -3425,7 +3994,7 @@
           },
           {
             "id": "b8",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:98",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:98",
             "cond": "in.Version.ModifiedBy",
             "predicate_paths": [
               "in.Version.ModifiedBy"
@@ -3498,6 +4067,30 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "appliestopart",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "appliestoparts",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "articletype",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "artifacts",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "body",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "configurationset",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "cursor",
             "fuzzy_suggestions": null
           },
@@ -3508,11 +4101,19 @@
             ]
           },
           {
+            "field": "filesize",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "filetype",
             "fuzzy_suggestions": null
           },
           {
             "field": "opportunityid",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "ownedby",
             "fuzzy_suggestions": null
           },
           {
@@ -3524,11 +4125,27 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "resource",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "space",
             "fuzzy_suggestions": null
           },
           {
+            "field": "status",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "surfaceid",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "title",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "type",
             "fuzzy_suggestions": null
           },
           {
@@ -3870,6 +4487,120 @@
           ]
         },
         {
+          "name": "Should verify uploaded file content matches original using SHA256",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should verify artifact versioning with SHA256 hash verification",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should verify markdown file content and bold text formatting",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
           "name": "should persist and recall a preference across conversations",
           "file": "e2e/personal_computer_memory/personal_computer_memory_suite_test.go",
           "labels": null,
@@ -3888,6 +4619,41 @@
             "AiAssistantSurface.AiAgents.Id",
             "StatusCode",
             "Url"
+          ]
+        },
+        {
+          "name": "Should verify file attachment content matches original using SHA256",
+          "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToPart",
+            "Artifacts",
+            "Body",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Title",
+            "Type"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Work",
+            "Work.AsTicket"
           ]
         },
         {
@@ -3911,7 +4677,7 @@
     {
       "rpc": "GetNextUploadUrl",
       "operation": "ArtifactsUploadNext",
-      "tests": 1,
+      "tests": 15,
       "status": {
         "documented": [
           200,
@@ -3941,7 +4707,7 @@
         "leaf_fields_read_by_rpc": 3,
         "covered_count": 1,
         "coverage_pct": 33.3,
-        "request_fields_set_by_tests": 5,
+        "request_fields_set_by_tests": 6,
         "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -3972,7 +4738,21 @@
             "path": "in.Cursor",
             "match": "exact",
             "by_tests": [
-              "Home tenant cursor cannot advance other tenant upload"
+              "100 MiB multi-part upload create next complete",
+              "Another member cursor cannot advance a different upload",
+              "Another tenant cannot advance upload session",
+              "Complete rejects total size over configuration_set limit",
+              "Complete without uploading all declared parts should fail",
+              "Cursor must match artifact id on next and complete",
+              "Home tenant cursor cannot advance other tenant upload",
+              "Invalid cursor signature is rejected on next and complete",
+              "Invalid cursor values are rejected",
+              "Missing id or cursor on next complete should fail",
+              "Multi-part upload create next complete",
+              "Next and complete after complete should fail",
+              "Non-final part under 5 MiB should fail on complete",
+              "Requests without authentication are rejected",
+              "Three-part upload create next next complete"
             ]
           }
         ],
@@ -4025,7 +4805,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
               "in.ArtifactId"
@@ -4033,7 +4813,7 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
             "cond": "in.ArtifactId == *ObjectTypeArtifact",
             "predicate_paths": [
               "in.ArtifactId"
@@ -4041,7 +4821,7 @@
           },
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:397",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:397",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
               "in.ArtifactId"
@@ -4049,7 +4829,7 @@
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:404",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:404",
             "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
@@ -4057,7 +4837,7 @@
           },
           {
             "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:410",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:410",
             "cond": "in.ChunkSize \u003e= 0",
             "predicate_paths": [
               "in.ChunkSize"
@@ -4073,7 +4853,7 @@
           },
           {
             "id": "b7",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:667",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:667",
             "cond": "in.ArtifactId != objType",
             "predicate_paths": [
               "in.ArtifactId"
@@ -4081,7 +4861,7 @@
           },
           {
             "id": "b8",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3600",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3600",
             "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
@@ -4110,6 +4890,10 @@
       "anomalies": {
         "unmatched_test_fields": [
           {
+            "field": "configurationset",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "filename",
             "fuzzy_suggestions": null
           },
@@ -4128,6 +4912,373 @@
         ]
       },
       "test_facts": [
+        {
+          "name": "Multi-part upload create next complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "Cursor",
+            "GetUrl",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Three-part upload create next next complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "Cursor",
+            "GetUrl",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "100 MiB multi-part upload create next complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+            "INTERNAL_ARTIFACTS_GET",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Artifact",
+            "Artifact.File",
+            "Artifact.File.Size",
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Requests without authentication are rejected",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Missing id or cursor on next complete should fail",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Invalid cursor signature is rejected on next and complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Cursor must match artifact id on next and complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Invalid cursor values are rejected",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Another member cursor cannot advance a different upload",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Complete without uploading all declared parts should fail",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Non-final part under 5 MiB should fail on complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Complete rejects total size over configuration_set limit",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "ConfigurationSet",
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Next and complete after complete should fail",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Another tenant cannot advance upload session",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
         {
           "name": "Home tenant cursor cannot advance other tenant upload",
           "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
@@ -4157,7 +5308,7 @@
     {
       "rpc": "GetUploadUrl",
       "operation": "ArtifactsPrepare,ArtifactsUploadCreate",
-      "tests": 17,
+      "tests": 58,
       "status": {
         "documented": null,
         "asserted": [
@@ -4169,16 +5320,16 @@
       },
       "fields": {
         "leaf_fields_read_by_rpc": 10,
-        "covered_count": 3,
-        "coverage_pct": 30,
-        "request_fields_set_by_tests": 6,
-        "set_by_positive_tests": 3,
+        "covered_count": 4,
+        "coverage_pct": 40,
+        "request_fields_set_by_tests": 24,
+        "set_by_positive_tests": 4,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
             "total": 9,
-            "set": 3,
-            "pct": 33.3
+            "set": 4,
+            "pct": 44.4
           },
           "nested": {
             "total": 1,
@@ -4193,8 +5344,8 @@
         },
         "representative": {
           "units": 10,
-          "covered": 3,
-          "pct": 30,
+          "covered": 4,
+          "pct": 40,
           "collapsed_types": [
             "api.CreateHeaders"
           ]
@@ -4204,41 +5355,138 @@
             "path": "in.ConfigurationSet",
             "match": "exact",
             "by_tests": [
-              "Invalid configuration_set on create should fail"
+              "Complete rejects total size over configuration_set limit",
+              "Invalid configuration_set on create should fail",
+              "Should create and verify content block article",
+              "Should handle article images ",
+              "Should verify artifact versioning with SHA256 hash verification",
+              "Should verify file attachment content matches original using SHA256",
+              "Should verify markdown file content and bold text formatting",
+              "Should verify uploaded file content matches original using SHA256"
             ]
           },
           {
             "path": "in.FileName",
             "match": "exact",
             "by_tests": [
+              "100 MiB multi-part upload create next complete",
+              "Actor field does not override created_by",
+              "Another member cursor cannot advance a different upload",
+              "Another org's owner cannot LIST artifacts of a parent in another org",
+              "Another tenant cannot advance upload session",
+              "Another tenant cannot get or locate completed artifact",
+              "Complete rejects total size over configuration_set limit",
+              "Complete with parent_id outside tenant should fail",
+              "Complete without uploading all declared parts should fail",
+              "Complete without uploading parts should fail",
+              "Copy artifact",
               "Create with negative part_size should fail",
+              "Cursor must match artifact id on next and complete",
+              "Dev user can create and complete upload",
               "Download artifact with access key",
               "Download public artifact with access key",
+              "Download with another artifact's access key should return 403 (key swap attack)",
+              "Get artifact",
+              "Home tenant cursor cannot advance other tenant upload",
               "Invalid configuration_set on create should fail",
+              "Invalid cursor signature is rejected on next and complete",
+              "Invalid cursor values are rejected",
               "Invalid extension",
               "Invalid headers on create should fail",
+              "Locate Private Article Artifact - No Auth",
+              "Locate Public Article Artifact - No Auth",
+              "Locate artifact",
+              "Multi-part upload create next complete",
+              "Next and complete after complete should fail",
+              "Non-final part under 5 MiB should fail on complete",
               "PUT body does not match part_size",
+              "Requests without authentication are rejected",
+              "Should create and verify content block article",
+              "Should handle article images ",
+              "Should verify artifact versioning with SHA256 hash verification",
+              "Should verify file attachment content matches original using SHA256",
+              "Should verify markdown file content and bold text formatting",
+              "Should verify uploaded file content matches original using SHA256",
+              "Single-part upload create PUT complete",
               "Tests artifacts APIs for smoke validation",
               "TextArtifact",
+              "Three-part upload create next next complete",
+              "Unauthenticated download of private (unpublished) article artifact should return 403",
               "Unauthenticated download of public article artifact without key should succeed",
-              "UnknownTypeArtifact"
+              "UnknownTypeArtifact",
+              "Version Creation",
+              "Version List",
+              "Version delete",
+              "Versions prepare creates a new version",
+              "parent_id on complete attaches artifact to parent"
+            ]
+          },
+          {
+            "path": "in.FileSize",
+            "match": "exact",
+            "by_tests": [
+              "Should create and verify content block article",
+              "Should handle article images ",
+              "Should verify artifact versioning with SHA256 hash verification",
+              "Should verify file attachment content matches original using SHA256",
+              "Should verify markdown file content and bold text formatting",
+              "Should verify uploaded file content matches original using SHA256"
             ]
           },
           {
             "path": "in.FileType",
             "match": "exact",
             "by_tests": [
+              "100 MiB multi-part upload create next complete",
+              "Actor field does not override created_by",
+              "Another member cursor cannot advance a different upload",
+              "Another org's owner cannot LIST artifacts of a parent in another org",
+              "Another tenant cannot advance upload session",
+              "Another tenant cannot get or locate completed artifact",
+              "Complete rejects total size over configuration_set limit",
+              "Complete with parent_id outside tenant should fail",
+              "Complete without uploading all declared parts should fail",
+              "Complete without uploading parts should fail",
+              "Copy artifact",
               "Create with empty file name should fail",
               "Create with negative part_size should fail",
+              "Cursor must match artifact id on next and complete",
+              "Dev user can create and complete upload",
               "Download artifact with access key",
               "Download public artifact with access key",
+              "Download with another artifact's access key should return 403 (key swap attack)",
+              "Get artifact",
+              "Home tenant cursor cannot advance other tenant upload",
               "Invalid configuration_set on create should fail",
+              "Invalid cursor signature is rejected on next and complete",
+              "Invalid cursor values are rejected",
               "Invalid extension",
               "Invalid headers on create should fail",
+              "Locate Private Article Artifact - No Auth",
+              "Locate Public Article Artifact - No Auth",
+              "Locate artifact",
+              "Multi-part upload create next complete",
+              "Next and complete after complete should fail",
+              "Non-final part under 5 MiB should fail on complete",
               "PUT body does not match part_size",
+              "Requests without authentication are rejected",
+              "Should create and verify content block article",
+              "Should handle article images ",
+              "Should verify artifact versioning with SHA256 hash verification",
+              "Should verify file attachment content matches original using SHA256",
+              "Should verify markdown file content and bold text formatting",
+              "Should verify uploaded file content matches original using SHA256",
+              "Single-part upload create PUT complete",
               "Tests artifacts APIs for smoke validation",
               "TextArtifact",
-              "Unauthenticated download of public article artifact without key should succeed"
+              "Three-part upload create next next complete",
+              "Unauthenticated download of private (unpublished) article artifact should return 403",
+              "Unauthenticated download of public article artifact without key should succeed",
+              "Version Creation",
+              "Version List",
+              "Version delete",
+              "Versions prepare creates a new version",
+              "parent_id on complete attaches artifact to parent"
             ]
           }
         ],
@@ -4246,7 +5494,6 @@
           "in.ActorId",
           "in.DevOid",
           "in.FileEncoding",
-          "in.FileSize",
           "in.Headers.ContentDisposition",
           "in.IsChunkedUpload",
           "in.SkipFileConstrains"
@@ -4256,20 +5503,20 @@
         "total": 35,
         "happy_path_reached": true,
         "reachable_on_happy_path": 34,
-        "present_arm_exercised": 14,
-        "present_arm_pct": 40,
+        "present_arm_exercised": 18,
+        "present_arm_pct": 51.4,
         "absent_arm_exercised": 34,
         "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
-        "both_arms_exercised": 14,
-        "coverage_pct": 40,
+        "both_arms_exercised": 18,
+        "coverage_pct": 51.4,
         "by_origin": {
           "service": {
             "total": 21,
             "reachable_on_happy_path": 20,
-            "present_arm_exercised": 11,
-            "present_arm_pct": 52.4,
+            "present_arm_exercised": 14,
+            "present_arm_pct": 66.7,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 20
@@ -4277,8 +5524,8 @@
           "generated": {
             "total": 7,
             "reachable_on_happy_path": 7,
-            "present_arm_exercised": 2,
-            "present_arm_pct": 28.6,
+            "present_arm_exercised": 3,
+            "present_arm_pct": 42.9,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 7
@@ -4296,7 +5543,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.ActorId == nil",
             "predicate_paths": [
               "in.ActorId"
@@ -4304,7 +5551,7 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -4312,7 +5559,7 @@
           },
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -4320,7 +5567,7 @@
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -4328,7 +5575,7 @@
           },
           {
             "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.DevOid == nil",
             "predicate_paths": [
               "in.DevOid"
@@ -4336,7 +5583,7 @@
           },
           {
             "id": "b6",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:322",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:322",
             "cond": "in.ActorId == nil",
             "predicate_paths": [
               "in.ActorId"
@@ -4344,7 +5591,7 @@
           },
           {
             "id": "b7",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:329",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:329",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -4352,7 +5599,7 @@
           },
           {
             "id": "b8",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:332",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:332",
             "cond": "in.DevOid == nil",
             "predicate_paths": [
               "in.DevOid"
@@ -4360,47 +5607,15 @@
           },
           {
             "id": "b9",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:339",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:339",
             "cond": "in.DevOid",
             "predicate_paths": [
               "in.DevOid"
             ]
           },
           {
-            "id": "b10",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:357",
-            "cond": "in.FileSize \u003e= 0",
-            "predicate_paths": [
-              "in.FileSize"
-            ]
-          },
-          {
-            "id": "b15",
-            "at": "internal/server/multipart_upload.go:32",
-            "cond": "in.FileSize \u003c= 0",
-            "predicate_paths": [
-              "in.FileSize"
-            ]
-          },
-          {
-            "id": "b21",
-            "at": "internal/server/upload.go:141",
-            "cond": "in.FileSize \u003e *t11 * 1024 * 1024",
-            "predicate_paths": [
-              "in.FileSize"
-            ]
-          },
-          {
-            "id": "b22",
-            "at": "internal/server/upload.go:152",
-            "cond": "in.FileSize \u003c t38 * 1024 * 1024",
-            "predicate_paths": [
-              "in.FileSize"
-            ]
-          },
-          {
             "id": "b23",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3600",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3600",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -4477,6 +5692,40 @@
       "anomalies": {
         "unmatched_test_fields": [
           {
+            "field": "actor",
+            "fuzzy_suggestions": [
+              "in.ActorId"
+            ]
+          },
+          {
+            "field": "appliestopart",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "appliestoparts",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "articletype",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "artifacts",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "body",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "cursor",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "description",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "headers",
             "fuzzy_suggestions": null
           },
@@ -4485,7 +5734,45 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "key",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "ownedby",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "parent",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "parentid",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "partsize",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "resource",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "status",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "title",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "type",
+            "fuzzy_suggestions": [
+              "in.FileType"
+            ]
+          },
+          {
+            "field": "version",
             "fuzzy_suggestions": null
           }
         ]
@@ -4543,6 +5830,125 @@
           ]
         },
         {
+          "name": "Locate artifact",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_LOCATE",
+            "GINKGO_PR_SANITY"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Locate Public Article Artifact - No Auth",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_LOCATE",
+            "GINKGO_PR_SANITY"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Locate Private Article Artifact - No Auth",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_LOCATE",
+            "GINKGO_PR_SANITY"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Get artifact",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_GET"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Artifact",
+            "Artifact.GetParentId",
+            "Id",
+            "StatusCode",
+            "Version",
+            "Work",
+            "Work.AsIssue"
+          ]
+        },
+        {
+          "name": "Copy artifact",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_COPY",
+            "GINKGO_PR_SANITY"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
           "name": "UnknownTypeArtifact",
           "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
           "labels": [
@@ -4586,6 +5992,53 @@
           ]
         },
         {
+          "name": "Download with another artifact's access key should return 403 (key swap attack)",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_DOWNLOAD",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id",
+            "Key"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "GetAccessKey",
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Unauthenticated download of private (unpublished) article artifact should return 403",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_DOWNLOAD",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
           "name": "Unauthenticated download of public article artifact without key should succeed",
           "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
           "labels": [
@@ -4606,6 +6059,104 @@
           "response_fields_asserted": [
             "Body",
             "Body.Close",
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Version Creation",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_VERSIONS_PREPARE"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Version List",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_VERSIONS_LIST"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Id",
+            "StatusCode",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Version delete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_VERSIONS_DELETE"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "GetVersions",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Another org's owner cannot LIST artifacts of a parent in another org",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_LIST"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "ParentId"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Artifacts",
             "Id",
             "StatusCode"
           ]
@@ -4663,6 +6214,52 @@
           ]
         },
         {
+          "name": "Locate artifact",
+          "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "PUBLIC_ARTIFACTS_LOCATE"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Get artifact",
+          "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "PUBLIC_ARTIFACTS_GET",
+            "GINKGO_PR_SANITY"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Id",
+            "StatusCode",
+            "Work",
+            "Work.AsIssue"
+          ]
+        },
+        {
           "name": "UnknownTypeArtifact",
           "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
           "labels": [
@@ -4679,6 +6276,29 @@
           "response_fields_asserted": [
             "Id",
             "StatusCode"
+          ]
+        },
+        {
+          "name": "Versions prepare creates a new version",
+          "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "PUBLIC_ARTIFACTS_VERSIONS_PREPARE"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Id",
+            "StatusCode",
+            "Url"
           ]
         },
         {
@@ -4706,6 +6326,194 @@
           ]
         },
         {
+          "name": "Should handle article images ",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "Artifacts",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Parent",
+            "Resource",
+            "Status",
+            "Title"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Article.Resource",
+            "Article.Resource.Artifacts",
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Should verify uploaded file content matches original using SHA256",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should verify artifact versioning with SHA256 hash verification",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should verify markdown file content and bold text formatting",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should create and verify content block article",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "Description",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Title"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.ArticleType",
+            "Article.Description",
+            "Article.Id",
+            "Article.Resource",
+            "Article.Resource.Artifacts",
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
           "name": "Tests artifacts APIs for smoke validation",
           "file": "e2e/smoke_test_case/artifacts_test/artifacts_test.go",
           "labels": [
@@ -4724,6 +6532,221 @@
             "GetUrl",
             "Id",
             "StatusCode"
+          ]
+        },
+        {
+          "name": "Should verify file attachment content matches original using SHA256",
+          "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToPart",
+            "Artifacts",
+            "Body",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Title",
+            "Type"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Work",
+            "Work.AsTicket"
+          ]
+        },
+        {
+          "name": "Single-part upload create PUT complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+            "INTERNAL_ARTIFACTS_GET",
+            "INTERNAL_ARTIFACTS_LOCATE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Artifact",
+            "Artifact.Id",
+            "Body",
+            "Body.Close",
+            "Cursor",
+            "GetUrl",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Multi-part upload create next complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "Cursor",
+            "GetUrl",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Three-part upload create next next complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "Cursor",
+            "GetUrl",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "100 MiB multi-part upload create next complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+            "INTERNAL_ARTIFACTS_GET",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Artifact",
+            "Artifact.File",
+            "Artifact.File.Size",
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "parent_id on complete attaches artifact to parent",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+            "INTERNAL_ARTIFACTS_LIST"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "ParentId",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Artifacts",
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Dev user can create and complete upload",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
           ]
         },
         {
@@ -4800,6 +6823,130 @@
           ]
         },
         {
+          "name": "Requests without authentication are rejected",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Invalid cursor signature is rejected on next and complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Cursor must match artifact id on next and complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Invalid cursor values are rejected",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Another member cursor cannot advance a different upload",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
           "name": "PUT body does not match part_size",
           "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
           "labels": [
@@ -4820,13 +6967,277 @@
             "StatusCode",
             "Url"
           ]
+        },
+        {
+          "name": "Complete without uploading parts should fail",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Complete without uploading all declared parts should fail",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Non-final part under 5 MiB should fail on complete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Complete rejects total size over configuration_set limit",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "ConfigurationSet",
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Actor field does not override created_by",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+            "INTERNAL_ARTIFACTS_GET"
+          ],
+          "fields_set": [
+            "Actor",
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Artifact",
+            "Artifact.CreatedBy",
+            "Artifact.CreatedBy.AsDevUserSummary",
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Complete with parent_id outside tenant should fail",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "ParentId",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Next and complete after complete should fail",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Another tenant cannot advance upload session",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Home tenant cursor cannot advance other tenant upload",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Another tenant cannot get or locate completed artifact",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_GET",
+            "INTERNAL_ARTIFACTS_LOCATE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
         }
       ]
     },
     {
       "rpc": "HardDeleteArtifactVersion",
       "operation": "ArtifactsHardDeleteVersion",
-      "tests": 8,
+      "tests": 9,
       "status": {
         "documented": [
           200,
@@ -4894,7 +7305,8 @@
               "Should verify artifact versioning with SHA256 hash verification",
               "Should verify file attachment content matches original using SHA256",
               "Should verify markdown file content and bold text formatting",
-              "Should verify uploaded file content matches original using SHA256"
+              "Should verify uploaded file content matches original using SHA256",
+              "Version delete"
             ]
           }
         ],
@@ -5062,6 +7474,34 @@
           "asserts_success": true,
           "response_fields_asserted": [
             "StatusCode"
+          ]
+        },
+        {
+          "name": "Version delete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_VERSIONS_DELETE"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "GetVersions",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
           ]
         },
         {
@@ -5395,7 +7835,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.ParentId == nil",
             "predicate_paths": [
               "in.ParentId"
@@ -5403,7 +7843,7 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:479",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:479",
             "cond": "in.ParentId == nil",
             "predicate_paths": [
               "in.ParentId"
@@ -5411,7 +7851,7 @@
           },
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/datapath/mfz/context/context.go:77",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/datapath/mfz/context/context.go:77",
             "cond": "in.ParentId == nil",
             "predicate_paths": [
               "in.ParentId"
@@ -5446,7 +7886,7 @@
     {
       "rpc": "ListArtifactVersions",
       "operation": "ArtifactsVersionsList",
-      "tests": 2,
+      "tests": 7,
       "status": {
         "documented": [
           200,
@@ -5479,7 +7919,7 @@
         "leaf_fields_read_by_rpc": 1,
         "covered_count": 1,
         "coverage_pct": 100,
-        "request_fields_set_by_tests": 3,
+        "request_fields_set_by_tests": 14,
         "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -5510,7 +7950,12 @@
             "path": "in.Id",
             "match": "exact",
             "by_tests": [
+              "Add an about page with multiple versions and publish it",
+              "Should verify artifact versioning with SHA256 hash verification",
+              "Should verify markdown file content and bold text formatting",
+              "Should verify uploaded file content matches original using SHA256",
               "Version List",
+              "Version delete",
               "Versions list for non-existent artifact should return 404"
             ]
           }
@@ -5582,11 +8027,55 @@
       "anomalies": {
         "unmatched_test_fields": [
           {
+            "field": "appliestoparts",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "articletype",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "configurationset",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "filename",
             "fuzzy_suggestions": null
           },
           {
+            "field": "filesize",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "filetype",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "ownedby",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "parent",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "publishedversion",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "resource",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "status",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "title",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "version",
             "fuzzy_suggestions": null
           }
         ]
@@ -5628,6 +8117,181 @@
           "response_fields_asserted": [
             "Id",
             "StatusCode",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Version delete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_VERSIONS_DELETE"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "GetVersions",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Add an about page with multiple versions and publish it",
+          "file": "api/v2_internal/plug/journeys/kb_test.go",
+          "labels": [
+            "INTERNAL_ARTICLES_CREATE",
+            "POSITIVE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "Id",
+            "OwnedBy",
+            "Parent",
+            "PublishedVersion",
+            "Resource",
+            "Status",
+            "Title"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.GetId",
+            "Article.GetResource",
+            "Article.GetStatus",
+            "StatusCode",
+            "Version",
+            "Version.Version",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should verify uploaded file content matches original using SHA256",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should verify artifact versioning with SHA256 hash verification",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should verify markdown file content and bold text formatting",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
             "Versions"
           ]
         }
@@ -5757,7 +8421,7 @@
         "gaps": [
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.Ancestor == nil",
             "predicate_paths": [
               "in.Ancestor"
@@ -5765,7 +8429,7 @@
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:275",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:275",
             "cond": "in.Ancestor != nil",
             "predicate_paths": [
               "in.Ancestor"
@@ -6173,7 +8837,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6181,7 +8845,7 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
             "cond": "in.ArtifactId == *ObjectTypeArtifact",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6189,7 +8853,7 @@
           },
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.ParentId == nil",
             "predicate_paths": [
               "in.ParentId"
@@ -6197,7 +8861,7 @@
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:550",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:550",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6205,7 +8869,7 @@
           },
           {
             "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:557",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:557",
             "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6213,7 +8877,7 @@
           },
           {
             "id": "b6",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:560",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:560",
             "cond": "in.ParentId != nil",
             "predicate_paths": [
               "in.ParentId"
@@ -6286,7 +8950,7 @@
           },
           {
             "id": "b15",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/datapath/mfz/context/context.go:77",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/datapath/mfz/context/context.go:77",
             "cond": "in.ParentId == nil",
             "predicate_paths": [
               "in.ParentId"
@@ -6294,7 +8958,7 @@
           },
           {
             "id": "b16",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/datapath/mfz/context/context.go:86",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/go/datapath/mfz/context/context.go:86",
             "cond": "in.ParentId == nil",
             "predicate_paths": [
               "in.ParentId"
@@ -6302,7 +8966,7 @@
           },
           {
             "id": "b17",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:659",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:659",
             "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6310,7 +8974,7 @@
           },
           {
             "id": "b18",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3620",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/utils.go:3620",
             "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6369,7 +9033,7 @@
     {
       "rpc": "UpdateArtifactContent",
       "operation": "ArtifactsVersionsPrepare",
-      "tests": 3,
+      "tests": 10,
       "status": {
         "documented": [
           200,
@@ -6400,7 +9064,7 @@
         "leaf_fields_read_by_rpc": 3,
         "covered_count": 0,
         "coverage_pct": 0,
-        "request_fields_set_by_tests": 3,
+        "request_fields_set_by_tests": 16,
         "set_by_positive_tests": 0,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -6477,7 +9141,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.ActorId == nil",
             "predicate_paths": [
               "in.ActorId"
@@ -6485,7 +9149,7 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -6493,7 +9157,7 @@
           },
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -6501,7 +9165,7 @@
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -6509,7 +9173,7 @@
           },
           {
             "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.DevOid == nil",
             "predicate_paths": [
               "in.DevOid"
@@ -6517,7 +9181,7 @@
           },
           {
             "id": "b6",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6525,7 +9189,7 @@
           },
           {
             "id": "b7",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
             "cond": "in.ArtifactId == *ObjectTypeArtifact",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6533,7 +9197,7 @@
           },
           {
             "id": "b8",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:491",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:491",
             "cond": "in.ActorId == nil",
             "predicate_paths": [
               "in.ActorId"
@@ -6541,7 +9205,7 @@
           },
           {
             "id": "b9",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:498",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:498",
             "cond": "in.ActorId",
             "predicate_paths": [
               "in.ActorId"
@@ -6549,7 +9213,7 @@
           },
           {
             "id": "b10",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:501",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:501",
             "cond": "in.DevOid == nil",
             "predicate_paths": [
               "in.DevOid"
@@ -6557,7 +9221,7 @@
           },
           {
             "id": "b11",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:508",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:508",
             "cond": "in.DevOid",
             "predicate_paths": [
               "in.DevOid"
@@ -6565,7 +9229,7 @@
           },
           {
             "id": "b12",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:511",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:511",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6573,7 +9237,7 @@
           },
           {
             "id": "b13",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:518",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:518",
             "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6602,7 +9266,37 @@
       "anomalies": {
         "unmatched_test_fields": [
           {
+            "field": "appliestopart",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "appliestoparts",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "articletype",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "artifacts",
+            "fuzzy_suggestions": [
+              "in.ArtifactId"
+            ]
+          },
+          {
+            "field": "body",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "configurationset",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "filename",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "filesize",
             "fuzzy_suggestions": null
           },
           {
@@ -6611,6 +9305,30 @@
           },
           {
             "field": "id",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "ownedby",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "resource",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "status",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "title",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "type",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "version",
             "fuzzy_suggestions": null
           }
         ]
@@ -6630,6 +9348,82 @@
           "asserts_success": true,
           "response_fields_asserted": [
             "StatusCode"
+          ]
+        },
+        {
+          "name": "Version Creation",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_VERSIONS_PREPARE"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "Version List",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_VERSIONS_LIST"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Id",
+            "StatusCode",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Version delete",
+          "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_VERSIONS_DELETE"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType",
+            "Id",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "GetVersions",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
           ]
         },
         {
@@ -6669,6 +9463,155 @@
             "Id",
             "StatusCode",
             "Url"
+          ]
+        },
+        {
+          "name": "Should verify uploaded file content matches original using SHA256",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should verify artifact versioning with SHA256 hash verification",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should verify markdown file content and bold text formatting",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should verify file attachment content matches original using SHA256",
+          "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToPart",
+            "Artifacts",
+            "Body",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Title",
+            "Type"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Work",
+            "Work.AsTicket"
           ]
         }
       ]
@@ -6763,7 +9706,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6771,7 +9714,7 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
             "cond": "in.ArtifactId == *ObjectTypeArtifact",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6779,7 +9722,7 @@
           },
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:672",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:672",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6787,7 +9730,7 @@
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:679",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:679",
             "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6910,7 +9853,7 @@
         "gaps": [
           {
             "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6918,7 +9861,7 @@
           },
           {
             "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1656",
             "cond": "in.ArtifactId == *ObjectTypeArtifact",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6926,7 +9869,7 @@
           },
           {
             "id": "b3",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:749",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:749",
             "cond": "in.ArtifactId == nil",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6934,7 +9877,7 @@
           },
           {
             "id": "b4",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:756",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:756",
             "cond": "in.ArtifactId",
             "predicate_paths": [
               "in.ArtifactId"
@@ -6942,7 +9885,7 @@
           },
           {
             "id": "b5",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:765",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:765",
             "cond": "in.Headers != nil",
             "predicate_paths": [
               "in.Headers"
@@ -6950,7 +9893,7 @@
           },
           {
             "id": "b6",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:766",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:766",
             "cond": "in.Headers != nil",
             "predicate_paths": [
               "in.Headers"

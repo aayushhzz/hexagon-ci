@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "DeleteRevUser",
     "operation": "RevUsersDelete",
-    "tests": 4,
+    "tests": 5,
     "status": {
       "documented": [
         200,
@@ -19,17 +19,17 @@
       "asserted": [
         200,
         400,
-        401
+        401,
+        404
       ],
       "missing": [
         403,
-        404,
         413,
         429,
         500,
         503
       ],
-      "coverage_pct": 33.3
+      "coverage_pct": 44.4
     },
     "fields": {
       "leaf_fields_read_by_rpc": 3,
@@ -114,7 +114,7 @@
       "gaps": [
         {
           "id": "b1",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
           "cond": "in.UserIdentifier.UserDon == nil",
           "predicate_paths": [
             "in.UserIdentifier.UserDon"
@@ -122,7 +122,7 @@
         },
         {
           "id": "b2",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1786",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:1786",
           "cond": "in.UserIdentifier.UserDon != nil",
           "predicate_paths": [
             "in.UserIdentifier.UserDon"
@@ -130,7 +130,7 @@
         },
         {
           "id": "b3",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1791",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:1791",
           "cond": "in.UserIdentifier.UserDon",
           "predicate_paths": [
             "in.UserIdentifier.UserDon"
@@ -138,7 +138,7 @@
         },
         {
           "id": "b4",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1760",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:1760",
           "cond": "in.UserIdentifier == nil",
           "predicate_paths": [
             "in.UserIdentifier"
@@ -146,7 +146,7 @@
         },
         {
           "id": "b5",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20261007095326-814d7923e721/api/janus.pb.validator.go:1763",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:1763",
           "cond": "in.UserIdentifier != nil",
           "predicate_paths": [
             "in.UserIdentifier"
@@ -205,6 +205,23 @@
       ]
     },
     "test_facts": [
+      {
+        "name": "Delete a RevUser",
+        "file": "api/v2_internal/identity_flows/rev_users_api_test.go",
+        "labels": [
+          "INTERNAL_REVUSERS_DELETE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          404
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
       {
         "name": "WithOnlyRequiredFields",
         "file": "api/v2_internal/rev_users/crud/delete_rev_users_test.go",
@@ -273,11 +290,11 @@
     "errors": [
       {
         "symbol": "ObjectTypeInvalid",
-        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:446",
         "tainted": false
       }
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteRevUser` (HTTP operation `RevUsersDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsSystemDelete\n  - in.UserIdentifier.UserDon\n  - in.UserIdentifier.UserExternalId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon\n  - in.UserIdentifier == nil\n  - in.UserIdentifier != nil\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon == nil\n  - in.IsSystemDelete\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteRevUser` (HTTP operation `RevUsersDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsSystemDelete\n  - in.UserIdentifier.UserDon\n  - in.UserIdentifier.UserExternalId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon\n  - in.UserIdentifier == nil\n  - in.UserIdentifier != nil\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon == nil\n  - in.IsSystemDelete\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }
