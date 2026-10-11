@@ -5,15 +5,28 @@
     "operation": "DevUsersSelfUpdate,DevUsersUpdate",
     "tests": 9,
     "status": {
-      "documented": [],
+      "documented": [
+        200,
+        400,
+        401,
+        403
+      ],
       "asserted": [
         200,
         201,
         403
       ],
-      "missing": [],
-      "infra_statuses": [],
-      "coverage_pct": 0
+      "missing": [
+        400,
+        401
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 50
     },
     "fields": {
       "leaf_fields_read_by_rpc": 28,
@@ -1133,5 +1146,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateDevUser` (HTTP operation `DevUsersSelfUpdate,DevUsersUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AggregateErrors\n  - in.DevUid.Value\n  - in.Updates.Availability.Int64Values\n  - in.Updates.AvailabilityModes.Int64Values\n  - in.Updates.Email\n  - in.Updates.ExperienceStartDate\n  - in.Updates.ExternalSourceData\n  - in.Updates.JobHistory.Values\n  - in.Updates.PhoneNumbers.StringValues\n  - in.Updates.PlatformRevUserMetadata\n  - in.Updates.ReportsToId\n  - in.Updates.Skills.Values\n  - in.Updates.StagedInfo\n  - in.Updates.State\n  - in.Updates.Status.Description\n  - in.Updates.Status.ExpiresAt\n  - in.Updates.SyncMetadata\n  - in.Updates.Timezone\n  - in.Updates.UnsetFieldMask.Paths\n  - in.Updates.UserAttributionMetadata\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AggregateErrors\n  - in.AggregateErrors\n  - in.Updates.AvailabilityModes == nil\n  - in.AggregateErrors\n  - in.Updates == nil\n  - in.Updates.Timezone\n  - in.Updates.Status == nil\n  - in.Updates.Status.Description != nil\n  - in.Updates.Status.ExpiresAt != nil\n  - in.Updates.Skills == nil\n  - in.Updates.JobHistory == nil\n  - in.Updates.Skills != nil\n  - in.Updates.JobHistory != nil\n  - in.Updates.AvailabilityModes == nil\n  - in.Updates.UnsetFieldMask == nil\n  - in.Updates.ReportsToId == nil\n  - in.Updates.ReportsToId != nil\n  - in.Updates.DisplayPicture != nil\n  - in.DevUid.Value\n  - in.DevUid.Value == \"\"\n  - in.DevUid.Value\n  - in.DevUid.Value == nil\n  - in.DevUid.Value == nil\n  - **t25 != in.DevUid.Value\n  - in.Updates.Timezone != nil\n  - in.Updates != nil\n  - in.Updates.Email != nil\n  - in.Updates.AvailabilityModes != nil\n  - in.Updates.PlatformRevUserMetadata != nil\n  - in.Updates.Availability == nil\n  - in.Updates.UserAttributionMetadata != nil\n  - in.Updates.Availability != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - errCacheUnavailable\n  - errEmailAlreadyExists\n  - errInternalCacheTransientError\n  - errInvalidInputEmail\n  - errInvalidStatusDescription\n  - errInvalidStatusExpiry\n  - errOldVersionOfSchemaFragments\n  - errPhoneNumberInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n  - errStateIssueForEmailUpdate\n  - errTermsAndConditionsResetError\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `reportsto` -> suggestions ['in.Updates.ReportsToId']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateDevUser` (HTTP operation `DevUsersSelfUpdate,DevUsersUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AggregateErrors\n  - in.DevUid.Value\n  - in.Updates.Availability.Int64Values\n  - in.Updates.AvailabilityModes.Int64Values\n  - in.Updates.Email\n  - in.Updates.ExperienceStartDate\n  - in.Updates.ExternalSourceData\n  - in.Updates.JobHistory.Values\n  - in.Updates.PhoneNumbers.StringValues\n  - in.Updates.PlatformRevUserMetadata\n  - in.Updates.ReportsToId\n  - in.Updates.Skills.Values\n  - in.Updates.StagedInfo\n  - in.Updates.State\n  - in.Updates.Status.Description\n  - in.Updates.Status.ExpiresAt\n  - in.Updates.SyncMetadata\n  - in.Updates.Timezone\n  - in.Updates.UnsetFieldMask.Paths\n  - in.Updates.UserAttributionMetadata\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AggregateErrors\n  - in.AggregateErrors\n  - in.Updates.AvailabilityModes == nil\n  - in.AggregateErrors\n  - in.Updates == nil\n  - in.Updates.Timezone\n  - in.Updates.Status == nil\n  - in.Updates.Status.Description != nil\n  - in.Updates.Status.ExpiresAt != nil\n  - in.Updates.Skills == nil\n  - in.Updates.JobHistory == nil\n  - in.Updates.Skills != nil\n  - in.Updates.JobHistory != nil\n  - in.Updates.AvailabilityModes == nil\n  - in.Updates.UnsetFieldMask == nil\n  - in.Updates.ReportsToId == nil\n  - in.Updates.ReportsToId != nil\n  - in.Updates.DisplayPicture != nil\n  - in.DevUid.Value\n  - in.DevUid.Value == \"\"\n  - in.DevUid.Value\n  - in.DevUid.Value == nil\n  - in.DevUid.Value == nil\n  - **t25 != in.DevUid.Value\n  - in.Updates.Timezone != nil\n  - in.Updates != nil\n  - in.Updates.Email != nil\n  - in.Updates.AvailabilityModes != nil\n  - in.Updates.PlatformRevUserMetadata != nil\n  - in.Updates.Availability == nil\n  - in.Updates.UserAttributionMetadata != nil\n  - in.Updates.Availability != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - errCacheUnavailable\n  - errEmailAlreadyExists\n  - errInternalCacheTransientError\n  - errInvalidInputEmail\n  - errInvalidStatusDescription\n  - errInvalidStatusExpiry\n  - errOldVersionOfSchemaFragments\n  - errPhoneNumberInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n  - errStateIssueForEmailUpdate\n  - errTermsAndConditionsResetError\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `reportsto` -> suggestions ['in.Updates.ReportsToId']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

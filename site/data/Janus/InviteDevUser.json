@@ -5,14 +5,31 @@
     "operation": "DevOrgsInvitesCreate,UserInvitationUpdate",
     "tests": 3,
     "status": {
-      "documented": [],
+      "documented": [
+        200,
+        201,
+        400,
+        401,
+        403,
+        409
+      ],
       "asserted": [
         200,
         201
       ],
-      "missing": [],
-      "infra_statuses": [],
-      "coverage_pct": 0
+      "missing": [
+        400,
+        401,
+        403,
+        409
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 33.3
     },
     "fields": {
       "leaf_fields_read_by_rpc": 4,
@@ -318,5 +335,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `InviteDevUser` (HTTP operation `DevOrgsInvitesCreate,UserInvitationUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.GroupIds\n  - in.InviterName\n  - in.Licenses\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.InviterName != \"\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevOrgNotFound\n  - errInternalServiceError\n  - errInvalidInputEmail\n  - errInviteDeactivatedUser\n  - errInviteToInvalidGroup\n  - errUserAlreadyJoined\n  - errUserNotAllowedToInviteToGroup\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `InviteDevUser` (HTTP operation `DevOrgsInvitesCreate,UserInvitationUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 409]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.GroupIds\n  - in.InviterName\n  - in.Licenses\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.InviterName != \"\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevOrgNotFound\n  - errInternalServiceError\n  - errInvalidInputEmail\n  - errInviteDeactivatedUser\n  - errInviteToInvalidGroup\n  - errUserAlreadyJoined\n  - errUserNotAllowedToInviteToGroup\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

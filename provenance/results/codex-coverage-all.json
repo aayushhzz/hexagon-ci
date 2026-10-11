@@ -7060,8 +7060,8 @@
         "service_count": 1,
         "call_count": 2,
         "reached_by_test": true,
-        "deps_result_used_in_response": 17,
-        "deps_result_checked_by_test": 17,
+        "deps_result_used_in_response": 18,
+        "deps_result_checked_by_test": 18,
         "response_links": [
           {
             "dep": "schemaregistry:GetCustomStage",
@@ -7175,6 +7175,17 @@
           },
           {
             "dep": "schemaregistry:GetCustomStage",
+            "path": "out.Project.LastSystemModificationVersion",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Persists a custom field across Create → Get",
+              "Rejects a custom field with an unknown schema key",
+              "Updates a custom field via ProjectsUpdate"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomState",
             "path": "out.Project.LastSystemModificationVersion",
             "checked_by": [
               "Creates a project with required fields and returns a well-formed DON at the start stage",
@@ -20456,16 +20467,30 @@
       "operation": "WebhooksFetch,WorksGet,WorksGetPost",
       "tests": 36,
       "status": {
-        "documented": [],
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          404
+        ],
         "asserted": [
           200,
           201,
           400,
           404
         ],
-        "missing": [],
-        "infra_statuses": [],
-        "coverage_pct": 0
+        "missing": [
+          401,
+          403
+        ],
+        "infra_statuses": [
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 60
       },
       "fields": {
         "leaf_fields_read_by_rpc": 3,
@@ -25506,16 +25531,28 @@
       "operation": "ConversationsCount,ConversationsCountPost,ConversationsList,ConversationsListPost,LobbiesList",
       "tests": 12,
       "status": {
-        "documented": [],
+        "documented": [
+          200,
+          400,
+          401,
+          403
+        ],
         "asserted": [
           200,
           201,
           400,
           401
         ],
-        "missing": [],
-        "infra_statuses": [],
-        "coverage_pct": 0
+        "missing": [
+          403
+        ],
+        "infra_statuses": [
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 75
       },
       "fields": {
         "leaf_fields_read_by_rpc": 82,
@@ -27524,15 +27561,28 @@
       "operation": "WorksExport,WorksList,WorksListPost",
       "tests": 82,
       "status": {
-        "documented": [],
+        "documented": [
+          200,
+          400,
+          401,
+          403
+        ],
         "asserted": [
           200,
           201,
           400
         ],
-        "missing": [],
-        "infra_statuses": [],
-        "coverage_pct": 0
+        "missing": [
+          401,
+          403
+        ],
+        "infra_statuses": [
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 50
       },
       "fields": {
         "leaf_fields_read_by_rpc": 126,

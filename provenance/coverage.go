@@ -782,7 +782,7 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 		for _, b := range branches {
 			rep.Branches.ByOrigin.bucket(branchOrigin(b.At)).Total++
 		}
-		documented := statusSpec[op]
+		documented := documentedStatuses(statusSpec, op)
 		rep.Status = statusCoverage(documented, map[int]bool{})
 		return rep
 	}
@@ -793,11 +793,11 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 		asserted[status] = true
 	}
 	if of.success {
-		for _, status := range successCodes(statusSpec[op]) {
+		for _, status := range successCodes(documentedStatuses(statusSpec, op)) {
 			asserted[status] = true
 		}
 	}
-	rep.Status = statusCoverage(statusSpec[op], asserted)
+	rep.Status = statusCoverage(documentedStatuses(statusSpec, op), asserted)
 	rep.Fields.ExercisedByTests = len(of.fieldsSet)
 
 	// Normalized indexes of test-set fields: canonical name -> original -> tests.
@@ -1736,4 +1736,21 @@ func sortedKeysInt(m map[int]bool) []int {
 	}
 	sort.Ints(out)
 	return out
+}
+
+// documentedStatuses unions the documented response codes of every operation an
+// RPC maps to. The operation label may be several API operations joined by a
+// comma (e.g. "NotificationsList,NotificationsListPost"), so a single statusSpec
+// lookup would miss them.
+func documentedStatuses(spec map[string][]int, op string) []int {
+	set := map[int]bool{}
+	for _, name := range strings.Split(op, ",") {
+		if name = strings.TrimSpace(name); name == "" {
+			continue
+		}
+		for _, code := range spec[name] {
+			set[code] = true
+		}
+	}
+	return sortedKeysInt(set)
 }

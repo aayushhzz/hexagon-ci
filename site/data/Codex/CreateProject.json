@@ -349,8 +349,8 @@
       "service_count": 1,
       "call_count": 2,
       "reached_by_test": true,
-      "deps_result_used_in_response": 17,
-      "deps_result_checked_by_test": 17,
+      "deps_result_used_in_response": 18,
+      "deps_result_checked_by_test": 18,
       "response_links": [
         {
           "dep": "schemaregistry:GetCustomStage",
@@ -464,6 +464,17 @@
         },
         {
           "dep": "schemaregistry:GetCustomStage",
+          "path": "out.Project.LastSystemModificationVersion",
+          "checked_by": [
+            "Creates a project with required fields and returns a well-formed DON at the start stage",
+            "Persists a custom field across Create \u2192 Get",
+            "Rejects a custom field with an unknown schema key",
+            "Updates a custom field via ProjectsUpdate"
+          ],
+          "checked": true
+        },
+        {
+          "dep": "schemaregistry:GetCustomState",
           "path": "out.Project.LastSystemModificationVersion",
           "checked_by": [
             "Creates a project with required fields and returns a well-formed DON at the start stage",
