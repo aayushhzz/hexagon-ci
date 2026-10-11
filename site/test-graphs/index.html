@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e13">
+  <meta name="description" content="Explore function-centered Hexagon CI call graphs locally.">
+  <title>Hexagon CI · Function Graph Explorer</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./style.css?v=20261011-viewport">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Hexagon CI graph explorer home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand-copy"><strong>HEXAGON</strong><span>FUNCTION GRAPH EXPLORER</span></span>
+      </a>
+      <div class="topbar-center"><span class="live-dot"></span><span>LOCAL WORKSPACE</span><span class="topbar-divider">/</span><span id="header-repo">Loading graph library</span></div>
+      <div class="topbar-actions">
+        <button class="button button-quiet" id="import-button" type="button" title="Open a graph-v2 JSON file from this computer">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 13V3m0 0L6.5 6.5M10 3l3.5 3.5M4 12.5v3A1.5 1.5 0 0 0 5.5 17h9a1.5 1.5 0 0 0 1.5-1.5v-3"/></svg>
+          <span>Open graph JSON</span>
+        </button>
+        <input id="file-input" type="file" accept=".json,application/json" hidden>
+        <span class="avatar" aria-label="Local session">HX</span>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" aria-label="Graph library">
+        <div class="sidebar-heading">
+          <div><p class="eyebrow">Workspace</p><h1>Graph library</h1></div>
+          <span class="count-pill" id="dataset-count">—</span>
+        </div>
+        <label class="search-box repo-search">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="m13.2 13.2 4 4"/></svg>
+          <input id="repo-search" type="search" placeholder="Find a repository" autocomplete="off">
+          <kbd>/</kbd>
+        </label>
+        <div class="section-label"><span>REPOSITORIES</span><button id="refresh-button" class="icon-button" type="button" title="Reload graph library" aria-label="Reload graph library"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16.2 7.5A6.5 6.5 0 0 0 5 4.9L3.5 6.5M3.5 6.5V3.4m0 3.1h3.1M3.8 12.5A6.5 6.5 0 0 0 15 15.1l1.5-1.6m0 0v3.1m0-3.1h-3.1"/></svg></button></div>
+        <nav id="repo-list" class="repo-list" aria-label="Repositories"></nav>
+        <div class="sidebar-note"><span class="note-icon">i</span><p>Graph snapshots stay in this local workspace. Use <strong>Open graph JSON</strong> to inspect another Hexagon graph.</p></div>
+        <div class="sidebar-bottom"><span class="status-indicator"></span><span>Local session</span><span class="version-label">GRAPH V2</span></div>
+      </aside>
+
+      <main class="main-panel">
+        <section class="graph-heading" aria-label="Selected graph">
+          <div class="graph-title-group">
+            <div class="repo-glyph" id="repo-glyph">IN</div>
+            <div><div class="title-line"><h2 id="graph-title">Loading…</h2><span class="branch-tag" id="graph-language">GO</span></div><p class="repo-path" id="graph-subtitle">Preparing the graph workspace</p></div>
+          </div>
+          <div class="snapshot-meta"><span class="snapshot-dot"></span><span id="snapshot-label">Local snapshot</span><span class="meta-separator">·</span><span id="snapshot-date">—</span></div>
+        </section>
+
+        <section class="control-bar" aria-label="Graph controls">
+          <label class="search-box graph-search">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="m13.2 13.2 4 4"/></svg>
+            <input id="node-search" type="search" placeholder="Search functions, tests, files…" autocomplete="off">
+            <kbd>Ctrl K</kbd>
+          </label>
+          <div class="control-divider"></div>
+          <div class="test-picker function-picker" role="group" aria-label="Function view selection">
+            <label class="control-caption" for="function-search">FUNCTION VIEW</label>
+            <div class="function-picker-wrap">
+            <label class="search-box test-search">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="m13.2 13.2 4 4"/></svg>
+              <input id="function-search" type="search" placeholder="Find a function…" autocomplete="off" aria-label="Find a function view" aria-expanded="false" aria-controls="function-options" aria-describedby="function-picker-help">
+            </label>
+            <div id="function-options" class="function-options" role="listbox" aria-label="Matching functions" hidden></div>
+            </div>
+            <span id="function-picker-help" class="visually-hidden">Search for a function to see its direct callers, direct callees, and related tests. Choose All functions to return to the full graph.</span>
+            <button id="all-functions" class="all-functions-button" type="button" aria-pressed="false">All functions</button>
+          </div>
+          <div class="control-divider hide-small"></div>
+          <button id="filter-tests" class="filter-toggle active" type="button" aria-pressed="true"><span class="legend-dot test-dot"></span>Tests</button>
+          <button id="filter-functions" class="filter-toggle active" type="button" aria-pressed="true"><span class="legend-dot function-dot"></span>Functions</button>
+          <div class="control-spacer"></div>
+          <button class="icon-button zoom-button" id="zoom-out" type="button" aria-label="Zoom out" title="Zoom out"><span>−</span></button>
+          <button class="icon-button zoom-button" id="zoom-in" type="button" aria-label="Zoom in" title="Zoom in"><span>+</span></button>
+          <button class="icon-button fit-button" id="fit-graph" type="button" aria-label="Fit graph to screen" title="Fit graph to screen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 3H3v4m10-4h4v4M3 13v4h4m10-4v4h-4M3 7l5-5m9 5-5-5M3 13l5 5m9-5-5 5"/></svg></button>
+        </section>
+
+        <section class="canvas-frame" id="canvas-frame" aria-label="Interactive call graph">
+          <canvas id="graph-canvas" role="img" aria-label="Interactive function call graph. Use the mouse to pan and zoom, and select a node to inspect it." tabindex="0">Your browser does not support the graph canvas.</canvas>
+          <div class="canvas-vignette" aria-hidden="true"></div>
+          <div class="canvas-label canvas-label-top"><span class="tiny-pulse"></span><span id="canvas-mode">FULL GRAPH</span><span class="canvas-label-divider"></span><span id="canvas-node-count">— NODES</span></div>
+          <button id="focus-tests-toggle" class="focus-tests-toggle" type="button" hidden>Show all tests</button>
+          <div class="graph-scale"><span>CALL GRAPH</span><span class="scale-line"></span><span>CALLER → CALLEE</span></div>
+          <div class="canvas-hint"><span class="mouse-icon">↔</span> Drag to pan <i></i> Scroll to zoom <i></i> Click a node to inspect</div>
+          <div id="drop-overlay" class="drop-overlay" hidden><div><span class="drop-symbol">↓</span><strong>Drop a graph-v2 JSON file</strong><span>It will open in this local session</span></div></div>
+          <div id="loading-overlay" class="loading-overlay"><span class="loader"></span><span>Building graph view</span></div>
+          <div id="toast" class="toast" role="status" aria-live="polite"></div>
+        </section>
+
+        <footer class="graph-footer">
+          <div class="footer-stats"><div><span class="footer-key">FUNCTIONS</span><strong id="stat-functions">—</strong></div><div><span class="footer-key">CALL EDGES</span><strong id="stat-edges">—</strong></div><div><span class="footer-key">TEST ROOTS</span><strong id="stat-tests">—</strong></div><div><span class="footer-key">UNRESOLVED</span><strong id="stat-unresolved">—</strong></div></div>
+          <div class="footer-fingerprint"><span>ANALYSIS</span><code id="fingerprint">—</code></div>
+        </footer>
+      </main>
+
+      <aside class="inspector" aria-label="Node details">
+        <div class="inspector-header"><div><p class="eyebrow">Inspector</p><h2>Node details</h2></div><button id="clear-selection" class="icon-button" type="button" title="Clear selection" aria-label="Clear selection">×</button></div>
+        <div id="empty-inspector" class="empty-inspector"><div class="inspector-orbit"><span></span><span></span><span></span><b>·</b></div><h3>Explore a function</h3><p>Choose a function view to see its direct callers, callees, and every related test.</p><div class="key-hint"><kbd>Search</kbd><span>or click a function node to focus it</span></div></div>
+        <div id="node-inspector" class="node-inspector" hidden></div>
+        <div class="inspector-bottom"><span class="inspector-lock">⌁</span><p>Graph data is read locally by your browser and is not uploaded.</p></div>
+      </aside>
+    </div>
+  </div>
+  <script src="./app.js?v=20261011-viewport"></script>
+</body>
+</html>
