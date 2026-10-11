@@ -1,0 +1,714 @@
+// Parse Go source into call graph facts without executing or type-checking it.
+package main
+
+import (
+	"bytes"
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"go/ast"
+	gobuild "go/build"
+	"go/parser"
+	"go/printer"
+	"go/token"
+	"os"
+	"path"
+	"path/filepath"
+	"runtime"
+	"sort"
+	"strconv"
+	"strings"
+	"unicode"
+	"unicode/utf8"
+)
+
+type input struct {
+	Sources map[string][]byte `json:"sources"`
+	Root    string            `json:"root"`
+	Tags    []string          `json:"tags"`
+}
+
+type node struct {
+	ID         string `json:"id"`
+	Path       string `json:"path"`
+	Qualname   string `json:"qualname"`
+	Line       int    `json:"line"`
+	IsTest     bool   `json:"is_test"`
+	SourceHash string `json:"source_hash"`
+}
+
+type edge struct {
+	Caller string `json:"caller"`
+	Callee string `json:"callee"`
+	Path   string `json:"path"`
+	Line   int    `json:"line"`
+}
+
+type unresolvedCall struct {
+	Caller     string `json:"caller"`
+	Expression string `json:"expression"`
+	Path       string `json:"path"`
+	Line       int    `json:"line"`
+}
+
+type output struct {
+	Nodes           []node           `json:"nodes"`
+	Edges           []edge           `json:"edges"`
+	UnresolvedCalls []unresolvedCall `json:"unresolved_calls"`
+	Files           []fileFact       `json:"files"`
+	SourceFiles     []sourceFileFact `json:"source_files"`
+	SelectionUnsafe []string         `json:"selection_unsafe_reasons"`
+	BuildContext    buildContext     `json:"build_context"`
+}
+
+type sourceFileFact struct {
+	Path            string `json:"path"`
+	NonFunctionHash string `json:"non_function_hash"`
+}
+
+type fileFact struct {
+	Path    string   `json:"path"`
+	Package string   `json:"package"`
+	Imports []string `json:"imports"`
+}
+
+type buildContext struct {
+	GOOS       string   `json:"goos"`
+	GOARCH     string   `json:"goarch"`
+	GoVersion  string   `json:"go_version"`
+	Compiler   string   `json:"compiler"`
+	CgoEnabled bool     `json:"cgo_enabled"`
+	BuildTags  []string `json:"build_tags"`
+}
+
+type sourceFile struct {
+	Path    string
+	Package string
+	Imports map[string]string
+	AST     *ast.File
+}
+
+type function struct {
+	Node         node
+	Package      string
+	ReceiverType string
+	ReceiverVar  string
+	Shadowed     map[string]bool
+	Bindings     map[string]typeRef
+	File         *sourceFile
+	Decl         *ast.FuncDecl
+}
+
+type typeRef struct {
+	Package string
+	Name    string
+}
+
+type resolver struct {
+	index    map[string][]string
+	packages map[string]map[string]bool
+	types    map[string]map[string]bool
+	module   string
+	returns  map[string]typeRef
+}
+
+func packageKey(filename, packageName string) string {
+	return path.Dir(filename) + "::" + packageName
+}
+
+func modulePath(mod []byte) string {
+	for _, line := range strings.Split(string(mod), "\n") {
+		line = strings.TrimSpace(line)
+		if strings.HasPrefix(line, "module ") {
+			return strings.Trim(strings.TrimSpace(strings.TrimPrefix(line, "module ")), "\"")
+		}
+	}
+	return ""
+}
+
+func receiver(decl *ast.FuncDecl) (string, string) {
+	if decl.Recv == nil || len(decl.Recv.List) == 0 {
+		return "", ""
+	}
+	field := decl.Recv.List[0]
+	name := ""
+	if len(field.Names) > 0 {
+		name = field.Names[0].Name
+	}
+	typ := field.Type
+	for {
+		switch value := typ.(type) {
+		case *ast.StarExpr:
+			typ = value.X
+		case *ast.IndexExpr:
+			typ = value.X
+		case *ast.IndexListExpr:
+			typ = value.X
+		default:
+			ident, ok := typ.(*ast.Ident)
+			if ok {
+				return ident.Name, name
+			}
+			return "", name
+		}
+	}
+}
+
+func isTest(decl *ast.FuncDecl, filename string, imports map[string]string) bool {
+	name := decl.Name.Name
+	if !strings.HasSuffix(filename, "_test.go") || decl.Recv != nil ||
+		!strings.HasPrefix(name, "Test") || len(name) <= len("Test") {
+		return false
+	}
+	first, _ := utf8.DecodeRuneInString(strings.TrimPrefix(name, "Test"))
+	if unicode.IsLower(first) || decl.Type.Params == nil || len(decl.Type.Params.List) != 1 {
+		return false
+	}
+	parameter := decl.Type.Params.List[0]
+	if len(parameter.Names) != 1 {
+		return false
+	}
+	pointer, ok := parameter.Type.(*ast.StarExpr)
+	if !ok {
+		return false
+	}
+	selector, ok := pointer.X.(*ast.SelectorExpr)
+	if !ok || selector.Sel.Name != "T" {
+		return false
+	}
+	qualifier, ok := selector.X.(*ast.Ident)
+	return ok && imports[qualifier.Name] == "testing"
+}
+
+func importsFor(file *ast.File) map[string]string {
+	imports := make(map[string]string)
+	for _, spec := range file.Imports {
+		importPath, err := strconv.Unquote(spec.Path.Value)
+		if err != nil {
+			continue
+		}
+		alias := path.Base(importPath)
+		if spec.Name != nil {
+			alias = spec.Name.Name
+		}
+		if alias != "_" && alias != "." {
+			imports[alias] = importPath
+		}
+	}
+	return imports
+}
+
+func unique(index map[string][]string, packageName, name string) string {
+	targets := index[packageName+"|"+name]
+	if len(targets) == 1 {
+		return targets[0]
+	}
+	return ""
+}
+
+func localImport(module, importPath string, packages map[string]map[string]bool) string {
+	directory := ""
+	switch {
+	case module == "" || importPath == "":
+		return ""
+	case importPath == module:
+		directory = "."
+	case strings.HasPrefix(importPath, module+"/"):
+		directory = strings.TrimPrefix(importPath, module+"/")
+	default:
+		return ""
+	}
+	var selected string
+	for candidate := range packages[directory] {
+		if strings.HasSuffix(candidate, "_test") {
+			continue
+		}
+		if selected != "" {
+			return "" // Multiple package variants: do not guess a target.
+		}
+		selected = candidate
+	}
+	if selected == "" {
+		return ""
+	}
+	return directory + "::" + selected
+}
+
+func unwrap(expr ast.Expr) ast.Expr {
+	for {
+		switch value := expr.(type) {
+		case *ast.IndexExpr:
+			expr = value.X
+		case *ast.IndexListExpr:
+			expr = value.X
+		case *ast.ParenExpr:
+			expr = value.X
+		default:
+			return expr
+		}
+	}
+}
+
+// Treat any local declaration as a possible shadow throughout the function.
+// This may leave an otherwise resolvable call unresolved, but avoids inventing
+// an edge to a package symbol when a local binding has the same name.
+func shadowedNames(decl *ast.FuncDecl) map[string]bool {
+	names := make(map[string]bool)
+	addFields := func(fields *ast.FieldList) {
+		if fields == nil {
+			return
+		}
+		for _, field := range fields.List {
+			for _, identifier := range field.Names {
+				names[identifier.Name] = true
+			}
+		}
+	}
+	addIdent := func(expr ast.Expr) {
+		if identifier, ok := expr.(*ast.Ident); ok && identifier.Name != "_" {
+			names[identifier.Name] = true
+		}
+	}
+	addFields(decl.Type.Params)
+	addFields(decl.Type.Results)
+	if decl.Body != nil {
+		ast.Inspect(decl.Body, func(n ast.Node) bool {
+			switch item := n.(type) {
+			case *ast.AssignStmt:
+				if item.Tok == token.DEFINE {
+					for _, expr := range item.Lhs {
+						addIdent(expr)
+					}
+				}
+			case *ast.RangeStmt:
+				if item.Tok == token.DEFINE {
+					addIdent(item.Key)
+					addIdent(item.Value)
+				}
+			case *ast.ValueSpec:
+				for _, identifier := range item.Names {
+					names[identifier.Name] = true
+				}
+			case *ast.FuncLit:
+				addFields(item.Type.Params)
+				addFields(item.Type.Results)
+			}
+			return true
+		})
+	}
+	return names
+}
+
+func (r resolver) declaredType(expr ast.Expr, fn function) typeRef {
+	for {
+		switch value := expr.(type) {
+		case *ast.StarExpr:
+			expr = value.X
+		case *ast.IndexExpr:
+			expr = value.X
+		case *ast.IndexListExpr:
+			expr = value.X
+		default:
+			goto base
+		}
+	}
+base:
+	switch value := expr.(type) {
+	case *ast.Ident:
+		if r.types[fn.Package][value.Name] {
+			return typeRef{fn.Package, value.Name}
+		}
+	case *ast.SelectorExpr:
+		if ident, ok := value.X.(*ast.Ident); ok && !fn.Shadowed[ident.Name] {
+			pkg := localImport(r.module, fn.File.Imports[ident.Name], r.packages)
+			if r.types[pkg][value.Sel.Name] {
+				return typeRef{pkg, value.Sel.Name}
+			}
+		}
+	}
+	return typeRef{}
+}
+
+func (r resolver) expressionType(expr ast.Expr, fn function) typeRef {
+	expr = unwrap(expr)
+	switch value := expr.(type) {
+	case *ast.Ident:
+		return fn.Bindings[value.Name]
+	case *ast.UnaryExpr:
+		if value.Op == token.AND {
+			return r.expressionType(value.X, fn)
+		}
+	case *ast.CompositeLit:
+		return r.declaredType(value.Type, fn)
+	case *ast.CallExpr:
+		if target := r.resolve(value.Fun, fn); target != "" {
+			return r.returns[target]
+		}
+		return r.declaredType(value.Fun, fn) // A conversion to a known local type.
+	}
+	return typeRef{}
+}
+
+func (r resolver) localBindings(fn function) map[string]typeRef {
+	bindings := make(map[string]typeRef)
+	seen := make(map[string]bool)
+	add := func(name string, typ typeRef) {
+		if name == "_" {
+			return
+		}
+		if seen[name] {
+			bindings[name] = typeRef{} // Shadowed in another scope: do not guess.
+			return
+		}
+		seen[name] = true
+		bindings[name] = typ
+	}
+	for _, fields := range []*ast.FieldList{fn.Decl.Type.Params, fn.Decl.Type.Results} {
+		if fields == nil {
+			continue
+		}
+		for _, field := range fields.List {
+			for _, ident := range field.Names {
+				add(ident.Name, r.declaredType(field.Type, fn))
+			}
+		}
+	}
+	if fn.ReceiverVar != "" {
+		add(fn.ReceiverVar, typeRef{fn.Package, fn.ReceiverType})
+	}
+	fn.Bindings = bindings
+	if fn.Decl.Body != nil {
+		ast.Inspect(fn.Decl.Body, func(n ast.Node) bool {
+			switch item := n.(type) {
+			case *ast.AssignStmt:
+				if item.Tok == token.DEFINE {
+					for i, lhs := range item.Lhs {
+						if ident, ok := lhs.(*ast.Ident); ok {
+							typ := typeRef{}
+							if i < len(item.Rhs) && len(item.Lhs) == len(item.Rhs) {
+								typ = r.expressionType(item.Rhs[i], fn)
+							}
+							add(ident.Name, typ)
+						}
+					}
+				}
+			case *ast.RangeStmt:
+				if item.Tok == token.DEFINE {
+					for _, expr := range []ast.Expr{item.Key, item.Value} {
+						if ident, ok := expr.(*ast.Ident); ok {
+							add(ident.Name, typeRef{})
+						}
+					}
+				}
+			case *ast.ValueSpec:
+				for i, ident := range item.Names {
+					typ := r.declaredType(item.Type, fn)
+					if typ == (typeRef{}) && i < len(item.Values) {
+						typ = r.expressionType(item.Values[i], fn)
+					}
+					add(ident.Name, typ)
+				}
+			case *ast.FuncLit:
+				for _, fields := range []*ast.FieldList{item.Type.Params, item.Type.Results} {
+					if fields != nil {
+						for _, field := range fields.List {
+							for _, ident := range field.Names {
+								add(ident.Name, typeRef{})
+							}
+						}
+					}
+				}
+			}
+			return true
+		})
+	}
+	return bindings
+}
+
+func (r resolver) resolve(expr ast.Expr, fn function) string {
+	expr = unwrap(expr)
+	switch value := expr.(type) {
+	case *ast.Ident:
+		if fn.Shadowed[value.Name] {
+			return ""
+		}
+		return unique(r.index, fn.Package, value.Name)
+	case *ast.SelectorExpr:
+		if typ := r.expressionType(value.X, fn); typ != (typeRef{}) {
+			return unique(r.index, typ.Package, typ.Name+"."+value.Sel.Name)
+		}
+		if qualifier, ok := value.X.(*ast.Ident); ok {
+			if fn.Shadowed[qualifier.Name] {
+				return ""
+			}
+			if qualifier.Name == fn.ReceiverVar && fn.ReceiverType != "" {
+				return unique(r.index, fn.Package, fn.ReceiverType+"."+value.Sel.Name)
+			}
+			if importPath, ok := fn.File.Imports[qualifier.Name]; ok {
+				pkg := localImport(r.module, importPath, r.packages)
+				return unique(r.index, pkg, value.Sel.Name)
+			}
+			if r.types[fn.Package][qualifier.Name] {
+				return unique(r.index, fn.Package, qualifier.Name+"."+value.Sel.Name)
+			}
+			return ""
+		}
+		if left, ok := value.X.(*ast.SelectorExpr); ok {
+			if qualifier, ok := left.X.(*ast.Ident); ok {
+				if importPath, ok := fn.File.Imports[qualifier.Name]; ok && !fn.Shadowed[qualifier.Name] {
+					pkg := localImport(r.module, importPath, r.packages)
+					if r.types[pkg][left.Sel.Name] {
+						return unique(r.index, pkg, left.Sel.Name+"."+value.Sel.Name)
+					}
+				}
+			}
+		}
+	}
+	return ""
+}
+
+func build(sources map[string][]byte, root string, tags []string) (output, error) {
+	result := output{
+		Nodes: []node{}, Edges: []edge{}, UnresolvedCalls: []unresolvedCall{}, Files: []fileFact{},
+		SourceFiles: []sourceFileFact{}, SelectionUnsafe: []string{},
+	}
+	context := gobuild.Default
+	context.BuildTags = append([]string{}, tags...)
+	sort.Strings(context.BuildTags)
+	result.BuildContext = buildContext{
+		GOOS: context.GOOS, GOARCH: context.GOARCH,
+		GoVersion: runtime.Version(), Compiler: context.Compiler,
+		CgoEnabled: context.CgoEnabled, BuildTags: context.BuildTags,
+	}
+	fset := token.NewFileSet()
+	files := []sourceFile{}
+	unsafeReasons := make(map[string]bool)
+	packages := make(map[string]map[string]bool)
+	types := make(map[string]map[string]bool)
+	paths := make([]string, 0, len(sources))
+	for filename := range sources {
+		if strings.HasSuffix(filename, ".go") {
+			paths = append(paths, filename)
+		}
+	}
+	sort.Strings(paths)
+	if len(paths) == 0 {
+		return result, fmt.Errorf("no Go source files found in the repository")
+	}
+	for _, filename := range paths {
+		if root != "" {
+			matched, err := context.MatchFile(
+				filepath.Join(root, filepath.FromSlash(path.Dir(filename))), path.Base(filename),
+			)
+			if err != nil {
+				return result, fmt.Errorf("check Go build constraints for %s: %w", filename, err)
+			}
+			if !matched {
+				continue
+			}
+		}
+		file, err := parser.ParseFile(fset, filename, sources[filename], parser.AllErrors|parser.ParseComments)
+		if err != nil {
+			return result, fmt.Errorf("parse %s: %w", filename, err)
+		}
+		for _, comments := range file.Comments {
+			for _, comment := range comments.List {
+				text := strings.TrimSpace(comment.Text)
+				if strings.HasPrefix(text, "//go:linkname") || strings.HasPrefix(text, "//export ") {
+					unsafeReasons["Go linkname/export directives can add unmodeled callers"] = true
+				}
+			}
+		}
+		pkg := packageKey(filename, file.Name.Name)
+		files = append(files, sourceFile{filename, pkg, importsFor(file), file})
+		result.SourceFiles = append(result.SourceFiles, sourceFileFact{
+			Path: filename, NonFunctionHash: nonFunctionHash(fset, file, sources[filename]),
+		})
+		dir := path.Dir(filename)
+		if packages[dir] == nil {
+			packages[dir] = make(map[string]bool)
+		}
+		packages[dir][file.Name.Name] = true
+		if types[pkg] == nil {
+			types[pkg] = make(map[string]bool)
+		}
+		for _, decl := range file.Decls {
+			general, ok := decl.(*ast.GenDecl)
+			if !ok {
+				continue
+			}
+			if general.Tok == token.VAR {
+				for _, spec := range general.Specs {
+					if values, ok := spec.(*ast.ValueSpec); ok && len(values.Values) > 0 {
+						unsafeReasons["package-level variable initialization is not connected to test roots"] = true
+					}
+				}
+			}
+			for _, spec := range general.Specs {
+				if typ, ok := spec.(*ast.TypeSpec); ok {
+					types[pkg][typ.Name.Name] = true
+				}
+			}
+		}
+	}
+
+	module := modulePath(sources["go.mod"])
+	for _, file := range files {
+		imports := make(map[string]bool)
+		for _, spec := range file.AST.Imports {
+			importPath, err := strconv.Unquote(spec.Path.Value)
+			if err == nil {
+				if pkg := localImport(module, importPath, packages); pkg != "" {
+					imports[pkg] = true
+				}
+			}
+		}
+		dependencies := make([]string, 0, len(imports))
+		for pkg := range imports {
+			dependencies = append(dependencies, pkg)
+		}
+		sort.Strings(dependencies)
+		result.Files = append(result.Files, fileFact{file.Path, file.Package, dependencies})
+	}
+	index := make(map[string][]string)
+	functions := []function{}
+	occurrences := make(map[string]int)
+	for i := range files {
+		file := &files[i]
+		for _, decl := range file.AST.Decls {
+			fn, ok := decl.(*ast.FuncDecl)
+			if !ok {
+				continue
+			}
+			if fn.Body == nil {
+				unsafeReasons["bodyless function declarations can hide assembly or external calls"] = true
+			}
+			receiverType, receiverVar := receiver(fn)
+			qualname := fn.Name.Name
+			if receiverType != "" {
+				qualname = receiverType + "." + qualname
+			}
+			baseID := file.Path + "::" + qualname
+			occurrences[baseID]++
+			id := baseID
+			if qualname == "init" || occurrences[baseID] > 1 {
+				id = fmt.Sprintf("%s#%d", baseID, occurrences[baseID])
+			}
+			item := node{
+				ID: id, Path: file.Path,
+				Qualname: qualname, Line: fset.Position(fn.Pos()).Line,
+				IsTest:     isTest(fn, file.Path, file.Imports),
+				SourceHash: functionHash(fset, fn, sources[file.Path]),
+			}
+			result.Nodes = append(result.Nodes, item)
+			index[file.Package+"|"+qualname] = append(index[file.Package+"|"+qualname], item.ID)
+			functions = append(functions, function{
+				Node: item, Package: file.Package, ReceiverType: receiverType,
+				ReceiverVar: receiverVar, Shadowed: shadowedNames(fn), File: file, Decl: fn,
+			})
+		}
+	}
+	for reason := range unsafeReasons {
+		result.SelectionUnsafe = append(result.SelectionUnsafe, reason)
+	}
+	sort.Strings(result.SelectionUnsafe)
+
+	r := resolver{index: index, packages: packages, types: types, module: module, returns: make(map[string]typeRef)}
+	for _, fn := range functions {
+		fields := fn.Decl.Type.Results
+		if fields != nil && len(fields.List) == 1 && len(fields.List[0].Names) <= 1 {
+			r.returns[fn.Node.ID] = r.declaredType(fields.List[0].Type, fn)
+		}
+	}
+	for i := range functions {
+		functions[i].Bindings = r.localBindings(functions[i])
+	}
+	for _, fn := range functions {
+		if fn.Decl.Body == nil {
+			continue
+		}
+		ast.Inspect(fn.Decl.Body, func(n ast.Node) bool {
+			call, ok := n.(*ast.CallExpr)
+			if !ok {
+				return true
+			}
+			line := fset.Position(call.Pos()).Line
+			target := r.resolve(call.Fun, fn)
+			if target != "" {
+				result.Edges = append(result.Edges, edge{fn.Node.ID, target, fn.File.Path, line})
+			} else {
+				var expression bytes.Buffer
+				_ = printer.Fprint(&expression, fset, call.Fun)
+				result.UnresolvedCalls = append(result.UnresolvedCalls,
+					unresolvedCall{fn.Node.ID, expression.String(), fn.File.Path, line})
+			}
+			return true
+		})
+	}
+	return result, nil
+}
+
+func functionHash(fset *token.FileSet, decl *ast.FuncDecl, source []byte) string {
+	start := decl.Pos()
+	if decl.Doc != nil && decl.Doc.Pos() < start {
+		start = decl.Doc.Pos()
+	}
+	begin := fset.Position(start).Offset
+	end := fset.Position(decl.End()).Offset
+	if begin < 0 || end < begin || end > len(source) {
+		return ""
+	}
+	digest := sha256.Sum256(source[begin:end])
+	return hex.EncodeToString(digest[:])
+}
+
+func nonFunctionHash(fset *token.FileSet, file *ast.File, source []byte) string {
+	type sourceRange struct{ start, end int }
+	ranges := []sourceRange{}
+	for _, decl := range file.Decls {
+		fn, ok := decl.(*ast.FuncDecl)
+		if !ok {
+			continue
+		}
+		start := fn.Pos()
+		if fn.Doc != nil && fn.Doc.Pos() < start {
+			start = fn.Doc.Pos()
+		}
+		ranges = append(ranges, sourceRange{
+			start: fset.Position(start).Offset,
+			end:   fset.Position(fn.End()).Offset,
+		})
+	}
+	sort.Slice(ranges, func(i, j int) bool { return ranges[i].start < ranges[j].start })
+	var residual bytes.Buffer
+	cursor := 0
+	for _, current := range ranges {
+		if current.start < cursor || current.start < 0 || current.end < current.start || current.end > len(source) {
+			continue
+		}
+		residual.Write(source[cursor:current.start])
+		cursor = current.end
+	}
+	residual.Write(source[cursor:])
+	normalized := strings.Join(strings.Fields(residual.String()), " ")
+	digest := sha256.Sum256([]byte(normalized))
+	return hex.EncodeToString(digest[:])
+}
+
+func main() {
+	var data input
+	if err := json.NewDecoder(os.Stdin).Decode(&data); err != nil {
+		fmt.Fprintln(os.Stderr, "decode source snapshot:", err)
+		os.Exit(1)
+	}
+	facts, err := build(data.Sources, data.Root, data.Tags)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	if err := json.NewEncoder(os.Stdout).Encode(facts); err != nil {
+		fmt.Fprintln(os.Stderr, "encode graph facts:", err)
+		os.Exit(1)
+	}
+}

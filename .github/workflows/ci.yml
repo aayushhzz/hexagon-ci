@@ -17,15 +17,29 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: "1.24.x"
+          cache-dependency-path: go.mod
 
-      - name: Run test suite
-        run: python -m unittest discover -s tests -v
+      - name: Set up Python for reference parity
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run Go tests and Python parity checks
+        run: go test ./...
+
+      - name: Vet Go code
+        run: go vet ./...
+
+      - name: Run archived Python reference tests
+        env:
+          PYTHONPATH: python
+        run: python -m unittest discover -s python/tests -v
+
+      - name: Run archived graph v2 reference tests
+        env:
+          PYTHONPATH: python/graph_v2_reference
+        run: python -m unittest discover -s python/graph_v2_reference/tests -v

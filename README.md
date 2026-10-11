@@ -1,43 +1,91 @@
 # Hexagon CI
 
-Source-derived per-test call graph builder. Python uses the standard-library AST. Go uses a small helper built with the Go standard library; both feed the same full-rebuild graph engine.
+Hexagon CI is a Go CLI for building per-test source graphs, reporting tests that may be affected by file changes, and running Go tests. JSON graphs retain the existing graph v2 contract; a compact Go-specific graph artifact is also available. The plan format is unchanged. The former Python implementation and its tests are preserved under [`python/`](python/) as a runnable reference.
 
-Run a full rebuild from this checkout:
+The reusable Go API lives in `github.com/aayushhzz/hexagon-ci/hexagon`; the root CLI delegates to this package. Go integrations can build graphs and plans directly:
+
+```go
+import "github.com/aayushhzz/hexagon-ci/hexagon"
+
+func plan(repository string, changedFiles []string, previous *hexagon.Graph) (*hexagon.ImpactPlan, error) {
+	graph, err := hexagon.BuildGraph(repository, nil)
+	if err != nil {
+		return nil, err
+	}
+	return hexagon.PlanFileChanges(graph, changedFiles, previous)
+}
+```
+
+For function-level impact, callers can pass parsed structured hunks to `PlanDiff` or `PlanCompactDiff`. These return the existing `ImpactPlan`, map changed lines to functions, walk reverse caller edges to test roots, and preserve the full-suite fallback whenever mapping or graph completeness is uncertain. Raw unified-diff parsing stays outside the library. `RunCandidateTests` is an explicit diagnostic path; ordinary `RunTests` continues to honor the full-suite safety flag.
+
+The function-oriented `PlanGitDiff` and `PlanGitDiffCompact` APIs accept old/new paths with 1-based inclusive changed-line ranges. They return `FunctionDiffPlan`: `TestRoots` lists affected tests, while `FunctionsToRun` gives the trace of changed functions, callers, and test roots. Unmappable ranges, missing base graphs, and unresolved calls set `RunFullSuite` and broaden the candidate roots to every current test.
+
+This library API does not change the existing file-based `plan` command.
+
+```go
+plan, err := hexagon.PlanGitDiff(headGraph, gitDiff, baseGraph)
+if err != nil {
+	return err
+}
+if plan.RunFullSuite {
+	// Keep the safe full-suite fallback; the candidate roots remain diagnostic.
+}
+for _, testRoot := range plan.TestRoots {
+	// Each value is a graph function ID such as "pkg/service_test.go::TestUpdate".
+	_ = testRoot
+}
+```
+
+Build the CLI and rebuild a Go repository graph:
 
 ```sh
-python3 -m test_call_graph /path/to/python/repository --output /path/to/graph.json
-python3 -m test_call_graph /path/to/go/repository --language go --output /path/to/go-graph.json
-python3 -m test_call_graph /path/to/go/repository --language go --go-tags alt --output /path/to/go-graph.json.gz
+go build -o /tmp/hexagon-ci .
+/tmp/hexagon-ci graph /path/to/go/repository --output /path/to/graph.json
+/tmp/hexagon-ci graph /path/to/go/repository --go-tags alt --output /path/to/graph.json.gz
+/tmp/hexagon-ci graph /path/to/go/repository --output /path/to/graph.hgc.gz
 ```
 
-Go mode requires a `go` executable on `PATH`. It invokes `go run` by default; for repeated rebuilds, compile the helper once and pass the binary to avoid compilation time:
+The `.hgc.gz` suffix selects a versioned, gzip-compressed numeric artifact. It stores function names once and test reachability as sorted function IDs, without building all named test views. Go callers can use `BuildCompactGraph`, `RebuildCompactToFile`, `ReadCompactGraph`, and `NewCompactIndex(...).TestGraph(root)` to expand one view on demand. This gob-based format is Go-specific; use JSON graph v2 when another implementation needs to read the graph. The `plan` command accepts either format for the current and previous snapshots without expanding every compact test view.
+
+The original positional graph invocation remains supported:
 
 ```sh
-go build -o /tmp/go-ast-helper test_call_graph/go_source/main.go
-python3 -m test_call_graph /path/to/go/repository --language go --go-helper /tmp/go-ast-helper --output /path/to/go-graph.json
+/tmp/hexagon-ci /path/to/go/repository --language go --output /path/to/graph.json
 ```
 
-Each invocation scans all supported source files (excluding common generated/dependency directories), then traverses all functions reachable from each discovered test. Python resolves simple same-module, imported-function, module-qualified, and `self`/`cls` method calls. Go resolves direct same-package and repository-local imported functions, and some receiver calls where a parameter, local initializer, or repository-local constructor identifies the concrete type. Go tests are `Test...` functions in `_test.go` with a `*testing.T` argument. Format version 2 contains function nodes, resolved edges, per-test subgraphs, unresolved calls, and, for Go, selected-file package/import metadata. Node IDs use repository-relative file paths and qualified function names. `source_fingerprint` hashes scanned repository bytes; `analysis_fingerprint` also includes the analyzer and Go build context. An output ending in `.gz` is deterministically gzip-compressed and atomically replaced.
+For an impact plan, pass the current graph, changed repository-relative paths, and (when available) the previous graph so deleted files still contribute candidates:
 
-Adding, removing, or changing source or tests takes effect on the next run. The output is replaced only after a complete rebuild; parse or source-change errors leave the previous JSON file intact. The caller should treat that previous file as stale after a failed run. A full rebuild does not require a persistent graph index.
-
-This is static reachability, not a runtime execution trace. Python dynamic dispatch, local imports, framework-invoked fixtures, decorators, and calls through variables may remain unresolved. Go interface dispatch, function values, external modules, unknown receiver types, callbacks, and package initialization can remain unresolved. Shadowed names without a unique target remain unresolved. The reported Go file count is the number discovered; the `files` list contains those selected by the Go build context. Pass custom build tags with `--go-tags` (comma-separated). The analyzer rejects nonempty effective `GOFLAGS` rather than silently ignoring build flags. Calls inside Go function literals are attributed to the enclosing named function. Non-call dependencies such as constants in another file have no function node, but selected-file package imports allow a broader candidate list. These limits mean a large-repository graph is a partial static approximation rather than proof of runtime coverage.
-
-The safe planning API deliberately does **not** authorize selective execution:
-
-```python
-from test_call_graph import plan_file_changes
-
-plan = plan_file_changes(current_graph, ["lib/config.go"], previous_graph=previous_graph)
-print(plan.candidate_tests)  # diagnostic package/call-graph ancestry
-assert plan.run_full_suite  # run the complete applicable test suite
+```sh
+/tmp/hexagon-ci plan /path/to/graph.json \
+  --changed-file lib/config.go \
+  --previous-graph /path/to/base-graph.json \
+  --output /path/to/plan.json
+/tmp/hexagon-ci test /path/to/go/repository --plan /path/to/plan.json
 ```
 
-The candidate list includes tests in the changed file's package and reverse repository-local importers, including dependencies with no function node; previous snapshots cover deleted files. `run_full_suite` remains true because this static graph cannot prove that other tests are unaffected. A future test runner must honor that field; this builder does not execute tests. Changes outside selected Go sources or untracked runtime dependencies also require a full-suite run.
+The planner reports call-graph and package-import candidates, but sets `run_full_suite` to `true` and leaves `selection_complete` unset. Static analysis cannot prove that callbacks, interface dispatch, generated code, non-call dependencies, or runtime configuration have no effect on other tests. The runner uses `go test ./...` unless a plan explicitly marks selection complete and its source fingerprint, analyzer, and Go build context still match the checkout. Incomplete, stale, or mismatched plans fall back to the full suite. Build tags from graph analysis are carried into test execution. Go environment flags are rejected unless expressed with `--go-tags`, so the analyzed and executed build contexts stay explicit.
 
-See [the Prometheus benchmark and sanity audit](docs/prometheus-go-benchmark.md) for observed edges, deterministic rebuilds, and concrete missed-dependency cases.
+Graph v2 includes function nodes, resolved call edges, per-test subgraphs, unresolved calls, selected Go file package/import metadata, source fingerprints, and build context. Readers tolerate additional JSON fields while rejecting unsupported graph versions or languages. Compact artifacts carry the same facts and are checked for version, structure, and compressed-stream integrity on read. Plans use format version 1; the runner rejects an unknown plan version rather than guessing how to execute it. Graph writes are atomic, gzip output is deterministic, and parse/source-change failures leave the previous output intact.
 
-Run the focused tests with `python3 -m unittest discover -s tests -v`.
+The Go analyzer uses the Go standard library and does not type-check or execute repository code while building the graph. Interface dispatch, function values, callbacks, external modules, unknown receiver types, and package initialization can remain unresolved. Candidate tests are diagnostic until dependency completeness is established, so full-suite fallback remains the safe default.
+
+The Python implementation is retained for reference and parity checks. To run it directly from the repository root:
+
+```sh
+PYTHONPATH=python python3 -m test_call_graph /path/to/repository --language go --output /tmp/python-graph.json
+PYTHONPATH=python python3 -m unittest discover -s python/tests -v
+```
+
+The archived planner and runner from the earlier Python implementation remain under `python/test_call_graph` and `python/tests`. The graph v2 Python reference used for native-Go parity checks is under `python/graph_v2_reference`.
+
+Run the Go suite and static checks with:
+
+```sh
+go test ./...
+go vet ./...
+```
+
+The Go integration tests run the Python reference against shared Go fixtures and compare graph v2 and selector behavior. See [the Prometheus benchmark and sanity audit](docs/prometheus-go-benchmark.md) for observed edges, deterministic rebuilds, and concrete missed-dependency cases, [the Go/Python monolith benchmark](docs/go-monolith-graph-benchmarks.md) for build-time comparisons, and [the compact graph implementation measurements](docs/compact-go-graph-implementation.md) for artifact, memory, and planning costs.
 
 ## Per-RPC provenance and coverage (Go)
 
