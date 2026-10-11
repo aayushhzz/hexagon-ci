@@ -9,11 +9,7 @@
         200,
         400,
         401,
-        403,
-        413,
-        429,
-        500,
-        503
+        403
       ],
       "asserted": [
         200,
@@ -22,13 +18,15 @@
       ],
       "missing": [
         401,
-        403,
+        403
+      ],
+      "infra_statuses": [
         413,
         429,
         500,
         503
       ],
-      "coverage_pct": 25
+      "coverage_pct": 50
     },
     "fields": {
       "leaf_fields_read_by_rpc": 28,
@@ -646,5 +644,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListTeams` (HTTP operation `TeamsListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CursorParams\n  - in.Filter.Apps\n  - in.Filter.AppsOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CustomFields.Fields\n  - in.Filter.EnabledFeatures\n  - in.Filter.ExternalSourceData\n  - in.Filter.GroupId\n  - in.Filter.GroupIdOp\n  - in.Filter.IsDefault\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.SpacesFilter\n  - in.Filter.Subtype\n  - in.Filter.SubtypeOp\n  - in.Filter.SyncMetadata\n  - in.Filter.SyncMetadataOp\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.CursorParams != nil\n  - in.CursorParams != nil\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Filter.CustomFields == nil\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.ModifiedDate != nil\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.Before != nil\n  - in.Filter.ModifiedDate.DatePreset != nil\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.ModifiedDate.Before != nil\n  - in.Filter.SpacesFilter != nil\n  - in.Filter != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `cursor` -> suggestions ['in.CursorParams']\n  - test field `group` -> suggestions ['in.Filter.GroupId', 'in.Filter.GroupIdOp']\n  - test field `groupop` -> suggestions []\n  - test field `limit` -> suggestions []\n  - test field `mode` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListTeams` (HTTP operation `TeamsListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CursorParams\n  - in.Filter.Apps\n  - in.Filter.AppsOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CustomFields.Fields\n  - in.Filter.EnabledFeatures\n  - in.Filter.ExternalSourceData\n  - in.Filter.GroupId\n  - in.Filter.GroupIdOp\n  - in.Filter.IsDefault\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.SpacesFilter\n  - in.Filter.Subtype\n  - in.Filter.SubtypeOp\n  - in.Filter.SyncMetadata\n  - in.Filter.SyncMetadataOp\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.CursorParams != nil\n  - in.CursorParams != nil\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Filter.CustomFields == nil\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.ModifiedDate != nil\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.Before != nil\n  - in.Filter.ModifiedDate.DatePreset != nil\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.ModifiedDate.Before != nil\n  - in.Filter.SpacesFilter != nil\n  - in.Filter != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `cursor` -> suggestions ['in.CursorParams']\n  - test field `group` -> suggestions ['in.Filter.GroupId', 'in.Filter.GroupIdOp']\n  - test field `groupop` -> suggestions []\n  - test field `limit` -> suggestions []\n  - test field `mode` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

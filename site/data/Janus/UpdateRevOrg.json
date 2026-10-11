@@ -11,11 +11,7 @@
         401,
         403,
         404,
-        409,
-        413,
-        429,
-        500,
-        503
+        409
       ],
       "asserted": [
         200,
@@ -27,12 +23,15 @@
       ],
       "missing": [
         403,
-        404,
+        404
+      ],
+      "infra_statuses": [
         413,
         429,
+        500,
         503
       ],
-      "coverage_pct": 50
+      "coverage_pct": 66.7
     },
     "fields": {
       "leaf_fields_read_by_rpc": 9,
@@ -486,5 +485,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateRevOrg` (HTTP operation `RevOrgsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [403, 404, 413, 429, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevOrg.Account\n  - in.RevOrg.ExternalOid\n  - in.RevOrg.PhoneNumbers.StringValues\n  - in.RevOrg.SharedWith.Values\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevOrg.ExternalOid != \"\"\n  - in.RevOrg.ExternalOid != nil\n  - in.RevOrg.Account != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidRevOrgFilter\n  - errPhoneNumberInvalid\n  - errRevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `environment` -> suggestions []\n  - test field `externalref` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `sharedwith` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateRevOrg` (HTTP operation `RevOrgsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [403, 404]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevOrg.Account\n  - in.RevOrg.ExternalOid\n  - in.RevOrg.PhoneNumbers.StringValues\n  - in.RevOrg.SharedWith.Values\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevOrg.ExternalOid != \"\"\n  - in.RevOrg.ExternalOid != nil\n  - in.RevOrg.Account != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidRevOrgFilter\n  - errPhoneNumberInvalid\n  - errRevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `environment` -> suggestions []\n  - test field `externalref` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `sharedwith` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

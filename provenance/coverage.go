@@ -94,7 +94,21 @@ type StatusCoverage struct {
 	Documented  []int   `json:"documented"`
 	Asserted    []int   `json:"asserted"`
 	Missing     []int   `json:"missing"`
+	Infra       []int   `json:"infra_statuses"`
 	CoveragePct float64 `json:"coverage_pct"`
+}
+
+// infraStatuses are response codes the gateway documents for essentially every
+// operation (payload too large, rate limiting, server/unavailable) but that are
+// cross-cutting infrastructure rather than the endpoint's own behaviour. They
+// are excluded from the response-code denominator and reported separately.
+var infraStatuses = map[int]bool{
+	413: true, // Request Entity Too Large
+	429: true, // Too Many Requests
+	500: true, // Internal Server Error
+	502: true, // Bad Gateway
+	503: true, // Service Unavailable
+	504: true, // Gateway Timeout
 }
 
 type FieldCoverage struct {
@@ -891,8 +905,15 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 
 func statusCoverage(documented []int, assertedSet map[int]bool) StatusCoverage {
 	missing := make([]int, 0)
+	infra := make([]int, 0)
+	doc := make([]int, 0, len(documented))
 	covered := 0
 	for _, status := range documented {
+		if infraStatuses[status] {
+			infra = append(infra, status)
+			continue
+		}
+		doc = append(doc, status)
 		if assertedSet[status] {
 			covered++
 		} else {
@@ -900,10 +921,11 @@ func statusCoverage(documented []int, assertedSet map[int]bool) StatusCoverage {
 		}
 	}
 	return StatusCoverage{
-		Documented:  documented,
+		Documented:  doc,
 		Asserted:    sortedKeysInt(assertedSet),
 		Missing:     missing,
-		CoveragePct: pct(covered, len(documented)),
+		Infra:       infra,
+		CoveragePct: pct(covered, len(doc)),
 	}
 }
 

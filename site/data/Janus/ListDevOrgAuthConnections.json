@@ -9,11 +9,7 @@
         200,
         400,
         401,
-        403,
-        413,
-        429,
-        500,
-        503
+        403
       ],
       "asserted": [
         200
@@ -21,13 +17,15 @@
       "missing": [
         400,
         401,
-        403,
+        403
+      ],
+      "infra_statuses": [
         413,
         429,
         500,
         503
       ],
-      "coverage_pct": 12.5
+      "coverage_pct": 25
     },
     "fields": {
       "leaf_fields_read_by_rpc": 0,
@@ -159,5 +157,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListDevOrgAuthConnections` (HTTP operation `DevOrgAuthConnectionsListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - none\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - none\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContextDevOid\n  - errInvalidJWTToken\n  - errNoAssociatedAuth0OrgID\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListDevOrgAuthConnections` (HTTP operation `DevOrgAuthConnectionsListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - none\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - none\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContextDevOid\n  - errInvalidJWTToken\n  - errNoAssociatedAuth0OrgID\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

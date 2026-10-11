@@ -10,11 +10,7 @@
         400,
         401,
         403,
-        409,
-        413,
-        429,
-        500,
-        503
+        409
       ],
       "asserted": [
         200,
@@ -24,13 +20,15 @@
         403
       ],
       "missing": [
-        409,
+        409
+      ],
+      "infra_statuses": [
         413,
         429,
         500,
         503
       ],
-      "coverage_pct": 44.4
+      "coverage_pct": 80
     },
     "fields": {
       "leaf_fields_read_by_rpc": 11,
@@ -988,5 +986,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateRevUser` (HTTP operation `RevUsersCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountId\n  - in.AggregateErrors\n  - in.CustomSchemaSpec\n  - in.IsJanusAsyncFlow\n  - in.IsSystemCreate\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevUserAssociation\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountId|in.OrgIdentifier.OrgDon == nil\n  - in.AccountId|in.OrgIdentifier == nil\n  - in.AccountId|in.OrgIdentifier.OrgDon != nil\n  - in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer\n  - in.AccountId != nil\n  - in.AccountId|in.OrgIdentifier != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errAccountNotFound\n  - errEmailAlreadyExists\n  - errInvalidInputEmail\n  - errInvalidRevOrgFilter\n  - errPhoneNumberInvalid\n  - errRevOrgNotFound\n  - errRevUserAlreadyExists\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `account` -> suggestions ['in.AccountId']\n  - test field `association` -> suggestions ['in.RevUserAssociation']\n  - test field `description` -> suggestions []\n  - test field `displayname` -> suggestions []\n  - test field `externalref` -> suggestions []\n  - test field `revorg` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateRevUser` (HTTP operation `RevUsersCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [409]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountId\n  - in.AggregateErrors\n  - in.CustomSchemaSpec\n  - in.IsJanusAsyncFlow\n  - in.IsSystemCreate\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevUserAssociation\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountId|in.OrgIdentifier.OrgDon == nil\n  - in.AccountId|in.OrgIdentifier == nil\n  - in.AccountId|in.OrgIdentifier.OrgDon != nil\n  - in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer\n  - in.AccountId != nil\n  - in.AccountId|in.OrgIdentifier != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errAccountNotFound\n  - errEmailAlreadyExists\n  - errInvalidInputEmail\n  - errInvalidRevOrgFilter\n  - errPhoneNumberInvalid\n  - errRevOrgNotFound\n  - errRevUserAlreadyExists\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `account` -> suggestions ['in.AccountId']\n  - test field `association` -> suggestions ['in.RevUserAssociation']\n  - test field `description` -> suggestions []\n  - test field `displayname` -> suggestions []\n  - test field `externalref` -> suggestions []\n  - test field `revorg` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

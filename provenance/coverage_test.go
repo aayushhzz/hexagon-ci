@@ -671,3 +671,19 @@ func _() {
 		t.Fatalf("statuses=%v, want [400]", statuses)
 	}
 }
+
+func TestStatusCoverageExcludesInfra(t *testing.T) {
+	sc := statusCoverage([]int{200, 400, 401, 413, 429, 500, 503}, map[int]bool{200: true, 400: true})
+	if len(sc.Documented) != 3 { // 200,400,401
+		t.Fatalf("documented=%v, want [200 400 401]", sc.Documented)
+	}
+	if len(sc.Infra) != 4 { // 413,429,500,503
+		t.Fatalf("infra=%v, want 4 entries", sc.Infra)
+	}
+	if sc.CoveragePct != pct(2, 3) {
+		t.Fatalf("coverage=%v, want %v", sc.CoveragePct, pct(2, 3))
+	}
+	if len(sc.Missing) != 1 || sc.Missing[0] != 401 {
+		t.Fatalf("missing=%v, want [401]", sc.Missing)
+	}
+}

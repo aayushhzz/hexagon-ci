@@ -9,11 +9,7 @@
         200,
         400,
         401,
-        403,
-        413,
-        429,
-        500,
-        503
+        403
       ],
       "asserted": [
         200,
@@ -22,13 +18,15 @@
       "missing": [
         400,
         401,
-        403,
+        403
+      ],
+      "infra_statuses": [
         413,
         429,
         500,
         503
       ],
-      "coverage_pct": 12.5
+      "coverage_pct": 25
     },
     "fields": {
       "leaf_fields_read_by_rpc": 20,
@@ -498,5 +496,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListDevOrgInvite` (HTTP operation `DevOrgsInvitesList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.PageParams.SortBy\n  - in.SearchQuery\n  - in.UserFilter.CreatedByAgentId\n  - in.UserFilter.CreatedByAgentIdOp\n  - in.UserFilter.CreatedById\n  - in.UserFilter.CreatedByIdOp\n  - in.UserFilter.CreatedDate.After\n  - in.UserFilter.CreatedDate.Before\n  - in.UserFilter.CreatedDate.DatePreset.Type\n  - in.UserFilter.Email\n  - in.UserFilter.ExpiresAt.After\n  - in.UserFilter.ExpiresAt.Before\n  - in.UserFilter.ExpiresAt.DatePreset.Type\n  - in.UserFilter.GroupIds\n  - in.UserFilter.ModifiedById\n  - in.UserFilter.ModifiedByIdOp\n  - in.UserFilter.ModifiedDate.After\n  - in.UserFilter.ModifiedDate.Before\n  - in.UserFilter.ModifiedDate.DatePreset.Type\n  - in.UserFilter.State\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserFilter.CreatedDate != nil\n  - in.UserFilter.CreatedDate.After != nil\n  - in.UserFilter.CreatedDate.Before != nil\n  - in.UserFilter.CreatedDate.DatePreset != nil\n  - in.UserFilter.CreatedDate.After != nil\n  - in.UserFilter.CreatedDate.DatePreset.Type\n  - in.UserFilter.CreatedDate.Before != nil\n  - in.UserFilter.ModifiedDate != nil\n  - in.UserFilter.ModifiedDate.After != nil\n  - in.UserFilter.ModifiedDate.Before != nil\n  - in.UserFilter.ModifiedDate.DatePreset != nil\n  - in.UserFilter.ModifiedDate.After != nil\n  - in.UserFilter.ModifiedDate.DatePreset.Type\n  - in.UserFilter.ModifiedDate.Before != nil\n  - in.UserFilter.ExpiresAt != nil\n  - in.UserFilter.ExpiresAt.After != nil\n  - in.UserFilter.ExpiresAt.Before != nil\n  - in.UserFilter.ExpiresAt.DatePreset != nil\n  - in.UserFilter.ExpiresAt.After != nil\n  - in.UserFilter.ExpiresAt.DatePreset.Type\n  - in.UserFilter.ExpiresAt.Before != nil\n  - in.SearchQuery != \"\"\n  - in.PageParams != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidSortByInputField\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListDevOrgInvite` (HTTP operation `DevOrgsInvitesList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.PageParams.SortBy\n  - in.SearchQuery\n  - in.UserFilter.CreatedByAgentId\n  - in.UserFilter.CreatedByAgentIdOp\n  - in.UserFilter.CreatedById\n  - in.UserFilter.CreatedByIdOp\n  - in.UserFilter.CreatedDate.After\n  - in.UserFilter.CreatedDate.Before\n  - in.UserFilter.CreatedDate.DatePreset.Type\n  - in.UserFilter.Email\n  - in.UserFilter.ExpiresAt.After\n  - in.UserFilter.ExpiresAt.Before\n  - in.UserFilter.ExpiresAt.DatePreset.Type\n  - in.UserFilter.GroupIds\n  - in.UserFilter.ModifiedById\n  - in.UserFilter.ModifiedByIdOp\n  - in.UserFilter.ModifiedDate.After\n  - in.UserFilter.ModifiedDate.Before\n  - in.UserFilter.ModifiedDate.DatePreset.Type\n  - in.UserFilter.State\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserFilter.CreatedDate != nil\n  - in.UserFilter.CreatedDate.After != nil\n  - in.UserFilter.CreatedDate.Before != nil\n  - in.UserFilter.CreatedDate.DatePreset != nil\n  - in.UserFilter.CreatedDate.After != nil\n  - in.UserFilter.CreatedDate.DatePreset.Type\n  - in.UserFilter.CreatedDate.Before != nil\n  - in.UserFilter.ModifiedDate != nil\n  - in.UserFilter.ModifiedDate.After != nil\n  - in.UserFilter.ModifiedDate.Before != nil\n  - in.UserFilter.ModifiedDate.DatePreset != nil\n  - in.UserFilter.ModifiedDate.After != nil\n  - in.UserFilter.ModifiedDate.DatePreset.Type\n  - in.UserFilter.ModifiedDate.Before != nil\n  - in.UserFilter.ExpiresAt != nil\n  - in.UserFilter.ExpiresAt.After != nil\n  - in.UserFilter.ExpiresAt.Before != nil\n  - in.UserFilter.ExpiresAt.DatePreset != nil\n  - in.UserFilter.ExpiresAt.After != nil\n  - in.UserFilter.ExpiresAt.DatePreset.Type\n  - in.UserFilter.ExpiresAt.Before != nil\n  - in.SearchQuery != \"\"\n  - in.PageParams != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidSortByInputField\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

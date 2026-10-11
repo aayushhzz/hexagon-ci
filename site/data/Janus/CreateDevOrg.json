@@ -10,11 +10,7 @@
         400,
         401,
         403,
-        409,
-        413,
-        429,
-        500,
-        503
+        409
       ],
       "asserted": [
         201,
@@ -23,13 +19,15 @@
       "missing": [
         400,
         401,
-        403,
+        403
+      ],
+      "infra_statuses": [
         413,
         429,
         500,
         503
       ],
-      "coverage_pct": 22.2
+      "coverage_pct": 40
     },
     "fields": {
       "leaf_fields_read_by_rpc": 13,
@@ -292,5 +290,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateDevOrg` (HTTP operation `DevOrgsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOrg.AllowedEmailDomain\n  - in.DevOrg.AllowedEmailDomains\n  - in.DevOrg.PhoneNumbers\n  - in.DevOrg.PlatformRevOrgMetadata.AccountDeDupDomain\n  - in.DevOrgIdPrefix\n  - in.ServicePlan.ServicePlanLineItems\n  - in.Utm.Campaign\n  - in.Utm.Content\n  - in.Utm.Medium\n  - in.Utm.Source\n  - in.Utm.Term\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOrg == nil\n  - in.ServicePlan != nil\n  - in.DevOrg.AllowedEmailDomains\n  - in.DevOrg.AllowedEmailDomain != \"\"\n  - in.Utm != nil\n  - in.DevOrgIdPrefix != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevSlugInvalid\n  - errDisplayNameLengthTooShort\n  - errDomainBasedAccessNotAllowed\n  - errInternalServiceError\n  - errInvalidAuthContextEmail\n  - errInvalidJWTToken\n  - errMaxDevOrgsPerUserReached\n  - errPhoneNumberInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `environment` -> suggestions []\n  - test field `givedomainaccess` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateDevOrg` (HTTP operation `DevOrgsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOrg.AllowedEmailDomain\n  - in.DevOrg.AllowedEmailDomains\n  - in.DevOrg.PhoneNumbers\n  - in.DevOrg.PlatformRevOrgMetadata.AccountDeDupDomain\n  - in.DevOrgIdPrefix\n  - in.ServicePlan.ServicePlanLineItems\n  - in.Utm.Campaign\n  - in.Utm.Content\n  - in.Utm.Medium\n  - in.Utm.Source\n  - in.Utm.Term\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOrg == nil\n  - in.ServicePlan != nil\n  - in.DevOrg.AllowedEmailDomains\n  - in.DevOrg.AllowedEmailDomain != \"\"\n  - in.Utm != nil\n  - in.DevOrgIdPrefix != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevSlugInvalid\n  - errDisplayNameLengthTooShort\n  - errDomainBasedAccessNotAllowed\n  - errInternalServiceError\n  - errInvalidAuthContextEmail\n  - errInvalidJWTToken\n  - errMaxDevOrgsPerUserReached\n  - errPhoneNumberInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `environment` -> suggestions []\n  - test field `givedomainaccess` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }
