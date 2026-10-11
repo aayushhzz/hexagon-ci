@@ -31,11 +31,11 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 114,
-      "covered_count": 0,
-      "coverage_pct": 0,
+      "covered_count": 2,
+      "coverage_pct": 1.8,
       "request_fields_set_by_tests": 3,
-      "set_by_positive_tests": 0,
-      "set_by_negative_tests": 0,
+      "set_by_positive_tests": 2,
+      "set_by_negative_tests": 1,
       "by_depth": {
         "top_level": {
           "total": 6,
@@ -44,25 +44,46 @@
         },
         "nested": {
           "total": 33,
-          "set": 0,
-          "pct": 0
+          "set": 1,
+          "pct": 3
         },
         "deep": {
           "total": 75,
-          "set": 0,
-          "pct": 0
+          "set": 1,
+          "pct": 1.3
         }
       },
       "representative": {
         "units": 8,
-        "covered": 0,
-        "pct": 0,
+        "covered": 1,
+        "pct": 12.5,
         "collapsed_types": [
           "apiv2.CustomListWorksFilter",
           "apiv2.ListWorksFilter"
         ]
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.Filter.TicketFilter.Group",
+          "match": "alias",
+          "by_tests": [
+            "Development team coordinates issue resolution",
+            "Support team manages customer tickets throughout resolution process"
+          ]
+        },
+        {
+          "path": "in.Filter.WorkType",
+          "match": "alias",
+          "by_tests": [
+            "Development team coordinates issue resolution",
+            "Filter by wrong type",
+            "IssuesCount",
+            "OpportunitiesCount",
+            "Support team manages customer tickets throughout resolution process",
+            "TicketsCount"
+          ]
+        }
+      ],
       "gaps": [
         "in.CustomFilter.IssueFilters",
         "in.CustomFilter.TaskFilters",
@@ -153,7 +174,6 @@
         "in.Filter.TicketFilter.ChannelsV2Instances",
         "in.Filter.TicketFilter.ChannelsV2InstancesOp",
         "in.Filter.TicketFilter.ChannelsV2Op",
-        "in.Filter.TicketFilter.Group",
         "in.Filter.TicketFilter.GroupOp",
         "in.Filter.TicketFilter.OwnedByAgentId",
         "in.Filter.TicketFilter.RevOid",
@@ -169,7 +189,6 @@
         "in.Filter.TicketFilter.SubtypeOp",
         "in.Filter.TicketFilter.SurveysAggregation",
         "in.Filter.TicketFilter.SurveysAggregationOp",
-        "in.Filter.WorkType",
         "in.Filter.WorkflowId",
         "in.Filter.WorkflowIdOp",
         "in.Filter.WorkflowRunId",
@@ -887,28 +906,8 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
-          "field": "groupby",
-          "fuzzy_suggestions": [
-            "in.Filter.TicketFilter.Group"
-          ]
-        },
-        {
           "field": "limit",
           "fuzzy_suggestions": null
-        },
-        {
-          "field": "type",
-          "fuzzy_suggestions": [
-            "in.Filter.IssueFilter.Subtype",
-            "in.Filter.IssueFilter.SubtypeOp",
-            "in.Filter.OpportunityFilter.Subtype",
-            "in.Filter.OpportunityFilter.SubtypeOp",
-            "in.Filter.TaskFilter.Subtype",
-            "in.Filter.TaskFilter.SubtypeOp",
-            "in.Filter.TicketFilter.Subtype",
-            "in.Filter.TicketFilter.SubtypeOp",
-            "in.Filter.WorkType"
-          ]
         }
       ]
     },
@@ -1451,5 +1450,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CountWorks` (HTTP operation `WorksCountPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomFilter.IssueFilters\n  - in.CustomFilter.TaskFilters\n  - in.CustomFilter.TicketFilters\n  - in.DevOid\n  - in.ExcludeWorkIds\n  - in.Filter.ActualCloseDateOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.DeprecatedCreatedByAgentId\n  - in.Filter.DeprecatedCreatedByAgentIdOp\n  - in.Filter.ExternalSourceData\n  - in.Filter.IssueFilter.AccountIds\n  - in.Filter.IssueFilter.AccountIdsOp\n  - in.Filter.IssueFilter.ActualStartDateOp\n  - in.Filter.IssueFilter.AppliesToPartId\n  - in.Filter.IssueFilter.AppliesToPartIdOp\n  - in.Filter.IssueFilter.AppliesToVersionIds\n  - in.Filter.IssueFilter.AppsOp\n  - in.Filter.IssueFilter.DevelopedWith\n  - in.Filter.IssueFilter.LastCodeActivityOp\n  - in.Filter.IssueFilter.MilestoneId\n  - in.Filter.IssueFilter.MilestoneIdOp\n  - in.Filter.IssueFilter.Priority\n  - in.Filter.IssueFilter.ProjectId\n  - in.Filter.IssueFilter.ProjectIdOp\n  - in.Filter.IssueFilter.ReleaseVersionIds\n  - in.Filter.IssueFilter.RevOrgIds\n  - in.Filter.IssueFilter.RevOrgIdsOp\n  - in.Filter.IssueFilter.SlaId\n  - in.Filter.IssueFilter.SlaSummary\n  - in.Filter.IssueFilter.SprintId\n  - in.Filter.IssueFilter.SprintIdOp\n  - in.Filter.IssueFilter.SprintState\n  - in.Filter.IssueFilter.SprintStateOp\n  - in.Filter.IssueFilter.Subtype\n  - in.Filter.IssueFilter.SubtypeOp\n  - in.Filter.IssueFilter.TargetStartDateOp\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.OpportunityFilter.AccountId\n  - in.Filter.OpportunityFilter.AccountIdOp\n  - in.Filter.OpportunityFilter.AnnualContractValue\n  - in.Filter.OpportunityFilter.AppsOp\n  - in.Filter.OpportunityFilter.Budget\n  - in.Filter.OpportunityFilter.ContactIds\n  - in.Filter.OpportunityFilter.ContactIdsOp\n  - in.Filter.OpportunityFilter.ForecastCategory\n  - in.Filter.OpportunityFilter.Priority\n  - in.Filter.OpportunityFilter.SpacesFilter.SpaceId\n  - in.Filter.OpportunityFilter.Subtype\n  - in.Filter.OpportunityFilter.SubtypeOp\n  - in.Filter.OpportunityFilter.Value\n  - in.Filter.OwnedByIds\n  - in.Filter.OwnedByIdsOp\n  - in.Filter.Reactions\n  - in.Filter.ReportedByIds\n  - (+54 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp == nil\n  - in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp != 0\n  - in.DevOid == nil\n  - in.Filter.TicketFilter.AppliesToPartIdOp != nil\n  - in.Filter.TicketFilter.RevOidOp != nil\n  - in.Filter.TicketFilter.AccountIdOp != nil\n  - in.Filter.TicketFilter.GroupOp != nil\n  - in.Filter.TicketFilter.ChannelsOp != nil\n  - in.Filter.TicketFilter.ChannelsV2Op != nil\n  - in.Filter.TicketFilter.ChannelsV2InstancesOp != nil\n  - in.Filter.TicketFilter.SurveysAggregationOp != nil\n  - in.Filter.TicketFilter.SentimentOp != nil\n  - in.Filter.TicketFilter.SubtypeOp != nil\n  - in.Filter.TicketFilter.AppsOp != nil\n  - in.Filter.IssueFilter.AppliesToPartIdOp != nil\n  - in.Filter.IssueFilter.RevOrgIdsOp != nil\n  - in.Filter.IssueFilter.AccountIdsOp != nil\n  - in.Filter.IssueFilter.SprintIdOp != nil\n  - in.Filter.IssueFilter.SprintStateOp != nil\n  - in.Filter.IssueFilter.ProjectIdOp != nil\n  - in.Filter.IssueFilter.MilestoneIdOp != nil\n  - in.Filter.IssueFilter.TargetStartDateOp != nil\n  - in.Filter.IssueFilter.ActualStartDateOp != nil\n  - in.Filter.IssueFilter.LastCodeActivityOp != nil\n  - in.Filter.IssueFilter.SubtypeOp != nil\n  - in.Filter.IssueFilter.AppsOp != nil\n  - in.Filter.TaskFilter.AppliesToPartIdOp != nil\n  - in.Filter.TaskFilter.SubtypeOp != nil\n  - in.Filter.TaskFilter.AppsOp != nil\n  - in.Filter.OpportunityFilter.AccountIdOp != nil\n  - in.Filter.OpportunityFilter.ContactIdsOp != nil\n  - in.Filter.OpportunityFilter.SubtypeOp != nil\n  - in.Filter.OpportunityFilter.AppsOp != nil\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.ReportedByIdsOp != nil\n  - in.Filter.OwnedByIdsOp != nil\n  - in.Filter.TargetCloseDateOp != nil\n  - in.Filter.ActualCloseDateOp != nil\n  - (+37 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `groupby` -> suggestions ['in.Filter.TicketFilter.Group']\n  - test field `limit` -> suggestions []\n  - test field `type` -> suggestions ['in.Filter.IssueFilter.Subtype', 'in.Filter.IssueFilter.SubtypeOp', 'in.Filter.OpportunityFilter.Subtype', 'in.Filter.OpportunityFilter.SubtypeOp', 'in.Filter.TaskFilter.Subtype', 'in.Filter.TaskFilter.SubtypeOp', 'in.Filter.TicketFilter.Subtype', 'in.Filter.TicketFilter.SubtypeOp', 'in.Filter.WorkType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CountWorks` (HTTP operation `WorksCountPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomFilter.IssueFilters\n  - in.CustomFilter.TaskFilters\n  - in.CustomFilter.TicketFilters\n  - in.DevOid\n  - in.ExcludeWorkIds\n  - in.Filter.ActualCloseDateOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.DeprecatedCreatedByAgentId\n  - in.Filter.DeprecatedCreatedByAgentIdOp\n  - in.Filter.ExternalSourceData\n  - in.Filter.IssueFilter.AccountIds\n  - in.Filter.IssueFilter.AccountIdsOp\n  - in.Filter.IssueFilter.ActualStartDateOp\n  - in.Filter.IssueFilter.AppliesToPartId\n  - in.Filter.IssueFilter.AppliesToPartIdOp\n  - in.Filter.IssueFilter.AppliesToVersionIds\n  - in.Filter.IssueFilter.AppsOp\n  - in.Filter.IssueFilter.DevelopedWith\n  - in.Filter.IssueFilter.LastCodeActivityOp\n  - in.Filter.IssueFilter.MilestoneId\n  - in.Filter.IssueFilter.MilestoneIdOp\n  - in.Filter.IssueFilter.Priority\n  - in.Filter.IssueFilter.ProjectId\n  - in.Filter.IssueFilter.ProjectIdOp\n  - in.Filter.IssueFilter.ReleaseVersionIds\n  - in.Filter.IssueFilter.RevOrgIds\n  - in.Filter.IssueFilter.RevOrgIdsOp\n  - in.Filter.IssueFilter.SlaId\n  - in.Filter.IssueFilter.SlaSummary\n  - in.Filter.IssueFilter.SprintId\n  - in.Filter.IssueFilter.SprintIdOp\n  - in.Filter.IssueFilter.SprintState\n  - in.Filter.IssueFilter.SprintStateOp\n  - in.Filter.IssueFilter.Subtype\n  - in.Filter.IssueFilter.SubtypeOp\n  - in.Filter.IssueFilter.TargetStartDateOp\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.OpportunityFilter.AccountId\n  - in.Filter.OpportunityFilter.AccountIdOp\n  - in.Filter.OpportunityFilter.AnnualContractValue\n  - in.Filter.OpportunityFilter.AppsOp\n  - in.Filter.OpportunityFilter.Budget\n  - in.Filter.OpportunityFilter.ContactIds\n  - in.Filter.OpportunityFilter.ContactIdsOp\n  - in.Filter.OpportunityFilter.ForecastCategory\n  - in.Filter.OpportunityFilter.Priority\n  - in.Filter.OpportunityFilter.SpacesFilter.SpaceId\n  - in.Filter.OpportunityFilter.Subtype\n  - in.Filter.OpportunityFilter.SubtypeOp\n  - in.Filter.OpportunityFilter.Value\n  - in.Filter.OwnedByIds\n  - in.Filter.OwnedByIdsOp\n  - in.Filter.Reactions\n  - in.Filter.ReportedByIds\n  - (+52 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp == nil\n  - in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp != 0\n  - in.DevOid == nil\n  - in.Filter.TicketFilter.AppliesToPartIdOp != nil\n  - in.Filter.TicketFilter.RevOidOp != nil\n  - in.Filter.TicketFilter.AccountIdOp != nil\n  - in.Filter.TicketFilter.GroupOp != nil\n  - in.Filter.TicketFilter.ChannelsOp != nil\n  - in.Filter.TicketFilter.ChannelsV2Op != nil\n  - in.Filter.TicketFilter.ChannelsV2InstancesOp != nil\n  - in.Filter.TicketFilter.SurveysAggregationOp != nil\n  - in.Filter.TicketFilter.SentimentOp != nil\n  - in.Filter.TicketFilter.SubtypeOp != nil\n  - in.Filter.TicketFilter.AppsOp != nil\n  - in.Filter.IssueFilter.AppliesToPartIdOp != nil\n  - in.Filter.IssueFilter.RevOrgIdsOp != nil\n  - in.Filter.IssueFilter.AccountIdsOp != nil\n  - in.Filter.IssueFilter.SprintIdOp != nil\n  - in.Filter.IssueFilter.SprintStateOp != nil\n  - in.Filter.IssueFilter.ProjectIdOp != nil\n  - in.Filter.IssueFilter.MilestoneIdOp != nil\n  - in.Filter.IssueFilter.TargetStartDateOp != nil\n  - in.Filter.IssueFilter.ActualStartDateOp != nil\n  - in.Filter.IssueFilter.LastCodeActivityOp != nil\n  - in.Filter.IssueFilter.SubtypeOp != nil\n  - in.Filter.IssueFilter.AppsOp != nil\n  - in.Filter.TaskFilter.AppliesToPartIdOp != nil\n  - in.Filter.TaskFilter.SubtypeOp != nil\n  - in.Filter.TaskFilter.AppsOp != nil\n  - in.Filter.OpportunityFilter.AccountIdOp != nil\n  - in.Filter.OpportunityFilter.ContactIdsOp != nil\n  - in.Filter.OpportunityFilter.SubtypeOp != nil\n  - in.Filter.OpportunityFilter.AppsOp != nil\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.ReportedByIdsOp != nil\n  - in.Filter.OwnedByIdsOp != nil\n  - in.Filter.TargetCloseDateOp != nil\n  - in.Filter.ActualCloseDateOp != nil\n  - (+37 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `limit` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

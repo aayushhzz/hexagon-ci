@@ -433,3 +433,38 @@ func parseFirstItBody(t *testing.T, src string) *ast.FuncLit {
 	}
 	return body
 }
+
+// TestScanItBodyCapturesAssignedFields guards capture of request fields set by
+// assignment (req.Field = ...) rather than struct literals. Empty assignments
+// (Stage = nil) must not count.
+func TestScanItBodyCapturesAssignedFields(t *testing.T) {
+	src := `package x
+
+func _() {
+	It("build then call", func() {
+		req := apiv2internal.WorksCountPostJSONRequestBody{Type: &types}
+		req.Stage = nil
+		req.Ticket.Subtype = &sub
+		req.Ticket.SubtypeOp = &op
+		req.Filter.TaskFilter.Priority = &p
+		http_utils.MakeRequest(ctx, ClientV2.WorksCountPost, req, &resp)
+	})
+}`
+	body := parseFirstItBody(t, src)
+	ops, fields, _, _ := scanItBody(body)
+	if len(ops) != 1 || ops[0] != "WorksCountPost" {
+		t.Fatalf("ops = %v, want [WorksCountPost]", ops)
+	}
+	got := map[string]bool{}
+	for _, f := range fields {
+		got[f] = true
+	}
+	for _, want := range []string{"Type", "Subtype", "SubtypeOp", "Priority"} {
+		if !got[want] {
+			t.Errorf("missing assigned field %q; got %v", want, fields)
+		}
+	}
+	if got["Stage"] {
+		t.Errorf("empty assignment (Stage = nil) must not count; got %v", fields)
+	}
+}

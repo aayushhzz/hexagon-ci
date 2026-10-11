@@ -318,9 +318,37 @@ func collectTests(f *ast.File, file string, ops map[string]*opFacts) {
 // scanItBody extracts the operations called, request fields set, asserted
 // statuses, and success assertions. A single It may issue several requests (an
 // action plus verification calls), so every operation invoked is returned, in
-// source order and deduped. Commented-out request calls are not part of the AST
-// and so are never seen here; disabled specs (XIt/PIt) are not matched as Its.
+// source order and deduped. Request fields come from struct literals AND from
+// field assignments on the request variable (req.Field = ..., req.Nested.Field =
+// ...), since many tests build nested requests imperatively. Commented-out
+// request calls are not part of the AST and so are never seen here; disabled
+// specs (XIt/PIt) are not matched as Its.
 func scanItBody(body *ast.FuncLit) (ops []string, fields []string, statuses []int, success bool) {
+	// Pass 1: identify request variables (declared with a request-body type, or
+	// used as the request argument of a MakeRequest call). Done first so field
+	// assignments are captured whether they precede or follow the call.
+	reqVars := map[string]bool{}
+	ast.Inspect(body, func(n ast.Node) bool {
+		switch e := n.(type) {
+		case *ast.CallExpr:
+			if isSelName(e.Fun, "MakeRequest") && len(e.Args) >= 3 {
+				if root := rootIdent(e.Args[2]); root != "" {
+					reqVars[root] = true
+				}
+			}
+		case *ast.AssignStmt:
+			for i, lhs := range e.Lhs {
+				if id, ok := lhs.(*ast.Ident); ok && requestBodyLit(rhsAt(e, i)) != nil {
+					reqVars[id.Name] = true
+				}
+			}
+		case *ast.DeclStmt:
+			registerDeclaredReqvars(e, reqVars)
+		}
+		return true
+	})
+
+	// Pass 2: operations, request fields, asserted statuses, success.
 	hasStatus := false
 	sawBeNil := false
 	seen := map[string]bool{}
@@ -348,6 +376,8 @@ func scanItBody(body *ast.FuncLit) (ops []string, fields []string, statuses []in
 			case "BeNil":
 				sawBeNil = true
 			}
+		case *ast.AssignStmt:
+			captureAssignedFields(e, reqVars, &fields)
 		case *ast.SelectorExpr:
 			if e.Sel.Name == "StatusCode" {
 				hasStatus = true
@@ -364,6 +394,105 @@ func scanItBody(body *ast.FuncLit) (ops []string, fields []string, statuses []in
 		statuses = nil
 	}
 	return ops, fields, statuses, sawBeNil
+}
+
+// rhsAt returns the right-hand side of an assignment for LHS index i.
+func rhsAt(as *ast.AssignStmt, i int) ast.Expr {
+	if i < len(as.Rhs) {
+		return as.Rhs[i]
+	}
+	if len(as.Rhs) == 1 {
+		return as.Rhs[0]
+	}
+	return nil
+}
+
+// captureAssignedFields records fields assigned to a request variable
+// (req.Field = value, including nested req.Nested.Field). Empty values (nil, "",
+// 0, false) are skipped, matching the literal path: assigning an empty value does
+// not exercise that input.
+func captureAssignedFields(as *ast.AssignStmt, reqVars map[string]bool, fields *[]string) {
+	for i, lhs := range as.Lhs {
+		root, leaf, ok := assignmentTargetLeaf(lhs)
+		if !ok || !reqVars[root] {
+			continue
+		}
+		if rhs := rhsAt(as, i); rhs != nil && !isEmptyValue(rhs) {
+			*fields = append(*fields, leaf)
+		}
+	}
+}
+
+// registerDeclaredReqvars records `var x RequestBodyType` and
+// `var x = RequestBodyType{...}` so later field assignments to x are captured.
+func registerDeclaredReqvars(ds *ast.DeclStmt, reqVars map[string]bool) {
+	gd, ok := ds.Decl.(*ast.GenDecl)
+	if !ok || gd.Tok != token.VAR {
+		return
+	}
+	for _, spec := range gd.Specs {
+		vs, ok := spec.(*ast.ValueSpec)
+		if !ok {
+			continue
+		}
+		isReq := isRequestBodyType(vs.Type)
+		if !isReq {
+			for _, v := range vs.Values {
+				if requestBodyLit(v) != nil {
+					isReq = true
+					break
+				}
+			}
+		}
+		if isReq {
+			for _, n := range vs.Names {
+				reqVars[n.Name] = true
+			}
+		}
+	}
+}
+
+// requestBodyLit unwraps &expr and returns the composite literal when its type
+// is a request-body type.
+func requestBodyLit(e ast.Expr) *ast.CompositeLit {
+	if e == nil {
+		return nil
+	}
+	if u, ok := e.(*ast.UnaryExpr); ok {
+		e = u.X
+	}
+	if cl, ok := e.(*ast.CompositeLit); ok && isRequestBodyType(cl.Type) {
+		return cl
+	}
+	return nil
+}
+
+// assignmentTargetLeaf returns the root identifier and leaf field name for an
+// assignment target like req.Field or req.Nested.Field.
+func assignmentTargetLeaf(e ast.Expr) (root, leaf string, ok bool) {
+	sel, isSel := e.(*ast.SelectorExpr)
+	if !isSel {
+		return "", "", false
+	}
+	path := []string{sel.Sel.Name}
+	cur := sel.X
+	for {
+		switch x := cur.(type) {
+		case *ast.SelectorExpr:
+			path = append([]string{x.Sel.Name}, path...)
+			cur = x.X
+		case *ast.ParenExpr:
+			cur = x.X
+		case *ast.StarExpr:
+			cur = x.X
+		case *ast.IndexExpr:
+			cur = x.X
+		case *ast.Ident:
+			return x.Name, path[len(path)-1], true
+		default:
+			return "", "", false
+		}
+	}
 }
 
 // scanResponseFields collects response field paths a test asserts on. The
