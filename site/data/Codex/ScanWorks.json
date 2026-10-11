@@ -160,10 +160,11 @@
       ]
     },
     "branches": {
-      "total": 72,
+      "total": 64,
       "enum_switch_branches": 88,
+      "server_gated_branches": 8,
       "happy_path_reached": false,
-      "reachable_on_happy_path": 37,
+      "reachable_on_happy_path": 29,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
       "absent_arm_exercised": 0,
@@ -174,7 +175,7 @@
       "coverage_pct": 0,
       "by_origin": {
         "service": {
-          "total": 26,
+          "total": 24,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -183,7 +184,7 @@
           "absent_arm_exercised": 0
         },
         "generated": {
-          "total": 42,
+          "total": 38,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -192,7 +193,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 4,
+          "total": 2,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -202,14 +203,6 @@
         }
       },
       "gaps": [
-        {
-          "id": "b1",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
-          "cond": "in.DevOid == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
         {
           "id": "b46",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6318",
@@ -331,22 +324,6 @@
           ]
         },
         {
-          "id": "b61",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:389",
-          "cond": "in.DevOid == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b62",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:396",
-          "cond": "in.DevOid",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
           "id": "b63",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:402",
           "cond": "in.Filter != nil",
@@ -384,14 +361,6 @@
           "cond": "in.CustomFilter != nil",
           "predicate_paths": [
             "in.CustomFilter"
-          ]
-        },
-        {
-          "id": "b68",
-          "at": "internal/serverv2/scan_works.go:127",
-          "cond": "in.DevOid == nil",
-          "predicate_paths": [
-            "in.DevOid"
           ]
         },
         {
@@ -472,14 +441,6 @@
           "cond": "in.Cursor|in.DevOid|in.Filter|in.IncludeWorkIds|in.Projection.Kind == nil",
           "predicate_paths": [
             "in.Projection.Kind"
-          ]
-        },
-        {
-          "id": "b79",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
-          "cond": "in.Cursor|in.DevOid|in.Filter|in.IncludeWorkIds == nil",
-          "predicate_paths": [
-            "in.DevOid"
           ]
         },
         {
@@ -603,22 +564,6 @@
           ]
         },
         {
-          "id": "b139",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:389",
-          "cond": "in.Cursor|in.DevOid|in.Filter|in.IncludeWorkIds == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b140",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:396",
-          "cond": "in.Cursor|in.DevOid|in.Filter|in.IncludeWorkIds",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
           "id": "b141",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:402",
           "cond": "in.Cursor|in.DevOid|in.Filter|in.IncludeWorkIds != nil",
@@ -656,14 +601,6 @@
           "cond": "in.Cursor|in.CustomFilter|in.DevOid|in.Filter|in.IncludeWorkIds != nil",
           "predicate_paths": [
             "in.CustomFilter"
-          ]
-        },
-        {
-          "id": "b146",
-          "at": "internal/serverv2/scan_works.go:127",
-          "cond": "in.Cursor|in.DevOid|in.Filter|in.IncludeWorkIds == nil",
-          "predicate_paths": [
-            "in.DevOid"
           ]
         },
         {
@@ -1108,5 +1045,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ScanWorks` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Cursor\n  - in.CustomFilter.IssueFilters\n  - in.CustomFilter.TaskFilters\n  - in.CustomFilter.TicketFilters\n  - in.DevOid\n  - in.ExcludeWorkIds\n  - in.Filter.ActualCloseDateOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.DeprecatedCreatedByAgentId\n  - in.Filter.DeprecatedCreatedByAgentIdOp\n  - in.Filter.ExternalSourceData\n  - in.Filter.IssueFilter.AccountIds\n  - in.Filter.IssueFilter.AccountIdsOp\n  - in.Filter.IssueFilter.ActualStartDateOp\n  - in.Filter.IssueFilter.AppliesToPartId\n  - in.Filter.IssueFilter.AppliesToPartIdOp\n  - in.Filter.IssueFilter.AppliesToVersionIds\n  - in.Filter.IssueFilter.AppsOp\n  - in.Filter.IssueFilter.DevelopedWith\n  - in.Filter.IssueFilter.LastCodeActivityOp\n  - in.Filter.IssueFilter.MilestoneId\n  - in.Filter.IssueFilter.MilestoneIdOp\n  - in.Filter.IssueFilter.Priority\n  - in.Filter.IssueFilter.ProjectId\n  - in.Filter.IssueFilter.ProjectIdOp\n  - in.Filter.IssueFilter.ReleaseVersionIds\n  - in.Filter.IssueFilter.RevOrgIds\n  - in.Filter.IssueFilter.RevOrgIdsOp\n  - in.Filter.IssueFilter.SlaId\n  - in.Filter.IssueFilter.SlaSummary\n  - in.Filter.IssueFilter.SprintId\n  - in.Filter.IssueFilter.SprintIdOp\n  - in.Filter.IssueFilter.SprintState\n  - in.Filter.IssueFilter.SprintStateOp\n  - in.Filter.IssueFilter.SubtypeOp\n  - in.Filter.IssueFilter.TargetStartDateOp\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.OpportunityFilter.AccountId\n  - in.Filter.OpportunityFilter.AccountIdOp\n  - in.Filter.OpportunityFilter.AnnualContractValue\n  - in.Filter.OpportunityFilter.AppsOp\n  - in.Filter.OpportunityFilter.Budget\n  - in.Filter.OpportunityFilter.ContactIds\n  - in.Filter.OpportunityFilter.ContactIdsOp\n  - in.Filter.OpportunityFilter.ForecastCategory\n  - in.Filter.OpportunityFilter.Priority\n  - in.Filter.OpportunityFilter.SubtypeOp\n  - in.Filter.OpportunityFilter.Value\n  - in.Filter.OwnedByIds\n  - in.Filter.OwnedByIdsOp\n  - in.Filter.Reactions\n  - in.Filter.ReportedByIds\n  - in.Filter.ReportedByIdsOp\n  - in.Filter.Stage\n  - (+52 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.Filter.TicketFilter != nil\n  - in.Filter.TicketFilter != nil\n  - in.Filter.IssueFilter != nil\n  - in.Filter.IssueFilter != nil\n  - in.Filter.TaskFilter != nil\n  - in.Filter.TaskFilter != nil\n  - in.Filter.OpportunityFilter != nil\n  - in.Filter.OpportunityFilter != nil\n  - in.VistaId == nil\n  - in.CustomFilter.IssueFilters != nil\n  - in.CustomFilter.IssueFilters != nil\n  - in.CustomFilter.TicketFilters != nil\n  - in.CustomFilter.TicketFilters != nil\n  - in.CustomFilter.TaskFilters != nil\n  - in.CustomFilter.TaskFilters != nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.VistaId != nil\n  - in.CustomFilter != nil\n  - in.CustomFilter != nil\n  - in.DevOid == nil\n  - in != nil\n  - in.Filter != nil\n  - in.Cursor == \"\"\n  - in.Cursor == \"\"\n  - in.Cursor == \"\"\n  - in.Cursor\n  - in.Cursor\n  - in.Cursor|in.DevOid|in.Filter|in.IncludeWorkIds|in.Projection.Kind == nil\n  - in.Cursor|in.DevOid|in.Filter|in.IncludeWorkIds|in.Projection.Kind\n  - in.Cursor|in.DevOid|in.Filter|in.IncludeWorkIds|in.Projection.Kind == nil\n  - in.Cursor|in.DevOid|in.Filter|in.IncludeWorkIds == nil\n  - in.Cursor|in.DevOid|in.Filter|in.Filter.TicketFilter|in.IncludeWorkIds != nil\n  - in.Cursor|in.DevOid|in.Filter|in.Filter.TicketFilter|in.IncludeWorkIds != nil\n  - in.Cursor|in.DevOid|in.Filter|in.Filter.IssueFilter|in.IncludeWorkIds != nil\n  - in.Cursor|in.DevOid|in.Filter|in.Filter.IssueFilter|in.IncludeWorkIds != nil\n  - in.Cursor|in.DevOid|in.Filter|in.Filter.TaskFilter|in.IncludeWorkIds != nil\n  - (+32 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ScanWorks` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Cursor\n  - in.CustomFilter.IssueFilters\n  - in.CustomFilter.TaskFilters\n  - in.CustomFilter.TicketFilters\n  - in.DevOid\n  - in.ExcludeWorkIds\n  - in.Filter.ActualCloseDateOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.DeprecatedCreatedByAgentId\n  - in.Filter.DeprecatedCreatedByAgentIdOp\n  - in.Filter.ExternalSourceData\n  - in.Filter.IssueFilter.AccountIds\n  - in.Filter.IssueFilter.AccountIdsOp\n  - in.Filter.IssueFilter.ActualStartDateOp\n  - in.Filter.IssueFilter.AppliesToPartId\n  - in.Filter.IssueFilter.AppliesToPartIdOp\n  - in.Filter.IssueFilter.AppliesToVersionIds\n  - in.Filter.IssueFilter.AppsOp\n  - in.Filter.IssueFilter.DevelopedWith\n  - in.Filter.IssueFilter.LastCodeActivityOp\n  - in.Filter.IssueFilter.MilestoneId\n  - in.Filter.IssueFilter.MilestoneIdOp\n  - in.Filter.IssueFilter.Priority\n  - in.Filter.IssueFilter.ProjectId\n  - in.Filter.IssueFilter.ProjectIdOp\n  - in.Filter.IssueFilter.ReleaseVersionIds\n  - in.Filter.IssueFilter.RevOrgIds\n  - in.Filter.IssueFilter.RevOrgIdsOp\n  - in.Filter.IssueFilter.SlaId\n  - in.Filter.IssueFilter.SlaSummary\n  - in.Filter.IssueFilter.SprintId\n  - in.Filter.IssueFilter.SprintIdOp\n  - in.Filter.IssueFilter.SprintState\n  - in.Filter.IssueFilter.SprintStateOp\n  - in.Filter.IssueFilter.SubtypeOp\n  - in.Filter.IssueFilter.TargetStartDateOp\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.OpportunityFilter.AccountId\n  - in.Filter.OpportunityFilter.AccountIdOp\n  - in.Filter.OpportunityFilter.AnnualContractValue\n  - in.Filter.OpportunityFilter.AppsOp\n  - in.Filter.OpportunityFilter.Budget\n  - in.Filter.OpportunityFilter.ContactIds\n  - in.Filter.OpportunityFilter.ContactIdsOp\n  - in.Filter.OpportunityFilter.ForecastCategory\n  - in.Filter.OpportunityFilter.Priority\n  - in.Filter.OpportunityFilter.SubtypeOp\n  - in.Filter.OpportunityFilter.Value\n  - in.Filter.OwnedByIds\n  - in.Filter.OwnedByIdsOp\n  - in.Filter.Reactions\n  - in.Filter.ReportedByIds\n  - in.Filter.ReportedByIdsOp\n  - in.Filter.Stage\n  - (+52 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter.TicketFilter != nil\n  - in.Filter.TicketFilter != nil\n  - in.Filter.IssueFilter != nil\n  - in.Filter.IssueFilter != nil\n  - in.Filter.TaskFilter != nil\n  - in.Filter.TaskFilter != nil\n  - in.Filter.OpportunityFilter != nil\n  - in.Filter.OpportunityFilter != nil\n  - in.VistaId == nil\n  - in.CustomFilter.IssueFilters != nil\n  - in.CustomFilter.IssueFilters != nil\n  - in.CustomFilter.TicketFilters != nil\n  - in.CustomFilter.TicketFilters != nil\n  - in.CustomFilter.TaskFilters != nil\n  - in.CustomFilter.TaskFilters != nil\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.VistaId != nil\n  - in.CustomFilter != nil\n  - in.CustomFilter != nil\n  - in != nil\n  - in.Filter != nil\n  - in.Cursor == \"\"\n  - in.Cursor == \"\"\n  - in.Cursor == \"\"\n  - in.Cursor\n  - in.Cursor\n  - in.Cursor|in.DevOid|in.Filter|in.IncludeWorkIds|in.Projection.Kind == nil\n  - in.Cursor|in.DevOid|in.Filter|in.IncludeWorkIds|in.Projection.Kind\n  - in.Cursor|in.DevOid|in.Filter|in.IncludeWorkIds|in.Projection.Kind == nil\n  - in.Cursor|in.DevOid|in.Filter|in.Filter.TicketFilter|in.IncludeWorkIds != nil\n  - in.Cursor|in.DevOid|in.Filter|in.Filter.TicketFilter|in.IncludeWorkIds != nil\n  - in.Cursor|in.DevOid|in.Filter|in.Filter.IssueFilter|in.IncludeWorkIds != nil\n  - in.Cursor|in.DevOid|in.Filter|in.Filter.IssueFilter|in.IncludeWorkIds != nil\n  - in.Cursor|in.DevOid|in.Filter|in.Filter.TaskFilter|in.IncludeWorkIds != nil\n  - in.Cursor|in.DevOid|in.Filter|in.Filter.TaskFilter|in.IncludeWorkIds != nil\n  - in.Cursor|in.DevOid|in.Filter|in.Filter.OpportunityFilter|in.IncludeWorkIds != nil\n  - in.Cursor|in.DevOid|in.Filter|in.Filter.OpportunityFilter|in.IncludeWorkIds != nil\n  - in.Cursor|in.DevOid|in.Filter|in.IncludeWorkIds|in.VistaId == nil\n  - in.Cursor|in.CustomFilter.IssueFilters|in.DevOid|in.Filter|in.IncludeWorkIds != nil\n  - (+24 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

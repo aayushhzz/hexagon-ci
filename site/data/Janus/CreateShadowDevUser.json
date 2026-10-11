@@ -109,27 +109,28 @@
       ]
     },
     "branches": {
-      "total": 44,
+      "total": 43,
       "enum_switch_branches": 0,
+      "server_gated_branches": 1,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 29,
+      "reachable_on_happy_path": 28,
       "present_arm_exercised": 9,
-      "present_arm_pct": 20.5,
-      "absent_arm_exercised": 20,
-      "absent_arm_pct": 69,
+      "present_arm_pct": 20.9,
+      "absent_arm_exercised": 19,
+      "absent_arm_pct": 67.9,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 20.5,
+      "coverage_pct": 20.9,
       "by_origin": {
         "service": {
-          "total": 16,
-          "reachable_on_happy_path": 16,
+          "total": 15,
+          "reachable_on_happy_path": 15,
           "present_arm_exercised": 9,
-          "present_arm_pct": 56.3,
+          "present_arm_pct": 60,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 7
+          "absent_arm_exercised": 6
         },
         "generated": {
           "total": 21,
@@ -400,14 +401,6 @@
           ]
         },
         {
-          "id": "b34",
-          "at": "internal/service/devuser_validations.go:240",
-          "cond": "in.DevOid == \"\"",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
           "id": "b35",
           "at": "internal/service/devuser_validations.go:236",
           "cond": "in.AggregateErrors",
@@ -642,5 +635,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateShadowDevUser` (HTTP operation `DevUsersCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AggregateErrors\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.DevrevCopy.OriginId.Id\n  - in.DevrevCopy.OriginOrgId.Id\n  - in.DisplayNamePrefix\n  - in.ExternalIdentities\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.IngestionSource\n  - in.PhoneNumbers\n  - in.ReportsToId\n  - in.StagedInfo.SyncInUnresolvedFields\n  - in.StagedInfo.SyncOutUnresolvedFields\n  - in.SyncMetadata.SyncedByDevUsers\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.CreatedById != nil\n  - in.ExternalSourceData.ModifiedById != nil\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.ReportsToId == nil\n  - in.DevrevCopy.OriginId != nil\n  - in.DevrevCopy.OriginOrgId != nil\n  - in.DevrevCopy.OriginOrgId.Id\n  - in.SyncMetadata != nil\n  - in.SyncMetadata != nil\n  - in.StagedInfo != nil\n  - in.StagedInfo != nil\n  - in.ExternalSourceData != nil\n  - in.ExternalSourceData != nil\n  - in.CustomSchemaSpec != nil\n  - in.CustomSchemaSpec != nil\n  - in.ReportsToId != nil\n  - in.DevrevCopy != nil\n  - in.ReportsToId\n  - in.DevrevCopy != nil\n  - in.DisplayNamePrefix == \"\"\n  - in.DisplayNamePrefix\n  - in.AggregateErrors\n  - in.DevOid == \"\"\n  - in.AggregateErrors\n  - in.AggregateErrors\n  - in.ReportsToId != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrAuthContextNotFound\n  - ErrParseServiceContext\n  - ErrParseUserContext\n  - ErrServiceContextNotFound\n  - ErrUserContextNotFound\n  - ObjectTypeInvalid\n  - errDevOrgNotFound\n  - errInternalServiceError\n  - errInvalidAuthContextDevOid\n  - errInvalidInputEmail\n  - errInvalidRequestBody\n  - errInvalidStateForShadowUserCreation\n  - errPhoneNumberInvalid\n  - errUserNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateShadowDevUser` (HTTP operation `DevUsersCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AggregateErrors\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.DevrevCopy.OriginId.Id\n  - in.DevrevCopy.OriginOrgId.Id\n  - in.DisplayNamePrefix\n  - in.ExternalIdentities\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.IngestionSource\n  - in.PhoneNumbers\n  - in.ReportsToId\n  - in.StagedInfo.SyncInUnresolvedFields\n  - in.StagedInfo.SyncOutUnresolvedFields\n  - in.SyncMetadata.SyncedByDevUsers\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.CreatedById != nil\n  - in.ExternalSourceData.ModifiedById != nil\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.ReportsToId == nil\n  - in.DevrevCopy.OriginId != nil\n  - in.DevrevCopy.OriginOrgId != nil\n  - in.DevrevCopy.OriginOrgId.Id\n  - in.SyncMetadata != nil\n  - in.SyncMetadata != nil\n  - in.StagedInfo != nil\n  - in.StagedInfo != nil\n  - in.ExternalSourceData != nil\n  - in.ExternalSourceData != nil\n  - in.CustomSchemaSpec != nil\n  - in.CustomSchemaSpec != nil\n  - in.ReportsToId != nil\n  - in.DevrevCopy != nil\n  - in.ReportsToId\n  - in.DevrevCopy != nil\n  - in.DisplayNamePrefix == \"\"\n  - in.DisplayNamePrefix\n  - in.AggregateErrors\n  - in.AggregateErrors\n  - in.AggregateErrors\n  - in.ReportsToId != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrAuthContextNotFound\n  - ErrParseServiceContext\n  - ErrParseUserContext\n  - ErrServiceContextNotFound\n  - ErrUserContextNotFound\n  - ObjectTypeInvalid\n  - errDevOrgNotFound\n  - errInternalServiceError\n  - errInvalidAuthContextDevOid\n  - errInvalidInputEmail\n  - errInvalidRequestBody\n  - errInvalidStateForShadowUserCreation\n  - errPhoneNumberInvalid\n  - errUserNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

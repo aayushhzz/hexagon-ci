@@ -148,6 +148,7 @@ type DepthBands struct {
 type BranchCoverage struct {
 	Total            int           `json:"total"`
 	EnumSwitch       int           `json:"enum_switch_branches"`
+	ServerGated      int           `json:"server_gated_branches"`
 	HappyPathReached bool          `json:"happy_path_reached"`
 	ReachableOnHappy int           `json:"reachable_on_happy_path"`
 	PresentArm       int           `json:"present_arm_exercised"`
@@ -224,6 +225,36 @@ func isEnumSwitchBranch(b Branch) bool {
 		}
 	}
 	return true
+}
+
+// serverInjectedLeaves are request field names the gateway fills from the auth
+// context or internal state; a client never sets them directly.
+var serverInjectedLeaves = map[string]bool{
+	"DevOid":    true,
+	"DevUid":    true,
+	"DevUserId": true,
+	"DevOrgId":  true,
+	"RevOid":    true,
+	"RevOrgId":  true,
+	"RevUserId": true,
+	"ActorId":   true,
+}
+
+// isServerGatedBranch reports whether every request-tied condition of a branch is
+// a server-injected field. Such a branch can never be satisfied by a test that
+// supplies inputs, so it is excluded from the validation branch denominator.
+func isServerGatedBranch(b Branch) bool {
+	sawNonRoot := false
+	for _, p := range b.PredicatePaths {
+		if p == "in" {
+			continue // the request root is always provided
+		}
+		sawNonRoot = true
+		if !serverInjectedLeaves[lastComponent(p)] {
+			return false
+		}
+	}
+	return sawNonRoot
 }
 
 // Anomalies surfaces HTTP-body vs RPC-request field mismatches for review.
@@ -649,6 +680,14 @@ func buildCoverage(p *Provenance, of *opFacts, op string, aliases map[string]str
 	for _, b := range p.Branches {
 		if isEnumSwitchBranch(b) {
 			rep.Branches.EnumSwitch++
+			continue
+		}
+		// A branch gated only by server-injected fields (identity/context values
+		// the gateway fills, never the client) can never be exercised by a test
+		// supplying inputs, so it is excluded from the validation denominator and
+		// reported separately.
+		if isServerGatedBranch(b) {
+			rep.Branches.ServerGated++
 			continue
 		}
 		branches = append(branches, b)

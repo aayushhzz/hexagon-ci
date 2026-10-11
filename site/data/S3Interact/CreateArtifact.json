@@ -61,10 +61,11 @@
       ]
     },
     "branches": {
-      "total": 35,
+      "total": 25,
       "enum_switch_branches": 0,
+      "server_gated_branches": 10,
       "happy_path_reached": false,
-      "reachable_on_happy_path": 13,
+      "reachable_on_happy_path": 3,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
       "absent_arm_exercised": 0,
@@ -84,7 +85,7 @@
           "absent_arm_exercised": 0
         },
         "generated": {
-          "total": 17,
+          "total": 13,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -93,7 +94,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 9,
+          "total": 3,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -103,46 +104,6 @@
         }
       },
       "gaps": [
-        {
-          "id": "b1",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
-          "cond": "in.ActorId == nil",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b2",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1787",
-          "cond": "in.ActorId",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b3",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1789",
-          "cond": "in.ActorId",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b4",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/obj_type.go:1788",
-          "cond": "in.ActorId",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b5",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
-          "cond": "in.DevOid == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
         {
           "id": "b6",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:625",
@@ -240,38 +201,6 @@
           ]
         },
         {
-          "id": "b18",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:18",
-          "cond": "in.ActorId == nil",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b19",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:25",
-          "cond": "in.ActorId",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b20",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:28",
-          "cond": "in.DevOid == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b21",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:35",
-          "cond": "in.DevOid",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
           "id": "b22",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/api/artifacts.pb.validator.go:38",
           "cond": "in.Artifact == nil",
@@ -352,14 +281,6 @@
           ]
         },
         {
-          "id": "b32",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:667",
-          "cond": "in.DevOid != objType",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
           "id": "b33",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/artifacts-client@v0.0.0-20260906142804-5aec29388bdb/configset/configset.go:338",
           "cond": "in.Artifact.ConfigurationSet == 0",
@@ -435,5 +356,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateArtifact` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.Artifact.ArchivedDate\n  - in.Artifact.ConfigurationSet\n  - in.Artifact.File.Encoding\n  - in.Artifact.File.Key\n  - in.Artifact.File.Name\n  - in.Artifact.File.Size\n  - in.Artifact.File.Type\n  - in.Artifact.GeneratedFiles\n  - in.Artifact.Headers.ContentDisposition\n  - in.Artifact.Headers.ContentId\n  - in.Artifact.ParentId\n  - in.Artifact.PublishedDate\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId\n  - in.ActorId\n  - in.ActorId\n  - in.DevOid == nil\n  - in.Artifact.ParentId == nil\n  - in.Artifact.File.Name == nil\n  - in.Artifact.File.Name != nil\n  - in.Artifact.File.Type == nil\n  - in.Artifact.File.Type != nil\n  - in.Artifact.File.Key == nil\n  - in.Artifact.File.Encoding != nil\n  - in.Artifact.ParentId != nil\n  - in.Artifact.File != nil\n  - in.Artifact.File != nil\n  - in.Artifact.Headers != nil\n  - in.Artifact.Headers != nil\n  - in.ActorId == nil\n  - in.ActorId\n  - in.DevOid == nil\n  - in.DevOid\n  - in.Artifact == nil\n  - in.Artifact != nil\n  - in != nil\n  - in.Artifact.File == nil\n  - in.Artifact.ParentId != nil\n  - in.Artifact.File != nil\n  - in.Artifact.Headers != nil\n  - in.Artifact.GeneratedFiles != nil\n  - in.Artifact.PublishedDate != nil\n  - in.Artifact.ArchivedDate != nil\n  - in.DevOid != objType\n  - in.Artifact.ConfigurationSet == 0\n  - in.Artifact.ConfigurationSet == 0\n  - in.Artifact|in.Artifact.File|in.Artifact.File.Encoding|in.Artifact.File.Key|in.Artifact.File.Name|in.Artifact.File.Size|in.Artifact.File.Type|in.Artifact.Headers|in.Artifact.Headers.ContentId|in.Artifact.ParentId == nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateArtifact` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.Artifact.ArchivedDate\n  - in.Artifact.ConfigurationSet\n  - in.Artifact.File.Encoding\n  - in.Artifact.File.Key\n  - in.Artifact.File.Name\n  - in.Artifact.File.Size\n  - in.Artifact.File.Type\n  - in.Artifact.GeneratedFiles\n  - in.Artifact.Headers.ContentDisposition\n  - in.Artifact.Headers.ContentId\n  - in.Artifact.ParentId\n  - in.Artifact.PublishedDate\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Artifact.ParentId == nil\n  - in.Artifact.File.Name == nil\n  - in.Artifact.File.Name != nil\n  - in.Artifact.File.Type == nil\n  - in.Artifact.File.Type != nil\n  - in.Artifact.File.Key == nil\n  - in.Artifact.File.Encoding != nil\n  - in.Artifact.ParentId != nil\n  - in.Artifact.File != nil\n  - in.Artifact.File != nil\n  - in.Artifact.Headers != nil\n  - in.Artifact.Headers != nil\n  - in.Artifact == nil\n  - in.Artifact != nil\n  - in != nil\n  - in.Artifact.File == nil\n  - in.Artifact.ParentId != nil\n  - in.Artifact.File != nil\n  - in.Artifact.Headers != nil\n  - in.Artifact.GeneratedFiles != nil\n  - in.Artifact.PublishedDate != nil\n  - in.Artifact.ArchivedDate != nil\n  - in.Artifact.ConfigurationSet == 0\n  - in.Artifact.ConfigurationSet == 0\n  - in.Artifact|in.Artifact.File|in.Artifact.File.Encoding|in.Artifact.File.Key|in.Artifact.File.Name|in.Artifact.File.Size|in.Artifact.File.Type|in.Artifact.Headers|in.Artifact.Headers.ContentId|in.Artifact.ParentId == nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

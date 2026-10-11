@@ -51,10 +51,11 @@
       ]
     },
     "branches": {
-      "total": 11,
+      "total": 10,
       "enum_switch_branches": 0,
+      "server_gated_branches": 1,
       "happy_path_reached": false,
-      "reachable_on_happy_path": 11,
+      "reachable_on_happy_path": 10,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
       "absent_arm_exercised": 0,
@@ -65,7 +66,7 @@
       "coverage_pct": 0,
       "by_origin": {
         "service": {
-          "total": 11,
+          "total": 10,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -147,14 +148,6 @@
           "cond": "in.UserDisplayId == \"\"",
           "predicate_paths": [
             "in.UserDisplayId"
-          ]
-        },
-        {
-          "id": "b8",
-          "at": "internal/service/revuser.go:832",
-          "cond": "in.RevOrgId != nil",
-          "predicate_paths": [
-            "in.RevOrgId"
           ]
         },
         {
@@ -278,5 +271,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `LocateRevUserByEmail` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountId\n  - in.Auth0UserId\n  - in.RevOrgId\n  - in.UserDisplayId\n  - in.UserEmail\n  - in.UserExternalRef\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Auth0UserId == \"\"\n  - in.Auth0UserId != *ObjectTypeAuth0User\n  - in.UserEmail\n  - in.UserExternalRef != nil\n  - in.Auth0UserId != *ObjectTypeAuth0User\n  - in.Auth0UserId != nil\n  - in.UserDisplayId == \"\"\n  - in.RevOrgId != nil\n  - api.RevUser).GetDisplayId() == in.UserDisplayId\n  - in.AccountId != nil\n  - proto.Id).GetId() == in.AccountId\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errForbiddenConnectionMethod\n  - errRevOrgNotFound\n  - errRevUserNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `LocateRevUserByEmail` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountId\n  - in.Auth0UserId\n  - in.RevOrgId\n  - in.UserDisplayId\n  - in.UserEmail\n  - in.UserExternalRef\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Auth0UserId == \"\"\n  - in.Auth0UserId != *ObjectTypeAuth0User\n  - in.UserEmail\n  - in.UserExternalRef != nil\n  - in.Auth0UserId != *ObjectTypeAuth0User\n  - in.Auth0UserId != nil\n  - in.UserDisplayId == \"\"\n  - api.RevUser).GetDisplayId() == in.UserDisplayId\n  - in.AccountId != nil\n  - proto.Id).GetId() == in.AccountId\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errForbiddenConnectionMethod\n  - errRevOrgNotFound\n  - errRevUserNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

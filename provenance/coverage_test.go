@@ -612,3 +612,22 @@ func TestClassifyBranchRootPresence(t *testing.T) {
 		t.Fatalf("root nil-check with no tests should not be present, got %+v", oc)
 	}
 }
+
+func TestServerGatedBranch(t *testing.T) {
+	cases := []struct {
+		paths []string
+		want  bool
+	}{
+		{[]string{"in.DevOid"}, true},
+		{[]string{"in.Filter.DevUserId"}, true},
+		{[]string{"in", "in.ActorId"}, true},
+		{[]string{"in.DevOid", "in.Title"}, false},
+		{[]string{"in"}, false},
+		{nil, false},
+	}
+	for _, tc := range cases {
+		if got := isServerGatedBranch(Branch{PredicatePaths: tc.paths}); got != tc.want {
+			t.Errorf("isServerGatedBranch(%v) = %v, want %v", tc.paths, got, tc.want)
+		}
+	}
+}

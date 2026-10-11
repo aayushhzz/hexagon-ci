@@ -107,72 +107,49 @@
       ]
     },
     "branches": {
-      "total": 39,
+      "total": 34,
       "enum_switch_branches": 36,
+      "server_gated_branches": 5,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 11,
+      "reachable_on_happy_path": 6,
       "present_arm_exercised": 1,
-      "present_arm_pct": 2.6,
-      "absent_arm_exercised": 10,
-      "absent_arm_pct": 90.9,
+      "present_arm_pct": 2.9,
+      "absent_arm_exercised": 5,
+      "absent_arm_pct": 83.3,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 2.6,
+      "coverage_pct": 2.9,
       "by_origin": {
         "service": {
-          "total": 31,
-          "reachable_on_happy_path": 3,
+          "total": 30,
+          "reachable_on_happy_path": 2,
           "present_arm_exercised": 1,
-          "present_arm_pct": 3.2,
+          "present_arm_pct": 3.3,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 2
+          "absent_arm_exercised": 1
         },
         "generated": {
-          "total": 6,
-          "reachable_on_happy_path": 6,
+          "total": 4,
+          "reachable_on_happy_path": 4,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 6
+          "absent_arm_exercised": 4
         },
         "library": {
-          "total": 2,
-          "reachable_on_happy_path": 2,
+          "total": 0,
+          "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 2
+          "absent_arm_exercised": 0
         }
       },
       "gaps": [
-        {
-          "id": "b1",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
-          "cond": "in.DevOid == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b6",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:1141",
-          "cond": "in.DevOid == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b7",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:1148",
-          "cond": "in.DevOid",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
         {
           "id": "b8",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:1151",
@@ -203,22 +180,6 @@
           "cond": "in.PerPage >= 0",
           "predicate_paths": [
             "in.PerPage"
-          ]
-        },
-        {
-          "id": "b12",
-          "at": "internal/serverv2/list_vista_group_item.go:28",
-          "cond": "in.DevOid == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b14",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:653",
-          "cond": "in.DevOid != objType",
-          "predicate_paths": [
-            "in.DevOid"
           ]
         },
         {
@@ -708,5 +669,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListVistaGroupItem` (HTTP operation `VistasGroupsList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.EndDate.After\n  - in.Filter.EndDate.Before\n  - in.Filter.EndDate.DatePreset.Type\n  - in.Filter.ExternalSourceData\n  - in.Filter.GroupObjectType\n  - in.Filter.InferredParts\n  - in.Filter.IsSystem\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.StagedInfo\n  - in.Filter.StartDate.After\n  - in.Filter.StartDate.Before\n  - in.Filter.StartDate.DatePreset.Type\n  - in.Filter.State\n  - in.Filter.SyncMetadata\n  - in.Filter.SyncMetadataOp\n  - in.Filter.Type\n  - in.IncludeItems\n  - in.Page\n  - in.PerPage\n  - in.SkipTotal\n  - in.SortBy\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Page >= 0\n  - in.PerPage >= 0\n  - in.DevOid == nil\n  - in.DevOid != objType\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.ModifiedDate != nil\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.Before != nil\n  - in.Filter.ModifiedDate.DatePreset != nil\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.ModifiedDate.Before != nil\n  - in.Filter.StartDate != nil\n  - in.Filter.StartDate.After != nil\n  - in.Filter.EndDate != nil\n  - in.Filter.StartDate.Before != nil\n  - in.Filter.StartDate.DatePreset != nil\n  - in.Filter.StartDate.After != nil\n  - in.Filter.StartDate.DatePreset.Type\n  - in.Filter.StartDate.Before != nil\n  - in.Filter.EndDate.After != nil\n  - in.Filter.EndDate.Before != nil\n  - in.Filter.EndDate.DatePreset != nil\n  - in.Filter.EndDate.After != nil\n  - in.Filter.EndDate.DatePreset.Type\n  - in.Filter.EndDate.Before != nil\n  - in.IncludeItems\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListVistaGroupItem` (HTTP operation `VistasGroupsList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.EndDate.After\n  - in.Filter.EndDate.Before\n  - in.Filter.EndDate.DatePreset.Type\n  - in.Filter.ExternalSourceData\n  - in.Filter.GroupObjectType\n  - in.Filter.InferredParts\n  - in.Filter.IsSystem\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.StagedInfo\n  - in.Filter.StartDate.After\n  - in.Filter.StartDate.Before\n  - in.Filter.StartDate.DatePreset.Type\n  - in.Filter.State\n  - in.Filter.SyncMetadata\n  - in.Filter.SyncMetadataOp\n  - in.Filter.Type\n  - in.IncludeItems\n  - in.Page\n  - in.PerPage\n  - in.SkipTotal\n  - in.SortBy\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Page >= 0\n  - in.PerPage >= 0\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.ModifiedDate != nil\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.Before != nil\n  - in.Filter.ModifiedDate.DatePreset != nil\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.ModifiedDate.Before != nil\n  - in.Filter.StartDate != nil\n  - in.Filter.StartDate.After != nil\n  - in.Filter.EndDate != nil\n  - in.Filter.StartDate.Before != nil\n  - in.Filter.StartDate.DatePreset != nil\n  - in.Filter.StartDate.After != nil\n  - in.Filter.StartDate.DatePreset.Type\n  - in.Filter.StartDate.Before != nil\n  - in.Filter.EndDate.After != nil\n  - in.Filter.EndDate.Before != nil\n  - in.Filter.EndDate.DatePreset != nil\n  - in.Filter.EndDate.After != nil\n  - in.Filter.EndDate.DatePreset.Type\n  - in.Filter.EndDate.Before != nil\n  - in.IncludeItems\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

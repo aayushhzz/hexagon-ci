@@ -1134,45 +1134,46 @@
       ]
     },
     "branches": {
-      "total": 754,
+      "total": 695,
       "enum_switch_branches": 0,
+      "server_gated_branches": 59,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 83,
+      "reachable_on_happy_path": 38,
       "present_arm_exercised": 36,
-      "present_arm_pct": 4.8,
-      "absent_arm_exercised": 76,
-      "absent_arm_pct": 91.6,
+      "present_arm_pct": 5.2,
+      "absent_arm_exercised": 31,
+      "absent_arm_pct": 81.6,
       "negative_arm_exercised": 26,
-      "negative_arm_pct": 3.4,
+      "negative_arm_pct": 3.7,
       "both_arms_exercised": 3,
-      "coverage_pct": 4.8,
+      "coverage_pct": 5.2,
       "by_origin": {
         "service": {
-          "total": 98,
-          "reachable_on_happy_path": 32,
+          "total": 78,
+          "reachable_on_happy_path": 20,
           "present_arm_exercised": 9,
-          "present_arm_pct": 9.2,
+          "present_arm_pct": 11.5,
           "negative_arm_exercised": 2,
-          "negative_arm_pct": 2,
-          "absent_arm_exercised": 25
+          "negative_arm_pct": 2.6,
+          "absent_arm_exercised": 13
         },
         "generated": {
-          "total": 467,
-          "reachable_on_happy_path": 17,
+          "total": 455,
+          "reachable_on_happy_path": 9,
           "present_arm_exercised": 27,
-          "present_arm_pct": 5.8,
+          "present_arm_pct": 5.9,
           "negative_arm_exercised": 24,
-          "negative_arm_pct": 5.1,
-          "absent_arm_exercised": 17
+          "negative_arm_pct": 5.3,
+          "absent_arm_exercised": 9
         },
         "library": {
-          "total": 189,
-          "reachable_on_happy_path": 34,
+          "total": 162,
+          "reachable_on_happy_path": 9,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 34
+          "absent_arm_exercised": 9
         }
       },
       "gaps": [
@@ -1217,54 +1218,6 @@
           ]
         },
         {
-          "id": "b6",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
-          "cond": "in.ActorId == nil",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b7",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
-          "cond": "in.DevOid == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b8",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:653",
-          "cond": "in.DevOid != objType",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b9",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/obj_type.go:2648",
-          "cond": "in.DevOid == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b10",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/obj_type.go:2651",
-          "cond": "in.DevOid == *ObjectTypeCustomObject",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b11",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:579",
-          "cond": "in.DevOid == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
           "id": "b12",
           "at": "internal/serverv2/works_helper.go:1270",
           "cond": "in.Ticket.ReportedByIds == nil",
@@ -1273,67 +1226,11 @@
           ]
         },
         {
-          "id": "b13",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/utils.go:529",
-          "cond": "in.DevOid",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
           "id": "b14",
           "at": "internal/serverv2/works_helper.go:1270",
           "cond": "in.DevOid|in.Ticket.ReportedByIds == nil",
           "predicate_paths": [
             "in.Ticket.ReportedByIds"
-          ]
-        },
-        {
-          "id": "b15",
-          "at": "internal/serverv2/works_helper.go:1201",
-          "cond": "in.DevOid|in.Ticket.RevOid == nil",
-          "predicate_paths": [
-            "in.Ticket.RevOid"
-          ]
-        },
-        {
-          "id": "b16",
-          "at": "internal/serverv2/works_helper.go:1233",
-          "cond": "in.DevOid|in.Ticket.RevOid == nil",
-          "predicate_paths": [
-            "in.Ticket.RevOid"
-          ]
-        },
-        {
-          "id": "b17",
-          "at": "internal/serverv2/works_helper.go:1212",
-          "cond": "in.DevOid|in.Ticket.RevOid == nil",
-          "predicate_paths": [
-            "in.Ticket.RevOid"
-          ]
-        },
-        {
-          "id": "b18",
-          "at": "internal/serverv2/works_helper.go:1206",
-          "cond": "in.DevOid != nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b19",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/utils.go:643",
-          "cond": "in.DevOid",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b20",
-          "at": "internal/serverv2/create_work.go:954",
-          "cond": "in.ActorId != *ObjectTypeRevUser",
-          "predicate_paths": [
-            "in.ActorId"
           ]
         },
         {
@@ -1537,27 +1434,11 @@
           ]
         },
         {
-          "id": "b46",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
-          "cond": "in.Ticket.RevOid == nil",
-          "predicate_paths": [
-            "in.Ticket.RevOid"
-          ]
-        },
-        {
           "id": "b47",
           "at": "internal/serverv2/create_work.go:1069",
           "cond": "in.Ticket.SlaId != nil",
           "predicate_paths": [
             "in.Ticket.SlaId"
-          ]
-        },
-        {
-          "id": "b48",
-          "at": "internal/serverv2/create_work.go:1069",
-          "cond": "in.Ticket.RevOid == nil",
-          "predicate_paths": [
-            "in.Ticket.RevOid"
           ]
         },
         {
@@ -1617,70 +1498,6 @@
           ]
         },
         {
-          "id": "b56",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/convert.go:451",
-          "cond": "in.DevOid == *ObjectTypeRevUser",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b57",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/convert.go:482",
-          "cond": "in.DevOid == *ObjectTypeSyncUnit",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b58",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/convert.go:455",
-          "cond": "in.DevOid == *ObjectTypeCommand",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b59",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/convert.go:457",
-          "cond": "in.DevOid == *ObjectTypeMarketplaceSubmission",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b60",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/convert.go:461",
-          "cond": "in.DevOid == *ObjectTypeMarketplaceItem",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b61",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/convert.go:465",
-          "cond": "in.DevOid == *ObjectTypeMarketplaceSection",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b62",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/convert.go:469",
-          "cond": "in.DevOid == *ObjectTypeVistaGroupItem",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b63",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/convert.go:473",
-          "cond": "in.DevOid == *ObjectTypeOrgScheduleRevision",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
           "id": "b64",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
           "cond": "in.Id == nil",
@@ -1705,70 +1522,6 @@
           ]
         },
         {
-          "id": "b67",
-          "at": "internal/serverv2/work_crud_helpers.go:61",
-          "cond": "in.ActorId == nil",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b68",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/jwt/utils.go:25",
-          "cond": "in.ActorId == *ObjectTypeSysUser",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b69",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/jwt/utils.go:27",
-          "cond": "in.ActorId == *ObjectTypeDevUser",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b70",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/jwt/utils.go:29",
-          "cond": "in.ActorId == *ObjectTypeRevUser",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b71",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/jwt/utils.go:31",
-          "cond": "in.ActorId == *ObjectTypeSvcAcc",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b72",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/utils.go:3514",
-          "cond": "in.DevOid",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b73",
-          "at": "internal/serverv2/default_stage_diagrams.go:132",
-          "cond": "in.DevOid != nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b74",
-          "at": "internal/serverv2/stage_helpers.go:55",
-          "cond": "in.DevOid != \"\"",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
           "id": "b75",
           "at": "internal/serverv2/create_work.go:1117",
           "cond": "in.Issue.Stage|in.Opportunity.Stage|in.Task.Stage|in.Ticket.Stage == nil",
@@ -1777,30 +1530,6 @@
             "in.Opportunity.Stage",
             "in.Task.Stage",
             "in.Ticket.Stage"
-          ]
-        },
-        {
-          "id": "b76",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/obj_type.go:1647",
-          "cond": "in.ActorId",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b77",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/obj_type.go:1649",
-          "cond": "in.ActorId",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b78",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/obj_type.go:1648",
-          "cond": "in.ActorId",
-          "predicate_paths": [
-            "in.ActorId"
           ]
         },
         {
@@ -2276,14 +2005,6 @@
           ]
         },
         {
-          "id": "b138",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
-          "cond": "in.WorkOneof.Ticket.RevOid == nil",
-          "predicate_paths": [
-            "in.WorkOneof.Ticket.RevOid"
-          ]
-        },
-        {
           "id": "b139",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
           "cond": "in.WorkOneof.Ticket.AccountId == nil",
@@ -2444,27 +2165,11 @@
           ]
         },
         {
-          "id": "b162",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:10498",
-          "cond": "in.WorkOneof.Ticket.RevOid != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Ticket.RevOid"
-          ]
-        },
-        {
           "id": "b163",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:10516",
           "cond": "in.WorkOneof.Ticket.AccountId != nil",
           "predicate_paths": [
             "in.WorkOneof.Ticket.AccountId"
-          ]
-        },
-        {
-          "id": "b164",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:10508",
-          "cond": "in.WorkOneof.Ticket.RevOid",
-          "predicate_paths": [
-            "in.WorkOneof.Ticket.RevOid"
           ]
         },
         {
@@ -4620,38 +4325,6 @@
           ]
         },
         {
-          "id": "b443",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:2020",
-          "cond": "in.ActorId == nil",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b444",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:2037",
-          "cond": "in.ActorId",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b445",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:2044",
-          "cond": "in.DevOid == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b446",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:2061",
-          "cond": "in.DevOid",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
           "id": "b447",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:2068",
           "cond": "in.Id != nil",
@@ -5028,27 +4701,11 @@
           ]
         },
         {
-          "id": "b498",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:1925",
-          "cond": "in.WorkOneof.Ticket.RevOid != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Ticket.RevOid"
-          ]
-        },
-        {
           "id": "b499",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:1934",
           "cond": "in.WorkOneof.Ticket.AccountId != nil",
           "predicate_paths": [
             "in.WorkOneof.Ticket.AccountId"
-          ]
-        },
-        {
-          "id": "b500",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:1930",
-          "cond": "in.WorkOneof.Ticket.RevOid",
-          "predicate_paths": [
-            "in.WorkOneof.Ticket.RevOid"
           ]
         },
         {
@@ -6508,38 +6165,6 @@
           ]
         },
         {
-          "id": "b692",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:23",
-          "cond": "in.ActorId == nil",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b693",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:30",
-          "cond": "in.ActorId",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b694",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:33",
-          "cond": "in.DevOid == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b695",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:40",
-          "cond": "in.DevOid",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
           "id": "b696",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:43",
           "cond": "in.Id != nil",
@@ -6620,83 +6245,11 @@
           ]
         },
         {
-          "id": "b708",
-          "at": "internal/serverv2/create_work.go:104",
-          "cond": "in.ActorId == nil",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b709",
-          "at": "internal/serverv2/create_work.go:107",
-          "cond": "in.DevOid == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b711",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:579",
-          "cond": "in.ActorId|in.DevOid == nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
           "id": "b712",
           "at": "internal/serverv2/works_helper.go:1270",
           "cond": "in.ActorId|in.DevOid|in.Ticket.ReportedByIds == nil",
           "predicate_paths": [
             "in.Ticket.ReportedByIds"
-          ]
-        },
-        {
-          "id": "b713",
-          "at": "internal/serverv2/works_helper.go:1201",
-          "cond": "in.ActorId|in.DevOid|in.Ticket.RevOid == nil",
-          "predicate_paths": [
-            "in.Ticket.RevOid"
-          ]
-        },
-        {
-          "id": "b714",
-          "at": "internal/serverv2/works_helper.go:1233",
-          "cond": "in.ActorId|in.DevOid|in.Ticket.RevOid == nil",
-          "predicate_paths": [
-            "in.Ticket.RevOid"
-          ]
-        },
-        {
-          "id": "b715",
-          "at": "internal/serverv2/works_helper.go:1212",
-          "cond": "in.ActorId|in.DevOid|in.Ticket.RevOid == nil",
-          "predicate_paths": [
-            "in.Ticket.RevOid"
-          ]
-        },
-        {
-          "id": "b716",
-          "at": "internal/serverv2/works_helper.go:1206",
-          "cond": "in.ActorId|in.DevOid != nil",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b717",
-          "at": "internal/serverv2/work_crud_helpers.go:61",
-          "cond": "in.ActorId|in.DevOid == nil",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b718",
-          "at": "internal/serverv2/create_work.go:222",
-          "cond": "in.DevOid != nil",
-          "predicate_paths": [
-            "in.DevOid"
           ]
         },
         {
@@ -6765,14 +6318,6 @@
           ]
         },
         {
-          "id": "b729",
-          "at": "internal/serverv2/create_work.go:329",
-          "cond": "in.Ticket.RevOid == nil",
-          "predicate_paths": [
-            "in.Ticket.RevOid"
-          ]
-        },
-        {
           "id": "b730",
           "at": "internal/serverv2/create_work.go:332",
           "cond": "in.Ticket.ReportedByIds == nil",
@@ -6794,22 +6339,6 @@
           "cond": "in.Ticket.ArtifactIds == nil",
           "predicate_paths": [
             "in.Ticket.ArtifactIds"
-          ]
-        },
-        {
-          "id": "b733",
-          "at": "internal/serverv2/create_work.go:369",
-          "cond": "in.ActorId == *ObjectTypeRevUser",
-          "predicate_paths": [
-            "in.ActorId"
-          ]
-        },
-        {
-          "id": "b735",
-          "at": "internal/serverv2/create_work.go:375",
-          "cond": "in.ActorId|in.DevOid != nil",
-          "predicate_paths": [
-            "in.DevOid"
           ]
         },
         {
@@ -10679,5 +10208,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateWork` (HTTP operation `WorksCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.CreateEmbeddedTasks\n  - in.CreateLinks\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.Id\n  - in.IsSystemUpdate\n  - in.Issue.DisplayIdAlias\n  - in.Issue.OwnedByIds\n  - in.Issue.SpaceId\n  - in.Issue.SprintState\n  - in.Issue.Stage\n  - in.Opportunity.DisplayIdAlias\n  - in.Opportunity.SpaceId\n  - in.Opportunity.Stage\n  - in.StageValidationOptions\n  - in.Task.Stage\n  - in.Ticket.AccountId\n  - in.Ticket.AppliesToPartId\n  - in.Ticket.ArtifactIds\n  - in.Ticket.BrandId\n  - in.Ticket.Channels\n  - in.Ticket.ChannelsV2\n  - in.Ticket.CustomFields\n  - in.Ticket.CustomSchemaFragmentIds\n  - in.Ticket.Group\n  - in.Ticket.IsFrozen\n  - in.Ticket.IsSpam\n  - in.Ticket.NeedsResponse\n  - in.Ticket.OwnedByIds\n  - in.Ticket.ReportedByIds\n  - in.Ticket.RevOid\n  - in.Ticket.SlaId\n  - in.Ticket.SourceChannel\n  - in.Ticket.SourceChannelV2\n  - in.Ticket.SourceChannelV2Instance\n  - in.Ticket.SpaceId\n  - in.Ticket.Stage\n  - in.Ticket.Visibility\n  - in.WorkOneof.Issue.AppliesToPartId\n  - in.WorkOneof.Issue.AppliesToVersionIds\n  - in.WorkOneof.Issue.ArtifactIds\n  - in.WorkOneof.Issue.DevelopedWith\n  - in.WorkOneof.Issue.DevrevCopy.OriginId\n  - in.WorkOneof.Issue.DevrevCopy.OriginOrgId\n  - in.WorkOneof.Issue.EventContext.Source\n  - in.WorkOneof.Issue.ExternalRef\n  - in.WorkOneof.Issue.ExternalSourceData.CreatedById\n  - in.WorkOneof.Issue.ExternalSourceData.ModifiedById\n  - in.WorkOneof.Issue.MilestoneId\n  - in.WorkOneof.Issue.OwnedByIds\n  - in.WorkOneof.Issue.Priority\n  - in.WorkOneof.Issue.ProjectId\n  - in.WorkOneof.Issue.Reactions\n  - in.WorkOneof.Issue.ReleaseVersionIds\n  - in.WorkOneof.Issue.ReportedById\n  - in.WorkOneof.Issue.ReportedByIds\n  - in.WorkOneof.Issue.SharedWith\n  - in.WorkOneof.Issue.SlaId\n  - (+119 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.WorkOneof\n  - in.WorkOneof.Ticket.WorkType == 5\n  - in.WorkOneof.Issue.WorkType == 2\n  - in.WorkOneof.Task.WorkType == 4\n  - in.WorkOneof.Opportunity.WorkType == 6\n  - in.ActorId == nil\n  - in.DevOid == nil\n  - in.DevOid != objType\n  - in.DevOid == nil\n  - in.DevOid == *ObjectTypeCustomObject\n  - in.DevOid == nil\n  - in.Ticket.ReportedByIds == nil\n  - in.DevOid\n  - in.DevOid|in.Ticket.ReportedByIds == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid != nil\n  - in.DevOid\n  - in.ActorId != *ObjectTypeRevUser\n  - in.Ticket.AppliesToPartId != nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.IsSpam == nil\n  - in.Ticket.IsFrozen == nil\n  - in.Ticket.NeedsResponse == nil\n  - in.Ticket.Visibility == nil\n  - in.Ticket.SourceChannel == nil\n  - in.Ticket.SourceChannel == *t59\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.BrandId|in.Ticket.Group|in.Ticket.SpaceId|in.Ticket.Tags == nil\n  - in.Ticket.BrandId|in.Ticket.SourceChannelV2Instance|in.Ticket.SpaceId == nil\n  - in.Ticket.ChannelsV2 != nil\n  - in.Ticket.Channels != nil\n  - in.Ticket.SourceChannelV2 != nil\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.SourceChannel == *t43\n  - in.Ticket.SourceChannel == *t54\n  - in.Ticket.SourceChannel == *t57\n  - in.Ticket.SourceChannel == *t60\n  - (+678 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - EOF\n  - ErrActAsByNotFound\n  - ErrActAsNotFound\n  - ErrAuth0UserNotFound\n  - ErrAuthContextNotFound\n  - ErrCorruptedDocument\n  - ErrDecodeToNil\n  - ErrDocumentTooLarge\n  - ErrElementNotFound\n  - ErrEmptyKey\n  - ErrEmptyWriteConcern\n  - ErrInconsistent\n  - ErrInvalidDocumentSequenceStyle\n  - ErrNegativeMaxTime\n  - ErrNegativeW\n  - ErrNegativeWTimeout\n  - ErrNilRegistry\n  - ErrNilType\n  - ErrNonDocument\n  - ErrNonPrimaryReadPref\n  - ErrParseServiceContext\n  - ErrParseUserContext\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ErrServiceContextNotFound\n  - ErrSessionEnded\n  - ErrSubjectNotFound\n  - ErrSurfaceIDNotFound\n  - ErrSvcAccNotFound\n  - ErrUserContextNotFound\n  - ErrWrongClient\n  - ObjectTypeInvalid\n  - ObjectTypeIssue\n  - ObjectTypeOpportunity\n  - ObjectTypeTask\n  - ObjectTypeTicket\n  - dNaN\n  - dNegInf\n  - dPosInf\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions ['in.Ticket.AppliesToPartId', 'in.WorkOneof.Issue.AppliesToPartId', 'in.WorkOneof.Task.AppliesToPartId', 'in.WorkOneof.Ticket.AppliesToPartId']\n  - test field `customschemaspec` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Issue.OwnedByIds', 'in.Ticket.OwnedByIds', 'in.WorkOneof.Issue.OwnedByIds', 'in.WorkOneof.Opportunity.OwnedByIds', 'in.WorkOneof.Task.OwnedByIds', 'in.WorkOneof.Ticket.OwnedByAgentId', 'in.WorkOneof.Ticket.OwnedByIds']\n  - test field `reportedby` -> suggestions ['in.Ticket.ReportedByIds', 'in.WorkOneof.Issue.ReportedById', 'in.WorkOneof.Issue.ReportedByIds', 'in.WorkOneof.Opportunity.ReportedById', 'in.WorkOneof.Opportunity.ReportedByIds', 'in.WorkOneof.Task.ReportedById', 'in.WorkOneof.Task.ReportedByIds', 'in.WorkOneof.Ticket.ReportedById', 'in.WorkOneof.Ticket.ReportedByIds']\n  - test field `type` -> suggestions ['in.WorkOneof.Issue.WorkType', 'in.WorkOneof.Opportunity.WorkType', 'in.WorkOneof.Task.WorkType', 'in.WorkOneof.Ticket.WorkType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateWork` (HTTP operation `WorksCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.CreateEmbeddedTasks\n  - in.CreateLinks\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.Id\n  - in.IsSystemUpdate\n  - in.Issue.DisplayIdAlias\n  - in.Issue.OwnedByIds\n  - in.Issue.SpaceId\n  - in.Issue.SprintState\n  - in.Issue.Stage\n  - in.Opportunity.DisplayIdAlias\n  - in.Opportunity.SpaceId\n  - in.Opportunity.Stage\n  - in.StageValidationOptions\n  - in.Task.Stage\n  - in.Ticket.AccountId\n  - in.Ticket.AppliesToPartId\n  - in.Ticket.ArtifactIds\n  - in.Ticket.BrandId\n  - in.Ticket.Channels\n  - in.Ticket.ChannelsV2\n  - in.Ticket.CustomFields\n  - in.Ticket.CustomSchemaFragmentIds\n  - in.Ticket.Group\n  - in.Ticket.IsFrozen\n  - in.Ticket.IsSpam\n  - in.Ticket.NeedsResponse\n  - in.Ticket.OwnedByIds\n  - in.Ticket.ReportedByIds\n  - in.Ticket.RevOid\n  - in.Ticket.SlaId\n  - in.Ticket.SourceChannel\n  - in.Ticket.SourceChannelV2\n  - in.Ticket.SourceChannelV2Instance\n  - in.Ticket.SpaceId\n  - in.Ticket.Stage\n  - in.Ticket.Visibility\n  - in.WorkOneof.Issue.AppliesToPartId\n  - in.WorkOneof.Issue.AppliesToVersionIds\n  - in.WorkOneof.Issue.ArtifactIds\n  - in.WorkOneof.Issue.DevelopedWith\n  - in.WorkOneof.Issue.DevrevCopy.OriginId\n  - in.WorkOneof.Issue.DevrevCopy.OriginOrgId\n  - in.WorkOneof.Issue.EventContext.Source\n  - in.WorkOneof.Issue.ExternalRef\n  - in.WorkOneof.Issue.ExternalSourceData.CreatedById\n  - in.WorkOneof.Issue.ExternalSourceData.ModifiedById\n  - in.WorkOneof.Issue.MilestoneId\n  - in.WorkOneof.Issue.OwnedByIds\n  - in.WorkOneof.Issue.Priority\n  - in.WorkOneof.Issue.ProjectId\n  - in.WorkOneof.Issue.Reactions\n  - in.WorkOneof.Issue.ReleaseVersionIds\n  - in.WorkOneof.Issue.ReportedById\n  - in.WorkOneof.Issue.ReportedByIds\n  - in.WorkOneof.Issue.SharedWith\n  - in.WorkOneof.Issue.SlaId\n  - (+119 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.WorkOneof\n  - in.WorkOneof.Ticket.WorkType == 5\n  - in.WorkOneof.Issue.WorkType == 2\n  - in.WorkOneof.Task.WorkType == 4\n  - in.WorkOneof.Opportunity.WorkType == 6\n  - in.Ticket.ReportedByIds == nil\n  - in.DevOid|in.Ticket.ReportedByIds == nil\n  - in.Ticket.AppliesToPartId != nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.IsSpam == nil\n  - in.Ticket.IsFrozen == nil\n  - in.Ticket.NeedsResponse == nil\n  - in.Ticket.Visibility == nil\n  - in.Ticket.SourceChannel == nil\n  - in.Ticket.SourceChannel == *t59\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.BrandId|in.Ticket.Group|in.Ticket.SpaceId|in.Ticket.Tags == nil\n  - in.Ticket.BrandId|in.Ticket.SourceChannelV2Instance|in.Ticket.SpaceId == nil\n  - in.Ticket.ChannelsV2 != nil\n  - in.Ticket.Channels != nil\n  - in.Ticket.SourceChannelV2 != nil\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.SourceChannel == *t43\n  - in.Ticket.SourceChannel == *t54\n  - in.Ticket.SourceChannel == *t57\n  - in.Ticket.SourceChannel == *t60\n  - in.Ticket.SourceChannel == *t63\n  - in.Ticket.SpaceId == nil\n  - in.Ticket.SpaceId == nil\n  - in.Ticket.BrandId == nil\n  - in.Ticket.SpaceId != nil\n  - in.Ticket.SlaId != nil\n  - in.Ticket.Group == nil\n  - in.Ticket.Group == nil\n  - in.Ticket.SpaceId == nil\n  - in.Ticket.Group == nil\n  - in.Ticket.SpaceId == nil\n  - in.AggregateErrors\n  - in.AggregateErrors\n  - (+619 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - EOF\n  - ErrActAsByNotFound\n  - ErrActAsNotFound\n  - ErrAuth0UserNotFound\n  - ErrAuthContextNotFound\n  - ErrCorruptedDocument\n  - ErrDecodeToNil\n  - ErrDocumentTooLarge\n  - ErrElementNotFound\n  - ErrEmptyKey\n  - ErrEmptyWriteConcern\n  - ErrInconsistent\n  - ErrInvalidDocumentSequenceStyle\n  - ErrNegativeMaxTime\n  - ErrNegativeW\n  - ErrNegativeWTimeout\n  - ErrNilRegistry\n  - ErrNilType\n  - ErrNonDocument\n  - ErrNonPrimaryReadPref\n  - ErrParseServiceContext\n  - ErrParseUserContext\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ErrServiceContextNotFound\n  - ErrSessionEnded\n  - ErrSubjectNotFound\n  - ErrSurfaceIDNotFound\n  - ErrSvcAccNotFound\n  - ErrUserContextNotFound\n  - ErrWrongClient\n  - ObjectTypeInvalid\n  - ObjectTypeIssue\n  - ObjectTypeOpportunity\n  - ObjectTypeTask\n  - ObjectTypeTicket\n  - dNaN\n  - dNegInf\n  - dPosInf\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions ['in.Ticket.AppliesToPartId', 'in.WorkOneof.Issue.AppliesToPartId', 'in.WorkOneof.Task.AppliesToPartId', 'in.WorkOneof.Ticket.AppliesToPartId']\n  - test field `customschemaspec` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Issue.OwnedByIds', 'in.Ticket.OwnedByIds', 'in.WorkOneof.Issue.OwnedByIds', 'in.WorkOneof.Opportunity.OwnedByIds', 'in.WorkOneof.Task.OwnedByIds', 'in.WorkOneof.Ticket.OwnedByAgentId', 'in.WorkOneof.Ticket.OwnedByIds']\n  - test field `reportedby` -> suggestions ['in.Ticket.ReportedByIds', 'in.WorkOneof.Issue.ReportedById', 'in.WorkOneof.Issue.ReportedByIds', 'in.WorkOneof.Opportunity.ReportedById', 'in.WorkOneof.Opportunity.ReportedByIds', 'in.WorkOneof.Task.ReportedById', 'in.WorkOneof.Task.ReportedByIds', 'in.WorkOneof.Ticket.ReportedById', 'in.WorkOneof.Ticket.ReportedByIds']\n  - test field `type` -> suggestions ['in.WorkOneof.Issue.WorkType', 'in.WorkOneof.Opportunity.WorkType', 'in.WorkOneof.Task.WorkType', 'in.WorkOneof.Ticket.WorkType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

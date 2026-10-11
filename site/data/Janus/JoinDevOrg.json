@@ -47,10 +47,11 @@
       ]
     },
     "branches": {
-      "total": 4,
+      "total": 0,
       "enum_switch_branches": 0,
+      "server_gated_branches": 4,
       "happy_path_reached": false,
-      "reachable_on_happy_path": 4,
+      "reachable_on_happy_path": 0,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
       "absent_arm_exercised": 0,
@@ -61,7 +62,7 @@
       "coverage_pct": 0,
       "by_origin": {
         "service": {
-          "total": 2,
+          "total": 0,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -79,7 +80,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 2,
+          "total": 0,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -88,40 +89,7 @@
           "absent_arm_exercised": 0
         }
       },
-      "gaps": [
-        {
-          "id": "b1",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/utils.go:3599",
-          "cond": "in.DevOid",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b2",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:291",
-          "cond": "in.DevOid == \"\"",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b3",
-          "at": "internal/service/devorg.go:2344",
-          "cond": "in.DevOid == \"\"",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        },
-        {
-          "id": "b4",
-          "at": "internal/service/devorg.go:2375",
-          "cond": "in.DevOid",
-          "predicate_paths": [
-            "in.DevOid"
-          ]
-        }
-      ]
+      "gaps": []
     },
     "dependencies": {
       "services": [
@@ -263,5 +231,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `JoinDevOrg` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Client\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid\n  - in.DevOid == \"\"\n  - in.DevOid == \"\"\n  - in.DevOid\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevOrgNotFound\n  - errInvalidArguments\n  - errInvalidAuthContextAuth0UserID\n  - errInvalidAuthContextDevOid\n  - errInvalidAuthContextEmail\n  - errInvalidJoinDevOrgRequest\n  - errNotTrustedConnection\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `JoinDevOrg` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Client\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - none\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevOrgNotFound\n  - errInvalidArguments\n  - errInvalidAuthContextAuth0UserID\n  - errInvalidAuthContextDevOid\n  - errInvalidAuthContextEmail\n  - errInvalidJoinDevOrgRequest\n  - errNotTrustedConnection\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

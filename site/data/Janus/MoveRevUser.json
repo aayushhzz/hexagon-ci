@@ -47,10 +47,11 @@
       ]
     },
     "branches": {
-      "total": 8,
+      "total": 5,
       "enum_switch_branches": 0,
+      "server_gated_branches": 3,
       "happy_path_reached": false,
-      "reachable_on_happy_path": 7,
+      "reachable_on_happy_path": 4,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
       "absent_arm_exercised": 0,
@@ -70,7 +71,7 @@
           "absent_arm_exercised": 0
         },
         "generated": {
-          "total": 4,
+          "total": 2,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -79,7 +80,7 @@
           "absent_arm_exercised": 0
         },
         "library": {
-          "total": 2,
+          "total": 1,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -90,35 +91,11 @@
       },
       "gaps": [
         {
-          "id": "b1",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
-          "cond": "in.RevUserId == nil",
-          "predicate_paths": [
-            "in.RevUserId"
-          ]
-        },
-        {
           "id": "b2",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
           "cond": "in.TargetRevOrgId == nil",
           "predicate_paths": [
             "in.TargetRevOrgId"
-          ]
-        },
-        {
-          "id": "b3",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2465",
-          "cond": "in.RevUserId == nil",
-          "predicate_paths": [
-            "in.RevUserId"
-          ]
-        },
-        {
-          "id": "b4",
-          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2472",
-          "cond": "in.RevUserId",
-          "predicate_paths": [
-            "in.RevUserId"
           ]
         },
         {
@@ -267,5 +244,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MoveRevUser` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.RevUserId\n  - in.TargetRevOrgId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.RevUserId == nil\n  - in.TargetRevOrgId == nil\n  - in.RevUserId == nil\n  - in.RevUserId\n  - in.TargetRevOrgId == nil\n  - in.TargetRevOrgId\n  - in != nil\n  - in.RevUserId != in.TargetRevOrgId\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInternalMoveRevUserError\n  - errInvalidRevOrgFilter\n  - errRevOrgNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MoveRevUser` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.RevUserId\n  - in.TargetRevOrgId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.TargetRevOrgId == nil\n  - in.TargetRevOrgId == nil\n  - in.TargetRevOrgId\n  - in != nil\n  - in.RevUserId != in.TargetRevOrgId\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInternalMoveRevUserError\n  - errInvalidRevOrgFilter\n  - errRevOrgNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

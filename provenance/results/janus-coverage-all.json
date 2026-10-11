@@ -48,6 +48,7 @@
       "branches": {
         "total": 1,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -184,27 +185,28 @@
         ]
       },
       "branches": {
-        "total": 3,
+        "total": 2,
         "enum_switch_branches": 0,
+        "server_gated_branches": 1,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 1,
+        "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
-        "absent_arm_exercised": 1,
-        "absent_arm_pct": 100,
+        "absent_arm_exercised": 0,
+        "absent_arm_pct": 0,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
         "coverage_pct": 0,
         "by_origin": {
           "service": {
-            "total": 1,
-            "reachable_on_happy_path": 1,
+            "total": 0,
+            "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 1
+            "absent_arm_exercised": 0
           },
           "generated": {
             "total": 0,
@@ -240,14 +242,6 @@
             "cond": "in.DevUid.Value == \"\"",
             "predicate_paths": [
               "in.DevUid.Value"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "internal/service/devuser.go:3323",
-            "cond": "in.DevUid == \"\"",
-            "predicate_paths": [
-              "in.DevUid"
             ]
           }
         ]
@@ -394,18 +388,19 @@
         ]
       },
       "branches": {
-        "total": 5,
+        "total": 2,
         "enum_switch_branches": 0,
+        "server_gated_branches": 3,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 5,
-        "present_arm_exercised": 4,
-        "present_arm_pct": 80,
+        "reachable_on_happy_path": 2,
+        "present_arm_exercised": 1,
+        "present_arm_pct": 50,
         "absent_arm_exercised": 1,
-        "absent_arm_pct": 20,
+        "absent_arm_pct": 50,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 80,
+        "coverage_pct": 50,
         "by_origin": {
           "service": {
             "total": 2,
@@ -417,19 +412,19 @@
             "absent_arm_exercised": 1
           },
           "generated": {
-            "total": 2,
-            "reachable_on_happy_path": 2,
-            "present_arm_exercised": 2,
-            "present_arm_pct": 100,
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 1,
-            "reachable_on_happy_path": 1,
-            "present_arm_exercised": 1,
-            "present_arm_pct": 100,
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 0
@@ -530,6 +525,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
@@ -666,10 +662,11 @@
         ]
       },
       "branches": {
-        "total": 4,
+        "total": 1,
         "enum_switch_branches": 0,
+        "server_gated_branches": 3,
         "happy_path_reached": false,
-        "reachable_on_happy_path": 3,
+        "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
         "absent_arm_exercised": 0,
@@ -689,7 +686,7 @@
             "absent_arm_exercised": 0
           },
           "generated": {
-            "total": 2,
+            "total": 0,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -698,7 +695,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 1,
+            "total": 0,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -708,30 +705,6 @@
           }
         },
         "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
-            "cond": "in.RevOrgId == nil",
-            "predicate_paths": [
-              "in.RevOrgId"
-            ]
-          },
-          {
-            "id": "b2",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:1161",
-            "cond": "in.RevOrgId == nil",
-            "predicate_paths": [
-              "in.RevOrgId"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:1168",
-            "cond": "in.RevOrgId",
-            "predicate_paths": [
-              "in.RevOrgId"
-            ]
-          },
           {
             "id": "b4",
             "at": "internal/service/revorg.go:1992",
@@ -804,10 +777,11 @@
         ]
       },
       "branches": {
-        "total": 4,
+        "total": 1,
         "enum_switch_branches": 0,
+        "server_gated_branches": 3,
         "happy_path_reached": false,
-        "reachable_on_happy_path": 3,
+        "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
         "absent_arm_exercised": 0,
@@ -827,7 +801,7 @@
             "absent_arm_exercised": 0
           },
           "generated": {
-            "total": 2,
+            "total": 0,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -836,7 +810,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 1,
+            "total": 0,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -846,30 +820,6 @@
           }
         },
         "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
-            "cond": "in.RevUserId == nil",
-            "predicate_paths": [
-              "in.RevUserId"
-            ]
-          },
-          {
-            "id": "b2",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:1860",
-            "cond": "in.RevUserId == nil",
-            "predicate_paths": [
-              "in.RevUserId"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:1867",
-            "cond": "in.RevUserId",
-            "predicate_paths": [
-              "in.RevUserId"
-            ]
-          },
           {
             "id": "b4",
             "at": "internal/service/revuser_merge.go:190",
@@ -954,6 +904,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
@@ -1139,6 +1090,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 4,
@@ -1455,6 +1407,7 @@
       "branches": {
         "total": 1,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -1596,6 +1549,7 @@
       "branches": {
         "total": 1,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 1,
@@ -1730,6 +1684,7 @@
       "branches": {
         "total": 12,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 0,
@@ -1934,6 +1889,7 @@
       "branches": {
         "total": 14,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
@@ -2160,6 +2116,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 0,
@@ -2306,6 +2263,7 @@
       "branches": {
         "total": 5,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 0,
@@ -2568,6 +2526,7 @@
       "branches": {
         "total": 41,
         "enum_switch_branches": 304,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
@@ -3088,6 +3047,7 @@
       "branches": {
         "total": 22,
         "enum_switch_branches": 24,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
@@ -3483,6 +3443,7 @@
       "branches": {
         "total": 45,
         "enum_switch_branches": 336,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
@@ -4090,6 +4051,7 @@
       "branches": {
         "total": 21,
         "enum_switch_branches": 152,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -4516,6 +4478,7 @@
       "branches": {
         "total": 28,
         "enum_switch_branches": 168,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 0,
@@ -4998,6 +4961,7 @@
       "branches": {
         "total": 23,
         "enum_switch_branches": 168,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -5340,6 +5304,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -5612,6 +5577,7 @@
       "branches": {
         "total": 72,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 6,
         "present_arm_exercised": 11,
@@ -6473,6 +6439,7 @@
       "branches": {
         "total": 3,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 2,
         "present_arm_exercised": 0,
@@ -6662,6 +6629,7 @@
       "branches": {
         "total": 12,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 6,
@@ -6912,6 +6880,7 @@
       "branches": {
         "total": 33,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 18,
         "present_arm_exercised": 1,
@@ -7398,6 +7367,7 @@
       "branches": {
         "total": 15,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 2,
         "present_arm_exercised": 0,
@@ -7646,56 +7616,49 @@
         ]
       },
       "branches": {
-        "total": 13,
+        "total": 8,
         "enum_switch_branches": 0,
+        "server_gated_branches": 5,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 8,
+        "reachable_on_happy_path": 3,
         "present_arm_exercised": 3,
-        "present_arm_pct": 23.1,
-        "absent_arm_exercised": 5,
-        "absent_arm_pct": 62.5,
+        "present_arm_pct": 37.5,
+        "absent_arm_exercised": 0,
+        "absent_arm_pct": 0,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 23.1,
+        "coverage_pct": 37.5,
         "by_origin": {
           "service": {
-            "total": 5,
-            "reachable_on_happy_path": 2,
+            "total": 4,
+            "reachable_on_happy_path": 1,
             "present_arm_exercised": 1,
-            "present_arm_pct": 20,
+            "present_arm_pct": 25,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 1
+            "absent_arm_exercised": 0
           },
           "generated": {
-            "total": 6,
-            "reachable_on_happy_path": 4,
+            "total": 4,
+            "reachable_on_happy_path": 2,
             "present_arm_exercised": 2,
-            "present_arm_pct": 33.3,
+            "present_arm_pct": 50,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 2
+            "absent_arm_exercised": 0
           },
           "library": {
-            "total": 2,
-            "reachable_on_happy_path": 2,
+            "total": 0,
+            "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 2
+            "absent_arm_exercised": 0
           }
         },
         "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
-            "cond": "in.DevUserId == nil",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
           {
             "id": "b2",
             "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1231",
@@ -7710,38 +7673,6 @@
             "cond": "in.Highlight.Message == nil",
             "predicate_paths": [
               "in.Highlight.Message"
-            ]
-          },
-          {
-            "id": "b4",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:791",
-            "cond": "in.DevUserId == nil",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
-          {
-            "id": "b5",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:798",
-            "cond": "in.DevUserId",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
-          {
-            "id": "b8",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:291",
-            "cond": "in.DevUserId == \"\"",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
-          {
-            "id": "b10",
-            "at": "internal/service/devuser.go:3623",
-            "cond": "in.DevUserId != *t13",
-            "predicate_paths": [
-              "in.DevUserId"
             ]
           },
           {
@@ -7886,6 +7817,7 @@
       "branches": {
         "total": 1,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -8034,6 +7966,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 1,
@@ -8784,6 +8717,7 @@
       "branches": {
         "total": 3,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 2,
         "present_arm_exercised": 0,
@@ -8979,6 +8913,7 @@
       "branches": {
         "total": 9,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 1,
@@ -9794,6 +9729,7 @@
       "branches": {
         "total": 2,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
@@ -9931,6 +9867,7 @@
       "branches": {
         "total": 6,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 2,
         "present_arm_exercised": 0,
@@ -10109,6 +10046,7 @@
       "branches": {
         "total": 22,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 2,
         "present_arm_exercised": 0,
@@ -10470,27 +10408,28 @@
         ]
       },
       "branches": {
-        "total": 44,
+        "total": 43,
         "enum_switch_branches": 0,
+        "server_gated_branches": 1,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 29,
+        "reachable_on_happy_path": 28,
         "present_arm_exercised": 9,
-        "present_arm_pct": 20.5,
-        "absent_arm_exercised": 20,
-        "absent_arm_pct": 69,
+        "present_arm_pct": 20.9,
+        "absent_arm_exercised": 19,
+        "absent_arm_pct": 67.9,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 20.5,
+        "coverage_pct": 20.9,
         "by_origin": {
           "service": {
-            "total": 16,
-            "reachable_on_happy_path": 16,
+            "total": 15,
+            "reachable_on_happy_path": 15,
             "present_arm_exercised": 9,
-            "present_arm_pct": 56.3,
+            "present_arm_pct": 60,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 7
+            "absent_arm_exercised": 6
           },
           "generated": {
             "total": 21,
@@ -10761,14 +10700,6 @@
             ]
           },
           {
-            "id": "b34",
-            "at": "internal/service/devuser_validations.go:240",
-            "cond": "in.DevOid == \"\"",
-            "predicate_paths": [
-              "in.DevOid"
-            ]
-          },
-          {
             "id": "b35",
             "at": "internal/service/devuser_validations.go:236",
             "cond": "in.AggregateErrors",
@@ -10918,6 +10849,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -11043,6 +10975,7 @@
       "branches": {
         "total": 2,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
@@ -11477,6 +11410,7 @@
       "branches": {
         "total": 6,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 4,
@@ -11625,6 +11559,7 @@
       "branches": {
         "total": 6,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
@@ -11890,6 +11825,7 @@
       "branches": {
         "total": 107,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 14,
         "present_arm_exercised": 16,
@@ -13238,6 +13174,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -13346,27 +13283,28 @@
         ]
       },
       "branches": {
-        "total": 4,
+        "total": 3,
         "enum_switch_branches": 0,
+        "server_gated_branches": 1,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 1,
+        "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
-        "absent_arm_exercised": 1,
-        "absent_arm_pct": 100,
+        "absent_arm_exercised": 0,
+        "absent_arm_pct": 0,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
         "coverage_pct": 0,
         "by_origin": {
           "service": {
-            "total": 2,
-            "reachable_on_happy_path": 1,
+            "total": 1,
+            "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 1
+            "absent_arm_exercised": 0
           },
           "generated": {
             "total": 0,
@@ -13402,14 +13340,6 @@
             "cond": "in.DevUid.Value == \"\"",
             "predicate_paths": [
               "in.DevUid.Value"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "internal/service/devuser.go:3253",
-            "cond": "in.DevUid != nil",
-            "predicate_paths": [
-              "in.DevUid"
             ]
           },
           {
@@ -13572,6 +13502,7 @@
       "branches": {
         "total": 8,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 8,
         "present_arm_exercised": 1,
@@ -13802,6 +13733,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -13948,6 +13880,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 0,
@@ -14157,27 +14090,28 @@
         ]
       },
       "branches": {
-        "total": 5,
+        "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 1,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 1,
+        "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
-        "absent_arm_exercised": 1,
-        "absent_arm_pct": 100,
+        "absent_arm_exercised": 0,
+        "absent_arm_pct": 0,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
         "coverage_pct": 0,
         "by_origin": {
           "service": {
-            "total": 3,
-            "reachable_on_happy_path": 1,
+            "total": 2,
+            "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 1
+            "absent_arm_exercised": 0
           },
           "generated": {
             "total": 0,
@@ -14213,14 +14147,6 @@
             "cond": "in.DevUid.Value == \"\"",
             "predicate_paths": [
               "in.DevUid.Value"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "internal/service/devuser.go:1368",
-            "cond": "in.DevUid != nil",
-            "predicate_paths": [
-              "in.DevUid"
             ]
           },
           {
@@ -14363,89 +14289,49 @@
         ]
       },
       "branches": {
-        "total": 7,
+        "total": 2,
         "enum_switch_branches": 0,
+        "server_gated_branches": 5,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 7,
+        "reachable_on_happy_path": 2,
         "present_arm_exercised": 2,
-        "present_arm_pct": 28.6,
-        "absent_arm_exercised": 5,
-        "absent_arm_pct": 71.4,
+        "present_arm_pct": 100,
+        "absent_arm_exercised": 0,
+        "absent_arm_pct": 0,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 28.6,
+        "coverage_pct": 100,
         "by_origin": {
           "service": {
-            "total": 3,
-            "reachable_on_happy_path": 3,
+            "total": 2,
+            "reachable_on_happy_path": 2,
             "present_arm_exercised": 2,
-            "present_arm_pct": 66.7,
+            "present_arm_pct": 100,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 1
+            "absent_arm_exercised": 0
           },
           "generated": {
-            "total": 2,
-            "reachable_on_happy_path": 2,
+            "total": 0,
+            "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 2
+            "absent_arm_exercised": 0
           },
           "library": {
-            "total": 2,
-            "reachable_on_happy_path": 2,
+            "total": 0,
+            "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 2
+            "absent_arm_exercised": 0
           }
         },
-        "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
-            "cond": "in.DevUserId == nil",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
-          {
-            "id": "b2",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:812",
-            "cond": "in.DevUserId == nil",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:819",
-            "cond": "in.DevUserId",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
-          {
-            "id": "b4",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:291",
-            "cond": "in.DevUserId == \"\"",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
-          {
-            "id": "b6",
-            "at": "internal/service/devuser.go:3736",
-            "cond": "in.DevUserId != *t13",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          }
-        ]
+        "gaps": null
       },
       "dependencies": {
         "services": [
@@ -14578,6 +14464,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -14698,6 +14585,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -14831,6 +14719,7 @@
       "branches": {
         "total": 13,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 6,
         "present_arm_exercised": 1,
@@ -15144,6 +15033,7 @@
       "branches": {
         "total": 9,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 1,
@@ -15394,6 +15284,7 @@
       "branches": {
         "total": 2,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
@@ -15532,6 +15423,7 @@
       "branches": {
         "total": 2,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
@@ -15698,6 +15590,7 @@
       "branches": {
         "total": 3,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
@@ -15933,6 +15826,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 4,
@@ -16090,6 +15984,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
@@ -16260,6 +16155,7 @@
       "branches": {
         "total": 2,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 2,
         "present_arm_exercised": 0,
@@ -16404,6 +16300,7 @@
       "branches": {
         "total": 3,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
@@ -16542,6 +16439,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 0,
@@ -16689,6 +16587,7 @@
       "branches": {
         "total": 1,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
@@ -16843,6 +16742,7 @@
       "branches": {
         "total": 21,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 11,
         "present_arm_exercised": 9,
@@ -17102,6 +17002,7 @@
       "branches": {
         "total": 3,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
@@ -17278,27 +17179,28 @@
         ]
       },
       "branches": {
-        "total": 5,
+        "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 5,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 5,
+        "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
-        "absent_arm_exercised": 5,
-        "absent_arm_pct": 100,
+        "absent_arm_exercised": 0,
+        "absent_arm_pct": 0,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
         "coverage_pct": 0,
         "by_origin": {
           "service": {
-            "total": 3,
-            "reachable_on_happy_path": 3,
+            "total": 0,
+            "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 3
+            "absent_arm_exercised": 0
           },
           "generated": {
             "total": 0,
@@ -17310,57 +17212,16 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 2,
-            "reachable_on_happy_path": 2,
+            "total": 0,
+            "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 2
+            "absent_arm_exercised": 0
           }
         },
-        "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/utils.go:3599",
-            "cond": "in.DevOid",
-            "predicate_paths": [
-              "in.DevOid"
-            ]
-          },
-          {
-            "id": "b2",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:291",
-            "cond": "in.DevOid == \"\"",
-            "predicate_paths": [
-              "in.DevOid"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "internal/service/devorg.go:1758",
-            "cond": "in.DevOid != \"\"",
-            "predicate_paths": [
-              "in.DevOid"
-            ]
-          },
-          {
-            "id": "b4",
-            "at": "internal/service/devorg.go:1761",
-            "cond": "in.DevOid == \"\"",
-            "predicate_paths": [
-              "in.DevOid"
-            ]
-          },
-          {
-            "id": "b5",
-            "at": "internal/service/devorg.go:1785",
-            "cond": "*t36 != in.DevOid",
-            "predicate_paths": [
-              "in.DevOid"
-            ]
-          }
-        ]
+        "gaps": null
       },
       "dependencies": {
         "services": null,
@@ -17551,6 +17412,7 @@
       "branches": {
         "total": 3,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
@@ -17810,6 +17672,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -17915,6 +17778,7 @@
       "branches": {
         "total": 1,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -18029,6 +17893,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
@@ -18168,6 +18033,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -18276,13 +18142,14 @@
         ]
       },
       "branches": {
-        "total": 5,
+        "total": 1,
         "enum_switch_branches": 0,
+        "server_gated_branches": 4,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 5,
+        "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
-        "absent_arm_exercised": 5,
+        "absent_arm_exercised": 1,
         "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
@@ -18290,13 +18157,13 @@
         "coverage_pct": 0,
         "by_origin": {
           "service": {
-            "total": 3,
-            "reachable_on_happy_path": 3,
+            "total": 1,
+            "reachable_on_happy_path": 1,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 3
+            "absent_arm_exercised": 1
           },
           "generated": {
             "total": 0,
@@ -18308,48 +18175,16 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 2,
-            "reachable_on_happy_path": 2,
+            "total": 0,
+            "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 2
+            "absent_arm_exercised": 0
           }
         },
         "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/utils.go:3622",
-            "cond": "in.DevUid",
-            "predicate_paths": [
-              "in.DevUid"
-            ]
-          },
-          {
-            "id": "b2",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:291",
-            "cond": "in.DevUid == \"\"",
-            "predicate_paths": [
-              "in.DevUid"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "internal/service/devuser.go:1060",
-            "cond": "in.DevUid != \"\"",
-            "predicate_paths": [
-              "in.DevUid"
-            ]
-          },
-          {
-            "id": "b4",
-            "at": "internal/service/devuser.go:1063",
-            "cond": "in.DevUid == \"\"",
-            "predicate_paths": [
-              "in.DevUid"
-            ]
-          },
           {
             "id": "b5",
             "at": "internal/service/devuser.go:1082",
@@ -18822,6 +18657,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -18925,6 +18761,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -19053,6 +18890,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -19194,6 +19032,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -19312,6 +19151,7 @@
       "branches": {
         "total": 34,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 10,
         "present_arm_exercised": 1,
@@ -19920,6 +19760,7 @@
       "branches": {
         "total": 40,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 18,
         "present_arm_exercised": 1,
@@ -20572,6 +20413,7 @@
       "branches": {
         "total": 2,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
@@ -20704,6 +20546,7 @@
       "branches": {
         "total": 2,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
@@ -20872,6 +20715,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 4,
@@ -21126,6 +20970,7 @@
       "branches": {
         "total": 3,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
@@ -21338,6 +21183,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 4,
@@ -21507,6 +21353,7 @@
       "branches": {
         "total": 3,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
@@ -21696,6 +21543,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 4,
@@ -21959,6 +21807,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -22117,6 +21966,7 @@
       "branches": {
         "total": 1,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -22350,6 +22200,7 @@
       "branches": {
         "total": 41,
         "enum_switch_branches": 152,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 9,
         "present_arm_exercised": 5,
@@ -22931,6 +22782,7 @@
       "branches": {
         "total": 36,
         "enum_switch_branches": 168,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 5,
         "present_arm_exercised": 0,
@@ -23432,6 +23284,7 @@
       "branches": {
         "total": 31,
         "enum_switch_branches": 152,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 2,
         "present_arm_exercised": 3,
@@ -23914,6 +23767,7 @@
       "branches": {
         "total": 64,
         "enum_switch_branches": 168,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 19,
         "present_arm_exercised": 8,
@@ -24511,6 +24365,7 @@
       "branches": {
         "total": 9,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 8,
         "present_arm_exercised": 0,
@@ -24704,6 +24559,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 3,
@@ -24887,6 +24743,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -24991,10 +24848,11 @@
         ]
       },
       "branches": {
-        "total": 4,
+        "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 4,
         "happy_path_reached": false,
-        "reachable_on_happy_path": 4,
+        "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
         "absent_arm_exercised": 0,
@@ -25005,7 +24863,7 @@
         "coverage_pct": 0,
         "by_origin": {
           "service": {
-            "total": 2,
+            "total": 0,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -25023,7 +24881,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 2,
+            "total": 0,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -25032,40 +24890,7 @@
             "absent_arm_exercised": 0
           }
         },
-        "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/utils.go:3599",
-            "cond": "in.DevOid",
-            "predicate_paths": [
-              "in.DevOid"
-            ]
-          },
-          {
-            "id": "b2",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:291",
-            "cond": "in.DevOid == \"\"",
-            "predicate_paths": [
-              "in.DevOid"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "internal/service/devorg.go:2344",
-            "cond": "in.DevOid == \"\"",
-            "predicate_paths": [
-              "in.DevOid"
-            ]
-          },
-          {
-            "id": "b4",
-            "at": "internal/service/devorg.go:2375",
-            "cond": "in.DevOid",
-            "predicate_paths": [
-              "in.DevOid"
-            ]
-          }
-        ]
+        "gaps": []
       },
       "dependencies": {
         "services": [
@@ -25152,6 +24977,7 @@
       "branches": {
         "total": 3,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 2,
         "present_arm_exercised": 0,
@@ -25290,10 +25116,11 @@
         ]
       },
       "branches": {
-        "total": 2,
+        "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 2,
         "happy_path_reached": false,
-        "reachable_on_happy_path": 2,
+        "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
         "absent_arm_exercised": 0,
@@ -25322,7 +25149,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 2,
+            "total": 0,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -25331,24 +25158,7 @@
             "absent_arm_exercised": 0
           }
         },
-        "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/utils.go:3619",
-            "cond": "in.DevOid",
-            "predicate_paths": [
-              "in.DevOid"
-            ]
-          },
-          {
-            "id": "b2",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/utils.go:3622",
-            "cond": "in.DevUid",
-            "predicate_paths": [
-              "in.DevUid"
-            ]
-          }
-        ]
+        "gaps": []
       },
       "dependencies": {
         "services": null,
@@ -25458,72 +25268,49 @@
         ]
       },
       "branches": {
-        "total": 14,
+        "total": 8,
         "enum_switch_branches": 0,
+        "server_gated_branches": 6,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 14,
+        "reachable_on_happy_path": 8,
         "present_arm_exercised": 6,
-        "present_arm_pct": 42.9,
-        "absent_arm_exercised": 8,
-        "absent_arm_pct": 57.1,
+        "present_arm_pct": 75,
+        "absent_arm_exercised": 2,
+        "absent_arm_pct": 25,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 42.9,
+        "coverage_pct": 75,
         "by_origin": {
           "service": {
-            "total": 10,
-            "reachable_on_happy_path": 10,
+            "total": 8,
+            "reachable_on_happy_path": 8,
             "present_arm_exercised": 6,
-            "present_arm_pct": 60,
+            "present_arm_pct": 75,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 4
+            "absent_arm_exercised": 2
           },
           "generated": {
-            "total": 2,
-            "reachable_on_happy_path": 2,
+            "total": 0,
+            "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 2
+            "absent_arm_exercised": 0
           },
           "library": {
-            "total": 2,
-            "reachable_on_happy_path": 2,
+            "total": 0,
+            "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 2
+            "absent_arm_exercised": 0
           }
         },
         "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
-            "cond": "in.DevUserId == nil",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
-          {
-            "id": "b2",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:745",
-            "cond": "in.DevUserId != nil",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:750",
-            "cond": "in.DevUserId",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
           {
             "id": "b5",
             "at": "internal/service/devuser.go:2356",
@@ -25533,35 +25320,11 @@
             ]
           },
           {
-            "id": "b10",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:291",
-            "cond": "in.DevUserId == \"\"",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
-          {
-            "id": "b12",
-            "at": "internal/service/devuser.go:2407",
-            "cond": "in.DevUserId != nil",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
-          {
             "id": "b13",
             "at": "internal/service/devuser.go:2436",
             "cond": "in.Auth0UserId != \"\"",
             "predicate_paths": [
               "in.Auth0UserId"
-            ]
-          },
-          {
-            "id": "b14",
-            "at": "internal/service/devuser.go:2424",
-            "cond": "in.DevUserId == *t43",
-            "predicate_paths": [
-              "in.DevUserId"
             ]
           }
         ]
@@ -25674,6 +25437,7 @@
       "branches": {
         "total": 13,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 12,
         "present_arm_exercised": 0,
@@ -26000,6 +25764,7 @@
       "branches": {
         "total": 57,
         "enum_switch_branches": 304,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 13,
         "present_arm_exercised": 0,
@@ -26908,6 +26673,7 @@
       "branches": {
         "total": 6,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 5,
         "present_arm_exercised": 0,
@@ -27081,6 +26847,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -27239,6 +27006,7 @@
       "branches": {
         "total": 23,
         "enum_switch_branches": 24,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 2,
         "present_arm_exercised": 0,
@@ -27578,6 +27346,7 @@
       "branches": {
         "total": 8,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 8,
         "present_arm_exercised": 1,
@@ -27872,6 +27641,7 @@
       "branches": {
         "total": 72,
         "enum_switch_branches": 357,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 16,
         "present_arm_exercised": 1,
@@ -28778,6 +28548,7 @@
       "branches": {
         "total": 33,
         "enum_switch_branches": 171,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 6,
         "present_arm_exercised": 1,
@@ -29262,18 +29033,19 @@
         ]
       },
       "branches": {
-        "total": 12,
+        "total": 9,
         "enum_switch_branches": 0,
+        "server_gated_branches": 3,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 8,
-        "present_arm_exercised": 4,
-        "present_arm_pct": 33.3,
+        "reachable_on_happy_path": 5,
+        "present_arm_exercised": 1,
+        "present_arm_pct": 11.1,
         "absent_arm_exercised": 4,
-        "absent_arm_pct": 50,
-        "negative_arm_exercised": 3,
-        "negative_arm_pct": 25,
+        "absent_arm_pct": 80,
+        "negative_arm_exercised": 0,
+        "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 33.3,
+        "coverage_pct": 11.1,
         "by_origin": {
           "service": {
             "total": 7,
@@ -29285,21 +29057,21 @@
             "absent_arm_exercised": 2
           },
           "generated": {
-            "total": 4,
-            "reachable_on_happy_path": 4,
-            "present_arm_exercised": 2,
-            "present_arm_pct": 50,
-            "negative_arm_exercised": 2,
-            "negative_arm_pct": 50,
+            "total": 2,
+            "reachable_on_happy_path": 2,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
             "absent_arm_exercised": 2
           },
           "library": {
-            "total": 1,
-            "reachable_on_happy_path": 1,
-            "present_arm_exercised": 1,
-            "present_arm_pct": 100,
-            "negative_arm_exercised": 1,
-            "negative_arm_pct": 100,
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
             "absent_arm_exercised": 0
           }
         },
@@ -29644,6 +29416,7 @@
       "branches": {
         "total": 81,
         "enum_switch_branches": 210,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 32,
         "present_arm_exercised": 1,
@@ -30496,6 +30269,7 @@
       "branches": {
         "total": 8,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 7,
         "present_arm_exercised": 0,
@@ -30697,6 +30471,7 @@
       "branches": {
         "total": 9,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 8,
         "present_arm_exercised": 0,
@@ -30951,6 +30726,7 @@
       "branches": {
         "total": 19,
         "enum_switch_branches": 63,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 5,
         "present_arm_exercised": 1,
@@ -31431,6 +31207,7 @@
       "branches": {
         "total": 24,
         "enum_switch_branches": 168,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
@@ -31791,6 +31568,7 @@
       "branches": {
         "total": 1,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
@@ -31984,6 +31762,7 @@
       "branches": {
         "total": 22,
         "enum_switch_branches": 63,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 6,
         "present_arm_exercised": 1,
@@ -32440,10 +32219,11 @@
         ]
       },
       "branches": {
-        "total": 11,
+        "total": 10,
         "enum_switch_branches": 0,
+        "server_gated_branches": 1,
         "happy_path_reached": false,
-        "reachable_on_happy_path": 11,
+        "reachable_on_happy_path": 10,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
         "absent_arm_exercised": 0,
@@ -32454,7 +32234,7 @@
         "coverage_pct": 0,
         "by_origin": {
           "service": {
-            "total": 11,
+            "total": 10,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -32536,14 +32316,6 @@
             "cond": "in.UserDisplayId == \"\"",
             "predicate_paths": [
               "in.UserDisplayId"
-            ]
-          },
-          {
-            "id": "b8",
-            "at": "internal/service/revuser.go:832",
-            "cond": "in.RevOrgId != nil",
-            "predicate_paths": [
-              "in.RevOrgId"
             ]
           },
           {
@@ -32634,6 +32406,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -32740,6 +32513,7 @@
       "branches": {
         "total": 8,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 7,
         "present_arm_exercised": 0,
@@ -32954,6 +32728,7 @@
       "branches": {
         "total": 8,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 8,
         "present_arm_exercised": 8,
@@ -33127,6 +32902,7 @@
       "branches": {
         "total": 7,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 7,
         "present_arm_exercised": 0,
@@ -33355,6 +33131,7 @@
       "branches": {
         "total": 8,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 8,
         "present_arm_exercised": 1,
@@ -33556,6 +33333,7 @@
       "branches": {
         "total": 7,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 6,
         "present_arm_exercised": 0,
@@ -33740,6 +33518,7 @@
       "branches": {
         "total": 10,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 10,
         "present_arm_exercised": 1,
@@ -33964,6 +33743,7 @@
       "branches": {
         "total": 7,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 6,
         "present_arm_exercised": 0,
@@ -34168,11 +33948,12 @@
         "gaps": null
       },
       "branches": {
-        "total": 6,
+        "total": 3,
         "enum_switch_branches": 0,
+        "server_gated_branches": 3,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 6,
-        "present_arm_exercised": 6,
+        "reachable_on_happy_path": 3,
+        "present_arm_exercised": 3,
         "present_arm_pct": 100,
         "absent_arm_exercised": 0,
         "absent_arm_pct": 0,
@@ -34191,18 +33972,18 @@
             "absent_arm_exercised": 0
           },
           "generated": {
-            "total": 4,
-            "reachable_on_happy_path": 4,
-            "present_arm_exercised": 4,
+            "total": 2,
+            "reachable_on_happy_path": 2,
+            "present_arm_exercised": 2,
             "present_arm_pct": 100,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 2,
-            "reachable_on_happy_path": 2,
-            "present_arm_exercised": 2,
+            "total": 1,
+            "reachable_on_happy_path": 1,
+            "present_arm_exercised": 1,
             "present_arm_pct": 100,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
@@ -34300,10 +34081,11 @@
         ]
       },
       "branches": {
-        "total": 8,
+        "total": 5,
         "enum_switch_branches": 0,
+        "server_gated_branches": 3,
         "happy_path_reached": false,
-        "reachable_on_happy_path": 7,
+        "reachable_on_happy_path": 4,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
         "absent_arm_exercised": 0,
@@ -34323,7 +34105,7 @@
             "absent_arm_exercised": 0
           },
           "generated": {
-            "total": 4,
+            "total": 2,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -34332,7 +34114,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 2,
+            "total": 1,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -34343,35 +34125,11 @@
         },
         "gaps": [
           {
-            "id": "b1",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
-            "cond": "in.RevUserId == nil",
-            "predicate_paths": [
-              "in.RevUserId"
-            ]
-          },
-          {
             "id": "b2",
             "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
             "cond": "in.TargetRevOrgId == nil",
             "predicate_paths": [
               "in.TargetRevOrgId"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2465",
-            "cond": "in.RevUserId == nil",
-            "predicate_paths": [
-              "in.RevUserId"
-            ]
-          },
-          {
-            "id": "b4",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2472",
-            "cond": "in.RevUserId",
-            "predicate_paths": [
-              "in.RevUserId"
             ]
           },
           {
@@ -34486,6 +34244,7 @@
       "branches": {
         "total": 3,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 2,
         "present_arm_exercised": 0,
@@ -34641,6 +34400,7 @@
       "branches": {
         "total": 3,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 2,
         "present_arm_exercised": 0,
@@ -34801,6 +34561,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -34909,6 +34670,7 @@
       "branches": {
         "total": 8,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 2,
         "present_arm_exercised": 0,
@@ -35115,6 +34877,7 @@
       "branches": {
         "total": 16,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 2,
         "present_arm_exercised": 0,
@@ -35409,18 +35172,19 @@
         ]
       },
       "branches": {
-        "total": 5,
+        "total": 2,
         "enum_switch_branches": 0,
+        "server_gated_branches": 3,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 5,
-        "present_arm_exercised": 4,
-        "present_arm_pct": 80,
+        "reachable_on_happy_path": 2,
+        "present_arm_exercised": 1,
+        "present_arm_pct": 50,
         "absent_arm_exercised": 1,
-        "absent_arm_pct": 20,
+        "absent_arm_pct": 50,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 80,
+        "coverage_pct": 50,
         "by_origin": {
           "service": {
             "total": 2,
@@ -35432,19 +35196,19 @@
             "absent_arm_exercised": 1
           },
           "generated": {
-            "total": 2,
-            "reachable_on_happy_path": 2,
-            "present_arm_exercised": 2,
-            "present_arm_pct": 100,
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 1,
-            "reachable_on_happy_path": 1,
-            "present_arm_exercised": 1,
-            "present_arm_pct": 100,
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 0
@@ -35550,6 +35314,7 @@
       "branches": {
         "total": 1,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
@@ -35665,6 +35430,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -35848,6 +35614,7 @@
       "branches": {
         "total": 23,
         "enum_switch_branches": 168,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -36245,6 +36012,7 @@
       "branches": {
         "total": 39,
         "enum_switch_branches": 189,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 6,
         "present_arm_exercised": 1,
@@ -36689,6 +36457,7 @@
       "branches": {
         "total": 1,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 0,
@@ -36808,6 +36577,7 @@
       "branches": {
         "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -36912,10 +36682,11 @@
         ]
       },
       "branches": {
-        "total": 2,
+        "total": 0,
         "enum_switch_branches": 0,
+        "server_gated_branches": 2,
         "happy_path_reached": false,
-        "reachable_on_happy_path": 2,
+        "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
         "absent_arm_exercised": 0,
@@ -36944,7 +36715,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 2,
+            "total": 0,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -36953,24 +36724,7 @@
             "absent_arm_exercised": 0
           }
         },
-        "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/utils.go:3619",
-            "cond": "in.DevOid",
-            "predicate_paths": [
-              "in.DevOid"
-            ]
-          },
-          {
-            "id": "b2",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/utils.go:3622",
-            "cond": "in.DevUid",
-            "predicate_paths": [
-              "in.DevUid"
-            ]
-          }
-        ]
+        "gaps": []
       },
       "dependencies": {
         "services": null,
@@ -37036,6 +36790,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
@@ -37172,10 +36927,11 @@
         ]
       },
       "branches": {
-        "total": 4,
+        "total": 1,
         "enum_switch_branches": 0,
+        "server_gated_branches": 3,
         "happy_path_reached": false,
-        "reachable_on_happy_path": 3,
+        "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
         "absent_arm_exercised": 0,
@@ -37195,7 +36951,7 @@
             "absent_arm_exercised": 0
           },
           "generated": {
-            "total": 2,
+            "total": 0,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -37204,7 +36960,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 1,
+            "total": 0,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -37214,30 +36970,6 @@
           }
         },
         "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
-            "cond": "in.RevOrgId == nil",
-            "predicate_paths": [
-              "in.RevOrgId"
-            ]
-          },
-          {
-            "id": "b2",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:1177",
-            "cond": "in.RevOrgId == nil",
-            "predicate_paths": [
-              "in.RevOrgId"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:1184",
-            "cond": "in.RevOrgId",
-            "predicate_paths": [
-              "in.RevOrgId"
-            ]
-          },
           {
             "id": "b4",
             "at": "internal/service/revorg.go:2051",
@@ -37310,10 +37042,11 @@
         ]
       },
       "branches": {
-        "total": 4,
+        "total": 1,
         "enum_switch_branches": 0,
+        "server_gated_branches": 3,
         "happy_path_reached": false,
-        "reachable_on_happy_path": 3,
+        "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
         "absent_arm_exercised": 0,
@@ -37333,7 +37066,7 @@
             "absent_arm_exercised": 0
           },
           "generated": {
-            "total": 2,
+            "total": 0,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -37342,7 +37075,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 1,
+            "total": 0,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -37352,30 +37085,6 @@
           }
         },
         "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
-            "cond": "in.RevUserId == nil",
-            "predicate_paths": [
-              "in.RevUserId"
-            ]
-          },
-          {
-            "id": "b2",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:1876",
-            "cond": "in.RevUserId == nil",
-            "predicate_paths": [
-              "in.RevUserId"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:1883",
-            "cond": "in.RevUserId",
-            "predicate_paths": [
-              "in.RevUserId"
-            ]
-          },
           {
             "id": "b4",
             "at": "internal/service/revuser_merge.go:249",
@@ -37460,6 +37169,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
@@ -37607,6 +37317,7 @@
       "branches": {
         "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
@@ -37784,89 +37495,49 @@
         ]
       },
       "branches": {
-        "total": 7,
+        "total": 2,
         "enum_switch_branches": 0,
+        "server_gated_branches": 5,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 7,
+        "reachable_on_happy_path": 2,
         "present_arm_exercised": 2,
-        "present_arm_pct": 28.6,
-        "absent_arm_exercised": 5,
-        "absent_arm_pct": 71.4,
+        "present_arm_pct": 100,
+        "absent_arm_exercised": 0,
+        "absent_arm_pct": 0,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 28.6,
+        "coverage_pct": 100,
         "by_origin": {
           "service": {
-            "total": 3,
-            "reachable_on_happy_path": 3,
+            "total": 2,
+            "reachable_on_happy_path": 2,
             "present_arm_exercised": 2,
-            "present_arm_pct": 66.7,
+            "present_arm_pct": 100,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 1
+            "absent_arm_exercised": 0
           },
           "generated": {
-            "total": 2,
-            "reachable_on_happy_path": 2,
+            "total": 0,
+            "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 2
+            "absent_arm_exercised": 0
           },
           "library": {
-            "total": 2,
-            "reachable_on_happy_path": 2,
+            "total": 0,
+            "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 2
+            "absent_arm_exercised": 0
           }
         },
-        "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
-            "cond": "in.DevUserId == nil",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
-          {
-            "id": "b2",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:765",
-            "cond": "in.DevUserId != nil",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:770",
-            "cond": "in.DevUserId",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
-          {
-            "id": "b4",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:291",
-            "cond": "in.DevUserId == \"\"",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          },
-          {
-            "id": "b7",
-            "at": "internal/service/devuser.go:2582",
-            "cond": "in.DevUserId != nil",
-            "predicate_paths": [
-              "in.DevUserId"
-            ]
-          }
-        ]
+        "gaps": null
       },
       "dependencies": {
         "services": [
@@ -37977,6 +37648,7 @@
       "branches": {
         "total": 12,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 11,
         "present_arm_exercised": 0,
@@ -38224,6 +37896,7 @@
       "branches": {
         "total": 16,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 6,
@@ -38664,6 +38337,7 @@
       "branches": {
         "total": 5,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -38888,6 +38562,7 @@
       "branches": {
         "total": 33,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 15,
         "present_arm_exercised": 1,
@@ -39473,27 +39148,28 @@
         ]
       },
       "branches": {
-        "total": 45,
+        "total": 43,
         "enum_switch_branches": 0,
+        "server_gated_branches": 2,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 9,
+        "reachable_on_happy_path": 7,
         "present_arm_exercised": 11,
-        "present_arm_pct": 24.4,
-        "absent_arm_exercised": 8,
-        "absent_arm_pct": 88.9,
+        "present_arm_pct": 25.6,
+        "absent_arm_exercised": 6,
+        "absent_arm_pct": 85.7,
         "negative_arm_exercised": 5,
-        "negative_arm_pct": 11.1,
+        "negative_arm_pct": 11.6,
         "both_arms_exercised": 1,
-        "coverage_pct": 24.4,
+        "coverage_pct": 25.6,
         "by_origin": {
           "service": {
-            "total": 39,
-            "reachable_on_happy_path": 9,
+            "total": 37,
+            "reachable_on_happy_path": 7,
             "present_arm_exercised": 11,
-            "present_arm_pct": 28.2,
+            "present_arm_pct": 29.7,
             "negative_arm_exercised": 5,
-            "negative_arm_pct": 12.8,
-            "absent_arm_exercised": 8
+            "negative_arm_pct": 13.5,
+            "absent_arm_exercised": 6
           },
           "generated": {
             "total": 0,
@@ -39705,22 +39381,6 @@
             "cond": "**t25 != in.DevUid.Value",
             "predicate_paths": [
               "in.DevUid.Value"
-            ]
-          },
-          {
-            "id": "b33",
-            "at": "internal/service/devuser.go:2099",
-            "cond": "in.DevUid != nil",
-            "predicate_paths": [
-              "in.DevUid"
-            ]
-          },
-          {
-            "id": "b35",
-            "at": "internal/service/devuser.go:2099",
-            "cond": "in.DevUid != *t54",
-            "predicate_paths": [
-              "in.DevUid"
             ]
           },
           {
@@ -40094,6 +39754,7 @@
       "branches": {
         "total": 5,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 5,
         "present_arm_exercised": 5,
@@ -40242,6 +39903,7 @@
       "branches": {
         "total": 2,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
@@ -40411,6 +40073,7 @@
       "branches": {
         "total": 10,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 1,
@@ -40827,6 +40490,7 @@
       "branches": {
         "total": 16,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 1,
         "present_arm_exercised": 2,
@@ -41188,6 +40852,7 @@
       "branches": {
         "total": 11,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 5,
         "present_arm_exercised": 0,
@@ -41424,6 +41089,7 @@
       "branches": {
         "total": 10,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 7,
         "present_arm_exercised": 1,
@@ -41726,6 +41392,7 @@
       "branches": {
         "total": 7,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 5,
         "present_arm_exercised": 5,
@@ -41908,6 +41575,7 @@
       "branches": {
         "total": 3,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
@@ -42263,6 +41931,7 @@
       "branches": {
         "total": 69,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 10,
         "present_arm_exercised": 32,
@@ -42916,6 +42585,7 @@
       "branches": {
         "total": 81,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 21,
         "present_arm_exercised": 0,
@@ -43681,6 +43351,7 @@
       "branches": {
         "total": 6,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 5,
         "present_arm_exercised": 0,
@@ -43836,10 +43507,11 @@
         ]
       },
       "branches": {
-        "total": 7,
+        "total": 4,
         "enum_switch_branches": 0,
+        "server_gated_branches": 3,
         "happy_path_reached": false,
-        "reachable_on_happy_path": 6,
+        "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
         "absent_arm_exercised": 0,
@@ -43859,7 +43531,7 @@
             "absent_arm_exercised": 0
           },
           "generated": {
-            "total": 4,
+            "total": 2,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -43868,7 +43540,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 2,
+            "total": 1,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -43879,35 +43551,11 @@
         },
         "gaps": [
           {
-            "id": "b1",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
-            "cond": "in.RevUserId == nil",
-            "predicate_paths": [
-              "in.RevUserId"
-            ]
-          },
-          {
             "id": "b2",
             "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
             "cond": "in.TargetRevOrgId == nil",
             "predicate_paths": [
               "in.TargetRevOrgId"
-            ]
-          },
-          {
-            "id": "b3",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2658",
-            "cond": "in.RevUserId == nil",
-            "predicate_paths": [
-              "in.RevUserId"
-            ]
-          },
-          {
-            "id": "b4",
-            "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2665",
-            "cond": "in.RevUserId",
-            "predicate_paths": [
-              "in.RevUserId"
             ]
           },
           {
@@ -44015,6 +43663,7 @@
       "branches": {
         "total": 5,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": true,
         "reachable_on_happy_path": 5,
         "present_arm_exercised": 0,
@@ -44216,6 +43865,7 @@
       "branches": {
         "total": 22,
         "enum_switch_branches": 0,
+        "server_gated_branches": 0,
         "happy_path_reached": false,
         "reachable_on_happy_path": 2,
         "present_arm_exercised": 0,
