@@ -1,6 +1,9 @@
 package main
 
 import (
+	"go/ast"
+	"go/parser"
+	"go/token"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -342,4 +345,91 @@ func TestClassifyBranch(t *testing.T) {
 			t.Fatalf("empty branch should be inert, got %+v", oc)
 		}
 	})
+}
+
+// TestScanItBodyCollectsEveryOperation guards the fix for tests that issue an
+// action plus verification requests: every operation the It calls must be
+// returned (not just the last), deduped, and in source order.
+func TestScanItBodyCollectsEveryOperation(t *testing.T) {
+	src := `package x
+
+func _() {
+	It("activate then verify", func() {
+		req := apiv2internal.DevUsersActivateJSONRequestBody{Id: "u1"}
+		http_utils.MakeRequest(ctx, clientV2Internal.DevUsersActivate, req, &resp)
+		http_utils.MakeRequest(ctx, clientV2Internal.DevUsersGetPost, getReq, &getResp)
+		// verification is repeated in many tests; repeating is fine.
+		http_utils.MakeRequest(ctx, clientV2Internal.DevUsersGetPost, getReq, &getResp)
+	})
+}`
+	body := parseFirstItBody(t, src)
+	ops, _, _, _ := scanItBody(body)
+	want := []string{"DevUsersActivate", "DevUsersGetPost"}
+	if !reflect.DeepEqual(ops, want) {
+		t.Fatalf("scanItBody ops = %v, want %v", ops, want)
+	}
+}
+
+// TestCollectTestsLinksAllCalledOperations is the end-to-end check: a test that
+// acts then verifies must be linked to BOTH operations, and a commented-out
+// request must not create a link.
+func TestCollectTestsLinksAllCalledOperations(t *testing.T) {
+	src := `package x
+
+func _() {
+	It("activate then verify", func() {
+		req := apiv2internal.DevUsersActivateJSONRequestBody{Id: "u1"}
+		http_utils.MakeRequest(ctx, clientV2Internal.DevUsersActivate, req, &resp)
+		http_utils.MakeRequest(ctx, clientV2Internal.DevUsersGetPost, getReq, &getResp)
+	})
+	It("disabled", func() {
+		// http_utils.MakeRequest(ctx, clientV2Internal.DevUsersDelete, req, &resp)
+	})
+}`
+	fset := token.NewFileSet()
+	f, err := parser.ParseFile(fset, "x_test.go", src, 0)
+	if err != nil {
+		t.Fatal(err)
+	}
+	ops := map[string]*opFacts{}
+	collectTests(f, "x_test.go", ops)
+
+	for _, op := range []string{"DevUsersActivate", "DevUsersGetPost"} {
+		of := ops[op]
+		if of == nil {
+			t.Fatalf("operation %s was not linked", op)
+		}
+		if len(of.Tests) != 1 {
+			t.Fatalf("operation %s: got %d tests, want 1", op, len(of.Tests))
+		}
+	}
+	if ops["DevUsersDelete"] != nil {
+		t.Fatalf("commented-out request must not create a link")
+	}
+}
+
+func parseFirstItBody(t *testing.T, src string) *ast.FuncLit {
+	t.Helper()
+	fset := token.NewFileSet()
+	f, err := parser.ParseFile(fset, "x_test.go", src, 0)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var body *ast.FuncLit
+	ast.Inspect(f, func(n ast.Node) bool {
+		call, ok := n.(*ast.CallExpr)
+		if !ok || !isIdent(call.Fun, "It") {
+			return true
+		}
+		for _, a := range call.Args {
+			if fl, ok := a.(*ast.FuncLit); ok && body == nil {
+				body = fl
+			}
+		}
+		return true
+	})
+	if body == nil {
+		t.Fatal("no It body found")
+	}
+	return body
 }

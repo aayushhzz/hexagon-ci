@@ -15,10 +15,19 @@ raw JSON).
 
 The UI never over-claims coverage:
 
-- **Mapped vs unmapped.** Only RPCs whose operation appears in the lifejacket
-  suite are mapped. Unmapped RPCs show `—` for coverage (undefined, *not* a
-  verified zero); service aggregates are computed over mapped RPCs only.
-- **Zero denominators.** When a mapped RPC's real denominator is known to be
+- **Three buckets, not two.** Every RPC is classified by whether a client can
+  reach it and whether a test covers it:
+  - **Linked** — the gateway exposes an operation and a Lifejacket test is
+    matched to it; coverage is measured.
+  - **Reachable, untested** — the gateway exposes an operation (so a client can
+    call it), but no test covers it yet; this is a coverage gap to close.
+  - **Internal/admin** — no gateway operation exists, so an end-to-end client
+    cannot reach it; it is out of scope, *not* a missed test.
+  Reachability comes from each service's reviewed op-map (`provenance/opmap*.json`).
+  Reachable-but-untested and internal/admin RPCs show `Not measured` for coverage
+  (undefined, *not* a verified zero); service aggregates are computed over linked
+  RPCs only.
+- **Zero denominators.** When a linked RPC's real denominator is known to be
   zero (e.g. it reads no leaf request fields), coverage shows `n/a`, not `0%`.
 - **Static reachability.** All metrics are static field-sensitive provenance
   intersected with test inputs/assertions, not executed-branch coverage. This is

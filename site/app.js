@@ -118,7 +118,7 @@ function barClass(pct) {
 /* A percentage cell for tables: value + mini bar, or n/a / dash. */
 function pctCell(res, { ratio = "" } = {}) {
   if (res.kind === "unknown") {
-    return `<span class="pctcell"><span class="pv na" title="Not linked to any test, so this is not measured">Not measured</span></span>`;
+    return `<span class="pctcell"><span class="pv na" title="No linked test, so this is not measured">Not measured</span></span>`;
   }
   if (res.kind === "na") {
     return `<span class="pctcell"><span class="pv na" title="${attr(ratio || "Nothing to measure here")}">n/a</span><span class="bar na" aria-hidden="true"></span></span>`;
@@ -144,7 +144,7 @@ const HELP = {
   anomalies: "Request fields in the tests that did not line up with a field this endpoint reads. These are rename suggestions for a person to review. Nothing is changed automatically.",
   tests: "The Lifejacket tests that are linked to this endpoint.",
   depth: "The same input field coverage, split by how deeply nested each field is, so a few important top-level fields are not lost among large optional sub-sections.",
-  mapped: "Linked means a test could be matched to this endpoint. Not linked means no test matched (the endpoint is internal or admin, or its name could not be worked out). A not-linked endpoint shows 'Not measured' instead of a fake zero, and does not mean no tests exist for it.",
+  mapped: "Each backend RPC falls into one of three buckets. Linked: a Lifejacket test is matched to this endpoint and supplies its inputs. Reachable, untested: the gateway exposes an HTTP operation for it, so a client can call it, but no test covers it yet - this is the gap worth closing. Internal/admin: no gateway operation exists, so an end-to-end client cannot reach it; it is out of scope, not a missed test.",
   deps: "Other services and the datastore this endpoint calls while handling the request. Input and branch coverage do not see these, so a read-or-enrich endpoint can look empty while its real work is here. 'Reached by a test' means a passing test calls this endpoint, so these calls run on that path. It does not prove the test checks what came back.",
   verified: "When a service call's result is copied into a response field, we check whether a test actually asserts on that field. 'Used in response' is where the result lands (found by tracing the code). 'Checked by a test' means a test verifies that field, so the call's result is really being tested, not just triggered. Datastore reads are left out on purpose. Field names are matched proto-to-HTTP through a reviewed map, so a rename can still be missed.",
 };
@@ -174,7 +174,7 @@ function loadingCard(label) {
 const svcViews = Object.create(null);
 function viewStateFor(svc) {
   if (!svcViews[svc]) {
-    svcViews[svc] = { q: "", scope: "mapped", quick: new Set(), sort: "rpc", dir: 1 };
+    svcViews[svc] = { q: "", scope: "linked", quick: new Set(), sort: "rpc", dir: 1 };
   }
   return svcViews[svc];
 }
@@ -205,7 +205,7 @@ async function viewServices(token) {
     };
     return `<a class="service-card" href="#/${encodeURIComponent(s.service)}">
       <div class="svc-name">${esc(s.service)}</div>
-      <div class="svc-meta">${esc(s.rpcs)} RPCs (backend operations) &middot; ${esc(s.mapped)} test-linked &middot; ${esc(s.anomalies)} inputs missing from tests</div>
+      <div class="svc-meta">${esc(s.rpcs)} RPCs (backend operations) &middot; ${esc(s.linked)} linked &middot; ${esc(s.untested)} reachable untested &middot; ${esc(s.internal)} internal/admin</div>
       <div class="service-metrics">
         ${mm("Input fields covered", rowFieldPct(s), "field")}
         ${mm("Branches reached", rowBranchPct(s), "reached")}
@@ -221,13 +221,15 @@ async function viewServices(token) {
       <p class="eyebrow">Code and test comparison</p>
       <h1>Lifejacket coverage across services</h1>
       <p class="lede">For each backend RPC (a backend operation), this compares what the code reads and
-      checks against the inputs and checks its linked Lifejacket tests supply. Pick a service to see its
-      RPCs, where tests reach, and the gaps to close.</p>
+      checks against the inputs and checks its linked Lifejacket tests supply. RPCs are split into
+      test-linked, reachable-but-untested (a client can call it, but no test covers it yet), and
+      internal/admin (no gateway operation, so it is out of scope).</p>
     </div>
     <div class="callout accent">
       These numbers compare service code with Lifejacket test inputs and checks. They do not show results
-      from a test run. Each service number counts only its test-linked RPCs. Not-linked internal RPCs are
-      left out of the total rather than counted as zero.
+      from a test run. "Reachable" means the gateway exposes an HTTP operation for the RPC, so a client such
+      as Lifejacket can call it. Service coverage numbers count only test-linked RPCs; reachable-but-untested
+      and internal/admin RPCs are not counted as zero.
     </div>
     <div class="service-grid">${cards || '<p class="empty-inline">No services found.</p>'}</div>
     <section class="methodology">
@@ -280,19 +282,19 @@ async function viewService(svc, token) {
     <div class="page-head">
       <p class="eyebrow">Service</p>
       <h1>${esc(svc)}</h1>
-      <p class="lede">${esc(t.mapped)} of ${esc(t.rpcs)} RPCs (backend operations) are linked to a Lifejacket test.
-      The remaining ${esc(t.unmapped)} are not linked (internal or admin RPCs, or operations whose name could
-      not be derived) and are left out of the numbers below.</p>
+      <p class="lede">${esc(t.reachable)} of ${esc(t.rpcs)} RPCs (backend operations) are reachable through a gateway operation,
+      so a client such as Lifejacket can call them. ${esc(t.linked)} are linked to a test; ${esc(t.untested)} are reachable but
+      have no test yet. The remaining ${esc(t.internal)} are internal/admin (no gateway operation) and are out of scope.</p>
     </div>
 
     <div class="callout">
-      These numbers compare service code with Lifejacket test inputs and checks. They do not show results from
-      a test run. The service totals count only its test-linked RPCs. A not-linked RPC has no linked tests and
-      shows "Not measured" rather than a real zero; this does not mean no tests exist for it.
+      These numbers compare service code with Lifejacket test inputs and checks, not a test run. "Reachable" means the
+      gateway exposes an HTTP operation for the RPC. Service coverage totals count only test-linked RPCs; reachable-but-untested
+      and internal/admin RPCs are shown as "Not measured" rather than a real zero.
     </div>
 
     <div class="stat-strip">
-      ${stat("RPCs", { kind: "value", text: String(t.rpcs) }, `${t.mapped} test-linked / ${t.unmapped} not linked`)}
+      ${stat("RPCs", { kind: "value", text: String(t.rpcs) }, `${t.linked} linked / ${t.untested} reachable untested / ${t.internal} internal`, "mapped")}
       ${stat("Input fields covered", fieldRes, `${fieldCov} / ${fieldTot} ${useRep ? "input units" : "input fields"}`, "field")}
       ${stat("Branches reached", presentRes, `${brPresent} / ${brTotal} ${useSvc ? "service branches" : "branches"}`, "reached")}
       ${stat("Error paths tested", negRes, `${brNeg} / ${brTotal} ${useSvc ? "service branches" : "branches"}`, "errorPath")}
@@ -312,8 +314,9 @@ async function viewService(svc, token) {
         <input id="q" type="search" placeholder="Search RPC or operation name..." autocomplete="off" />
       </div>
       <div class="filter-group" role="group" aria-label="Scope">
-        <button class="seg" data-scope="mapped" type="button">Test-linked</button>
-        <button class="seg" data-scope="unmapped" type="button">Not linked</button>
+        <button class="seg" data-scope="linked" type="button">Test-linked</button>
+        <button class="seg" data-scope="untested" type="button">Reachable, untested</button>
+        <button class="seg" data-scope="internal" type="button">Internal/admin</button>
         <button class="seg" data-scope="all" type="button">All</button>
       </div>
       <div class="chip-filters" role="group" aria-label="Quick filters">
@@ -361,11 +364,11 @@ function renderTable(svc, allRows) {
   const q = vs.q.trim().toLowerCase();
 
   let rows = allRows.filter((r) => {
-    if (vs.scope === "mapped" && r.unmapped) return false;
-    if (vs.scope === "unmapped" && !r.unmapped) return false;
+    const bucket = r.bucket || (r.unmapped ? "internal" : "linked");
+    if (vs.scope !== "all" && bucket !== vs.scope) return false;
     if (q && !(r.rpc.toLowerCase().includes(q) || (r.operation || "").toLowerCase().includes(q))) return false;
     if (vs.quick.has("fieldgaps") && !(r.gap_count > 0)) return false;
-    if (vs.quick.has("neggaps") && !(!r.unmapped && r.negative_pct === 0 && r.field_total > 0)) return false;
+    if (vs.quick.has("neggaps") && !(bucket === "linked" && r.negative_pct === 0 && r.field_total > 0)) return false;
     if (vs.quick.has("anomalies") && !(r.anomaly_count > 0)) return false;
     return true;
   });
@@ -390,9 +393,12 @@ function renderTable(svc, allRows) {
 
   const body = rows.map((r) => {
     const unmapped = !!r.unmapped;
-    const tag = unmapped
-      ? '<span class="tag unmapped" title="No test could be linked to this operation">not linked</span>'
-      : "";
+    const bucket = r.bucket || (unmapped ? "internal" : "linked");
+    const tag = bucket === "linked"
+      ? ""
+      : bucket === "untested"
+        ? '<span class="tag unmapped" title="Reachable through a gateway operation, but no Lifejacket test covers it yet">reachable, untested</span>'
+        : '<span class="tag unmapped" title="No gateway operation; internal/admin, out of scope for this suite">internal/admin</span>';
     const ratio = (c, t) => `${c}/${t}`;
     const fp = rowFieldPair(r);
     const bp = rowBranchPair(r);
@@ -430,8 +436,8 @@ function renderTable(svc, allRows) {
       <tbody>${body || empty}</tbody>
     </table>
     </div>
-    <p class="rows-note">${rows.length} RPC${rows.length === 1 ? "" : "s"} shown. The columns apply to test-linked RPCs only.
-    Not-linked rows show <code>Not measured</code> because there is nothing to measure, which is not the same as zero.</p>`;
+    <p class="rows-note">${rows.length} RPC${rows.length === 1 ? "" : "s"} shown. The coverage columns apply to test-linked RPCs only.
+    Reachable-but-untested and internal/admin rows show <code>Not measured</code>, which is not the same as zero.</p>`;
 
   document.querySelectorAll(".sort-btn[data-sort]").forEach((btn) => btn.addEventListener("click", () => {
     const key = btn.dataset.sort;
@@ -449,8 +455,15 @@ async function viewRpc(svc, rpc, token) {
     { text: rpc },
   ]);
   app.innerHTML = loadingCard(rpc);
-  const d = await getJSON(`data/${encodeURIComponent(svc)}/${encodeURIComponent(rpc)}.json`);
+  const svcDir = `data/${encodeURIComponent(svc)}`;
+  // The detail file may predate the reachable/linked bucket fields, so read the
+  // service index too and fall back to its row for the bucket.
+  const [d, idx] = await Promise.all([
+    getJSON(`${svcDir}/${encodeURIComponent(rpc)}.json`),
+    getJSON(`${svcDir}/index.json`).catch(() => null),
+  ]);
   if (token !== routeToken) return;
+  const row = idx && (idx.rpcs || []).find((r) => r.rpc === rpc);
 
   const c = d.coverage || {};
   const prov = d.provenance || {};
@@ -478,16 +491,22 @@ async function viewRpc(svc, rpc, token) {
   const documented = st.documented || [];
 
   // ---- header + mapping note ----
-  const mapTag = unmapped
-    ? '<span class="tag unmapped">not linked</span>'
-    : '<span class="tag mapped">test-linked</span>';
+  const bucket = c.bucket || (row && row.bucket) || (unmapped ? "internal" : "linked");
+  const mapTag = bucket === "linked"
+    ? '<span class="tag mapped">test-linked</span>'
+    : bucket === "untested"
+      ? '<span class="tag unmapped">reachable, untested</span>'
+      : '<span class="tag unmapped">internal/admin</span>';
 
-  const unmappedNote = unmapped ? `
+  const unmappedNote = bucket === "untested" ? `
     <div class="callout">
-      No test could be linked to this RPC (it is an internal or admin RPC, or its operation name could not be
-      derived). The information below is read from the code, but there are no linked tests to compare against,
-      so test coverage cannot be measured here. This does not mean no tests exist for it. Read the input and check counts as
-      the surface that would need tests, not as a real zero.
+      This RPC is reachable through a gateway operation, so a client can call it, but no Lifejacket test covers it yet.
+      The information below is read from the code, so the input and check counts show the surface that still needs tests,
+      not a measured zero. This is a coverage gap to close.
+    </div>` : bucket === "internal" ? `
+    <div class="callout">
+      This RPC has no gateway operation, so an end-to-end client cannot reach it (internal or admin). The information
+      below is read from the code; test coverage is not applicable. This is out of scope for the Lifejacket suite, not a missed test.
     </div>` : "";
 
   // nothing-to-measure note for test-linked RPCs that read no input fields
@@ -599,7 +618,7 @@ async function viewRpc(svc, rpc, token) {
         <thead><tr><th scope="col">Response code</th><th scope="col">Checked by a test</th></tr></thead>
         <tbody>${statusRows}</tbody>
       </table></div>`
-      : `<div class="panel"><p class="empty-inline">No HTTP response codes are documented for this operation${unmapped ? " (not linked to any test)." : "."}</p></div>`}`;
+      : `<div class="panel"><p class="empty-inline">No HTTP response codes are documented for this operation${unmapped ? " (no linked test)." : "."}</p></div>`}`;
 
   // ---- covered field evidence ----
   const coveredSection = `
@@ -613,7 +632,7 @@ async function viewRpc(svc, rpc, token) {
           <div class="ev-meta">match: <span class="badge ${cf.match === "alias" ? "match-alias" : ""}">${esc(cf.match || "exact")}</span></div>
           <div class="ev-tests">${(cf.by_tests || []).map((tn) => `<span class="badge">${esc(tn)}</span>`).join("") || '<span class="empty-inline">no named test</span>'}</div>
         </div>`).join("")
-        : `<div class="evidence-item"><p class="empty-inline">No covered input fields${unmapped ? " (not linked to any test)." : "."}</p></div>`}
+        : `<div class="evidence-item"><p class="empty-inline">No covered input fields${unmapped ? " (no linked test)." : "."}</p></div>`}
     </div>`;
 
   // ---- field gaps ----
@@ -725,7 +744,7 @@ async function viewRpc(svc, rpc, token) {
         </div>
       </details>`;
     }).join("")
-      : `<div class="panel"><p class="empty-inline">No linked tests${unmapped ? " (not linked to any test)." : "."}</p></div>`}`;
+      : `<div class="panel"><p class="empty-inline">No linked tests${unmapped ? " (no linked test)." : "."}</p></div>`}`;
 
   // ---- agent prompt ----
   const promptSection = `

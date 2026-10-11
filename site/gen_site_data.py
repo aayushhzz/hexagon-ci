@@ -29,6 +29,25 @@ def load(name):
         return json.load(fh)
 
 
+def load_reachable(op_map_file):
+    """RPC names reachable via a gateway operation, from the service op-map.
+
+    These are the RPCs a client such as the Lifejacket suite can actually reach.
+    An RPC absent from this set has no gateway operation and is internal/admin:
+    it is out of scope for end-to-end coverage rather than an untested endpoint.
+    """
+    if not op_map_file:
+        return set()
+    path = ROOT / "provenance" / op_map_file
+    if not path.exists():
+        return set()
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return set()
+    return set((data.get("by_operation") or {}).values())
+
+
 def build_prompt(entry, prov):
     """A ready-to-paste instruction for an agent to close this RPC's gaps."""
     rpc = entry["rpc"]
@@ -85,16 +104,26 @@ def build_prompt(entry, prov):
     return "\n".join(lines)
 
 
-def summary_row(entry):
+def summary_row(entry, reachable):
     f = entry.get("fields") or {}
     b = entry.get("branches") or {}
     s = entry.get("status") or {}
     a = (entry.get("anomalies") or {}).get("unmatched_test_fields") or []
     svc = (b.get("by_origin") or {}).get("service", {})
+    unmapped = bool(entry.get("unmapped", False))
+    is_reachable = entry["rpc"] in reachable
+    if not unmapped:
+        bucket = "linked"
+    elif is_reachable:
+        bucket = "untested"
+    else:
+        bucket = "internal"
     return {
         "rpc": entry["rpc"],
         "operation": entry.get("operation", ""),
-        "unmapped": bool(entry.get("unmapped", False)),
+        "unmapped": unmapped,
+        "reachable": is_reachable,
+        "bucket": bucket,
         "tests": entry.get("tests", 0) or 0,
         "field_pct": f.get("coverage_pct", 0.0) or 0.0,
         "field_covered": f.get("covered_count", 0) or 0,
@@ -121,11 +150,13 @@ def summary_row(entry):
     }
 
 
-def build_service(service, cov, prov):
+def build_service(service, cov, prov, reachable):
     """Emit index.json + per-RPC detail for one service, return its services.json row."""
     prov_by_rpc = {p["rpc"]: p for p in prov.get("provenance", [])}
     entries = sorted(cov.get("coverage", []), key=lambda e: e["rpc"])
     mapped = [e for e in entries if not e.get("unmapped", False)]
+    untested = [e for e in entries if e.get("unmapped", False) and e["rpc"] in reachable]
+    internal = [e for e in entries if e.get("unmapped", False) and e["rpc"] not in reachable]
 
     def agg(key, sub):
         return sum((e.get(key) or {}).get(sub, 0) or 0 for e in mapped)
@@ -152,6 +183,10 @@ def build_service(service, cov, prov):
         "rpcs": len(entries),
         "mapped": len(mapped),
         "unmapped": len(entries) - len(mapped),
+        "linked": len(mapped),
+        "reachable": len(mapped) + len(untested),
+        "untested": len(untested),
+        "internal": len(internal),
         "field_covered": agg("fields", "covered_count"),
         "field_total": agg("fields", "leaf_fields_read_by_rpc"),
         "rep_covered": agg_rep("covered"),
@@ -184,8 +219,33 @@ def build_service(service, cov, prov):
     svc_dir = OUT / service
     svc_dir.mkdir(parents=True, exist_ok=True)
 
-    index = {"service": service, "totals": totals, "rpcs": [summary_row(e) for e in entries]}
+    index = {"service": service, "totals": totals, "rpcs": [summary_row(e, reachable) for e in entries]}
     (svc_dir / "index.json").write_text(json.dumps(index, indent=2), encoding="utf-8")
+
+    # Per-RPC detail carries provenance-derived fields (func, request/response
+    # types, sinks, errors). Only rewrite it when provenance is available, so a
+    # coverage-only run does not blank those fields in the committed files.
+    if not prov.get("provenance"):
+        print(f"kept existing per-RPC detail for '{service}' (no provenance available)")
+        return {
+            "service": service,
+            "rpcs": totals["rpcs"],
+            "mapped": totals["mapped"],
+            "linked": totals["linked"],
+            "reachable": totals["reachable"],
+            "untested": totals["untested"],
+            "internal": totals["internal"],
+            "field_pct": totals["field_pct"],
+            "rep_pct": totals["rep_pct"],
+            "present_pct": totals["present_pct"],
+            "svc_present_pct": totals["svc_present_pct"],
+            "negative_pct": totals["negative_pct"],
+            "status_pct": totals["status_pct"],
+            "anomalies": totals["anomalies"],
+            "dep_rpcs": totals.get("dep_rpcs", 0),
+            "dep_used": totals.get("dep_used", 0),
+            "dep_checked": totals.get("dep_checked", 0),
+        }
 
     for e in entries:
         p = prov_by_rpc.get(e["rpc"], {})
@@ -209,6 +269,10 @@ def build_service(service, cov, prov):
         "service": service,
         "rpcs": totals["rpcs"],
         "mapped": totals["mapped"],
+        "linked": totals["linked"],
+        "reachable": totals["reachable"],
+        "untested": totals["untested"],
+        "internal": totals["internal"],
         "field_pct": totals["field_pct"],
         "rep_pct": totals["rep_pct"],
         "present_pct": totals["present_pct"],
@@ -230,12 +294,16 @@ def main():
         slug = svc["name"].lower()
         cov_path = RESULTS / f"{slug}-coverage-all.json"
         prov_path = RESULTS / f"{slug}-provenance-all.json"
-        if not cov_path.exists() or not prov_path.exists():
-            print(f"skip {svc['name']}: missing {cov_path.name} or {prov_path.name} (run results/reproduce.sh first)")
+        if not cov_path.exists():
+            print(f"skip {svc['name']}: missing {cov_path.name} (run results/reproduce.sh first)")
             continue
         cov = json.loads(cov_path.read_text(encoding="utf-8"))
-        prov = json.loads(prov_path.read_text(encoding="utf-8"))
-        services.append(build_service(svc["name"], cov, prov))
+        # The per-service provenance dumps are gitignored build artifacts; the site
+        # still builds from the committed coverage files alone (detail loses the
+        # sink/error lists until reproduce.sh is run).
+        prov = json.loads(prov_path.read_text(encoding="utf-8")) if prov_path.exists() else {}
+        reachable = load_reachable(svc.get("op_map_file", ""))
+        services.append(build_service(svc["name"], cov, prov, reachable))
     services.sort(key=lambda s: s["service"].lower())
     (OUT / "services.json").write_text(json.dumps({"services": services}, indent=2), encoding="utf-8")
     print(f"wrote services.json with {len(services)} services")

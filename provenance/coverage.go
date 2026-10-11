@@ -269,50 +269,61 @@ func collectTests(f *ast.File, file string, ops map[string]*opFacts) {
 		if body == nil {
 			return true
 		}
-		op, fields, statuses, success := scanItBody(body)
-		if op == "" {
+		calledOps, fields, statuses, success := scanItBody(body)
+		if len(calledOps) == 0 {
 			return true // not a request-issuing test
 		}
 		respFields := scanResponseFields(body)
-		of := ops[op]
-		if of == nil {
-			of = &opFacts{Operation: op, fieldsSet: map[string]map[string]bool{}, statuses: map[int]bool{}, respPaths: map[string]map[string]bool{}}
-			ops[op] = of
-		}
-		if success {
-			of.success = true
-		}
 		tf := testFact{Name: name, File: file, Labels: labels, Fields: sortedUniq(fields), Status: sortedUniqInt(statuses), Success: success, RespFields: sortedUniq(respFields)}
-		of.Tests = append(of.Tests, tf)
-		for _, fld := range fields {
-			leaf := strings.ToLower(fld)
-			if of.fieldsSet[leaf] == nil {
-				of.fieldsSet[leaf] = map[string]bool{}
+		// A single It may issue several requests: an action plus verification
+		// calls. Link the test to every operation it invokes, so a test is never
+		// dropped just because its target is not the last request in the block.
+		// Repeating a shared verification operation across many tests is expected.
+		for _, op := range calledOps {
+			of := ops[op]
+			if of == nil {
+				of = &opFacts{Operation: op, fieldsSet: map[string]map[string]bool{}, statuses: map[int]bool{}, respPaths: map[string]map[string]bool{}}
+				ops[op] = of
 			}
-			of.fieldsSet[leaf][name] = true
-		}
-		for _, rp := range respFields {
-			c := canonComponents(rp)
-			key := strings.Join(c, ".")
-			if key == "" {
-				continue
+			if success {
+				of.success = true
 			}
-			if of.respPaths[key] == nil {
-				of.respPaths[key] = map[string]bool{}
+			of.Tests = append(of.Tests, tf)
+			for _, fld := range fields {
+				leaf := strings.ToLower(fld)
+				if of.fieldsSet[leaf] == nil {
+					of.fieldsSet[leaf] = map[string]bool{}
+				}
+				of.fieldsSet[leaf][name] = true
 			}
-			of.respPaths[key][name] = true
-		}
-		for _, s := range statuses {
-			of.statuses[s] = true
+			for _, rp := range respFields {
+				c := canonComponents(rp)
+				key := strings.Join(c, ".")
+				if key == "" {
+					continue
+				}
+				if of.respPaths[key] == nil {
+					of.respPaths[key] = map[string]bool{}
+				}
+				of.respPaths[key][name] = true
+			}
+			for _, s := range statuses {
+				of.statuses[s] = true
+			}
 		}
 		return true
 	})
 }
 
-// scanItBody extracts the operation called, request fields set, asserted statuses, and success assertions.
-func scanItBody(body *ast.FuncLit) (op string, fields []string, statuses []int, success bool) {
+// scanItBody extracts the operations called, request fields set, asserted
+// statuses, and success assertions. A single It may issue several requests (an
+// action plus verification calls), so every operation invoked is returned, in
+// source order and deduped. Commented-out request calls are not part of the AST
+// and so are never seen here; disabled specs (XIt/PIt) are not matched as Its.
+func scanItBody(body *ast.FuncLit) (ops []string, fields []string, statuses []int, success bool) {
 	hasStatus := false
 	sawBeNil := false
+	seen := map[string]bool{}
 	ast.Inspect(body, func(n ast.Node) bool {
 		switch e := n.(type) {
 		case *ast.CallExpr:
@@ -320,7 +331,10 @@ func scanItBody(body *ast.FuncLit) (op string, fields []string, statuses []int, 
 			if isSelName(e.Fun, "MakeRequest") {
 				for _, a := range e.Args {
 					if sel, ok := a.(*ast.SelectorExpr); ok && isClientRecv(sel.X) {
-						op = sel.Sel.Name
+						if !seen[sel.Sel.Name] {
+							seen[sel.Sel.Name] = true
+							ops = append(ops, sel.Sel.Name)
+						}
 					}
 				}
 			}
@@ -349,7 +363,7 @@ func scanItBody(body *ast.FuncLit) (op string, fields []string, statuses []int, 
 	if !hasStatus {
 		statuses = nil
 	}
-	return op, fields, statuses, sawBeNil
+	return ops, fields, statuses, sawBeNil
 }
 
 // scanResponseFields collects response field paths a test asserts on. The
