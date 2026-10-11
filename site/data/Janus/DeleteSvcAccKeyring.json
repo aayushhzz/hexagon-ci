@@ -1,0 +1,264 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "DeleteSvcAccKeyring",
+    "operation": "ServiceAccountsKeyringsDelete",
+    "tests": 2,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404
+      ],
+      "asserted": [
+        200,
+        404
+      ],
+      "missing": [
+        400,
+        401,
+        403
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 40
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 2,
+      "covered_count": 2,
+      "coverage_pct": 100,
+      "request_fields_set_by_tests": 2,
+      "set_by_positive_tests": 2,
+      "set_by_negative_tests": 2,
+      "by_depth": {
+        "top_level": {
+          "total": 2,
+          "set": 2,
+          "pct": 100
+        },
+        "nested": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 2,
+        "covered": 2,
+        "pct": 100,
+        "collapsed_types": []
+      },
+      "covered": [
+        {
+          "path": "in.KeyId",
+          "match": "exact",
+          "by_tests": [
+            "Deleting a keyring associated with a service account",
+            "Deleting a non-existing keyring"
+          ]
+        },
+        {
+          "path": "in.ServiceAccountId",
+          "match": "exact",
+          "by_tests": [
+            "Deleting a keyring associated with a service account",
+            "Deleting a non-existing keyring"
+          ]
+        }
+      ],
+      "gaps": null
+    },
+    "branches": {
+      "total": 4,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 4,
+      "present_arm_exercised": 4,
+      "present_arm_pct": 100,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 4,
+      "negative_arm_pct": 100,
+      "both_arms_exercised": 0,
+      "coverage_pct": 100,
+      "by_origin": {
+        "service": {
+          "total": 2,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 100,
+          "negative_arm_exercised": 2,
+          "negative_arm_pct": 100,
+          "absent_arm_exercised": 0
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 2,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 100,
+          "negative_arm_exercised": 2,
+          "negative_arm_pct": 100,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": null
+    },
+    "dependencies": {
+      "services": [
+        {
+          "service": "this service",
+          "calls": [
+            "Invalidate"
+          ]
+        }
+      ],
+      "datastore_calls": [
+        "Delete",
+        "Get",
+        "LockForRead",
+        "Set"
+      ],
+      "service_count": 1,
+      "call_count": 1,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": [
+      {
+        "name": "Deleting a keyring associated with a service account",
+        "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_SERVICE_ACCOUNTS_KEYRINGS_DELETE"
+        ],
+        "fields_set": [
+          "KeyId",
+          "ServiceAccountId"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Deleting a non-existing keyring",
+        "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_SERVICE_ACCOUNTS_KEYRINGS_DELETE"
+        ],
+        "fields_set": [
+          "KeyId",
+          "ServiceAccountId"
+        ],
+        "statuses": [
+          404
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).DeleteSvcAccKeyring",
+    "request_type": "api.DeleteSvcAccKeyringRequest",
+    "response_type": "api.DeleteSvcAccKeyringResponse",
+    "sinks": [
+      {
+        "kind": "db",
+        "target": "Get",
+        "via_paths": [
+          "in.ServiceAccountId"
+        ],
+        "at": "internal/service/serviceaccount.go:813"
+      },
+      {
+        "kind": "db",
+        "target": "LockForRead",
+        "via_paths": [
+          "in.ServiceAccountId"
+        ],
+        "at": "internal/service/serviceaccount.go:824"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.ServiceAccountId"
+        ],
+        "at": "internal/service/cache.go:187"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.ServiceAccountId"
+        ],
+        "at": "internal/service/serviceaccount.go:844"
+      },
+      {
+        "kind": "rpc",
+        "target": "Invalidate",
+        "via_paths": [
+          "in.ServiceAccountId"
+        ],
+        "at": "internal/service/serviceaccount.go:887"
+      },
+      {
+        "kind": "db",
+        "target": "Delete",
+        "via_paths": [
+          "in.ServiceAccountId"
+        ],
+        "at": "internal/service/serviceaccount.go:893"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "errSvcAccKeyIDNotFound",
+        "at": "internal/service/serviceaccount.go:864",
+        "tainted": false
+      },
+      {
+        "symbol": "errKeyringNotFound",
+        "at": "internal/service/serviceaccount.go:637",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteSvcAccKeyring` (HTTP operation `ServiceAccountsKeyringsDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - none\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - none\n\nError symbols this RPC can return (candidate negative assertions):\n  - errKeyringNotFound\n  - errSvcAccKeyIDNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

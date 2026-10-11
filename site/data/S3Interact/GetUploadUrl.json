@@ -1,0 +1,1787 @@
+{
+  "service": "S3Interact",
+  "coverage": {
+    "rpc": "GetUploadUrl",
+    "operation": "ArtifactsPrepare,ArtifactsUploadCreate",
+    "tests": 58,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403
+      ],
+      "asserted": [
+        200,
+        201,
+        400,
+        401,
+        403
+      ],
+      "missing": [],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 100
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 10,
+      "covered_count": 4,
+      "coverage_pct": 40,
+      "request_fields_set_by_tests": 7,
+      "set_by_positive_tests": 4,
+      "set_by_negative_tests": 3,
+      "by_depth": {
+        "top_level": {
+          "total": 9,
+          "set": 4,
+          "pct": 44.4
+        },
+        "nested": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 10,
+        "covered": 4,
+        "pct": 40,
+        "collapsed_types": [
+          "api.CreateHeaders"
+        ]
+      },
+      "covered": [
+        {
+          "path": "in.ConfigurationSet",
+          "match": "exact",
+          "by_tests": [
+            "Complete rejects total size over configuration_set limit",
+            "Invalid configuration_set on create should fail",
+            "Should create and verify content block article",
+            "Should handle article images ",
+            "Should verify artifact versioning with SHA256 hash verification",
+            "Should verify file attachment content matches original using SHA256",
+            "Should verify markdown file content and bold text formatting",
+            "Should verify uploaded file content matches original using SHA256"
+          ]
+        },
+        {
+          "path": "in.FileName",
+          "match": "exact",
+          "by_tests": [
+            "100 MiB multi-part upload create next complete",
+            "Actor field does not override created_by",
+            "Another member cursor cannot advance a different upload",
+            "Another org's owner cannot LIST artifacts of a parent in another org",
+            "Another tenant cannot advance upload session",
+            "Another tenant cannot get or locate completed artifact",
+            "Complete rejects total size over configuration_set limit",
+            "Complete with parent_id outside tenant should fail",
+            "Complete without uploading all declared parts should fail",
+            "Complete without uploading parts should fail",
+            "Copy artifact",
+            "Create with negative part_size should fail",
+            "Cursor must match artifact id on next and complete",
+            "Dev user can create and complete upload",
+            "Download artifact with access key",
+            "Download public artifact with access key",
+            "Download with another artifact's access key should return 403 (key swap attack)",
+            "Get artifact",
+            "Home tenant cursor cannot advance other tenant upload",
+            "Invalid configuration_set on create should fail",
+            "Invalid cursor signature is rejected on next and complete",
+            "Invalid cursor values are rejected",
+            "Invalid extension",
+            "Invalid headers on create should fail",
+            "Locate Private Article Artifact - No Auth",
+            "Locate Public Article Artifact - No Auth",
+            "Locate artifact",
+            "Multi-part upload create next complete",
+            "Next and complete after complete should fail",
+            "Non-final part under 5 MiB should fail on complete",
+            "PUT body does not match part_size",
+            "Requests without authentication are rejected",
+            "Should create and verify content block article",
+            "Should handle article images ",
+            "Should verify artifact versioning with SHA256 hash verification",
+            "Should verify file attachment content matches original using SHA256",
+            "Should verify markdown file content and bold text formatting",
+            "Should verify uploaded file content matches original using SHA256",
+            "Single-part upload create PUT complete",
+            "Tests artifacts APIs for smoke validation",
+            "TextArtifact",
+            "Three-part upload create next next complete",
+            "Unauthenticated download of private (unpublished) article artifact should return 403",
+            "Unauthenticated download of public article artifact without key should succeed",
+            "UnknownTypeArtifact",
+            "Version Creation",
+            "Version List",
+            "Version delete",
+            "Versions prepare creates a new version",
+            "parent_id on complete attaches artifact to parent"
+          ]
+        },
+        {
+          "path": "in.FileSize",
+          "match": "exact",
+          "by_tests": [
+            "Should create and verify content block article",
+            "Should handle article images ",
+            "Should verify artifact versioning with SHA256 hash verification",
+            "Should verify file attachment content matches original using SHA256",
+            "Should verify markdown file content and bold text formatting",
+            "Should verify uploaded file content matches original using SHA256"
+          ]
+        },
+        {
+          "path": "in.FileType",
+          "match": "exact",
+          "by_tests": [
+            "100 MiB multi-part upload create next complete",
+            "Actor field does not override created_by",
+            "Another member cursor cannot advance a different upload",
+            "Another org's owner cannot LIST artifacts of a parent in another org",
+            "Another tenant cannot advance upload session",
+            "Another tenant cannot get or locate completed artifact",
+            "Complete rejects total size over configuration_set limit",
+            "Complete with parent_id outside tenant should fail",
+            "Complete without uploading all declared parts should fail",
+            "Complete without uploading parts should fail",
+            "Copy artifact",
+            "Create with empty file name should fail",
+            "Create with negative part_size should fail",
+            "Cursor must match artifact id on next and complete",
+            "Dev user can create and complete upload",
+            "Download artifact with access key",
+            "Download public artifact with access key",
+            "Download with another artifact's access key should return 403 (key swap attack)",
+            "Get artifact",
+            "Home tenant cursor cannot advance other tenant upload",
+            "Invalid configuration_set on create should fail",
+            "Invalid cursor signature is rejected on next and complete",
+            "Invalid cursor values are rejected",
+            "Invalid extension",
+            "Invalid headers on create should fail",
+            "Locate Private Article Artifact - No Auth",
+            "Locate Public Article Artifact - No Auth",
+            "Locate artifact",
+            "Multi-part upload create next complete",
+            "Next and complete after complete should fail",
+            "Non-final part under 5 MiB should fail on complete",
+            "PUT body does not match part_size",
+            "Requests without authentication are rejected",
+            "Should create and verify content block article",
+            "Should handle article images ",
+            "Should verify artifact versioning with SHA256 hash verification",
+            "Should verify file attachment content matches original using SHA256",
+            "Should verify markdown file content and bold text formatting",
+            "Should verify uploaded file content matches original using SHA256",
+            "Single-part upload create PUT complete",
+            "Tests artifacts APIs for smoke validation",
+            "TextArtifact",
+            "Three-part upload create next next complete",
+            "Unauthenticated download of private (unpublished) article artifact should return 403",
+            "Unauthenticated download of public article artifact without key should succeed",
+            "Version Creation",
+            "Version List",
+            "Version delete",
+            "Versions prepare creates a new version",
+            "parent_id on complete attaches artifact to parent"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.ActorId",
+        "in.DevOid",
+        "in.FileEncoding",
+        "in.Headers.ContentDisposition",
+        "in.IsChunkedUpload",
+        "in.SkipFileConstrains"
+      ]
+    },
+    "branches": {
+      "total": 24,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 11,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 24,
+      "present_arm_exercised": 19,
+      "present_arm_pct": 79.2,
+      "absent_arm_exercised": 23,
+      "absent_arm_pct": 95.8,
+      "negative_arm_exercised": 14,
+      "negative_arm_pct": 58.3,
+      "both_arms_exercised": 18,
+      "coverage_pct": 79.2,
+      "by_origin": {
+        "service": {
+          "total": 20,
+          "reachable_on_happy_path": 20,
+          "present_arm_exercised": 15,
+          "present_arm_pct": 75,
+          "negative_arm_exercised": 11,
+          "negative_arm_pct": 55,
+          "absent_arm_exercised": 19
+        },
+        "generated": {
+          "total": 3,
+          "reachable_on_happy_path": 3,
+          "present_arm_exercised": 3,
+          "present_arm_pct": 100,
+          "negative_arm_exercised": 2,
+          "negative_arm_pct": 66.7,
+          "absent_arm_exercised": 3
+        },
+        "library": {
+          "total": 1,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 100,
+          "negative_arm_exercised": 1,
+          "negative_arm_pct": 100,
+          "absent_arm_exercised": 1
+        }
+      },
+      "gaps": [
+        {
+          "id": "b26",
+          "at": "internal/server/multipart_upload.go:73",
+          "cond": "in.FileEncoding != \"\"",
+          "predicate_paths": [
+            "in.FileEncoding"
+          ]
+        },
+        {
+          "id": "b28",
+          "at": "internal/server/upload.go:184",
+          "cond": "in.IsChunkedUpload",
+          "predicate_paths": [
+            "in.IsChunkedUpload"
+          ]
+        },
+        {
+          "id": "b30",
+          "at": "internal/server/upload.go:224",
+          "cond": "in.SkipFileConstrains",
+          "predicate_paths": [
+            "in.SkipFileConstrains"
+          ]
+        },
+        {
+          "id": "b34",
+          "at": "internal/server/upload.go:274",
+          "cond": "in.FileEncoding != \"\"",
+          "predicate_paths": [
+            "in.FileEncoding"
+          ]
+        },
+        {
+          "id": "b35",
+          "at": "internal/server/upload.go:278",
+          "cond": "in.IsChunkedUpload",
+          "predicate_paths": [
+            "in.IsChunkedUpload"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": null,
+      "datastore_calls": [],
+      "service_count": 0,
+      "call_count": 0,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "actor",
+          "fuzzy_suggestions": [
+            "in.ActorId"
+          ]
+        },
+        {
+          "field": "headers",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "partsize",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Invalid extension",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Prepare with empty file name should fail",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "TextArtifact",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Locate artifact",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_LOCATE",
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Locate Public Article Artifact - No Auth",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_LOCATE",
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Locate Private Article Artifact - No Auth",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_LOCATE",
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200,
+          201,
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Get artifact",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_GET"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Article",
+          "Article.Id",
+          "Artifact",
+          "Artifact.GetParentId",
+          "Id",
+          "StatusCode",
+          "Version",
+          "Work",
+          "Work.AsIssue"
+        ]
+      },
+      {
+        "name": "Copy artifact",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_COPY",
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "UnknownTypeArtifact",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "FileName"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Download artifact with access key",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_DOWNLOAD",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Body",
+          "Body.Close",
+          "GetAccessKey",
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Download with another artifact's access key should return 403 (key swap attack)",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_DOWNLOAD",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetAccessKey",
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Unauthenticated download of private (unpublished) article artifact should return 403",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_DOWNLOAD",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Unauthenticated download of public article artifact without key should succeed",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_DOWNLOAD",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Body",
+          "Body.Close",
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Version Creation",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_VERSIONS_PREPARE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Body",
+          "Body.Close",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Version List",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_VERSIONS_LIST"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Id",
+          "StatusCode",
+          "Versions"
+        ]
+      },
+      {
+        "name": "Version delete",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_VERSIONS_DELETE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Body",
+          "Body.Close",
+          "GetVersions",
+          "Id",
+          "StatusCode",
+          "Url",
+          "Versions"
+        ]
+      },
+      {
+        "name": "Another org's owner cannot LIST artifacts of a parent in another org",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_LIST"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Artifacts",
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Invalid extension",
+        "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "NEGATIVE",
+          "PUBLIC_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Prepare with empty file name should fail",
+        "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "NEGATIVE",
+          "PUBLIC_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "TextArtifact",
+        "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "PUBLIC_ARTIFACTS_PREPARE",
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Locate artifact",
+        "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "PUBLIC_ARTIFACTS_LOCATE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Get artifact",
+        "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "PUBLIC_ARTIFACTS_GET",
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Id",
+          "StatusCode",
+          "Work",
+          "Work.AsIssue"
+        ]
+      },
+      {
+        "name": "UnknownTypeArtifact",
+        "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "PUBLIC_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "FileName"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Versions prepare creates a new version",
+        "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "PUBLIC_ARTIFACTS_VERSIONS_PREPARE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Download public artifact with access key",
+        "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "PUBLIC_ARTIFACTS_DOWNLOAD",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Body",
+          "Body.Close",
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should handle article images ",
+        "file": "e2e/collections/collection_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "ConfigurationSet",
+          "FileName",
+          "FileSize",
+          "FileType"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Article",
+          "Article.Id",
+          "Article.Resource",
+          "Article.Resource.Artifacts",
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should verify uploaded file content matches original using SHA256",
+        "file": "e2e/collections/collection_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "ConfigurationSet",
+          "FileName",
+          "FileSize",
+          "FileType"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Article",
+          "Article.Id",
+          "Body",
+          "Body.Close",
+          "Id",
+          "StatusCode",
+          "Url",
+          "Versions"
+        ]
+      },
+      {
+        "name": "Should verify artifact versioning with SHA256 hash verification",
+        "file": "e2e/collections/collection_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "ConfigurationSet",
+          "FileName",
+          "FileSize",
+          "FileType"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Article",
+          "Article.Id",
+          "Body",
+          "Body.Close",
+          "Id",
+          "StatusCode",
+          "Url",
+          "Versions"
+        ]
+      },
+      {
+        "name": "Should verify markdown file content and bold text formatting",
+        "file": "e2e/collections/collection_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "ConfigurationSet",
+          "FileName",
+          "FileSize",
+          "FileType"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Article",
+          "Article.Id",
+          "Body",
+          "Body.Close",
+          "Id",
+          "StatusCode",
+          "Url",
+          "Versions"
+        ]
+      },
+      {
+        "name": "Should create and verify content block article",
+        "file": "e2e/collections/collection_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "ConfigurationSet",
+          "FileName",
+          "FileSize",
+          "FileType"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Article",
+          "Article.ArticleType",
+          "Article.Description",
+          "Article.Id",
+          "Article.Resource",
+          "Article.Resource.Artifacts",
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Tests artifacts APIs for smoke validation",
+        "file": "e2e/smoke_test_case/artifacts_test/artifacts_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetUrl",
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should verify file attachment content matches original using SHA256",
+        "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "ConfigurationSet",
+          "FileName",
+          "FileSize",
+          "FileType"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Body",
+          "Body.Close",
+          "Id",
+          "StatusCode",
+          "Url",
+          "Work",
+          "Work.AsTicket"
+        ]
+      },
+      {
+        "name": "Single-part upload create PUT complete",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+          "INTERNAL_ARTIFACTS_GET",
+          "INTERNAL_ARTIFACTS_LOCATE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Artifact",
+          "Artifact.Id",
+          "Body",
+          "Body.Close",
+          "Cursor",
+          "GetUrl",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Multi-part upload create next complete",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Body",
+          "Body.Close",
+          "Cursor",
+          "GetUrl",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Three-part upload create next next complete",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Body",
+          "Body.Close",
+          "Cursor",
+          "GetUrl",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "100 MiB multi-part upload create next complete",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+          "INTERNAL_ARTIFACTS_GET",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Artifact",
+          "Artifact.File",
+          "Artifact.File.Size",
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "parent_id on complete attaches artifact to parent",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+          "INTERNAL_ARTIFACTS_LIST"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Artifacts",
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Dev user can create and complete upload",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Create with negative part_size should fail",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Create with empty file name should fail",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE"
+        ],
+        "fields_set": [
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Invalid configuration_set on create should fail",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE"
+        ],
+        "fields_set": [
+          "ConfigurationSet",
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Invalid headers on create should fail",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "Headers",
+          "PartSize"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Requests without authentication are rejected",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          401
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Invalid cursor signature is rejected on next and complete",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Cursor must match artifact id on next and complete",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Invalid cursor values are rejected",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Another member cursor cannot advance a different upload",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "PUT body does not match part_size",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Complete without uploading parts should fail",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Complete without uploading all declared parts should fail",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Non-final part under 5 MiB should fail on complete",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Complete rejects total size over configuration_set limit",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "ConfigurationSet",
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Actor field does not override created_by",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE",
+          "INTERNAL_ARTIFACTS_GET"
+        ],
+        "fields_set": [
+          "Actor",
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Artifact",
+          "Artifact.CreatedBy",
+          "Artifact.CreatedBy.AsDevUserSummary",
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Complete with parent_id outside tenant should fail",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Next and complete after complete should fail",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Another tenant cannot advance upload session",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "Home tenant cursor cannot advance other tenant upload",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Another tenant cannot get or locate completed artifact",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_GET",
+          "INTERNAL_ARTIFACTS_LOCATE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/s3interact/internal/server.S3Interact).GetUploadUrl",
+    "request_type": "api.GetUploadUrlRequest",
+    "response_type": "api.GetUploadUrlResponse",
+    "sinks": [],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidMediaParameter",
+        "at": "/Users/asd/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.1.darwin-arm64/src/mime/mediatype.go:172",
+        "tainted": false
+      },
+      {
+        "symbol": "errDuplicateParamName",
+        "at": "/Users/asd/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.1.darwin-arm64/src/mime/mediatype.go:187",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrNilArguments",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:68",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrNotSupported",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:73",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrNonPointerArgument",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/merge.go:376",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrDifferentArgumentsTypes",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/merge.go:393",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetUploadUrl` (HTTP operation `ArtifactsPrepare,ArtifactsUploadCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.DevOid\n  - in.FileEncoding\n  - in.Headers.ContentDisposition\n  - in.IsChunkedUpload\n  - in.SkipFileConstrains\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.FileEncoding != \"\"\n  - in.IsChunkedUpload\n  - in.SkipFileConstrains\n  - in.FileEncoding != \"\"\n  - in.IsChunkedUpload\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrInvalidMediaParameter\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n  - errDuplicateParamName\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `actor` -> suggestions ['in.ActorId']\n  - test field `headers` -> suggestions []\n  - test field `partsize` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

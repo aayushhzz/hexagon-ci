@@ -1,0 +1,159 @@
+{
+  "service": "Codex",
+  "coverage": {
+    "rpc": "ListMilestones",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": [],
+      "asserted": [],
+      "missing": [],
+      "infra_statuses": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 1,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 1,
+        "covered": 0,
+        "pct": 0,
+        "collapsed_types": []
+      },
+      "covered": null,
+      "gaps": [
+        "in.DqlQuery"
+      ]
+    },
+    "branches": {
+      "total": 3,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 3,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "by_origin": {
+        "service": {
+          "total": 3,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "internal/dql/dql_converter.go:85",
+          "cond": "in.DqlQuery == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "internal/dql/dql_converter.go:57",
+          "cond": "in.DqlQuery == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/serverv2/list_milestones.go:47",
+          "cond": "in.DqlQuery == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": null,
+      "datastore_calls": [],
+      "service_count": 0,
+      "call_count": 0,
+      "reached_by_test": false,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/codex/internal/serverv2.Codex).ListMilestones",
+    "request_type": "apiv2.ListMilestonesRequest",
+    "response_type": "apiv2.ListMilestonesResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "ParseQuery",
+        "via_paths": [
+          "in.DqlQuery"
+        ],
+        "at": "internal/dql/dql_converter.go:90"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ErrDQLQueryNil",
+        "at": "internal/dql/dql_converter.go:86",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListMilestones` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DqlQuery\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DqlQuery == nil\n  - in.DqlQuery == nil\n  - in.DqlQuery == nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

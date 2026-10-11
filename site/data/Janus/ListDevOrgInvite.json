@@ -1,0 +1,500 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "ListDevOrgInvite",
+    "operation": "DevOrgsInvitesList",
+    "tests": 1,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403
+      ],
+      "asserted": [
+        200,
+        201
+      ],
+      "missing": [
+        400,
+        401,
+        403
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 25
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 20,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 10,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 9,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 14,
+        "covered": 0,
+        "pct": 0,
+        "collapsed_types": [
+          "api.PaginationParams",
+          "proto.DateFilter"
+        ]
+      },
+      "covered": null,
+      "gaps": [
+        "in.PageParams.SortBy",
+        "in.SearchQuery",
+        "in.UserFilter.CreatedByAgentId",
+        "in.UserFilter.CreatedByAgentIdOp",
+        "in.UserFilter.CreatedById",
+        "in.UserFilter.CreatedByIdOp",
+        "in.UserFilter.CreatedDate.After",
+        "in.UserFilter.CreatedDate.Before",
+        "in.UserFilter.CreatedDate.DatePreset.Type",
+        "in.UserFilter.Email",
+        "in.UserFilter.ExpiresAt.After",
+        "in.UserFilter.ExpiresAt.Before",
+        "in.UserFilter.ExpiresAt.DatePreset.Type",
+        "in.UserFilter.GroupIds",
+        "in.UserFilter.ModifiedById",
+        "in.UserFilter.ModifiedByIdOp",
+        "in.UserFilter.ModifiedDate.After",
+        "in.UserFilter.ModifiedDate.Before",
+        "in.UserFilter.ModifiedDate.DatePreset.Type",
+        "in.UserFilter.State"
+      ]
+    },
+    "branches": {
+      "total": 23,
+      "enum_switch_branches": 24,
+      "server_gated_branches": 0,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 2,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 2,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "by_origin": {
+        "service": {
+          "total": 23,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 2
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "internal/filter/devu_invites.gen.go:107",
+          "cond": "in.UserFilter.CreatedDate != nil",
+          "predicate_paths": [
+            "in.UserFilter.CreatedDate"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "internal/filter/devu_invites.gen.go:110",
+          "cond": "in.UserFilter.CreatedDate.After != nil",
+          "predicate_paths": [
+            "in.UserFilter.CreatedDate.After"
+          ]
+        },
+        {
+          "id": "b11",
+          "at": "internal/filter/devu_invites.gen.go:117",
+          "cond": "in.UserFilter.CreatedDate.Before != nil",
+          "predicate_paths": [
+            "in.UserFilter.CreatedDate.Before"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "internal/filter/devu_invites.gen.go:124",
+          "cond": "in.UserFilter.CreatedDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.UserFilter.CreatedDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b13",
+          "at": "internal/filter/devu_invites.gen.go:125",
+          "cond": "in.UserFilter.CreatedDate.After != nil",
+          "predicate_paths": [
+            "in.UserFilter.CreatedDate.After"
+          ]
+        },
+        {
+          "id": "b14",
+          "at": "",
+          "cond": "in.UserFilter.CreatedDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.UserFilter.CreatedDate.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b15",
+          "at": "internal/filter/devu_invites.gen.go:125",
+          "cond": "in.UserFilter.CreatedDate.Before != nil",
+          "predicate_paths": [
+            "in.UserFilter.CreatedDate.Before"
+          ]
+        },
+        {
+          "id": "b16",
+          "at": "internal/filter/devu_invites.gen.go:231",
+          "cond": "in.UserFilter.ModifiedDate != nil",
+          "predicate_paths": [
+            "in.UserFilter.ModifiedDate"
+          ]
+        },
+        {
+          "id": "b25",
+          "at": "internal/filter/devu_invites.gen.go:234",
+          "cond": "in.UserFilter.ModifiedDate.After != nil",
+          "predicate_paths": [
+            "in.UserFilter.ModifiedDate.After"
+          ]
+        },
+        {
+          "id": "b26",
+          "at": "internal/filter/devu_invites.gen.go:241",
+          "cond": "in.UserFilter.ModifiedDate.Before != nil",
+          "predicate_paths": [
+            "in.UserFilter.ModifiedDate.Before"
+          ]
+        },
+        {
+          "id": "b27",
+          "at": "internal/filter/devu_invites.gen.go:248",
+          "cond": "in.UserFilter.ModifiedDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.UserFilter.ModifiedDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b28",
+          "at": "internal/filter/devu_invites.gen.go:249",
+          "cond": "in.UserFilter.ModifiedDate.After != nil",
+          "predicate_paths": [
+            "in.UserFilter.ModifiedDate.After"
+          ]
+        },
+        {
+          "id": "b29",
+          "at": "",
+          "cond": "in.UserFilter.ModifiedDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.UserFilter.ModifiedDate.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b30",
+          "at": "internal/filter/devu_invites.gen.go:249",
+          "cond": "in.UserFilter.ModifiedDate.Before != nil",
+          "predicate_paths": [
+            "in.UserFilter.ModifiedDate.Before"
+          ]
+        },
+        {
+          "id": "b39",
+          "at": "internal/filter/devu_invites.gen.go:362",
+          "cond": "in.UserFilter.ExpiresAt != nil",
+          "predicate_paths": [
+            "in.UserFilter.ExpiresAt"
+          ]
+        },
+        {
+          "id": "b40",
+          "at": "internal/filter/devu_invites.gen.go:365",
+          "cond": "in.UserFilter.ExpiresAt.After != nil",
+          "predicate_paths": [
+            "in.UserFilter.ExpiresAt.After"
+          ]
+        },
+        {
+          "id": "b41",
+          "at": "internal/filter/devu_invites.gen.go:372",
+          "cond": "in.UserFilter.ExpiresAt.Before != nil",
+          "predicate_paths": [
+            "in.UserFilter.ExpiresAt.Before"
+          ]
+        },
+        {
+          "id": "b42",
+          "at": "internal/filter/devu_invites.gen.go:379",
+          "cond": "in.UserFilter.ExpiresAt.DatePreset != nil",
+          "predicate_paths": [
+            "in.UserFilter.ExpiresAt.DatePreset"
+          ]
+        },
+        {
+          "id": "b43",
+          "at": "internal/filter/devu_invites.gen.go:380",
+          "cond": "in.UserFilter.ExpiresAt.After != nil",
+          "predicate_paths": [
+            "in.UserFilter.ExpiresAt.After"
+          ]
+        },
+        {
+          "id": "b44",
+          "at": "",
+          "cond": "in.UserFilter.ExpiresAt.DatePreset.Type",
+          "predicate_paths": [
+            "in.UserFilter.ExpiresAt.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b45",
+          "at": "internal/filter/devu_invites.gen.go:380",
+          "cond": "in.UserFilter.ExpiresAt.Before != nil",
+          "predicate_paths": [
+            "in.UserFilter.ExpiresAt.Before"
+          ]
+        },
+        {
+          "id": "b46",
+          "at": "internal/service/devuser_invites.go:585",
+          "cond": "in.SearchQuery != \"\"",
+          "predicate_paths": [
+            "in.SearchQuery"
+          ]
+        },
+        {
+          "id": "b47",
+          "at": "internal/service/devuser_invites.go:619",
+          "cond": "in.PageParams != nil",
+          "predicate_paths": [
+            "in.PageParams"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": null,
+      "datastore_calls": [
+        "Aggregate"
+      ],
+      "service_count": 0,
+      "call_count": 0,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": [
+      {
+        "name": "Invite a DevUser 2",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEV_ORG_INVITE_CREATE",
+          "INTERNAL_DEV_ORGS_INVITES_LIST",
+          "INTERNAL_DEVUSERS_INVITATIONS_LIST",
+          "INTERNAL_DEV_ORGS_INVITES_COUNT"
+        ],
+        "fields_set": null,
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Count",
+          "Invites",
+          "Invites.Email",
+          "Invites.State",
+          "StatusCode"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).ListDevOrgInvite",
+    "request_type": "api.ListDevOrgInviteRequest",
+    "response_type": "api.ListDevOrgInviteResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetSortBy",
+        "via_paths": [
+          "in.PageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/list_item_helpers.go:104"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetSortBy",
+        "via_paths": [
+          "in.PageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/list_item_helpers.go:107"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetSortBy",
+        "via_paths": [
+          "in.PageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/list_item_helpers.go:108"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPage",
+        "via_paths": [
+          "in.PageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/list_item_helpers.go:115"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPage",
+        "via_paths": [
+          "in.PageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/list_item_helpers.go:118"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in.PageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/list_item_helpers.go:124"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPage",
+        "via_paths": [
+          "in.PageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/list_item_helpers.go:121"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in.PageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/list_item_helpers.go:125"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in.PageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/list_item_helpers.go:128"
+      },
+      {
+        "kind": "db",
+        "target": "Aggregate",
+        "via_paths": [
+          "in.PageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/list_item_helpers.go:275"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ErrInvalidQuarter",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:116",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrTimeBeforeFiscalStart",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:197",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidPeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:211",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrTimeBeforeFiscalStart",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:207",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:283",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:319",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:380",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:219",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:225",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidSortByInputField",
+        "at": "internal/service/devuser_invites.go:622",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListDevOrgInvite` (HTTP operation `DevOrgsInvitesList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.PageParams.SortBy\n  - in.SearchQuery\n  - in.UserFilter.CreatedByAgentId\n  - in.UserFilter.CreatedByAgentIdOp\n  - in.UserFilter.CreatedById\n  - in.UserFilter.CreatedByIdOp\n  - in.UserFilter.CreatedDate.After\n  - in.UserFilter.CreatedDate.Before\n  - in.UserFilter.CreatedDate.DatePreset.Type\n  - in.UserFilter.Email\n  - in.UserFilter.ExpiresAt.After\n  - in.UserFilter.ExpiresAt.Before\n  - in.UserFilter.ExpiresAt.DatePreset.Type\n  - in.UserFilter.GroupIds\n  - in.UserFilter.ModifiedById\n  - in.UserFilter.ModifiedByIdOp\n  - in.UserFilter.ModifiedDate.After\n  - in.UserFilter.ModifiedDate.Before\n  - in.UserFilter.ModifiedDate.DatePreset.Type\n  - in.UserFilter.State\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserFilter.CreatedDate != nil\n  - in.UserFilter.CreatedDate.After != nil\n  - in.UserFilter.CreatedDate.Before != nil\n  - in.UserFilter.CreatedDate.DatePreset != nil\n  - in.UserFilter.CreatedDate.After != nil\n  - in.UserFilter.CreatedDate.DatePreset.Type\n  - in.UserFilter.CreatedDate.Before != nil\n  - in.UserFilter.ModifiedDate != nil\n  - in.UserFilter.ModifiedDate.After != nil\n  - in.UserFilter.ModifiedDate.Before != nil\n  - in.UserFilter.ModifiedDate.DatePreset != nil\n  - in.UserFilter.ModifiedDate.After != nil\n  - in.UserFilter.ModifiedDate.DatePreset.Type\n  - in.UserFilter.ModifiedDate.Before != nil\n  - in.UserFilter.ExpiresAt != nil\n  - in.UserFilter.ExpiresAt.After != nil\n  - in.UserFilter.ExpiresAt.Before != nil\n  - in.UserFilter.ExpiresAt.DatePreset != nil\n  - in.UserFilter.ExpiresAt.After != nil\n  - in.UserFilter.ExpiresAt.DatePreset.Type\n  - in.UserFilter.ExpiresAt.Before != nil\n  - in.SearchQuery != \"\"\n  - in.PageParams != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidSortByInputField\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

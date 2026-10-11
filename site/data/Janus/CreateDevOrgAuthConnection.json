@@ -1,0 +1,645 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "CreateDevOrgAuthConnection",
+    "operation": "DevOrgAuthConnectionsCreate",
+    "tests": 7,
+    "status": {
+      "documented": [
+        201,
+        400,
+        401,
+        403
+      ],
+      "asserted": [
+        201,
+        400
+      ],
+      "missing": [
+        401,
+        403
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 50
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 24,
+      "covered_count": 1,
+      "coverage_pct": 4.2,
+      "request_fields_set_by_tests": 2,
+      "set_by_positive_tests": 1,
+      "set_by_negative_tests": 1,
+      "by_depth": {
+        "top_level": {
+          "total": 2,
+          "set": 1,
+          "pct": 50
+        },
+        "nested": {
+          "total": 19,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 3,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 24,
+        "covered": 1,
+        "pct": 4.2,
+        "collapsed_types": []
+      },
+      "covered": [
+        {
+          "path": "in.DisplayName",
+          "match": "exact",
+          "by_tests": [
+            "Create Azure AD connection",
+            "Create Google Apps connection",
+            "Create OIDC connection",
+            "Create SAML connection",
+            "Empty Display Name",
+            "Invalid Connection Type",
+            "Invalid connection_name (SAML connection)"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.AzureAdOptions.ClientId",
+        "in.AzureAdOptions.ClientSecret",
+        "in.AzureAdOptions.Domain",
+        "in.GoogleAppsOptions.ClientId",
+        "in.GoogleAppsOptions.ClientSecret",
+        "in.GoogleAppsOptions.TenantDomain",
+        "in.OidcOptions.ClientId",
+        "in.OidcOptions.ClientSecret",
+        "in.OidcOptions.Issuer",
+        "in.OktaOptions.ClientId",
+        "in.OktaOptions.ClientSecret",
+        "in.OktaOptions.Domain",
+        "in.OptionsOneof.AzureAdOptions",
+        "in.OptionsOneof.GoogleAppsOptions",
+        "in.OptionsOneof.OidcOptions",
+        "in.OptionsOneof.OktaOptions",
+        "in.OptionsOneof.SamlOptions.FieldsMap",
+        "in.SamlOptions.ConnectionName",
+        "in.SamlOptions.FieldsMap.Email",
+        "in.SamlOptions.FieldsMap.UserId",
+        "in.SamlOptions.SignInEndpoint",
+        "in.SamlOptions.SigningCert",
+        "in.Strategy"
+      ]
+    },
+    "branches": {
+      "total": 33,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 18,
+      "present_arm_exercised": 1,
+      "present_arm_pct": 3,
+      "absent_arm_exercised": 17,
+      "absent_arm_pct": 94.4,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 3,
+      "by_origin": {
+        "service": {
+          "total": 21,
+          "reachable_on_happy_path": 18,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 4.8,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 17
+        },
+        "generated": {
+          "total": 12,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2051",
+          "cond": "in.OptionsOneof.SamlOptions.FieldsMap != nil",
+          "predicate_paths": [
+            "in.OptionsOneof.SamlOptions.FieldsMap"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2052",
+          "cond": "in.OptionsOneof.SamlOptions.FieldsMap != nil",
+          "predicate_paths": [
+            "in.OptionsOneof.SamlOptions.FieldsMap"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "",
+          "cond": "in.OptionsOneof",
+          "predicate_paths": [
+            "in.OptionsOneof"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2116",
+          "cond": "in.OptionsOneof.OidcOptions != nil",
+          "predicate_paths": [
+            "in.OptionsOneof.OidcOptions"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2117",
+          "cond": "in.OptionsOneof.OidcOptions != nil",
+          "predicate_paths": [
+            "in.OptionsOneof.OidcOptions"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2124",
+          "cond": "in.OptionsOneof.SamlOptions != nil",
+          "predicate_paths": [
+            "in.OptionsOneof.SamlOptions"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2125",
+          "cond": "in.OptionsOneof.SamlOptions != nil",
+          "predicate_paths": [
+            "in.OptionsOneof.SamlOptions"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2132",
+          "cond": "in.OptionsOneof.GoogleAppsOptions != nil",
+          "predicate_paths": [
+            "in.OptionsOneof.GoogleAppsOptions"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2133",
+          "cond": "in.OptionsOneof.GoogleAppsOptions != nil",
+          "predicate_paths": [
+            "in.OptionsOneof.GoogleAppsOptions"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2140",
+          "cond": "in.OptionsOneof.AzureAdOptions != nil",
+          "predicate_paths": [
+            "in.OptionsOneof.AzureAdOptions"
+          ]
+        },
+        {
+          "id": "b11",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2141",
+          "cond": "in.OptionsOneof.AzureAdOptions != nil",
+          "predicate_paths": [
+            "in.OptionsOneof.AzureAdOptions"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2148",
+          "cond": "in.OptionsOneof.OktaOptions != nil",
+          "predicate_paths": [
+            "in.OptionsOneof.OktaOptions"
+          ]
+        },
+        {
+          "id": "b13",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2149",
+          "cond": "in.OptionsOneof.OktaOptions != nil",
+          "predicate_paths": [
+            "in.OptionsOneof.OktaOptions"
+          ]
+        },
+        {
+          "id": "b14",
+          "at": "internal/service/devorg_connections.go:62",
+          "cond": "in.Strategy == \"oidc\"",
+          "predicate_paths": [
+            "in.Strategy"
+          ]
+        },
+        {
+          "id": "b15",
+          "at": "internal/service/devorg_connections.go:64",
+          "cond": "in.OidcOptions == nil",
+          "predicate_paths": [
+            "in.OidcOptions"
+          ]
+        },
+        {
+          "id": "b16",
+          "at": "internal/service/devorg_connections.go:75",
+          "cond": "in.SamlOptions == nil",
+          "predicate_paths": [
+            "in.SamlOptions"
+          ]
+        },
+        {
+          "id": "b17",
+          "at": "internal/service/devorg_connections.go:73",
+          "cond": "in.Strategy == \"samlp\"",
+          "predicate_paths": [
+            "in.Strategy"
+          ]
+        },
+        {
+          "id": "b18",
+          "at": "internal/service/devorg_connections.go:99",
+          "cond": "in.GoogleAppsOptions == nil",
+          "predicate_paths": [
+            "in.GoogleAppsOptions"
+          ]
+        },
+        {
+          "id": "b19",
+          "at": "internal/service/devorg_connections.go:97",
+          "cond": "in.Strategy == \"google-apps\"",
+          "predicate_paths": [
+            "in.Strategy"
+          ]
+        },
+        {
+          "id": "b20",
+          "at": "internal/service/devorg_connections.go:110",
+          "cond": "in.AzureAdOptions == nil",
+          "predicate_paths": [
+            "in.AzureAdOptions"
+          ]
+        },
+        {
+          "id": "b21",
+          "at": "internal/service/devorg_connections.go:108",
+          "cond": "in.Strategy == \"waad\"",
+          "predicate_paths": [
+            "in.Strategy"
+          ]
+        },
+        {
+          "id": "b22",
+          "at": "internal/service/devorg_connections.go:121",
+          "cond": "in.OktaOptions == nil",
+          "predicate_paths": [
+            "in.OktaOptions"
+          ]
+        },
+        {
+          "id": "b23",
+          "at": "internal/service/devorg_connections.go:119",
+          "cond": "in.Strategy == \"okta\"",
+          "predicate_paths": [
+            "in.Strategy"
+          ]
+        },
+        {
+          "id": "b25",
+          "at": "internal/service/devorg_connections.go:484",
+          "cond": "in.Strategy == \"samlp\"",
+          "predicate_paths": [
+            "in.Strategy"
+          ]
+        },
+        {
+          "id": "b26",
+          "at": "internal/service/devorg_connections.go:495",
+          "cond": "in.Strategy == \"oidc\"",
+          "predicate_paths": [
+            "in.Strategy"
+          ]
+        },
+        {
+          "id": "b27",
+          "at": "internal/service/devorg_connections.go:514",
+          "cond": "in.SamlOptions.FieldsMap != nil",
+          "predicate_paths": [
+            "in.SamlOptions.FieldsMap"
+          ]
+        },
+        {
+          "id": "b28",
+          "at": "internal/service/devorg_connections.go:506",
+          "cond": "in.Strategy == \"samlp\"",
+          "predicate_paths": [
+            "in.Strategy"
+          ]
+        },
+        {
+          "id": "b29",
+          "at": "internal/service/devorg_connections.go:528",
+          "cond": "in.Strategy == \"google-apps\"",
+          "predicate_paths": [
+            "in.Strategy"
+          ]
+        },
+        {
+          "id": "b30",
+          "at": "internal/service/devorg_connections.go:515",
+          "cond": "in.SamlOptions.FieldsMap.Email != \"\"",
+          "predicate_paths": [
+            "in.SamlOptions.FieldsMap.Email"
+          ]
+        },
+        {
+          "id": "b31",
+          "at": "internal/service/devorg_connections.go:518",
+          "cond": "in.SamlOptions.FieldsMap.UserId != \"\"",
+          "predicate_paths": [
+            "in.SamlOptions.FieldsMap.UserId"
+          ]
+        },
+        {
+          "id": "b32",
+          "at": "internal/service/devorg_connections.go:535",
+          "cond": "in.Strategy == \"waad\"",
+          "predicate_paths": [
+            "in.Strategy"
+          ]
+        },
+        {
+          "id": "b33",
+          "at": "internal/service/devorg_connections.go:543",
+          "cond": "in.Strategy == \"okta\"",
+          "predicate_paths": [
+            "in.Strategy"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": [
+        {
+          "service": "this service",
+          "calls": [
+            "CreateConnection"
+          ]
+        }
+      ],
+      "datastore_calls": [],
+      "service_count": 1,
+      "call_count": 1,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "type",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Empty Display Name",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Invalid Connection Type",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Invalid connection_name (SAML connection)",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Create SAML connection",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetAuthConnection"
+        ]
+      },
+      {
+        "name": "Create OIDC connection",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetAuthConnection"
+        ]
+      },
+      {
+        "name": "Create Google Apps connection",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetAuthConnection"
+        ]
+      },
+      {
+        "name": "Create Azure AD connection",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetAuthConnection"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).CreateDevOrgAuthConnection",
+    "request_type": "api.CreateDevOrgAuthConnectionRequest",
+    "response_type": "api.CreateDevOrgAuthConnectionResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetExternalError",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/devorg_connections.go:442"
+      },
+      {
+        "kind": "rpc",
+        "target": "CreateConnection",
+        "via_paths": [
+          "in.DisplayName",
+          "in.SamlOptions.ConnectionName",
+          "in.Strategy"
+        ],
+        "at": "internal/service/devorg_connections.go:554"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "errInvalidStrategyOptions",
+        "at": "internal/service/devorg_connections.go:65",
+        "tainted": true
+      },
+      {
+        "symbol": "errInvalidStrategyOptions",
+        "at": "internal/service/devorg_connections.go:76",
+        "tainted": true
+      },
+      {
+        "symbol": "errInvalidStrategyOptions",
+        "at": "internal/service/devorg_connections.go:100",
+        "tainted": true
+      },
+      {
+        "symbol": "errInvalidStrategyOptions",
+        "at": "internal/service/devorg_connections.go:111",
+        "tainted": true
+      },
+      {
+        "symbol": "errInvalidStrategy",
+        "at": "internal/service/devorg_connections.go:131",
+        "tainted": true
+      },
+      {
+        "symbol": "errInvalidStrategyOptions",
+        "at": "internal/service/devorg_connections.go:122",
+        "tainted": true
+      },
+      {
+        "symbol": "errInvalidStrategyType",
+        "at": "internal/service/devorg_connections.go:144",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidStrategyType",
+        "at": "internal/service/devorg_connections.go:156",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidStrategyType",
+        "at": "internal/service/devorg_connections.go:163",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidStrategyType",
+        "at": "internal/service/devorg_connections.go:170",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidStrategyType",
+        "at": "internal/service/devorg_connections.go:188",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidStrategyType",
+        "at": "internal/service/devorg_connections.go:200",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidStrategy",
+        "at": "internal/service/devorg_connections.go:222",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidStrategyType",
+        "at": "internal/service/devorg_connections.go:212",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidAuthContextDevOid",
+        "at": "internal/service/devorg_connections.go:453",
+        "tainted": true
+      },
+      {
+        "symbol": "errMaxEnterpriseConnectionLimitReached",
+        "at": "internal/service/devorg_connections.go:465",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateDevOrgAuthConnection` (HTTP operation `DevOrgAuthConnectionsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AzureAdOptions.ClientId\n  - in.AzureAdOptions.ClientSecret\n  - in.AzureAdOptions.Domain\n  - in.GoogleAppsOptions.ClientId\n  - in.GoogleAppsOptions.ClientSecret\n  - in.GoogleAppsOptions.TenantDomain\n  - in.OidcOptions.ClientId\n  - in.OidcOptions.ClientSecret\n  - in.OidcOptions.Issuer\n  - in.OktaOptions.ClientId\n  - in.OktaOptions.ClientSecret\n  - in.OktaOptions.Domain\n  - in.OptionsOneof.AzureAdOptions\n  - in.OptionsOneof.GoogleAppsOptions\n  - in.OptionsOneof.OidcOptions\n  - in.OptionsOneof.OktaOptions\n  - in.OptionsOneof.SamlOptions.FieldsMap\n  - in.SamlOptions.ConnectionName\n  - in.SamlOptions.FieldsMap.Email\n  - in.SamlOptions.FieldsMap.UserId\n  - in.SamlOptions.SignInEndpoint\n  - in.SamlOptions.SigningCert\n  - in.Strategy\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OptionsOneof.SamlOptions.FieldsMap != nil\n  - in.OptionsOneof.SamlOptions.FieldsMap != nil\n  - in.OptionsOneof\n  - in.OptionsOneof.OidcOptions != nil\n  - in.OptionsOneof.OidcOptions != nil\n  - in.OptionsOneof.SamlOptions != nil\n  - in.OptionsOneof.SamlOptions != nil\n  - in.OptionsOneof.GoogleAppsOptions != nil\n  - in.OptionsOneof.GoogleAppsOptions != nil\n  - in.OptionsOneof.AzureAdOptions != nil\n  - in.OptionsOneof.AzureAdOptions != nil\n  - in.OptionsOneof.OktaOptions != nil\n  - in.OptionsOneof.OktaOptions != nil\n  - in.Strategy == \"oidc\"\n  - in.OidcOptions == nil\n  - in.SamlOptions == nil\n  - in.Strategy == \"samlp\"\n  - in.GoogleAppsOptions == nil\n  - in.Strategy == \"google-apps\"\n  - in.AzureAdOptions == nil\n  - in.Strategy == \"waad\"\n  - in.OktaOptions == nil\n  - in.Strategy == \"okta\"\n  - in.Strategy == \"samlp\"\n  - in.Strategy == \"oidc\"\n  - in.SamlOptions.FieldsMap != nil\n  - in.Strategy == \"samlp\"\n  - in.Strategy == \"google-apps\"\n  - in.SamlOptions.FieldsMap.Email != \"\"\n  - in.SamlOptions.FieldsMap.UserId != \"\"\n  - in.Strategy == \"waad\"\n  - in.Strategy == \"okta\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContextDevOid\n  - errInvalidStrategy\n  - errInvalidStrategyOptions\n  - errInvalidStrategyType\n  - errMaxEnterpriseConnectionLimitReached\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `type` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

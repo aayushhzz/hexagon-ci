@@ -1,0 +1,335 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "GetAccount",
+    "operation": "AccountsGet",
+    "tests": 3,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404
+      ],
+      "asserted": [
+        200,
+        400
+      ],
+      "missing": [
+        401,
+        403,
+        404
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 40
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 5,
+      "covered_count": 1,
+      "coverage_pct": 20,
+      "request_fields_set_by_tests": 1,
+      "set_by_positive_tests": 1,
+      "set_by_negative_tests": 1,
+      "by_depth": {
+        "top_level": {
+          "total": 2,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 3,
+          "set": 1,
+          "pct": 33.3
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 5,
+        "covered": 1,
+        "pct": 20,
+        "collapsed_types": []
+      },
+      "covered": [
+        {
+          "path": "in.AccountIdentifier.AccountDon",
+          "match": "alias",
+          "by_tests": [
+            "Get account",
+            "Get account with invalid id"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.AccountIdentifier.Domain",
+        "in.AccountIdentifier.ExternalRef",
+        "in.IncludeArchived",
+        "in.ResolvePrimary"
+      ]
+    },
+    "branches": {
+      "total": 21,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 11,
+      "present_arm_exercised": 9,
+      "present_arm_pct": 42.9,
+      "absent_arm_exercised": 10,
+      "absent_arm_pct": 90.9,
+      "negative_arm_exercised": 8,
+      "negative_arm_pct": 38.1,
+      "both_arms_exercised": 0,
+      "coverage_pct": 42.9,
+      "by_origin": {
+        "service": {
+          "total": 15,
+          "reachable_on_happy_path": 9,
+          "present_arm_exercised": 5,
+          "present_arm_pct": 33.3,
+          "negative_arm_exercised": 4,
+          "negative_arm_pct": 26.7,
+          "absent_arm_exercised": 8
+        },
+        "generated": {
+          "total": 4,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 50,
+          "negative_arm_exercised": 2,
+          "negative_arm_pct": 50,
+          "absent_arm_exercised": 2
+        },
+        "library": {
+          "total": 2,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 100,
+          "negative_arm_exercised": 2,
+          "negative_arm_pct": 100,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b4",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:1336",
+          "cond": "in.AccountIdentifier == nil",
+          "predicate_paths": [
+            "in.AccountIdentifier"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:1339",
+          "cond": "in.AccountIdentifier != nil",
+          "predicate_paths": [
+            "in.AccountIdentifier"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "internal/service/account.go:91",
+          "cond": "in.AccountIdentifier == nil",
+          "predicate_paths": [
+            "in.AccountIdentifier"
+          ]
+        },
+        {
+          "id": "b11",
+          "at": "internal/service/account.go:109",
+          "cond": "in.AccountIdentifier.Domain != \"\"",
+          "predicate_paths": [
+            "in.AccountIdentifier.Domain"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "internal/service/account.go:90",
+          "cond": "in.ResolvePrimary",
+          "predicate_paths": [
+            "in.ResolvePrimary"
+          ]
+        },
+        {
+          "id": "b13",
+          "at": "internal/service/account.go:117",
+          "cond": "in.AccountIdentifier.ExternalRef != nil",
+          "predicate_paths": [
+            "in.AccountIdentifier.ExternalRef"
+          ]
+        },
+        {
+          "id": "b15",
+          "at": "internal/service/account.go:1036",
+          "cond": "in.ResolvePrimary",
+          "predicate_paths": [
+            "in.ResolvePrimary"
+          ]
+        },
+        {
+          "id": "b16",
+          "at": "internal/service/account.go:1036",
+          "cond": "in.IncludeArchived",
+          "predicate_paths": [
+            "in.IncludeArchived"
+          ]
+        },
+        {
+          "id": "b18",
+          "at": "internal/service/account.go:1052",
+          "cond": "in.ResolvePrimary",
+          "predicate_paths": [
+            "in.ResolvePrimary"
+          ]
+        },
+        {
+          "id": "b19",
+          "at": "internal/service/account.go:1063",
+          "cond": "in.IncludeArchived",
+          "predicate_paths": [
+            "in.IncludeArchived"
+          ]
+        },
+        {
+          "id": "b20",
+          "at": "internal/service/account.go:1081",
+          "cond": "in.ResolvePrimary",
+          "predicate_paths": [
+            "in.ResolvePrimary"
+          ]
+        },
+        {
+          "id": "b21",
+          "at": "internal/service/account.go:1080",
+          "cond": "in.IncludeArchived",
+          "predicate_paths": [
+            "in.IncludeArchived"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": [
+        {
+          "service": "this service",
+          "calls": [
+            "AccountExists",
+            "Lock"
+          ]
+        }
+      ],
+      "datastore_calls": [],
+      "service_count": 1,
+      "call_count": 2,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": [
+      {
+        "name": "Get account",
+        "file": "api/v2_internal/accounts/accounts_get_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ACCOUNTS_GET",
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetAccount"
+        ]
+      },
+      {
+        "name": "Get account with invalid id",
+        "file": "api/v2_internal/accounts/accounts_get_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ACCOUNTS_GET"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Get account with empty id",
+        "file": "api/v2_internal/accounts/accounts_get_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ACCOUNTS_GET"
+        ],
+        "fields_set": null,
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).GetAccount",
+    "request_type": "api.GetAccountRequest",
+    "response_type": "api.GetAccountResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetExternalError",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/account.go:1033"
+      },
+      {
+        "kind": "rpc",
+        "target": "AccountExists",
+        "via_paths": [
+          "in.AccountIdentifier.AccountDon"
+        ],
+        "at": "internal/service/account.go:1057"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.AccountIdentifier.AccountDon"
+        ],
+        "at": "internal/service/common.go:319"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:446",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetAccount` (HTTP operation `AccountsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 404]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountIdentifier.Domain\n  - in.AccountIdentifier.ExternalRef\n  - in.IncludeArchived\n  - in.ResolvePrimary\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountIdentifier == nil\n  - in.AccountIdentifier != nil\n  - in.AccountIdentifier == nil\n  - in.AccountIdentifier.Domain != \"\"\n  - in.ResolvePrimary\n  - in.AccountIdentifier.ExternalRef != nil\n  - in.ResolvePrimary\n  - in.IncludeArchived\n  - in.ResolvePrimary\n  - in.IncludeArchived\n  - in.ResolvePrimary\n  - in.IncludeArchived\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

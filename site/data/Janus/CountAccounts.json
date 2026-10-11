@@ -1,0 +1,655 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "CountAccounts",
+    "operation": "AccountsCount",
+    "tests": 2,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403
+      ],
+      "asserted": [
+        200
+      ],
+      "missing": [
+        400,
+        401,
+        403
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 25
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 65,
+      "covered_count": 5,
+      "coverage_pct": 7.7,
+      "request_fields_set_by_tests": 5,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 10,
+          "set": 1,
+          "pct": 10
+        },
+        "deep": {
+          "total": 54,
+          "set": 4,
+          "pct": 7.4
+        }
+      },
+      "representative": {
+        "units": 2,
+        "covered": 1,
+        "pct": 50,
+        "collapsed_types": [
+          "api.ListOrgsFilter"
+        ]
+      },
+      "covered": [
+        {
+          "path": "in.Filters.AccountFilter.Domains",
+          "match": "exact",
+          "by_tests": [
+            "Count accounts with filters"
+          ]
+        },
+        {
+          "path": "in.Filters.AccountFilter.DomainsOp",
+          "match": "exact",
+          "by_tests": [
+            "Count accounts with filters"
+          ]
+        },
+        {
+          "path": "in.Filters.AccountFilter.ExternalRefs",
+          "match": "exact",
+          "by_tests": [
+            "Count accounts with filters"
+          ]
+        },
+        {
+          "path": "in.Filters.AccountFilter.ExternalRefsOp",
+          "match": "exact",
+          "by_tests": [
+            "Count accounts with filters"
+          ]
+        },
+        {
+          "path": "in.Filters.DisplayName",
+          "match": "exact",
+          "by_tests": [
+            "Count accounts with filters"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.Filters.AccountFilter.Apps",
+        "in.Filters.AccountFilter.AppsOp",
+        "in.Filters.AccountFilter.CustomFields.Fields",
+        "in.Filters.AccountFilter.ExternalSourceData",
+        "in.Filters.AccountFilter.Industry",
+        "in.Filters.AccountFilter.IndustryOp",
+        "in.Filters.AccountFilter.IngestionChannel",
+        "in.Filters.AccountFilter.LeadSource",
+        "in.Filters.AccountFilter.LeadSourceOp",
+        "in.Filters.AccountFilter.OwnedBy",
+        "in.Filters.AccountFilter.OwnedByOp",
+        "in.Filters.AccountFilter.SharedWith",
+        "in.Filters.AccountFilter.Stage",
+        "in.Filters.AccountFilter.StagedInfo",
+        "in.Filters.AccountFilter.Subtype",
+        "in.Filters.AccountFilter.SubtypeOp",
+        "in.Filters.AccountFilter.SyncMetadata",
+        "in.Filters.AccountFilter.Tags",
+        "in.Filters.AccountFilter.TagsOp",
+        "in.Filters.AccountFilter.Tier",
+        "in.Filters.AccountFilter.TierOp",
+        "in.Filters.AccountFilter.TotalRevenue",
+        "in.Filters.AccountFilter.Websites",
+        "in.Filters.AccountFilter.WebsitesOp",
+        "in.Filters.CreatedByAgentId",
+        "in.Filters.CreatedByAgentIdOp",
+        "in.Filters.CreatedById",
+        "in.Filters.CreatedByIdOp",
+        "in.Filters.CreatedDate.After",
+        "in.Filters.CreatedDate.Before",
+        "in.Filters.CreatedDate.DatePreset.Type",
+        "in.Filters.DevOrgFilter.UeSyncState",
+        "in.Filters.Environment",
+        "in.Filters.EnvironmentOp",
+        "in.Filters.ModifiedById",
+        "in.Filters.ModifiedByIdOp",
+        "in.Filters.ModifiedDate.After",
+        "in.Filters.ModifiedDate.Before",
+        "in.Filters.ModifiedDate.DatePreset.Type",
+        "in.Filters.RevOrgFilter.Account",
+        "in.Filters.RevOrgFilter.AccountOp",
+        "in.Filters.RevOrgFilter.Apps",
+        "in.Filters.RevOrgFilter.AppsOp",
+        "in.Filters.RevOrgFilter.CustomFields.Fields",
+        "in.Filters.RevOrgFilter.ExternalOid",
+        "in.Filters.RevOrgFilter.ExternalOidIssuer",
+        "in.Filters.RevOrgFilter.ExternalOidOp",
+        "in.Filters.RevOrgFilter.ExternalSourceData",
+        "in.Filters.RevOrgFilter.SharedWith",
+        "in.Filters.RevOrgFilter.SlaId",
+        "in.Filters.RevOrgFilter.StagedInfo",
+        "in.Filters.RevOrgFilter.Subtype",
+        "in.Filters.RevOrgFilter.SubtypeOp",
+        "in.Filters.RevOrgFilter.SyncMetadata",
+        "in.Filters.RevOrgFilter.Tags",
+        "in.Filters.RevOrgFilter.TagsOp",
+        "in.Filters.RevOrgFilter.Tier",
+        "in.Filters.RevOrgFilter.Type",
+        "in.Filters.State",
+        "in.SearchQuery"
+      ]
+    },
+    "branches": {
+      "total": 41,
+      "enum_switch_branches": 304,
+      "server_gated_branches": 0,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 1,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 1,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "by_origin": {
+        "service": {
+          "total": 37,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 1
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 4,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b4",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/query.go:196",
+          "cond": "in.Filters.RevOrgFilter.CustomFields == nil",
+          "predicate_paths": [
+            "in.Filters.RevOrgFilter.CustomFields"
+          ]
+        },
+        {
+          "id": "b34",
+          "at": "internal/filter/orgs_search.gen.go:726",
+          "cond": "in.Filters.RevOrgFilter != nil",
+          "predicate_paths": [
+            "in.Filters.RevOrgFilter"
+          ]
+        },
+        {
+          "id": "b46",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/query.go:196",
+          "cond": "in.Filters.AccountFilter.CustomFields == nil",
+          "predicate_paths": [
+            "in.Filters.AccountFilter.CustomFields"
+          ]
+        },
+        {
+          "id": "b116",
+          "at": "internal/filter/orgs_search.gen.go:1113",
+          "cond": "in.Filters.AccountFilter != nil",
+          "predicate_paths": [
+            "in.Filters.AccountFilter"
+          ]
+        },
+        {
+          "id": "b125",
+          "at": "internal/filter/orgs_search.gen.go:95",
+          "cond": "in.Filters.CreatedDate != nil",
+          "predicate_paths": [
+            "in.Filters.CreatedDate"
+          ]
+        },
+        {
+          "id": "b134",
+          "at": "internal/filter/orgs_search.gen.go:97",
+          "cond": "in.Filters.CreatedDate.After != nil",
+          "predicate_paths": [
+            "in.Filters.CreatedDate.After"
+          ]
+        },
+        {
+          "id": "b135",
+          "at": "internal/filter/orgs_search.gen.go:104",
+          "cond": "in.Filters.CreatedDate.Before != nil",
+          "predicate_paths": [
+            "in.Filters.CreatedDate.Before"
+          ]
+        },
+        {
+          "id": "b136",
+          "at": "internal/filter/orgs_search.gen.go:111",
+          "cond": "in.Filters.CreatedDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.Filters.CreatedDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b137",
+          "at": "internal/filter/orgs_search.gen.go:112",
+          "cond": "in.Filters.CreatedDate.After != nil",
+          "predicate_paths": [
+            "in.Filters.CreatedDate.After"
+          ]
+        },
+        {
+          "id": "b138",
+          "at": "",
+          "cond": "in.Filters.CreatedDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.Filters.CreatedDate.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b139",
+          "at": "internal/filter/orgs_search.gen.go:112",
+          "cond": "in.Filters.CreatedDate.Before != nil",
+          "predicate_paths": [
+            "in.Filters.CreatedDate.Before"
+          ]
+        },
+        {
+          "id": "b140",
+          "at": "internal/filter/orgs_search.gen.go:209",
+          "cond": "in.Filters.ModifiedDate != nil",
+          "predicate_paths": [
+            "in.Filters.ModifiedDate"
+          ]
+        },
+        {
+          "id": "b149",
+          "at": "internal/filter/orgs_search.gen.go:211",
+          "cond": "in.Filters.ModifiedDate.After != nil",
+          "predicate_paths": [
+            "in.Filters.ModifiedDate.After"
+          ]
+        },
+        {
+          "id": "b150",
+          "at": "internal/filter/orgs_search.gen.go:218",
+          "cond": "in.Filters.ModifiedDate.Before != nil",
+          "predicate_paths": [
+            "in.Filters.ModifiedDate.Before"
+          ]
+        },
+        {
+          "id": "b151",
+          "at": "internal/filter/orgs_search.gen.go:225",
+          "cond": "in.Filters.ModifiedDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.Filters.ModifiedDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b152",
+          "at": "internal/filter/orgs_search.gen.go:226",
+          "cond": "in.Filters.ModifiedDate.After != nil",
+          "predicate_paths": [
+            "in.Filters.ModifiedDate.After"
+          ]
+        },
+        {
+          "id": "b153",
+          "at": "",
+          "cond": "in.Filters.ModifiedDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.Filters.ModifiedDate.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b154",
+          "at": "internal/filter/orgs_search.gen.go:226",
+          "cond": "in.Filters.ModifiedDate.Before != nil",
+          "predicate_paths": [
+            "in.Filters.ModifiedDate.Before"
+          ]
+        },
+        {
+          "id": "b171",
+          "at": "internal/filter/orgs_search.gen.go:398",
+          "cond": "in.Filters.DevOrgFilter != nil",
+          "predicate_paths": [
+            "in.Filters.DevOrgFilter"
+          ]
+        },
+        {
+          "id": "b172",
+          "at": "internal/filter/orgs_search.gen.go:417",
+          "cond": "in.Filters.RevOrgFilter != nil",
+          "predicate_paths": [
+            "in.Filters.RevOrgFilter"
+          ]
+        },
+        {
+          "id": "b173",
+          "at": "internal/filter/orgs_search.gen.go:436",
+          "cond": "in.Filters.AccountFilter != nil",
+          "predicate_paths": [
+            "in.Filters.AccountFilter"
+          ]
+        },
+        {
+          "id": "b174",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/query.go:160",
+          "cond": "in.Filters.RevOrgFilter.CustomFields == nil",
+          "predicate_paths": [
+            "in.Filters.RevOrgFilter.CustomFields"
+          ]
+        },
+        {
+          "id": "b207",
+          "at": "internal/filter/orgs.gen.go:910",
+          "cond": "in.Filters.RevOrgFilter != nil",
+          "predicate_paths": [
+            "in.Filters.RevOrgFilter"
+          ]
+        },
+        {
+          "id": "b216",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/query.go:160",
+          "cond": "in.Filters.AccountFilter.CustomFields == nil",
+          "predicate_paths": [
+            "in.Filters.AccountFilter.CustomFields"
+          ]
+        },
+        {
+          "id": "b289",
+          "at": "internal/filter/orgs.gen.go:1471",
+          "cond": "in.Filters.AccountFilter != nil",
+          "predicate_paths": [
+            "in.Filters.AccountFilter"
+          ]
+        },
+        {
+          "id": "b298",
+          "at": "internal/filter/orgs.gen.go:175",
+          "cond": "in.Filters.CreatedDate != nil",
+          "predicate_paths": [
+            "in.Filters.CreatedDate"
+          ]
+        },
+        {
+          "id": "b307",
+          "at": "internal/filter/orgs.gen.go:178",
+          "cond": "in.Filters.CreatedDate.After != nil",
+          "predicate_paths": [
+            "in.Filters.CreatedDate.After"
+          ]
+        },
+        {
+          "id": "b308",
+          "at": "internal/filter/orgs.gen.go:185",
+          "cond": "in.Filters.CreatedDate.Before != nil",
+          "predicate_paths": [
+            "in.Filters.CreatedDate.Before"
+          ]
+        },
+        {
+          "id": "b309",
+          "at": "internal/filter/orgs.gen.go:192",
+          "cond": "in.Filters.CreatedDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.Filters.CreatedDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b310",
+          "at": "internal/filter/orgs.gen.go:193",
+          "cond": "in.Filters.CreatedDate.After != nil",
+          "predicate_paths": [
+            "in.Filters.CreatedDate.After"
+          ]
+        },
+        {
+          "id": "b311",
+          "at": "internal/filter/orgs.gen.go:193",
+          "cond": "in.Filters.CreatedDate.Before != nil",
+          "predicate_paths": [
+            "in.Filters.CreatedDate.Before"
+          ]
+        },
+        {
+          "id": "b312",
+          "at": "internal/filter/orgs.gen.go:299",
+          "cond": "in.Filters.ModifiedDate != nil",
+          "predicate_paths": [
+            "in.Filters.ModifiedDate"
+          ]
+        },
+        {
+          "id": "b321",
+          "at": "internal/filter/orgs.gen.go:302",
+          "cond": "in.Filters.ModifiedDate.After != nil",
+          "predicate_paths": [
+            "in.Filters.ModifiedDate.After"
+          ]
+        },
+        {
+          "id": "b322",
+          "at": "internal/filter/orgs.gen.go:309",
+          "cond": "in.Filters.ModifiedDate.Before != nil",
+          "predicate_paths": [
+            "in.Filters.ModifiedDate.Before"
+          ]
+        },
+        {
+          "id": "b323",
+          "at": "internal/filter/orgs.gen.go:316",
+          "cond": "in.Filters.ModifiedDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.Filters.ModifiedDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b324",
+          "at": "internal/filter/orgs.gen.go:317",
+          "cond": "in.Filters.ModifiedDate.After != nil",
+          "predicate_paths": [
+            "in.Filters.ModifiedDate.After"
+          ]
+        },
+        {
+          "id": "b325",
+          "at": "internal/filter/orgs.gen.go:317",
+          "cond": "in.Filters.ModifiedDate.Before != nil",
+          "predicate_paths": [
+            "in.Filters.ModifiedDate.Before"
+          ]
+        },
+        {
+          "id": "b342",
+          "at": "internal/filter/orgs.gen.go:480",
+          "cond": "in.Filters.DevOrgFilter != nil",
+          "predicate_paths": [
+            "in.Filters.DevOrgFilter"
+          ]
+        },
+        {
+          "id": "b343",
+          "at": "internal/filter/orgs.gen.go:498",
+          "cond": "in.Filters.RevOrgFilter != nil",
+          "predicate_paths": [
+            "in.Filters.RevOrgFilter"
+          ]
+        },
+        {
+          "id": "b344",
+          "at": "internal/filter/orgs.gen.go:516",
+          "cond": "in.Filters.AccountFilter != nil",
+          "predicate_paths": [
+            "in.Filters.AccountFilter"
+          ]
+        },
+        {
+          "id": "b345",
+          "at": "internal/service/account.go:1462",
+          "cond": "in.SearchQuery != \"\"",
+          "predicate_paths": [
+            "in.SearchQuery"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": null,
+      "datastore_calls": [],
+      "service_count": 0,
+      "call_count": 0,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 2,
+      "deps_result_checked_by_test": 2,
+      "response_links": [
+        {
+          "dep": "schemaregistry:GetAggregatedSchema",
+          "path": "out.Total",
+          "checked_by": [
+            "AccountsCount"
+          ],
+          "checked": true
+        },
+        {
+          "dep": "wisp:SuggestsSearch",
+          "path": "out.Total",
+          "checked_by": [
+            "AccountsCount"
+          ],
+          "checked": true
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": [
+      {
+        "name": "Count accounts with filters",
+        "file": "api/v2_internal/accounts/accounts_count_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ACCOUNTS_COUNT"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "Domains",
+          "DomainsOp",
+          "ExternalRefs",
+          "ExternalRefsOp"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "AccountsCount",
+        "file": "devorg_sanity_check/entities_count_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Count"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).CountAccounts",
+    "request_type": "api.CountAccountsRequest",
+    "response_type": "api.CountAccountsResponse",
+    "sinks": [],
+    "errors": [
+      {
+        "symbol": "ErrInvalidQuarter",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:116",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrTimeBeforeFiscalStart",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:197",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidPeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:211",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrTimeBeforeFiscalStart",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:207",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:283",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:319",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:380",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:219",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:225",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CountAccounts` (HTTP operation `AccountsCount`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Filters.AccountFilter.Apps\n  - in.Filters.AccountFilter.AppsOp\n  - in.Filters.AccountFilter.CustomFields.Fields\n  - in.Filters.AccountFilter.ExternalSourceData\n  - in.Filters.AccountFilter.Industry\n  - in.Filters.AccountFilter.IndustryOp\n  - in.Filters.AccountFilter.IngestionChannel\n  - in.Filters.AccountFilter.LeadSource\n  - in.Filters.AccountFilter.LeadSourceOp\n  - in.Filters.AccountFilter.OwnedBy\n  - in.Filters.AccountFilter.OwnedByOp\n  - in.Filters.AccountFilter.SharedWith\n  - in.Filters.AccountFilter.Stage\n  - in.Filters.AccountFilter.StagedInfo\n  - in.Filters.AccountFilter.Subtype\n  - in.Filters.AccountFilter.SubtypeOp\n  - in.Filters.AccountFilter.SyncMetadata\n  - in.Filters.AccountFilter.Tags\n  - in.Filters.AccountFilter.TagsOp\n  - in.Filters.AccountFilter.Tier\n  - in.Filters.AccountFilter.TierOp\n  - in.Filters.AccountFilter.TotalRevenue\n  - in.Filters.AccountFilter.Websites\n  - in.Filters.AccountFilter.WebsitesOp\n  - in.Filters.CreatedByAgentId\n  - in.Filters.CreatedByAgentIdOp\n  - in.Filters.CreatedById\n  - in.Filters.CreatedByIdOp\n  - in.Filters.CreatedDate.After\n  - in.Filters.CreatedDate.Before\n  - in.Filters.CreatedDate.DatePreset.Type\n  - in.Filters.DevOrgFilter.UeSyncState\n  - in.Filters.Environment\n  - in.Filters.EnvironmentOp\n  - in.Filters.ModifiedById\n  - in.Filters.ModifiedByIdOp\n  - in.Filters.ModifiedDate.After\n  - in.Filters.ModifiedDate.Before\n  - in.Filters.ModifiedDate.DatePreset.Type\n  - in.Filters.RevOrgFilter.Account\n  - in.Filters.RevOrgFilter.AccountOp\n  - in.Filters.RevOrgFilter.Apps\n  - in.Filters.RevOrgFilter.AppsOp\n  - in.Filters.RevOrgFilter.CustomFields.Fields\n  - in.Filters.RevOrgFilter.ExternalOid\n  - in.Filters.RevOrgFilter.ExternalOidIssuer\n  - in.Filters.RevOrgFilter.ExternalOidOp\n  - in.Filters.RevOrgFilter.ExternalSourceData\n  - in.Filters.RevOrgFilter.SharedWith\n  - in.Filters.RevOrgFilter.SlaId\n  - in.Filters.RevOrgFilter.StagedInfo\n  - in.Filters.RevOrgFilter.Subtype\n  - in.Filters.RevOrgFilter.SubtypeOp\n  - in.Filters.RevOrgFilter.SyncMetadata\n  - in.Filters.RevOrgFilter.Tags\n  - in.Filters.RevOrgFilter.TagsOp\n  - in.Filters.RevOrgFilter.Tier\n  - in.Filters.RevOrgFilter.Type\n  - in.Filters.State\n  - in.SearchQuery\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filters.RevOrgFilter.CustomFields == nil\n  - in.Filters.RevOrgFilter != nil\n  - in.Filters.AccountFilter.CustomFields == nil\n  - in.Filters.AccountFilter != nil\n  - in.Filters.CreatedDate != nil\n  - in.Filters.CreatedDate.After != nil\n  - in.Filters.CreatedDate.Before != nil\n  - in.Filters.CreatedDate.DatePreset != nil\n  - in.Filters.CreatedDate.After != nil\n  - in.Filters.CreatedDate.DatePreset.Type\n  - in.Filters.CreatedDate.Before != nil\n  - in.Filters.ModifiedDate != nil\n  - in.Filters.ModifiedDate.After != nil\n  - in.Filters.ModifiedDate.Before != nil\n  - in.Filters.ModifiedDate.DatePreset != nil\n  - in.Filters.ModifiedDate.After != nil\n  - in.Filters.ModifiedDate.DatePreset.Type\n  - in.Filters.ModifiedDate.Before != nil\n  - in.Filters.DevOrgFilter != nil\n  - in.Filters.RevOrgFilter != nil\n  - in.Filters.AccountFilter != nil\n  - in.Filters.RevOrgFilter.CustomFields == nil\n  - in.Filters.RevOrgFilter != nil\n  - in.Filters.AccountFilter.CustomFields == nil\n  - in.Filters.AccountFilter != nil\n  - in.Filters.CreatedDate != nil\n  - in.Filters.CreatedDate.After != nil\n  - in.Filters.CreatedDate.Before != nil\n  - in.Filters.CreatedDate.DatePreset != nil\n  - in.Filters.CreatedDate.After != nil\n  - in.Filters.CreatedDate.Before != nil\n  - in.Filters.ModifiedDate != nil\n  - in.Filters.ModifiedDate.After != nil\n  - in.Filters.ModifiedDate.Before != nil\n  - in.Filters.ModifiedDate.DatePreset != nil\n  - in.Filters.ModifiedDate.After != nil\n  - in.Filters.ModifiedDate.Before != nil\n  - in.Filters.DevOrgFilter != nil\n  - in.Filters.RevOrgFilter != nil\n  - in.Filters.AccountFilter != nil\n  - (+1 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

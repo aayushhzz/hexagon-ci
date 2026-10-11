@@ -1,0 +1,298 @@
+{
+  "service": "Codex",
+  "coverage": {
+    "rpc": "UpdateMilestone",
+    "operation": "MilestonesUpdate",
+    "tests": 6,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404
+      ],
+      "asserted": [
+        200,
+        404
+      ],
+      "missing": [
+        400,
+        401,
+        403
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 40
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 3,
+      "covered_count": 1,
+      "coverage_pct": 33.3,
+      "request_fields_set_by_tests": 5,
+      "set_by_positive_tests": 1,
+      "set_by_negative_tests": 1,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 1,
+          "pct": 100
+        },
+        "nested": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 2,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 3,
+        "covered": 1,
+        "pct": 33.3,
+        "collapsed_types": [
+          "wrapperspb.StringValue"
+        ]
+      },
+      "covered": [
+        {
+          "path": "in.Id",
+          "match": "exact",
+          "by_tests": [
+            "Returns 404 for non-existent milestone",
+            "Returns 404 when updating a deleted milestone",
+            "Updates description",
+            "Updates due_date",
+            "Updates status through all transitions",
+            "Updates title"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.Milestone.Description.Value",
+        "in.Milestone.Title.Value"
+      ]
+    },
+    "branches": {
+      "total": 7,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 5,
+      "present_arm_exercised": 5,
+      "present_arm_pct": 71.4,
+      "absent_arm_exercised": 2,
+      "absent_arm_pct": 40,
+      "negative_arm_exercised": 4,
+      "negative_arm_pct": 57.1,
+      "both_arms_exercised": 0,
+      "coverage_pct": 71.4,
+      "by_origin": {
+        "service": {
+          "total": 1,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 100,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "generated": {
+          "total": 5,
+          "reachable_on_happy_path": 3,
+          "present_arm_exercised": 3,
+          "present_arm_pct": 60,
+          "negative_arm_exercised": 3,
+          "negative_arm_pct": 60,
+          "absent_arm_exercised": 2
+        },
+        "library": {
+          "total": 1,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 100,
+          "negative_arm_exercised": 1,
+          "negative_arm_pct": 100,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b5",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/milestone.pb.validator.go:53",
+          "cond": "in.Milestone != nil",
+          "predicate_paths": [
+            "in.Milestone"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/milestone.pb.validator.go:54",
+          "cond": "in.Milestone != nil",
+          "predicate_paths": [
+            "in.Milestone"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": null,
+      "datastore_calls": [],
+      "service_count": 0,
+      "call_count": 0,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "description",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "duedate",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "status",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "title",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Updates title",
+        "file": "api/v2_internal/milestones/crud/update_milestone_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Title"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Milestone",
+          "Milestone.Title",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Updates description",
+        "file": "api/v2_internal/milestones/crud/update_milestone_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Milestone",
+          "Milestone.Description",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Updates due_date",
+        "file": "api/v2_internal/milestones/crud/update_milestone_test.go",
+        "labels": null,
+        "fields_set": [
+          "DueDate",
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Milestone",
+          "Milestone.DueDate",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Updates status through all transitions",
+        "file": "api/v2_internal/milestones/crud/update_milestone_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Status"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Milestone",
+          "Milestone.Status",
+          "Milestone.Status.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Returns 404 for non-existent milestone",
+        "file": "api/v2_internal/milestones/crud/update_milestone_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Title"
+        ],
+        "statuses": [
+          404
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Returns 404 when updating a deleted milestone",
+        "file": "api/v2_internal/milestones/crud/update_milestone_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Title"
+        ],
+        "statuses": [
+          404
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/codex/internal/serverv2.Codex).UpdateMilestone",
+    "request_type": "apiv2.UpdateMilestoneRequest",
+    "response_type": "apiv2.UpdateMilestoneResponse",
+    "sinks": [],
+    "errors": [],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateMilestone` (HTTP operation `MilestonesUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Milestone.Description.Value\n  - in.Milestone.Title.Value\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Milestone != nil\n  - in.Milestone != nil\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `duedate` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `title` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

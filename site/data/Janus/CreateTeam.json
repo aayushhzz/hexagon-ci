@@ -1,0 +1,1986 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "CreateTeam",
+    "operation": "TeamsCreate",
+    "tests": 25,
+    "status": {
+      "documented": [
+        201,
+        400,
+        401,
+        403,
+        409
+      ],
+      "asserted": [
+        200,
+        201,
+        400,
+        403,
+        409
+      ],
+      "missing": [
+        401
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 80
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 34,
+      "covered_count": 4,
+      "coverage_pct": 11.8,
+      "request_fields_set_by_tests": 5,
+      "set_by_positive_tests": 4,
+      "set_by_negative_tests": 4,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 1,
+          "pct": 100
+        },
+        "nested": {
+          "total": 7,
+          "set": 3,
+          "pct": 42.9
+        },
+        "deep": {
+          "total": 26,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 26,
+        "covered": 4,
+        "pct": 15.4,
+        "collapsed_types": [
+          "api.CreateDevrevCopy",
+          "api.CreateExternalSourceDataComp",
+          "api.CustomSchemaSpec",
+          "proto.Id",
+          "structpb.Struct"
+        ]
+      },
+      "covered": [
+        {
+          "path": "in.DryRun",
+          "match": "exact",
+          "by_tests": [
+            "DryRunCreateInvalidKey",
+            "DryRunCreateValid"
+          ]
+        },
+        {
+          "path": "in.Team.Description",
+          "match": "exact",
+          "by_tests": [
+            "WithNameAndDescription"
+          ]
+        },
+        {
+          "path": "in.Team.Key",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "ArchiveAlreadyArchivedTeam",
+            "ArchiveFailsWhenSpaceManagementDisabled",
+            "ArchiveTeamArchivesBackingSpace",
+            "ArchiveTeamArchivesLinkedGroup",
+            "ArchiveTeamSuccessfully",
+            "CreateFailsWhenSpaceManagementDisabled",
+            "DryRunCreateInvalidKey",
+            "DryRunCreateValid",
+            "GroupCanBecomeTeamAfterHierarchyEstablished",
+            "ListFiltersByArchivedStatus",
+            "NoAccessUserCannotArchive",
+            "NoAccessUserCannotCreate",
+            "RegularUserCannotArchive",
+            "RegularUserCannotCreate",
+            "UpdateArchivedTeamFails",
+            "WithDuplicateGroup",
+            "WithDuplicateKey",
+            "WithDuplicateKeyFromAnotherTeam",
+            "WithGroupID",
+            "WithInvalidKeyFormatLowercase",
+            "WithInvalidKeyFormatTooLong",
+            "WithInvalidKeyFormatTooShort",
+            "WithMissingGroup",
+            "WithNameAndDescription"
+          ]
+        },
+        {
+          "path": "in.Team.Name",
+          "match": "exact",
+          "by_tests": [
+            "WithNameAndDescription"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.CustomSchemaSpec.Drop",
+        "in.CustomSchemaSpec.TenantFragment",
+        "in.CustomSchemaSpec.ValidateRequiredFields",
+        "in.Team.CustomFields.Fields",
+        "in.Team.DevrevCopy.LastSyncedDate",
+        "in.Team.DevrevCopy.OriginId.Id",
+        "in.Team.DevrevCopy.OriginOrgId.Id",
+        "in.Team.EnabledFeatures",
+        "in.Team.ExternalSourceData.ClosedDate",
+        "in.Team.ExternalSourceData.CreatedById.Id",
+        "in.Team.ExternalSourceData.CreatedDate",
+        "in.Team.ExternalSourceData.ModifiedById.Id",
+        "in.Team.ExternalSourceData.ModifiedDate",
+        "in.Team.GroupId.Id",
+        "in.Team.Icon.ArtifactId.Id",
+        "in.Team.Icon.Stock.PaletteColor",
+        "in.Team.Icon.Stock.Shape",
+        "in.Team.SyncMetadata.ExternalRecordId",
+        "in.Team.SyncMetadata.ExternalRecordType",
+        "in.Team.SyncMetadata.ExternalReference",
+        "in.Team.SyncMetadata.LastSyncIn.Status",
+        "in.Team.SyncMetadata.LastSyncIn.SyncDate",
+        "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+        "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+        "in.Team.SyncMetadata.LastSyncOut.Status",
+        "in.Team.SyncMetadata.LastSyncOut.SyncDate",
+        "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+        "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+        "in.Team.SyncMetadata.OriginSystem",
+        "in.Team.SyncMetadata.SyncedByDevUsers"
+      ]
+    },
+    "branches": {
+      "total": 107,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 14,
+      "present_arm_exercised": 16,
+      "present_arm_pct": 15,
+      "absent_arm_exercised": 13,
+      "absent_arm_pct": 92.9,
+      "negative_arm_exercised": 15,
+      "negative_arm_pct": 14,
+      "both_arms_exercised": 4,
+      "coverage_pct": 15,
+      "by_origin": {
+        "service": {
+          "total": 55,
+          "reachable_on_happy_path": 7,
+          "present_arm_exercised": 13,
+          "present_arm_pct": 23.6,
+          "negative_arm_exercised": 12,
+          "negative_arm_pct": 21.8,
+          "absent_arm_exercised": 6
+        },
+        "generated": {
+          "total": 42,
+          "reachable_on_happy_path": 4,
+          "present_arm_exercised": 3,
+          "present_arm_pct": 7.1,
+          "negative_arm_exercised": 3,
+          "negative_arm_pct": 7.1,
+          "absent_arm_exercised": 4
+        },
+        "library": {
+          "total": 10,
+          "reachable_on_happy_path": 3,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 3
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/obj_type.go:1648",
+          "cond": "in.Team.Icon.ArtifactId.Id == *ObjectTypeArtifact",
+          "predicate_paths": [
+            "in.Team.Icon.ArtifactId.Id"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1704",
+          "cond": "in.Team.Icon.Stock != nil",
+          "predicate_paths": [
+            "in.Team.Icon.Stock"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1705",
+          "cond": "in.Team.Icon.Stock != nil",
+          "predicate_paths": [
+            "in.Team.Icon.Stock"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1709",
+          "cond": "in.Team.Icon.ArtifactId != nil",
+          "predicate_paths": [
+            "in.Team.Icon.ArtifactId"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1714",
+          "cond": "in.Team.Icon.ArtifactId.Id",
+          "predicate_paths": [
+            "in.Team.Icon.ArtifactId.Id"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2031",
+          "cond": "in.Team.SyncMetadata.LastSyncIn.SyncUnitId != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncIn.SyncUnitId"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2040",
+          "cond": "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2036",
+          "cond": "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2045",
+          "cond": "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2163",
+          "cond": "in.Team.SyncMetadata.LastSyncOut.SyncUnitId != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncOut.SyncUnitId"
+          ]
+        },
+        {
+          "id": "b11",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2172",
+          "cond": "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2168",
+          "cond": "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id"
+          ]
+        },
+        {
+          "id": "b13",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2177",
+          "cond": "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id"
+          ]
+        },
+        {
+          "id": "b14",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1905",
+          "cond": "in.Team.SyncMetadata.LastSyncIn != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncIn"
+          ]
+        },
+        {
+          "id": "b15",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1906",
+          "cond": "in.Team.SyncMetadata.LastSyncIn != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncIn"
+          ]
+        },
+        {
+          "id": "b16",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1910",
+          "cond": "in.Team.SyncMetadata.LastSyncOut != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncOut"
+          ]
+        },
+        {
+          "id": "b17",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1911",
+          "cond": "in.Team.SyncMetadata.LastSyncOut != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncOut"
+          ]
+        },
+        {
+          "id": "b18",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/obj_type.go:1783",
+          "cond": "in.Team.ExternalSourceData.CreatedById.Id",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.CreatedById.Id"
+          ]
+        },
+        {
+          "id": "b19",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/obj_type.go:1785",
+          "cond": "in.Team.ExternalSourceData.CreatedById.Id",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.CreatedById.Id"
+          ]
+        },
+        {
+          "id": "b20",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/obj_type.go:1784",
+          "cond": "in.Team.ExternalSourceData.CreatedById.Id",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.CreatedById.Id"
+          ]
+        },
+        {
+          "id": "b21",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/obj_type.go:1783",
+          "cond": "in.Team.ExternalSourceData.ModifiedById.Id",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.ModifiedById.Id"
+          ]
+        },
+        {
+          "id": "b22",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/obj_type.go:1785",
+          "cond": "in.Team.ExternalSourceData.ModifiedById.Id",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.ModifiedById.Id"
+          ]
+        },
+        {
+          "id": "b23",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/obj_type.go:1784",
+          "cond": "in.Team.ExternalSourceData.ModifiedById.Id",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.ModifiedById.Id"
+          ]
+        },
+        {
+          "id": "b24",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2450",
+          "cond": "in.Team.ExternalSourceData.CreatedById != nil",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.CreatedById"
+          ]
+        },
+        {
+          "id": "b25",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2459",
+          "cond": "in.Team.ExternalSourceData.ModifiedById != nil",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.ModifiedById"
+          ]
+        },
+        {
+          "id": "b26",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2455",
+          "cond": "in.Team.ExternalSourceData.CreatedById.Id",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.CreatedById.Id"
+          ]
+        },
+        {
+          "id": "b27",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2464",
+          "cond": "in.Team.ExternalSourceData.ModifiedById.Id",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.ModifiedById.Id"
+          ]
+        },
+        {
+          "id": "b28",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2626",
+          "cond": "in.Team.DevrevCopy.OriginId != nil",
+          "predicate_paths": [
+            "in.Team.DevrevCopy.OriginId"
+          ]
+        },
+        {
+          "id": "b29",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2631",
+          "cond": "in.Team.DevrevCopy.OriginOrgId != nil",
+          "predicate_paths": [
+            "in.Team.DevrevCopy.OriginOrgId"
+          ]
+        },
+        {
+          "id": "b30",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2636",
+          "cond": "in.Team.DevrevCopy.OriginOrgId.Id",
+          "predicate_paths": [
+            "in.Team.DevrevCopy.OriginOrgId.Id"
+          ]
+        },
+        {
+          "id": "b34",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3722",
+          "cond": "in.Team.GroupId != nil",
+          "predicate_paths": [
+            "in.Team.GroupId"
+          ]
+        },
+        {
+          "id": "b36",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3731",
+          "cond": "in.Team.Icon != nil",
+          "predicate_paths": [
+            "in.Team.Icon"
+          ]
+        },
+        {
+          "id": "b37",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3727",
+          "cond": "in.Team.GroupId.Id",
+          "predicate_paths": [
+            "in.Team.GroupId.Id"
+          ]
+        },
+        {
+          "id": "b38",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3732",
+          "cond": "in.Team.Icon != nil",
+          "predicate_paths": [
+            "in.Team.Icon"
+          ]
+        },
+        {
+          "id": "b39",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3741",
+          "cond": "in.Team.SyncMetadata != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata"
+          ]
+        },
+        {
+          "id": "b40",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3742",
+          "cond": "in.Team.SyncMetadata != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata"
+          ]
+        },
+        {
+          "id": "b41",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3746",
+          "cond": "in.Team.ExternalSourceData != nil",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData"
+          ]
+        },
+        {
+          "id": "b42",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3747",
+          "cond": "in.Team.ExternalSourceData != nil",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData"
+          ]
+        },
+        {
+          "id": "b43",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3751",
+          "cond": "in.Team.DevrevCopy != nil",
+          "predicate_paths": [
+            "in.Team.DevrevCopy"
+          ]
+        },
+        {
+          "id": "b44",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3752",
+          "cond": "in.Team.DevrevCopy != nil",
+          "predicate_paths": [
+            "in.Team.DevrevCopy"
+          ]
+        },
+        {
+          "id": "b45",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:246",
+          "cond": "in.CustomSchemaSpec.Drop != nil",
+          "predicate_paths": [
+            "in.CustomSchemaSpec.Drop"
+          ]
+        },
+        {
+          "id": "b46",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:247",
+          "cond": "in.CustomSchemaSpec.Drop != nil",
+          "predicate_paths": [
+            "in.CustomSchemaSpec.Drop"
+          ]
+        },
+        {
+          "id": "b47",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2913",
+          "cond": "in.Team != nil",
+          "predicate_paths": [
+            "in.Team"
+          ]
+        },
+        {
+          "id": "b48",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2914",
+          "cond": "in.Team != nil",
+          "predicate_paths": [
+            "in.Team"
+          ]
+        },
+        {
+          "id": "b49",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2918",
+          "cond": "in.CustomSchemaSpec != nil",
+          "predicate_paths": [
+            "in.CustomSchemaSpec"
+          ]
+        },
+        {
+          "id": "b50",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2919",
+          "cond": "in.CustomSchemaSpec != nil",
+          "predicate_paths": [
+            "in.CustomSchemaSpec"
+          ]
+        },
+        {
+          "id": "b51",
+          "at": "internal/service/team_validations.go:129",
+          "cond": "in.Team.GroupId != nil",
+          "predicate_paths": [
+            "in.Team.GroupId"
+          ]
+        },
+        {
+          "id": "b53",
+          "at": "internal/service/team_validations.go:129",
+          "cond": "in.Team.GroupId.Id",
+          "predicate_paths": [
+            "in.Team.GroupId.Id"
+          ]
+        },
+        {
+          "id": "b56",
+          "at": "internal/service/team_validations.go:290",
+          "cond": "in.Team.GroupId != nil",
+          "predicate_paths": [
+            "in.Team.GroupId"
+          ]
+        },
+        {
+          "id": "b57",
+          "at": "internal/service/team_validations.go:290",
+          "cond": "in.Team.GroupId.Id != \"\"",
+          "predicate_paths": [
+            "in.Team.GroupId.Id"
+          ]
+        },
+        {
+          "id": "b58",
+          "at": "internal/service/team_validations.go:162",
+          "cond": "in.Team.GroupId.Id",
+          "predicate_paths": [
+            "in.Team.GroupId.Id"
+          ]
+        },
+        {
+          "id": "b61",
+          "at": "internal/service/team_validations.go:311",
+          "cond": "in.Team.Icon.ArtifactId != nil",
+          "predicate_paths": [
+            "in.Team.Icon.ArtifactId"
+          ]
+        },
+        {
+          "id": "b62",
+          "at": "internal/service/team_validations.go:320",
+          "cond": "in.Team.Icon.Stock == nil",
+          "predicate_paths": [
+            "in.Team.Icon.Stock"
+          ]
+        },
+        {
+          "id": "b63",
+          "at": "internal/service/team_validations.go:359",
+          "cond": "in.Team.Icon == nil",
+          "predicate_paths": [
+            "in.Team.Icon"
+          ]
+        },
+        {
+          "id": "b64",
+          "at": "internal/service/team_validations.go:365",
+          "cond": "in.Team.Icon.Stock != nil",
+          "predicate_paths": [
+            "in.Team.Icon.Stock"
+          ]
+        },
+        {
+          "id": "b65",
+          "at": "internal/service/team_validations.go:416",
+          "cond": "in.Team.GroupId != nil",
+          "predicate_paths": [
+            "in.Team.GroupId"
+          ]
+        },
+        {
+          "id": "b69",
+          "at": "internal/service/team_validations.go:450",
+          "cond": "in.Team.GroupId != nil",
+          "predicate_paths": [
+            "in.Team.GroupId"
+          ]
+        },
+        {
+          "id": "b71",
+          "at": "internal/service/team_validations.go:450",
+          "cond": "in.Team.GroupId.Id != \"\"",
+          "predicate_paths": [
+            "in.Team.GroupId.Id"
+          ]
+        },
+        {
+          "id": "b74",
+          "at": "internal/service/common.go:794",
+          "cond": "in.Team.CustomFields == nil",
+          "predicate_paths": [
+            "in.Team.CustomFields"
+          ]
+        },
+        {
+          "id": "b75",
+          "at": "internal/service/common.go:813",
+          "cond": "in.CustomSchemaSpec.TenantFragment",
+          "predicate_paths": [
+            "in.CustomSchemaSpec.TenantFragment"
+          ]
+        },
+        {
+          "id": "b76",
+          "at": "internal/service/common.go:814",
+          "cond": "in.CustomSchemaSpec == nil",
+          "predicate_paths": [
+            "in.CustomSchemaSpec"
+          ]
+        },
+        {
+          "id": "b77",
+          "at": "internal/service/common.go:813",
+          "cond": "in.Team.CustomFields",
+          "predicate_paths": [
+            "in.Team.CustomFields"
+          ]
+        },
+        {
+          "id": "b78",
+          "at": "internal/collection/icon.gen.go:206",
+          "cond": "in.Team.Icon.Stock != nil",
+          "predicate_paths": [
+            "in.Team.Icon.Stock"
+          ]
+        },
+        {
+          "id": "b79",
+          "at": "internal/collection/icon.gen.go:213",
+          "cond": "in.Team.Icon.ArtifactId != nil",
+          "predicate_paths": [
+            "in.Team.Icon.ArtifactId"
+          ]
+        },
+        {
+          "id": "b80",
+          "at": "internal/collection/sync_in.gen.go:258",
+          "cond": "in.Team.SyncMetadata.LastSyncIn.SyncDate != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncIn.SyncDate"
+          ]
+        },
+        {
+          "id": "b81",
+          "at": "internal/collection/sync_in.gen.go:264",
+          "cond": "in.Team.SyncMetadata.LastSyncIn.SyncUnitId != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncIn.SyncUnitId"
+          ]
+        },
+        {
+          "id": "b82",
+          "at": "internal/collection/sync_in.gen.go:272",
+          "cond": "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId"
+          ]
+        },
+        {
+          "id": "b83",
+          "at": "internal/collection/sync_out.gen.go:258",
+          "cond": "in.Team.SyncMetadata.LastSyncOut.SyncDate != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncOut.SyncDate"
+          ]
+        },
+        {
+          "id": "b84",
+          "at": "internal/collection/sync_out.gen.go:264",
+          "cond": "in.Team.SyncMetadata.LastSyncOut.SyncUnitId != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncOut.SyncUnitId"
+          ]
+        },
+        {
+          "id": "b85",
+          "at": "internal/collection/sync_out.gen.go:272",
+          "cond": "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId"
+          ]
+        },
+        {
+          "id": "b86",
+          "at": "internal/collection/sync_metadata.gen.go:393",
+          "cond": "in.Team.SyncMetadata.SyncedByDevUsers != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.SyncedByDevUsers"
+          ]
+        },
+        {
+          "id": "b87",
+          "at": "internal/collection/sync_metadata.gen.go:405",
+          "cond": "in.Team.SyncMetadata.LastSyncIn != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncIn"
+          ]
+        },
+        {
+          "id": "b88",
+          "at": "internal/collection/sync_metadata.gen.go:412",
+          "cond": "in.Team.SyncMetadata.LastSyncOut != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncOut"
+          ]
+        },
+        {
+          "id": "b89",
+          "at": "internal/collection/external_source_data_comp.gen.go:291",
+          "cond": "in.Team.ExternalSourceData.CreatedDate != nil",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.CreatedDate"
+          ]
+        },
+        {
+          "id": "b90",
+          "at": "internal/collection/external_source_data_comp.gen.go:295",
+          "cond": "in.Team.ExternalSourceData.ModifiedDate != nil",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.ModifiedDate"
+          ]
+        },
+        {
+          "id": "b91",
+          "at": "internal/collection/external_source_data_comp.gen.go:299",
+          "cond": "in.Team.ExternalSourceData.ClosedDate != nil",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.ClosedDate"
+          ]
+        },
+        {
+          "id": "b92",
+          "at": "internal/collection/external_source_data_comp.gen.go:303",
+          "cond": "in.Team.ExternalSourceData.CreatedById != nil",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.CreatedById"
+          ]
+        },
+        {
+          "id": "b93",
+          "at": "internal/collection/external_source_data_comp.gen.go:311",
+          "cond": "in.Team.ExternalSourceData.ModifiedById != nil",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.ModifiedById"
+          ]
+        },
+        {
+          "id": "b94",
+          "at": "internal/collection/devrev_copy.gen.go:233",
+          "cond": "in.Team.DevrevCopy.OriginId != nil",
+          "predicate_paths": [
+            "in.Team.DevrevCopy.OriginId"
+          ]
+        },
+        {
+          "id": "b95",
+          "at": "internal/collection/devrev_copy.gen.go:241",
+          "cond": "in.Team.DevrevCopy.OriginOrgId != nil",
+          "predicate_paths": [
+            "in.Team.DevrevCopy.OriginOrgId"
+          ]
+        },
+        {
+          "id": "b96",
+          "at": "internal/collection/devrev_copy.gen.go:249",
+          "cond": "in.Team.DevrevCopy.LastSyncedDate != nil",
+          "predicate_paths": [
+            "in.Team.DevrevCopy.LastSyncedDate"
+          ]
+        },
+        {
+          "id": "b97",
+          "at": "internal/collection/team.gen.go:1317",
+          "cond": "in.Team.GroupId != nil",
+          "predicate_paths": [
+            "in.Team.GroupId"
+          ]
+        },
+        {
+          "id": "b98",
+          "at": "internal/collection/team.gen.go:1325",
+          "cond": "in.Team.Icon != nil",
+          "predicate_paths": [
+            "in.Team.Icon"
+          ]
+        },
+        {
+          "id": "b99",
+          "at": "internal/collection/team.gen.go:1334",
+          "cond": "in.Team.EnabledFeatures != nil",
+          "predicate_paths": [
+            "in.Team.EnabledFeatures"
+          ]
+        },
+        {
+          "id": "b100",
+          "at": "internal/collection/team.gen.go:1342",
+          "cond": "in.Team.SyncMetadata != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata"
+          ]
+        },
+        {
+          "id": "b101",
+          "at": "internal/collection/team.gen.go:1349",
+          "cond": "in.Team.ExternalSourceData != nil",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData"
+          ]
+        },
+        {
+          "id": "b102",
+          "at": "internal/collection/team.gen.go:1356",
+          "cond": "in.Team.DevrevCopy != nil",
+          "predicate_paths": [
+            "in.Team.DevrevCopy"
+          ]
+        },
+        {
+          "id": "b103",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/utils.go:4627",
+          "cond": "in.Team|in.Team.Description|in.Team.DevrevCopy|in.Team.DevrevCopy.OriginId.Id|in.Team.DevrevCopy.OriginOrgId.Id|in.Team.ExternalSourceData|in.Team.ExternalSourceData.CreatedById.Id|in.Team.ExternalSourceData.ModifiedById.Id|in.Team.GroupId.Id|in.Team.Icon|in.Team.Icon.ArtifactId.Id|in.Team.Icon.Stock|in.Team.Key|in.Team.Name|in.Team.SyncMetadata|in.Team.SyncMetadata.ExternalRecordId|in.Team.SyncMetadata.ExternalRecordType|in.Team.SyncMetadata.ExternalReference|in.Team.SyncMetadata.LastSyncIn|in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id|in.Team.SyncMetadata.LastSyncOut|in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id|in.Team.SyncMetadata.OriginSystem",
+          "predicate_paths": [
+            "in.Team"
+          ]
+        },
+        {
+          "id": "b104",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:862",
+          "cond": "in.Team|in.Team.Description|in.Team.DevrevCopy|in.Team.DevrevCopy.OriginId.Id|in.Team.DevrevCopy.OriginOrgId.Id|in.Team.ExternalSourceData|in.Team.ExternalSourceData.CreatedById.Id|in.Team.ExternalSourceData.ModifiedById.Id|in.Team.GroupId.Id|in.Team.Icon|in.Team.Icon.ArtifactId.Id|in.Team.Icon.Stock|in.Team.Key|in.Team.Name|in.Team.SyncMetadata|in.Team.SyncMetadata.ExternalRecordId|in.Team.SyncMetadata.ExternalRecordType|in.Team.SyncMetadata.ExternalReference|in.Team.SyncMetadata.LastSyncIn|in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id|in.Team.SyncMetadata.LastSyncOut|in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id|in.Team.SyncMetadata.OriginSystem != nil",
+          "predicate_paths": [
+            "in.Team"
+          ]
+        },
+        {
+          "id": "b105",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_fields.go:160",
+          "cond": "in.Team|in.Team.Description|in.Team.DevrevCopy|in.Team.DevrevCopy.OriginId.Id|in.Team.DevrevCopy.OriginOrgId.Id|in.Team.ExternalSourceData|in.Team.ExternalSourceData.CreatedById.Id|in.Team.ExternalSourceData.ModifiedById.Id|in.Team.GroupId.Id|in.Team.Icon|in.Team.Icon.ArtifactId.Id|in.Team.Icon.Stock|in.Team.Key|in.Team.Name|in.Team.SyncMetadata|in.Team.SyncMetadata.ExternalRecordId|in.Team.SyncMetadata.ExternalRecordType|in.Team.SyncMetadata.ExternalReference|in.Team.SyncMetadata.LastSyncIn|in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id|in.Team.SyncMetadata.LastSyncOut|in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id|in.Team.SyncMetadata.OriginSystem != nil",
+          "predicate_paths": [
+            "in.Team"
+          ]
+        },
+        {
+          "id": "b107",
+          "at": "internal/service/team.go:277",
+          "cond": "in.Team|in.Team.Description|in.Team.DevrevCopy|in.Team.DevrevCopy.OriginId.Id|in.Team.DevrevCopy.OriginOrgId.Id|in.Team.ExternalSourceData|in.Team.ExternalSourceData.CreatedById.Id|in.Team.ExternalSourceData.ModifiedById.Id|in.Team.GroupId.Id|in.Team.Icon|in.Team.Icon.ArtifactId.Id|in.Team.Icon.Stock|in.Team.Key|in.Team.Name|in.Team.SyncMetadata|in.Team.SyncMetadata.ExternalRecordId|in.Team.SyncMetadata.ExternalRecordType|in.Team.SyncMetadata.ExternalReference|in.Team.SyncMetadata.LastSyncIn|in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id|in.Team.SyncMetadata.LastSyncOut|in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id|in.Team.SyncMetadata.OriginSystem != nil",
+          "predicate_paths": [
+            "in.Team"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": [
+        {
+          "service": "mfz",
+          "calls": [
+            "Lock"
+          ]
+        },
+        {
+          "service": "schemaregistry",
+          "calls": [
+            "GetAggregatedSchema",
+            "GetUpgradeInstructionsV2"
+          ]
+        },
+        {
+          "service": "this service",
+          "calls": [
+            "Create",
+            "GetAggregatedSchemaForWrite",
+            "GetSpace",
+            "ReadMultipleWithFilter",
+            "SeedDefaultSpaceWidgets",
+            "UpdateManyWithFilter"
+          ]
+        }
+      ],
+      "datastore_calls": [
+        "Delete",
+        "Read",
+        "ReadWithFilter"
+      ],
+      "service_count": 3,
+      "call_count": 9,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "group",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "GroupCanBecomeTeamAfterHierarchyEstablished",
+        "file": "api/v2_internal/groups/hierarchy/group_hierarchy_teams_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_OBJECT_MEMBERS_CREATE"
+        ],
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Group",
+          "Team.Group.Id",
+          "Team.Space",
+          "Team.Space.Id"
+        ]
+      },
+      {
+        "name": "WithGroupID",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Description",
+          "Team.Group",
+          "Team.Group.Id",
+          "Team.Icon",
+          "Team.Icon.ArtifactId",
+          "Team.Icon.Stock",
+          "Team.Id",
+          "Team.Key",
+          "Team.Name",
+          "Team.Space",
+          "Team.Space.Id"
+        ]
+      },
+      {
+        "name": "WithNameAndDescription",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "Key",
+          "Name"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Description",
+          "Team.Group",
+          "Team.Group.Name",
+          "Team.Icon",
+          "Team.Icon.ArtifactId",
+          "Team.Icon.Stock",
+          "Team.Id",
+          "Team.Key",
+          "Team.Name",
+          "Team.Space",
+          "Team.Space.Id"
+        ]
+      },
+      {
+        "name": "DryRunCreateValid",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "DryRun",
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Teams"
+        ]
+      },
+      {
+        "name": "WithMissingGroup",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithInvalidKeyFormatLowercase",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithInvalidKeyFormatTooShort",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithInvalidKeyFormatTooLong",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithDuplicateKey",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          201,
+          409
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithDuplicateGroup",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          201,
+          400
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "DryRunCreateInvalidKey",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "DryRun",
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "RegularUserCannotCreate",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "NoAccessUserCannotCreate",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "CreateFailsWhenSpaceManagementDisabled",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "AllKeysUniqueAcrossTeams",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "WithDuplicateKeyFromAnotherTeam",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          201,
+          409
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "ArchiveTeamSuccessfully",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id",
+          "Team.IsArchived"
+        ]
+      },
+      {
+        "name": "ArchiveTeamArchivesBackingSpace",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Space",
+          "Space.IsArchived",
+          "StatusCode",
+          "Team",
+          "Team.Id",
+          "Team.Space",
+          "Team.Space.Id"
+        ]
+      },
+      {
+        "name": "ArchiveTeamArchivesLinkedGroup",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Group",
+          "Group.IsArchived",
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "ListFiltersByArchivedStatus",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id",
+          "Teams"
+        ]
+      },
+      {
+        "name": "ArchiveAlreadyArchivedTeam",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201,
+          400
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "UpdateArchivedTeamFails",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201,
+          403
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "RegularUserCannotArchive",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          201,
+          403
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "NoAccessUserCannotArchive",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          201,
+          403
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "ArchiveFailsWhenSpaceManagementDisabled",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          201,
+          400
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).CreateTeam",
+    "request_type": "api.CreateTeamRequest",
+    "response_type": "api.CreateTeamResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetExternalError",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/team_validations.go:37"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetShape",
+        "via_paths": [
+          "in.Team.Icon.Stock"
+        ],
+        "at": "internal/service/team_validations.go:333"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPaletteColor",
+        "via_paths": [
+          "in.Team.Icon.Stock"
+        ],
+        "at": "internal/service/team_validations.go:344"
+      },
+      {
+        "kind": "db",
+        "target": "ReadWithFilter",
+        "via_paths": [
+          "in.Team.GroupId"
+        ],
+        "at": "mfz/service/common.go:725"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetUpgradeInstructionsV2",
+        "via_paths": [
+          "in.Team.GroupId"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/upgrade_object_v2.go:211"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetAggregatedSchema",
+        "via_paths": [
+          "in.Team.GroupId"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetAggregatedSchemaForWrite",
+        "via_paths": [
+          "in.CustomSchemaSpec"
+        ],
+        "at": "internal/service/common.go:838"
+      },
+      {
+        "kind": "dispatch",
+        "target": "Collection",
+        "via_paths": [
+          "in.Team",
+          "in.Team.Description",
+          "in.Team.DevrevCopy",
+          "in.Team.DevrevCopy.OriginId.Id",
+          "in.Team.DevrevCopy.OriginOrgId.Id",
+          "in.Team.ExternalSourceData",
+          "in.Team.ExternalSourceData.CreatedById.Id",
+          "in.Team.ExternalSourceData.ModifiedById.Id",
+          "in.Team.GroupId.Id",
+          "in.Team.Icon",
+          "in.Team.Icon.ArtifactId.Id",
+          "in.Team.Icon.Stock",
+          "in.Team.Key",
+          "in.Team.Name",
+          "in.Team.SyncMetadata",
+          "in.Team.SyncMetadata.ExternalRecordId",
+          "in.Team.SyncMetadata.ExternalRecordType",
+          "in.Team.SyncMetadata.ExternalReference",
+          "in.Team.SyncMetadata.LastSyncIn",
+          "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+          "in.Team.SyncMetadata.LastSyncOut",
+          "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+          "in.Team.SyncMetadata.OriginSystem"
+        ],
+        "at": "internal/db/init.go:55"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetSpace",
+        "via_paths": [
+          "in.Team",
+          "in.Team.Description",
+          "in.Team.DevrevCopy",
+          "in.Team.DevrevCopy.OriginId.Id",
+          "in.Team.DevrevCopy.OriginOrgId.Id",
+          "in.Team.ExternalSourceData",
+          "in.Team.ExternalSourceData.CreatedById.Id",
+          "in.Team.ExternalSourceData.ModifiedById.Id",
+          "in.Team.GroupId.Id",
+          "in.Team.Icon",
+          "in.Team.Icon.ArtifactId.Id",
+          "in.Team.Icon.Stock",
+          "in.Team.Key",
+          "in.Team.Name",
+          "in.Team.SyncMetadata",
+          "in.Team.SyncMetadata.ExternalRecordId",
+          "in.Team.SyncMetadata.ExternalRecordType",
+          "in.Team.SyncMetadata.ExternalReference",
+          "in.Team.SyncMetadata.LastSyncIn",
+          "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+          "in.Team.SyncMetadata.LastSyncOut",
+          "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+          "in.Team.SyncMetadata.OriginSystem"
+        ],
+        "at": "mfz/service/seed_space_defaults.go:54"
+      },
+      {
+        "kind": "rpc",
+        "target": "ReadMultipleWithFilter",
+        "via_paths": [
+          "in.Team",
+          "in.Team.Description",
+          "in.Team.DevrevCopy",
+          "in.Team.DevrevCopy.OriginId.Id",
+          "in.Team.DevrevCopy.OriginOrgId.Id",
+          "in.Team.ExternalSourceData",
+          "in.Team.ExternalSourceData.CreatedById.Id",
+          "in.Team.ExternalSourceData.ModifiedById.Id",
+          "in.Team.GroupId.Id",
+          "in.Team.Icon",
+          "in.Team.Icon.ArtifactId.Id",
+          "in.Team.Icon.Stock",
+          "in.Team.Key",
+          "in.Team.Name",
+          "in.Team.SyncMetadata",
+          "in.Team.SyncMetadata.ExternalRecordId",
+          "in.Team.SyncMetadata.ExternalRecordType",
+          "in.Team.SyncMetadata.ExternalReference",
+          "in.Team.SyncMetadata.LastSyncIn",
+          "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+          "in.Team.SyncMetadata.LastSyncOut",
+          "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+          "in.Team.SyncMetadata.OriginSystem"
+        ],
+        "at": "mfz/service/seed_space_defaults.go:217"
+      },
+      {
+        "kind": "db",
+        "target": "Read",
+        "via_paths": [
+          "in.Team",
+          "in.Team.Description",
+          "in.Team.DevrevCopy",
+          "in.Team.DevrevCopy.OriginId.Id",
+          "in.Team.DevrevCopy.OriginOrgId.Id",
+          "in.Team.ExternalSourceData",
+          "in.Team.ExternalSourceData.CreatedById.Id",
+          "in.Team.ExternalSourceData.ModifiedById.Id",
+          "in.Team.GroupId.Id",
+          "in.Team.Icon",
+          "in.Team.Icon.ArtifactId.Id",
+          "in.Team.Icon.Stock",
+          "in.Team.Key",
+          "in.Team.Name",
+          "in.Team.SyncMetadata",
+          "in.Team.SyncMetadata.ExternalRecordId",
+          "in.Team.SyncMetadata.ExternalRecordType",
+          "in.Team.SyncMetadata.ExternalReference",
+          "in.Team.SyncMetadata.LastSyncIn",
+          "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+          "in.Team.SyncMetadata.LastSyncOut",
+          "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+          "in.Team.SyncMetadata.OriginSystem"
+        ],
+        "at": "mfz/service/seed_space_defaults.go:310"
+      },
+      {
+        "kind": "rpc",
+        "target": "Create",
+        "via_paths": [
+          "in.Team",
+          "in.Team.Description",
+          "in.Team.DevrevCopy",
+          "in.Team.DevrevCopy.OriginId.Id",
+          "in.Team.DevrevCopy.OriginOrgId.Id",
+          "in.Team.ExternalSourceData",
+          "in.Team.ExternalSourceData.CreatedById.Id",
+          "in.Team.ExternalSourceData.ModifiedById.Id",
+          "in.Team.GroupId.Id",
+          "in.Team.Icon",
+          "in.Team.Icon.ArtifactId.Id",
+          "in.Team.Icon.Stock",
+          "in.Team.Key",
+          "in.Team.Name",
+          "in.Team.SyncMetadata",
+          "in.Team.SyncMetadata.ExternalRecordId",
+          "in.Team.SyncMetadata.ExternalRecordType",
+          "in.Team.SyncMetadata.ExternalReference",
+          "in.Team.SyncMetadata.LastSyncIn",
+          "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+          "in.Team.SyncMetadata.LastSyncOut",
+          "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+          "in.Team.SyncMetadata.OriginSystem"
+        ],
+        "at": "mfz/service/seed_space_defaults.go:340"
+      },
+      {
+        "kind": "db",
+        "target": "ReadWithFilter",
+        "via_paths": [
+          "in.Team",
+          "in.Team.Description",
+          "in.Team.DevrevCopy",
+          "in.Team.DevrevCopy.OriginId.Id",
+          "in.Team.DevrevCopy.OriginOrgId.Id",
+          "in.Team.ExternalSourceData",
+          "in.Team.ExternalSourceData.CreatedById.Id",
+          "in.Team.ExternalSourceData.ModifiedById.Id",
+          "in.Team.GroupId.Id",
+          "in.Team.Icon",
+          "in.Team.Icon.ArtifactId.Id",
+          "in.Team.Icon.Stock",
+          "in.Team.Key",
+          "in.Team.Name",
+          "in.Team.SyncMetadata",
+          "in.Team.SyncMetadata.ExternalRecordId",
+          "in.Team.SyncMetadata.ExternalRecordType",
+          "in.Team.SyncMetadata.ExternalReference",
+          "in.Team.SyncMetadata.LastSyncIn",
+          "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+          "in.Team.SyncMetadata.LastSyncOut",
+          "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+          "in.Team.SyncMetadata.OriginSystem"
+        ],
+        "at": "mfz/service/apply_role.go:404"
+      },
+      {
+        "kind": "db",
+        "target": "ReadWithFilter",
+        "via_paths": [
+          "in.Team",
+          "in.Team.Description",
+          "in.Team.DevrevCopy",
+          "in.Team.DevrevCopy.OriginId.Id",
+          "in.Team.DevrevCopy.OriginOrgId.Id",
+          "in.Team.ExternalSourceData",
+          "in.Team.ExternalSourceData.CreatedById.Id",
+          "in.Team.ExternalSourceData.ModifiedById.Id",
+          "in.Team.GroupId.Id",
+          "in.Team.Icon",
+          "in.Team.Icon.ArtifactId.Id",
+          "in.Team.Icon.Stock",
+          "in.Team.Key",
+          "in.Team.Name",
+          "in.Team.SyncMetadata",
+          "in.Team.SyncMetadata.ExternalRecordId",
+          "in.Team.SyncMetadata.ExternalRecordType",
+          "in.Team.SyncMetadata.ExternalReference",
+          "in.Team.SyncMetadata.LastSyncIn",
+          "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+          "in.Team.SyncMetadata.LastSyncOut",
+          "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+          "in.Team.SyncMetadata.OriginSystem"
+        ],
+        "at": "mfz/service/common.go:760"
+      },
+      {
+        "kind": "rpc",
+        "target": "UpdateManyWithFilter",
+        "via_paths": [
+          "in.Team",
+          "in.Team.Description",
+          "in.Team.DevrevCopy",
+          "in.Team.DevrevCopy.OriginId.Id",
+          "in.Team.DevrevCopy.OriginOrgId.Id",
+          "in.Team.ExternalSourceData",
+          "in.Team.ExternalSourceData.CreatedById.Id",
+          "in.Team.ExternalSourceData.ModifiedById.Id",
+          "in.Team.GroupId.Id",
+          "in.Team.Icon",
+          "in.Team.Icon.ArtifactId.Id",
+          "in.Team.Icon.Stock",
+          "in.Team.Key",
+          "in.Team.Name",
+          "in.Team.SyncMetadata",
+          "in.Team.SyncMetadata.ExternalRecordId",
+          "in.Team.SyncMetadata.ExternalRecordType",
+          "in.Team.SyncMetadata.ExternalReference",
+          "in.Team.SyncMetadata.LastSyncIn",
+          "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+          "in.Team.SyncMetadata.LastSyncOut",
+          "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+          "in.Team.SyncMetadata.OriginSystem"
+        ],
+        "at": "mfz/service/apply_role.go:485"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.Team",
+          "in.Team.Description",
+          "in.Team.DevrevCopy",
+          "in.Team.DevrevCopy.OriginId.Id",
+          "in.Team.DevrevCopy.OriginOrgId.Id",
+          "in.Team.ExternalSourceData",
+          "in.Team.ExternalSourceData.CreatedById.Id",
+          "in.Team.ExternalSourceData.ModifiedById.Id",
+          "in.Team.GroupId.Id",
+          "in.Team.Icon",
+          "in.Team.Icon.ArtifactId.Id",
+          "in.Team.Icon.Stock",
+          "in.Team.Key",
+          "in.Team.Name",
+          "in.Team.SyncMetadata",
+          "in.Team.SyncMetadata.ExternalRecordId",
+          "in.Team.SyncMetadata.ExternalRecordType",
+          "in.Team.SyncMetadata.ExternalReference",
+          "in.Team.SyncMetadata.LastSyncIn",
+          "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+          "in.Team.SyncMetadata.LastSyncOut",
+          "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+          "in.Team.SyncMetadata.OriginSystem"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/cache.go:1067"
+      },
+      {
+        "kind": "db",
+        "target": "Delete",
+        "via_paths": [
+          "in.Team",
+          "in.Team.Description",
+          "in.Team.DevrevCopy",
+          "in.Team.DevrevCopy.OriginId.Id",
+          "in.Team.DevrevCopy.OriginOrgId.Id",
+          "in.Team.ExternalSourceData",
+          "in.Team.ExternalSourceData.CreatedById.Id",
+          "in.Team.ExternalSourceData.ModifiedById.Id",
+          "in.Team.GroupId.Id",
+          "in.Team.Icon",
+          "in.Team.Icon.ArtifactId.Id",
+          "in.Team.Icon.Stock",
+          "in.Team.Key",
+          "in.Team.Name",
+          "in.Team.SyncMetadata",
+          "in.Team.SyncMetadata.ExternalRecordId",
+          "in.Team.SyncMetadata.ExternalRecordType",
+          "in.Team.SyncMetadata.ExternalReference",
+          "in.Team.SyncMetadata.LastSyncIn",
+          "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+          "in.Team.SyncMetadata.LastSyncOut",
+          "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+          "in.Team.SyncMetadata.OriginSystem"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/cache.go:432"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.Team",
+          "in.Team.Description",
+          "in.Team.DevrevCopy",
+          "in.Team.DevrevCopy.OriginId.Id",
+          "in.Team.DevrevCopy.OriginOrgId.Id",
+          "in.Team.ExternalSourceData",
+          "in.Team.ExternalSourceData.CreatedById.Id",
+          "in.Team.ExternalSourceData.ModifiedById.Id",
+          "in.Team.GroupId.Id",
+          "in.Team.Icon",
+          "in.Team.Icon.ArtifactId.Id",
+          "in.Team.Icon.Stock",
+          "in.Team.Key",
+          "in.Team.Name",
+          "in.Team.SyncMetadata",
+          "in.Team.SyncMetadata.ExternalRecordId",
+          "in.Team.SyncMetadata.ExternalRecordType",
+          "in.Team.SyncMetadata.ExternalReference",
+          "in.Team.SyncMetadata.LastSyncIn",
+          "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+          "in.Team.SyncMetadata.LastSyncOut",
+          "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+          "in.Team.SyncMetadata.OriginSystem"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/roles.go:455"
+      },
+      {
+        "kind": "db",
+        "target": "Delete",
+        "via_paths": [
+          "in.Team",
+          "in.Team.Description",
+          "in.Team.DevrevCopy",
+          "in.Team.DevrevCopy.OriginId.Id",
+          "in.Team.DevrevCopy.OriginOrgId.Id",
+          "in.Team.ExternalSourceData",
+          "in.Team.ExternalSourceData.CreatedById.Id",
+          "in.Team.ExternalSourceData.ModifiedById.Id",
+          "in.Team.GroupId.Id",
+          "in.Team.Icon",
+          "in.Team.Icon.ArtifactId.Id",
+          "in.Team.Icon.Stock",
+          "in.Team.Key",
+          "in.Team.Name",
+          "in.Team.SyncMetadata",
+          "in.Team.SyncMetadata.ExternalRecordId",
+          "in.Team.SyncMetadata.ExternalRecordType",
+          "in.Team.SyncMetadata.ExternalReference",
+          "in.Team.SyncMetadata.LastSyncIn",
+          "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+          "in.Team.SyncMetadata.LastSyncOut",
+          "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+          "in.Team.SyncMetadata.OriginSystem"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/roles.go:445"
+      },
+      {
+        "kind": "rpc",
+        "target": "SeedDefaultSpaceWidgets",
+        "via_paths": [
+          "in.Team",
+          "in.Team.Description",
+          "in.Team.DevrevCopy",
+          "in.Team.DevrevCopy.OriginId.Id",
+          "in.Team.DevrevCopy.OriginOrgId.Id",
+          "in.Team.ExternalSourceData",
+          "in.Team.ExternalSourceData.CreatedById.Id",
+          "in.Team.ExternalSourceData.ModifiedById.Id",
+          "in.Team.GroupId.Id",
+          "in.Team.Icon",
+          "in.Team.Icon.ArtifactId.Id",
+          "in.Team.Icon.Stock",
+          "in.Team.Key",
+          "in.Team.Name",
+          "in.Team.SyncMetadata",
+          "in.Team.SyncMetadata.ExternalRecordId",
+          "in.Team.SyncMetadata.ExternalRecordType",
+          "in.Team.SyncMetadata.ExternalReference",
+          "in.Team.SyncMetadata.LastSyncIn",
+          "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+          "in.Team.SyncMetadata.LastSyncOut",
+          "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+          "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+          "in.Team.SyncMetadata.OriginSystem"
+        ],
+        "at": "internal/service/space.go:257"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:446",
+        "tainted": false
+      },
+      {
+        "symbol": "errSchemaRegistryUnimplementedEnvironment",
+        "at": "internal/service/common.go:833",
+        "tainted": false
+      },
+      {
+        "symbol": "errOldVersionOfSchemaFragments",
+        "at": "internal/service/common.go:851",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateTeam` (HTTP operation `TeamsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomSchemaSpec.Drop\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.Team.CustomFields.Fields\n  - in.Team.DevrevCopy.LastSyncedDate\n  - in.Team.DevrevCopy.OriginId.Id\n  - in.Team.DevrevCopy.OriginOrgId.Id\n  - in.Team.EnabledFeatures\n  - in.Team.ExternalSourceData.ClosedDate\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.CreatedDate\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.ExternalSourceData.ModifiedDate\n  - in.Team.GroupId.Id\n  - in.Team.Icon.ArtifactId.Id\n  - in.Team.Icon.Stock.PaletteColor\n  - in.Team.Icon.Stock.Shape\n  - in.Team.SyncMetadata.ExternalRecordId\n  - in.Team.SyncMetadata.ExternalRecordType\n  - in.Team.SyncMetadata.ExternalReference\n  - in.Team.SyncMetadata.LastSyncIn.Status\n  - in.Team.SyncMetadata.LastSyncIn.SyncDate\n  - in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id\n  - in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id\n  - in.Team.SyncMetadata.LastSyncOut.Status\n  - in.Team.SyncMetadata.LastSyncOut.SyncDate\n  - in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id\n  - in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id\n  - in.Team.SyncMetadata.OriginSystem\n  - in.Team.SyncMetadata.SyncedByDevUsers\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Team.Icon.ArtifactId.Id == *ObjectTypeArtifact\n  - in.Team.Icon.Stock != nil\n  - in.Team.Icon.Stock != nil\n  - in.Team.Icon.ArtifactId != nil\n  - in.Team.Icon.ArtifactId.Id\n  - in.Team.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.Team.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id\n  - in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id\n  - in.Team.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.Team.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id\n  - in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id\n  - in.Team.SyncMetadata.LastSyncIn != nil\n  - in.Team.SyncMetadata.LastSyncIn != nil\n  - in.Team.SyncMetadata.LastSyncOut != nil\n  - in.Team.SyncMetadata.LastSyncOut != nil\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.ExternalSourceData.CreatedById != nil\n  - in.Team.ExternalSourceData.ModifiedById != nil\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.DevrevCopy.OriginId != nil\n  - in.Team.DevrevCopy.OriginOrgId != nil\n  - in.Team.DevrevCopy.OriginOrgId.Id\n  - in.Team.GroupId != nil\n  - in.Team.Icon != nil\n  - in.Team.GroupId.Id\n  - in.Team.Icon != nil\n  - in.Team.SyncMetadata != nil\n  - in.Team.SyncMetadata != nil\n  - in.Team.ExternalSourceData != nil\n  - in.Team.ExternalSourceData != nil\n  - in.Team.DevrevCopy != nil\n  - in.Team.DevrevCopy != nil\n  - (+51 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errOldVersionOfSchemaFragments\n  - errSchemaRegistryUnimplementedEnvironment\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `group` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

@@ -1,0 +1,305 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "DeleteAccount",
+    "operation": "AccountsDelete",
+    "tests": 1,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404
+      ],
+      "asserted": [
+        200,
+        201,
+        403
+      ],
+      "missing": [
+        400,
+        401,
+        404
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 40
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 2,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 1,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 2,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 2,
+        "covered": 0,
+        "pct": 0,
+        "collapsed_types": []
+      },
+      "covered": null,
+      "gaps": [
+        "in.AccountId",
+        "in.IsSystemDelete"
+      ]
+    },
+    "branches": {
+      "total": 8,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 8,
+      "present_arm_exercised": 1,
+      "present_arm_pct": 12.5,
+      "absent_arm_exercised": 7,
+      "absent_arm_pct": 87.5,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 12.5,
+      "by_origin": {
+        "service": {
+          "total": 3,
+          "reachable_on_happy_path": 3,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 33.3,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 2
+        },
+        "generated": {
+          "total": 2,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 2
+        },
+        "library": {
+          "total": 3,
+          "reachable_on_happy_path": 3,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 3
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
+          "cond": "in.AccountId == nil",
+          "predicate_paths": [
+            "in.AccountId"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:1503",
+          "cond": "in.AccountId == nil",
+          "predicate_paths": [
+            "in.AccountId"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:1510",
+          "cond": "in.AccountId",
+          "predicate_paths": [
+            "in.AccountId"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:291",
+          "cond": "in.AccountId == \"\"",
+          "predicate_paths": [
+            "in.AccountId"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "internal/service/cache.go:583",
+          "cond": "in.AccountId != nil",
+          "predicate_paths": [
+            "in.AccountId"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:593",
+          "cond": "in.AccountId == nil",
+          "predicate_paths": [
+            "in.AccountId"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "internal/service/account.go:1260",
+          "cond": "in.IsSystemDelete",
+          "predicate_paths": [
+            "in.IsSystemDelete"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": [
+        {
+          "service": "sdk",
+          "calls": [
+            "ConfigureClient"
+          ]
+        },
+        {
+          "service": "shared",
+          "calls": [
+            "ExecuteWorkflow"
+          ]
+        },
+        {
+          "service": "this service",
+          "calls": [
+            "Lock",
+            "RemoveAccountWithExternalRefs"
+          ]
+        }
+      ],
+      "datastore_calls": [],
+      "service_count": 3,
+      "call_count": 4,
+      "reached_by_test": false,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "account:all scope required for AccountsDelete",
+        "file": "api/v2_internal/scopes/crud/scopes_rev_user_account_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ROLE_SETS_CREATE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200,
+          201,
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Account",
+          "Account.Id",
+          "ServiceAccount",
+          "ServiceAccount.Id",
+          "StatusCode"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).DeleteAccount",
+    "request_type": "api.DeleteAccountRequest",
+    "response_type": "api.EmptyResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetExternalError",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/account.go:1227"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.AccountId"
+        ],
+        "at": "internal/service/cache.go:575"
+      },
+      {
+        "kind": "rpc",
+        "target": "RemoveAccountWithExternalRefs",
+        "via_paths": [
+          "in.AccountId"
+        ],
+        "at": "internal/service/cache.go:584"
+      },
+      {
+        "kind": "rpc",
+        "target": "ConfigureClient",
+        "via_paths": [
+          "in.AccountId",
+          "in.IsSystemDelete"
+        ],
+        "at": "/Users/asd/go/pkg/mod/go.temporal.io/sdk@v1.46.0/internal/client.go:1447"
+      },
+      {
+        "kind": "rpc",
+        "target": "ExecuteWorkflow",
+        "via_paths": [
+          "in.AccountId",
+          "in.IsSystemDelete"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/sdks/temporal/workflow/workflow.go:64"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:446",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidSortByInputField",
+        "at": "internal/service/revorg.go:657",
+        "tainted": false
+      },
+      {
+        "symbol": "errAccountNotFound",
+        "at": "internal/service/account.go:174",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteAccount` (HTTP operation `AccountsDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 404]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountId\n  - in.IsSystemDelete\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountId == nil\n  - in.AccountId == nil\n  - in.AccountId\n  - in.AccountId == \"\"\n  - in.AccountId != nil\n  - in.AccountId == nil\n  - in.IsSystemDelete\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errAccountNotFound\n  - errInvalidSortByInputField\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

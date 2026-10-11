@@ -1,0 +1,2069 @@
+{
+  "service": "Codex",
+  "coverage": {
+    "rpc": "UpdateConversation",
+    "operation": "ConversationsUpdate",
+    "tests": 18,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404
+      ],
+      "asserted": [
+        200,
+        201,
+        400,
+        403
+      ],
+      "missing": [
+        401,
+        404
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 60
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 71,
+      "covered_count": 6,
+      "coverage_pct": 8.5,
+      "request_fields_set_by_tests": 7,
+      "set_by_positive_tests": 5,
+      "set_by_negative_tests": 5,
+      "by_depth": {
+        "top_level": {
+          "total": 5,
+          "set": 1,
+          "pct": 20
+        },
+        "nested": {
+          "total": 34,
+          "set": 3,
+          "pct": 8.8
+        },
+        "deep": {
+          "total": 32,
+          "set": 2,
+          "pct": 6.3
+        }
+      },
+      "representative": {
+        "units": 71,
+        "covered": 6,
+        "pct": 8.5,
+        "collapsed_types": [
+          "api.CustomSchemaSpec",
+          "wrapperspb.StringValue"
+        ]
+      },
+      "covered": [
+        {
+          "path": "in.Conversation.AiResolutionStatus",
+          "match": "exact",
+          "by_tests": [
+            "Should allow AI resolution status update when the entitlement flag is disabled",
+            "Should require AGENT_RESOLUTION entitlement to update AI resolution status when the flag is enabled"
+          ]
+        },
+        {
+          "path": "in.Conversation.Description",
+          "match": "exact",
+          "by_tests": [
+            "rev user should be able to create and update a conversation, and retain access"
+          ]
+        },
+        {
+          "path": "in.Conversation.LastMessage.Id",
+          "match": "exact",
+          "by_tests": [
+            "Clear owned_by_agent - Agent should NOT respond",
+            "Create a first conversation with comments",
+            "Create a second conversation with comments",
+            "DevUser message - Should suspend agent from responding",
+            "DevUser must able to update conversation stage",
+            "DevUser must not able to update conversation with invalid stage",
+            "Other RevUser from the same RevOrg must not able to update the conversation",
+            "RevUser must able to update conversation title",
+            "Should allow AI resolution status update when the entitlement flag is disabled",
+            "Should allow unrelated conversation updates when the entitlement flag is enabled",
+            "Should require AGENT_RESOLUTION entitlement to update AI resolution status when the flag is enabled",
+            "Should verify complete conversation stage transition workflow",
+            "should verify sorting conversations by modified date"
+          ]
+        },
+        {
+          "path": "in.Conversation.SlaSummary.Stage",
+          "match": "exact",
+          "by_tests": [
+            "Create a first conversation with comments",
+            "Create a second conversation with comments",
+            "DevUser must able to update conversation stage",
+            "DevUser must not able to update conversation with invalid stage",
+            "Other RevUser from the same RevOrg must not able to update the conversation",
+            "Should verify complete conversation stage transition workflow"
+          ]
+        },
+        {
+          "path": "in.Conversation.Title",
+          "match": "exact",
+          "by_tests": [
+            "RevUser must able to update conversation title",
+            "Should allow unrelated conversation updates when the entitlement flag is enabled",
+            "should verify sorting conversations by modified date"
+          ]
+        },
+        {
+          "path": "in.Id",
+          "match": "exact",
+          "by_tests": [
+            "Clear owned_by_agent - Agent should NOT respond",
+            "Create a first conversation with comments",
+            "Create a second conversation with comments",
+            "DevUser message - Should suspend agent from responding",
+            "DevUser must able to update conversation stage",
+            "DevUser must not able to update conversation with invalid stage",
+            "Other RevUser from the same RevOrg must not able to update the conversation",
+            "RevUser must able to update conversation title",
+            "Should allow AI resolution status update when the entitlement flag is disabled",
+            "Should allow unrelated conversation updates when the entitlement flag is enabled",
+            "Should require AGENT_RESOLUTION entitlement to update AI resolution status when the flag is enabled",
+            "Should verify complete conversation stage transition workflow",
+            "should verify sorting conversations by modified date"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.ActorId",
+        "in.Conversation.AccountId",
+        "in.Conversation.AppliesToPartIds.IdValues",
+        "in.Conversation.BrandId",
+        "in.Conversation.BroadcastChannels",
+        "in.Conversation.Channels.IdValues",
+        "in.Conversation.ChannelsInstances.IdValues",
+        "in.Conversation.CustomFields",
+        "in.Conversation.DevrevCopy",
+        "in.Conversation.ExternalSourceData.CreatedById",
+        "in.Conversation.ExternalSourceData.ModifiedById",
+        "in.Conversation.ExternalSourceData.ModifiedDate",
+        "in.Conversation.FirstResponseTime",
+        "in.Conversation.FirstUnrepliedRevMessageDate",
+        "in.Conversation.Group",
+        "in.Conversation.IsCreatorVerified",
+        "in.Conversation.IsFrozen",
+        "in.Conversation.IsSpam",
+        "in.Conversation.LastExternalMessageDate",
+        "in.Conversation.LastExternalMessageId",
+        "in.Conversation.LastInternalMessageDate",
+        "in.Conversation.LastInternalMessageId",
+        "in.Conversation.LastMessage.CreatedById",
+        "in.Conversation.LastMessage.UserType",
+        "in.Conversation.LastMessageId",
+        "in.Conversation.LastMessageTimestamp",
+        "in.Conversation.MemberIds.IdValues",
+        "in.Conversation.Metadata",
+        "in.Conversation.OwnedByAgentId",
+        "in.Conversation.OwnedByIds.IdValues",
+        "in.Conversation.ParticipantOids.IdValues",
+        "in.Conversation.ParticipantUids.IdValues",
+        "in.Conversation.Priority",
+        "in.Conversation.Sentiment",
+        "in.Conversation.SentimentModifiedDate",
+        "in.Conversation.SentimentSummary.Value",
+        "in.Conversation.Sessions.Values",
+        "in.Conversation.SlaId",
+        "in.Conversation.SlaSummary.OrgScheduleId",
+        "in.Conversation.SlaSummary.SlaTrackerId",
+        "in.Conversation.SlaTrackerId",
+        "in.Conversation.SourceChannel",
+        "in.Conversation.SourceChannelV2",
+        "in.Conversation.SourceChannelV2Instance",
+        "in.Conversation.Stage.StageId",
+        "in.Conversation.StagedInfo.SyncInUnresolvedFields.Values",
+        "in.Conversation.StagedInfo.SyncOutUnresolvedFields.Values",
+        "in.Conversation.StartedById",
+        "in.Conversation.Status",
+        "in.Conversation.SurveysAggregation.Values",
+        "in.Conversation.SyncMetadata.LastSyncIn.Status",
+        "in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId",
+        "in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId",
+        "in.Conversation.SyncMetadata.LastSyncOut.Status",
+        "in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId",
+        "in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId",
+        "in.Conversation.SyncMetadata.SyncedByDevUsers.IdValues",
+        "in.Conversation.Tags.Values",
+        "in.Conversation.TargetLocale.Value",
+        "in.Conversation.TuringActive",
+        "in.Conversation.UnsetFieldMask.Paths",
+        "in.CustomSchemaSpec.Drop",
+        "in.DevOid",
+        "in.IsSystemUpdate",
+        "in.TagOpType"
+      ]
+    },
+    "branches": {
+      "total": 194,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 14,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 12,
+      "present_arm_exercised": 17,
+      "present_arm_pct": 8.8,
+      "absent_arm_exercised": 11,
+      "absent_arm_pct": 91.7,
+      "negative_arm_exercised": 13,
+      "negative_arm_pct": 6.7,
+      "both_arms_exercised": 3,
+      "coverage_pct": 8.8,
+      "by_origin": {
+        "service": {
+          "total": 13,
+          "reachable_on_happy_path": 4,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 7.7,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 3
+        },
+        "generated": {
+          "total": 94,
+          "reachable_on_happy_path": 7,
+          "present_arm_exercised": 7,
+          "present_arm_pct": 7.4,
+          "negative_arm_exercised": 6,
+          "negative_arm_pct": 6.4,
+          "absent_arm_exercised": 7
+        },
+        "library": {
+          "total": 87,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 9,
+          "present_arm_pct": 10.3,
+          "negative_arm_exercised": 7,
+          "negative_arm_pct": 8,
+          "absent_arm_exercised": 1
+        }
+      },
+      "gaps": [
+        {
+          "id": "b7",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.SourceChannelV2 == nil",
+          "predicate_paths": [
+            "in.Conversation.SourceChannelV2"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.SourceChannelV2Instance == nil",
+          "predicate_paths": [
+            "in.Conversation.SourceChannelV2Instance"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.Group == nil",
+          "predicate_paths": [
+            "in.Conversation.Group"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.StartedById == nil",
+          "predicate_paths": [
+            "in.Conversation.StartedById"
+          ]
+        },
+        {
+          "id": "b11",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/obj_type.go:1647",
+          "cond": "in.Conversation.StartedById",
+          "predicate_paths": [
+            "in.Conversation.StartedById"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/obj_type.go:1649",
+          "cond": "in.Conversation.StartedById",
+          "predicate_paths": [
+            "in.Conversation.StartedById"
+          ]
+        },
+        {
+          "id": "b13",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/obj_type.go:1648",
+          "cond": "in.Conversation.StartedById",
+          "predicate_paths": [
+            "in.Conversation.StartedById"
+          ]
+        },
+        {
+          "id": "b14",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.AccountId == nil",
+          "predicate_paths": [
+            "in.Conversation.AccountId"
+          ]
+        },
+        {
+          "id": "b18",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.LastMessage.CreatedById == nil",
+          "predicate_paths": [
+            "in.Conversation.LastMessage.CreatedById"
+          ]
+        },
+        {
+          "id": "b20",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2251",
+          "cond": "in.Conversation.LastMessage.CreatedById != nil",
+          "predicate_paths": [
+            "in.Conversation.LastMessage.CreatedById"
+          ]
+        },
+        {
+          "id": "b22",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.LastExternalMessageId == nil",
+          "predicate_paths": [
+            "in.Conversation.LastExternalMessageId"
+          ]
+        },
+        {
+          "id": "b23",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.LastInternalMessageId == nil",
+          "predicate_paths": [
+            "in.Conversation.LastInternalMessageId"
+          ]
+        },
+        {
+          "id": "b24",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.LastMessageId == nil",
+          "predicate_paths": [
+            "in.Conversation.LastMessageId"
+          ]
+        },
+        {
+          "id": "b25",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.OwnedByAgentId == nil",
+          "predicate_paths": [
+            "in.Conversation.OwnedByAgentId"
+          ]
+        },
+        {
+          "id": "b26",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.Stage.StageId == nil",
+          "predicate_paths": [
+            "in.Conversation.Stage.StageId"
+          ]
+        },
+        {
+          "id": "b27",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:1740",
+          "cond": "in.Conversation.Stage.StageId != nil",
+          "predicate_paths": [
+            "in.Conversation.Stage.StageId"
+          ]
+        },
+        {
+          "id": "b28",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:1745",
+          "cond": "in.Conversation.Stage.StageId",
+          "predicate_paths": [
+            "in.Conversation.Stage.StageId"
+          ]
+        },
+        {
+          "id": "b29",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.SlaSummary.SlaTrackerId == nil",
+          "predicate_paths": [
+            "in.Conversation.SlaSummary.SlaTrackerId"
+          ]
+        },
+        {
+          "id": "b30",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.SlaSummary.OrgScheduleId == nil",
+          "predicate_paths": [
+            "in.Conversation.SlaSummary.OrgScheduleId"
+          ]
+        },
+        {
+          "id": "b31",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:382",
+          "cond": "in.Conversation.SlaSummary.SlaTrackerId != nil",
+          "predicate_paths": [
+            "in.Conversation.SlaSummary.SlaTrackerId"
+          ]
+        },
+        {
+          "id": "b32",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:387",
+          "cond": "in.Conversation.SlaSummary.SlaTrackerId",
+          "predicate_paths": [
+            "in.Conversation.SlaSummary.SlaTrackerId"
+          ]
+        },
+        {
+          "id": "b33",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:394",
+          "cond": "in.Conversation.SlaSummary.OrgScheduleId != nil",
+          "predicate_paths": [
+            "in.Conversation.SlaSummary.OrgScheduleId"
+          ]
+        },
+        {
+          "id": "b34",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:399",
+          "cond": "in.Conversation.SlaSummary.OrgScheduleId",
+          "predicate_paths": [
+            "in.Conversation.SlaSummary.OrgScheduleId"
+          ]
+        },
+        {
+          "id": "b35",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.SlaId == nil",
+          "predicate_paths": [
+            "in.Conversation.SlaId"
+          ]
+        },
+        {
+          "id": "b36",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.SlaTrackerId == nil",
+          "predicate_paths": [
+            "in.Conversation.SlaTrackerId"
+          ]
+        },
+        {
+          "id": "b37",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId == nil",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId"
+          ]
+        },
+        {
+          "id": "b38",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId == nil",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId"
+          ]
+        },
+        {
+          "id": "b39",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2750",
+          "cond": "in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId != nil",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId"
+          ]
+        },
+        {
+          "id": "b40",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2759",
+          "cond": "in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId != nil",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId"
+          ]
+        },
+        {
+          "id": "b41",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2755",
+          "cond": "in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId"
+          ]
+        },
+        {
+          "id": "b42",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2764",
+          "cond": "in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId"
+          ]
+        },
+        {
+          "id": "b43",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId == nil",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId"
+          ]
+        },
+        {
+          "id": "b44",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId == nil",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId"
+          ]
+        },
+        {
+          "id": "b45",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2882",
+          "cond": "in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId != nil",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId"
+          ]
+        },
+        {
+          "id": "b46",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2891",
+          "cond": "in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId != nil",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId"
+          ]
+        },
+        {
+          "id": "b47",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2887",
+          "cond": "in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId"
+          ]
+        },
+        {
+          "id": "b48",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2896",
+          "cond": "in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId"
+          ]
+        },
+        {
+          "id": "b49",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2613",
+          "cond": "in.Conversation.SyncMetadata.SyncedByDevUsers != nil",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.SyncedByDevUsers"
+          ]
+        },
+        {
+          "id": "b50",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2626",
+          "cond": "in.Conversation.SyncMetadata.LastSyncIn != nil",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.LastSyncIn"
+          ]
+        },
+        {
+          "id": "b51",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2627",
+          "cond": "in.Conversation.SyncMetadata.LastSyncIn != nil",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.LastSyncIn"
+          ]
+        },
+        {
+          "id": "b52",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2631",
+          "cond": "in.Conversation.SyncMetadata.LastSyncOut != nil",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.LastSyncOut"
+          ]
+        },
+        {
+          "id": "b53",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2632",
+          "cond": "in.Conversation.SyncMetadata.LastSyncOut != nil",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata.LastSyncOut"
+          ]
+        },
+        {
+          "id": "b54",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2422",
+          "cond": "in.Conversation.StagedInfo.SyncInUnresolvedFields != nil",
+          "predicate_paths": [
+            "in.Conversation.StagedInfo.SyncInUnresolvedFields"
+          ]
+        },
+        {
+          "id": "b55",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2423",
+          "cond": "in.Conversation.StagedInfo.SyncInUnresolvedFields != nil",
+          "predicate_paths": [
+            "in.Conversation.StagedInfo.SyncInUnresolvedFields"
+          ]
+        },
+        {
+          "id": "b56",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2427",
+          "cond": "in.Conversation.StagedInfo.SyncOutUnresolvedFields != nil",
+          "predicate_paths": [
+            "in.Conversation.StagedInfo.SyncOutUnresolvedFields"
+          ]
+        },
+        {
+          "id": "b57",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2428",
+          "cond": "in.Conversation.StagedInfo.SyncOutUnresolvedFields != nil",
+          "predicate_paths": [
+            "in.Conversation.StagedInfo.SyncOutUnresolvedFields"
+          ]
+        },
+        {
+          "id": "b58",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.ExternalSourceData.CreatedById == nil",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData.CreatedById"
+          ]
+        },
+        {
+          "id": "b59",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/obj_type.go:1647",
+          "cond": "in.Conversation.ExternalSourceData.CreatedById",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData.CreatedById"
+          ]
+        },
+        {
+          "id": "b60",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/obj_type.go:1649",
+          "cond": "in.Conversation.ExternalSourceData.CreatedById",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData.CreatedById"
+          ]
+        },
+        {
+          "id": "b61",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/obj_type.go:1648",
+          "cond": "in.Conversation.ExternalSourceData.CreatedById",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData.CreatedById"
+          ]
+        },
+        {
+          "id": "b62",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.ExternalSourceData.ModifiedById == nil",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData.ModifiedById"
+          ]
+        },
+        {
+          "id": "b63",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/obj_type.go:1647",
+          "cond": "in.Conversation.ExternalSourceData.ModifiedById",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData.ModifiedById"
+          ]
+        },
+        {
+          "id": "b64",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/obj_type.go:1649",
+          "cond": "in.Conversation.ExternalSourceData.ModifiedById",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData.ModifiedById"
+          ]
+        },
+        {
+          "id": "b65",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/obj_type.go:1648",
+          "cond": "in.Conversation.ExternalSourceData.ModifiedById",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData.ModifiedById"
+          ]
+        },
+        {
+          "id": "b66",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2989",
+          "cond": "in.Conversation.ExternalSourceData.CreatedById != nil",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData.CreatedById"
+          ]
+        },
+        {
+          "id": "b67",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2998",
+          "cond": "in.Conversation.ExternalSourceData.ModifiedById != nil",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData.ModifiedById"
+          ]
+        },
+        {
+          "id": "b68",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:2994",
+          "cond": "in.Conversation.ExternalSourceData.CreatedById",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData.CreatedById"
+          ]
+        },
+        {
+          "id": "b69",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/composite.pb.validator.go:3003",
+          "cond": "in.Conversation.ExternalSourceData.ModifiedById",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData.ModifiedById"
+          ]
+        },
+        {
+          "id": "b70",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Conversation.BrandId == nil",
+          "predicate_paths": [
+            "in.Conversation.BrandId"
+          ]
+        },
+        {
+          "id": "b72",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5314",
+          "cond": "in.Conversation.ParticipantUids != nil",
+          "predicate_paths": [
+            "in.Conversation.ParticipantUids"
+          ]
+        },
+        {
+          "id": "b73",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5327",
+          "cond": "in.Conversation.Channels != nil",
+          "predicate_paths": [
+            "in.Conversation.Channels"
+          ]
+        },
+        {
+          "id": "b74",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5343",
+          "cond": "in.Conversation.ChannelsInstances != nil",
+          "predicate_paths": [
+            "in.Conversation.ChannelsInstances"
+          ]
+        },
+        {
+          "id": "b75",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5359",
+          "cond": "in.Conversation.SourceChannelV2 != nil",
+          "predicate_paths": [
+            "in.Conversation.SourceChannelV2"
+          ]
+        },
+        {
+          "id": "b76",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5368",
+          "cond": "in.Conversation.SourceChannelV2Instance != nil",
+          "predicate_paths": [
+            "in.Conversation.SourceChannelV2Instance"
+          ]
+        },
+        {
+          "id": "b77",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5364",
+          "cond": "in.Conversation.SourceChannelV2",
+          "predicate_paths": [
+            "in.Conversation.SourceChannelV2"
+          ]
+        },
+        {
+          "id": "b78",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5377",
+          "cond": "in.Conversation.ParticipantOids != nil",
+          "predicate_paths": [
+            "in.Conversation.ParticipantOids"
+          ]
+        },
+        {
+          "id": "b79",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5373",
+          "cond": "in.Conversation.SourceChannelV2Instance",
+          "predicate_paths": [
+            "in.Conversation.SourceChannelV2Instance"
+          ]
+        },
+        {
+          "id": "b80",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5390",
+          "cond": "in.Conversation.OwnedByIds != nil",
+          "predicate_paths": [
+            "in.Conversation.OwnedByIds"
+          ]
+        },
+        {
+          "id": "b81",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5403",
+          "cond": "in.Conversation.Group != nil",
+          "predicate_paths": [
+            "in.Conversation.Group"
+          ]
+        },
+        {
+          "id": "b82",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5412",
+          "cond": "in.Conversation.StartedById != nil",
+          "predicate_paths": [
+            "in.Conversation.StartedById"
+          ]
+        },
+        {
+          "id": "b83",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5408",
+          "cond": "in.Conversation.Group",
+          "predicate_paths": [
+            "in.Conversation.Group"
+          ]
+        },
+        {
+          "id": "b84",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5417",
+          "cond": "in.Conversation.StartedById",
+          "predicate_paths": [
+            "in.Conversation.StartedById"
+          ]
+        },
+        {
+          "id": "b85",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5424",
+          "cond": "in.Conversation.AccountId != nil",
+          "predicate_paths": [
+            "in.Conversation.AccountId"
+          ]
+        },
+        {
+          "id": "b86",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5433",
+          "cond": "in.Conversation.Tags != nil",
+          "predicate_paths": [
+            "in.Conversation.Tags"
+          ]
+        },
+        {
+          "id": "b87",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5429",
+          "cond": "in.Conversation.AccountId",
+          "predicate_paths": [
+            "in.Conversation.AccountId"
+          ]
+        },
+        {
+          "id": "b88",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5434",
+          "cond": "in.Conversation.Tags != nil",
+          "predicate_paths": [
+            "in.Conversation.Tags"
+          ]
+        },
+        {
+          "id": "b89",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5438",
+          "cond": "in.Conversation.AppliesToPartIds != nil",
+          "predicate_paths": [
+            "in.Conversation.AppliesToPartIds"
+          ]
+        },
+        {
+          "id": "b90",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5454",
+          "cond": "in.Conversation.LastMessage != nil",
+          "predicate_paths": [
+            "in.Conversation.LastMessage"
+          ]
+        },
+        {
+          "id": "b91",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5455",
+          "cond": "in.Conversation.LastMessage != nil",
+          "predicate_paths": [
+            "in.Conversation.LastMessage"
+          ]
+        },
+        {
+          "id": "b92",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5459",
+          "cond": "in.Conversation.Metadata != nil",
+          "predicate_paths": [
+            "in.Conversation.Metadata"
+          ]
+        },
+        {
+          "id": "b93",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5460",
+          "cond": "in.Conversation.Metadata != nil",
+          "predicate_paths": [
+            "in.Conversation.Metadata"
+          ]
+        },
+        {
+          "id": "b94",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5464",
+          "cond": "in.Conversation.LastExternalMessageId != nil",
+          "predicate_paths": [
+            "in.Conversation.LastExternalMessageId"
+          ]
+        },
+        {
+          "id": "b95",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5473",
+          "cond": "in.Conversation.LastInternalMessageId != nil",
+          "predicate_paths": [
+            "in.Conversation.LastInternalMessageId"
+          ]
+        },
+        {
+          "id": "b96",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5469",
+          "cond": "in.Conversation.LastExternalMessageId",
+          "predicate_paths": [
+            "in.Conversation.LastExternalMessageId"
+          ]
+        },
+        {
+          "id": "b97",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5482",
+          "cond": "in.Conversation.LastMessageId != nil",
+          "predicate_paths": [
+            "in.Conversation.LastMessageId"
+          ]
+        },
+        {
+          "id": "b98",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5478",
+          "cond": "in.Conversation.LastInternalMessageId",
+          "predicate_paths": [
+            "in.Conversation.LastInternalMessageId"
+          ]
+        },
+        {
+          "id": "b99",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5491",
+          "cond": "in.Conversation.OwnedByAgentId != nil",
+          "predicate_paths": [
+            "in.Conversation.OwnedByAgentId"
+          ]
+        },
+        {
+          "id": "b100",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5487",
+          "cond": "in.Conversation.LastMessageId",
+          "predicate_paths": [
+            "in.Conversation.LastMessageId"
+          ]
+        },
+        {
+          "id": "b101",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5500",
+          "cond": "in.Conversation.TargetLocale != nil",
+          "predicate_paths": [
+            "in.Conversation.TargetLocale"
+          ]
+        },
+        {
+          "id": "b102",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5496",
+          "cond": "in.Conversation.OwnedByAgentId",
+          "predicate_paths": [
+            "in.Conversation.OwnedByAgentId"
+          ]
+        },
+        {
+          "id": "b105",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5513",
+          "cond": "in.Conversation.SlaSummary != nil",
+          "predicate_paths": [
+            "in.Conversation.SlaSummary"
+          ]
+        },
+        {
+          "id": "b106",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5514",
+          "cond": "in.Conversation.SlaSummary != nil",
+          "predicate_paths": [
+            "in.Conversation.SlaSummary"
+          ]
+        },
+        {
+          "id": "b107",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5518",
+          "cond": "in.Conversation.SlaId != nil",
+          "predicate_paths": [
+            "in.Conversation.SlaId"
+          ]
+        },
+        {
+          "id": "b108",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5527",
+          "cond": "in.Conversation.SlaTrackerId != nil",
+          "predicate_paths": [
+            "in.Conversation.SlaTrackerId"
+          ]
+        },
+        {
+          "id": "b109",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5523",
+          "cond": "in.Conversation.SlaId",
+          "predicate_paths": [
+            "in.Conversation.SlaId"
+          ]
+        },
+        {
+          "id": "b110",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5536",
+          "cond": "in.Conversation.SurveysAggregation != nil",
+          "predicate_paths": [
+            "in.Conversation.SurveysAggregation"
+          ]
+        },
+        {
+          "id": "b111",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5532",
+          "cond": "in.Conversation.SlaTrackerId",
+          "predicate_paths": [
+            "in.Conversation.SlaTrackerId"
+          ]
+        },
+        {
+          "id": "b112",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5537",
+          "cond": "in.Conversation.SurveysAggregation != nil",
+          "predicate_paths": [
+            "in.Conversation.SurveysAggregation"
+          ]
+        },
+        {
+          "id": "b113",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5541",
+          "cond": "in.Conversation.Sessions != nil",
+          "predicate_paths": [
+            "in.Conversation.Sessions"
+          ]
+        },
+        {
+          "id": "b114",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5542",
+          "cond": "in.Conversation.Sessions != nil",
+          "predicate_paths": [
+            "in.Conversation.Sessions"
+          ]
+        },
+        {
+          "id": "b115",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5546",
+          "cond": "in.Conversation.SyncMetadata != nil",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata"
+          ]
+        },
+        {
+          "id": "b116",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5547",
+          "cond": "in.Conversation.SyncMetadata != nil",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata"
+          ]
+        },
+        {
+          "id": "b117",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5551",
+          "cond": "in.Conversation.StagedInfo != nil",
+          "predicate_paths": [
+            "in.Conversation.StagedInfo"
+          ]
+        },
+        {
+          "id": "b118",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5552",
+          "cond": "in.Conversation.StagedInfo != nil",
+          "predicate_paths": [
+            "in.Conversation.StagedInfo"
+          ]
+        },
+        {
+          "id": "b119",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5556",
+          "cond": "in.Conversation.ExternalSourceData != nil",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData"
+          ]
+        },
+        {
+          "id": "b120",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5557",
+          "cond": "in.Conversation.ExternalSourceData != nil",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData"
+          ]
+        },
+        {
+          "id": "b121",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5561",
+          "cond": "in.Conversation.BrandId != nil",
+          "predicate_paths": [
+            "in.Conversation.BrandId"
+          ]
+        },
+        {
+          "id": "b122",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5570",
+          "cond": "in.Conversation.SentimentSummary != nil",
+          "predicate_paths": [
+            "in.Conversation.SentimentSummary"
+          ]
+        },
+        {
+          "id": "b123",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5566",
+          "cond": "in.Conversation.BrandId",
+          "predicate_paths": [
+            "in.Conversation.BrandId"
+          ]
+        },
+        {
+          "id": "b124",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5575",
+          "cond": "in.Conversation.DevrevCopy != nil",
+          "predicate_paths": [
+            "in.Conversation.DevrevCopy"
+          ]
+        },
+        {
+          "id": "b125",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:5576",
+          "cond": "in.Conversation.DevrevCopy != nil",
+          "predicate_paths": [
+            "in.Conversation.DevrevCopy"
+          ]
+        },
+        {
+          "id": "b126",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260701100938-401162ec7707/api/registry.pb.validator.go:241",
+          "cond": "in.CustomSchemaSpec.Drop != nil",
+          "predicate_paths": [
+            "in.CustomSchemaSpec.Drop"
+          ]
+        },
+        {
+          "id": "b127",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260701100938-401162ec7707/api/registry.pb.validator.go:242",
+          "cond": "in.CustomSchemaSpec.Drop != nil",
+          "predicate_paths": [
+            "in.CustomSchemaSpec.Drop"
+          ]
+        },
+        {
+          "id": "b134",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:1453",
+          "cond": "in.Conversation != nil",
+          "predicate_paths": [
+            "in.Conversation"
+          ]
+        },
+        {
+          "id": "b135",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:1454",
+          "cond": "in.Conversation != nil",
+          "predicate_paths": [
+            "in.Conversation"
+          ]
+        },
+        {
+          "id": "b136",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:1458",
+          "cond": "in.TagOpType != nil",
+          "predicate_paths": [
+            "in.TagOpType"
+          ]
+        },
+        {
+          "id": "b137",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:1463",
+          "cond": "in.CustomSchemaSpec != nil",
+          "predicate_paths": [
+            "in.CustomSchemaSpec"
+          ]
+        },
+        {
+          "id": "b138",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:1464",
+          "cond": "in.CustomSchemaSpec != nil",
+          "predicate_paths": [
+            "in.CustomSchemaSpec"
+          ]
+        },
+        {
+          "id": "b142",
+          "at": "internal/serverv2/converters.go:149",
+          "cond": "in.Conversation.Group == nil",
+          "predicate_paths": [
+            "in.Conversation.Group"
+          ]
+        },
+        {
+          "id": "b143",
+          "at": "internal/serverv2/group_validations.go:202",
+          "cond": "in.Conversation.Group == nil",
+          "predicate_paths": [
+            "in.Conversation.Group"
+          ]
+        },
+        {
+          "id": "b144",
+          "at": "internal/serverv2/group_validations.go:288",
+          "cond": "in.Conversation.UnsetFieldMask == nil",
+          "predicate_paths": [
+            "in.Conversation.UnsetFieldMask"
+          ]
+        },
+        {
+          "id": "b145",
+          "at": "internal/serverv2/group_validations.go:276",
+          "cond": "in.Conversation.OwnedByAgentId == nil",
+          "predicate_paths": [
+            "in.Conversation.OwnedByAgentId"
+          ]
+        },
+        {
+          "id": "b147",
+          "at": "internal/serverv2/group_validations.go:275",
+          "cond": "in.Conversation.UnsetFieldMask",
+          "predicate_paths": [
+            "in.Conversation.UnsetFieldMask"
+          ]
+        },
+        {
+          "id": "b151",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:733",
+          "cond": "in.Conversation.Status != nil",
+          "predicate_paths": [
+            "in.Conversation.Status"
+          ]
+        },
+        {
+          "id": "b152",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:736",
+          "cond": "in.Conversation.ParticipantUids != nil",
+          "predicate_paths": [
+            "in.Conversation.ParticipantUids"
+          ]
+        },
+        {
+          "id": "b153",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:739",
+          "cond": "in.Conversation.BroadcastChannels != nil",
+          "predicate_paths": [
+            "in.Conversation.BroadcastChannels"
+          ]
+        },
+        {
+          "id": "b154",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:742",
+          "cond": "in.Conversation.Channels != nil",
+          "predicate_paths": [
+            "in.Conversation.Channels"
+          ]
+        },
+        {
+          "id": "b155",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:745",
+          "cond": "in.Conversation.ChannelsInstances != nil",
+          "predicate_paths": [
+            "in.Conversation.ChannelsInstances"
+          ]
+        },
+        {
+          "id": "b156",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:748",
+          "cond": "in.Conversation.SourceChannel != nil",
+          "predicate_paths": [
+            "in.Conversation.SourceChannel"
+          ]
+        },
+        {
+          "id": "b157",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:751",
+          "cond": "in.Conversation.SourceChannelV2 != nil",
+          "predicate_paths": [
+            "in.Conversation.SourceChannelV2"
+          ]
+        },
+        {
+          "id": "b158",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:754",
+          "cond": "in.Conversation.SourceChannelV2Instance != nil",
+          "predicate_paths": [
+            "in.Conversation.SourceChannelV2Instance"
+          ]
+        },
+        {
+          "id": "b159",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:757",
+          "cond": "in.Conversation.ParticipantOids != nil",
+          "predicate_paths": [
+            "in.Conversation.ParticipantOids"
+          ]
+        },
+        {
+          "id": "b160",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:760",
+          "cond": "in.Conversation.OwnedByIds != nil",
+          "predicate_paths": [
+            "in.Conversation.OwnedByIds"
+          ]
+        },
+        {
+          "id": "b161",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:763",
+          "cond": "in.Conversation.Group != nil",
+          "predicate_paths": [
+            "in.Conversation.Group"
+          ]
+        },
+        {
+          "id": "b162",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:766",
+          "cond": "in.Conversation.StartedById != nil",
+          "predicate_paths": [
+            "in.Conversation.StartedById"
+          ]
+        },
+        {
+          "id": "b163",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:769",
+          "cond": "in.Conversation.Priority != 0",
+          "predicate_paths": [
+            "in.Conversation.Priority"
+          ]
+        },
+        {
+          "id": "b166",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:778",
+          "cond": "in.Conversation.LastMessageTimestamp != nil",
+          "predicate_paths": [
+            "in.Conversation.LastMessageTimestamp"
+          ]
+        },
+        {
+          "id": "b167",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:781",
+          "cond": "in.Conversation.AccountId != nil",
+          "predicate_paths": [
+            "in.Conversation.AccountId"
+          ]
+        },
+        {
+          "id": "b168",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:784",
+          "cond": "in.Conversation.Tags != nil",
+          "predicate_paths": [
+            "in.Conversation.Tags"
+          ]
+        },
+        {
+          "id": "b169",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:787",
+          "cond": "in.Conversation.AppliesToPartIds != nil",
+          "predicate_paths": [
+            "in.Conversation.AppliesToPartIds"
+          ]
+        },
+        {
+          "id": "b170",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:790",
+          "cond": "in.Conversation.FirstResponseTime != nil",
+          "predicate_paths": [
+            "in.Conversation.FirstResponseTime"
+          ]
+        },
+        {
+          "id": "b171",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:793",
+          "cond": "in.Conversation.LastMessage != nil",
+          "predicate_paths": [
+            "in.Conversation.LastMessage"
+          ]
+        },
+        {
+          "id": "b172",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:796",
+          "cond": "in.Conversation.Metadata != nil",
+          "predicate_paths": [
+            "in.Conversation.Metadata"
+          ]
+        },
+        {
+          "id": "b173",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:799",
+          "cond": "in.Conversation.IsSpam != nil",
+          "predicate_paths": [
+            "in.Conversation.IsSpam"
+          ]
+        },
+        {
+          "id": "b174",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:802",
+          "cond": "in.Conversation.TuringActive != nil",
+          "predicate_paths": [
+            "in.Conversation.TuringActive"
+          ]
+        },
+        {
+          "id": "b175",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:805",
+          "cond": "in.Conversation.IsCreatorVerified != nil",
+          "predicate_paths": [
+            "in.Conversation.IsCreatorVerified"
+          ]
+        },
+        {
+          "id": "b176",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:808",
+          "cond": "in.Conversation.LastExternalMessageDate != nil",
+          "predicate_paths": [
+            "in.Conversation.LastExternalMessageDate"
+          ]
+        },
+        {
+          "id": "b177",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:811",
+          "cond": "in.Conversation.LastInternalMessageDate != nil",
+          "predicate_paths": [
+            "in.Conversation.LastInternalMessageDate"
+          ]
+        },
+        {
+          "id": "b178",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:814",
+          "cond": "in.Conversation.FirstUnrepliedRevMessageDate != nil",
+          "predicate_paths": [
+            "in.Conversation.FirstUnrepliedRevMessageDate"
+          ]
+        },
+        {
+          "id": "b179",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:817",
+          "cond": "in.Conversation.LastExternalMessageId != nil",
+          "predicate_paths": [
+            "in.Conversation.LastExternalMessageId"
+          ]
+        },
+        {
+          "id": "b180",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:820",
+          "cond": "in.Conversation.LastInternalMessageId != nil",
+          "predicate_paths": [
+            "in.Conversation.LastInternalMessageId"
+          ]
+        },
+        {
+          "id": "b181",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:823",
+          "cond": "in.Conversation.LastMessageId != nil",
+          "predicate_paths": [
+            "in.Conversation.LastMessageId"
+          ]
+        },
+        {
+          "id": "b182",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:826",
+          "cond": "in.Conversation.OwnedByAgentId != nil",
+          "predicate_paths": [
+            "in.Conversation.OwnedByAgentId"
+          ]
+        },
+        {
+          "id": "b184",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:832",
+          "cond": "in.Conversation.TargetLocale != nil",
+          "predicate_paths": [
+            "in.Conversation.TargetLocale"
+          ]
+        },
+        {
+          "id": "b186",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:838",
+          "cond": "in.Conversation.SlaSummary != nil",
+          "predicate_paths": [
+            "in.Conversation.SlaSummary"
+          ]
+        },
+        {
+          "id": "b187",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:841",
+          "cond": "in.Conversation.SlaId != nil",
+          "predicate_paths": [
+            "in.Conversation.SlaId"
+          ]
+        },
+        {
+          "id": "b188",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:844",
+          "cond": "in.Conversation.SlaTrackerId != nil",
+          "predicate_paths": [
+            "in.Conversation.SlaTrackerId"
+          ]
+        },
+        {
+          "id": "b189",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:847",
+          "cond": "in.Conversation.SurveysAggregation != nil",
+          "predicate_paths": [
+            "in.Conversation.SurveysAggregation"
+          ]
+        },
+        {
+          "id": "b190",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:850",
+          "cond": "in.Conversation.Sessions != nil",
+          "predicate_paths": [
+            "in.Conversation.Sessions"
+          ]
+        },
+        {
+          "id": "b191",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:853",
+          "cond": "in.Conversation.IsFrozen != nil",
+          "predicate_paths": [
+            "in.Conversation.IsFrozen"
+          ]
+        },
+        {
+          "id": "b192",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:856",
+          "cond": "in.Conversation.SyncMetadata != nil",
+          "predicate_paths": [
+            "in.Conversation.SyncMetadata"
+          ]
+        },
+        {
+          "id": "b193",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:859",
+          "cond": "in.Conversation.StagedInfo != nil",
+          "predicate_paths": [
+            "in.Conversation.StagedInfo"
+          ]
+        },
+        {
+          "id": "b194",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:862",
+          "cond": "in.Conversation.ExternalSourceData != nil",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData"
+          ]
+        },
+        {
+          "id": "b195",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:865",
+          "cond": "in.Conversation.BrandId != nil",
+          "predicate_paths": [
+            "in.Conversation.BrandId"
+          ]
+        },
+        {
+          "id": "b196",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:868",
+          "cond": "in.Conversation.Sentiment != nil",
+          "predicate_paths": [
+            "in.Conversation.Sentiment"
+          ]
+        },
+        {
+          "id": "b197",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:871",
+          "cond": "in.Conversation.SentimentSummary != nil",
+          "predicate_paths": [
+            "in.Conversation.SentimentSummary"
+          ]
+        },
+        {
+          "id": "b198",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:874",
+          "cond": "in.Conversation.SentimentModifiedDate != nil",
+          "predicate_paths": [
+            "in.Conversation.SentimentModifiedDate"
+          ]
+        },
+        {
+          "id": "b199",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:877",
+          "cond": "in.Conversation.DevrevCopy != nil",
+          "predicate_paths": [
+            "in.Conversation.DevrevCopy"
+          ]
+        },
+        {
+          "id": "b200",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:880",
+          "cond": "in.Conversation.CustomFields != nil",
+          "predicate_paths": [
+            "in.Conversation.CustomFields"
+          ]
+        },
+        {
+          "id": "b201",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/proto_helpers.gen.go:885",
+          "cond": "in.Conversation.UnsetFieldMask != nil",
+          "predicate_paths": [
+            "in.Conversation.UnsetFieldMask"
+          ]
+        },
+        {
+          "id": "b202",
+          "at": "internal/serverv2/update_conversation.go:71",
+          "cond": "in.Conversation != nil",
+          "predicate_paths": [
+            "in.Conversation"
+          ]
+        },
+        {
+          "id": "b203",
+          "at": "internal/serverv2/update_conversation.go:71",
+          "cond": "in.Conversation.Status != nil",
+          "predicate_paths": [
+            "in.Conversation.Status"
+          ]
+        },
+        {
+          "id": "b204",
+          "at": "internal/serverv2/update_conversation.go:125",
+          "cond": "in.Conversation.ExternalSourceData != nil",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData"
+          ]
+        },
+        {
+          "id": "b205",
+          "at": "internal/serverv2/update_conversation.go:126",
+          "cond": "in.Conversation.ExternalSourceData.ModifiedDate != nil",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData.ModifiedDate"
+          ]
+        },
+        {
+          "id": "b206",
+          "at": "internal/serverv2/update_conversation.go:140",
+          "cond": "in.Conversation",
+          "predicate_paths": [
+            "in.Conversation"
+          ]
+        },
+        {
+          "id": "b207",
+          "at": "internal/serverv2/update_conversation.go:129",
+          "cond": "in.Conversation.ExternalSourceData.ModifiedById != nil",
+          "predicate_paths": [
+            "in.Conversation.ExternalSourceData.ModifiedById"
+          ]
+        },
+        {
+          "id": "b208",
+          "at": "internal/serverv2/update_conversation.go:147",
+          "cond": "in.IsSystemUpdate",
+          "predicate_paths": [
+            "in.IsSystemUpdate"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": [
+        {
+          "service": "this service",
+          "calls": [
+            "GetGroup"
+          ]
+        }
+      ],
+      "datastore_calls": [],
+      "service_count": 1,
+      "call_count": 1,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "memberids",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "ownedbyagent",
+          "fuzzy_suggestions": [
+            "in.Conversation.OwnedByAgentId"
+          ]
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "rev user should be able to create and update a conversation, and retain access",
+        "file": "api/v2_internal/conversations/mfz/conversation_revuser_access_test.go",
+        "labels": [
+          "INTERNAL_CONVERSATIONS_CREATE"
+        ],
+        "fields_set": [
+          "Description"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversation.Id"
+        ]
+      },
+      {
+        "name": "RevUser must able to update conversation title",
+        "file": "api/v2_internal/conversations/update_conversation_test.go",
+        "labels": [
+          "POSITIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "Id",
+          "Title"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversation.Title",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "DevUser must able to update conversation stage",
+        "file": "api/v2_internal/conversations/update_conversation_test.go",
+        "labels": [
+          "POSITIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "Id",
+          "Stage"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversation.Stage",
+          "Conversation.Stage.Name",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should allow AI resolution status update when the entitlement flag is disabled",
+        "file": "api/v2_internal/conversations/update_conversation_test.go",
+        "labels": [
+          "POSITIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "AiResolutionStatus",
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should require AGENT_RESOLUTION entitlement to update AI resolution status when the flag is enabled",
+        "file": "api/v2_internal/conversations/update_conversation_test.go",
+        "labels": [
+          "NEGATIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "AiResolutionStatus",
+          "Id"
+        ],
+        "statuses": [
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should allow unrelated conversation updates when the entitlement flag is enabled",
+        "file": "api/v2_internal/conversations/update_conversation_test.go",
+        "labels": [
+          "POSITIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "Id",
+          "Title"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "DevUser must not able to update conversation with invalid stage",
+        "file": "api/v2_internal/conversations/update_conversation_test.go",
+        "labels": [
+          "NEGATIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "Id",
+          "Stage"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Other RevUser from the same RevOrg must not able to update the conversation",
+        "file": "api/v2_internal/conversations/update_conversation_test.go",
+        "labels": [
+          "NEGATIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "Id",
+          "Stage"
+        ],
+        "statuses": [
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Create a first conversation with comments",
+        "file": "api/v2_internal/plug/question_answer/question_answer_generation_test.go",
+        "labels": [
+          "INTERNAL_CONVERSATIONS_CREATE",
+          "INTERNAL_TIMELINE_ENTRIES_CREATE"
+        ],
+        "fields_set": [
+          "Id",
+          "Stage"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversation.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Create a second conversation with comments",
+        "file": "api/v2_internal/plug/question_answer/question_answer_generation_test.go",
+        "labels": [
+          "INTERNAL_CONVERSATIONS_CREATE",
+          "INTERNAL_TIMELINE_ENTRIES_CREATE"
+        ],
+        "fields_set": [
+          "Id",
+          "Stage"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversation.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "DevUser message - Should suspend agent from responding",
+        "file": "api/v2_internal/plug_agent/conversation_created_dev_user_suspend_exit_path_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "MemberIds"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversation.Members",
+          "DevUser",
+          "DevUser.Id"
+        ]
+      },
+      {
+        "name": "Clear owned_by_agent - Agent should NOT respond",
+        "file": "api/v2_internal/plug_agent/nudge_buttons_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "OwnedByAgent"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "should verify sorting conversations by modified date",
+        "file": "e2e/conversation_user_journey/conversation_group_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "Id",
+          "Title"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should verify complete conversation stage transition workflow",
+        "file": "e2e/conversation_user_journey/conversation_uat_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "Id",
+          "Stage"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversation.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should be able to perform all CRUD operations on conversations",
+        "file": "e2e/conversation_user_journey/mfz_conversation_test/mfz_conversation_test.go",
+        "labels": [
+          "UAT"
+        ],
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should be able to create and manage conversations",
+        "file": "e2e/conversation_user_journey/mfz_conversation_test/mfz_conversation_test.go",
+        "labels": [
+          "UAT"
+        ],
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should be able to perform all CRUD operations as DevUser",
+        "file": "e2e/conversation_user_journey/mfz_conversation_test/mfz_conversation_test.go",
+        "labels": [
+          "UAT"
+        ],
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should be able to read and update but not create or delete conversations",
+        "file": "e2e/conversation_user_journey/mfz_conversation_test/mfz_conversation_test.go",
+        "labels": [
+          "UAT"
+        ],
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/codex/internal/serverv2.Codex).UpdateConversation",
+    "request_type": "apiv2.UpdateConversationRequest",
+    "response_type": "apiv2.UpdateConversationResponse",
+    "sinks": [
+      {
+        "kind": "rpc",
+        "target": "GetGroup",
+        "via_paths": [
+          "in.Conversation.Group"
+        ],
+        "at": "internal/serverv2/group_validations.go:209"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetDevOid",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/common/crud.go:64"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetId",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/common/crud.go:71"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:432",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateConversation` (HTTP operation `ConversationsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.Conversation.AccountId\n  - in.Conversation.AppliesToPartIds.IdValues\n  - in.Conversation.BrandId\n  - in.Conversation.BroadcastChannels\n  - in.Conversation.Channels.IdValues\n  - in.Conversation.ChannelsInstances.IdValues\n  - in.Conversation.CustomFields\n  - in.Conversation.DevrevCopy\n  - in.Conversation.ExternalSourceData.CreatedById\n  - in.Conversation.ExternalSourceData.ModifiedById\n  - in.Conversation.ExternalSourceData.ModifiedDate\n  - in.Conversation.FirstResponseTime\n  - in.Conversation.FirstUnrepliedRevMessageDate\n  - in.Conversation.Group\n  - in.Conversation.IsCreatorVerified\n  - in.Conversation.IsFrozen\n  - in.Conversation.IsSpam\n  - in.Conversation.LastExternalMessageDate\n  - in.Conversation.LastExternalMessageId\n  - in.Conversation.LastInternalMessageDate\n  - in.Conversation.LastInternalMessageId\n  - in.Conversation.LastMessage.CreatedById\n  - in.Conversation.LastMessage.UserType\n  - in.Conversation.LastMessageId\n  - in.Conversation.LastMessageTimestamp\n  - in.Conversation.MemberIds.IdValues\n  - in.Conversation.Metadata\n  - in.Conversation.OwnedByAgentId\n  - in.Conversation.OwnedByIds.IdValues\n  - in.Conversation.ParticipantOids.IdValues\n  - in.Conversation.ParticipantUids.IdValues\n  - in.Conversation.Priority\n  - in.Conversation.Sentiment\n  - in.Conversation.SentimentModifiedDate\n  - in.Conversation.SentimentSummary.Value\n  - in.Conversation.Sessions.Values\n  - in.Conversation.SlaId\n  - in.Conversation.SlaSummary.OrgScheduleId\n  - in.Conversation.SlaSummary.SlaTrackerId\n  - in.Conversation.SlaTrackerId\n  - in.Conversation.SourceChannel\n  - in.Conversation.SourceChannelV2\n  - in.Conversation.SourceChannelV2Instance\n  - in.Conversation.Stage.StageId\n  - in.Conversation.StagedInfo.SyncInUnresolvedFields.Values\n  - in.Conversation.StagedInfo.SyncOutUnresolvedFields.Values\n  - in.Conversation.StartedById\n  - in.Conversation.Status\n  - in.Conversation.SurveysAggregation.Values\n  - in.Conversation.SyncMetadata.LastSyncIn.Status\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.Conversation.SyncMetadata.LastSyncOut.Status\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId\n  - in.Conversation.SyncMetadata.SyncedByDevUsers.IdValues\n  - in.Conversation.Tags.Values\n  - in.Conversation.TargetLocale.Value\n  - in.Conversation.TuringActive\n  - (+5 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Conversation.SourceChannelV2 == nil\n  - in.Conversation.SourceChannelV2Instance == nil\n  - in.Conversation.Group == nil\n  - in.Conversation.StartedById == nil\n  - in.Conversation.StartedById\n  - in.Conversation.StartedById\n  - in.Conversation.StartedById\n  - in.Conversation.AccountId == nil\n  - in.Conversation.LastMessage.CreatedById == nil\n  - in.Conversation.LastMessage.CreatedById != nil\n  - in.Conversation.LastExternalMessageId == nil\n  - in.Conversation.LastInternalMessageId == nil\n  - in.Conversation.LastMessageId == nil\n  - in.Conversation.OwnedByAgentId == nil\n  - in.Conversation.Stage.StageId == nil\n  - in.Conversation.Stage.StageId != nil\n  - in.Conversation.Stage.StageId\n  - in.Conversation.SlaSummary.SlaTrackerId == nil\n  - in.Conversation.SlaSummary.OrgScheduleId == nil\n  - in.Conversation.SlaSummary.SlaTrackerId != nil\n  - in.Conversation.SlaSummary.SlaTrackerId\n  - in.Conversation.SlaSummary.OrgScheduleId != nil\n  - in.Conversation.SlaSummary.OrgScheduleId\n  - in.Conversation.SlaId == nil\n  - in.Conversation.SlaTrackerId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId == nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId == nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId\n  - in.Conversation.SyncMetadata.SyncedByDevUsers != nil\n  - in.Conversation.SyncMetadata.LastSyncIn != nil\n  - in.Conversation.SyncMetadata.LastSyncIn != nil\n  - (+137 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `memberids` -> suggestions []\n  - test field `ownedbyagent` -> suggestions ['in.Conversation.OwnedByAgentId']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

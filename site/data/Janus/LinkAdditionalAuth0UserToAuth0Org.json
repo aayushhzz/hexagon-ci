@@ -1,0 +1,187 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "LinkAdditionalAuth0UserToAuth0Org",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": [],
+      "asserted": [],
+      "missing": [],
+      "infra_statuses": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 2,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 2,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 2,
+        "covered": 0,
+        "pct": 0,
+        "collapsed_types": []
+      },
+      "covered": null,
+      "gaps": [
+        "in.Auth0OrgId",
+        "in.Auth0UserId"
+      ]
+    },
+    "branches": {
+      "total": 3,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 2,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "by_origin": {
+        "service": {
+          "total": 2,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 1,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/asd/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.0.darwin-arm64/src/slices/slices.go:98",
+          "cond": "in.Auth0UserId == *t4",
+          "predicate_paths": [
+            "in.Auth0UserId"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "internal/service/devuser.go:1157",
+          "cond": "in != nil",
+          "predicate_paths": [
+            "in"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/service/devuser.go:1219",
+          "cond": "in.Auth0UserId",
+          "predicate_paths": [
+            "in.Auth0UserId"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": [
+        {
+          "service": "this service",
+          "calls": [
+            "AddMembersToOrg",
+            "GetUser",
+            "UpdateUserMetadata"
+          ]
+        }
+      ],
+      "datastore_calls": [],
+      "service_count": 1,
+      "call_count": 3,
+      "reached_by_test": false,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).LinkAdditionalAuth0UserToAuth0Org",
+    "request_type": "api.LinkAdditionalAuth0UserToAuth0OrgRequest",
+    "response_type": "api.LinkAdditionalAuth0UserToAuth0OrgResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetExternalError",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/devuser.go:1158"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetUser",
+        "via_paths": [
+          "in.Auth0UserId"
+        ],
+        "at": "internal/service/devuser.go:1172"
+      },
+      {
+        "kind": "rpc",
+        "target": "AddMembersToOrg",
+        "via_paths": [
+          "in.Auth0OrgId"
+        ],
+        "at": "internal/service/devuser.go:1251"
+      },
+      {
+        "kind": "rpc",
+        "target": "UpdateUserMetadata",
+        "via_paths": [
+          "in.Auth0UserId"
+        ],
+        "at": "internal/service/devuser.go:1285"
+      }
+    ],
+    "errors": [],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `LinkAdditionalAuth0UserToAuth0Org` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Auth0OrgId\n  - in.Auth0UserId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Auth0UserId == *t4\n  - in != nil\n  - in.Auth0UserId\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

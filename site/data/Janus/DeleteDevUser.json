@@ -1,0 +1,250 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "DeleteDevUser",
+    "operation": "DevUsersDelete",
+    "tests": 1,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404
+      ],
+      "asserted": [
+        200,
+        201
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 20
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 1,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 1,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 1,
+        "covered": 0,
+        "pct": 0,
+        "collapsed_types": [
+          "wrapperspb.StringValue"
+        ]
+      },
+      "covered": null,
+      "gaps": [
+        "in.DevUid.Value"
+      ]
+    },
+    "branches": {
+      "total": 4,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 1,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 0,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "by_origin": {
+        "service": {
+          "total": 2,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 2,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/utils.go:3622",
+          "cond": "in.DevUid.Value",
+          "predicate_paths": [
+            "in.DevUid.Value"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:291",
+          "cond": "in.DevUid.Value == \"\"",
+          "predicate_paths": [
+            "in.DevUid.Value"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "internal/service/devuser.go:1372",
+          "cond": "in.DevUid.Value == \"\"",
+          "predicate_paths": [
+            "in.DevUid.Value"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "internal/service/devuser.go:1368",
+          "cond": "in.DevUid.Value != *t70",
+          "predicate_paths": [
+            "in.DevUid.Value"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": null,
+      "datastore_calls": [
+        "Get",
+        "LockForRead",
+        "Set"
+      ],
+      "service_count": 0,
+      "call_count": 0,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "DevUsers Delete",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEVUSERS_DELETE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "DevUser",
+          "DevUser.Email",
+          "DevUser.FullName",
+          "DevUser.Id",
+          "DevUser.State",
+          "StatusCode"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).DeleteDevUser",
+    "request_type": "api.DeleteDevUserRequest",
+    "response_type": "api.EmptyRequest",
+    "sinks": [
+      {
+        "kind": "db",
+        "target": "Get",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "internal/service/devuser.go:136"
+      },
+      {
+        "kind": "db",
+        "target": "LockForRead",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "internal/service/devuser.go:145"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "internal/service/cache.go:298"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.DevUid.Value"
+        ],
+        "at": "internal/service/devuser.go:166"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "errDeleteOrDeactivateCallForLastActiveUser",
+        "at": "internal/service/devuser.go:3210",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidAuthContextDevUid",
+        "at": "internal/service/devuser.go:1374",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteDevUser` (HTTP operation `DevUsersDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUid.Value\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUid.Value\n  - in.DevUid.Value == \"\"\n  - in.DevUid.Value == \"\"\n  - in.DevUid.Value != *t70\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDeleteOrDeactivateCallForLastActiveUser\n  - errInvalidAuthContextDevUid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

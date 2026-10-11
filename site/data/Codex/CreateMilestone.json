@@ -1,0 +1,355 @@
+{
+  "service": "Codex",
+  "coverage": {
+    "rpc": "CreateMilestone",
+    "operation": "MilestonesCreate",
+    "tests": 5,
+    "status": {
+      "documented": [
+        201,
+        400,
+        401,
+        403
+      ],
+      "asserted": [
+        201,
+        400
+      ],
+      "missing": [
+        401,
+        403
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 50
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 5,
+      "covered_count": 4,
+      "coverage_pct": 80,
+      "request_fields_set_by_tests": 5,
+      "set_by_positive_tests": 4,
+      "set_by_negative_tests": 4,
+      "by_depth": {
+        "top_level": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 5,
+          "set": 4,
+          "pct": 80
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 5,
+        "covered": 4,
+        "pct": 80,
+        "collapsed_types": []
+      },
+      "covered": [
+        {
+          "path": "in.Milestone.Description",
+          "match": "exact",
+          "by_tests": [
+            "Creates with all optional fields"
+          ]
+        },
+        {
+          "path": "in.Milestone.DueDate",
+          "match": "exact",
+          "by_tests": [
+            "Creates with all optional fields"
+          ]
+        },
+        {
+          "path": "in.Milestone.Status",
+          "match": "exact",
+          "by_tests": [
+            "Creates with all optional fields",
+            "Creates with only required fields",
+            "Fails with invalid parent ID",
+            "Fails without parent",
+            "Fails without title"
+          ]
+        },
+        {
+          "path": "in.Milestone.Title",
+          "match": "exact",
+          "by_tests": [
+            "Creates with all optional fields",
+            "Creates with only required fields",
+            "Fails with invalid parent ID",
+            "Fails without parent"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.Milestone.ParentId"
+      ]
+    },
+    "branches": {
+      "total": 16,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 4,
+      "present_arm_exercised": 9,
+      "present_arm_pct": 56.3,
+      "absent_arm_exercised": 3,
+      "absent_arm_pct": 75,
+      "negative_arm_exercised": 8,
+      "negative_arm_pct": 50,
+      "both_arms_exercised": 0,
+      "coverage_pct": 56.3,
+      "by_origin": {
+        "service": {
+          "total": 3,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 66.7,
+          "negative_arm_exercised": 1,
+          "negative_arm_pct": 33.3,
+          "absent_arm_exercised": 0
+        },
+        "generated": {
+          "total": 7,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 3,
+          "present_arm_pct": 42.9,
+          "negative_arm_exercised": 3,
+          "negative_arm_pct": 42.9,
+          "absent_arm_exercised": 2
+        },
+        "library": {
+          "total": 6,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 4,
+          "present_arm_pct": 66.7,
+          "negative_arm_exercised": 4,
+          "negative_arm_pct": 66.7,
+          "absent_arm_exercised": 1
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.Milestone.ParentId == nil",
+          "predicate_paths": [
+            "in.Milestone.ParentId"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:1227",
+          "cond": "in.Milestone.ParentId == nil",
+          "predicate_paths": [
+            "in.Milestone.ParentId"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:1234",
+          "cond": "in.Milestone.ParentId",
+          "predicate_paths": [
+            "in.Milestone.ParentId"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/milestone.pb.validator.go:16",
+          "cond": "in.Milestone != nil",
+          "predicate_paths": [
+            "in.Milestone"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/milestone.pb.validator.go:17",
+          "cond": "in.Milestone != nil",
+          "predicate_paths": [
+            "in.Milestone"
+          ]
+        },
+        {
+          "id": "b14",
+          "at": "internal/collectionv2/milestone.gen.go:751",
+          "cond": "in.Milestone.ParentId != nil",
+          "predicate_paths": [
+            "in.Milestone.ParentId"
+          ]
+        },
+        {
+          "id": "b15",
+          "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:66",
+          "cond": "in.Milestone|in.Milestone.Description|in.Milestone.ParentId|in.Milestone.Title == nil",
+          "predicate_paths": [
+            "in.Milestone"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": null,
+      "datastore_calls": [],
+      "service_count": 0,
+      "call_count": 0,
+      "reached_by_test": false,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "parent",
+          "fuzzy_suggestions": [
+            "in.Milestone.ParentId"
+          ]
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Creates with only required fields",
+        "file": "api/v2_internal/milestones/crud/create_milestone_test.go",
+        "labels": [
+          "POSITIVE",
+          "ADMIN"
+        ],
+        "fields_set": [
+          "Parent",
+          "Status",
+          "Title"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Milestone",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Creates with all optional fields",
+        "file": "api/v2_internal/milestones/crud/create_milestone_test.go",
+        "labels": [
+          "POSITIVE",
+          "ADMIN"
+        ],
+        "fields_set": [
+          "Description",
+          "DueDate",
+          "Parent",
+          "Status",
+          "Title"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Milestone",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Fails without title",
+        "file": "api/v2_internal/milestones/crud/create_milestone_test.go",
+        "labels": null,
+        "fields_set": [
+          "Parent",
+          "Status"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Fails without parent",
+        "file": "api/v2_internal/milestones/crud/create_milestone_test.go",
+        "labels": null,
+        "fields_set": [
+          "Status",
+          "Title"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Fails with invalid parent ID",
+        "file": "api/v2_internal/milestones/crud/create_milestone_test.go",
+        "labels": null,
+        "fields_set": [
+          "Parent",
+          "Status",
+          "Title"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/codex/internal/serverv2.Codex).CreateMilestone",
+    "request_type": "apiv2.CreateMilestoneRequest",
+    "response_type": "apiv2.CreateMilestoneResponse",
+    "sinks": [],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:432",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrNilArguments",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:68",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrNotSupported",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:73",
+        "tainted": true
+      },
+      {
+        "symbol": "ErrNonPointerArgument",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/merge.go:376",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrDifferentArgumentsTypes",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/merge.go:393",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateMilestone` (HTTP operation `MilestonesCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Milestone.ParentId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Milestone.ParentId == nil\n  - in.Milestone.ParentId == nil\n  - in.Milestone.ParentId\n  - in.Milestone != nil\n  - in.Milestone != nil\n  - in.Milestone.ParentId != nil\n  - in.Milestone|in.Milestone.Description|in.Milestone.ParentId|in.Milestone.Title == nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `parent` -> suggestions ['in.Milestone.ParentId']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

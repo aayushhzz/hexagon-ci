@@ -1,0 +1,536 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "UpdateAccount",
+    "operation": "AccountsUpdate",
+    "tests": 11,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        409
+      ],
+      "asserted": [
+        200,
+        201,
+        400,
+        403
+      ],
+      "missing": [
+        401,
+        404,
+        409
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 50
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 11,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 8,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 3,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 7,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 11,
+        "covered": 0,
+        "pct": 0,
+        "collapsed_types": [
+          "proto.StringList",
+          "wrapperspb.StringValue"
+        ]
+      },
+      "covered": null,
+      "gaps": [
+        "in.Account.DisplayName.Value",
+        "in.Account.Domains.StringValues",
+        "in.Account.ExternalRefs.StringValues",
+        "in.Account.PhoneNumbers.StringValues",
+        "in.Account.SharedWith.Values",
+        "in.Account.Tags.Values",
+        "in.Account.Websites.StringValues",
+        "in.AccountIdentifier.AccountDon",
+        "in.AccountIdentifier.Domain",
+        "in.AccountIdentifier.ExternalRef",
+        "in.UniqueDisplayNameSuffix"
+      ]
+    },
+    "branches": {
+      "total": 16,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 4,
+      "present_arm_exercised": 6,
+      "present_arm_pct": 37.5,
+      "absent_arm_exercised": 3,
+      "absent_arm_pct": 75,
+      "negative_arm_exercised": 2,
+      "negative_arm_pct": 12.5,
+      "both_arms_exercised": 0,
+      "coverage_pct": 37.5,
+      "by_origin": {
+        "service": {
+          "total": 15,
+          "reachable_on_happy_path": 4,
+          "present_arm_exercised": 6,
+          "present_arm_pct": 40,
+          "negative_arm_exercised": 2,
+          "negative_arm_pct": 13.3,
+          "absent_arm_exercised": 3
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 1,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:625",
+          "cond": "in.AccountIdentifier.AccountDon == nil",
+          "predicate_paths": [
+            "in.AccountIdentifier.AccountDon"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "internal/service/account.go:91",
+          "cond": "in.AccountIdentifier == nil",
+          "predicate_paths": [
+            "in.AccountIdentifier"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/service/account.go:95",
+          "cond": "in.AccountIdentifier.AccountDon != nil",
+          "predicate_paths": [
+            "in.AccountIdentifier.AccountDon"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "internal/service/account.go:109",
+          "cond": "in.AccountIdentifier.Domain != \"\"",
+          "predicate_paths": [
+            "in.AccountIdentifier.Domain"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "internal/service/account.go:117",
+          "cond": "in.AccountIdentifier.ExternalRef != nil",
+          "predicate_paths": [
+            "in.AccountIdentifier.ExternalRef"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "internal/service/account_validations.go:286",
+          "cond": "in.Account.Websites.StringValues",
+          "predicate_paths": [
+            "in.Account.Websites.StringValues"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "internal/service/account_validations.go:313",
+          "cond": "in.Account.Domains.StringValues",
+          "predicate_paths": [
+            "in.Account.Domains.StringValues"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "internal/service/account_validations.go:353",
+          "cond": "in.Account.ExternalRefs.StringValues",
+          "predicate_paths": [
+            "in.Account.ExternalRefs.StringValues"
+          ]
+        },
+        {
+          "id": "b9",
+          "at": "internal/service/account_validations.go:391",
+          "cond": "in.UniqueDisplayNameSuffix == nil",
+          "predicate_paths": [
+            "in.UniqueDisplayNameSuffix"
+          ]
+        },
+        {
+          "id": "b10",
+          "at": "internal/service/account_validations.go:399",
+          "cond": "in.UniqueDisplayNameSuffix != nil",
+          "predicate_paths": [
+            "in.UniqueDisplayNameSuffix"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": null,
+      "datastore_calls": [],
+      "service_count": 0,
+      "call_count": 0,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "description",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "displayname",
+          "fuzzy_suggestions": [
+            "in.UniqueDisplayNameSuffix"
+          ]
+        },
+        {
+          "field": "domains",
+          "fuzzy_suggestions": [
+            "in.AccountIdentifier.Domain"
+          ]
+        },
+        {
+          "field": "externalrefs",
+          "fuzzy_suggestions": [
+            "in.AccountIdentifier.ExternalRef"
+          ]
+        },
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "sharedwith",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "tier",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "websites",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Update account",
+        "file": "api/v2_internal/accounts/accounts_update_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ACCOUNTS_UPDATE"
+        ],
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Domains",
+          "ExternalRefs",
+          "Id",
+          "Tier",
+          "Websites"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Update account with conflicting fields",
+        "file": "api/v2_internal/accounts/accounts_update_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ACCOUNTS_UPDATE"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "ExternalRefs",
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Update account with only required fields",
+        "file": "api/v2_internal/accounts/accounts_update_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ACCOUNTS_UPDATE",
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Update account with invalid fields",
+        "file": "api/v2_internal/accounts/accounts_update_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ACCOUNTS_UPDATE"
+        ],
+        "fields_set": [
+          "Id",
+          "Tier"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Update account without required fields",
+        "file": "api/v2_internal/accounts/accounts_update_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ACCOUNTS_UPDATE"
+        ],
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Update account with empty fields",
+        "file": "api/v2_internal/accounts/accounts_update_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ACCOUNTS_UPDATE"
+        ],
+        "fields_set": [
+          "ExternalRefs",
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Update account with invalid id",
+        "file": "api/v2_internal/accounts/accounts_update_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ACCOUNTS_UPDATE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Use a rev_user role on an account shared_with \u2014 expect 400",
+        "file": "api/v2_internal/accounts/shared_with/account_shared_with_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "SharedWith"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "account:write scope required for AccountsCreate and AccountsUpdate",
+        "file": "api/v2_internal/scopes/crud/scopes_rev_user_account_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ROLE_SETS_CREATE"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "Id"
+        ],
+        "statuses": [
+          200,
+          201,
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Account",
+          "Account.Id",
+          "ServiceAccount",
+          "ServiceAccount.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Emits update event",
+        "file": "e2e/transformers/janus/janus_test.go",
+        "labels": [
+          "POSITIVE",
+          "FUNCTIONAL"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should create workflow with account updated trigger that analyzes sentiment",
+        "file": "e2e/workflow_uat_automation/workflow_node_test.go",
+        "labels": [
+          "UAT"
+        ],
+        "fields_set": [
+          "Description",
+          "Id"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Workflow",
+          "Workflow.Id",
+          "WorkflowStep",
+          "WorkflowStep.Id"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).UpdateAccount",
+    "request_type": "api.UpdateAccountRequest",
+    "response_type": "api.UpdateAccountResponse",
+    "sinks": [],
+    "errors": [
+      {
+        "symbol": "errInputContainsDuplicateWebsites",
+        "at": "internal/service/account_validations.go:288",
+        "tainted": true
+      },
+      {
+        "symbol": "errWebsiteAlreadyExists",
+        "at": "internal/service/account_validations.go:297",
+        "tainted": true
+      },
+      {
+        "symbol": "errInputContainsDuplicateDomains",
+        "at": "internal/service/account_validations.go:315",
+        "tainted": true
+      },
+      {
+        "symbol": "errInputContainsNotAcceptableDomains",
+        "at": "internal/service/account_validations.go:323",
+        "tainted": true
+      },
+      {
+        "symbol": "errDomainAlreadyExists",
+        "at": "internal/service/account_validations.go:337",
+        "tainted": true
+      },
+      {
+        "symbol": "errInputContainsDuplicateExternalRefs",
+        "at": "internal/service/account_validations.go:355",
+        "tainted": true
+      },
+      {
+        "symbol": "errEmptyExternalRefs",
+        "at": "internal/service/account_validations.go:380",
+        "tainted": false
+      },
+      {
+        "symbol": "errAccountEmptyDisplayName",
+        "at": "internal/service/account_validations.go:393",
+        "tainted": true
+      },
+      {
+        "symbol": "errAccountDisplayNameAlreadyExists",
+        "at": "internal/service/account_validations.go:429",
+        "tainted": true
+      },
+      {
+        "symbol": "errPhoneNumberInvalid",
+        "at": "internal/service/utils.go:95",
+        "tainted": false
+      },
+      {
+        "symbol": "errInputContainsNotAcceptableWebsites",
+        "at": "internal/service/account_validations.go:451",
+        "tainted": false
+      },
+      {
+        "symbol": "errAccountNotFound",
+        "at": "internal/service/account_validations.go:162",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateAccount` (HTTP operation `AccountsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404, 409]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Account.DisplayName.Value\n  - in.Account.Domains.StringValues\n  - in.Account.ExternalRefs.StringValues\n  - in.Account.PhoneNumbers.StringValues\n  - in.Account.SharedWith.Values\n  - in.Account.Tags.Values\n  - in.Account.Websites.StringValues\n  - in.AccountIdentifier.AccountDon\n  - in.AccountIdentifier.Domain\n  - in.AccountIdentifier.ExternalRef\n  - in.UniqueDisplayNameSuffix\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountIdentifier.AccountDon == nil\n  - in.AccountIdentifier == nil\n  - in.AccountIdentifier.AccountDon != nil\n  - in.AccountIdentifier.Domain != \"\"\n  - in.AccountIdentifier.ExternalRef != nil\n  - in.Account.Websites.StringValues\n  - in.Account.Domains.StringValues\n  - in.Account.ExternalRefs.StringValues\n  - in.UniqueDisplayNameSuffix == nil\n  - in.UniqueDisplayNameSuffix != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errAccountDisplayNameAlreadyExists\n  - errAccountEmptyDisplayName\n  - errAccountNotFound\n  - errDomainAlreadyExists\n  - errEmptyExternalRefs\n  - errInputContainsDuplicateDomains\n  - errInputContainsDuplicateExternalRefs\n  - errInputContainsDuplicateWebsites\n  - errInputContainsNotAcceptableDomains\n  - errInputContainsNotAcceptableWebsites\n  - errPhoneNumberInvalid\n  - errWebsiteAlreadyExists\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `displayname` -> suggestions ['in.UniqueDisplayNameSuffix']\n  - test field `domains` -> suggestions ['in.AccountIdentifier.Domain']\n  - test field `externalrefs` -> suggestions ['in.AccountIdentifier.ExternalRef']\n  - test field `id` -> suggestions []\n  - test field `sharedwith` -> suggestions []\n  - test field `tier` -> suggestions []\n  - test field `websites` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

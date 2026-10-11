@@ -1,0 +1,637 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "GroupRevOrgs",
+    "operation": "RevOrgsGroup",
+    "tests": 1,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403
+      ],
+      "asserted": [
+        400
+      ],
+      "missing": [
+        200,
+        401,
+        403
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 25
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 71,
+      "covered_count": 2,
+      "coverage_pct": 2.8,
+      "request_fields_set_by_tests": 4,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 2,
+      "by_depth": {
+        "top_level": {
+          "total": 3,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 14,
+          "set": 1,
+          "pct": 7.1
+        },
+        "deep": {
+          "total": 54,
+          "set": 1,
+          "pct": 1.9
+        }
+      },
+      "representative": {
+        "units": 5,
+        "covered": 2,
+        "pct": 40,
+        "collapsed_types": [
+          "api.GroupPaginationParams",
+          "api.ListOrgsFilter"
+        ]
+      },
+      "covered": [
+        {
+          "path": "in.GroupPageParams.GroupBy",
+          "match": "exact",
+          "by_tests": [
+            "Group RevOrgs"
+          ]
+        },
+        {
+          "path": "in.OrgFilter.RevOrgFilter.Account",
+          "match": "exact",
+          "by_tests": [
+            "Group RevOrgs"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.GroupPageParams.PerGroup",
+        "in.GroupPageParams.SortBy",
+        "in.GroupPageParams.SortGroupKeyBy",
+        "in.OrgFilter.AccountFilter.Apps",
+        "in.OrgFilter.AccountFilter.AppsOp",
+        "in.OrgFilter.AccountFilter.CustomFields.Fields",
+        "in.OrgFilter.AccountFilter.Domains",
+        "in.OrgFilter.AccountFilter.DomainsOp",
+        "in.OrgFilter.AccountFilter.ExternalRefs",
+        "in.OrgFilter.AccountFilter.ExternalRefsOp",
+        "in.OrgFilter.AccountFilter.ExternalSourceData",
+        "in.OrgFilter.AccountFilter.Industry",
+        "in.OrgFilter.AccountFilter.IndustryOp",
+        "in.OrgFilter.AccountFilter.IngestionChannel",
+        "in.OrgFilter.AccountFilter.LeadSource",
+        "in.OrgFilter.AccountFilter.LeadSourceOp",
+        "in.OrgFilter.AccountFilter.OwnedBy",
+        "in.OrgFilter.AccountFilter.OwnedByOp",
+        "in.OrgFilter.AccountFilter.SharedWith",
+        "in.OrgFilter.AccountFilter.Stage",
+        "in.OrgFilter.AccountFilter.StagedInfo",
+        "in.OrgFilter.AccountFilter.Subtype",
+        "in.OrgFilter.AccountFilter.SubtypeOp",
+        "in.OrgFilter.AccountFilter.SyncMetadata",
+        "in.OrgFilter.AccountFilter.Tags",
+        "in.OrgFilter.AccountFilter.TagsOp",
+        "in.OrgFilter.AccountFilter.Tier",
+        "in.OrgFilter.AccountFilter.TierOp",
+        "in.OrgFilter.AccountFilter.TotalRevenue",
+        "in.OrgFilter.AccountFilter.Websites",
+        "in.OrgFilter.AccountFilter.WebsitesOp",
+        "in.OrgFilter.CreatedByAgentId",
+        "in.OrgFilter.CreatedByAgentIdOp",
+        "in.OrgFilter.CreatedById",
+        "in.OrgFilter.CreatedByIdOp",
+        "in.OrgFilter.CreatedDate.After",
+        "in.OrgFilter.CreatedDate.Before",
+        "in.OrgFilter.CreatedDate.DatePreset.Type",
+        "in.OrgFilter.DevOrgFilter.UeSyncState",
+        "in.OrgFilter.DisplayName",
+        "in.OrgFilter.Environment",
+        "in.OrgFilter.EnvironmentOp",
+        "in.OrgFilter.ModifiedById",
+        "in.OrgFilter.ModifiedByIdOp",
+        "in.OrgFilter.ModifiedDate.After",
+        "in.OrgFilter.ModifiedDate.Before",
+        "in.OrgFilter.ModifiedDate.DatePreset.Type",
+        "in.OrgFilter.RevOrgFilter.AccountOp",
+        "in.OrgFilter.RevOrgFilter.Apps",
+        "in.OrgFilter.RevOrgFilter.AppsOp",
+        "in.OrgFilter.RevOrgFilter.CustomFields.Fields",
+        "in.OrgFilter.RevOrgFilter.ExternalOid",
+        "in.OrgFilter.RevOrgFilter.ExternalOidIssuer",
+        "in.OrgFilter.RevOrgFilter.ExternalOidOp",
+        "in.OrgFilter.RevOrgFilter.ExternalSourceData",
+        "in.OrgFilter.RevOrgFilter.SharedWith",
+        "in.OrgFilter.RevOrgFilter.SlaId",
+        "in.OrgFilter.RevOrgFilter.StagedInfo",
+        "in.OrgFilter.RevOrgFilter.Subtype",
+        "in.OrgFilter.RevOrgFilter.SubtypeOp",
+        "in.OrgFilter.RevOrgFilter.SyncMetadata",
+        "in.OrgFilter.RevOrgFilter.Tags",
+        "in.OrgFilter.RevOrgFilter.TagsOp",
+        "in.OrgFilter.RevOrgFilter.Tier",
+        "in.OrgFilter.RevOrgFilter.Type",
+        "in.OrgFilter.State",
+        "in.SkipItemsInGroup",
+        "in.SkipTotalGroups",
+        "in.SkipTotalItems"
+      ]
+    },
+    "branches": {
+      "total": 31,
+      "enum_switch_branches": 152,
+      "server_gated_branches": 0,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 2,
+      "present_arm_exercised": 3,
+      "present_arm_pct": 9.7,
+      "absent_arm_exercised": 2,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 3,
+      "negative_arm_pct": 9.7,
+      "both_arms_exercised": 0,
+      "coverage_pct": 9.7,
+      "by_origin": {
+        "service": {
+          "total": 24,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 3,
+          "present_arm_pct": 12.5,
+          "negative_arm_exercised": 3,
+          "negative_arm_pct": 12.5,
+          "absent_arm_exercised": 2
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 7,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/query.go:160",
+          "cond": "in.OrgFilter.RevOrgFilter.CustomFields == nil",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter.CustomFields"
+          ]
+        },
+        {
+          "id": "b34",
+          "at": "internal/filter/orgs.gen.go:910",
+          "cond": "in.OrgFilter.RevOrgFilter != nil",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter"
+          ]
+        },
+        {
+          "id": "b43",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/query.go:160",
+          "cond": "in.OrgFilter.AccountFilter.CustomFields == nil",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter.CustomFields"
+          ]
+        },
+        {
+          "id": "b116",
+          "at": "internal/filter/orgs.gen.go:1471",
+          "cond": "in.OrgFilter.AccountFilter != nil",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter"
+          ]
+        },
+        {
+          "id": "b125",
+          "at": "internal/filter/orgs.gen.go:175",
+          "cond": "in.OrgFilter.CreatedDate != nil",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedDate"
+          ]
+        },
+        {
+          "id": "b134",
+          "at": "internal/filter/orgs.gen.go:178",
+          "cond": "in.OrgFilter.CreatedDate.After != nil",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedDate.After"
+          ]
+        },
+        {
+          "id": "b135",
+          "at": "internal/filter/orgs.gen.go:185",
+          "cond": "in.OrgFilter.CreatedDate.Before != nil",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedDate.Before"
+          ]
+        },
+        {
+          "id": "b136",
+          "at": "internal/filter/orgs.gen.go:192",
+          "cond": "in.OrgFilter.CreatedDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b137",
+          "at": "internal/filter/orgs.gen.go:193",
+          "cond": "in.OrgFilter.CreatedDate.After != nil",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedDate.After"
+          ]
+        },
+        {
+          "id": "b138",
+          "at": "",
+          "cond": "in.OrgFilter.CreatedDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedDate.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b139",
+          "at": "internal/filter/orgs.gen.go:193",
+          "cond": "in.OrgFilter.CreatedDate.Before != nil",
+          "predicate_paths": [
+            "in.OrgFilter.CreatedDate.Before"
+          ]
+        },
+        {
+          "id": "b140",
+          "at": "internal/filter/orgs.gen.go:299",
+          "cond": "in.OrgFilter.ModifiedDate != nil",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedDate"
+          ]
+        },
+        {
+          "id": "b149",
+          "at": "internal/filter/orgs.gen.go:302",
+          "cond": "in.OrgFilter.ModifiedDate.After != nil",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedDate.After"
+          ]
+        },
+        {
+          "id": "b150",
+          "at": "internal/filter/orgs.gen.go:309",
+          "cond": "in.OrgFilter.ModifiedDate.Before != nil",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedDate.Before"
+          ]
+        },
+        {
+          "id": "b151",
+          "at": "internal/filter/orgs.gen.go:316",
+          "cond": "in.OrgFilter.ModifiedDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b152",
+          "at": "internal/filter/orgs.gen.go:317",
+          "cond": "in.OrgFilter.ModifiedDate.After != nil",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedDate.After"
+          ]
+        },
+        {
+          "id": "b153",
+          "at": "",
+          "cond": "in.OrgFilter.ModifiedDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedDate.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b154",
+          "at": "internal/filter/orgs.gen.go:317",
+          "cond": "in.OrgFilter.ModifiedDate.Before != nil",
+          "predicate_paths": [
+            "in.OrgFilter.ModifiedDate.Before"
+          ]
+        },
+        {
+          "id": "b171",
+          "at": "internal/filter/orgs.gen.go:480",
+          "cond": "in.OrgFilter.DevOrgFilter != nil",
+          "predicate_paths": [
+            "in.OrgFilter.DevOrgFilter"
+          ]
+        },
+        {
+          "id": "b172",
+          "at": "internal/filter/orgs.gen.go:498",
+          "cond": "in.OrgFilter.RevOrgFilter != nil",
+          "predicate_paths": [
+            "in.OrgFilter.RevOrgFilter"
+          ]
+        },
+        {
+          "id": "b173",
+          "at": "internal/filter/orgs.gen.go:516",
+          "cond": "in.OrgFilter.AccountFilter != nil",
+          "predicate_paths": [
+            "in.OrgFilter.AccountFilter"
+          ]
+        },
+        {
+          "id": "b174",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/group_item_helpers.go:96",
+          "cond": "in.GroupPageParams.PerGroup < 0",
+          "predicate_paths": [
+            "in.GroupPageParams.PerGroup"
+          ]
+        },
+        {
+          "id": "b175",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/group_item_helpers.go:99",
+          "cond": "in.GroupPageParams.PerGroup != 0",
+          "predicate_paths": [
+            "in.GroupPageParams.PerGroup"
+          ]
+        },
+        {
+          "id": "b176",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/group_item_helpers.go:100",
+          "cond": "in.GroupPageParams.PerGroup < 0",
+          "predicate_paths": [
+            "in.GroupPageParams.PerGroup"
+          ]
+        },
+        {
+          "id": "b177",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/group_item_helpers.go:100",
+          "cond": "in.GroupPageParams.PerGroup > *maxItemsPerGroup",
+          "predicate_paths": [
+            "in.GroupPageParams.PerGroup"
+          ]
+        },
+        {
+          "id": "b178",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/group_item_helpers.go:134",
+          "cond": "call() * in.GroupPageParams.PerGroup > *maxTotalGroupItems",
+          "predicate_paths": [
+            "in.GroupPageParams.PerGroup"
+          ]
+        },
+        {
+          "id": "b179",
+          "at": "internal/service/revorg.go:1636",
+          "cond": "in.GroupPageParams == nil",
+          "predicate_paths": [
+            "in.GroupPageParams"
+          ]
+        },
+        {
+          "id": "b180",
+          "at": "internal/service/revorg.go:1641",
+          "cond": "in.GroupPageParams != nil",
+          "predicate_paths": [
+            "in.GroupPageParams"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": null,
+      "datastore_calls": [
+        "Aggregate"
+      ],
+      "service_count": 0,
+      "call_count": 0,
+      "reached_by_test": false,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "limit",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "limitpergroup",
+          "fuzzy_suggestions": [
+            "in.GroupPageParams.PerGroup"
+          ]
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Group RevOrgs",
+        "file": "api/v2_internal/identity_flows/revorg_apis_test.go",
+        "labels": [
+          "INTERNAL_REVORGS_GROUP"
+        ],
+        "fields_set": [
+          "Account",
+          "GroupBy",
+          "Limit",
+          "LimitPerGroup"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Groups",
+          "StatusCode"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).GroupRevOrgs",
+    "request_type": "api.GroupRevOrgsRequest",
+    "response_type": "api.GroupRevOrgsResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetSortBy",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/group_item_helpers.go:107"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetSortBy",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/group_item_helpers.go:110"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetSortBy",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/group_item_helpers.go:111"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPage",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/group_item_helpers.go:118"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPage",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/group_item_helpers.go:121"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/group_item_helpers.go:126"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPage",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/group_item_helpers.go:124"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/group_item_helpers.go:127"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/group_item_helpers.go:134"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in.GroupPageParams"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/group_item_helpers.go:130"
+      },
+      {
+        "kind": "db",
+        "target": "Aggregate",
+        "via_paths": [
+          "in.GroupPageParams",
+          "in.GroupPageParams.GroupBy",
+          "in.GroupPageParams.PerGroup",
+          "in.GroupPageParams.SortGroupKeyBy",
+          "in.SkipItemsInGroup",
+          "in.SkipTotalGroups",
+          "in.SkipTotalItems"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/db/group_item_helpers.go:534"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ErrInvalidQuarter",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:116",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrTimeBeforeFiscalStart",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:197",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidPeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:211",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrTimeBeforeFiscalStart",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:207",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:283",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:319",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:380",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:219",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:225",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidGroupParams",
+        "at": "internal/service/revorg.go:1637",
+        "tainted": true
+      },
+      {
+        "symbol": "errInvalidSortByInputField",
+        "at": "internal/service/revorg.go:1645",
+        "tainted": true
+      },
+      {
+        "symbol": "errInvalidGroupByInputField",
+        "at": "internal/service/revorg.go:1653",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GroupRevOrgs` (HTTP operation `RevOrgsGroup`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [200, 401, 403]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.GroupPageParams.PerGroup\n  - in.GroupPageParams.SortBy\n  - in.GroupPageParams.SortGroupKeyBy\n  - in.OrgFilter.AccountFilter.Apps\n  - in.OrgFilter.AccountFilter.AppsOp\n  - in.OrgFilter.AccountFilter.CustomFields.Fields\n  - in.OrgFilter.AccountFilter.Domains\n  - in.OrgFilter.AccountFilter.DomainsOp\n  - in.OrgFilter.AccountFilter.ExternalRefs\n  - in.OrgFilter.AccountFilter.ExternalRefsOp\n  - in.OrgFilter.AccountFilter.ExternalSourceData\n  - in.OrgFilter.AccountFilter.Industry\n  - in.OrgFilter.AccountFilter.IndustryOp\n  - in.OrgFilter.AccountFilter.IngestionChannel\n  - in.OrgFilter.AccountFilter.LeadSource\n  - in.OrgFilter.AccountFilter.LeadSourceOp\n  - in.OrgFilter.AccountFilter.OwnedBy\n  - in.OrgFilter.AccountFilter.OwnedByOp\n  - in.OrgFilter.AccountFilter.SharedWith\n  - in.OrgFilter.AccountFilter.Stage\n  - in.OrgFilter.AccountFilter.StagedInfo\n  - in.OrgFilter.AccountFilter.Subtype\n  - in.OrgFilter.AccountFilter.SubtypeOp\n  - in.OrgFilter.AccountFilter.SyncMetadata\n  - in.OrgFilter.AccountFilter.Tags\n  - in.OrgFilter.AccountFilter.TagsOp\n  - in.OrgFilter.AccountFilter.Tier\n  - in.OrgFilter.AccountFilter.TierOp\n  - in.OrgFilter.AccountFilter.TotalRevenue\n  - in.OrgFilter.AccountFilter.Websites\n  - in.OrgFilter.AccountFilter.WebsitesOp\n  - in.OrgFilter.CreatedByAgentId\n  - in.OrgFilter.CreatedByAgentIdOp\n  - in.OrgFilter.CreatedById\n  - in.OrgFilter.CreatedByIdOp\n  - in.OrgFilter.CreatedDate.After\n  - in.OrgFilter.CreatedDate.Before\n  - in.OrgFilter.CreatedDate.DatePreset.Type\n  - in.OrgFilter.DevOrgFilter.UeSyncState\n  - in.OrgFilter.DisplayName\n  - in.OrgFilter.Environment\n  - in.OrgFilter.EnvironmentOp\n  - in.OrgFilter.ModifiedById\n  - in.OrgFilter.ModifiedByIdOp\n  - in.OrgFilter.ModifiedDate.After\n  - in.OrgFilter.ModifiedDate.Before\n  - in.OrgFilter.ModifiedDate.DatePreset.Type\n  - in.OrgFilter.RevOrgFilter.AccountOp\n  - in.OrgFilter.RevOrgFilter.Apps\n  - in.OrgFilter.RevOrgFilter.AppsOp\n  - in.OrgFilter.RevOrgFilter.CustomFields.Fields\n  - in.OrgFilter.RevOrgFilter.ExternalOid\n  - in.OrgFilter.RevOrgFilter.ExternalOidIssuer\n  - in.OrgFilter.RevOrgFilter.ExternalOidOp\n  - in.OrgFilter.RevOrgFilter.ExternalSourceData\n  - in.OrgFilter.RevOrgFilter.SharedWith\n  - in.OrgFilter.RevOrgFilter.SlaId\n  - in.OrgFilter.RevOrgFilter.StagedInfo\n  - in.OrgFilter.RevOrgFilter.Subtype\n  - in.OrgFilter.RevOrgFilter.SubtypeOp\n  - (+9 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OrgFilter.RevOrgFilter.CustomFields == nil\n  - in.OrgFilter.RevOrgFilter != nil\n  - in.OrgFilter.AccountFilter.CustomFields == nil\n  - in.OrgFilter.AccountFilter != nil\n  - in.OrgFilter.CreatedDate != nil\n  - in.OrgFilter.CreatedDate.After != nil\n  - in.OrgFilter.CreatedDate.Before != nil\n  - in.OrgFilter.CreatedDate.DatePreset != nil\n  - in.OrgFilter.CreatedDate.After != nil\n  - in.OrgFilter.CreatedDate.DatePreset.Type\n  - in.OrgFilter.CreatedDate.Before != nil\n  - in.OrgFilter.ModifiedDate != nil\n  - in.OrgFilter.ModifiedDate.After != nil\n  - in.OrgFilter.ModifiedDate.Before != nil\n  - in.OrgFilter.ModifiedDate.DatePreset != nil\n  - in.OrgFilter.ModifiedDate.After != nil\n  - in.OrgFilter.ModifiedDate.DatePreset.Type\n  - in.OrgFilter.ModifiedDate.Before != nil\n  - in.OrgFilter.DevOrgFilter != nil\n  - in.OrgFilter.RevOrgFilter != nil\n  - in.OrgFilter.AccountFilter != nil\n  - in.GroupPageParams.PerGroup < 0\n  - in.GroupPageParams.PerGroup != 0\n  - in.GroupPageParams.PerGroup < 0\n  - in.GroupPageParams.PerGroup > *maxItemsPerGroup\n  - call() * in.GroupPageParams.PerGroup > *maxTotalGroupItems\n  - in.GroupPageParams == nil\n  - in.GroupPageParams != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidGroupByInputField\n  - errInvalidGroupParams\n  - errInvalidSortByInputField\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `limit` -> suggestions []\n  - test field `limitpergroup` -> suggestions ['in.GroupPageParams.PerGroup']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

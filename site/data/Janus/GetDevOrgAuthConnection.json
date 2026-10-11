@@ -1,0 +1,340 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "GetDevOrgAuthConnection",
+    "operation": "DevOrgAuthConnectionsGet",
+    "tests": 9,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404
+      ],
+      "asserted": [
+        200,
+        400,
+        403
+      ],
+      "missing": [
+        401,
+        404
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 60
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 1,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 1,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 1,
+        "covered": 0,
+        "pct": 0,
+        "collapsed_types": []
+      },
+      "covered": null,
+      "gaps": [
+        "in.ConnectionId"
+      ]
+    },
+    "branches": {
+      "total": 3,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 3,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 3,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "by_origin": {
+        "service": {
+          "total": 2,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 2
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 1,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 1
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/asd/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.0.darwin-arm64/src/slices/slices.go:98",
+          "cond": "in.ConnectionId == *t4",
+          "predicate_paths": [
+            "in.ConnectionId"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "internal/service/devorg_connections.go:376",
+          "cond": "in.ConnectionId",
+          "predicate_paths": [
+            "in.ConnectionId"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/service/devorg_connections.go:411",
+          "cond": "management.OrganizationConnection).GetConnectionID() == in.ConnectionId",
+          "predicate_paths": [
+            "in.ConnectionId"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": [
+        {
+          "service": "this service",
+          "calls": [
+            "CheckDefaultConnectionByID",
+            "GetConnection"
+          ]
+        }
+      ],
+      "datastore_calls": [],
+      "service_count": 1,
+      "call_count": 2,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Get connection with invalid id",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Get connection with empty id",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Get SAML connection",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetAuthConnection"
+        ]
+      },
+      {
+        "name": "Get OIDC connection",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetAuthConnection"
+        ]
+      },
+      {
+        "name": "Get Google Apps connection",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetAuthConnection"
+        ]
+      },
+      {
+        "name": "Get Azure AD connection",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetAuthConnection"
+        ]
+      },
+      {
+        "name": "Enable connection",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetAuthConnection"
+        ]
+      },
+      {
+        "name": "Disable connection",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetAuthConnection"
+        ]
+      },
+      {
+        "name": "Delete disabled connections",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          403
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).GetDevOrgAuthConnection",
+    "request_type": "api.GetDevOrgAuthConnectionRequest",
+    "response_type": "api.GetDevOrgAuthConnectionResponse",
+    "sinks": [
+      {
+        "kind": "rpc",
+        "target": "CheckDefaultConnectionByID",
+        "via_paths": [
+          "in.ConnectionId"
+        ],
+        "at": "internal/service/devorg_connections.go:377"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetConnection",
+        "via_paths": [
+          "in.ConnectionId"
+        ],
+        "at": "internal/service/devorg_connections.go:398"
+      },
+      {
+        "kind": "rpc",
+        "target": "CheckDefaultConnectionByID",
+        "via_paths": [
+          "in.ConnectionId"
+        ],
+        "at": "internal/service/devorg_connections.go:416"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "errInvalidJWTToken",
+        "at": "internal/service/devorg_connections.go:360",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidAuthContextDevOid",
+        "at": "internal/service/devorg_connections.go:366",
+        "tainted": false
+      },
+      {
+        "symbol": "errNoAssociatedAuth0OrgID",
+        "at": "internal/service/devorg_connections.go:387",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetDevOrgAuthConnection` (HTTP operation `DevOrgAuthConnectionsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ConnectionId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ConnectionId == *t4\n  - in.ConnectionId\n  - management.OrganizationConnection).GetConnectionID() == in.ConnectionId\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContextDevOid\n  - errInvalidJWTToken\n  - errNoAssociatedAuth0OrgID\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

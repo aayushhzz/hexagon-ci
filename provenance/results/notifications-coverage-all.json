@@ -1,0 +1,1797 @@
+{
+  "coverage": [
+    {
+      "rpc": "CountInboxNotifications",
+      "operation": "NotificationsCountPost",
+      "tests": 2,
+      "status": {
+        "documented": [
+          200,
+          400,
+          401,
+          403
+        ],
+        "asserted": [
+          200,
+          400
+        ],
+        "missing": [
+          401,
+          403
+        ],
+        "infra_statuses": [
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 50
+      },
+      "fields": {
+        "leaf_fields_read_by_rpc": 14,
+        "covered_count": 2,
+        "coverage_pct": 14.3,
+        "request_fields_set_by_tests": 3,
+        "set_by_positive_tests": 2,
+        "set_by_negative_tests": 1,
+        "by_depth": {
+          "top_level": {
+            "total": 2,
+            "set": 1,
+            "pct": 50
+          },
+          "nested": {
+            "total": 8,
+            "set": 1,
+            "pct": 12.5
+          },
+          "deep": {
+            "total": 4,
+            "set": 0,
+            "pct": 0
+          }
+        },
+        "representative": {
+          "units": 3,
+          "covered": 2,
+          "pct": 66.7,
+          "collapsed_types": [
+            "api.ListInboxNotificationsFilter"
+          ]
+        },
+        "covered": [
+          {
+            "path": "in.Filter.Types",
+            "match": "exact",
+            "by_tests": [
+              "Has a notification"
+            ]
+          },
+          {
+            "path": "in.GroupBy",
+            "match": "exact",
+            "by_tests": [
+              "Fails to provide a response",
+              "Has a notification"
+            ]
+          }
+        ],
+        "gaps": [
+          "in.Filter.ActorDons",
+          "in.Filter.LastNotificationTimestamp.TimestampFrom",
+          "in.Filter.LastNotificationTimestamp.TimestampTo",
+          "in.Filter.NotificationIds",
+          "in.Filter.ParentDons",
+          "in.Filter.ParentTypeOp",
+          "in.Filter.ParentTypes",
+          "in.Filter.Priorities",
+          "in.Filter.States",
+          "in.Filter.UserParticipationFilter.Activities",
+          "in.Filter.UserParticipationFilter.Visibilities",
+          "in.UserDon"
+        ]
+      },
+      "branches": {
+        "total": 7,
+        "enum_switch_branches": 1,
+        "server_gated_branches": 0,
+        "happy_path_reached": true,
+        "reachable_on_happy_path": 3,
+        "present_arm_exercised": 2,
+        "present_arm_pct": 28.6,
+        "absent_arm_exercised": 1,
+        "absent_arm_pct": 33.3,
+        "negative_arm_exercised": 2,
+        "negative_arm_pct": 28.6,
+        "both_arms_exercised": 0,
+        "coverage_pct": 28.6,
+        "by_origin": {
+          "service": {
+            "total": 7,
+            "reachable_on_happy_path": 3,
+            "present_arm_exercised": 2,
+            "present_arm_pct": 28.6,
+            "negative_arm_exercised": 2,
+            "negative_arm_pct": 28.6,
+            "absent_arm_exercised": 1
+          },
+          "generated": {
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          },
+          "library": {
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          }
+        },
+        "gaps": [
+          {
+            "id": "b1",
+            "at": "internal/infra/db/notification_repository.go:291",
+            "cond": "in.Filter == nil",
+            "predicate_paths": [
+              "in.Filter"
+            ]
+          },
+          {
+            "id": "b3",
+            "at": "internal/infra/db/notification_repository.go:432",
+            "cond": "in.Filter.LastNotificationTimestamp != nil",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp"
+            ]
+          },
+          {
+            "id": "b4",
+            "at": "internal/infra/db/notification_repository.go:439",
+            "cond": "in.Filter.LastNotificationTimestamp.TimestampFrom \u003e= 0",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp.TimestampFrom"
+            ]
+          },
+          {
+            "id": "b5",
+            "at": "internal/infra/db/notification_repository.go:454",
+            "cond": "in.Filter.UserParticipationFilter != nil",
+            "predicate_paths": [
+              "in.Filter.UserParticipationFilter"
+            ]
+          },
+          {
+            "id": "b6",
+            "at": "internal/infra/db/notification_repository.go:445",
+            "cond": "in.Filter.LastNotificationTimestamp.TimestampTo \u003e 0",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp.TimestampTo"
+            ]
+          }
+        ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
+      },
+      "anomalies": {
+        "unmatched_test_fields": [
+          {
+            "field": "parentids",
+            "fuzzy_suggestions": null
+          }
+        ]
+      },
+      "test_facts": [
+        {
+          "name": "Fails to provide a response",
+          "file": "api/v2_internal/notifications/notifications_count_test.go",
+          "labels": null,
+          "fields_set": [
+            "GroupBy"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Has a notification",
+          "file": "api/v2_internal/notifications/notifications_count_test.go",
+          "labels": null,
+          "fields_set": [
+            "GroupBy",
+            "ParentIds",
+            "Types"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "GetTotal",
+            "StatusCode"
+          ]
+        }
+      ]
+    },
+    {
+      "rpc": "CreateInboxNotifications",
+      "operation": "",
+      "tests": 0,
+      "status": {
+        "documented": [],
+        "asserted": [],
+        "missing": [],
+        "infra_statuses": [],
+        "coverage_pct": 0
+      },
+      "fields": {
+        "leaf_fields_read_by_rpc": 0,
+        "covered_count": 0,
+        "coverage_pct": 0,
+        "request_fields_set_by_tests": 0,
+        "set_by_positive_tests": 0,
+        "set_by_negative_tests": 0,
+        "by_depth": {
+          "top_level": {
+            "total": 0,
+            "set": 0,
+            "pct": 0
+          },
+          "nested": {
+            "total": 0,
+            "set": 0,
+            "pct": 0
+          },
+          "deep": {
+            "total": 0,
+            "set": 0,
+            "pct": 0
+          }
+        },
+        "representative": {
+          "units": 0,
+          "covered": 0,
+          "pct": 0,
+          "collapsed_types": []
+        },
+        "covered": null,
+        "gaps": null
+      },
+      "branches": {
+        "total": 0,
+        "enum_switch_branches": 0,
+        "server_gated_branches": 0,
+        "happy_path_reached": false,
+        "reachable_on_happy_path": 0,
+        "present_arm_exercised": 0,
+        "present_arm_pct": 0,
+        "absent_arm_exercised": 0,
+        "absent_arm_pct": 0,
+        "negative_arm_exercised": 0,
+        "negative_arm_pct": 0,
+        "both_arms_exercised": 0,
+        "coverage_pct": 0,
+        "by_origin": {
+          "service": {
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          },
+          "generated": {
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          },
+          "library": {
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          }
+        },
+        "gaps": []
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
+      },
+      "anomalies": {
+        "unmatched_test_fields": null
+      },
+      "test_facts": null,
+      "unmapped": true
+    },
+    {
+      "rpc": "DeleteInboxNotifications",
+      "operation": "",
+      "tests": 0,
+      "status": {
+        "documented": [],
+        "asserted": [],
+        "missing": [],
+        "infra_statuses": [],
+        "coverage_pct": 0
+      },
+      "fields": {
+        "leaf_fields_read_by_rpc": 2,
+        "covered_count": 0,
+        "coverage_pct": 0,
+        "request_fields_set_by_tests": 0,
+        "set_by_positive_tests": 0,
+        "set_by_negative_tests": 0,
+        "by_depth": {
+          "top_level": {
+            "total": 2,
+            "set": 0,
+            "pct": 0
+          },
+          "nested": {
+            "total": 0,
+            "set": 0,
+            "pct": 0
+          },
+          "deep": {
+            "total": 0,
+            "set": 0,
+            "pct": 0
+          }
+        },
+        "representative": {
+          "units": 2,
+          "covered": 0,
+          "pct": 0,
+          "collapsed_types": []
+        },
+        "covered": null,
+        "gaps": [
+          "in.Ids",
+          "in.UserDon"
+        ]
+      },
+      "branches": {
+        "total": 0,
+        "enum_switch_branches": 0,
+        "server_gated_branches": 0,
+        "happy_path_reached": false,
+        "reachable_on_happy_path": 0,
+        "present_arm_exercised": 0,
+        "present_arm_pct": 0,
+        "absent_arm_exercised": 0,
+        "absent_arm_pct": 0,
+        "negative_arm_exercised": 0,
+        "negative_arm_pct": 0,
+        "both_arms_exercised": 0,
+        "coverage_pct": 0,
+        "by_origin": {
+          "service": {
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          },
+          "generated": {
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          },
+          "library": {
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          }
+        },
+        "gaps": []
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [
+          "DeleteMany"
+        ],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
+      },
+      "anomalies": {
+        "unmatched_test_fields": null
+      },
+      "test_facts": null,
+      "unmapped": true
+    },
+    {
+      "rpc": "GetInboxNotification",
+      "operation": "",
+      "tests": 0,
+      "status": {
+        "documented": [],
+        "asserted": [],
+        "missing": [],
+        "infra_statuses": [],
+        "coverage_pct": 0
+      },
+      "fields": {
+        "leaf_fields_read_by_rpc": 2,
+        "covered_count": 0,
+        "coverage_pct": 0,
+        "request_fields_set_by_tests": 0,
+        "set_by_positive_tests": 0,
+        "set_by_negative_tests": 0,
+        "by_depth": {
+          "top_level": {
+            "total": 2,
+            "set": 0,
+            "pct": 0
+          },
+          "nested": {
+            "total": 0,
+            "set": 0,
+            "pct": 0
+          },
+          "deep": {
+            "total": 0,
+            "set": 0,
+            "pct": 0
+          }
+        },
+        "representative": {
+          "units": 2,
+          "covered": 0,
+          "pct": 0,
+          "collapsed_types": []
+        },
+        "covered": null,
+        "gaps": [
+          "in.Id",
+          "in.UserDon"
+        ]
+      },
+      "branches": {
+        "total": 2,
+        "enum_switch_branches": 0,
+        "server_gated_branches": 0,
+        "happy_path_reached": false,
+        "reachable_on_happy_path": 2,
+        "present_arm_exercised": 0,
+        "present_arm_pct": 0,
+        "absent_arm_exercised": 0,
+        "absent_arm_pct": 0,
+        "negative_arm_exercised": 0,
+        "negative_arm_pct": 0,
+        "both_arms_exercised": 0,
+        "coverage_pct": 0,
+        "by_origin": {
+          "service": {
+            "total": 2,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          },
+          "generated": {
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          },
+          "library": {
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          }
+        },
+        "gaps": [
+          {
+            "id": "b1",
+            "at": "internal/service/inbox/service.go:76",
+            "cond": "in.Id == \"\"",
+            "predicate_paths": [
+              "in.Id"
+            ]
+          },
+          {
+            "id": "b2",
+            "at": "internal/service/inbox/service.go:81",
+            "cond": "in.UserDon == nil",
+            "predicate_paths": [
+              "in.UserDon"
+            ]
+          }
+        ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [
+          "ReadWithFilter"
+        ],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
+      },
+      "anomalies": {
+        "unmatched_test_fields": null
+      },
+      "test_facts": null,
+      "unmapped": true
+    },
+    {
+      "rpc": "GroupInboxNotifications",
+      "operation": "NotificationsGroupPost",
+      "tests": 6,
+      "status": {
+        "documented": [
+          200,
+          400,
+          401,
+          403
+        ],
+        "asserted": [
+          200,
+          400
+        ],
+        "missing": [
+          401,
+          403
+        ],
+        "infra_statuses": [
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 50
+      },
+      "fields": {
+        "leaf_fields_read_by_rpc": 17,
+        "covered_count": 4,
+        "coverage_pct": 23.5,
+        "request_fields_set_by_tests": 5,
+        "set_by_positive_tests": 4,
+        "set_by_negative_tests": 0,
+        "by_depth": {
+          "top_level": {
+            "total": 5,
+            "set": 1,
+            "pct": 20
+          },
+          "nested": {
+            "total": 8,
+            "set": 3,
+            "pct": 37.5
+          },
+          "deep": {
+            "total": 4,
+            "set": 0,
+            "pct": 0
+          }
+        },
+        "representative": {
+          "units": 6,
+          "covered": 2,
+          "pct": 33.3,
+          "collapsed_types": [
+            "api.ListInboxNotificationsFilter"
+          ]
+        },
+        "covered": [
+          {
+            "path": "in.Filter.Priorities",
+            "match": "exact",
+            "by_tests": [
+              "Should have a notification for the User"
+            ]
+          },
+          {
+            "path": "in.Filter.States",
+            "match": "exact",
+            "by_tests": [
+              "Should have a notification for the User"
+            ]
+          },
+          {
+            "path": "in.Filter.Types",
+            "match": "exact",
+            "by_tests": [
+              "Has a notification",
+              "Should have a notification for the User"
+            ]
+          },
+          {
+            "path": "in.GroupBy",
+            "match": "exact",
+            "by_tests": [
+              "Has a notification",
+              "Has multiple notifications",
+              "Should have a notification for the User"
+            ]
+          }
+        ],
+        "gaps": [
+          "in.Filter.ActorDons",
+          "in.Filter.LastNotificationTimestamp.TimestampFrom",
+          "in.Filter.LastNotificationTimestamp.TimestampTo",
+          "in.Filter.NotificationIds",
+          "in.Filter.ParentDons",
+          "in.Filter.ParentTypeOp",
+          "in.Filter.ParentTypes",
+          "in.Filter.UserParticipationFilter.Activities",
+          "in.Filter.UserParticipationFilter.Visibilities",
+          "in.GroupSortBy",
+          "in.PerGroup",
+          "in.SortBy",
+          "in.UserDon"
+        ]
+      },
+      "branches": {
+        "total": 18,
+        "enum_switch_branches": 1,
+        "server_gated_branches": 0,
+        "happy_path_reached": true,
+        "reachable_on_happy_path": 14,
+        "present_arm_exercised": 6,
+        "present_arm_pct": 33.3,
+        "absent_arm_exercised": 9,
+        "absent_arm_pct": 64.3,
+        "negative_arm_exercised": 0,
+        "negative_arm_pct": 0,
+        "both_arms_exercised": 1,
+        "coverage_pct": 33.3,
+        "by_origin": {
+          "service": {
+            "total": 8,
+            "reachable_on_happy_path": 4,
+            "present_arm_exercised": 1,
+            "present_arm_pct": 12.5,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 4
+          },
+          "generated": {
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          },
+          "library": {
+            "total": 10,
+            "reachable_on_happy_path": 10,
+            "present_arm_exercised": 5,
+            "present_arm_pct": 50,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 5
+          }
+        },
+        "gaps": [
+          {
+            "id": "b1",
+            "at": "internal/infra/db/notification_repository.go:291",
+            "cond": "in.Filter == nil",
+            "predicate_paths": [
+              "in.Filter"
+            ]
+          },
+          {
+            "id": "b3",
+            "at": "internal/infra/db/notification_repository.go:432",
+            "cond": "in.Filter.LastNotificationTimestamp != nil",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp"
+            ]
+          },
+          {
+            "id": "b4",
+            "at": "internal/infra/db/notification_repository.go:439",
+            "cond": "in.Filter.LastNotificationTimestamp.TimestampFrom \u003e= 0",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp.TimestampFrom"
+            ]
+          },
+          {
+            "id": "b5",
+            "at": "internal/infra/db/notification_repository.go:454",
+            "cond": "in.Filter.UserParticipationFilter != nil",
+            "predicate_paths": [
+              "in.Filter.UserParticipationFilter"
+            ]
+          },
+          {
+            "id": "b6",
+            "at": "internal/infra/db/notification_repository.go:445",
+            "cond": "in.Filter.LastNotificationTimestamp.TimestampTo \u003e 0",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp.TimestampTo"
+            ]
+          },
+          {
+            "id": "b7",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260929155325-ebf6eb96f2c5/db/group_item_helpers.go:96",
+            "cond": "in.PerGroup \u003c 0",
+            "predicate_paths": [
+              "in.PerGroup"
+            ]
+          },
+          {
+            "id": "b8",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260929155325-ebf6eb96f2c5/db/group_item_helpers.go:99",
+            "cond": "in.PerGroup != 0",
+            "predicate_paths": [
+              "in.PerGroup"
+            ]
+          },
+          {
+            "id": "b9",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260929155325-ebf6eb96f2c5/db/group_item_helpers.go:100",
+            "cond": "in.PerGroup \u003c 0",
+            "predicate_paths": [
+              "in.PerGroup"
+            ]
+          },
+          {
+            "id": "b10",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260929155325-ebf6eb96f2c5/db/group_item_helpers.go:100",
+            "cond": "in.PerGroup \u003e *maxItemsPerGroup",
+            "predicate_paths": [
+              "in.PerGroup"
+            ]
+          },
+          {
+            "id": "b15",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260929155325-ebf6eb96f2c5/db/group_item_helpers.go:134",
+            "cond": "in * in.PerGroup \u003e *maxTotalGroupItems",
+            "predicate_paths": [
+              "in",
+              "in.PerGroup"
+            ]
+          },
+          {
+            "id": "b17",
+            "at": "internal/infra/db/notification_repository.go:243",
+            "cond": "in.Filter != nil",
+            "predicate_paths": [
+              "in.Filter"
+            ]
+          },
+          {
+            "id": "b18",
+            "at": "internal/service/inbox/service.go:107",
+            "cond": "in.UserDon == nil",
+            "predicate_paths": [
+              "in.UserDon"
+            ]
+          }
+        ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [
+          "Aggregate"
+        ],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
+      },
+      "anomalies": {
+        "unmatched_test_fields": [
+          {
+            "field": "parentids",
+            "fuzzy_suggestions": null
+          }
+        ]
+      },
+      "test_facts": [
+        {
+          "name": "Should have a notification for the User",
+          "file": "api/v2_internal/caterpillar/web_crawler_job_completion_test.go",
+          "labels": null,
+          "fields_set": [
+            "GroupBy",
+            "Priorities",
+            "States",
+            "Types"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "Groups",
+            "Groups.Notifications",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Fails to provide a response",
+          "file": "api/v2_internal/notifications/notifications_group_test.go",
+          "labels": null,
+          "fields_set": null,
+          "statuses": [
+            400
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Has a notification",
+          "file": "api/v2_internal/notifications/notifications_group_test.go",
+          "labels": null,
+          "fields_set": [
+            "GroupBy",
+            "ParentIds",
+            "Types"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "Groups",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Has a notification",
+          "file": "api/v2_internal/notifications/notifications_group_test.go",
+          "labels": null,
+          "fields_set": [
+            "GroupBy",
+            "ParentIds",
+            "Types"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "Groups",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Has a notification",
+          "file": "api/v2_internal/notifications/notifications_group_test.go",
+          "labels": null,
+          "fields_set": [
+            "GroupBy",
+            "ParentIds",
+            "Types"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "Groups",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Has multiple notifications",
+          "file": "api/v2_internal/notifications/notifications_group_test.go",
+          "labels": null,
+          "fields_set": [
+            "GroupBy",
+            "ParentIds"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "Groups",
+            "StatusCode"
+          ]
+        }
+      ]
+    },
+    {
+      "rpc": "ListInboxNotifications",
+      "operation": "NotificationsList,NotificationsListPost",
+      "tests": 10,
+      "status": {
+        "documented": [
+          200,
+          400,
+          401,
+          403
+        ],
+        "asserted": [
+          200,
+          201,
+          204,
+          400,
+          403
+        ],
+        "missing": [
+          401
+        ],
+        "infra_statuses": [
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 75
+      },
+      "fields": {
+        "leaf_fields_read_by_rpc": 14,
+        "covered_count": 2,
+        "coverage_pct": 14.3,
+        "request_fields_set_by_tests": 4,
+        "set_by_positive_tests": 2,
+        "set_by_negative_tests": 0,
+        "by_depth": {
+          "top_level": {
+            "total": 2,
+            "set": 0,
+            "pct": 0
+          },
+          "nested": {
+            "total": 8,
+            "set": 2,
+            "pct": 25
+          },
+          "deep": {
+            "total": 4,
+            "set": 0,
+            "pct": 0
+          }
+        },
+        "representative": {
+          "units": 3,
+          "covered": 1,
+          "pct": 33.3,
+          "collapsed_types": [
+            "api.ListInboxNotificationsFilter"
+          ]
+        },
+        "covered": [
+          {
+            "path": "in.Filter.States",
+            "match": "exact",
+            "by_tests": [
+              "Marks all notification read based on parent id.",
+              "Marks only few notifications as read."
+            ]
+          },
+          {
+            "path": "in.Filter.Types",
+            "match": "exact",
+            "by_tests": [
+              "Has a notification",
+              "Marks only few notifications as read."
+            ]
+          }
+        ],
+        "gaps": [
+          "in.Filter.ActorDons",
+          "in.Filter.LastNotificationTimestamp.TimestampFrom",
+          "in.Filter.LastNotificationTimestamp.TimestampTo",
+          "in.Filter.NotificationIds",
+          "in.Filter.ParentDons",
+          "in.Filter.ParentTypeOp",
+          "in.Filter.ParentTypes",
+          "in.Filter.Priorities",
+          "in.Filter.UserParticipationFilter.Activities",
+          "in.Filter.UserParticipationFilter.Visibilities",
+          "in.SortBy",
+          "in.UserDon"
+        ]
+      },
+      "branches": {
+        "total": 12,
+        "enum_switch_branches": 1,
+        "server_gated_branches": 0,
+        "happy_path_reached": true,
+        "reachable_on_happy_path": 8,
+        "present_arm_exercised": 5,
+        "present_arm_pct": 41.7,
+        "absent_arm_exercised": 3,
+        "absent_arm_pct": 37.5,
+        "negative_arm_exercised": 0,
+        "negative_arm_pct": 0,
+        "both_arms_exercised": 0,
+        "coverage_pct": 41.7,
+        "by_origin": {
+          "service": {
+            "total": 7,
+            "reachable_on_happy_path": 3,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 3
+          },
+          "generated": {
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          },
+          "library": {
+            "total": 5,
+            "reachable_on_happy_path": 5,
+            "present_arm_exercised": 5,
+            "present_arm_pct": 100,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          }
+        },
+        "gaps": [
+          {
+            "id": "b1",
+            "at": "internal/infra/db/notification_repository.go:291",
+            "cond": "in.Filter == nil",
+            "predicate_paths": [
+              "in.Filter"
+            ]
+          },
+          {
+            "id": "b3",
+            "at": "internal/infra/db/notification_repository.go:432",
+            "cond": "in.Filter.LastNotificationTimestamp != nil",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp"
+            ]
+          },
+          {
+            "id": "b4",
+            "at": "internal/infra/db/notification_repository.go:439",
+            "cond": "in.Filter.LastNotificationTimestamp.TimestampFrom \u003e= 0",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp.TimestampFrom"
+            ]
+          },
+          {
+            "id": "b5",
+            "at": "internal/infra/db/notification_repository.go:454",
+            "cond": "in.Filter.UserParticipationFilter != nil",
+            "predicate_paths": [
+              "in.Filter.UserParticipationFilter"
+            ]
+          },
+          {
+            "id": "b6",
+            "at": "internal/infra/db/notification_repository.go:445",
+            "cond": "in.Filter.LastNotificationTimestamp.TimestampTo \u003e 0",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp.TimestampTo"
+            ]
+          },
+          {
+            "id": "b12",
+            "at": "internal/infra/db/notification_repository.go:243",
+            "cond": "in.Filter != nil",
+            "predicate_paths": [
+              "in.Filter"
+            ]
+          },
+          {
+            "id": "b13",
+            "at": "internal/service/inbox/service.go:100",
+            "cond": "in.UserDon == nil",
+            "predicate_paths": [
+              "in.UserDon"
+            ]
+          }
+        ]
+      },
+      "dependencies": {
+        "services": null,
+        "datastore_calls": [
+          "Aggregate"
+        ],
+        "service_count": 0,
+        "call_count": 0,
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
+      },
+      "anomalies": {
+        "unmatched_test_fields": [
+          {
+            "field": "mode",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "parentids",
+            "fuzzy_suggestions": null
+          }
+        ]
+      },
+      "test_facts": [
+        {
+          "name": "should allow Rev User to access notifications.list",
+          "file": "api/v2_internal/gateway/rev_user_allowlist_test.go",
+          "labels": null,
+          "fields_set": null,
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "should confirm rev user allowlist enforcement is active in dev",
+          "file": "api/v2_internal/gateway/rev_user_allowlist_test.go",
+          "labels": null,
+          "fields_set": null,
+          "statuses": [
+            200,
+            403
+          ],
+          "asserts_success": false,
+          "asserts_error": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "should get notification for submission",
+          "file": "api/v2_internal/marketplace_consumer/marketplace_consumer_test.go",
+          "labels": null,
+          "fields_set": [
+            "ParentIds"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "Notifications",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Fails to provide a response",
+          "file": "api/v2_internal/notifications/notifications_list_test.go",
+          "labels": null,
+          "fields_set": [
+            "Mode"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Has a notification",
+          "file": "api/v2_internal/notifications/notifications_list_test.go",
+          "labels": null,
+          "fields_set": [
+            "ParentIds",
+            "Types"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "Notifications",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Has a notification",
+          "file": "api/v2_internal/notifications/notifications_list_test.go",
+          "labels": null,
+          "fields_set": [
+            "ParentIds",
+            "Types"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "Notifications",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Has a notification",
+          "file": "api/v2_internal/notifications/notifications_list_test.go",
+          "labels": null,
+          "fields_set": [
+            "ParentIds",
+            "Types"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "Notifications",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Marks all notification read based on parent id.",
+          "file": "api/v2_internal/notifications/notifications_mark_test.go",
+          "labels": null,
+          "fields_set": [
+            "ParentIds",
+            "States"
+          ],
+          "statuses": [
+            200,
+            204
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "Notifications",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Marks only few notifications as read.",
+          "file": "api/v2_internal/notifications/notifications_mark_test.go",
+          "labels": null,
+          "fields_set": [
+            "ParentIds",
+            "States",
+            "Types"
+          ],
+          "statuses": [
+            200,
+            204
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "Notifications",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Rev user should receive notifications for comments on all 4 tickets across workspaces",
+          "file": "api/v2_internal/notifications/notifications_multiworkspace_test.go",
+          "labels": null,
+          "fields_set": [
+            "ParentIds"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "Notifications",
+            "StatusCode"
+          ]
+        }
+      ]
+    },
+    {
+      "rpc": "MarkInboxNotifications",
+      "operation": "NotificationsMark,UserInteractionsUpdate",
+      "tests": 8,
+      "status": {
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          404
+        ],
+        "asserted": [
+          200,
+          204,
+          400,
+          401,
+          403
+        ],
+        "missing": [
+          404
+        ],
+        "infra_statuses": [
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 80
+      },
+      "fields": {
+        "leaf_fields_read_by_rpc": 2,
+        "covered_count": 0,
+        "coverage_pct": 0,
+        "request_fields_set_by_tests": 6,
+        "set_by_positive_tests": 0,
+        "set_by_negative_tests": 0,
+        "by_depth": {
+          "top_level": {
+            "total": 2,
+            "set": 0,
+            "pct": 0
+          },
+          "nested": {
+            "total": 0,
+            "set": 0,
+            "pct": 0
+          },
+          "deep": {
+            "total": 0,
+            "set": 0,
+            "pct": 0
+          }
+        },
+        "representative": {
+          "units": 2,
+          "covered": 0,
+          "pct": 0,
+          "collapsed_types": []
+        },
+        "covered": null,
+        "gaps": [
+          "in.Entries",
+          "in.UserDon"
+        ]
+      },
+      "branches": {
+        "total": 1,
+        "enum_switch_branches": 0,
+        "server_gated_branches": 0,
+        "happy_path_reached": true,
+        "reachable_on_happy_path": 1,
+        "present_arm_exercised": 1,
+        "present_arm_pct": 100,
+        "absent_arm_exercised": 0,
+        "absent_arm_pct": 0,
+        "negative_arm_exercised": 0,
+        "negative_arm_pct": 0,
+        "both_arms_exercised": 0,
+        "coverage_pct": 100,
+        "by_origin": {
+          "service": {
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          },
+          "generated": {
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          },
+          "library": {
+            "total": 1,
+            "reachable_on_happy_path": 1,
+            "present_arm_exercised": 1,
+            "present_arm_pct": 100,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          }
+        },
+        "gaps": null
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "UpdateManyWithFilter"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 1,
+        "call_count": 1,
+        "reached_by_test": true,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
+      },
+      "anomalies": {
+        "unmatched_test_fields": [
+          {
+            "field": "filter",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "panel",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "recordid",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "state",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "timestamp",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "unread",
+            "fuzzy_suggestions": null
+          }
+        ]
+      },
+      "test_facts": [
+        {
+          "name": "Fails as a priority is wrong",
+          "file": "api/v2_internal/notifications/notifications_mark_test.go",
+          "labels": null,
+          "fields_set": [
+            "Filter",
+            "State"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Marks all notification read based on parent id.",
+          "file": "api/v2_internal/notifications/notifications_mark_test.go",
+          "labels": null,
+          "fields_set": [
+            "Filter",
+            "State"
+          ],
+          "statuses": [
+            200,
+            204
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "Notifications",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Marks only few notifications as read.",
+          "file": "api/v2_internal/notifications/notifications_mark_test.go",
+          "labels": null,
+          "fields_set": [
+            "Filter",
+            "State"
+          ],
+          "statuses": [
+            200,
+            204
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "Notifications",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Should create a DM, post a comment on it, fetch the inbox list successfully and update the inbox list",
+          "file": "api/v2_internal/inbox/inbox_test.go",
+          "labels": [
+            "POSITIVE"
+          ],
+          "fields_set": [
+            "Panel",
+            "RecordId",
+            "Timestamp",
+            "Unread"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "Chat",
+            "Chat.AsDm",
+            "Entries",
+            "Entries.LastComments",
+            "Entries.LastComments.Body",
+            "Entries.Unread"
+          ]
+        },
+        {
+          "name": "marks notification as read when testUser opens the DM with actor1",
+          "file": "e2e/computer_multiplayer/computer_multiplayer_activity_test.go",
+          "labels": null,
+          "fields_set": [
+            "RecordId",
+            "Unread"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "testUser receives notifications and left nav updates when actor1 shares computer chat",
+          "file": "e2e/computer_multiplayer/computer_multiplayer_activity_test.go",
+          "labels": null,
+          "fields_set": [
+            "RecordId",
+            "Unread"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Updates user interactions via internal API",
+          "file": "e2e/smoke_test_case/user_interactions_test/user_interactions_test.go",
+          "labels": [
+            "SMOKE",
+            "INTERNAL_USER_INTERACTIONS_UPDATE"
+          ],
+          "fields_set": [
+            "RecordId"
+          ],
+          "statuses": [
+            401,
+            403
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Validates user interactions API with authentication",
+          "file": "e2e/smoke_test_case/user_interactions_test/user_interactions_test.go",
+          "labels": [
+            "SMOKE",
+            "INTERNAL_USER_INTERACTIONS_UPDATE"
+          ],
+          "fields_set": [
+            "RecordId"
+          ],
+          "statuses": [
+            401,
+            403
+          ],
+          "asserts_success": true,
+          "asserts_error": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        }
+      ]
+    },
+    {
+      "rpc": "UpdateInboxNotifications",
+      "operation": "",
+      "tests": 0,
+      "status": {
+        "documented": [],
+        "asserted": [],
+        "missing": [],
+        "infra_statuses": [],
+        "coverage_pct": 0
+      },
+      "fields": {
+        "leaf_fields_read_by_rpc": 2,
+        "covered_count": 0,
+        "coverage_pct": 0,
+        "request_fields_set_by_tests": 0,
+        "set_by_positive_tests": 0,
+        "set_by_negative_tests": 0,
+        "by_depth": {
+          "top_level": {
+            "total": 2,
+            "set": 0,
+            "pct": 0
+          },
+          "nested": {
+            "total": 0,
+            "set": 0,
+            "pct": 0
+          },
+          "deep": {
+            "total": 0,
+            "set": 0,
+            "pct": 0
+          }
+        },
+        "representative": {
+          "units": 2,
+          "covered": 0,
+          "pct": 0,
+          "collapsed_types": []
+        },
+        "covered": null,
+        "gaps": [
+          "in.Entries",
+          "in.UserDon"
+        ]
+      },
+      "branches": {
+        "total": 1,
+        "enum_switch_branches": 0,
+        "server_gated_branches": 0,
+        "happy_path_reached": false,
+        "reachable_on_happy_path": 0,
+        "present_arm_exercised": 0,
+        "present_arm_pct": 0,
+        "absent_arm_exercised": 0,
+        "absent_arm_pct": 0,
+        "negative_arm_exercised": 0,
+        "negative_arm_pct": 0,
+        "both_arms_exercised": 0,
+        "coverage_pct": 0,
+        "by_origin": {
+          "service": {
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          },
+          "generated": {
+            "total": 0,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          },
+          "library": {
+            "total": 1,
+            "reachable_on_happy_path": 0,
+            "present_arm_exercised": 0,
+            "present_arm_pct": 0,
+            "negative_arm_exercised": 0,
+            "negative_arm_pct": 0,
+            "absent_arm_exercised": 0
+          }
+        },
+        "gaps": [
+          {
+            "id": "b1",
+            "at": "/Users/asd/go/pkg/mod/github.com/devrev/notifications-client@v0.0.0-20260907111245-4644358f186d/common/error.go:184",
+            "cond": "in == nil",
+            "predicate_paths": [
+              "in"
+            ]
+          }
+        ]
+      },
+      "dependencies": {
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "UpdateManyWithFilter"
+            ]
+          }
+        ],
+        "datastore_calls": [],
+        "service_count": 1,
+        "call_count": 1,
+        "reached_by_test": false,
+        "deps_result_used_in_response": 0,
+        "deps_result_checked_by_test": 0,
+        "response_links": null
+      },
+      "anomalies": {
+        "unmatched_test_fields": null
+      },
+      "test_facts": null,
+      "unmapped": true
+    }
+  ],
+  "rpcs": 8,
+  "service": "GRPCServer"
+}

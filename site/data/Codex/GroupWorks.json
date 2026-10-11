@@ -1,0 +1,2414 @@
+{
+  "service": "Codex",
+  "coverage": {
+    "rpc": "GroupWorks",
+    "operation": "WorksGroupPost",
+    "tests": 63,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403
+      ],
+      "asserted": [
+        200,
+        400
+      ],
+      "missing": [
+        401,
+        403
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 50
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 126,
+      "covered_count": 2,
+      "coverage_pct": 1.6,
+      "request_fields_set_by_tests": 7,
+      "set_by_positive_tests": 2,
+      "set_by_negative_tests": 1,
+      "by_depth": {
+        "top_level": {
+          "total": 13,
+          "set": 2,
+          "pct": 15.4
+        },
+        "nested": {
+          "total": 35,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 78,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 17,
+        "covered": 2,
+        "pct": 11.8,
+        "collapsed_types": [
+          "apiv2.CustomListWorksFilter",
+          "apiv2.ListWorksFilter"
+        ]
+      },
+      "covered": [
+        {
+          "path": "in.GroupBy",
+          "match": "exact",
+          "by_tests": [
+            "Custom Fields - Boolean",
+            "Custom Fields - Devuser - caveat option user equalsTo",
+            "Custom Fields - Double",
+            "Custom Fields - Number",
+            "Custom Fields - Part - caveat option Parts equalsTo",
+            "Custom Fields - customer",
+            "Development team coordinates issue resolution",
+            "Group by forecast category - With invalid account filter",
+            "Group by forecast category - With invalid type",
+            "Should be able to group the tickets",
+            "Should be able to group tickets",
+            "Should only allow reading tickets in queued stage",
+            "Support team manages customer tickets throughout resolution process",
+            "With account filter",
+            "With invalid group by",
+            "With new group and custom role - caveat option Customer account belongs to",
+            "With new group and custom role - caveat option Customer account equalsTo",
+            "With new group and custom role - caveat option Customer account not equalsTo",
+            "With new group and custom role - caveat option Ticket group EqualsTo ",
+            "With new group and custom role - caveat option Ticket group belongs to",
+            "With new group and custom role - caveat option Ticket group not EqualsTo ",
+            "With new group and custom role - caveat option Ticket workspace belongs to ",
+            "With new group and custom role - caveat option Ticket workspace equals to ",
+            "With new group and custom role - caveat option Ticket workspace not equals to ",
+            "With new group and custom role - caveat option unverified user ",
+            "With new group and custom role - caveat option user belongs to reporters ",
+            "With new group and custom role - caveat option user equalsTo  ",
+            "With new group and custom role - caveat option user not equalsTo  ",
+            "With new group and custom role - caveat option verified user ",
+            "With new group and custom role - without caveat ",
+            "With type filter",
+            "should create tickets and group by parts without sorting",
+            "should create tickets with multiple owners, group them, and verify group order",
+            "should create tickets, group by parts, and sort by created date",
+            "should groupby stage and verify tickets"
+          ]
+        },
+        {
+          "path": "in.SortBy",
+          "match": "exact",
+          "by_tests": [
+            "should create tickets, group by parts, and sort by created date"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.CustomFilter.IssueFilters",
+        "in.CustomFilter.TaskFilters",
+        "in.CustomFilter.TicketFilters",
+        "in.DevOid",
+        "in.DqlQuery.SearchExpression",
+        "in.DqlQuery.SearchQuery",
+        "in.ExcludeWorkIds",
+        "in.Filter.ActualCloseDateOp",
+        "in.Filter.CreatedByAgentId",
+        "in.Filter.CreatedByAgentIdOp",
+        "in.Filter.CreatedById",
+        "in.Filter.CreatedByIdOp",
+        "in.Filter.DeprecatedCreatedByAgentId",
+        "in.Filter.DeprecatedCreatedByAgentIdOp",
+        "in.Filter.ExternalSourceData",
+        "in.Filter.IssueFilter.AccountIds",
+        "in.Filter.IssueFilter.AccountIdsOp",
+        "in.Filter.IssueFilter.ActualStartDateOp",
+        "in.Filter.IssueFilter.AppliesToPartId",
+        "in.Filter.IssueFilter.AppliesToPartIdOp",
+        "in.Filter.IssueFilter.AppliesToVersionIds",
+        "in.Filter.IssueFilter.Apps",
+        "in.Filter.IssueFilter.AppsOp",
+        "in.Filter.IssueFilter.DevelopedWith",
+        "in.Filter.IssueFilter.LastCodeActivityOp",
+        "in.Filter.IssueFilter.MilestoneId",
+        "in.Filter.IssueFilter.MilestoneIdOp",
+        "in.Filter.IssueFilter.Priority",
+        "in.Filter.IssueFilter.ProjectId",
+        "in.Filter.IssueFilter.ProjectIdOp",
+        "in.Filter.IssueFilter.ReleaseVersionIds",
+        "in.Filter.IssueFilter.RevOrgIds",
+        "in.Filter.IssueFilter.RevOrgIdsOp",
+        "in.Filter.IssueFilter.SlaId",
+        "in.Filter.IssueFilter.SlaSummary",
+        "in.Filter.IssueFilter.SprintId",
+        "in.Filter.IssueFilter.SprintIdOp",
+        "in.Filter.IssueFilter.SprintState",
+        "in.Filter.IssueFilter.SprintStateOp",
+        "in.Filter.IssueFilter.Subtype",
+        "in.Filter.IssueFilter.SubtypeOp",
+        "in.Filter.IssueFilter.TargetStartDateOp",
+        "in.Filter.Links",
+        "in.Filter.LinksOp",
+        "in.Filter.ModifiedById",
+        "in.Filter.ModifiedByIdOp",
+        "in.Filter.OpportunityFilter.AccountId",
+        "in.Filter.OpportunityFilter.AccountIdOp",
+        "in.Filter.OpportunityFilter.AnnualContractValue",
+        "in.Filter.OpportunityFilter.Apps",
+        "in.Filter.OpportunityFilter.AppsOp",
+        "in.Filter.OpportunityFilter.Budget",
+        "in.Filter.OpportunityFilter.ContactIds",
+        "in.Filter.OpportunityFilter.ContactIdsOp",
+        "in.Filter.OpportunityFilter.ForecastCategory",
+        "in.Filter.OpportunityFilter.Priority",
+        "in.Filter.OpportunityFilter.Subtype",
+        "in.Filter.OpportunityFilter.SubtypeOp",
+        "in.Filter.OpportunityFilter.Value",
+        "in.Filter.OwnedByIds",
+        "in.Filter.OwnedByIdsOp",
+        "in.Filter.Reactions",
+        "in.Filter.ReportedByIds",
+        "in.Filter.ReportedByIdsOp",
+        "in.Filter.Stage",
+        "in.Filter.StageOp",
+        "in.Filter.StagedInfo",
+        "in.Filter.SyncMetadata",
+        "in.Filter.SyncMetadataOp",
+        "in.Filter.Tags",
+        "in.Filter.TagsOp",
+        "in.Filter.TargetCloseDateOp",
+        "in.Filter.TaskFilter.AppliesToPartId",
+        "in.Filter.TaskFilter.AppliesToPartIdOp",
+        "in.Filter.TaskFilter.AppliesToVersionIds",
+        "in.Filter.TaskFilter.Apps",
+        "in.Filter.TaskFilter.AppsOp",
+        "in.Filter.TaskFilter.Priority",
+        "in.Filter.TaskFilter.Subtype",
+        "in.Filter.TaskFilter.SubtypeOp",
+        "in.Filter.TicketFilter.AccountId",
+        "in.Filter.TicketFilter.AccountIdOp",
+        "in.Filter.TicketFilter.AppliesToPartId",
+        "in.Filter.TicketFilter.AppliesToPartIdOp",
+        "in.Filter.TicketFilter.AppliesToVersionIds",
+        "in.Filter.TicketFilter.Apps",
+        "in.Filter.TicketFilter.AppsOp",
+        "in.Filter.TicketFilter.BrandId",
+        "in.Filter.TicketFilter.Channels",
+        "in.Filter.TicketFilter.ChannelsOp",
+        "in.Filter.TicketFilter.ChannelsV2",
+        "in.Filter.TicketFilter.ChannelsV2Instances",
+        "in.Filter.TicketFilter.ChannelsV2InstancesOp",
+        "in.Filter.TicketFilter.ChannelsV2Op",
+        "in.Filter.TicketFilter.Group",
+        "in.Filter.TicketFilter.GroupOp",
+        "in.Filter.TicketFilter.OwnedByAgentId",
+        "in.Filter.TicketFilter.RevOid",
+        "in.Filter.TicketFilter.RevOidOp",
+        "in.Filter.TicketFilter.SentimentOp",
+        "in.Filter.TicketFilter.Sessions",
+        "in.Filter.TicketFilter.Severity",
+        "in.Filter.TicketFilter.SlaId",
+        "in.Filter.TicketFilter.SlaSummary",
+        "in.Filter.TicketFilter.SourceChannelV2",
+        "in.Filter.TicketFilter.SourceChannelV2Instance",
+        "in.Filter.TicketFilter.Subtype",
+        "in.Filter.TicketFilter.SubtypeOp",
+        "in.Filter.TicketFilter.SurveysAggregation",
+        "in.Filter.TicketFilter.SurveysAggregationOp",
+        "in.Filter.WorkType",
+        "in.Filter.WorkflowId",
+        "in.Filter.WorkflowIdOp",
+        "in.Filter.WorkflowRunId",
+        "in.Filter.WorkflowRunIdOp",
+        "in.IncludeWorkIds",
+        "in.ObjectTypes",
+        "in.Page",
+        "in.PerGroup",
+        "in.PerPage",
+        "in.SkipItemsInGroup",
+        "in.SkipTotals",
+        "in.SortGroupKeyBy",
+        "in.VistaId"
+      ]
+    },
+    "branches": {
+      "total": 89,
+      "enum_switch_branches": 90,
+      "server_gated_branches": 10,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 58,
+      "present_arm_exercised": 10,
+      "present_arm_pct": 11.2,
+      "absent_arm_exercised": 55,
+      "absent_arm_pct": 94.8,
+      "negative_arm_exercised": 4,
+      "negative_arm_pct": 4.5,
+      "both_arms_exercised": 7,
+      "coverage_pct": 11.2,
+      "by_origin": {
+        "service": {
+          "total": 34,
+          "reachable_on_happy_path": 31,
+          "present_arm_exercised": 10,
+          "present_arm_pct": 29.4,
+          "negative_arm_exercised": 4,
+          "negative_arm_pct": 11.8,
+          "absent_arm_exercised": 28
+        },
+        "generated": {
+          "total": 48,
+          "reachable_on_happy_path": 20,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 20
+        },
+        "library": {
+          "total": 7,
+          "reachable_on_happy_path": 7,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 7
+        }
+      },
+      "gaps": [
+        {
+          "id": "b2",
+          "at": "internal/serverv2/list_works.go:300",
+          "cond": "in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.SortBy == nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b49",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6318",
+          "cond": "in.Filter.TicketFilter|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.TicketFilter"
+          ]
+        },
+        {
+          "id": "b50",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6319",
+          "cond": "in.Filter.TicketFilter|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.TicketFilter"
+          ]
+        },
+        {
+          "id": "b51",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6323",
+          "cond": "in.Filter.IssueFilter|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.IssueFilter"
+          ]
+        },
+        {
+          "id": "b52",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6324",
+          "cond": "in.Filter.IssueFilter|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.IssueFilter"
+          ]
+        },
+        {
+          "id": "b53",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6328",
+          "cond": "in.Filter.TaskFilter|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.TaskFilter"
+          ]
+        },
+        {
+          "id": "b54",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6329",
+          "cond": "in.Filter.TaskFilter|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.TaskFilter"
+          ]
+        },
+        {
+          "id": "b55",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6333",
+          "cond": "in.Filter.OpportunityFilter|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.OpportunityFilter"
+          ]
+        },
+        {
+          "id": "b56",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6334",
+          "cond": "in.Filter.OpportunityFilter|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.OpportunityFilter"
+          ]
+        },
+        {
+          "id": "b57",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.SortBy|in.VistaId == nil",
+          "predicate_paths": [
+            "in.VistaId"
+          ]
+        },
+        {
+          "id": "b58",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:285",
+          "cond": "in.CustomFilter.IssueFilters|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter.IssueFilters"
+          ]
+        },
+        {
+          "id": "b59",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:286",
+          "cond": "in.CustomFilter.IssueFilters|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter.IssueFilters"
+          ]
+        },
+        {
+          "id": "b60",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:290",
+          "cond": "in.CustomFilter.TicketFilters|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter.TicketFilters"
+          ]
+        },
+        {
+          "id": "b61",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:291",
+          "cond": "in.CustomFilter.TicketFilters|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter.TicketFilters"
+          ]
+        },
+        {
+          "id": "b62",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:295",
+          "cond": "in.CustomFilter.TaskFilters|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter.TaskFilters"
+          ]
+        },
+        {
+          "id": "b63",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:296",
+          "cond": "in.CustomFilter.TaskFilters|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter.TaskFilters"
+          ]
+        },
+        {
+          "id": "b66",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:467",
+          "cond": "in.Filter|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b67",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:468",
+          "cond": "in.Filter|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b68",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:472",
+          "cond": "in.PerGroup|in.SortBy >= 0",
+          "predicate_paths": [
+            "in.PerGroup"
+          ]
+        },
+        {
+          "id": "b69",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:475",
+          "cond": "in.PerGroup|in.SortBy <= 100",
+          "predicate_paths": [
+            "in.PerGroup"
+          ]
+        },
+        {
+          "id": "b70",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:478",
+          "cond": "in.Page|in.SortBy >= 0",
+          "predicate_paths": [
+            "in.Page"
+          ]
+        },
+        {
+          "id": "b71",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:481",
+          "cond": "in.PerPage|in.SortBy >= 0",
+          "predicate_paths": [
+            "in.PerPage"
+          ]
+        },
+        {
+          "id": "b72",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:484",
+          "cond": "in.PerPage|in.SortBy <= 100",
+          "predicate_paths": [
+            "in.PerPage"
+          ]
+        },
+        {
+          "id": "b73",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:498",
+          "cond": "in.SortBy|in.VistaId != nil",
+          "predicate_paths": [
+            "in.VistaId"
+          ]
+        },
+        {
+          "id": "b74",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:514",
+          "cond": "in.CustomFilter|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter"
+          ]
+        },
+        {
+          "id": "b75",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:515",
+          "cond": "in.CustomFilter|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter"
+          ]
+        },
+        {
+          "id": "b79",
+          "at": "internal/serverv2/works_helper.go:1779",
+          "cond": "in.DqlQuery|in.SortBy == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b80",
+          "at": "internal/serverv2/works_helper.go:1782",
+          "cond": "in.DqlQuery.SearchQuery|in.SortBy != \"\"",
+          "predicate_paths": [
+            "in.DqlQuery.SearchQuery"
+          ]
+        },
+        {
+          "id": "b81",
+          "at": "internal/serverv2/works_helper.go:1817",
+          "cond": "in.DqlQuery|in.SortBy",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b82",
+          "at": "internal/serverv2/works_helper.go:1822",
+          "cond": "in.DqlQuery|in.SortBy",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b83",
+          "at": "internal/dql/dql_converter.go:85",
+          "cond": "in.DqlQuery|in.SortBy == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b84",
+          "at": "internal/dql/dql_converter.go:57",
+          "cond": "in.DqlQuery|in.SortBy == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b85",
+          "at": "internal/serverv2/works_helper.go:1734",
+          "cond": "in.DevOid|in.Filter|in.ObjectTypes|in.SortBy == nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b86",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:96",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.PerGroup|in.SortBy < 0",
+          "predicate_paths": [
+            "in.PerGroup"
+          ]
+        },
+        {
+          "id": "b87",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:99",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.PerGroup|in.SortBy != 0",
+          "predicate_paths": [
+            "in.PerGroup"
+          ]
+        },
+        {
+          "id": "b88",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:100",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.PerGroup|in.SortBy < 0",
+          "predicate_paths": [
+            "in.PerGroup"
+          ]
+        },
+        {
+          "id": "b89",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:100",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.PerGroup|in.SortBy > *maxItemsPerGroup",
+          "predicate_paths": [
+            "in.PerGroup"
+          ]
+        },
+        {
+          "id": "b90",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:134",
+          "cond": "call() * in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.PerGroup|in.SortBy > *maxTotalGroupItems",
+          "predicate_paths": [
+            "in.PerGroup"
+          ]
+        },
+        {
+          "id": "b92",
+          "at": "internal/serverv2/list_works.go:300",
+          "cond": "in.DevOid|in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy == nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b139",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6318",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.TicketFilter"
+          ]
+        },
+        {
+          "id": "b140",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6319",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.TicketFilter"
+          ]
+        },
+        {
+          "id": "b141",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6323",
+          "cond": "in.DevOid|in.Filter.IssueFilter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.IssueFilter"
+          ]
+        },
+        {
+          "id": "b142",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6324",
+          "cond": "in.DevOid|in.Filter.IssueFilter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.IssueFilter"
+          ]
+        },
+        {
+          "id": "b143",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6328",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.TaskFilter"
+          ]
+        },
+        {
+          "id": "b144",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6329",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.TaskFilter"
+          ]
+        },
+        {
+          "id": "b145",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6333",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.OpportunityFilter"
+          ]
+        },
+        {
+          "id": "b146",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/schema.pb.validator.go:6334",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter.OpportunityFilter"
+          ]
+        },
+        {
+          "id": "b147",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy|in.VistaId == nil",
+          "predicate_paths": [
+            "in.VistaId"
+          ]
+        },
+        {
+          "id": "b148",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:285",
+          "cond": "in.CustomFilter.IssueFilters|in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter.IssueFilters"
+          ]
+        },
+        {
+          "id": "b149",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:286",
+          "cond": "in.CustomFilter.IssueFilters|in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter.IssueFilters"
+          ]
+        },
+        {
+          "id": "b150",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:290",
+          "cond": "in.CustomFilter.TicketFilters|in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter.TicketFilters"
+          ]
+        },
+        {
+          "id": "b151",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:291",
+          "cond": "in.CustomFilter.TicketFilters|in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter.TicketFilters"
+          ]
+        },
+        {
+          "id": "b152",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:295",
+          "cond": "in.CustomFilter.TaskFilters|in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter.TaskFilters"
+          ]
+        },
+        {
+          "id": "b153",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:296",
+          "cond": "in.CustomFilter.TaskFilters|in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter.TaskFilters"
+          ]
+        },
+        {
+          "id": "b156",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:467",
+          "cond": "in.DevOid|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b157",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:468",
+          "cond": "in.DevOid|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b158",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:472",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.PerGroup|in.SortBy >= 0",
+          "predicate_paths": [
+            "in.PerGroup"
+          ]
+        },
+        {
+          "id": "b159",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:475",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.PerGroup|in.SortBy <= 100",
+          "predicate_paths": [
+            "in.PerGroup"
+          ]
+        },
+        {
+          "id": "b160",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:478",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.Page|in.SortBy >= 0",
+          "predicate_paths": [
+            "in.Page"
+          ]
+        },
+        {
+          "id": "b161",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:481",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.PerPage|in.SortBy >= 0",
+          "predicate_paths": [
+            "in.PerPage"
+          ]
+        },
+        {
+          "id": "b162",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:484",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.PerPage|in.SortBy <= 100",
+          "predicate_paths": [
+            "in.PerPage"
+          ]
+        },
+        {
+          "id": "b163",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:498",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy|in.VistaId != nil",
+          "predicate_paths": [
+            "in.VistaId"
+          ]
+        },
+        {
+          "id": "b164",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:514",
+          "cond": "in.CustomFilter|in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter"
+          ]
+        },
+        {
+          "id": "b165",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:515",
+          "cond": "in.CustomFilter|in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.CustomFilter"
+          ]
+        },
+        {
+          "id": "b169",
+          "at": "internal/serverv2/works_helper.go:1779",
+          "cond": "in.DevOid|in.DqlQuery|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b170",
+          "at": "internal/serverv2/works_helper.go:1782",
+          "cond": "in.DevOid|in.DqlQuery.SearchQuery|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != \"\"",
+          "predicate_paths": [
+            "in.DqlQuery.SearchQuery"
+          ]
+        },
+        {
+          "id": "b171",
+          "at": "internal/serverv2/works_helper.go:1817",
+          "cond": "in.DevOid|in.DqlQuery|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b172",
+          "at": "internal/serverv2/works_helper.go:1822",
+          "cond": "in.DevOid|in.DqlQuery|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b173",
+          "at": "internal/dql/dql_converter.go:85",
+          "cond": "in.DevOid|in.DqlQuery|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b174",
+          "at": "internal/dql/dql_converter.go:57",
+          "cond": "in.DevOid|in.DqlQuery|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b175",
+          "at": "internal/serverv2/works_helper.go:1734",
+          "cond": "in.DevOid|in.Filter|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy == nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b176",
+          "at": "internal/serverv2/group_works.go:206",
+          "cond": "in.DevOid|in.DqlQuery|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b177",
+          "at": "internal/serverv2/group_works.go:259",
+          "cond": "in.DevOid|in.DqlQuery|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b178",
+          "at": "internal/serverv2/group_works.go:241",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SkipItemsInGroup|in.SortBy",
+          "predicate_paths": [
+            "in.SkipItemsInGroup"
+          ]
+        },
+        {
+          "id": "b180",
+          "at": "internal/serverv2/group_works.go:337",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy|in.VistaId != nil",
+          "predicate_paths": [
+            "in.VistaId"
+          ]
+        },
+        {
+          "id": "b182",
+          "at": "internal/serverv2/group_works.go:360",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.IssueFilter.SprintId|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy == nil",
+          "predicate_paths": [
+            "in.Filter.IssueFilter.SprintId"
+          ]
+        },
+        {
+          "id": "b183",
+          "at": "internal/serverv2/group_works.go:360",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy|in.VistaId == nil",
+          "predicate_paths": [
+            "in.VistaId"
+          ]
+        },
+        {
+          "id": "b187",
+          "at": "internal/serverv2/group_works.go:440",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.PerPage|in.SortBy > 100",
+          "predicate_paths": [
+            "in.PerPage"
+          ]
+        },
+        {
+          "id": "b189",
+          "at": "internal/serverv2/group_works.go:459",
+          "cond": "in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy|in.SortGroupKeyBy",
+          "predicate_paths": [
+            "in.SortGroupKeyBy"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": [
+        {
+          "service": "codex",
+          "calls": [
+            "DecryptBytes",
+            "DecryptText"
+          ]
+        },
+        {
+          "service": "schemaregistry",
+          "calls": [
+            "GetAggregatedSchema"
+          ]
+        },
+        {
+          "service": "this service",
+          "calls": [
+            "GroupSearch",
+            "SetError"
+          ]
+        }
+      ],
+      "datastore_calls": [
+        "Aggregate"
+      ],
+      "service_count": 3,
+      "call_count": 5,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 4,
+      "deps_result_checked_by_test": 1,
+      "response_links": [
+        {
+          "dep": "wisp:GroupSearch",
+          "path": "out.Groups",
+          "checked_by": [
+            "Development team coordinates issue resolution",
+            "Support team manages customer tickets throughout resolution process",
+            "should create tickets and group by parts without sorting",
+            "should create tickets with multiple owners, group them, and verify group order",
+            "should create tickets, group by parts, and sort by created date",
+            "should groupby stage and verify tickets"
+          ],
+          "checked": true
+        },
+        {
+          "dep": "wisp:GroupSearch",
+          "path": "out.IsLastPage",
+          "checked_by": null,
+          "checked": false
+        },
+        {
+          "dep": "wisp:GroupSearch",
+          "path": "out.NextCursor",
+          "checked_by": null,
+          "checked": false
+        },
+        {
+          "dep": "wisp:GroupSearch",
+          "path": "out.PrevCursor",
+          "checked_by": null,
+          "checked": false
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "limit",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "limitpergroup",
+          "fuzzy_suggestions": [
+            "in.Filter.TicketFilter.Group",
+            "in.PerGroup"
+          ]
+        },
+        {
+          "field": "opportunity",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "ticket",
+          "fuzzy_suggestions": [
+            "in.CustomFilter.TicketFilters"
+          ]
+        },
+        {
+          "field": "type",
+          "fuzzy_suggestions": [
+            "in.Filter.IssueFilter.Subtype",
+            "in.Filter.IssueFilter.SubtypeOp",
+            "in.Filter.OpportunityFilter.Subtype",
+            "in.Filter.OpportunityFilter.SubtypeOp",
+            "in.Filter.TaskFilter.Subtype",
+            "in.Filter.TaskFilter.SubtypeOp",
+            "in.Filter.TicketFilter.Subtype",
+            "in.Filter.TicketFilter.SubtypeOp",
+            "in.Filter.WorkType",
+            "in.ObjectTypes"
+          ]
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Custom Fields - Double",
+        "file": "api/v2_internal/work/issues/crud/custom_objects/group_issue_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Boolean",
+        "file": "api/v2_internal/work/issues/crud/custom_objects/group_issue_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Number",
+        "file": "api/v2_internal/work/issues/crud/custom_objects/group_issue_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - customer",
+        "file": "api/v2_internal/work/issues/crud/custom_objects/group_issue_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Part - caveat option Parts equalsTo",
+        "file": "api/v2_internal/work/issues/crud/custom_objects/group_issue_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Devuser - caveat option user equalsTo",
+        "file": "api/v2_internal/work/issues/crud/custom_objects/group_issue_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo  ",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Caveat option user Not equalsTo",
+        "file": "api/v2_internal/work/issues/crud/mfz/group_issue_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Double",
+        "file": "api/v2_internal/work/opportunities/custom_objects/group_opportunity_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Boolean",
+        "file": "api/v2_internal/work/opportunities/custom_objects/group_opportunity_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Number",
+        "file": "api/v2_internal/work/opportunities/custom_objects/group_opportunity_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - customer",
+        "file": "api/v2_internal/work/opportunities/custom_objects/group_opportunity_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Custom Fields - Devuser - caveat option user equalsTo",
+        "file": "api/v2_internal/work/opportunities/custom_objects/group_opportunity_custom_object_mfz_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With type filter",
+        "file": "api/v2_internal/work/opportunities/group_opportunity_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With account filter",
+        "file": "api/v2_internal/work/opportunities/group_opportunity_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Opportunity",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Group by forecast category - With invalid type",
+        "file": "api/v2_internal/work/opportunities/group_opportunity_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With invalid group by",
+        "file": "api/v2_internal/work/opportunities/group_opportunity_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Group by forecast category - With invalid account filter",
+        "file": "api/v2_internal/work/opportunities/group_opportunity_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Opportunity",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With caveat option user not equalsTo",
+        "file": "api/v2_internal/work/opportunities/mfz/group_opportunity_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With create privilege",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With caveat option user not equalsTo",
+        "file": "api/v2_internal/work/tickets/crud/mfz/groupby_ticket_mfz_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should be able to group the tickets",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should be able to group tickets",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - without caveat ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option user equalsTo  ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Customer account equalsTo",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Customer account belongs to",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket workspace equals to ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket workspace belongs to ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option verified user ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option user not equalsTo  ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option unverified user ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option user belongs to reporters ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket group not EqualsTo ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket group EqualsTo ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket group belongs to",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Customer account not equalsTo",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "With new group and custom role - caveat option Ticket workspace not equals to ",
+        "file": "api/v2_internal/work/tickets/crud/revuser_mfz/group_ticket_mfz_revuser_test.go",
+        "labels": null,
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Development team coordinates issue resolution",
+        "file": "e2e/smoke_test_case/works_management/works_issues_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_WORKS_COUNT",
+          "INTERNAL_WORKS_GROUP"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetCount",
+          "Groups",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Support team manages customer tickets throughout resolution process",
+        "file": "e2e/smoke_test_case/works_management/works_tickets_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_WORKS_LIST",
+          "INTERNAL_WORKS_COUNT"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetCount",
+          "Groups",
+          "StatusCode",
+          "Works"
+        ]
+      },
+      {
+        "name": "Should only allow reading tickets in queued stage",
+        "file": "e2e/ticktes_user_journey/mfz_tickets_test/mfz_tickets_test.go",
+        "labels": [
+          "UAT",
+          "DEV_USER"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Ticket",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "should groupby stage and verify tickets",
+        "file": "e2e/ticktes_user_journey/tickets_grouping_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Limit",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Groups"
+        ]
+      },
+      {
+        "name": "should create tickets and group by parts without sorting",
+        "file": "e2e/ticktes_user_journey/tickets_grouping_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Limit",
+          "LimitPerGroup",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Groups"
+        ]
+      },
+      {
+        "name": "should create tickets, group by parts, and sort by created date",
+        "file": "e2e/ticktes_user_journey/tickets_grouping_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Limit",
+          "LimitPerGroup",
+          "SortBy",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Groups"
+        ]
+      },
+      {
+        "name": "should create tickets with multiple owners, group them, and verify group order",
+        "file": "e2e/ticktes_user_journey/tickets_grouping_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Limit",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Groups",
+          "Works"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/codex/internal/serverv2.Codex).GroupWorks",
+    "request_type": "apiv2.GroupWorksRequest",
+    "response_type": "apiv2.GroupWorksResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetDevOid",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/works_helper.go:1035"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetCustomFilter",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/works_helper.go:1039"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetFilter",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/works_helper.go:1040"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetCustomFilter",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/works_helper.go:1040"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetFilter",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/work_crud_helpers.go:972"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetObjectTypes",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/work_crud_helpers.go:973"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetFilter",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/work_crud_helpers.go:976"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetObjectTypes",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/work_crud_helpers.go:972"
+      },
+      {
+        "kind": "rpc",
+        "target": "GroupSearch",
+        "via_paths": [
+          "in.DevOid",
+          "in.DqlQuery",
+          "in.Filter",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/works_helper.go:936"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in.DevOid",
+          "in.DqlQuery",
+          "in.Filter",
+          "in.SortBy"
+        ],
+        "at": "internal/common/errors.go:214"
+      },
+      {
+        "kind": "rpc",
+        "target": "DecryptText",
+        "via_paths": [
+          "in.DevOid",
+          "in.SortBy"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/encryption/decryption.go:95"
+      },
+      {
+        "kind": "rpc",
+        "target": "DecryptBytes",
+        "via_paths": [
+          "in.DevOid",
+          "in.SortBy"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/encryption/decryption.go:118"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in.DevOid",
+          "in.DqlQuery",
+          "in.Filter",
+          "in.SortBy"
+        ],
+        "at": "internal/common/errors.go:129"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in.DevOid",
+          "in.DqlQuery",
+          "in.Filter",
+          "in.SortBy"
+        ],
+        "at": "internal/common/errors.go:139"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in.DevOid",
+          "in.DqlQuery",
+          "in.Filter",
+          "in.SortBy"
+        ],
+        "at": "internal/common/errors.go:148"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in.DevOid",
+          "in.DqlQuery",
+          "in.Filter",
+          "in.SortBy"
+        ],
+        "at": "internal/common/errors.go:163"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in.DevOid",
+          "in.DqlQuery",
+          "in.Filter",
+          "in.SortBy"
+        ],
+        "at": "internal/common/errors.go:173"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in.DevOid",
+          "in.DqlQuery",
+          "in.Filter",
+          "in.SortBy"
+        ],
+        "at": "internal/common/errors.go:184"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in.DevOid",
+          "in.DqlQuery",
+          "in.Filter",
+          "in.SortBy"
+        ],
+        "at": "internal/common/errors.go:204"
+      },
+      {
+        "kind": "dispatch",
+        "target": "ParseQuery",
+        "via_paths": [
+          "in.DqlQuery",
+          "in.SortBy"
+        ],
+        "at": "internal/dql/dql_converter.go:90"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetDevOid",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/list_works.go:107"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetFilter",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/list_works.go:114"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetFilter",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/list_works.go:115"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetFilter",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/list_works.go:123"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetFilter",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/list_works.go:137"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetFilter",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/list_works.go:138"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetExcludeWorkIds",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/list_works.go:143"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetExcludeWorkIds",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/list_works.go:144"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetIncludeWorkIds",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/list_works.go:159"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetIncludeWorkIds",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/list_works.go:160"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetVistaId",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/list_works.go:173"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetVistaId",
+        "via_paths": [
+          "in",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/list_works.go:174"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetFilter",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.ObjectTypes",
+          "in.SortBy"
+        ],
+        "at": "internal/serverv2/list_works.go:79"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetAggregatedSchema",
+        "via_paths": [
+          "in.DevOid",
+          "in.Filter.IssueFilter.Apps",
+          "in.Filter.OpportunityFilter.Apps",
+          "in.Filter.TaskFilter.Apps",
+          "in.Filter.TicketFilter.Apps",
+          "in.GroupBy",
+          "in.ObjectTypes",
+          "in.SortBy"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260701100938-401162ec7707/lib/get_aggregated_schema_helper.go:288"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetSortBy",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.Filter.IssueFilter.Apps",
+          "in.Filter.OpportunityFilter.Apps",
+          "in.Filter.TaskFilter.Apps",
+          "in.Filter.TicketFilter.Apps",
+          "in.GroupBy",
+          "in.ObjectTypes",
+          "in.SortBy"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:107"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetSortBy",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.Filter.IssueFilter.Apps",
+          "in.Filter.OpportunityFilter.Apps",
+          "in.Filter.TaskFilter.Apps",
+          "in.Filter.TicketFilter.Apps",
+          "in.GroupBy",
+          "in.ObjectTypes",
+          "in.SortBy"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:110"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetSortBy",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.Filter.IssueFilter.Apps",
+          "in.Filter.OpportunityFilter.Apps",
+          "in.Filter.TaskFilter.Apps",
+          "in.Filter.TicketFilter.Apps",
+          "in.GroupBy",
+          "in.ObjectTypes",
+          "in.SortBy"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:111"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPage",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.Filter.IssueFilter.Apps",
+          "in.Filter.OpportunityFilter.Apps",
+          "in.Filter.TaskFilter.Apps",
+          "in.Filter.TicketFilter.Apps",
+          "in.GroupBy",
+          "in.ObjectTypes",
+          "in.SortBy"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:118"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPage",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.Filter.IssueFilter.Apps",
+          "in.Filter.OpportunityFilter.Apps",
+          "in.Filter.TaskFilter.Apps",
+          "in.Filter.TicketFilter.Apps",
+          "in.GroupBy",
+          "in.ObjectTypes",
+          "in.SortBy"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:121"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.Filter.IssueFilter.Apps",
+          "in.Filter.OpportunityFilter.Apps",
+          "in.Filter.TaskFilter.Apps",
+          "in.Filter.TicketFilter.Apps",
+          "in.GroupBy",
+          "in.ObjectTypes",
+          "in.SortBy"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:126"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPage",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.Filter.IssueFilter.Apps",
+          "in.Filter.OpportunityFilter.Apps",
+          "in.Filter.TaskFilter.Apps",
+          "in.Filter.TicketFilter.Apps",
+          "in.GroupBy",
+          "in.ObjectTypes",
+          "in.SortBy"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:124"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.Filter.IssueFilter.Apps",
+          "in.Filter.OpportunityFilter.Apps",
+          "in.Filter.TaskFilter.Apps",
+          "in.Filter.TicketFilter.Apps",
+          "in.GroupBy",
+          "in.ObjectTypes",
+          "in.SortBy"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:127"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.Filter.IssueFilter.Apps",
+          "in.Filter.OpportunityFilter.Apps",
+          "in.Filter.TaskFilter.Apps",
+          "in.Filter.TicketFilter.Apps",
+          "in.GroupBy",
+          "in.ObjectTypes",
+          "in.SortBy"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:134"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.Filter.IssueFilter.Apps",
+          "in.Filter.OpportunityFilter.Apps",
+          "in.Filter.TaskFilter.Apps",
+          "in.Filter.TicketFilter.Apps",
+          "in.GroupBy",
+          "in.ObjectTypes",
+          "in.SortBy"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:130"
+      },
+      {
+        "kind": "db",
+        "target": "Aggregate",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.Filter.IssueFilter.Apps",
+          "in.Filter.OpportunityFilter.Apps",
+          "in.Filter.TaskFilter.Apps",
+          "in.Filter.TicketFilter.Apps",
+          "in.GroupBy",
+          "in.ObjectTypes",
+          "in.PerGroup",
+          "in.SkipItemsInGroup",
+          "in.SkipTotals",
+          "in.SortBy"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:534"
+      },
+      {
+        "kind": "db",
+        "target": "Aggregate",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.Filter.IssueFilter.Apps",
+          "in.Filter.OpportunityFilter.Apps",
+          "in.Filter.TaskFilter.Apps",
+          "in.Filter.TicketFilter.Apps",
+          "in.GroupBy",
+          "in.ObjectTypes",
+          "in.PerGroup",
+          "in.SkipItemsInGroup",
+          "in.SkipTotals",
+          "in.SortBy"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/group_item_helpers.go:699"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:432",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrDQLQueryNil",
+        "at": "internal/dql/dql_converter.go:86",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GroupWorks` (HTTP operation `WorksGroupPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomFilter.IssueFilters\n  - in.CustomFilter.TaskFilters\n  - in.CustomFilter.TicketFilters\n  - in.DevOid\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SearchQuery\n  - in.ExcludeWorkIds\n  - in.Filter.ActualCloseDateOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.DeprecatedCreatedByAgentId\n  - in.Filter.DeprecatedCreatedByAgentIdOp\n  - in.Filter.ExternalSourceData\n  - in.Filter.IssueFilter.AccountIds\n  - in.Filter.IssueFilter.AccountIdsOp\n  - in.Filter.IssueFilter.ActualStartDateOp\n  - in.Filter.IssueFilter.AppliesToPartId\n  - in.Filter.IssueFilter.AppliesToPartIdOp\n  - in.Filter.IssueFilter.AppliesToVersionIds\n  - in.Filter.IssueFilter.Apps\n  - in.Filter.IssueFilter.AppsOp\n  - in.Filter.IssueFilter.DevelopedWith\n  - in.Filter.IssueFilter.LastCodeActivityOp\n  - in.Filter.IssueFilter.MilestoneId\n  - in.Filter.IssueFilter.MilestoneIdOp\n  - in.Filter.IssueFilter.Priority\n  - in.Filter.IssueFilter.ProjectId\n  - in.Filter.IssueFilter.ProjectIdOp\n  - in.Filter.IssueFilter.ReleaseVersionIds\n  - in.Filter.IssueFilter.RevOrgIds\n  - in.Filter.IssueFilter.RevOrgIdsOp\n  - in.Filter.IssueFilter.SlaId\n  - in.Filter.IssueFilter.SlaSummary\n  - in.Filter.IssueFilter.SprintId\n  - in.Filter.IssueFilter.SprintIdOp\n  - in.Filter.IssueFilter.SprintState\n  - in.Filter.IssueFilter.SprintStateOp\n  - in.Filter.IssueFilter.Subtype\n  - in.Filter.IssueFilter.SubtypeOp\n  - in.Filter.IssueFilter.TargetStartDateOp\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.OpportunityFilter.AccountId\n  - in.Filter.OpportunityFilter.AccountIdOp\n  - in.Filter.OpportunityFilter.AnnualContractValue\n  - in.Filter.OpportunityFilter.Apps\n  - in.Filter.OpportunityFilter.AppsOp\n  - in.Filter.OpportunityFilter.Budget\n  - in.Filter.OpportunityFilter.ContactIds\n  - in.Filter.OpportunityFilter.ContactIdsOp\n  - in.Filter.OpportunityFilter.ForecastCategory\n  - in.Filter.OpportunityFilter.Priority\n  - in.Filter.OpportunityFilter.Subtype\n  - in.Filter.OpportunityFilter.SubtypeOp\n  - in.Filter.OpportunityFilter.Value\n  - in.Filter.OwnedByIds\n  - (+64 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.SortBy == nil\n  - in.Filter.TicketFilter|in.SortBy != nil\n  - in.Filter.TicketFilter|in.SortBy != nil\n  - in.Filter.IssueFilter|in.SortBy != nil\n  - in.Filter.IssueFilter|in.SortBy != nil\n  - in.Filter.TaskFilter|in.SortBy != nil\n  - in.Filter.TaskFilter|in.SortBy != nil\n  - in.Filter.OpportunityFilter|in.SortBy != nil\n  - in.Filter.OpportunityFilter|in.SortBy != nil\n  - in.SortBy|in.VistaId == nil\n  - in.CustomFilter.IssueFilters|in.SortBy != nil\n  - in.CustomFilter.IssueFilters|in.SortBy != nil\n  - in.CustomFilter.TicketFilters|in.SortBy != nil\n  - in.CustomFilter.TicketFilters|in.SortBy != nil\n  - in.CustomFilter.TaskFilters|in.SortBy != nil\n  - in.CustomFilter.TaskFilters|in.SortBy != nil\n  - in.Filter|in.SortBy != nil\n  - in.Filter|in.SortBy != nil\n  - in.PerGroup|in.SortBy >= 0\n  - in.PerGroup|in.SortBy <= 100\n  - in.Page|in.SortBy >= 0\n  - in.PerPage|in.SortBy >= 0\n  - in.PerPage|in.SortBy <= 100\n  - in.SortBy|in.VistaId != nil\n  - in.CustomFilter|in.SortBy != nil\n  - in.CustomFilter|in.SortBy != nil\n  - in.DqlQuery|in.SortBy == nil\n  - in.DqlQuery.SearchQuery|in.SortBy != \"\"\n  - in.DqlQuery|in.SortBy\n  - in.DqlQuery|in.SortBy\n  - in.DqlQuery|in.SortBy == nil\n  - in.DqlQuery|in.SortBy == nil\n  - in.DevOid|in.Filter|in.ObjectTypes|in.SortBy == nil\n  - in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.PerGroup|in.SortBy < 0\n  - in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.PerGroup|in.SortBy != 0\n  - in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.PerGroup|in.SortBy < 0\n  - in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.PerGroup|in.SortBy > *maxItemsPerGroup\n  - call() * in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.PerGroup|in.SortBy > *maxTotalGroupItems\n  - in.DevOid|in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy == nil\n  - in.DevOid|in.Filter.IssueFilter.Apps|in.Filter.OpportunityFilter.Apps|in.Filter.TaskFilter.Apps|in.Filter.TicketFilter|in.Filter.TicketFilter.Apps|in.GroupBy|in.ObjectTypes|in.SortBy != nil\n  - (+39 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `limit` -> suggestions []\n  - test field `limitpergroup` -> suggestions ['in.Filter.TicketFilter.Group', 'in.PerGroup']\n  - test field `opportunity` -> suggestions []\n  - test field `ticket` -> suggestions ['in.CustomFilter.TicketFilters']\n  - test field `type` -> suggestions ['in.Filter.IssueFilter.Subtype', 'in.Filter.IssueFilter.SubtypeOp', 'in.Filter.OpportunityFilter.Subtype', 'in.Filter.OpportunityFilter.SubtypeOp', 'in.Filter.TaskFilter.Subtype', 'in.Filter.TaskFilter.SubtypeOp', 'in.Filter.TicketFilter.Subtype', 'in.Filter.TicketFilter.SubtypeOp', 'in.Filter.WorkType', 'in.ObjectTypes']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

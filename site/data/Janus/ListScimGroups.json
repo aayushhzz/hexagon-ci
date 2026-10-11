@@ -1,0 +1,297 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "ListScimGroups",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": [],
+      "asserted": [],
+      "missing": [],
+      "infra_statuses": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 3,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 3,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 3,
+        "covered": 0,
+        "pct": 0,
+        "collapsed_types": []
+      },
+      "covered": null,
+      "gaps": [
+        "in.Count",
+        "in.Filter",
+        "in.StartIndex"
+      ]
+    },
+    "branches": {
+      "total": 8,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 7,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "by_origin": {
+        "service": {
+          "total": 8,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "internal/service/scim_users.go:537",
+          "cond": "in.Filter == \"\"",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "internal/service/scim_groups.go:483",
+          "cond": "in.Filter == \"\"",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/service/scim_users.go:621",
+          "cond": "in.Count != nil",
+          "predicate_paths": [
+            "in.Count"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "internal/service/scim_users.go:622",
+          "cond": "in.Count > 100",
+          "predicate_paths": [
+            "in.Count"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "internal/service/scim_users.go:632",
+          "cond": "in.StartIndex != nil",
+          "predicate_paths": [
+            "in.StartIndex"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "internal/service/scim_users.go:638",
+          "cond": "in.StartIndex % in.Count == 0",
+          "predicate_paths": [
+            "in.Count",
+            "in.StartIndex"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "internal/service/scim_users.go:644",
+          "cond": "in.Count|in.StartIndex != 1",
+          "predicate_paths": [
+            "in.Count",
+            "in.StartIndex"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "internal/service/scim_groups.go:288",
+          "cond": "in != nil",
+          "predicate_paths": [
+            "in"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": [
+        {
+          "service": "janus",
+          "calls": [
+            "ListGroups"
+          ]
+        },
+        {
+          "service": "this service",
+          "calls": [
+            "ListItemsHelper",
+            "PrefixSearch"
+          ]
+        }
+      ],
+      "datastore_calls": [],
+      "service_count": 2,
+      "call_count": 3,
+      "reached_by_test": false,
+      "deps_result_used_in_response": 2,
+      "deps_result_checked_by_test": 0,
+      "response_links": [
+        {
+          "dep": "wisp:PrefixSearch",
+          "path": "out.Resources",
+          "checked_by": null,
+          "checked": false
+        },
+        {
+          "dep": "wisp:PrefixSearch",
+          "path": "out.TotalResults",
+          "checked_by": null,
+          "checked": false
+        }
+      ]
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).ListScimGroups",
+    "request_type": "api.ListScimGroupsRequest",
+    "response_type": "api.ListScimGroupsResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetExternalError",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/scim_groups.go:289"
+      },
+      {
+        "kind": "rpc",
+        "target": "ListGroups",
+        "via_paths": [
+          "in.Count",
+          "in.StartIndex"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/lib/space/filtering.go:406"
+      },
+      {
+        "kind": "rpc",
+        "target": "PrefixSearch",
+        "via_paths": [
+          "in.Count",
+          "in.StartIndex"
+        ],
+        "at": "mfz/service/common.go:1865"
+      },
+      {
+        "kind": "rpc",
+        "target": "ListItemsHelper",
+        "via_paths": [
+          "in.Count",
+          "in.StartIndex"
+        ],
+        "at": "mfz/service/list_group.go:196"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ErrInvalidQuarter",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:116",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrTimeBeforeFiscalStart",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:197",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidPeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:211",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrTimeBeforeFiscalStart",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:207",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:283",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:319",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:380",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:219",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/go/fiscal/fiscal_boundaries.go:225",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListScimGroups` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Count\n  - in.Filter\n  - in.StartIndex\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter == \"\"\n  - in.Filter == \"\"\n  - in.Count != nil\n  - in.Count > 100\n  - in.StartIndex != nil\n  - in.StartIndex % in.Count == 0\n  - in.Count|in.StartIndex != 1\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

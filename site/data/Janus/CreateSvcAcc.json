@@ -1,0 +1,451 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "CreateSvcAcc",
+    "operation": "ServiceAccountsCreate",
+    "tests": 12,
+    "status": {
+      "documented": [
+        201,
+        400,
+        401,
+        403
+      ],
+      "asserted": [
+        200,
+        201,
+        403
+      ],
+      "missing": [
+        400,
+        401
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 50
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 1,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 2,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 1,
+        "covered": 0,
+        "pct": 0,
+        "collapsed_types": []
+      },
+      "covered": null,
+      "gaps": [
+        "in.ServiceAccount.State"
+      ]
+    },
+    "branches": {
+      "total": 2,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 1,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 1,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "by_origin": {
+        "service": {
+          "total": 2,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 1
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "internal/service/serviceaccount.go:61",
+          "cond": "in.ServiceAccount == nil",
+          "predicate_paths": [
+            "in.ServiceAccount"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "internal/service/serviceaccount.go:67",
+          "cond": "in.ServiceAccount.State == 0",
+          "predicate_paths": [
+            "in.ServiceAccount.State"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": null,
+      "datastore_calls": [],
+      "service_count": 0,
+      "call_count": 0,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "displayname",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "genkeyring",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Creating an AAT using AAT token with act-as functionality for devuser[0] after adding service account to Systems Users group",
+        "file": "api/v2_internal/auth_tokens/auth_act_as_tokens_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_AUTH_TOKENS_CREATE"
+        ],
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          201,
+          403
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetAccessToken",
+          "GetExpiresIn",
+          "GetTokenType",
+          "ServiceAccount",
+          "ServiceAccount.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "rejects non-dev users (401/403)",
+        "file": "api/v2_internal/metis/respond_to_object_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "GenKeyring"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "AccessToken",
+          "ServiceAccount",
+          "ServiceAccount.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "CreateRoleSetViaApplyRoleSet",
+        "file": "api/v2_internal/role_sets/crud/role_set_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ROLE_SETS_CREATE"
+        ],
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Role",
+          "Role.Id",
+          "ServiceAccount",
+          "ServiceAccount.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "CreateRoleSetViaApplyRoleSet - Fail",
+        "file": "api/v2_internal/role_sets/crud/role_set_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ROLE_SETS_CREATE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          201,
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Role",
+          "Role.Id",
+          "ServiceAccount",
+          "ServiceAccount.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "custom_object:scopetest:write required for CustomObjectsCreate",
+        "file": "api/v2_internal/scopes/crud/scopes_custom_object_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ROLE_SETS_CREATE"
+        ],
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          201,
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "ServiceAccount",
+          "ServiceAccount.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "custom_object:scopetest:all required for CustomObjectsDelete",
+        "file": "api/v2_internal/scopes/crud/scopes_custom_object_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ROLE_SETS_CREATE"
+        ],
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          200,
+          201,
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "CustomObject",
+          "CustomObject.Id",
+          "ServiceAccount",
+          "ServiceAccount.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "service account impersonate scope controls PAT:act-as token creation and API access",
+        "file": "api/v2_internal/scopes/crud/scopes_pat_act_as_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_AUTH_TOKENS_CREATE"
+        ],
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          200,
+          201,
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "DevUsers",
+          "DevUsers.Id",
+          "GetAccessToken",
+          "ServiceAccount",
+          "ServiceAccount.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "rev_user:read and account:read assign/revoke, rev_user:read persists after revoking account:read",
+        "file": "api/v2_internal/scopes/crud/scopes_rev_user_account_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ROLE_SETS_CREATE"
+        ],
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          200,
+          201,
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Accounts",
+          "ServiceAccount",
+          "ServiceAccount.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "account:write scope required for AccountsCreate and AccountsUpdate",
+        "file": "api/v2_internal/scopes/crud/scopes_rev_user_account_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ROLE_SETS_CREATE"
+        ],
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          200,
+          201,
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Account",
+          "Account.Id",
+          "ServiceAccount",
+          "ServiceAccount.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "account:all scope required for AccountsDelete",
+        "file": "api/v2_internal/scopes/crud/scopes_rev_user_account_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ROLE_SETS_CREATE"
+        ],
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          200,
+          201,
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Account",
+          "Account.Id",
+          "ServiceAccount",
+          "ServiceAccount.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Creating a service account with a keyring",
+        "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_SERVICE_ACCOUNTS_CREATE"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "GenKeyring"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "ServiceAccount",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Creating a service account with no keyring",
+        "file": "api/v2_internal/service_accounts/service_accounts_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_SERVICE_ACCOUNTS_CREATE"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "GenKeyring"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "ServiceAccount",
+          "StatusCode"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).CreateSvcAcc",
+    "request_type": "api.CreateSvcAccRequest",
+    "response_type": "api.CreateSvcAccResponse",
+    "sinks": [],
+    "errors": [
+      {
+        "symbol": "errInvalidAuthContext",
+        "at": "internal/service/serviceaccount.go:57",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateSvcAcc` (HTTP operation `ServiceAccountsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ServiceAccount.State\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ServiceAccount == nil\n  - in.ServiceAccount.State == 0\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContext\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `displayname` -> suggestions []\n  - test field `genkeyring` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

@@ -1,0 +1,296 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "GetDevOrg",
+    "operation": "DevOrgsGetPost,DevOrgsSelfGetPost",
+    "tests": 6,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404
+      ],
+      "asserted": [
+        200
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 20
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 1,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 1,
+        "covered": 0,
+        "pct": 0,
+        "collapsed_types": []
+      },
+      "covered": null,
+      "gaps": [
+        "in.DevOid"
+      ]
+    },
+    "branches": {
+      "total": 0,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 5,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 0,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "by_origin": {
+        "service": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": null
+    },
+    "dependencies": {
+      "services": null,
+      "datastore_calls": [
+        "Get",
+        "LockForRead",
+        "Set"
+      ],
+      "service_count": 0,
+      "call_count": 0,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": [
+      {
+        "name": "DevUsers Get",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEV_ORGS_GET",
+          "INTERNAL_DEV_ORGS_SELF_GET",
+          "INTERNAL_DEV_ORGS_SELF"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "DevOrg",
+          "DevOrg.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Dev orgs get by revuser",
+        "file": "api/v2_internal/rev_users/crudl_revu_actor/dev_orgs_get_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Manages organization information and settings",
+        "file": "e2e/smoke_test_case/identity_management/dev_orgs_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_DEV_ORGS_GET"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "DevOrg",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Validates organization metadata and configuration integrity",
+        "file": "e2e/smoke_test_case/identity_management/dev_orgs_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_DEV_ORGS_GET"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "DevOrg",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Validates API reliability through repeated access patterns",
+        "file": "e2e/smoke_test_case/identity_management/dev_orgs_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_DEV_ORGS_GET"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "DevOrg",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "DevUsers Get",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEV_ORGS_GET",
+          "INTERNAL_DEV_ORGS_SELF_GET",
+          "INTERNAL_DEV_ORGS_SELF"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "DevOrg",
+          "DevOrg.Id",
+          "StatusCode"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).GetDevOrg",
+    "request_type": "api.GetDevOrgRequest",
+    "response_type": "api.GetDevOrgResponse",
+    "sinks": [
+      {
+        "kind": "db",
+        "target": "Get",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/service/devorg.go:130"
+      },
+      {
+        "kind": "db",
+        "target": "LockForRead",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/service/devorg.go:139"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/service/cache.go:146"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/service/devorg.go:159"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "errDevOrgNotFound",
+        "at": "internal/service/devorg.go:99",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidJWTToken",
+        "at": "internal/service/devorg.go:1763",
+        "tainted": true
+      },
+      {
+        "symbol": "errInvalidAuthContextDevOid",
+        "at": "internal/service/devorg.go:1769",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetDevOrg` (HTTP operation `DevOrgsGetPost,DevOrgsSelfGetPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - none\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevOrgNotFound\n  - errInvalidAuthContextDevOid\n  - errInvalidJWTToken\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

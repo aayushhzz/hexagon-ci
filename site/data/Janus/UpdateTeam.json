@@ -1,0 +1,902 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "UpdateTeam",
+    "operation": "TeamsUpdate",
+    "tests": 12,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404
+      ],
+      "asserted": [
+        200,
+        201,
+        400,
+        403,
+        409
+      ],
+      "missing": [
+        401,
+        404
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 60
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 20,
+      "covered_count": 10,
+      "coverage_pct": 50,
+      "request_fields_set_by_tests": 4,
+      "set_by_positive_tests": 10,
+      "set_by_negative_tests": 9,
+      "by_depth": {
+        "top_level": {
+          "total": 2,
+          "set": 2,
+          "pct": 100
+        },
+        "nested": {
+          "total": 4,
+          "set": 1,
+          "pct": 25
+        },
+        "deep": {
+          "total": 14,
+          "set": 7,
+          "pct": 50
+        }
+      },
+      "representative": {
+        "units": 20,
+        "covered": 10,
+        "pct": 50,
+        "collapsed_types": [
+          "api.CustomSchemaSpec",
+          "proto.Id",
+          "wrapperspb.StringValue"
+        ]
+      },
+      "covered": [
+        {
+          "path": "in.DryRun",
+          "match": "exact",
+          "by_tests": [
+            "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid"
+          ]
+        },
+        {
+          "path": "in.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid",
+            "NoAccessUserCannotUpdate",
+            "RegularUserCannotUpdate",
+            "UpdateArchivedTeamFails",
+            "UpdateFailsWhenSpaceManagementDisabled",
+            "UpdateKey",
+            "WithDuplicateKeyFromAnotherTeam",
+            "WithInvalidKeyFormat",
+            "WithNonExistentId",
+            "grants a newly created team's creator a space-scoped admin role"
+          ]
+        },
+        {
+          "path": "in.Team.ExternalSourceData.CreatedById.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid",
+            "NoAccessUserCannotUpdate",
+            "RegularUserCannotUpdate",
+            "UpdateArchivedTeamFails",
+            "UpdateFailsWhenSpaceManagementDisabled",
+            "UpdateKey",
+            "WithDuplicateKeyFromAnotherTeam",
+            "WithInvalidKeyFormat",
+            "WithNonExistentId",
+            "grants a newly created team's creator a space-scoped admin role"
+          ]
+        },
+        {
+          "path": "in.Team.ExternalSourceData.ModifiedById.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid",
+            "NoAccessUserCannotUpdate",
+            "RegularUserCannotUpdate",
+            "UpdateArchivedTeamFails",
+            "UpdateFailsWhenSpaceManagementDisabled",
+            "UpdateKey",
+            "WithDuplicateKeyFromAnotherTeam",
+            "WithInvalidKeyFormat",
+            "WithNonExistentId",
+            "grants a newly created team's creator a space-scoped admin role"
+          ]
+        },
+        {
+          "path": "in.Team.Icon.ArtifactId.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid",
+            "NoAccessUserCannotUpdate",
+            "RegularUserCannotUpdate",
+            "UpdateArchivedTeamFails",
+            "UpdateFailsWhenSpaceManagementDisabled",
+            "UpdateKey",
+            "WithDuplicateKeyFromAnotherTeam",
+            "WithInvalidKeyFormat",
+            "WithNonExistentId",
+            "grants a newly created team's creator a space-scoped admin role"
+          ]
+        },
+        {
+          "path": "in.Team.Name",
+          "match": "exact",
+          "by_tests": [
+            "grants a newly created team's creator a space-scoped admin role"
+          ]
+        },
+        {
+          "path": "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid",
+            "NoAccessUserCannotUpdate",
+            "RegularUserCannotUpdate",
+            "UpdateArchivedTeamFails",
+            "UpdateFailsWhenSpaceManagementDisabled",
+            "UpdateKey",
+            "WithDuplicateKeyFromAnotherTeam",
+            "WithInvalidKeyFormat",
+            "WithNonExistentId",
+            "grants a newly created team's creator a space-scoped admin role"
+          ]
+        },
+        {
+          "path": "in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid",
+            "NoAccessUserCannotUpdate",
+            "RegularUserCannotUpdate",
+            "UpdateArchivedTeamFails",
+            "UpdateFailsWhenSpaceManagementDisabled",
+            "UpdateKey",
+            "WithDuplicateKeyFromAnotherTeam",
+            "WithInvalidKeyFormat",
+            "WithNonExistentId",
+            "grants a newly created team's creator a space-scoped admin role"
+          ]
+        },
+        {
+          "path": "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid",
+            "NoAccessUserCannotUpdate",
+            "RegularUserCannotUpdate",
+            "UpdateArchivedTeamFails",
+            "UpdateFailsWhenSpaceManagementDisabled",
+            "UpdateKey",
+            "WithDuplicateKeyFromAnotherTeam",
+            "WithInvalidKeyFormat",
+            "WithNonExistentId",
+            "grants a newly created team's creator a space-scoped admin role"
+          ]
+        },
+        {
+          "path": "in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id",
+          "match": "exact",
+          "by_tests": [
+            "AllKeysUniqueAcrossTeams",
+            "DryRunUpdateInvalidKey",
+            "DryRunUpdateValid",
+            "NoAccessUserCannotUpdate",
+            "RegularUserCannotUpdate",
+            "UpdateArchivedTeamFails",
+            "UpdateFailsWhenSpaceManagementDisabled",
+            "UpdateKey",
+            "WithDuplicateKeyFromAnotherTeam",
+            "WithInvalidKeyFormat",
+            "WithNonExistentId",
+            "grants a newly created team's creator a space-scoped admin role"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.CustomSchemaSpec.Drop",
+        "in.Team.Description",
+        "in.Team.DevrevCopy",
+        "in.Team.EnabledFeatures.Values",
+        "in.Team.Icon.Stock.PaletteColor",
+        "in.Team.Icon.Stock.Shape",
+        "in.Team.Key.Value",
+        "in.Team.SyncMetadata.LastSyncIn.Status",
+        "in.Team.SyncMetadata.LastSyncOut.Status",
+        "in.Team.SyncMetadata.SyncedByDevUsers.IdValues"
+      ]
+    },
+    "branches": {
+      "total": 69,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 10,
+      "present_arm_exercised": 32,
+      "present_arm_pct": 46.4,
+      "absent_arm_exercised": 6,
+      "absent_arm_pct": 60,
+      "negative_arm_exercised": 30,
+      "negative_arm_pct": 43.5,
+      "both_arms_exercised": 2,
+      "coverage_pct": 46.4,
+      "by_origin": {
+        "service": {
+          "total": 20,
+          "reachable_on_happy_path": 3,
+          "present_arm_exercised": 13,
+          "present_arm_pct": 65,
+          "negative_arm_exercised": 11,
+          "negative_arm_pct": 55,
+          "absent_arm_exercised": 2
+        },
+        "generated": {
+          "total": 40,
+          "reachable_on_happy_path": 6,
+          "present_arm_exercised": 10,
+          "present_arm_pct": 25,
+          "negative_arm_exercised": 10,
+          "negative_arm_pct": 25,
+          "absent_arm_exercised": 4
+        },
+        "library": {
+          "total": 9,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 9,
+          "present_arm_pct": 100,
+          "negative_arm_exercised": 9,
+          "negative_arm_pct": 100,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b3",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1721",
+          "cond": "in.Team.Icon.Stock != nil",
+          "predicate_paths": [
+            "in.Team.Icon.Stock"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1722",
+          "cond": "in.Team.Icon.Stock != nil",
+          "predicate_paths": [
+            "in.Team.Icon.Stock"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1726",
+          "cond": "in.Team.Icon.ArtifactId != nil",
+          "predicate_paths": [
+            "in.Team.Icon.ArtifactId"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2055",
+          "cond": "in.Team.SyncMetadata.LastSyncIn.SyncUnitId != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncIn.SyncUnitId"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2064",
+          "cond": "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncIn.SyncHistoryId"
+          ]
+        },
+        {
+          "id": "b11",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2187",
+          "cond": "in.Team.SyncMetadata.LastSyncOut.SyncUnitId != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncOut.SyncUnitId"
+          ]
+        },
+        {
+          "id": "b12",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2196",
+          "cond": "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncOut.SyncHistoryId"
+          ]
+        },
+        {
+          "id": "b15",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1918",
+          "cond": "in.Team.SyncMetadata.SyncedByDevUsers != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.SyncedByDevUsers"
+          ]
+        },
+        {
+          "id": "b16",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1931",
+          "cond": "in.Team.SyncMetadata.LastSyncIn != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncIn"
+          ]
+        },
+        {
+          "id": "b17",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1932",
+          "cond": "in.Team.SyncMetadata.LastSyncIn != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncIn"
+          ]
+        },
+        {
+          "id": "b18",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1936",
+          "cond": "in.Team.SyncMetadata.LastSyncOut != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncOut"
+          ]
+        },
+        {
+          "id": "b19",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:1937",
+          "cond": "in.Team.SyncMetadata.LastSyncOut != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata.LastSyncOut"
+          ]
+        },
+        {
+          "id": "b26",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2471",
+          "cond": "in.Team.ExternalSourceData.CreatedById != nil",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.CreatedById"
+          ]
+        },
+        {
+          "id": "b27",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/composite.pb.validator.go:2480",
+          "cond": "in.Team.ExternalSourceData.ModifiedById != nil",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData.ModifiedById"
+          ]
+        },
+        {
+          "id": "b31",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3775",
+          "cond": "in.Team.Icon != nil",
+          "predicate_paths": [
+            "in.Team.Icon"
+          ]
+        },
+        {
+          "id": "b32",
+          "at": "",
+          "cond": "in.Team.Key.Value",
+          "predicate_paths": [
+            "in.Team.Key.Value"
+          ]
+        },
+        {
+          "id": "b33",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3776",
+          "cond": "in.Team.Icon != nil",
+          "predicate_paths": [
+            "in.Team.Icon"
+          ]
+        },
+        {
+          "id": "b34",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3780",
+          "cond": "in.Team.EnabledFeatures != nil",
+          "predicate_paths": [
+            "in.Team.EnabledFeatures"
+          ]
+        },
+        {
+          "id": "b35",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3781",
+          "cond": "in.Team.EnabledFeatures != nil",
+          "predicate_paths": [
+            "in.Team.EnabledFeatures"
+          ]
+        },
+        {
+          "id": "b36",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3785",
+          "cond": "in.Team.SyncMetadata != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata"
+          ]
+        },
+        {
+          "id": "b37",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3786",
+          "cond": "in.Team.SyncMetadata != nil",
+          "predicate_paths": [
+            "in.Team.SyncMetadata"
+          ]
+        },
+        {
+          "id": "b38",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3790",
+          "cond": "in.Team.ExternalSourceData != nil",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData"
+          ]
+        },
+        {
+          "id": "b39",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3791",
+          "cond": "in.Team.ExternalSourceData != nil",
+          "predicate_paths": [
+            "in.Team.ExternalSourceData"
+          ]
+        },
+        {
+          "id": "b40",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3795",
+          "cond": "in.Team.DevrevCopy != nil",
+          "predicate_paths": [
+            "in.Team.DevrevCopy"
+          ]
+        },
+        {
+          "id": "b41",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/schema.pb.validator.go:3796",
+          "cond": "in.Team.DevrevCopy != nil",
+          "predicate_paths": [
+            "in.Team.DevrevCopy"
+          ]
+        },
+        {
+          "id": "b42",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:246",
+          "cond": "in.CustomSchemaSpec.Drop != nil",
+          "predicate_paths": [
+            "in.CustomSchemaSpec.Drop"
+          ]
+        },
+        {
+          "id": "b43",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/api/registry.pb.validator.go:247",
+          "cond": "in.CustomSchemaSpec.Drop != nil",
+          "predicate_paths": [
+            "in.CustomSchemaSpec.Drop"
+          ]
+        },
+        {
+          "id": "b46",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2965",
+          "cond": "in.Team != nil",
+          "predicate_paths": [
+            "in.Team"
+          ]
+        },
+        {
+          "id": "b47",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2966",
+          "cond": "in.Team != nil",
+          "predicate_paths": [
+            "in.Team"
+          ]
+        },
+        {
+          "id": "b48",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2970",
+          "cond": "in.CustomSchemaSpec != nil",
+          "predicate_paths": [
+            "in.CustomSchemaSpec"
+          ]
+        },
+        {
+          "id": "b49",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/janus.pb.validator.go:2971",
+          "cond": "in.CustomSchemaSpec != nil",
+          "predicate_paths": [
+            "in.CustomSchemaSpec"
+          ]
+        },
+        {
+          "id": "b51",
+          "at": "internal/service/team_validations.go:311",
+          "cond": "in.Team.Icon.ArtifactId != nil",
+          "predicate_paths": [
+            "in.Team.Icon.ArtifactId"
+          ]
+        },
+        {
+          "id": "b52",
+          "at": "internal/service/team_validations.go:320",
+          "cond": "in.Team.Icon.Stock == nil",
+          "predicate_paths": [
+            "in.Team.Icon.Stock"
+          ]
+        },
+        {
+          "id": "b53",
+          "at": "internal/service/team_validations.go:373",
+          "cond": "in.Team.Icon == nil",
+          "predicate_paths": [
+            "in.Team.Icon"
+          ]
+        },
+        {
+          "id": "b54",
+          "at": "internal/service/team_validations.go:377",
+          "cond": "in.Team.Icon.Stock != nil",
+          "predicate_paths": [
+            "in.Team.Icon.Stock"
+          ]
+        },
+        {
+          "id": "b67",
+          "at": "internal/service/team.go:436",
+          "cond": "in.Team.Description != nil",
+          "predicate_paths": [
+            "in.Team.Description"
+          ]
+        },
+        {
+          "id": "b68",
+          "at": "internal/service/team.go:456",
+          "cond": "in.Team.EnabledFeatures != nil",
+          "predicate_paths": [
+            "in.Team.EnabledFeatures"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": [
+        {
+          "service": "schemaregistry",
+          "calls": [
+            "GetAggregatedSchema",
+            "GetUpgradeInstructionsV2"
+          ]
+        }
+      ],
+      "datastore_calls": [],
+      "service_count": 1,
+      "call_count": 2,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "key",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "grants a newly created team's creator a space-scoped admin role",
+        "file": "api/v2_internal/spaces/spaces_role_scope_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "Id",
+          "Name"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "AccessControlEntries",
+          "RoleSet",
+          "RoleSet.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "DryRunUpdateValid",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "DryRun",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Key"
+        ]
+      },
+      {
+        "name": "UpdateKey",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id",
+          "Team.Key",
+          "Team.KeyChangeHistory"
+        ]
+      },
+      {
+        "name": "AllKeysUniqueAcrossTeams",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "WithInvalidKeyFormat",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithDuplicateKeyFromAnotherTeam",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          201,
+          409
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      },
+      {
+        "name": "DryRunUpdateInvalidKey",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "DryRun",
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithNonExistentId",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "RegularUserCannotUpdate",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "NoAccessUserCannotUpdate",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          403
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "UpdateFailsWhenSpaceManagementDisabled",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "UpdateArchivedTeamFails",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201,
+          403
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).UpdateTeam",
+    "request_type": "api.UpdateTeamRequest",
+    "response_type": "api.UpdateTeamResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetExternalError",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/team_validations.go:177"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetShape",
+        "via_paths": [
+          "in.Team.Icon.Stock"
+        ],
+        "at": "internal/service/team_validations.go:333"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPaletteColor",
+        "via_paths": [
+          "in.Team.Icon.Stock"
+        ],
+        "at": "internal/service/team_validations.go:344"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetUpgradeInstructionsV2",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/upgrade_object_v2.go:211"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetAggregatedSchema",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:446",
+        "tainted": false
+      },
+      {
+        "symbol": "errSchemaRegistryUnimplementedEnvironment",
+        "at": "internal/service/team.go:974",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateTeam` (HTTP operation `TeamsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomSchemaSpec.Drop\n  - in.Team.Description\n  - in.Team.DevrevCopy\n  - in.Team.EnabledFeatures.Values\n  - in.Team.Icon.Stock.PaletteColor\n  - in.Team.Icon.Stock.Shape\n  - in.Team.Key.Value\n  - in.Team.SyncMetadata.LastSyncIn.Status\n  - in.Team.SyncMetadata.LastSyncOut.Status\n  - in.Team.SyncMetadata.SyncedByDevUsers.IdValues\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Team.Icon.Stock != nil\n  - in.Team.Icon.Stock != nil\n  - in.Team.Icon.ArtifactId != nil\n  - in.Team.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.Team.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.Team.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.Team.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - in.Team.SyncMetadata.SyncedByDevUsers != nil\n  - in.Team.SyncMetadata.LastSyncIn != nil\n  - in.Team.SyncMetadata.LastSyncIn != nil\n  - in.Team.SyncMetadata.LastSyncOut != nil\n  - in.Team.SyncMetadata.LastSyncOut != nil\n  - in.Team.ExternalSourceData.CreatedById != nil\n  - in.Team.ExternalSourceData.ModifiedById != nil\n  - in.Team.Icon != nil\n  - in.Team.Key.Value\n  - in.Team.Icon != nil\n  - in.Team.EnabledFeatures != nil\n  - in.Team.EnabledFeatures != nil\n  - in.Team.SyncMetadata != nil\n  - in.Team.SyncMetadata != nil\n  - in.Team.ExternalSourceData != nil\n  - in.Team.ExternalSourceData != nil\n  - in.Team.DevrevCopy != nil\n  - in.Team.DevrevCopy != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.Team != nil\n  - in.Team != nil\n  - in.CustomSchemaSpec != nil\n  - in.CustomSchemaSpec != nil\n  - in.Team.Icon.ArtifactId != nil\n  - in.Team.Icon.Stock == nil\n  - in.Team.Icon == nil\n  - in.Team.Icon.Stock != nil\n  - in.Team.Description != nil\n  - in.Team.EnabledFeatures != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `key` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

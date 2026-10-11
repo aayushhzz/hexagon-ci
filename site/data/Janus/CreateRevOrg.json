@@ -1,0 +1,833 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "CreateRevOrg",
+    "operation": "RevOrgsCreate",
+    "tests": 33,
+    "status": {
+      "documented": [
+        201,
+        400,
+        401,
+        403,
+        409
+      ],
+      "asserted": [
+        200,
+        201,
+        400,
+        401,
+        500
+      ],
+      "missing": [
+        403,
+        409
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 60
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 5,
+      "covered_count": 1,
+      "coverage_pct": 20,
+      "request_fields_set_by_tests": 6,
+      "set_by_positive_tests": 1,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 1,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 4,
+          "set": 1,
+          "pct": 25
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 5,
+        "covered": 1,
+        "pct": 20,
+        "collapsed_types": []
+      },
+      "covered": [
+        {
+          "path": "in.RevOrg.Account",
+          "match": "exact",
+          "by_tests": [
+            "Create RevOrg",
+            "Merge a RevOrg"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.IsJanusAsyncFlow",
+        "in.RevOrg.ExternalOidIssuer",
+        "in.RevOrg.PhoneNumbers",
+        "in.RevOrg.SharedWith"
+      ]
+    },
+    "branches": {
+      "total": 4,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 1,
+      "present_arm_exercised": 1,
+      "present_arm_pct": 25,
+      "absent_arm_exercised": 1,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 25,
+      "by_origin": {
+        "service": {
+          "total": 4,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 25,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 1
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "internal/service/revorg.go:47",
+          "cond": "in.RevOrg.ExternalOidIssuer != nil",
+          "predicate_paths": [
+            "in.RevOrg.ExternalOidIssuer"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "internal/service/revorg.go:118",
+          "cond": "in.IsJanusAsyncFlow",
+          "predicate_paths": [
+            "in.IsJanusAsyncFlow"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/service/revorg.go:118",
+          "cond": "in.RevOrg.ExternalOidIssuer",
+          "predicate_paths": [
+            "in.RevOrg.ExternalOidIssuer"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": null,
+      "datastore_calls": [],
+      "service_count": 0,
+      "call_count": 0,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "description",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "displayname",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "domain",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "environment",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "externalref",
+          "fuzzy_suggestions": null
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Create RevOrg",
+        "file": "api/v2_internal/identity_flows/revorg_apis_test.go",
+        "labels": [
+          "INTERNAL_REVORGS_CREATE"
+        ],
+        "fields_set": [
+          "Account",
+          "Description",
+          "DisplayName",
+          "ExternalRef"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "RevOrg",
+          "RevOrg.Account",
+          "RevOrg.Account.GetId",
+          "RevOrg.Description",
+          "RevOrg.DisplayName",
+          "RevOrg.ExternalRef",
+          "RevOrg.GetId"
+        ]
+      },
+      {
+        "name": "Merge a RevOrg",
+        "file": "api/v2_internal/identity_flows/revorg_apis_test.go",
+        "labels": [
+          "INTERNAL_REVORGS_MERGE"
+        ],
+        "fields_set": [
+          "Account",
+          "DisplayName",
+          "ExternalRef"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "RevOrg",
+          "RevOrg.Account",
+          "RevOrg.Account.GetId",
+          "RevOrg.DisplayName",
+          "RevOrg.ExternalRef",
+          "RevOrg.GetId",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithOnlyRequiredFields",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "RevOrg",
+          "RevOrg.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithAllFields",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "RevOrg",
+          "RevOrg.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithDescription",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "RevOrg",
+          "RevOrg.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithEnvironmentAsProduction",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Environment"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "RevOrg",
+          "RevOrg.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithEnvironmentAsStaging",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Environment"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "RevOrg",
+          "RevOrg.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithEnvironmentAsTest",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Environment"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "RevOrg",
+          "RevOrg.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithExternalRef",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "ExternalRef"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "RevOrg",
+          "RevOrg.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "MissingDisplayName",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "EmptyBody",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "UnknownEnvironmentEnum",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "401WrongPat",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          401
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "500ByInvalidPat",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          500
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithOnlyRequiredFields",
+        "file": "api/v2_public/rev_orgs/crud/delete_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Domain",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "MissingId",
+        "file": "api/v2_public/rev_orgs/crud/delete_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Domain",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "UnknownRevOrgId",
+        "file": "api/v2_public/rev_orgs/crud/delete_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Domain",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "401WrongPat",
+        "file": "api/v2_public/rev_orgs/crud/delete_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Domain",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          401
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithOnlyRequiredFields",
+        "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "MissingId",
+        "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "UnknownRevOrgId",
+        "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "401WrongPat",
+        "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          401
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "500ByInvalidPat",
+        "file": "api/v2_public/rev_orgs/crud/get_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          500
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithAllFields",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithDescription",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithExternalRef",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithEnvironmentAsProduction",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithEnvironmentAsStaging",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithEnvironmentAsTest",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "MissingId",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "EmptyBody",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "401WrongPat",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          401
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "500ByInvalidPat",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Environment",
+          "ExternalRef"
+        ],
+        "statuses": [
+          500
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).CreateRevOrg",
+    "request_type": "api.CreateRevOrgRequest",
+    "response_type": "api.CreateRevOrgResponse",
+    "sinks": [],
+    "errors": [
+      {
+        "symbol": "errPhoneNumberInvalid",
+        "at": "internal/service/phonenumbers.go:153",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateRevOrg` (HTTP operation `RevOrgsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [403, 409]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsJanusAsyncFlow\n  - in.RevOrg.ExternalOidIssuer\n  - in.RevOrg.PhoneNumbers\n  - in.RevOrg.SharedWith\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.RevOrg.ExternalOidIssuer != nil\n  - in.IsJanusAsyncFlow\n  - in.RevOrg.ExternalOidIssuer\n\nError symbols this RPC can return (candidate negative assertions):\n  - errPhoneNumberInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `displayname` -> suggestions []\n  - test field `domain` -> suggestions []\n  - test field `environment` -> suggestions []\n  - test field `externalref` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

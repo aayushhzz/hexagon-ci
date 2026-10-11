@@ -1,0 +1,1567 @@
+{
+  "service": "Codex",
+  "coverage": {
+    "rpc": "ListConversations",
+    "operation": "ConversationsCount,ConversationsCountPost,ConversationsList,ConversationsListPost,LobbiesList",
+    "tests": 12,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403
+      ],
+      "asserted": [
+        200,
+        201,
+        400,
+        401
+      ],
+      "missing": [
+        403
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 75
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 82,
+      "covered_count": 2,
+      "coverage_pct": 2.4,
+      "request_fields_set_by_tests": 4,
+      "set_by_positive_tests": 2,
+      "set_by_negative_tests": 2,
+      "by_depth": {
+        "top_level": {
+          "total": 6,
+          "set": 1,
+          "pct": 16.7
+        },
+        "nested": {
+          "total": 57,
+          "set": 1,
+          "pct": 1.8
+        },
+        "deep": {
+          "total": 19,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 7,
+        "covered": 2,
+        "pct": 28.6,
+        "collapsed_types": [
+          "apiv2.ListConversationsFilter"
+        ]
+      },
+      "covered": [
+        {
+          "path": "in.Filter.Stage",
+          "match": "exact",
+          "by_tests": [
+            "Should be able to list all conversation object for DevUser",
+            "Should throw error for invalid sort by key"
+          ]
+        },
+        {
+          "path": "in.SortBy",
+          "match": "exact",
+          "by_tests": [
+            "Should throw error for invalid sort by key",
+            "should create conversations, group by messages and sort by created date"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.DevOid",
+        "in.DqlQuery",
+        "in.Filter.AccountId",
+        "in.Filter.AccountIdOp",
+        "in.Filter.ActualCloseDate.After",
+        "in.Filter.ActualCloseDate.Before",
+        "in.Filter.ActualCloseDate.DatePreset.Type",
+        "in.Filter.AiResolutionStatus",
+        "in.Filter.AppliesToPartIds",
+        "in.Filter.Apps",
+        "in.Filter.AppsOp",
+        "in.Filter.BrandId",
+        "in.Filter.BroadcastChannels",
+        "in.Filter.Channels",
+        "in.Filter.ChannelsInstances",
+        "in.Filter.ChannelsInstancesOp",
+        "in.Filter.ConversationType",
+        "in.Filter.CreatedByAgentId",
+        "in.Filter.CreatedByAgentIdOp",
+        "in.Filter.CreatedById",
+        "in.Filter.CreatedByIdOp",
+        "in.Filter.CreatedDate.After",
+        "in.Filter.CreatedDate.Before",
+        "in.Filter.CreatedDate.DatePreset.Type",
+        "in.Filter.CustomFields.Fields",
+        "in.Filter.ExternalSourceData",
+        "in.Filter.FirstResponseTime.After",
+        "in.Filter.FirstResponseTime.Before",
+        "in.Filter.FirstResponseTime.DatePreset.Type",
+        "in.Filter.Group",
+        "in.Filter.HasSpaceId",
+        "in.Filter.IsCreatorVerified",
+        "in.Filter.IsFrozen",
+        "in.Filter.IsSpam",
+        "in.Filter.LastExternalMessageDate.After",
+        "in.Filter.LastExternalMessageDate.Before",
+        "in.Filter.LastExternalMessageDate.DatePreset.Type",
+        "in.Filter.LastMessageTimestamp.After",
+        "in.Filter.LastMessageTimestamp.Before",
+        "in.Filter.LastMessageTimestamp.DatePreset.Type",
+        "in.Filter.Links",
+        "in.Filter.LinksOp",
+        "in.Filter.MemberIds",
+        "in.Filter.ModifiedById",
+        "in.Filter.ModifiedByIdOp",
+        "in.Filter.ModifiedDate.After",
+        "in.Filter.ModifiedDate.Before",
+        "in.Filter.ModifiedDate.DatePreset.Type",
+        "in.Filter.OwnedByAgentId",
+        "in.Filter.OwnedByIds",
+        "in.Filter.OwnedByIdsOp",
+        "in.Filter.ParticipantOids",
+        "in.Filter.ParticipantUids",
+        "in.Filter.Priority",
+        "in.Filter.Sentiment",
+        "in.Filter.SentimentOp",
+        "in.Filter.Sessions",
+        "in.Filter.SlaId",
+        "in.Filter.SlaSummary",
+        "in.Filter.SourceChannel",
+        "in.Filter.SourceChannelOp",
+        "in.Filter.SourceChannelV2",
+        "in.Filter.SourceChannelV2Instance",
+        "in.Filter.SpacesFilter",
+        "in.Filter.StagedInfo",
+        "in.Filter.State",
+        "in.Filter.Status",
+        "in.Filter.Subtype",
+        "in.Filter.SubtypeOp",
+        "in.Filter.SurveysAggregation",
+        "in.Filter.SurveysAggregationOp",
+        "in.Filter.SyncMetadata",
+        "in.Filter.SyncMetadataOp",
+        "in.Filter.Tags",
+        "in.Filter.TagsOp",
+        "in.Filter.TargetLocale",
+        "in.Filter.TuringActive",
+        "in.Page",
+        "in.PerPage",
+        "in.SkipTotal"
+      ]
+    },
+    "branches": {
+      "total": 107,
+      "enum_switch_branches": 252,
+      "server_gated_branches": 5,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 19,
+      "present_arm_exercised": 2,
+      "present_arm_pct": 1.9,
+      "absent_arm_exercised": 17,
+      "absent_arm_pct": 89.5,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 1.9,
+      "by_origin": {
+        "service": {
+          "total": 97,
+          "reachable_on_happy_path": 11,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 2.1,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 9
+        },
+        "generated": {
+          "total": 8,
+          "reachable_on_happy_path": 8,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 8
+        },
+        "library": {
+          "total": 2,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b18",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:1531",
+          "cond": "in.Filter != nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b19",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:1532",
+          "cond": "in.Filter != nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b20",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:1536",
+          "cond": "in.Page >= 0",
+          "predicate_paths": [
+            "in.Page"
+          ]
+        },
+        {
+          "id": "b21",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:1539",
+          "cond": "in.PerPage >= 0",
+          "predicate_paths": [
+            "in.PerPage"
+          ]
+        },
+        {
+          "id": "b25",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260701100938-401162ec7707/lib/query.go:160",
+          "cond": "in.Filter.CustomFields == nil",
+          "predicate_paths": [
+            "in.Filter.CustomFields"
+          ]
+        },
+        {
+          "id": "b26",
+          "at": "internal/filterv2/conversations.gen.go:240",
+          "cond": "in.Filter.CreatedDate != nil",
+          "predicate_paths": [
+            "in.Filter.CreatedDate"
+          ]
+        },
+        {
+          "id": "b35",
+          "at": "internal/filterv2/conversations.gen.go:243",
+          "cond": "in.Filter.CreatedDate.After != nil",
+          "predicate_paths": [
+            "in.Filter.CreatedDate.After"
+          ]
+        },
+        {
+          "id": "b36",
+          "at": "internal/filterv2/conversations.gen.go:250",
+          "cond": "in.Filter.CreatedDate.Before != nil",
+          "predicate_paths": [
+            "in.Filter.CreatedDate.Before"
+          ]
+        },
+        {
+          "id": "b37",
+          "at": "internal/filterv2/conversations.gen.go:257",
+          "cond": "in.Filter.CreatedDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.Filter.CreatedDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b38",
+          "at": "internal/filterv2/conversations.gen.go:258",
+          "cond": "in.Filter.CreatedDate.After != nil",
+          "predicate_paths": [
+            "in.Filter.CreatedDate.After"
+          ]
+        },
+        {
+          "id": "b39",
+          "at": "",
+          "cond": "in.Filter.CreatedDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.Filter.CreatedDate.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b40",
+          "at": "internal/filterv2/conversations.gen.go:258",
+          "cond": "in.Filter.CreatedDate.Before != nil",
+          "predicate_paths": [
+            "in.Filter.CreatedDate.Before"
+          ]
+        },
+        {
+          "id": "b41",
+          "at": "internal/filterv2/conversations.gen.go:364",
+          "cond": "in.Filter.ModifiedDate != nil",
+          "predicate_paths": [
+            "in.Filter.ModifiedDate"
+          ]
+        },
+        {
+          "id": "b50",
+          "at": "internal/filterv2/conversations.gen.go:367",
+          "cond": "in.Filter.ModifiedDate.After != nil",
+          "predicate_paths": [
+            "in.Filter.ModifiedDate.After"
+          ]
+        },
+        {
+          "id": "b51",
+          "at": "internal/filterv2/conversations.gen.go:374",
+          "cond": "in.Filter.ModifiedDate.Before != nil",
+          "predicate_paths": [
+            "in.Filter.ModifiedDate.Before"
+          ]
+        },
+        {
+          "id": "b52",
+          "at": "internal/filterv2/conversations.gen.go:381",
+          "cond": "in.Filter.ModifiedDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.Filter.ModifiedDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b53",
+          "at": "internal/filterv2/conversations.gen.go:382",
+          "cond": "in.Filter.ModifiedDate.After != nil",
+          "predicate_paths": [
+            "in.Filter.ModifiedDate.After"
+          ]
+        },
+        {
+          "id": "b54",
+          "at": "",
+          "cond": "in.Filter.ModifiedDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.Filter.ModifiedDate.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b55",
+          "at": "internal/filterv2/conversations.gen.go:382",
+          "cond": "in.Filter.ModifiedDate.Before != nil",
+          "predicate_paths": [
+            "in.Filter.ModifiedDate.Before"
+          ]
+        },
+        {
+          "id": "b88",
+          "at": "internal/filterv2/conversations.gen.go:697",
+          "cond": "in.Filter.LastMessageTimestamp != nil",
+          "predicate_paths": [
+            "in.Filter.LastMessageTimestamp"
+          ]
+        },
+        {
+          "id": "b89",
+          "at": "internal/filterv2/conversations.gen.go:700",
+          "cond": "in.Filter.LastMessageTimestamp.After != nil",
+          "predicate_paths": [
+            "in.Filter.LastMessageTimestamp.After"
+          ]
+        },
+        {
+          "id": "b90",
+          "at": "internal/filterv2/conversations.gen.go:707",
+          "cond": "in.Filter.LastMessageTimestamp.Before != nil",
+          "predicate_paths": [
+            "in.Filter.LastMessageTimestamp.Before"
+          ]
+        },
+        {
+          "id": "b91",
+          "at": "internal/filterv2/conversations.gen.go:714",
+          "cond": "in.Filter.LastMessageTimestamp.DatePreset != nil",
+          "predicate_paths": [
+            "in.Filter.LastMessageTimestamp.DatePreset"
+          ]
+        },
+        {
+          "id": "b92",
+          "at": "internal/filterv2/conversations.gen.go:715",
+          "cond": "in.Filter.LastMessageTimestamp.After != nil",
+          "predicate_paths": [
+            "in.Filter.LastMessageTimestamp.After"
+          ]
+        },
+        {
+          "id": "b93",
+          "at": "",
+          "cond": "in.Filter.LastMessageTimestamp.DatePreset.Type",
+          "predicate_paths": [
+            "in.Filter.LastMessageTimestamp.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b94",
+          "at": "internal/filterv2/conversations.gen.go:715",
+          "cond": "in.Filter.LastMessageTimestamp.Before != nil",
+          "predicate_paths": [
+            "in.Filter.LastMessageTimestamp.Before"
+          ]
+        },
+        {
+          "id": "b111",
+          "at": "internal/filterv2/conversations.gen.go:889",
+          "cond": "in.Filter.FirstResponseTime != nil",
+          "predicate_paths": [
+            "in.Filter.FirstResponseTime"
+          ]
+        },
+        {
+          "id": "b112",
+          "at": "internal/filterv2/conversations.gen.go:892",
+          "cond": "in.Filter.FirstResponseTime.After != nil",
+          "predicate_paths": [
+            "in.Filter.FirstResponseTime.After"
+          ]
+        },
+        {
+          "id": "b113",
+          "at": "internal/filterv2/conversations.gen.go:899",
+          "cond": "in.Filter.FirstResponseTime.Before != nil",
+          "predicate_paths": [
+            "in.Filter.FirstResponseTime.Before"
+          ]
+        },
+        {
+          "id": "b114",
+          "at": "internal/filterv2/conversations.gen.go:906",
+          "cond": "in.Filter.FirstResponseTime.DatePreset != nil",
+          "predicate_paths": [
+            "in.Filter.FirstResponseTime.DatePreset"
+          ]
+        },
+        {
+          "id": "b115",
+          "at": "internal/filterv2/conversations.gen.go:907",
+          "cond": "in.Filter.FirstResponseTime.After != nil",
+          "predicate_paths": [
+            "in.Filter.FirstResponseTime.After"
+          ]
+        },
+        {
+          "id": "b116",
+          "at": "",
+          "cond": "in.Filter.FirstResponseTime.DatePreset.Type",
+          "predicate_paths": [
+            "in.Filter.FirstResponseTime.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b117",
+          "at": "internal/filterv2/conversations.gen.go:907",
+          "cond": "in.Filter.FirstResponseTime.Before != nil",
+          "predicate_paths": [
+            "in.Filter.FirstResponseTime.Before"
+          ]
+        },
+        {
+          "id": "b118",
+          "at": "internal/filterv2/conversations.gen.go:994",
+          "cond": "in.Filter.ActualCloseDate != nil",
+          "predicate_paths": [
+            "in.Filter.ActualCloseDate"
+          ]
+        },
+        {
+          "id": "b119",
+          "at": "internal/filterv2/conversations.gen.go:997",
+          "cond": "in.Filter.ActualCloseDate.After != nil",
+          "predicate_paths": [
+            "in.Filter.ActualCloseDate.After"
+          ]
+        },
+        {
+          "id": "b120",
+          "at": "internal/filterv2/conversations.gen.go:1004",
+          "cond": "in.Filter.ActualCloseDate.Before != nil",
+          "predicate_paths": [
+            "in.Filter.ActualCloseDate.Before"
+          ]
+        },
+        {
+          "id": "b121",
+          "at": "internal/filterv2/conversations.gen.go:1011",
+          "cond": "in.Filter.ActualCloseDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.Filter.ActualCloseDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b122",
+          "at": "internal/filterv2/conversations.gen.go:1012",
+          "cond": "in.Filter.ActualCloseDate.After != nil",
+          "predicate_paths": [
+            "in.Filter.ActualCloseDate.After"
+          ]
+        },
+        {
+          "id": "b123",
+          "at": "",
+          "cond": "in.Filter.ActualCloseDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.Filter.ActualCloseDate.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b124",
+          "at": "internal/filterv2/conversations.gen.go:1012",
+          "cond": "in.Filter.ActualCloseDate.Before != nil",
+          "predicate_paths": [
+            "in.Filter.ActualCloseDate.Before"
+          ]
+        },
+        {
+          "id": "b125",
+          "at": "internal/filterv2/conversations.gen.go:1092",
+          "cond": "in.Filter.LastExternalMessageDate != nil",
+          "predicate_paths": [
+            "in.Filter.LastExternalMessageDate"
+          ]
+        },
+        {
+          "id": "b126",
+          "at": "internal/filterv2/conversations.gen.go:1095",
+          "cond": "in.Filter.LastExternalMessageDate.After != nil",
+          "predicate_paths": [
+            "in.Filter.LastExternalMessageDate.After"
+          ]
+        },
+        {
+          "id": "b127",
+          "at": "internal/filterv2/conversations.gen.go:1102",
+          "cond": "in.Filter.LastExternalMessageDate.Before != nil",
+          "predicate_paths": [
+            "in.Filter.LastExternalMessageDate.Before"
+          ]
+        },
+        {
+          "id": "b128",
+          "at": "internal/filterv2/conversations.gen.go:1109",
+          "cond": "in.Filter.LastExternalMessageDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.Filter.LastExternalMessageDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b129",
+          "at": "internal/filterv2/conversations.gen.go:1110",
+          "cond": "in.Filter.LastExternalMessageDate.After != nil",
+          "predicate_paths": [
+            "in.Filter.LastExternalMessageDate.After"
+          ]
+        },
+        {
+          "id": "b130",
+          "at": "",
+          "cond": "in.Filter.LastExternalMessageDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.Filter.LastExternalMessageDate.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b131",
+          "at": "internal/filterv2/conversations.gen.go:1110",
+          "cond": "in.Filter.LastExternalMessageDate.Before != nil",
+          "predicate_paths": [
+            "in.Filter.LastExternalMessageDate.Before"
+          ]
+        },
+        {
+          "id": "b157",
+          "at": "internal/filterv2/conversations.gen.go:1639",
+          "cond": "in.Filter.SpacesFilter != nil",
+          "predicate_paths": [
+            "in.Filter.SpacesFilter"
+          ]
+        },
+        {
+          "id": "b173",
+          "at": "internal/filterv2/conversations.gen.go:1730",
+          "cond": "in.Filter != nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b182",
+          "at": "internal/dql/dql_converter.go:85",
+          "cond": "in.DqlQuery == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b183",
+          "at": "internal/dql/dql_converter.go:57",
+          "cond": "in.DqlQuery == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b198",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:1531",
+          "cond": "in.DevOid|in.Filter != nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b199",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:1532",
+          "cond": "in.DevOid|in.Filter != nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b200",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:1536",
+          "cond": "in.DevOid|in.Page >= 0",
+          "predicate_paths": [
+            "in.Page"
+          ]
+        },
+        {
+          "id": "b201",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20260717190425-05eb57743a69/apiv2/codex.pb.validator.go:1539",
+          "cond": "in.DevOid|in.PerPage >= 0",
+          "predicate_paths": [
+            "in.PerPage"
+          ]
+        },
+        {
+          "id": "b203",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260701100938-401162ec7707/lib/query.go:160",
+          "cond": "in.DevOid|in.Filter.CustomFields == nil",
+          "predicate_paths": [
+            "in.Filter.CustomFields"
+          ]
+        },
+        {
+          "id": "b204",
+          "at": "internal/filterv2/conversations.gen.go:240",
+          "cond": "in.DevOid|in.Filter.CreatedDate != nil",
+          "predicate_paths": [
+            "in.Filter.CreatedDate"
+          ]
+        },
+        {
+          "id": "b213",
+          "at": "internal/filterv2/conversations.gen.go:243",
+          "cond": "in.DevOid|in.Filter.CreatedDate.After != nil",
+          "predicate_paths": [
+            "in.Filter.CreatedDate.After"
+          ]
+        },
+        {
+          "id": "b214",
+          "at": "internal/filterv2/conversations.gen.go:250",
+          "cond": "in.DevOid|in.Filter.CreatedDate.Before != nil",
+          "predicate_paths": [
+            "in.Filter.CreatedDate.Before"
+          ]
+        },
+        {
+          "id": "b215",
+          "at": "internal/filterv2/conversations.gen.go:257",
+          "cond": "in.DevOid|in.Filter.CreatedDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.Filter.CreatedDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b216",
+          "at": "internal/filterv2/conversations.gen.go:258",
+          "cond": "in.DevOid|in.Filter.CreatedDate.After != nil",
+          "predicate_paths": [
+            "in.Filter.CreatedDate.After"
+          ]
+        },
+        {
+          "id": "b217",
+          "at": "",
+          "cond": "in.DevOid|in.Filter.CreatedDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.Filter.CreatedDate.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b218",
+          "at": "internal/filterv2/conversations.gen.go:258",
+          "cond": "in.DevOid|in.Filter.CreatedDate.Before != nil",
+          "predicate_paths": [
+            "in.Filter.CreatedDate.Before"
+          ]
+        },
+        {
+          "id": "b219",
+          "at": "internal/filterv2/conversations.gen.go:364",
+          "cond": "in.DevOid|in.Filter.ModifiedDate != nil",
+          "predicate_paths": [
+            "in.Filter.ModifiedDate"
+          ]
+        },
+        {
+          "id": "b228",
+          "at": "internal/filterv2/conversations.gen.go:367",
+          "cond": "in.DevOid|in.Filter.ModifiedDate.After != nil",
+          "predicate_paths": [
+            "in.Filter.ModifiedDate.After"
+          ]
+        },
+        {
+          "id": "b229",
+          "at": "internal/filterv2/conversations.gen.go:374",
+          "cond": "in.DevOid|in.Filter.ModifiedDate.Before != nil",
+          "predicate_paths": [
+            "in.Filter.ModifiedDate.Before"
+          ]
+        },
+        {
+          "id": "b230",
+          "at": "internal/filterv2/conversations.gen.go:381",
+          "cond": "in.DevOid|in.Filter.ModifiedDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.Filter.ModifiedDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b231",
+          "at": "internal/filterv2/conversations.gen.go:382",
+          "cond": "in.DevOid|in.Filter.ModifiedDate.After != nil",
+          "predicate_paths": [
+            "in.Filter.ModifiedDate.After"
+          ]
+        },
+        {
+          "id": "b232",
+          "at": "",
+          "cond": "in.DevOid|in.Filter.ModifiedDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.Filter.ModifiedDate.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b233",
+          "at": "internal/filterv2/conversations.gen.go:382",
+          "cond": "in.DevOid|in.Filter.ModifiedDate.Before != nil",
+          "predicate_paths": [
+            "in.Filter.ModifiedDate.Before"
+          ]
+        },
+        {
+          "id": "b266",
+          "at": "internal/filterv2/conversations.gen.go:697",
+          "cond": "in.DevOid|in.Filter.LastMessageTimestamp != nil",
+          "predicate_paths": [
+            "in.Filter.LastMessageTimestamp"
+          ]
+        },
+        {
+          "id": "b267",
+          "at": "internal/filterv2/conversations.gen.go:700",
+          "cond": "in.DevOid|in.Filter.LastMessageTimestamp.After != nil",
+          "predicate_paths": [
+            "in.Filter.LastMessageTimestamp.After"
+          ]
+        },
+        {
+          "id": "b268",
+          "at": "internal/filterv2/conversations.gen.go:707",
+          "cond": "in.DevOid|in.Filter.LastMessageTimestamp.Before != nil",
+          "predicate_paths": [
+            "in.Filter.LastMessageTimestamp.Before"
+          ]
+        },
+        {
+          "id": "b269",
+          "at": "internal/filterv2/conversations.gen.go:714",
+          "cond": "in.DevOid|in.Filter.LastMessageTimestamp.DatePreset != nil",
+          "predicate_paths": [
+            "in.Filter.LastMessageTimestamp.DatePreset"
+          ]
+        },
+        {
+          "id": "b270",
+          "at": "internal/filterv2/conversations.gen.go:715",
+          "cond": "in.DevOid|in.Filter.LastMessageTimestamp.After != nil",
+          "predicate_paths": [
+            "in.Filter.LastMessageTimestamp.After"
+          ]
+        },
+        {
+          "id": "b271",
+          "at": "",
+          "cond": "in.DevOid|in.Filter.LastMessageTimestamp.DatePreset.Type",
+          "predicate_paths": [
+            "in.Filter.LastMessageTimestamp.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b272",
+          "at": "internal/filterv2/conversations.gen.go:715",
+          "cond": "in.DevOid|in.Filter.LastMessageTimestamp.Before != nil",
+          "predicate_paths": [
+            "in.Filter.LastMessageTimestamp.Before"
+          ]
+        },
+        {
+          "id": "b289",
+          "at": "internal/filterv2/conversations.gen.go:889",
+          "cond": "in.DevOid|in.Filter.FirstResponseTime != nil",
+          "predicate_paths": [
+            "in.Filter.FirstResponseTime"
+          ]
+        },
+        {
+          "id": "b290",
+          "at": "internal/filterv2/conversations.gen.go:892",
+          "cond": "in.DevOid|in.Filter.FirstResponseTime.After != nil",
+          "predicate_paths": [
+            "in.Filter.FirstResponseTime.After"
+          ]
+        },
+        {
+          "id": "b291",
+          "at": "internal/filterv2/conversations.gen.go:899",
+          "cond": "in.DevOid|in.Filter.FirstResponseTime.Before != nil",
+          "predicate_paths": [
+            "in.Filter.FirstResponseTime.Before"
+          ]
+        },
+        {
+          "id": "b292",
+          "at": "internal/filterv2/conversations.gen.go:906",
+          "cond": "in.DevOid|in.Filter.FirstResponseTime.DatePreset != nil",
+          "predicate_paths": [
+            "in.Filter.FirstResponseTime.DatePreset"
+          ]
+        },
+        {
+          "id": "b293",
+          "at": "internal/filterv2/conversations.gen.go:907",
+          "cond": "in.DevOid|in.Filter.FirstResponseTime.After != nil",
+          "predicate_paths": [
+            "in.Filter.FirstResponseTime.After"
+          ]
+        },
+        {
+          "id": "b294",
+          "at": "",
+          "cond": "in.DevOid|in.Filter.FirstResponseTime.DatePreset.Type",
+          "predicate_paths": [
+            "in.Filter.FirstResponseTime.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b295",
+          "at": "internal/filterv2/conversations.gen.go:907",
+          "cond": "in.DevOid|in.Filter.FirstResponseTime.Before != nil",
+          "predicate_paths": [
+            "in.Filter.FirstResponseTime.Before"
+          ]
+        },
+        {
+          "id": "b296",
+          "at": "internal/filterv2/conversations.gen.go:994",
+          "cond": "in.DevOid|in.Filter.ActualCloseDate != nil",
+          "predicate_paths": [
+            "in.Filter.ActualCloseDate"
+          ]
+        },
+        {
+          "id": "b297",
+          "at": "internal/filterv2/conversations.gen.go:997",
+          "cond": "in.DevOid|in.Filter.ActualCloseDate.After != nil",
+          "predicate_paths": [
+            "in.Filter.ActualCloseDate.After"
+          ]
+        },
+        {
+          "id": "b298",
+          "at": "internal/filterv2/conversations.gen.go:1004",
+          "cond": "in.DevOid|in.Filter.ActualCloseDate.Before != nil",
+          "predicate_paths": [
+            "in.Filter.ActualCloseDate.Before"
+          ]
+        },
+        {
+          "id": "b299",
+          "at": "internal/filterv2/conversations.gen.go:1011",
+          "cond": "in.DevOid|in.Filter.ActualCloseDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.Filter.ActualCloseDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b300",
+          "at": "internal/filterv2/conversations.gen.go:1012",
+          "cond": "in.DevOid|in.Filter.ActualCloseDate.After != nil",
+          "predicate_paths": [
+            "in.Filter.ActualCloseDate.After"
+          ]
+        },
+        {
+          "id": "b301",
+          "at": "",
+          "cond": "in.DevOid|in.Filter.ActualCloseDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.Filter.ActualCloseDate.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b302",
+          "at": "internal/filterv2/conversations.gen.go:1012",
+          "cond": "in.DevOid|in.Filter.ActualCloseDate.Before != nil",
+          "predicate_paths": [
+            "in.Filter.ActualCloseDate.Before"
+          ]
+        },
+        {
+          "id": "b303",
+          "at": "internal/filterv2/conversations.gen.go:1092",
+          "cond": "in.DevOid|in.Filter.LastExternalMessageDate != nil",
+          "predicate_paths": [
+            "in.Filter.LastExternalMessageDate"
+          ]
+        },
+        {
+          "id": "b304",
+          "at": "internal/filterv2/conversations.gen.go:1095",
+          "cond": "in.DevOid|in.Filter.LastExternalMessageDate.After != nil",
+          "predicate_paths": [
+            "in.Filter.LastExternalMessageDate.After"
+          ]
+        },
+        {
+          "id": "b305",
+          "at": "internal/filterv2/conversations.gen.go:1102",
+          "cond": "in.DevOid|in.Filter.LastExternalMessageDate.Before != nil",
+          "predicate_paths": [
+            "in.Filter.LastExternalMessageDate.Before"
+          ]
+        },
+        {
+          "id": "b306",
+          "at": "internal/filterv2/conversations.gen.go:1109",
+          "cond": "in.DevOid|in.Filter.LastExternalMessageDate.DatePreset != nil",
+          "predicate_paths": [
+            "in.Filter.LastExternalMessageDate.DatePreset"
+          ]
+        },
+        {
+          "id": "b307",
+          "at": "internal/filterv2/conversations.gen.go:1110",
+          "cond": "in.DevOid|in.Filter.LastExternalMessageDate.After != nil",
+          "predicate_paths": [
+            "in.Filter.LastExternalMessageDate.After"
+          ]
+        },
+        {
+          "id": "b308",
+          "at": "",
+          "cond": "in.DevOid|in.Filter.LastExternalMessageDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.Filter.LastExternalMessageDate.DatePreset.Type"
+          ]
+        },
+        {
+          "id": "b309",
+          "at": "internal/filterv2/conversations.gen.go:1110",
+          "cond": "in.DevOid|in.Filter.LastExternalMessageDate.Before != nil",
+          "predicate_paths": [
+            "in.Filter.LastExternalMessageDate.Before"
+          ]
+        },
+        {
+          "id": "b335",
+          "at": "internal/filterv2/conversations.gen.go:1639",
+          "cond": "in.DevOid|in.Filter.SpacesFilter != nil",
+          "predicate_paths": [
+            "in.Filter.SpacesFilter"
+          ]
+        },
+        {
+          "id": "b351",
+          "at": "internal/filterv2/conversations.gen.go:1730",
+          "cond": "in.DevOid|in.Filter != nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b360",
+          "at": "internal/dql/dql_converter.go:85",
+          "cond": "in.DevOid|in.DqlQuery == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b361",
+          "at": "internal/dql/dql_converter.go:57",
+          "cond": "in.DevOid|in.DqlQuery == nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        },
+        {
+          "id": "b362",
+          "at": "internal/serverv2/list_conversations.go:104",
+          "cond": "in.DevOid|in.Filter != nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b363",
+          "at": "internal/serverv2/list_conversations.go:120",
+          "cond": "in.DevOid|in.Filter != nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b364",
+          "at": "internal/serverv2/list_conversations.go:128",
+          "cond": "in.DevOid|in.DqlQuery != nil",
+          "predicate_paths": [
+            "in.DqlQuery"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": [
+        {
+          "service": "janus",
+          "calls": [
+            "ListGroups"
+          ]
+        },
+        {
+          "service": "this service",
+          "calls": [
+            "SetError"
+          ]
+        }
+      ],
+      "datastore_calls": [
+        "Aggregate"
+      ],
+      "service_count": 2,
+      "call_count": 2,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "appliestoparts",
+          "fuzzy_suggestions": [
+            "in.Filter.AppliesToPartIds"
+          ]
+        },
+        {
+          "field": "stagename",
+          "fuzzy_suggestions": [
+            "in.Filter.Stage"
+          ]
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Should be able to return count for conversation objects",
+        "file": "api/v2_internal/conversations/count_conversations_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "StageName"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Count",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "ConversationsCount",
+        "file": "devorg_sanity_check/entities_count_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Count",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Creates conversations, counts them, and deletes all",
+        "file": "e2e/smoke_test_case/conversations/conversations_test.go",
+        "labels": [
+          "INTERNAL_CONVERSATIONS_COUNT"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Count",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should create conversations and group by members without sorting",
+        "file": "e2e/conversation_user_journey/conversation_group_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Conversations",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should create conversations, group by messages and sort by created date",
+        "file": "e2e/conversation_user_journey/conversation_group_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "SortBy"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Conversations",
+          "Conversations.CreatedDate",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should create conversations with multiple titles, verify creation and listing",
+        "file": "e2e/conversation_user_journey/conversation_group_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToParts"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversations",
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should create conversations with different valid parts, verify grouping",
+        "file": "e2e/conversation_user_journey/conversation_group_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP"
+        ],
+        "fields_set": [
+          "AppliesToParts"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversation.Id",
+          "Conversations",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Creates conversations, lists them, and deletes all",
+        "file": "e2e/smoke_test_case/conversations/conversations_test.go",
+        "labels": [
+          "INTERNAL_CONVERSATIONS_LIST"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Conversations",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should be able to list all conversation object for DevUser",
+        "file": "api/v2_internal/conversations/list_conversation_test.go",
+        "labels": [
+          "POSITIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "Stage"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should throw error for invalid sort by key",
+        "file": "api/v2_internal/conversations/list_conversation_test.go",
+        "labels": [
+          "NEGATIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "SortBy",
+          "Stage"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should return lobbies",
+        "file": "api/v2_internal/lobbies/lobbies_list_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should return error",
+        "file": "api/v2_internal/lobbies/lobbies_list_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          401
+        ],
+        "asserts_success": false,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/codex/internal/serverv2.Codex).ListConversations",
+    "request_type": "apiv2.ListConversationsRequest",
+    "response_type": "apiv2.ListConversationsResponse",
+    "sinks": [
+      {
+        "kind": "rpc",
+        "target": "ListGroups",
+        "via_paths": [
+          "in.Filter.SpacesFilter"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260707110155-c08a57e4ab79/lib/space/filtering.go:336"
+      },
+      {
+        "kind": "dispatch",
+        "target": "ParseQuery",
+        "via_paths": [
+          "in.DqlQuery"
+        ],
+        "at": "internal/dql/dql_converter.go:90"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetSortBy",
+        "via_paths": [
+          "in",
+          "in.DevOid"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/list_item_helpers.go:104"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetSortBy",
+        "via_paths": [
+          "in",
+          "in.DevOid"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/list_item_helpers.go:107"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetSortBy",
+        "via_paths": [
+          "in",
+          "in.DevOid"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/list_item_helpers.go:108"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPage",
+        "via_paths": [
+          "in",
+          "in.DevOid"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/list_item_helpers.go:115"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPage",
+        "via_paths": [
+          "in",
+          "in.DevOid"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/list_item_helpers.go:118"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in",
+          "in.DevOid"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/list_item_helpers.go:124"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPage",
+        "via_paths": [
+          "in",
+          "in.DevOid"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/list_item_helpers.go:121"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in",
+          "in.DevOid"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/list_item_helpers.go:125"
+      },
+      {
+        "kind": "dispatch",
+        "target": "GetPerPage",
+        "via_paths": [
+          "in",
+          "in.DevOid"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/list_item_helpers.go:128"
+      },
+      {
+        "kind": "db",
+        "target": "Aggregate",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.SkipTotal"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/list_item_helpers.go:275"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.SkipTotal"
+        ],
+        "at": "internal/common/errors.go:129"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.SkipTotal"
+        ],
+        "at": "internal/common/errors.go:139"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.SkipTotal"
+        ],
+        "at": "internal/common/errors.go:148"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.SkipTotal"
+        ],
+        "at": "internal/common/errors.go:163"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.SkipTotal"
+        ],
+        "at": "internal/common/errors.go:173"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.SkipTotal"
+        ],
+        "at": "internal/common/errors.go:184"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.SkipTotal"
+        ],
+        "at": "internal/common/errors.go:204"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in",
+          "in.DevOid",
+          "in.SkipTotal"
+        ],
+        "at": "internal/common/errors.go:214"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:432",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidQuarter",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:116",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrTimeBeforeFiscalStart",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:197",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidPeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:211",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrTimeBeforeFiscalStart",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:207",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:283",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:319",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:380",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:219",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:225",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrDQLQueryNil",
+        "at": "internal/dql/dql_converter.go:86",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListConversations` (HTTP operation `ConversationsCount,ConversationsCountPost,ConversationsList,ConversationsListPost,LobbiesList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [403]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.DqlQuery\n  - in.Filter.AccountId\n  - in.Filter.AccountIdOp\n  - in.Filter.ActualCloseDate.After\n  - in.Filter.ActualCloseDate.Before\n  - in.Filter.ActualCloseDate.DatePreset.Type\n  - in.Filter.AiResolutionStatus\n  - in.Filter.AppliesToPartIds\n  - in.Filter.Apps\n  - in.Filter.AppsOp\n  - in.Filter.BrandId\n  - in.Filter.BroadcastChannels\n  - in.Filter.Channels\n  - in.Filter.ChannelsInstances\n  - in.Filter.ChannelsInstancesOp\n  - in.Filter.ConversationType\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CustomFields.Fields\n  - in.Filter.ExternalSourceData\n  - in.Filter.FirstResponseTime.After\n  - in.Filter.FirstResponseTime.Before\n  - in.Filter.FirstResponseTime.DatePreset.Type\n  - in.Filter.Group\n  - in.Filter.HasSpaceId\n  - in.Filter.IsCreatorVerified\n  - in.Filter.IsFrozen\n  - in.Filter.IsSpam\n  - in.Filter.LastExternalMessageDate.After\n  - in.Filter.LastExternalMessageDate.Before\n  - in.Filter.LastExternalMessageDate.DatePreset.Type\n  - in.Filter.LastMessageTimestamp.After\n  - in.Filter.LastMessageTimestamp.Before\n  - in.Filter.LastMessageTimestamp.DatePreset.Type\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.MemberIds\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.OwnedByAgentId\n  - in.Filter.OwnedByIds\n  - in.Filter.OwnedByIdsOp\n  - in.Filter.ParticipantOids\n  - in.Filter.ParticipantUids\n  - in.Filter.Priority\n  - in.Filter.Sentiment\n  - in.Filter.SentimentOp\n  - in.Filter.Sessions\n  - in.Filter.SlaId\n  - in.Filter.SlaSummary\n  - in.Filter.SourceChannel\n  - (+20 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Page >= 0\n  - in.PerPage >= 0\n  - in.Filter.CustomFields == nil\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.ModifiedDate != nil\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.Before != nil\n  - in.Filter.ModifiedDate.DatePreset != nil\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.ModifiedDate.Before != nil\n  - in.Filter.LastMessageTimestamp != nil\n  - in.Filter.LastMessageTimestamp.After != nil\n  - in.Filter.LastMessageTimestamp.Before != nil\n  - in.Filter.LastMessageTimestamp.DatePreset != nil\n  - in.Filter.LastMessageTimestamp.After != nil\n  - in.Filter.LastMessageTimestamp.DatePreset.Type\n  - in.Filter.LastMessageTimestamp.Before != nil\n  - in.Filter.FirstResponseTime != nil\n  - in.Filter.FirstResponseTime.After != nil\n  - in.Filter.FirstResponseTime.Before != nil\n  - in.Filter.FirstResponseTime.DatePreset != nil\n  - in.Filter.FirstResponseTime.After != nil\n  - in.Filter.FirstResponseTime.DatePreset.Type\n  - in.Filter.FirstResponseTime.Before != nil\n  - in.Filter.ActualCloseDate != nil\n  - in.Filter.ActualCloseDate.After != nil\n  - in.Filter.ActualCloseDate.Before != nil\n  - in.Filter.ActualCloseDate.DatePreset != nil\n  - in.Filter.ActualCloseDate.After != nil\n  - in.Filter.ActualCloseDate.DatePreset.Type\n  - in.Filter.ActualCloseDate.Before != nil\n  - (+65 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestoparts` -> suggestions ['in.Filter.AppliesToPartIds']\n  - test field `stagename` -> suggestions ['in.Filter.Stage']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

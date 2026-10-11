@@ -1,0 +1,400 @@
+{
+  "service": "S3Interact",
+  "coverage": {
+    "rpc": "HardDeleteArtifactVersion",
+    "operation": "ArtifactsHardDeleteVersion",
+    "tests": 9,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403
+      ],
+      "asserted": [
+        200,
+        201
+      ],
+      "missing": [
+        400,
+        401,
+        403
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 25
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 2,
+      "covered_count": 1,
+      "coverage_pct": 50,
+      "request_fields_set_by_tests": 2,
+      "set_by_positive_tests": 1,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 2,
+          "set": 1,
+          "pct": 50
+        },
+        "nested": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 2,
+        "covered": 1,
+        "pct": 50,
+        "collapsed_types": []
+      },
+      "covered": [
+        {
+          "path": "in.Id",
+          "match": "exact",
+          "by_tests": [
+            "Hard delete version for non-existent artifact should return 404",
+            "Should create and verify content block article",
+            "Should handle article images ",
+            "Should verify artifact versioning with SHA256 hash verification",
+            "Should verify file attachment content matches original using SHA256",
+            "Should verify markdown file content and bold text formatting",
+            "Should verify uploaded file content matches original using SHA256",
+            "Version delete"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.VersionId"
+      ]
+    },
+    "branches": {
+      "total": 9,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 9,
+      "present_arm_exercised": 8,
+      "present_arm_pct": 88.9,
+      "absent_arm_exercised": 8,
+      "absent_arm_pct": 88.9,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 7,
+      "coverage_pct": 88.9,
+      "by_origin": {
+        "service": {
+          "total": 3,
+          "reachable_on_happy_path": 3,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 66.7,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 2
+        },
+        "generated": {
+          "total": 2,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 100,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 2
+        },
+        "library": {
+          "total": 4,
+          "reachable_on_happy_path": 4,
+          "present_arm_exercised": 4,
+          "present_arm_pct": 100,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 4
+        }
+      },
+      "gaps": [
+        {
+          "id": "b9",
+          "at": "internal/server/hard_delete_artifact_version.go:103",
+          "cond": "in.VersionId == \"\"",
+          "predicate_paths": [
+            "in.VersionId"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": null,
+      "datastore_calls": [],
+      "service_count": 0,
+      "call_count": 0,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": [
+        {
+          "field": "version",
+          "fuzzy_suggestions": [
+            "in.VersionId"
+          ]
+        }
+      ]
+    },
+    "test_facts": [
+      {
+        "name": "Hard delete version for non-existent artifact should return 404",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_VERSIONS_DELETE"
+        ],
+        "fields_set": [
+          "Id",
+          "Version"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Version delete",
+        "file": "api/v2_internal/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_VERSIONS_DELETE"
+        ],
+        "fields_set": [
+          "Id",
+          "Version"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Body",
+          "Body.Close",
+          "GetVersions",
+          "Id",
+          "StatusCode",
+          "Url",
+          "Versions"
+        ]
+      },
+      {
+        "name": "Hard delete version for non-existent artifact should return 404",
+        "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
+        "labels": [
+          "NEGATIVE",
+          "PUBLIC_ARTIFACTS_VERSIONS_DELETE"
+        ],
+        "fields_set": [
+          "Id",
+          "Version"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should handle article images ",
+        "file": "e2e/collections/collection_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Article",
+          "Article.Id",
+          "Article.Resource",
+          "Article.Resource.Artifacts",
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should verify uploaded file content matches original using SHA256",
+        "file": "e2e/collections/collection_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Article",
+          "Article.Id",
+          "Body",
+          "Body.Close",
+          "Id",
+          "StatusCode",
+          "Url",
+          "Versions"
+        ]
+      },
+      {
+        "name": "Should verify artifact versioning with SHA256 hash verification",
+        "file": "e2e/collections/collection_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Article",
+          "Article.Id",
+          "Body",
+          "Body.Close",
+          "Id",
+          "StatusCode",
+          "Url",
+          "Versions"
+        ]
+      },
+      {
+        "name": "Should verify markdown file content and bold text formatting",
+        "file": "e2e/collections/collection_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Article",
+          "Article.Id",
+          "Body",
+          "Body.Close",
+          "Id",
+          "StatusCode",
+          "Url",
+          "Versions"
+        ]
+      },
+      {
+        "name": "Should create and verify content block article",
+        "file": "e2e/collections/collection_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Article",
+          "Article.ArticleType",
+          "Article.Description",
+          "Article.Id",
+          "Article.Resource",
+          "Article.Resource.Artifacts",
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should verify file attachment content matches original using SHA256",
+        "file": "e2e/ticktes_user_journey/tickets_userjourney_test.go",
+        "labels": [
+          "UAT",
+          "UAT_TEMP",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Body",
+          "Body.Close",
+          "Id",
+          "StatusCode",
+          "Url",
+          "Work",
+          "Work.AsTicket"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/s3interact/internal/server.S3Interact).HardDeleteArtifactVersion",
+    "request_type": "api.HardDeleteArtifactVersionRequest",
+    "response_type": "api.HardDeleteArtifactVersionResponse",
+    "sinks": [],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:446",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `HardDeleteArtifactVersion` (HTTP operation `ArtifactsHardDeleteVersion`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.VersionId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.VersionId == \"\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `version` -> suggestions ['in.VersionId']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

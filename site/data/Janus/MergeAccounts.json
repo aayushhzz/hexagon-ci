@@ -1,0 +1,231 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "MergeAccounts",
+    "operation": "AccountsMerge",
+    "tests": 2,
+    "status": {
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404
+      ],
+      "asserted": [
+        200,
+        400
+      ],
+      "missing": [
+        401,
+        403,
+        404
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 40
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 2,
+      "covered_count": 2,
+      "coverage_pct": 100,
+      "request_fields_set_by_tests": 2,
+      "set_by_positive_tests": 2,
+      "set_by_negative_tests": 2,
+      "by_depth": {
+        "top_level": {
+          "total": 2,
+          "set": 2,
+          "pct": 100
+        },
+        "nested": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 2,
+        "covered": 2,
+        "pct": 100,
+        "collapsed_types": []
+      },
+      "covered": [
+        {
+          "path": "in.From",
+          "match": "exact",
+          "by_tests": [
+            "Merge Accounts",
+            "Merge Accounts With Wrong Id"
+          ]
+        },
+        {
+          "path": "in.To",
+          "match": "exact",
+          "by_tests": [
+            "Merge Accounts",
+            "Merge Accounts With Wrong Id"
+          ]
+        }
+      ],
+      "gaps": null
+    },
+    "branches": {
+      "total": 8,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 8,
+      "present_arm_exercised": 8,
+      "present_arm_pct": 100,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 7,
+      "negative_arm_pct": 87.5,
+      "both_arms_exercised": 0,
+      "coverage_pct": 100,
+      "by_origin": {
+        "service": {
+          "total": 2,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 100,
+          "negative_arm_exercised": 1,
+          "negative_arm_pct": 50,
+          "absent_arm_exercised": 0
+        },
+        "generated": {
+          "total": 4,
+          "reachable_on_happy_path": 4,
+          "present_arm_exercised": 4,
+          "present_arm_pct": 100,
+          "negative_arm_exercised": 4,
+          "negative_arm_pct": 100,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 2,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 100,
+          "negative_arm_exercised": 2,
+          "negative_arm_pct": 100,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": null
+    },
+    "dependencies": {
+      "services": [
+        {
+          "service": "this service",
+          "calls": [
+            "AccountExists",
+            "Lock"
+          ]
+        }
+      ],
+      "datastore_calls": [],
+      "service_count": 1,
+      "call_count": 2,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": [
+      {
+        "name": "Merge Accounts With Wrong Id",
+        "file": "api/v2_internal/accounts/accounts_merge_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ACCOUNTS_MERGE"
+        ],
+        "fields_set": [
+          "From",
+          "To"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "asserts_error": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Merge Accounts",
+        "file": "api/v2_internal/accounts/accounts_merge_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ACCOUNTS_MERGE"
+        ],
+        "fields_set": [
+          "From",
+          "To"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).MergeAccounts",
+    "request_type": "api.MergeAccountsRequest",
+    "response_type": "api.MergeAccountsResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetExternalError",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/account.go:1809"
+      },
+      {
+        "kind": "rpc",
+        "target": "AccountExists",
+        "via_paths": [
+          "in.From"
+        ],
+        "at": "internal/service/account.go:1057"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.From"
+        ],
+        "at": "internal/service/common.go:319"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:446",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MergeAccounts` (HTTP operation `AccountsMerge`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 404]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - none\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - none\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

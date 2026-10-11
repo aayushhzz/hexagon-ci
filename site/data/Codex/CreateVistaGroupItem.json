@@ -1,0 +1,1127 @@
+{
+  "service": "Codex",
+  "coverage": {
+    "rpc": "CreateVistaGroupItem",
+    "operation": "VistasGroupsCreate",
+    "tests": 6,
+    "status": {
+      "documented": [
+        201,
+        400,
+        401,
+        403
+      ],
+      "asserted": [
+        200,
+        201,
+        404
+      ],
+      "missing": [
+        400,
+        401,
+        403
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 25
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 61,
+      "covered_count": 3,
+      "coverage_pct": 4.9,
+      "request_fields_set_by_tests": 2,
+      "set_by_positive_tests": 3,
+      "set_by_negative_tests": 3,
+      "by_depth": {
+        "top_level": {
+          "total": 6,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 15,
+          "set": 2,
+          "pct": 13.3
+        },
+        "deep": {
+          "total": 40,
+          "set": 1,
+          "pct": 2.5
+        }
+      },
+      "representative": {
+        "units": 61,
+        "covered": 3,
+        "pct": 4.9,
+        "collapsed_types": [
+          "structpb.Struct"
+        ]
+      },
+      "covered": [
+        {
+          "path": "in.VistaGroupItem.Name",
+          "match": "exact",
+          "by_tests": [
+            "Successfully created vista group item with required fields only",
+            "Successfully deleted vista group item",
+            "Successfully listed vista group items",
+            "Successfully moved items between vista groups",
+            "Successfully retrieved vista group item",
+            "Successfully updated vista group item"
+          ]
+        },
+        {
+          "path": "in.VistaGroupItem.Parent.Name",
+          "match": "exact",
+          "by_tests": [
+            "Successfully created vista group item with required fields only",
+            "Successfully deleted vista group item",
+            "Successfully listed vista group items",
+            "Successfully moved items between vista groups",
+            "Successfully retrieved vista group item",
+            "Successfully updated vista group item"
+          ]
+        },
+        {
+          "path": "in.VistaGroupItem.ParentId",
+          "match": "exact",
+          "by_tests": [
+            "Successfully created vista group item with required fields only",
+            "Successfully deleted vista group item",
+            "Successfully listed vista group items",
+            "Successfully moved items between vista groups",
+            "Successfully retrieved vista group item",
+            "Successfully updated vista group item"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.ActorId",
+        "in.AggregateErrors",
+        "in.CustomId",
+        "in.DevOid",
+        "in.SprintArchivalValidationDisabled",
+        "in.SprintOverlapValidationDisabled",
+        "in.VistaGroupItem.CustomView.GroupByAttributes",
+        "in.VistaGroupItem.CustomView.KanbanCardAttributes",
+        "in.VistaGroupItem.CustomView.ShowGroups",
+        "in.VistaGroupItem.CustomView.TableColumns",
+        "in.VistaGroupItem.Description",
+        "in.VistaGroupItem.DescriptionTranslated.ContentData",
+        "in.VistaGroupItem.DescriptionTranslated.ContentKey",
+        "in.VistaGroupItem.DescriptionTranslated.ContentNamespace",
+        "in.VistaGroupItem.DevrevCopy.LastSyncedDate",
+        "in.VistaGroupItem.DevrevCopy.OriginId",
+        "in.VistaGroupItem.DevrevCopy.OriginOrgId",
+        "in.VistaGroupItem.EndDate",
+        "in.VistaGroupItem.ExternalSourceData.ClosedDate",
+        "in.VistaGroupItem.ExternalSourceData.CreatedById",
+        "in.VistaGroupItem.ExternalSourceData.CreatedDate",
+        "in.VistaGroupItem.ExternalSourceData.ModifiedById",
+        "in.VistaGroupItem.ExternalSourceData.ModifiedDate",
+        "in.VistaGroupItem.Filter.Fields",
+        "in.VistaGroupItem.Goals",
+        "in.VistaGroupItem.GoalsDocumentId",
+        "in.VistaGroupItem.GroupObjectType",
+        "in.VistaGroupItem.IconType",
+        "in.VistaGroupItem.InferredParts",
+        "in.VistaGroupItem.IsSystem",
+        "in.VistaGroupItem.Items",
+        "in.VistaGroupItem.NameTranslated.ContentData",
+        "in.VistaGroupItem.NameTranslated.ContentKey",
+        "in.VistaGroupItem.NameTranslated.ContentNamespace",
+        "in.VistaGroupItem.Parent.Flavor",
+        "in.VistaGroupItem.Parent.Id",
+        "in.VistaGroupItem.Parent.IsArchived",
+        "in.VistaGroupItem.StagedInfo.IsStaged",
+        "in.VistaGroupItem.StagedInfo.SyncInUnresolvedFields",
+        "in.VistaGroupItem.StagedInfo.SyncOutUnresolvedFields",
+        "in.VistaGroupItem.StagedInfo.UnresolvedFields",
+        "in.VistaGroupItem.StartDate",
+        "in.VistaGroupItem.State",
+        "in.VistaGroupItem.SyncMetadata.ExternalRecordId",
+        "in.VistaGroupItem.SyncMetadata.ExternalRecordType",
+        "in.VistaGroupItem.SyncMetadata.ExternalReference",
+        "in.VistaGroupItem.SyncMetadata.LastSyncIn.Status",
+        "in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncDate",
+        "in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId",
+        "in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId",
+        "in.VistaGroupItem.SyncMetadata.LastSyncOut.Status",
+        "in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncDate",
+        "in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId",
+        "in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId",
+        "in.VistaGroupItem.SyncMetadata.OriginSystem",
+        "in.VistaGroupItem.SyncMetadata.SyncedByDevUsers",
+        "in.VistaGroupItem.Type",
+        "in.VistaGroupItem.ViewType"
+      ]
+    },
+    "branches": {
+      "total": 82,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 3,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 10,
+      "present_arm_exercised": 14,
+      "present_arm_pct": 17.1,
+      "absent_arm_exercised": 9,
+      "absent_arm_pct": 90,
+      "negative_arm_exercised": 13,
+      "negative_arm_pct": 15.9,
+      "both_arms_exercised": 0,
+      "coverage_pct": 17.1,
+      "by_origin": {
+        "service": {
+          "total": 55,
+          "reachable_on_happy_path": 5,
+          "present_arm_exercised": 4,
+          "present_arm_pct": 7.3,
+          "negative_arm_exercised": 3,
+          "negative_arm_pct": 5.5,
+          "absent_arm_exercised": 4
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 27,
+          "reachable_on_happy_path": 5,
+          "present_arm_exercised": 10,
+          "present_arm_pct": 37,
+          "negative_arm_exercised": 10,
+          "negative_arm_pct": 37,
+          "absent_arm_exercised": 5
+        }
+      },
+      "gaps": [
+        {
+          "id": "b3",
+          "at": "internal/common/vista_validation.go:23",
+          "cond": "in.VistaGroupItem.Filter != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Filter"
+          ]
+        },
+        {
+          "id": "b16",
+          "at": "internal/common/severity_converter.go:66",
+          "cond": "in.VistaGroupItem.Filter != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Filter"
+          ]
+        },
+        {
+          "id": "b17",
+          "at": "internal/common/severity_converter.go:40",
+          "cond": "in.VistaGroupItem.Filter != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Filter"
+          ]
+        },
+        {
+          "id": "b18",
+          "at": "internal/common/forecast_category_converter.go:34",
+          "cond": "in.VistaGroupItem.Filter == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Filter"
+          ]
+        },
+        {
+          "id": "b19",
+          "at": "internal/serverv2/vista_helper.go:1128",
+          "cond": "in.VistaGroupItem == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem"
+          ]
+        },
+        {
+          "id": "b20",
+          "at": "internal/serverv2/vista_helper.go:1142",
+          "cond": "in.VistaGroupItem.CustomView == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.CustomView"
+          ]
+        },
+        {
+          "id": "b21",
+          "at": "internal/serverv2/vista_helper.go:1154",
+          "cond": "in.VistaGroupItem.Filter == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Filter"
+          ]
+        },
+        {
+          "id": "b22",
+          "at": "internal/serverv2/vista_helper.go:1157",
+          "cond": "in.VistaGroupItem.Filter.Fields == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Filter.Fields"
+          ]
+        },
+        {
+          "id": "b23",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.CustomId == nil",
+          "predicate_paths": [
+            "in.CustomId"
+          ]
+        },
+        {
+          "id": "b25",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260701100938-401162ec7707/lib/gen/collection/devrev_localized_text.gen.go:302",
+          "cond": "in.VistaGroupItem.NameTranslated.ContentData != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.NameTranslated.ContentData"
+          ]
+        },
+        {
+          "id": "b26",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260701100938-401162ec7707/lib/gen/collection/devrev_localized_text.gen.go:302",
+          "cond": "in.VistaGroupItem.DescriptionTranslated.ContentData != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.DescriptionTranslated.ContentData"
+          ]
+        },
+        {
+          "id": "b27",
+          "at": "internal/collectionv2/custom_view_fields.gen.go:359",
+          "cond": "in.VistaGroupItem.CustomView.TableColumns != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.CustomView.TableColumns"
+          ]
+        },
+        {
+          "id": "b28",
+          "at": "internal/collectionv2/custom_view_fields.gen.go:369",
+          "cond": "in.VistaGroupItem.CustomView.KanbanCardAttributes != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.CustomView.KanbanCardAttributes"
+          ]
+        },
+        {
+          "id": "b29",
+          "at": "internal/collectionv2/custom_view_fields.gen.go:381",
+          "cond": "in.VistaGroupItem.CustomView.GroupByAttributes != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.CustomView.GroupByAttributes"
+          ]
+        },
+        {
+          "id": "b30",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.VistaGroupItem.Parent.Id == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Parent.Id"
+          ]
+        },
+        {
+          "id": "b31",
+          "at": "internal/collectionv2/vista_group_item_parent_composite.gen.go:252",
+          "cond": "in.VistaGroupItem.Parent.Id != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Parent.Id"
+          ]
+        },
+        {
+          "id": "b32",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.VistaGroupItem.GoalsDocumentId == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.GoalsDocumentId"
+          ]
+        },
+        {
+          "id": "b33",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId"
+          ]
+        },
+        {
+          "id": "b34",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId"
+          ]
+        },
+        {
+          "id": "b35",
+          "at": "internal/collectionv2/sync_in.gen.go:268",
+          "cond": "in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncDate != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncDate"
+          ]
+        },
+        {
+          "id": "b36",
+          "at": "internal/collectionv2/sync_in.gen.go:274",
+          "cond": "in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId"
+          ]
+        },
+        {
+          "id": "b37",
+          "at": "internal/collectionv2/sync_in.gen.go:283",
+          "cond": "in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId"
+          ]
+        },
+        {
+          "id": "b38",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId"
+          ]
+        },
+        {
+          "id": "b39",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId"
+          ]
+        },
+        {
+          "id": "b40",
+          "at": "internal/collectionv2/sync_out.gen.go:268",
+          "cond": "in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncDate != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncDate"
+          ]
+        },
+        {
+          "id": "b41",
+          "at": "internal/collectionv2/sync_out.gen.go:274",
+          "cond": "in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId"
+          ]
+        },
+        {
+          "id": "b42",
+          "at": "internal/collectionv2/sync_out.gen.go:283",
+          "cond": "in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId"
+          ]
+        },
+        {
+          "id": "b43",
+          "at": "internal/collectionv2/sync_metadata.gen.go:401",
+          "cond": "in.VistaGroupItem.SyncMetadata.SyncedByDevUsers != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.SyncMetadata.SyncedByDevUsers"
+          ]
+        },
+        {
+          "id": "b44",
+          "at": "internal/collectionv2/sync_metadata.gen.go:415",
+          "cond": "in.VistaGroupItem.SyncMetadata.LastSyncIn != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.SyncMetadata.LastSyncIn"
+          ]
+        },
+        {
+          "id": "b45",
+          "at": "internal/collectionv2/sync_metadata.gen.go:421",
+          "cond": "in.VistaGroupItem.SyncMetadata.LastSyncOut != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.SyncMetadata.LastSyncOut"
+          ]
+        },
+        {
+          "id": "b46",
+          "at": "internal/collectionv2/staged_info.gen.go:347",
+          "cond": "in.VistaGroupItem.StagedInfo.UnresolvedFields != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.StagedInfo.UnresolvedFields"
+          ]
+        },
+        {
+          "id": "b47",
+          "at": "internal/collectionv2/staged_info.gen.go:353",
+          "cond": "in.VistaGroupItem.StagedInfo.SyncInUnresolvedFields != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.StagedInfo.SyncInUnresolvedFields"
+          ]
+        },
+        {
+          "id": "b48",
+          "at": "internal/collectionv2/staged_info.gen.go:363",
+          "cond": "in.VistaGroupItem.StagedInfo.SyncOutUnresolvedFields != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.StagedInfo.SyncOutUnresolvedFields"
+          ]
+        },
+        {
+          "id": "b49",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.VistaGroupItem.ExternalSourceData.CreatedById == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.ExternalSourceData.CreatedById"
+          ]
+        },
+        {
+          "id": "b50",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.VistaGroupItem.ExternalSourceData.ModifiedById == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.ExternalSourceData.ModifiedById"
+          ]
+        },
+        {
+          "id": "b51",
+          "at": "internal/collectionv2/external_source_data_comp.gen.go:301",
+          "cond": "in.VistaGroupItem.ExternalSourceData.CreatedDate != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.ExternalSourceData.CreatedDate"
+          ]
+        },
+        {
+          "id": "b52",
+          "at": "internal/collectionv2/external_source_data_comp.gen.go:305",
+          "cond": "in.VistaGroupItem.ExternalSourceData.ModifiedDate != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.ExternalSourceData.ModifiedDate"
+          ]
+        },
+        {
+          "id": "b53",
+          "at": "internal/collectionv2/external_source_data_comp.gen.go:309",
+          "cond": "in.VistaGroupItem.ExternalSourceData.ClosedDate != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.ExternalSourceData.ClosedDate"
+          ]
+        },
+        {
+          "id": "b54",
+          "at": "internal/collectionv2/external_source_data_comp.gen.go:313",
+          "cond": "in.VistaGroupItem.ExternalSourceData.CreatedById != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.ExternalSourceData.CreatedById"
+          ]
+        },
+        {
+          "id": "b55",
+          "at": "internal/collectionv2/external_source_data_comp.gen.go:322",
+          "cond": "in.VistaGroupItem.ExternalSourceData.ModifiedById != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.ExternalSourceData.ModifiedById"
+          ]
+        },
+        {
+          "id": "b56",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.VistaGroupItem.DevrevCopy.OriginId == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.DevrevCopy.OriginId"
+          ]
+        },
+        {
+          "id": "b57",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.VistaGroupItem.DevrevCopy.OriginOrgId == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.DevrevCopy.OriginOrgId"
+          ]
+        },
+        {
+          "id": "b58",
+          "at": "internal/collectionv2/devrev_copy.gen.go:239",
+          "cond": "in.VistaGroupItem.DevrevCopy.OriginId != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.DevrevCopy.OriginId"
+          ]
+        },
+        {
+          "id": "b59",
+          "at": "internal/collectionv2/devrev_copy.gen.go:248",
+          "cond": "in.VistaGroupItem.DevrevCopy.OriginOrgId != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.DevrevCopy.OriginOrgId"
+          ]
+        },
+        {
+          "id": "b60",
+          "at": "internal/collectionv2/devrev_copy.gen.go:257",
+          "cond": "in.VistaGroupItem.DevrevCopy.LastSyncedDate != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.DevrevCopy.LastSyncedDate"
+          ]
+        },
+        {
+          "id": "b61",
+          "at": "internal/collectionv2/vista_group_item.gen.go:1516",
+          "cond": "in.VistaGroupItem.NameTranslated != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.NameTranslated"
+          ]
+        },
+        {
+          "id": "b62",
+          "at": "internal/collectionv2/vista_group_item.gen.go:1524",
+          "cond": "in.VistaGroupItem.DescriptionTranslated != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.DescriptionTranslated"
+          ]
+        },
+        {
+          "id": "b64",
+          "at": "internal/collectionv2/vista_group_item.gen.go:1545",
+          "cond": "in.VistaGroupItem.Items != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Items"
+          ]
+        },
+        {
+          "id": "b65",
+          "at": "internal/collectionv2/vista_group_item.gen.go:1555",
+          "cond": "in.VistaGroupItem.StartDate != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.StartDate"
+          ]
+        },
+        {
+          "id": "b66",
+          "at": "internal/collectionv2/vista_group_item.gen.go:1559",
+          "cond": "in.VistaGroupItem.EndDate != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.EndDate"
+          ]
+        },
+        {
+          "id": "b67",
+          "at": "internal/collectionv2/vista_group_item.gen.go:1563",
+          "cond": "in.VistaGroupItem.Filter != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Filter"
+          ]
+        },
+        {
+          "id": "b68",
+          "at": "internal/collectionv2/vista_group_item.gen.go:1568",
+          "cond": "in.VistaGroupItem.CustomView != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.CustomView"
+          ]
+        },
+        {
+          "id": "b69",
+          "at": "internal/collectionv2/vista_group_item.gen.go:1578",
+          "cond": "in.VistaGroupItem.Parent != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Parent"
+          ]
+        },
+        {
+          "id": "b70",
+          "at": "internal/collectionv2/vista_group_item.gen.go:1586",
+          "cond": "in.VistaGroupItem.GoalsDocumentId != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.GoalsDocumentId"
+          ]
+        },
+        {
+          "id": "b71",
+          "at": "internal/collectionv2/vista_group_item.gen.go:1595",
+          "cond": "in.VistaGroupItem.InferredParts != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.InferredParts"
+          ]
+        },
+        {
+          "id": "b72",
+          "at": "internal/collectionv2/vista_group_item.gen.go:1607",
+          "cond": "in.VistaGroupItem.SyncMetadata != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.SyncMetadata"
+          ]
+        },
+        {
+          "id": "b73",
+          "at": "internal/collectionv2/vista_group_item.gen.go:1613",
+          "cond": "in.VistaGroupItem.StagedInfo != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.StagedInfo"
+          ]
+        },
+        {
+          "id": "b74",
+          "at": "internal/collectionv2/vista_group_item.gen.go:1619",
+          "cond": "in.VistaGroupItem.ExternalSourceData != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.ExternalSourceData"
+          ]
+        },
+        {
+          "id": "b75",
+          "at": "internal/collectionv2/vista_group_item.gen.go:1625",
+          "cond": "in.VistaGroupItem.DevrevCopy != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.DevrevCopy"
+          ]
+        },
+        {
+          "id": "b76",
+          "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:66",
+          "cond": "in.VistaGroupItem|in.VistaGroupItem.CustomView|in.VistaGroupItem.CustomView.ShowGroups|in.VistaGroupItem.Description|in.VistaGroupItem.DescriptionTranslated|in.VistaGroupItem.DescriptionTranslated.ContentData|in.VistaGroupItem.DescriptionTranslated.ContentKey|in.VistaGroupItem.DescriptionTranslated.ContentNamespace|in.VistaGroupItem.DevrevCopy|in.VistaGroupItem.DevrevCopy.OriginId|in.VistaGroupItem.DevrevCopy.OriginOrgId|in.VistaGroupItem.ExternalSourceData|in.VistaGroupItem.ExternalSourceData.CreatedById|in.VistaGroupItem.ExternalSourceData.ModifiedById|in.VistaGroupItem.Goals|in.VistaGroupItem.GoalsDocumentId|in.VistaGroupItem.IconType|in.VistaGroupItem.IsSystem|in.VistaGroupItem.Name|in.VistaGroupItem.NameTranslated|in.VistaGroupItem.NameTranslated.ContentData|in.VistaGroupItem.NameTranslated.ContentKey|in.VistaGroupItem.NameTranslated.ContentNamespace|in.VistaGroupItem.Parent|in.VistaGroupItem.Parent.Id|in.VistaGroupItem.Parent.IsArchived|in.VistaGroupItem.Parent.Name|in.VistaGroupItem.ParentId|in.VistaGroupItem.StagedInfo|in.VistaGroupItem.StagedInfo.IsStaged|in.VistaGroupItem.SyncMetadata|in.VistaGroupItem.SyncMetadata.ExternalRecordId|in.VistaGroupItem.SyncMetadata.ExternalRecordType|in.VistaGroupItem.SyncMetadata.ExternalReference|in.VistaGroupItem.SyncMetadata.LastSyncIn|in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId|in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId|in.VistaGroupItem.SyncMetadata.LastSyncOut|in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId|in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId|in.VistaGroupItem.SyncMetadata.OriginSystem == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem"
+          ]
+        },
+        {
+          "id": "b77",
+          "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/merge.go:375",
+          "cond": "in.VistaGroupItem|in.VistaGroupItem.CustomView|in.VistaGroupItem.CustomView.ShowGroups|in.VistaGroupItem.Description|in.VistaGroupItem.DescriptionTranslated|in.VistaGroupItem.DescriptionTranslated.ContentData|in.VistaGroupItem.DescriptionTranslated.ContentKey|in.VistaGroupItem.DescriptionTranslated.ContentNamespace|in.VistaGroupItem.DevrevCopy|in.VistaGroupItem.DevrevCopy.OriginId|in.VistaGroupItem.DevrevCopy.OriginOrgId|in.VistaGroupItem.ExternalSourceData|in.VistaGroupItem.ExternalSourceData.CreatedById|in.VistaGroupItem.ExternalSourceData.ModifiedById|in.VistaGroupItem.Goals|in.VistaGroupItem.GoalsDocumentId|in.VistaGroupItem.IconType|in.VistaGroupItem.IsSystem|in.VistaGroupItem.Name|in.VistaGroupItem.NameTranslated|in.VistaGroupItem.NameTranslated.ContentData|in.VistaGroupItem.NameTranslated.ContentKey|in.VistaGroupItem.NameTranslated.ContentNamespace|in.VistaGroupItem.Parent|in.VistaGroupItem.Parent.Id|in.VistaGroupItem.Parent.IsArchived|in.VistaGroupItem.Parent.Name|in.VistaGroupItem.ParentId|in.VistaGroupItem.StagedInfo|in.VistaGroupItem.StagedInfo.IsStaged|in.VistaGroupItem.SyncMetadata|in.VistaGroupItem.SyncMetadata.ExternalRecordId|in.VistaGroupItem.SyncMetadata.ExternalRecordType|in.VistaGroupItem.SyncMetadata.ExternalReference|in.VistaGroupItem.SyncMetadata.LastSyncIn|in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId|in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId|in.VistaGroupItem.SyncMetadata.LastSyncOut|in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId|in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId|in.VistaGroupItem.SyncMetadata.OriginSystem != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem"
+          ]
+        },
+        {
+          "id": "b78",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/mongo_metrics.go:106",
+          "cond": "in.VistaGroupItem|in.VistaGroupItem.CustomView|in.VistaGroupItem.CustomView.ShowGroups|in.VistaGroupItem.Description|in.VistaGroupItem.DescriptionTranslated|in.VistaGroupItem.DescriptionTranslated.ContentData|in.VistaGroupItem.DescriptionTranslated.ContentKey|in.VistaGroupItem.DescriptionTranslated.ContentNamespace|in.VistaGroupItem.DevrevCopy|in.VistaGroupItem.DevrevCopy.OriginId|in.VistaGroupItem.DevrevCopy.OriginOrgId|in.VistaGroupItem.ExternalSourceData|in.VistaGroupItem.ExternalSourceData.CreatedById|in.VistaGroupItem.ExternalSourceData.ModifiedById|in.VistaGroupItem.Goals|in.VistaGroupItem.GoalsDocumentId|in.VistaGroupItem.IconType|in.VistaGroupItem.IsSystem|in.VistaGroupItem.Name|in.VistaGroupItem.NameTranslated|in.VistaGroupItem.NameTranslated.ContentData|in.VistaGroupItem.NameTranslated.ContentKey|in.VistaGroupItem.NameTranslated.ContentNamespace|in.VistaGroupItem.Parent|in.VistaGroupItem.Parent.Id|in.VistaGroupItem.Parent.IsArchived|in.VistaGroupItem.Parent.Name|in.VistaGroupItem.ParentId|in.VistaGroupItem.StagedInfo|in.VistaGroupItem.StagedInfo.IsStaged|in.VistaGroupItem.SyncMetadata|in.VistaGroupItem.SyncMetadata.ExternalRecordId|in.VistaGroupItem.SyncMetadata.ExternalRecordType|in.VistaGroupItem.SyncMetadata.ExternalReference|in.VistaGroupItem.SyncMetadata.LastSyncIn|in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId|in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId|in.VistaGroupItem.SyncMetadata.LastSyncOut|in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId|in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId|in.VistaGroupItem.SyncMetadata.OriginSystem == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem"
+          ]
+        },
+        {
+          "id": "b79",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/mongo_metrics.go:114",
+          "cond": "in.VistaGroupItem|in.VistaGroupItem.CustomView|in.VistaGroupItem.CustomView.ShowGroups|in.VistaGroupItem.Description|in.VistaGroupItem.DescriptionTranslated|in.VistaGroupItem.DescriptionTranslated.ContentData|in.VistaGroupItem.DescriptionTranslated.ContentKey|in.VistaGroupItem.DescriptionTranslated.ContentNamespace|in.VistaGroupItem.DevrevCopy|in.VistaGroupItem.DevrevCopy.OriginId|in.VistaGroupItem.DevrevCopy.OriginOrgId|in.VistaGroupItem.ExternalSourceData|in.VistaGroupItem.ExternalSourceData.CreatedById|in.VistaGroupItem.ExternalSourceData.ModifiedById|in.VistaGroupItem.Goals|in.VistaGroupItem.GoalsDocumentId|in.VistaGroupItem.IconType|in.VistaGroupItem.IsSystem|in.VistaGroupItem.Name|in.VistaGroupItem.NameTranslated|in.VistaGroupItem.NameTranslated.ContentData|in.VistaGroupItem.NameTranslated.ContentKey|in.VistaGroupItem.NameTranslated.ContentNamespace|in.VistaGroupItem.Parent|in.VistaGroupItem.Parent.Id|in.VistaGroupItem.Parent.IsArchived|in.VistaGroupItem.Parent.Name|in.VistaGroupItem.ParentId|in.VistaGroupItem.StagedInfo|in.VistaGroupItem.StagedInfo.IsStaged|in.VistaGroupItem.SyncMetadata|in.VistaGroupItem.SyncMetadata.ExternalRecordId|in.VistaGroupItem.SyncMetadata.ExternalRecordType|in.VistaGroupItem.SyncMetadata.ExternalReference|in.VistaGroupItem.SyncMetadata.LastSyncIn|in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId|in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId|in.VistaGroupItem.SyncMetadata.LastSyncOut|in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId|in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId|in.VistaGroupItem.SyncMetadata.OriginSystem == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem"
+          ]
+        },
+        {
+          "id": "b80",
+          "at": "internal/serverv2/create_vista_group_item.go:166",
+          "cond": "in.SprintArchivalValidationDisabled",
+          "predicate_paths": [
+            "in.SprintArchivalValidationDisabled"
+          ]
+        },
+        {
+          "id": "b82",
+          "at": "internal/serverv2/create_vista_group_item.go:243",
+          "cond": "in.VistaGroupItem.Type",
+          "predicate_paths": [
+            "in.VistaGroupItem.Type"
+          ]
+        },
+        {
+          "id": "b83",
+          "at": "internal/serverv2/create_vista_group_item.go:244",
+          "cond": "in.SprintOverlapValidationDisabled",
+          "predicate_paths": [
+            "in.SprintOverlapValidationDisabled"
+          ]
+        },
+        {
+          "id": "b84",
+          "at": "internal/serverv2/create_vista_group_item.go:294",
+          "cond": "in.CustomId != nil",
+          "predicate_paths": [
+            "in.CustomId"
+          ]
+        },
+        {
+          "id": "b85",
+          "at": "internal/serverv2/create_vista_group_item.go:311",
+          "cond": "in.VistaGroupItem.Type",
+          "predicate_paths": [
+            "in.VistaGroupItem.Type"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": [
+        {
+          "service": "this service",
+          "calls": [
+            "SetError"
+          ]
+        }
+      ],
+      "datastore_calls": [
+        "Aggregate"
+      ],
+      "service_count": 1,
+      "call_count": 1,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": [
+      {
+        "name": "Successfully created vista group item with required fields only",
+        "file": "api/v2_internal/vista_groups/vistas_groups_create_test.go",
+        "labels": null,
+        "fields_set": [
+          "Name",
+          "ParentId"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Successfully deleted vista group item",
+        "file": "api/v2_internal/vista_groups/vistas_groups_delete_test.go",
+        "labels": null,
+        "fields_set": [
+          "Name",
+          "ParentId"
+        ],
+        "statuses": [
+          200,
+          404
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Successfully retrieved vista group item",
+        "file": "api/v2_internal/vista_groups/vistas_groups_get_test.go",
+        "labels": null,
+        "fields_set": [
+          "Name",
+          "ParentId"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Successfully listed vista group items",
+        "file": "api/v2_internal/vista_groups/vistas_groups_list_test.go",
+        "labels": null,
+        "fields_set": [
+          "Name",
+          "ParentId"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Successfully moved items between vista groups",
+        "file": "api/v2_internal/vista_groups/vistas_groups_move_test.go",
+        "labels": null,
+        "fields_set": [
+          "Name",
+          "ParentId"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "GetVistaGroup",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Successfully updated vista group item",
+        "file": "api/v2_internal/vista_groups/vistas_groups_update_test.go",
+        "labels": null,
+        "fields_set": [
+          "Name",
+          "ParentId"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/codex/internal/serverv2.Codex).CreateVistaGroupItem",
+    "request_type": "apiv2.CreateVistaGroupItemRequest",
+    "response_type": "apiv2.CreateVistaGroupItemResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "Validate",
+        "via_paths": [
+          "in",
+          "in.VistaGroupItem.Type"
+        ],
+        "at": "internal/serverv2/validator_wrapper.go:31"
+      },
+      {
+        "kind": "db",
+        "target": "Aggregate",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/db/list_item_helpers.go:275"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/common/errors.go:129"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/common/errors.go:139"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/common/errors.go:148"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/common/errors.go:163"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/common/errors.go:173"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/common/errors.go:184"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/common/errors.go:204"
+      },
+      {
+        "kind": "rpc",
+        "target": "SetError",
+        "via_paths": [
+          "in.DevOid"
+        ],
+        "at": "internal/common/errors.go:214"
+      },
+      {
+        "kind": "dispatch",
+        "target": "SetTag",
+        "via_paths": [
+          "in.VistaGroupItem",
+          "in.VistaGroupItem.CustomView",
+          "in.VistaGroupItem.CustomView.ShowGroups",
+          "in.VistaGroupItem.Description",
+          "in.VistaGroupItem.DescriptionTranslated",
+          "in.VistaGroupItem.DescriptionTranslated.ContentData",
+          "in.VistaGroupItem.DescriptionTranslated.ContentKey",
+          "in.VistaGroupItem.DescriptionTranslated.ContentNamespace",
+          "in.VistaGroupItem.DevrevCopy",
+          "in.VistaGroupItem.DevrevCopy.OriginId",
+          "in.VistaGroupItem.DevrevCopy.OriginOrgId",
+          "in.VistaGroupItem.ExternalSourceData",
+          "in.VistaGroupItem.ExternalSourceData.CreatedById",
+          "in.VistaGroupItem.ExternalSourceData.ModifiedById",
+          "in.VistaGroupItem.Goals",
+          "in.VistaGroupItem.GoalsDocumentId",
+          "in.VistaGroupItem.IconType",
+          "in.VistaGroupItem.IsSystem",
+          "in.VistaGroupItem.Name",
+          "in.VistaGroupItem.NameTranslated",
+          "in.VistaGroupItem.NameTranslated.ContentData",
+          "in.VistaGroupItem.NameTranslated.ContentKey",
+          "in.VistaGroupItem.NameTranslated.ContentNamespace",
+          "in.VistaGroupItem.Parent",
+          "in.VistaGroupItem.Parent.Id",
+          "in.VistaGroupItem.Parent.IsArchived",
+          "in.VistaGroupItem.Parent.Name",
+          "in.VistaGroupItem.ParentId",
+          "in.VistaGroupItem.StagedInfo",
+          "in.VistaGroupItem.StagedInfo.IsStaged",
+          "in.VistaGroupItem.SyncMetadata",
+          "in.VistaGroupItem.SyncMetadata.ExternalRecordId",
+          "in.VistaGroupItem.SyncMetadata.ExternalRecordType",
+          "in.VistaGroupItem.SyncMetadata.ExternalReference",
+          "in.VistaGroupItem.SyncMetadata.LastSyncIn",
+          "in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId",
+          "in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId",
+          "in.VistaGroupItem.SyncMetadata.LastSyncOut",
+          "in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId",
+          "in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId",
+          "in.VistaGroupItem.SyncMetadata.OriginSystem"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/tracer/tracer.go:77"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:432",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertFormatNotSupported",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/convert.go:361",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertFormatNotSupported",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/convert.go:367",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertObjectTypeNotSupported",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/convert.go:398",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertObjectTypeNotSupported",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/convert.go:443",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertComponentsNotSupported",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/convert.go:478",
+        "tainted": true
+      },
+      {
+        "symbol": "ErrRevertComponentsNotSupported",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/convert.go:491",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertComponentsNotSupported",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/convert.go:488",
+        "tainted": true
+      },
+      {
+        "symbol": "ErrInvalidQuarter",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:116",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrTimeBeforeFiscalStart",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:197",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidPeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:211",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrTimeBeforeFiscalStart",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:207",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:283",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:319",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:380",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:219",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrInvalidRelativePeriod",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/fiscal/fiscal_boundaries.go:225",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrNilArguments",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:68",
+        "tainted": true
+      },
+      {
+        "symbol": "ErrNotSupported",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:73",
+        "tainted": true
+      },
+      {
+        "symbol": "ErrNonPointerArgument",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/merge.go:376",
+        "tainted": true
+      },
+      {
+        "symbol": "ErrDifferentArgumentsTypes",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/merge.go:393",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateVistaGroupItem` (HTTP operation `VistasGroupsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.CustomId\n  - in.DevOid\n  - in.SprintArchivalValidationDisabled\n  - in.SprintOverlapValidationDisabled\n  - in.VistaGroupItem.CustomView.GroupByAttributes\n  - in.VistaGroupItem.CustomView.KanbanCardAttributes\n  - in.VistaGroupItem.CustomView.ShowGroups\n  - in.VistaGroupItem.CustomView.TableColumns\n  - in.VistaGroupItem.Description\n  - in.VistaGroupItem.DescriptionTranslated.ContentData\n  - in.VistaGroupItem.DescriptionTranslated.ContentKey\n  - in.VistaGroupItem.DescriptionTranslated.ContentNamespace\n  - in.VistaGroupItem.DevrevCopy.LastSyncedDate\n  - in.VistaGroupItem.DevrevCopy.OriginId\n  - in.VistaGroupItem.DevrevCopy.OriginOrgId\n  - in.VistaGroupItem.EndDate\n  - in.VistaGroupItem.ExternalSourceData.ClosedDate\n  - in.VistaGroupItem.ExternalSourceData.CreatedById\n  - in.VistaGroupItem.ExternalSourceData.CreatedDate\n  - in.VistaGroupItem.ExternalSourceData.ModifiedById\n  - in.VistaGroupItem.ExternalSourceData.ModifiedDate\n  - in.VistaGroupItem.Filter.Fields\n  - in.VistaGroupItem.Goals\n  - in.VistaGroupItem.GoalsDocumentId\n  - in.VistaGroupItem.GroupObjectType\n  - in.VistaGroupItem.IconType\n  - in.VistaGroupItem.InferredParts\n  - in.VistaGroupItem.IsSystem\n  - in.VistaGroupItem.Items\n  - in.VistaGroupItem.NameTranslated.ContentData\n  - in.VistaGroupItem.NameTranslated.ContentKey\n  - in.VistaGroupItem.NameTranslated.ContentNamespace\n  - in.VistaGroupItem.Parent.Flavor\n  - in.VistaGroupItem.Parent.Id\n  - in.VistaGroupItem.Parent.IsArchived\n  - in.VistaGroupItem.StagedInfo.IsStaged\n  - in.VistaGroupItem.StagedInfo.SyncInUnresolvedFields\n  - in.VistaGroupItem.StagedInfo.SyncOutUnresolvedFields\n  - in.VistaGroupItem.StagedInfo.UnresolvedFields\n  - in.VistaGroupItem.StartDate\n  - in.VistaGroupItem.State\n  - in.VistaGroupItem.SyncMetadata.ExternalRecordId\n  - in.VistaGroupItem.SyncMetadata.ExternalRecordType\n  - in.VistaGroupItem.SyncMetadata.ExternalReference\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.Status\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncDate\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.Status\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncDate\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId\n  - in.VistaGroupItem.SyncMetadata.OriginSystem\n  - in.VistaGroupItem.SyncMetadata.SyncedByDevUsers\n  - in.VistaGroupItem.Type\n  - in.VistaGroupItem.ViewType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.VistaGroupItem.Filter != nil\n  - in.VistaGroupItem.Filter != nil\n  - in.VistaGroupItem.Filter != nil\n  - in.VistaGroupItem.Filter == nil\n  - in.VistaGroupItem == nil\n  - in.VistaGroupItem.CustomView == nil\n  - in.VistaGroupItem.Filter == nil\n  - in.VistaGroupItem.Filter.Fields == nil\n  - in.CustomId == nil\n  - in.VistaGroupItem.NameTranslated.ContentData != nil\n  - in.VistaGroupItem.DescriptionTranslated.ContentData != nil\n  - in.VistaGroupItem.CustomView.TableColumns != nil\n  - in.VistaGroupItem.CustomView.KanbanCardAttributes != nil\n  - in.VistaGroupItem.CustomView.GroupByAttributes != nil\n  - in.VistaGroupItem.Parent.Id == nil\n  - in.VistaGroupItem.Parent.Id != nil\n  - in.VistaGroupItem.GoalsDocumentId == nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId == nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId == nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncDate != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId == nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId == nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncDate != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - in.VistaGroupItem.SyncMetadata.SyncedByDevUsers != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut != nil\n  - in.VistaGroupItem.StagedInfo.UnresolvedFields != nil\n  - in.VistaGroupItem.StagedInfo.SyncInUnresolvedFields != nil\n  - in.VistaGroupItem.StagedInfo.SyncOutUnresolvedFields != nil\n  - in.VistaGroupItem.ExternalSourceData.CreatedById == nil\n  - in.VistaGroupItem.ExternalSourceData.ModifiedById == nil\n  - in.VistaGroupItem.ExternalSourceData.CreatedDate != nil\n  - in.VistaGroupItem.ExternalSourceData.ModifiedDate != nil\n  - in.VistaGroupItem.ExternalSourceData.ClosedDate != nil\n  - in.VistaGroupItem.ExternalSourceData.CreatedById != nil\n  - in.VistaGroupItem.ExternalSourceData.ModifiedById != nil\n  - (+28 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

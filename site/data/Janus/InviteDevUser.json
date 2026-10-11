@@ -1,0 +1,339 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "InviteDevUser",
+    "operation": "DevOrgsInvitesCreate,UserInvitationUpdate",
+    "tests": 3,
+    "status": {
+      "documented": [
+        200,
+        201,
+        400,
+        401,
+        403,
+        409
+      ],
+      "asserted": [
+        200,
+        201
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        409
+      ],
+      "infra_statuses": [
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 33.3
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 4,
+      "covered_count": 1,
+      "coverage_pct": 25,
+      "request_fields_set_by_tests": 1,
+      "set_by_positive_tests": 1,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 4,
+          "set": 1,
+          "pct": 25
+        },
+        "nested": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 4,
+        "covered": 1,
+        "pct": 25,
+        "collapsed_types": []
+      },
+      "covered": [
+        {
+          "path": "in.Email",
+          "match": "exact",
+          "by_tests": [
+            "CreateDevuInvite",
+            "Invite a DevUser 2",
+            "UpdateDevuInvite"
+          ]
+        }
+      ],
+      "gaps": [
+        "in.GroupIds",
+        "in.InviterName",
+        "in.Licenses"
+      ]
+    },
+    "branches": {
+      "total": 4,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": true,
+      "reachable_on_happy_path": 4,
+      "present_arm_exercised": 3,
+      "present_arm_pct": 75,
+      "absent_arm_exercised": 1,
+      "absent_arm_pct": 25,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 75,
+      "by_origin": {
+        "service": {
+          "total": 3,
+          "reachable_on_happy_path": 3,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 66.7,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 1
+        },
+        "generated": {
+          "total": 0,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 1,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 100,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b4",
+          "at": "internal/service/devuser_invites.go:371",
+          "cond": "in.InviterName != \"\"",
+          "predicate_paths": [
+            "in.InviterName"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": [
+        {
+          "service": "this service",
+          "calls": [
+            "CreateInvitation",
+            "GetInvitationAppID",
+            "GetPreferences"
+          ]
+        }
+      ],
+      "datastore_calls": [
+        "Get",
+        "LockForRead",
+        "Set"
+      ],
+      "service_count": 1,
+      "call_count": 3,
+      "reached_by_test": true,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": [
+      {
+        "name": "CreateDevuInvite",
+        "file": "api/v2_internal/devu_invites/devuinvites_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Email"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Invite a DevUser 2",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEV_ORG_INVITE_CREATE",
+          "INTERNAL_DEV_ORGS_INVITES_LIST",
+          "INTERNAL_DEVUSERS_INVITATIONS_LIST",
+          "INTERNAL_DEV_ORGS_INVITES_COUNT"
+        ],
+        "fields_set": [
+          "Email"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "Count",
+          "Invites",
+          "Invites.Email",
+          "Invites.State",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "UpdateDevuInvite",
+        "file": "api/v2_internal/devu_invites/devuinvites_crud_test.go",
+        "labels": [
+          "INTERNAL_USERS_INVITATION_UPDATE"
+        ],
+        "fields_set": [
+          "Email"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "asserts_error": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).InviteDevUser",
+    "request_type": "api.InviteDevUserRequest",
+    "response_type": "api.InviteDevUserResponse",
+    "sinks": [
+      {
+        "kind": "rpc",
+        "target": "GetInvitationAppID",
+        "via_paths": [
+          "in.Email",
+          "in.InviterName",
+          "in.Licenses"
+        ],
+        "at": "internal/service/devuser_invites.go:229"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetPreferences",
+        "via_paths": [
+          "in.Email",
+          "in.InviterName",
+          "in.Licenses"
+        ],
+        "at": "internal/service/preferences.go:21"
+      },
+      {
+        "kind": "db",
+        "target": "Get",
+        "via_paths": [
+          "in.Email",
+          "in.InviterName",
+          "in.Licenses"
+        ],
+        "at": "internal/service/devorg.go:130"
+      },
+      {
+        "kind": "db",
+        "target": "LockForRead",
+        "via_paths": [
+          "in.Email",
+          "in.InviterName",
+          "in.Licenses"
+        ],
+        "at": "internal/service/devorg.go:139"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.Email",
+          "in.InviterName",
+          "in.Licenses"
+        ],
+        "at": "internal/service/cache.go:146"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.Email",
+          "in.InviterName",
+          "in.Licenses"
+        ],
+        "at": "internal/service/devorg.go:159"
+      },
+      {
+        "kind": "rpc",
+        "target": "CreateInvitation",
+        "via_paths": [
+          "in.Email",
+          "in.InviterName",
+          "in.Licenses"
+        ],
+        "at": "internal/service/devuser_invites.go:270"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "errInviteToInvalidGroup",
+        "at": "internal/service/devuser_invites.go:185",
+        "tainted": false
+      },
+      {
+        "symbol": "errUserNotAllowedToInviteToGroup",
+        "at": "internal/service/devuser_invites.go:200",
+        "tainted": false
+      },
+      {
+        "symbol": "errDevOrgNotFound",
+        "at": "internal/service/devorg.go:99",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidInputEmail",
+        "at": "internal/service/devuser_invites.go:308",
+        "tainted": true
+      },
+      {
+        "symbol": "errInviteDeactivatedUser",
+        "at": "internal/service/devuser_invites.go:333",
+        "tainted": true
+      },
+      {
+        "symbol": "errUserAlreadyJoined",
+        "at": "internal/service/devuser_invites.go:341",
+        "tainted": true
+      },
+      {
+        "symbol": "errInternalServiceError",
+        "at": "internal/service/devuser_invites.go:417",
+        "tainted": true
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `InviteDevUser` (HTTP operation `DevOrgsInvitesCreate,UserInvitationUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 409]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.GroupIds\n  - in.InviterName\n  - in.Licenses\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.InviterName != \"\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevOrgNotFound\n  - errInternalServiceError\n  - errInvalidInputEmail\n  - errInviteDeactivatedUser\n  - errInviteToInvalidGroup\n  - errUserAlreadyJoined\n  - errUserNotAllowedToInviteToGroup\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}

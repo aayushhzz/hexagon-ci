@@ -1,0 +1,504 @@
+{
+  "service": "Janus",
+  "coverage": {
+    "rpc": "PatchScimUser",
+    "operation": "",
+    "tests": 0,
+    "status": {
+      "documented": [],
+      "asserted": [],
+      "missing": [],
+      "infra_statuses": [],
+      "coverage_pct": 0
+    },
+    "fields": {
+      "leaf_fields_read_by_rpc": 2,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
+      "by_depth": {
+        "top_level": {
+          "total": 2,
+          "set": 0,
+          "pct": 0
+        },
+        "nested": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        },
+        "deep": {
+          "total": 0,
+          "set": 0,
+          "pct": 0
+        }
+      },
+      "representative": {
+        "units": 2,
+        "covered": 0,
+        "pct": 0,
+        "collapsed_types": []
+      },
+      "covered": null,
+      "gaps": [
+        "in.Id",
+        "in.Operations"
+      ]
+    },
+    "branches": {
+      "total": 3,
+      "enum_switch_branches": 0,
+      "server_gated_branches": 0,
+      "happy_path_reached": false,
+      "reachable_on_happy_path": 2,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
+      "absent_arm_exercised": 0,
+      "absent_arm_pct": 0,
+      "negative_arm_exercised": 0,
+      "negative_arm_pct": 0,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
+      "by_origin": {
+        "service": {
+          "total": 1,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "generated": {
+          "total": 1,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        },
+        "library": {
+          "total": 1,
+          "reachable_on_happy_path": 0,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
+          "absent_arm_exercised": 0
+        }
+      },
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/janus-client@v0.0.0-20260929053733-8cd23d601acf/api/scim.pb.validator.go:296",
+          "cond": "in.Id == nil",
+          "predicate_paths": [
+            "in.Id"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:291",
+          "cond": "in.Id == \"\"",
+          "predicate_paths": [
+            "in.Id"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/service/scim_users.go:459",
+          "cond": "in != nil",
+          "predicate_paths": [
+            "in"
+          ]
+        }
+      ]
+    },
+    "dependencies": {
+      "services": [
+        {
+          "service": "mfz",
+          "calls": [
+            "GetNamespace",
+            "Lock"
+          ]
+        },
+        {
+          "service": "schemaregistry",
+          "calls": [
+            "GetAggregatedSchema",
+            "GetUpgradeInstructionsV2"
+          ]
+        },
+        {
+          "service": "this service",
+          "calls": [
+            "BulkUpdateArtifacts",
+            "GetAggregatedSchemaForWrite",
+            "Invalidate",
+            "Lock",
+            "SyncUnitGet",
+            "UpdatePreferences"
+          ]
+        }
+      ],
+      "datastore_calls": [
+        "Delete",
+        "Get",
+        "LockForRead",
+        "ReadWithFilter",
+        "Set"
+      ],
+      "service_count": 3,
+      "call_count": 10,
+      "reached_by_test": false,
+      "deps_result_used_in_response": 0,
+      "deps_result_checked_by_test": 0,
+      "response_links": null
+    },
+    "anomalies": {
+      "unmatched_test_fields": null
+    },
+    "test_facts": null,
+    "unmapped": true
+  },
+  "provenance": {
+    "func": "(*github.com/devrev/janus/internal/service.Janus).PatchScimUser",
+    "request_type": "api.PatchScimUserRequest",
+    "response_type": "api.PatchScimUserResponse",
+    "sinks": [
+      {
+        "kind": "dispatch",
+        "target": "GetExternalError",
+        "via_paths": [
+          "in"
+        ],
+        "at": "internal/service/scim_users.go:460"
+      },
+      {
+        "kind": "db",
+        "target": "Get",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "internal/service/devuser.go:136"
+      },
+      {
+        "kind": "db",
+        "target": "LockForRead",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "internal/service/devuser.go:145"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "internal/service/cache.go:298"
+      },
+      {
+        "kind": "db",
+        "target": "Set",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "internal/service/devuser.go:166"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetUpgradeInstructionsV2",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/upgrade_object_v2.go:211"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetAggregatedSchemaForWrite",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "internal/service/common.go:838"
+      },
+      {
+        "kind": "rpc",
+        "target": "Invalidate",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "internal/service/devuser.go:1963"
+      },
+      {
+        "kind": "db",
+        "target": "Delete",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "internal/service/cache.go:74"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "internal/service/cache.go:105"
+      },
+      {
+        "kind": "db",
+        "target": "Delete",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "internal/service/cache.go:113"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetAggregatedSchema",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:288"
+      },
+      {
+        "kind": "rpc",
+        "target": "BulkUpdateArtifacts",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "internal/service/artifacts.go:60"
+      },
+      {
+        "kind": "rpc",
+        "target": "UpdatePreferences",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "internal/service/devuser.go:2048"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetNamespace",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/cache.go:1067"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/cache.go:1067"
+      },
+      {
+        "kind": "rpc",
+        "target": "GetNamespace",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/cache.go:1059"
+      },
+      {
+        "kind": "db",
+        "target": "Delete",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/cache.go:432"
+      },
+      {
+        "kind": "db",
+        "target": "ReadWithFilter",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "mfz/service/common.go:725"
+      },
+      {
+        "kind": "rpc",
+        "target": "SyncUnitGet",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "mfz/service/common.go:2195"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/cache.go:123"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/groups.go:894"
+      },
+      {
+        "kind": "db",
+        "target": "Delete",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/groups.go:862"
+      },
+      {
+        "kind": "rpc",
+        "target": "Lock",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/groups.go:741"
+      },
+      {
+        "kind": "db",
+        "target": "Delete",
+        "via_paths": [
+          "in.Id"
+        ],
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/mfz-client@v0.0.0-20260929091657-b89f2caae6cf/mfz/cache/groups.go:709"
+      }
+    ],
+    "errors": [
+      {
+        "symbol": "errDeleteOrDeactivateCallForLastActiveUser",
+        "at": "internal/service/devuser.go:3210",
+        "tainted": false
+      },
+      {
+        "symbol": "errPhoneNumberInvalid",
+        "at": "internal/service/utils.go:95",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidStatusDescription",
+        "at": "internal/service/common.go:283",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidStatusExpiry",
+        "at": "internal/service/common.go:289",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrNilArguments",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:68",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrNotSupported",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:73",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrNonPointerArgument",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/merge.go:376",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrDifferentArgumentsTypes",
+        "at": "/Users/asd/go/pkg/mod/github.com/imdario/mergo@v0.3.16/merge.go:393",
+        "tainted": false
+      },
+      {
+        "symbol": "errSchemaRegistryUnimplementedEnvironment",
+        "at": "internal/service/devuser.go:98",
+        "tainted": false
+      },
+      {
+        "symbol": "errSchemaRegistryUnimplementedEnvironment",
+        "at": "internal/service/common.go:833",
+        "tainted": false
+      },
+      {
+        "symbol": "errOldVersionOfSchemaFragments",
+        "at": "internal/service/common.go:851",
+        "tainted": false
+      },
+      {
+        "symbol": "errCacheUnavailable",
+        "at": "internal/service/cache.go:108",
+        "tainted": false
+      },
+      {
+        "symbol": "errInternalCacheTransientError",
+        "at": "internal/service/cache.go:111",
+        "tainted": false
+      },
+      {
+        "symbol": "errCacheUnavailable",
+        "at": "internal/service/cache.go:116",
+        "tainted": false
+      },
+      {
+        "symbol": "errInternalCacheTransientError",
+        "at": "internal/service/cache.go:119",
+        "tainted": false
+      },
+      {
+        "symbol": "errInvalidInputEmail",
+        "at": "internal/service/devuser.go:2208",
+        "tainted": false
+      },
+      {
+        "symbol": "errEmailAlreadyExists",
+        "at": "internal/service/devuser.go:2218",
+        "tainted": false
+      },
+      {
+        "symbol": "errStateIssueForEmailUpdate",
+        "at": "internal/service/devuser_utils.go:138",
+        "tainted": false
+      },
+      {
+        "symbol": "errTermsAndConditionsResetError",
+        "at": "internal/service/devuser.go:2121",
+        "tainted": false
+      },
+      {
+        "symbol": "ObjectTypeInvalid",
+        "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:446",
+        "tainted": false
+      },
+      {
+        "symbol": "errDefaultGroupNotFound",
+        "at": "internal/service/devuser.go:695",
+        "tainted": false
+      },
+      {
+        "symbol": "errReadingMongoCollection",
+        "at": "internal/service/devuser.go:3313",
+        "tainted": false
+      },
+      {
+        "symbol": "errReadingMongoCollection",
+        "at": "internal/service/devuser.go:3334",
+        "tainted": false
+      },
+      {
+        "symbol": "errMethodUnimplemented",
+        "at": "internal/service/scim_users.go:698",
+        "tainted": false
+      },
+      {
+        "symbol": "errMethodUnimplemented",
+        "at": "internal/service/scim_users.go:703",
+        "tainted": false
+      }
+    ],
+    "unresolved": []
+  },
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `PatchScimUser` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Id\n  - in.Operations\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Id == nil\n  - in.Id == \"\"\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n  - errCacheUnavailable\n  - errDefaultGroupNotFound\n  - errDeleteOrDeactivateCallForLastActiveUser\n  - errEmailAlreadyExists\n  - errInternalCacheTransientError\n  - errInvalidInputEmail\n  - errInvalidStatusDescription\n  - errInvalidStatusExpiry\n  - errMethodUnimplemented\n  - errOldVersionOfSchemaFragments\n  - errPhoneNumberInvalid\n  - errReadingMongoCollection\n  - errSchemaRegistryUnimplementedEnvironment\n  - errStateIssueForEmailUpdate\n  - errTermsAndConditionsResetError\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+}
