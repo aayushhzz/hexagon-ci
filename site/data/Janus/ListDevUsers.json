@@ -17,11 +17,11 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 82,
-      "covered_count": 6,
-      "coverage_pct": 7.3,
-      "request_fields_set_by_tests": 35,
-      "set_by_positive_tests": 6,
-      "set_by_negative_tests": 2,
+      "covered_count": 2,
+      "coverage_pct": 2.4,
+      "request_fields_set_by_tests": 2,
+      "set_by_positive_tests": 2,
+      "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
           "total": 3,
@@ -30,13 +30,13 @@
         },
         "nested": {
           "total": 22,
-          "set": 3,
-          "pct": 13.6
+          "set": 2,
+          "pct": 9.1
         },
         "deep": {
           "total": 57,
-          "set": 3,
-          "pct": 5.3
+          "set": 0,
+          "pct": 0
         }
       },
       "representative": {
@@ -51,42 +51,10 @@
       },
       "covered": [
         {
-          "path": "in.UserFilter.CreatedDate.DatePreset.Type",
-          "match": "exact",
-          "by_tests": [
-            "Should list entries for a ticket the user has read access to",
-            "returns 200 for valid execute with SIP routing enabled",
-            "returns 200 for valid execute with seeded snap-in and issue"
-          ]
-        },
-        {
-          "path": "in.UserFilter.DisplayName",
-          "match": "exact",
-          "by_tests": [
-            "service account impersonate scope controls PAT:act-as token creation and API access"
-          ]
-        },
-        {
           "path": "in.UserFilter.Email",
           "match": "exact",
           "by_tests": [
             "DevUsers List and Count"
-          ]
-        },
-        {
-          "path": "in.UserFilter.ModifiedDate.DatePreset.Type",
-          "match": "exact",
-          "by_tests": [
-            "Should list entries for a ticket the user has read access to",
-            "returns 200 for valid execute with SIP routing enabled",
-            "returns 200 for valid execute with seeded snap-in and issue"
-          ]
-        },
-        {
-          "path": "in.UserFilter.RevUserFilter.RevOrg",
-          "match": "exact",
-          "by_tests": [
-            "service account impersonate scope controls PAT:act-as token creation and API access"
           ]
         },
         {
@@ -112,6 +80,7 @@
         "in.UserFilter.CreatedByIdOp",
         "in.UserFilter.CreatedDate.After",
         "in.UserFilter.CreatedDate.Before",
+        "in.UserFilter.CreatedDate.DatePreset.Type",
         "in.UserFilter.DevUserFilter.Apps",
         "in.UserFilter.DevUserFilter.AppsOp",
         "in.UserFilter.DevUserFilter.Availability",
@@ -133,11 +102,13 @@
         "in.UserFilter.DevUserFilter.SyncMetadata",
         "in.UserFilter.DevUserFilter.Timezone",
         "in.UserFilter.DevrevProfileFilter",
+        "in.UserFilter.DisplayName",
         "in.UserFilter.EmailOp",
         "in.UserFilter.ModifiedById",
         "in.UserFilter.ModifiedByIdOp",
         "in.UserFilter.ModifiedDate.After",
         "in.UserFilter.ModifiedDate.Before",
+        "in.UserFilter.ModifiedDate.DatePreset.Type",
         "in.UserFilter.PhoneNumbers",
         "in.UserFilter.PhoneNumbersOp",
         "in.UserFilter.PrimaryIdentity",
@@ -160,6 +131,7 @@
         "in.UserFilter.RevUserFilter.PlugAvailabilityOp",
         "in.UserFilter.RevUserFilter.RevOid",
         "in.UserFilter.RevUserFilter.RevOidOp",
+        "in.UserFilter.RevUserFilter.RevOrg",
         "in.UserFilter.RevUserFilter.RevOrgOp",
         "in.UserFilter.RevUserFilter.SharedWith",
         "in.UserFilter.RevUserFilter.StagedInfo",
@@ -180,20 +152,20 @@
       "total": 429,
       "happy_path_reached": true,
       "reachable_on_happy_path": 15,
-      "present_arm_exercised": 2,
-      "present_arm_pct": 0.5,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
       "absent_arm_exercised": 15,
       "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0.5,
+      "coverage_pct": 0,
       "by_origin": {
         "service": {
           "total": 390,
           "reachable_on_happy_path": 11,
-          "present_arm_exercised": 2,
-          "present_arm_pct": 0.5,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 11
@@ -1579,6 +1551,14 @@
           ]
         },
         {
+          "id": "b171",
+          "at": "",
+          "cond": "in.UserFilter.CreatedDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.UserFilter.CreatedDate.DatePreset.Type"
+          ]
+        },
+        {
           "id": "b172",
           "at": "internal/filter/users_search.gen.go:125",
           "cond": "in.UserFilter.CreatedDate.Before != nil",
@@ -1688,6 +1668,14 @@
           "cond": "in.UserFilter.ModifiedDate.After != nil",
           "predicate_paths": [
             "in.UserFilter.ModifiedDate.After"
+          ]
+        },
+        {
+          "id": "b186",
+          "at": "",
+          "cond": "in.UserFilter.ModifiedDate.DatePreset.Type",
+          "predicate_paths": [
+            "in.UserFilter.ModifiedDate.DatePreset.Type"
           ]
         },
         {
@@ -3656,138 +3644,7 @@
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": [
-        {
-          "field": "actas",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "actionid",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "actions",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "appliestopart",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "blockid",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "contentdescriptor",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "description",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "expiresin",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "granttype",
-          "fuzzy_suggestions": [
-            "in.UserFilter.CreatedDate.DatePreset.Type",
-            "in.UserFilter.ModifiedDate.DatePreset.Type"
-          ]
-        },
-        {
-          "field": "id",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "manifest",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "name",
-          "fuzzy_suggestions": [
-            "in.UserFilter.DisplayName"
-          ]
-        },
-        {
-          "field": "object",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "objectid",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "ownedby",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "parent",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "principal",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "requestedtokentype",
-          "fuzzy_suggestions": [
-            "in.UserFilter.CreatedDate.DatePreset.Type",
-            "in.UserFilter.ModifiedDate.DatePreset.Type"
-          ]
-        },
-        {
-          "field": "requestkind",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "rolesetassignmentinfo",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "slug",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "snapinpackage",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "snapinversion",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "snapkitbody",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "sourcecodeartifact",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "text",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "timestamp",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "title",
-          "fuzzy_suggestions": [
-            "in.UserFilter.DevUserFilter.JobTitle"
-          ]
-        },
-        {
-          "field": "usecase",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "userprompt",
-          "fuzzy_suggestions": null
-        }
-      ]
+      "unmatched_test_fields": null
     },
     "test_facts": [
       {
@@ -3796,14 +3653,7 @@
         "labels": [
           "POSITIVE"
         ],
-        "fields_set": [
-          "ContentDescriptor",
-          "Id",
-          "Object",
-          "Text",
-          "Type",
-          "UseCase"
-        ],
+        "fields_set": null,
         "statuses": [
           200,
           202
@@ -3838,12 +3688,7 @@
         "name": "rejects dev user without ticket access (403/404)",
         "file": "api/v2_internal/metis/respond_to_object_test.go",
         "labels": null,
-        "fields_set": [
-          "Id",
-          "Object",
-          "RequestKind",
-          "UserPrompt"
-        ],
+        "fields_set": null,
         "statuses": null,
         "asserts_success": true,
         "response_fields_asserted": [
@@ -3856,27 +3701,7 @@
         "name": "returns 200 for valid execute with seeded snap-in and issue",
         "file": "api/v2_internal/snap_kit/snap_kit_action_execute_test.go",
         "labels": null,
-        "fields_set": [
-          "ActionId",
-          "Actions",
-          "AppliesToPart",
-          "BlockId",
-          "Description",
-          "Id",
-          "Manifest",
-          "Name",
-          "ObjectId",
-          "OwnedBy",
-          "Parent",
-          "Slug",
-          "SnapInPackage",
-          "SnapInVersion",
-          "SnapKitBody",
-          "SourceCodeArtifact",
-          "Timestamp",
-          "Title",
-          "Type"
-        ],
+        "fields_set": null,
         "statuses": [
           200,
           201
@@ -3904,27 +3729,7 @@
         "name": "returns 200 for valid execute with SIP routing enabled",
         "file": "api/v2_internal/snap_kit/snap_kit_action_execute_test.go",
         "labels": null,
-        "fields_set": [
-          "ActionId",
-          "Actions",
-          "AppliesToPart",
-          "BlockId",
-          "Description",
-          "Id",
-          "Manifest",
-          "Name",
-          "ObjectId",
-          "OwnedBy",
-          "Parent",
-          "Slug",
-          "SnapInPackage",
-          "SnapInVersion",
-          "SnapKitBody",
-          "SourceCodeArtifact",
-          "Timestamp",
-          "Title",
-          "Type"
-        ],
+        "fields_set": null,
         "statuses": [
           200,
           201
@@ -3971,18 +3776,7 @@
           "POSITIVE",
           "INTERNAL_AUTH_TOKENS_CREATE"
         ],
-        "fields_set": [
-          "ActAs",
-          "Description",
-          "DisplayName",
-          "ExpiresIn",
-          "GrantType",
-          "Name",
-          "Principal",
-          "RequestedTokenType",
-          "RevOrg",
-          "RoleSetAssignmentInfo"
-        ],
+        "fields_set": null,
         "statuses": [
           200,
           201,
@@ -4169,5 +3963,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListDevUsers` (HTTP operation `DevUsersList,DevUsersListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SortBy\n  - in.IncludeId\n  - in.PageParams.Page\n  - in.PageParams.PerPage\n  - in.PageParams.SortBy\n  - in.SearchQuery\n  - in.SkipTotal\n  - in.UserFilter.CreatedByAgentId\n  - in.UserFilter.CreatedByAgentIdOp\n  - in.UserFilter.CreatedById\n  - in.UserFilter.CreatedByIdOp\n  - in.UserFilter.CreatedDate.After\n  - in.UserFilter.CreatedDate.Before\n  - in.UserFilter.DevUserFilter.Apps\n  - in.UserFilter.DevUserFilter.AppsOp\n  - in.UserFilter.DevUserFilter.Availability\n  - in.UserFilter.DevUserFilter.AvailabilityModes\n  - in.UserFilter.DevUserFilter.AvailabilityModesOp\n  - in.UserFilter.DevUserFilter.AvailabilityOp\n  - in.UserFilter.DevUserFilter.CustomFields.Fields\n  - in.UserFilter.DevUserFilter.ExternalIdentities\n  - in.UserFilter.DevUserFilter.ExternalSourceData\n  - in.UserFilter.DevUserFilter.IsInvited\n  - in.UserFilter.DevUserFilter.JobHistory\n  - in.UserFilter.DevUserFilter.JobHistoryOp\n  - in.UserFilter.DevUserFilter.JobTitle\n  - in.UserFilter.DevUserFilter.ProfileId\n  - in.UserFilter.DevUserFilter.ReportsToId\n  - in.UserFilter.DevUserFilter.StagedInfo\n  - in.UserFilter.DevUserFilter.Subtype\n  - in.UserFilter.DevUserFilter.SubtypeOp\n  - in.UserFilter.DevUserFilter.SyncMetadata\n  - in.UserFilter.DevUserFilter.Timezone\n  - in.UserFilter.DevrevProfileFilter\n  - in.UserFilter.EmailOp\n  - in.UserFilter.ModifiedById\n  - in.UserFilter.ModifiedByIdOp\n  - in.UserFilter.ModifiedDate.After\n  - in.UserFilter.ModifiedDate.Before\n  - in.UserFilter.PhoneNumbers\n  - in.UserFilter.PhoneNumbersOp\n  - in.UserFilter.PrimaryIdentity\n  - in.UserFilter.PrimaryIdentityOp\n  - in.UserFilter.RevUserFilter.Apps\n  - in.UserFilter.RevUserFilter.AppsOp\n  - in.UserFilter.RevUserFilter.Associations\n  - in.UserFilter.RevUserFilter.AssociationsOp\n  - in.UserFilter.RevUserFilter.CustomFields.Fields\n  - in.UserFilter.RevUserFilter.ExternalRefs\n  - in.UserFilter.RevUserFilter.ExternalRefsOp\n  - in.UserFilter.RevUserFilter.ExternalSourceData\n  - in.UserFilter.RevUserFilter.ExternalUid\n  - in.UserFilter.RevUserFilter.ExternalUidIssuer\n  - in.UserFilter.RevUserFilter.ExternalUidOp\n  - in.UserFilter.RevUserFilter.Gender\n  - in.UserFilter.RevUserFilter.IngestionChannel\n  - in.UserFilter.RevUserFilter.IsVerified\n  - in.UserFilter.RevUserFilter.PlugAvailability\n  - in.UserFilter.RevUserFilter.PlugAvailabilityOp\n  - (+16 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserFilter.DevUserFilter.AvailabilityModesOp != nil\n  - in.UserFilter.DevUserFilter.AvailabilityOp != nil\n  - in.UserFilter.DevUserFilter.JobHistoryOp != nil\n  - in.UserFilter.DevUserFilter.SubtypeOp != nil\n  - in.UserFilter.DevUserFilter.AppsOp != nil\n  - in.UserFilter.RevUserFilter.RevOidOp != nil\n  - in.UserFilter.RevUserFilter.ExternalUidOp != nil\n  - in.UserFilter.RevUserFilter.ExternalRefsOp != nil\n  - in.UserFilter.RevUserFilter.TagsOp != nil\n  - in.UserFilter.RevUserFilter.RevOrgOp != nil\n  - in.UserFilter.RevUserFilter.PlugAvailabilityOp != nil\n  - in.UserFilter.RevUserFilter.AssociationsOp != nil\n  - in.UserFilter.RevUserFilter.SubtypeOp != nil\n  - in.UserFilter.RevUserFilter.AppsOp != nil\n  - in.UserFilter.CreatedByIdOp != nil\n  - in.UserFilter.ModifiedByIdOp != nil\n  - in.UserFilter.CreatedByAgentIdOp != nil\n  - in.UserFilter.EmailOp != nil\n  - in.UserFilter.StateOp != nil\n  - in.UserFilter.PrimaryIdentityOp != nil\n  - in.UserFilter.PhoneNumbersOp != nil\n  - in.UserFilter.DevUserFilter != nil\n  - in.UserFilter.DevUserFilter != nil\n  - in.UserFilter.SysUserFilter != nil\n  - in.UserFilter.SysUserFilter != nil\n  - in.UserFilter.SvcAccFilter != nil\n  - in.UserFilter.SvcAccFilter != nil\n  - in.UserFilter.DevrevProfileFilter != nil\n  - in.UserFilter.DevrevProfileFilter != nil\n  - in.UserFilter.RevUserFilter != nil\n  - in.UserFilter.RevUserFilter != nil\n  - in.PageParams != nil\n  - in.PageParams != nil\n  - in.UserFilter != nil\n  - in.UserFilter != nil\n  - in.SkipTotal\n  - in.SkipTotal\n  - in.DqlQuery == nil\n  - in.DqlQuery == nil\n  - in.PageParams != nil\n  - (+387 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidSortByInputField\n  - errUserNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `actas` -> suggestions []\n  - test field `actionid` -> suggestions []\n  - test field `actions` -> suggestions []\n  - test field `appliestopart` -> suggestions []\n  - test field `blockid` -> suggestions []\n  - test field `contentdescriptor` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `expiresin` -> suggestions []\n  - test field `granttype` -> suggestions ['in.UserFilter.CreatedDate.DatePreset.Type', 'in.UserFilter.ModifiedDate.DatePreset.Type']\n  - test field `id` -> suggestions []\n  - test field `manifest` -> suggestions []\n  - test field `name` -> suggestions ['in.UserFilter.DisplayName']\n  - test field `object` -> suggestions []\n  - test field `objectid` -> suggestions []\n  - test field `ownedby` -> suggestions []\n  - test field `parent` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `requestedtokentype` -> suggestions ['in.UserFilter.CreatedDate.DatePreset.Type', 'in.UserFilter.ModifiedDate.DatePreset.Type']\n  - test field `requestkind` -> suggestions []\n  - test field `rolesetassignmentinfo` -> suggestions []\n  - test field `slug` -> suggestions []\n  - test field `snapinpackage` -> suggestions []\n  - test field `snapinversion` -> suggestions []\n  - test field `snapkitbody` -> suggestions []\n  - test field `sourcecodeartifact` -> suggestions []\n  - test field `text` -> suggestions []\n  - test field `timestamp` -> suggestions []\n  - test field `title` -> suggestions ['in.UserFilter.DevUserFilter.JobTitle']\n  - test field `usecase` -> suggestions []\n  - test field `userprompt` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListDevUsers` (HTTP operation `DevUsersList,DevUsersListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SortBy\n  - in.IncludeId\n  - in.PageParams.Page\n  - in.PageParams.PerPage\n  - in.PageParams.SortBy\n  - in.SearchQuery\n  - in.SkipTotal\n  - in.UserFilter.CreatedByAgentId\n  - in.UserFilter.CreatedByAgentIdOp\n  - in.UserFilter.CreatedById\n  - in.UserFilter.CreatedByIdOp\n  - in.UserFilter.CreatedDate.After\n  - in.UserFilter.CreatedDate.Before\n  - in.UserFilter.CreatedDate.DatePreset.Type\n  - in.UserFilter.DevUserFilter.Apps\n  - in.UserFilter.DevUserFilter.AppsOp\n  - in.UserFilter.DevUserFilter.Availability\n  - in.UserFilter.DevUserFilter.AvailabilityModes\n  - in.UserFilter.DevUserFilter.AvailabilityModesOp\n  - in.UserFilter.DevUserFilter.AvailabilityOp\n  - in.UserFilter.DevUserFilter.CustomFields.Fields\n  - in.UserFilter.DevUserFilter.ExternalIdentities\n  - in.UserFilter.DevUserFilter.ExternalSourceData\n  - in.UserFilter.DevUserFilter.IsInvited\n  - in.UserFilter.DevUserFilter.JobHistory\n  - in.UserFilter.DevUserFilter.JobHistoryOp\n  - in.UserFilter.DevUserFilter.JobTitle\n  - in.UserFilter.DevUserFilter.ProfileId\n  - in.UserFilter.DevUserFilter.ReportsToId\n  - in.UserFilter.DevUserFilter.StagedInfo\n  - in.UserFilter.DevUserFilter.Subtype\n  - in.UserFilter.DevUserFilter.SubtypeOp\n  - in.UserFilter.DevUserFilter.SyncMetadata\n  - in.UserFilter.DevUserFilter.Timezone\n  - in.UserFilter.DevrevProfileFilter\n  - in.UserFilter.DisplayName\n  - in.UserFilter.EmailOp\n  - in.UserFilter.ModifiedById\n  - in.UserFilter.ModifiedByIdOp\n  - in.UserFilter.ModifiedDate.After\n  - in.UserFilter.ModifiedDate.Before\n  - in.UserFilter.ModifiedDate.DatePreset.Type\n  - in.UserFilter.PhoneNumbers\n  - in.UserFilter.PhoneNumbersOp\n  - in.UserFilter.PrimaryIdentity\n  - in.UserFilter.PrimaryIdentityOp\n  - in.UserFilter.RevUserFilter.Apps\n  - in.UserFilter.RevUserFilter.AppsOp\n  - in.UserFilter.RevUserFilter.Associations\n  - in.UserFilter.RevUserFilter.AssociationsOp\n  - in.UserFilter.RevUserFilter.CustomFields.Fields\n  - in.UserFilter.RevUserFilter.ExternalRefs\n  - in.UserFilter.RevUserFilter.ExternalRefsOp\n  - in.UserFilter.RevUserFilter.ExternalSourceData\n  - in.UserFilter.RevUserFilter.ExternalUid\n  - in.UserFilter.RevUserFilter.ExternalUidIssuer\n  - in.UserFilter.RevUserFilter.ExternalUidOp\n  - in.UserFilter.RevUserFilter.Gender\n  - in.UserFilter.RevUserFilter.IngestionChannel\n  - (+20 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserFilter.DevUserFilter.AvailabilityModesOp != nil\n  - in.UserFilter.DevUserFilter.AvailabilityOp != nil\n  - in.UserFilter.DevUserFilter.JobHistoryOp != nil\n  - in.UserFilter.DevUserFilter.SubtypeOp != nil\n  - in.UserFilter.DevUserFilter.AppsOp != nil\n  - in.UserFilter.RevUserFilter.RevOidOp != nil\n  - in.UserFilter.RevUserFilter.ExternalUidOp != nil\n  - in.UserFilter.RevUserFilter.ExternalRefsOp != nil\n  - in.UserFilter.RevUserFilter.TagsOp != nil\n  - in.UserFilter.RevUserFilter.RevOrgOp != nil\n  - in.UserFilter.RevUserFilter.PlugAvailabilityOp != nil\n  - in.UserFilter.RevUserFilter.AssociationsOp != nil\n  - in.UserFilter.RevUserFilter.SubtypeOp != nil\n  - in.UserFilter.RevUserFilter.AppsOp != nil\n  - in.UserFilter.CreatedByIdOp != nil\n  - in.UserFilter.ModifiedByIdOp != nil\n  - in.UserFilter.CreatedByAgentIdOp != nil\n  - in.UserFilter.EmailOp != nil\n  - in.UserFilter.StateOp != nil\n  - in.UserFilter.PrimaryIdentityOp != nil\n  - in.UserFilter.PhoneNumbersOp != nil\n  - in.UserFilter.DevUserFilter != nil\n  - in.UserFilter.DevUserFilter != nil\n  - in.UserFilter.SysUserFilter != nil\n  - in.UserFilter.SysUserFilter != nil\n  - in.UserFilter.SvcAccFilter != nil\n  - in.UserFilter.SvcAccFilter != nil\n  - in.UserFilter.DevrevProfileFilter != nil\n  - in.UserFilter.DevrevProfileFilter != nil\n  - in.UserFilter.RevUserFilter != nil\n  - in.UserFilter.RevUserFilter != nil\n  - in.PageParams != nil\n  - in.PageParams != nil\n  - in.UserFilter != nil\n  - in.UserFilter != nil\n  - in.SkipTotal\n  - in.SkipTotal\n  - in.DqlQuery == nil\n  - in.DqlQuery == nil\n  - in.PageParams != nil\n  - (+389 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidSortByInputField\n  - errUserNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

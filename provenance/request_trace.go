@@ -205,17 +205,16 @@ func (ri *repoIndex) resolveCall(call *ast.CallExpr, file *ast.File) *ast.FuncDe
 	return nil
 }
 
-// traceIt returns the operations discovered for an It by following the request
-// objects it starts (identifiers it passes to calls and sends to MakeRequest),
-// together with the fields set on those objects. Each object is traced from the
-// test scope, so fields set in the It or its enclosing setup are captured, and
-// followed through same-package and cross-package helpers, which both discovers
-// the operation a helper issues and any fields it sets on the object.
+// analyzeIt returns the operations an It exercises and, per operation, the
+// request fields set on the object that operation's MakeRequest sends.
 //
-// A root object's fields are kept only when that object actually reaches a
-// MakeRequest, so an object that leads nowhere (a context, a handler, an unused
-// variable) contributes neither fields nor attribution.
-func (ri *repoIndex) traceIt(itBody *ast.FuncLit, setup []*ast.BlockStmt, file *ast.File) (ops, fields []string) {
+// Each object is traced from the test scope (the It and its enclosing setup)
+// through same-package and cross-package helpers, and its fields are attributed
+// only to the operation(s) that object actually reaches. This keeps fields from
+// unrelated objects (for example a setup request built in the same It) from
+// being credited to a different operation. A root object that reaches no
+// MakeRequest contributes nothing.
+func (ri *repoIndex) analyzeIt(itBody *ast.FuncLit, setup []*ast.BlockStmt, file *ast.File) ([]string, map[string][]string) {
 	if ri == nil {
 		return nil, nil
 	}
@@ -226,10 +225,26 @@ func (ri *repoIndex) traceIt(itBody *ast.FuncLit, setup []*ast.BlockStmt, file *
 	}
 
 	opsSet := map[string]bool{}
-	// Direct MakeRequest calls record their operation.
+	opFields := map[string][]string{}
+	addFields := func(op string, fs []string) {
+		if op == "" || len(fs) == 0 {
+			return
+		}
+		opFields[op] = append(opFields[op], fs...)
+	}
+
+	// Direct MakeRequest calls: record the operation; an inline request literal
+	// contributes its keys to that operation.
 	for _, call := range findMakeRequests(itBody) {
-		if op := makeRequestOp(call); op != "" {
-			opsSet[op] = true
+		op := makeRequestOp(call)
+		if op == "" {
+			continue
+		}
+		opsSet[op] = true
+		if len(call.Args) >= 3 {
+			if lit := requestBodyLit(call.Args[2]); lit != nil {
+				addFields(op, compositeKeys(lit))
+			}
 		}
 	}
 
@@ -261,24 +276,25 @@ func (ri *repoIndex) traceIt(itBody *ast.FuncLit, setup []*ast.BlockStmt, file *
 		names = append(names, r)
 	}
 	sort.Strings(names)
+
 	for _, name := range names {
 		tr := &reqTracer{ri: ri, visited: map[string]bool{}, ops: map[string]bool{}}
 		tr.traceObject(name, scopes, 0)
 		if len(tr.ops) == 0 {
-			continue // object leads to no request; its fields are not attributed
+			continue // object reaches no request; its fields are not attributed
 		}
 		for op := range tr.ops {
 			opsSet[op] = true
+			addFields(op, tr.fields)
 		}
-		fields = append(fields, tr.fields...)
 	}
 
-	ops = make([]string, 0, len(opsSet))
+	ops := make([]string, 0, len(opsSet))
 	for op := range opsSet {
 		ops = append(ops, op)
 	}
 	sort.Strings(ops)
-	return ops, fields
+	return ops, opFields
 }
 
 type reqTracer struct {

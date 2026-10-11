@@ -36,7 +36,7 @@
       "leaf_fields_read_by_rpc": 1,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 4,
+      "request_fields_set_by_tests": 1,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -170,19 +170,7 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
-          "field": "email",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "fullname",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "id",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "state",
           "fuzzy_suggestions": null
         }
       ]
@@ -195,10 +183,7 @@
           "INTERNAL_DEVUSERS_DELETE"
         ],
         "fields_set": [
-          "Email",
-          "FullName",
-          "Id",
-          "State"
+          "Id"
         ],
         "statuses": [
           200,
@@ -268,5 +253,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteDevUser` (HTTP operation `DevUsersDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUid.Value\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUid.Value\n  - in.DevUid.Value == \"\"\n  - in.DevUid != nil\n  - in.DevUid.Value == \"\"\n  - in.DevUid.Value != *t70\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDeleteOrDeactivateCallForLastActiveUser\n  - errInvalidAuthContextDevUid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `email` -> suggestions []\n  - test field `fullname` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `state` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteDevUser` (HTTP operation `DevUsersDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUid.Value\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUid.Value\n  - in.DevUid.Value == \"\"\n  - in.DevUid != nil\n  - in.DevUid.Value == \"\"\n  - in.DevUid.Value != *t70\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDeleteOrDeactivateCallForLastActiveUser\n  - errInvalidAuthContextDevUid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -34,11 +34,11 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 83,
-      "covered_count": 3,
-      "coverage_pct": 3.6,
-      "request_fields_set_by_tests": 13,
-      "set_by_positive_tests": 3,
-      "set_by_negative_tests": 2,
+      "covered_count": 2,
+      "coverage_pct": 2.4,
+      "request_fields_set_by_tests": 4,
+      "set_by_positive_tests": 2,
+      "set_by_negative_tests": 1,
       "by_depth": {
         "top_level": {
           "total": 2,
@@ -47,8 +47,8 @@
         },
         "nested": {
           "total": 24,
-          "set": 1,
-          "pct": 4.2
+          "set": 0,
+          "pct": 0
         },
         "deep": {
           "total": 57,
@@ -68,14 +68,6 @@
         ]
       },
       "covered": [
-        {
-          "path": "in.Filters.DisplayName",
-          "match": "exact",
-          "by_tests": [
-            "rev_user:read and account:read assign/revoke, rev_user:read persists after revoking account:read",
-            "service account impersonate scope controls PAT:act-as token creation and API access"
-          ]
-        },
         {
           "path": "in.Filters.RevUserFilter.Associations",
           "match": "exact",
@@ -125,6 +117,7 @@
         "in.Filters.DevUserFilter.SyncMetadata",
         "in.Filters.DevUserFilter.Timezone",
         "in.Filters.DevrevProfileFilter",
+        "in.Filters.DisplayName",
         "in.Filters.Email",
         "in.Filters.EmailOp",
         "in.Filters.ModifiedById",
@@ -2566,51 +2559,11 @@
           "fuzzy_suggestions": null
         },
         {
-          "field": "actas",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "description",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "expiresin",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "externalref",
           "fuzzy_suggestions": [
             "in.Filters.RevUserFilter.ExternalRefs",
             "in.Filters.RevUserFilter.ExternalRefsOp"
           ]
-        },
-        {
-          "field": "granttype",
-          "fuzzy_suggestions": [
-            "in.Filters.CreatedDate.DatePreset.Type",
-            "in.Filters.ModifiedDate.DatePreset.Type"
-          ]
-        },
-        {
-          "field": "name",
-          "fuzzy_suggestions": [
-            "in.Filters.DisplayName"
-          ]
-        },
-        {
-          "field": "principal",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "requestedtokentype",
-          "fuzzy_suggestions": [
-            "in.Filters.CreatedDate.DatePreset.Type",
-            "in.Filters.ModifiedDate.DatePreset.Type"
-          ]
-        },
-        {
-          "field": "rolesetassignmentinfo",
-          "fuzzy_suggestions": null
         }
       ]
     },
@@ -2665,16 +2618,7 @@
           "INTERNAL_AUTH_TOKENS_CREATE"
         ],
         "fields_set": [
-          "ActAs",
-          "Description",
-          "DisplayName",
-          "ExpiresIn",
-          "GrantType",
-          "Name",
-          "Principal",
-          "RequestedTokenType",
-          "RevOrg",
-          "RoleSetAssignmentInfo"
+          "RevOrg"
         ],
         "statuses": [
           200,
@@ -2699,10 +2643,7 @@
           "INTERNAL_ROLE_SETS_CREATE"
         ],
         "fields_set": [
-          "DisplayName",
-          "Principal",
-          "RevOrg",
-          "RoleSetAssignmentInfo"
+          "RevOrg"
         ],
         "statuses": [
           200,
@@ -2881,5 +2822,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListRevUsers` (HTTP operation `RevUsersListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountId.Id\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SearchQuery\n  - in.DqlQuery.SortBy\n  - in.Filters.CreatedByAgentId\n  - in.Filters.CreatedByAgentIdOp\n  - in.Filters.CreatedById\n  - in.Filters.CreatedByIdOp\n  - in.Filters.CreatedDate.After\n  - in.Filters.CreatedDate.Before\n  - in.Filters.CreatedDate.DatePreset.Type\n  - in.Filters.DevUserFilter.Apps\n  - in.Filters.DevUserFilter.AppsOp\n  - in.Filters.DevUserFilter.Availability\n  - in.Filters.DevUserFilter.AvailabilityModes\n  - in.Filters.DevUserFilter.AvailabilityModesOp\n  - in.Filters.DevUserFilter.AvailabilityOp\n  - in.Filters.DevUserFilter.CustomFields.Fields\n  - in.Filters.DevUserFilter.ExternalIdentities\n  - in.Filters.DevUserFilter.ExternalSourceData\n  - in.Filters.DevUserFilter.IsInvited\n  - in.Filters.DevUserFilter.JobHistory\n  - in.Filters.DevUserFilter.JobHistoryOp\n  - in.Filters.DevUserFilter.JobTitle\n  - in.Filters.DevUserFilter.ProfileId\n  - in.Filters.DevUserFilter.ReportsToId\n  - in.Filters.DevUserFilter.StagedInfo\n  - in.Filters.DevUserFilter.Subtype\n  - in.Filters.DevUserFilter.SubtypeOp\n  - in.Filters.DevUserFilter.SyncMetadata\n  - in.Filters.DevUserFilter.Timezone\n  - in.Filters.DevrevProfileFilter\n  - in.Filters.Email\n  - in.Filters.EmailOp\n  - in.Filters.ModifiedById\n  - in.Filters.ModifiedByIdOp\n  - in.Filters.ModifiedDate.After\n  - in.Filters.ModifiedDate.Before\n  - in.Filters.ModifiedDate.DatePreset.Type\n  - in.Filters.PhoneNumbers\n  - in.Filters.PhoneNumbersOp\n  - in.Filters.PrimaryIdentity\n  - in.Filters.PrimaryIdentityOp\n  - in.Filters.RevUserFilter.Apps\n  - in.Filters.RevUserFilter.AppsOp\n  - in.Filters.RevUserFilter.AssociationsOp\n  - in.Filters.RevUserFilter.CustomFields.Fields\n  - in.Filters.RevUserFilter.ExternalRefs\n  - in.Filters.RevUserFilter.ExternalRefsOp\n  - in.Filters.RevUserFilter.ExternalSourceData\n  - in.Filters.RevUserFilter.ExternalUid\n  - in.Filters.RevUserFilter.ExternalUidIssuer\n  - in.Filters.RevUserFilter.ExternalUidOp\n  - in.Filters.RevUserFilter.Gender\n  - in.Filters.RevUserFilter.IngestionChannel\n  - in.Filters.RevUserFilter.IsVerified\n  - in.Filters.RevUserFilter.PlugAvailability\n  - in.Filters.RevUserFilter.PlugAvailabilityOp\n  - in.Filters.RevUserFilter.RevOid\n  - in.Filters.RevUserFilter.RevOidOp\n  - (+20 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filters.DevUserFilter.AvailabilityModesOp != nil\n  - in.Filters.DevUserFilter.AvailabilityOp != nil\n  - in.Filters.DevUserFilter.JobHistoryOp != nil\n  - in.Filters.DevUserFilter.SubtypeOp != nil\n  - in.Filters.DevUserFilter.AppsOp != nil\n  - in.Filters.RevUserFilter.RevOidOp != nil\n  - in.Filters.RevUserFilter.ExternalUidOp != nil\n  - in.Filters.RevUserFilter.ExternalRefsOp != nil\n  - in.Filters.RevUserFilter.TagsOp != nil\n  - in.Filters.RevUserFilter.RevOrgOp != nil\n  - in.Filters.RevUserFilter.PlugAvailabilityOp != nil\n  - in.Filters.RevUserFilter.AssociationsOp != nil\n  - in.Filters.RevUserFilter.SubtypeOp != nil\n  - in.Filters.RevUserFilter.AppsOp != nil\n  - in.Filters.CreatedByIdOp != nil\n  - in.Filters.ModifiedByIdOp != nil\n  - in.Filters.CreatedByAgentIdOp != nil\n  - in.Filters.EmailOp != nil\n  - in.Filters.StateOp != nil\n  - in.Filters.PrimaryIdentityOp != nil\n  - in.Filters.PhoneNumbersOp != nil\n  - in.Filters.DevUserFilter != nil\n  - in.Filters.DevUserFilter != nil\n  - in.Filters.SysUserFilter != nil\n  - in.Filters.SysUserFilter != nil\n  - in.Filters.SvcAccFilter != nil\n  - in.Filters.SvcAccFilter != nil\n  - in.Filters.DevrevProfileFilter != nil\n  - in.Filters.DevrevProfileFilter != nil\n  - in.Filters.RevUserFilter != nil\n  - in.Filters.RevUserFilter != nil\n  - in.PageParams != nil\n  - in.PageParams != nil\n  - in.Filters != nil\n  - in.Filters != nil\n  - in.AccountId != nil\n  - in.DqlQuery == nil\n  - in.DqlQuery.SearchQuery != \"\"\n  - in.DqlQuery == nil\n  - in.DqlQuery.SearchQuery != \"\"\n  - (+251 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidSortByInputField\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `account` -> suggestions []\n  - test field `actas` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `expiresin` -> suggestions []\n  - test field `externalref` -> suggestions ['in.Filters.RevUserFilter.ExternalRefs', 'in.Filters.RevUserFilter.ExternalRefsOp']\n  - test field `granttype` -> suggestions ['in.Filters.CreatedDate.DatePreset.Type', 'in.Filters.ModifiedDate.DatePreset.Type']\n  - test field `name` -> suggestions ['in.Filters.DisplayName']\n  - test field `principal` -> suggestions []\n  - test field `requestedtokentype` -> suggestions ['in.Filters.CreatedDate.DatePreset.Type', 'in.Filters.ModifiedDate.DatePreset.Type']\n  - test field `rolesetassignmentinfo` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListRevUsers` (HTTP operation `RevUsersListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountId.Id\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SearchQuery\n  - in.DqlQuery.SortBy\n  - in.Filters.CreatedByAgentId\n  - in.Filters.CreatedByAgentIdOp\n  - in.Filters.CreatedById\n  - in.Filters.CreatedByIdOp\n  - in.Filters.CreatedDate.After\n  - in.Filters.CreatedDate.Before\n  - in.Filters.CreatedDate.DatePreset.Type\n  - in.Filters.DevUserFilter.Apps\n  - in.Filters.DevUserFilter.AppsOp\n  - in.Filters.DevUserFilter.Availability\n  - in.Filters.DevUserFilter.AvailabilityModes\n  - in.Filters.DevUserFilter.AvailabilityModesOp\n  - in.Filters.DevUserFilter.AvailabilityOp\n  - in.Filters.DevUserFilter.CustomFields.Fields\n  - in.Filters.DevUserFilter.ExternalIdentities\n  - in.Filters.DevUserFilter.ExternalSourceData\n  - in.Filters.DevUserFilter.IsInvited\n  - in.Filters.DevUserFilter.JobHistory\n  - in.Filters.DevUserFilter.JobHistoryOp\n  - in.Filters.DevUserFilter.JobTitle\n  - in.Filters.DevUserFilter.ProfileId\n  - in.Filters.DevUserFilter.ReportsToId\n  - in.Filters.DevUserFilter.StagedInfo\n  - in.Filters.DevUserFilter.Subtype\n  - in.Filters.DevUserFilter.SubtypeOp\n  - in.Filters.DevUserFilter.SyncMetadata\n  - in.Filters.DevUserFilter.Timezone\n  - in.Filters.DevrevProfileFilter\n  - in.Filters.DisplayName\n  - in.Filters.Email\n  - in.Filters.EmailOp\n  - in.Filters.ModifiedById\n  - in.Filters.ModifiedByIdOp\n  - in.Filters.ModifiedDate.After\n  - in.Filters.ModifiedDate.Before\n  - in.Filters.ModifiedDate.DatePreset.Type\n  - in.Filters.PhoneNumbers\n  - in.Filters.PhoneNumbersOp\n  - in.Filters.PrimaryIdentity\n  - in.Filters.PrimaryIdentityOp\n  - in.Filters.RevUserFilter.Apps\n  - in.Filters.RevUserFilter.AppsOp\n  - in.Filters.RevUserFilter.AssociationsOp\n  - in.Filters.RevUserFilter.CustomFields.Fields\n  - in.Filters.RevUserFilter.ExternalRefs\n  - in.Filters.RevUserFilter.ExternalRefsOp\n  - in.Filters.RevUserFilter.ExternalSourceData\n  - in.Filters.RevUserFilter.ExternalUid\n  - in.Filters.RevUserFilter.ExternalUidIssuer\n  - in.Filters.RevUserFilter.ExternalUidOp\n  - in.Filters.RevUserFilter.Gender\n  - in.Filters.RevUserFilter.IngestionChannel\n  - in.Filters.RevUserFilter.IsVerified\n  - in.Filters.RevUserFilter.PlugAvailability\n  - in.Filters.RevUserFilter.PlugAvailabilityOp\n  - in.Filters.RevUserFilter.RevOid\n  - (+21 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filters.DevUserFilter.AvailabilityModesOp != nil\n  - in.Filters.DevUserFilter.AvailabilityOp != nil\n  - in.Filters.DevUserFilter.JobHistoryOp != nil\n  - in.Filters.DevUserFilter.SubtypeOp != nil\n  - in.Filters.DevUserFilter.AppsOp != nil\n  - in.Filters.RevUserFilter.RevOidOp != nil\n  - in.Filters.RevUserFilter.ExternalUidOp != nil\n  - in.Filters.RevUserFilter.ExternalRefsOp != nil\n  - in.Filters.RevUserFilter.TagsOp != nil\n  - in.Filters.RevUserFilter.RevOrgOp != nil\n  - in.Filters.RevUserFilter.PlugAvailabilityOp != nil\n  - in.Filters.RevUserFilter.AssociationsOp != nil\n  - in.Filters.RevUserFilter.SubtypeOp != nil\n  - in.Filters.RevUserFilter.AppsOp != nil\n  - in.Filters.CreatedByIdOp != nil\n  - in.Filters.ModifiedByIdOp != nil\n  - in.Filters.CreatedByAgentIdOp != nil\n  - in.Filters.EmailOp != nil\n  - in.Filters.StateOp != nil\n  - in.Filters.PrimaryIdentityOp != nil\n  - in.Filters.PhoneNumbersOp != nil\n  - in.Filters.DevUserFilter != nil\n  - in.Filters.DevUserFilter != nil\n  - in.Filters.SysUserFilter != nil\n  - in.Filters.SysUserFilter != nil\n  - in.Filters.SvcAccFilter != nil\n  - in.Filters.SvcAccFilter != nil\n  - in.Filters.DevrevProfileFilter != nil\n  - in.Filters.DevrevProfileFilter != nil\n  - in.Filters.RevUserFilter != nil\n  - in.Filters.RevUserFilter != nil\n  - in.PageParams != nil\n  - in.PageParams != nil\n  - in.Filters != nil\n  - in.Filters != nil\n  - in.AccountId != nil\n  - in.DqlQuery == nil\n  - in.DqlQuery.SearchQuery != \"\"\n  - in.DqlQuery == nil\n  - in.DqlQuery.SearchQuery != \"\"\n  - (+251 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidSortByInputField\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `account` -> suggestions []\n  - test field `externalref` -> suggestions ['in.Filters.RevUserFilter.ExternalRefs', 'in.Filters.RevUserFilter.ExternalRefsOp']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

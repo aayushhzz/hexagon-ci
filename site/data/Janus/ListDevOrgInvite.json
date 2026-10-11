@@ -32,10 +32,10 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 20,
-      "covered_count": 1,
-      "coverage_pct": 5,
-      "request_fields_set_by_tests": 1,
-      "set_by_positive_tests": 1,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 0,
+      "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
@@ -45,8 +45,8 @@
         },
         "nested": {
           "total": 10,
-          "set": 1,
-          "pct": 10
+          "set": 0,
+          "pct": 0
         },
         "deep": {
           "total": 9,
@@ -56,22 +56,14 @@
       },
       "representative": {
         "units": 14,
-        "covered": 1,
-        "pct": 7.1,
+        "covered": 0,
+        "pct": 0,
         "collapsed_types": [
           "api.PaginationParams",
           "proto.DateFilter"
         ]
       },
-      "covered": [
-        {
-          "path": "in.UserFilter.Email",
-          "match": "exact",
-          "by_tests": [
-            "Invite a DevUser 2"
-          ]
-        }
-      ],
+      "covered": null,
       "gaps": [
         "in.PageParams.SortBy",
         "in.SearchQuery",
@@ -82,6 +74,7 @@
         "in.UserFilter.CreatedDate.After",
         "in.UserFilter.CreatedDate.Before",
         "in.UserFilter.CreatedDate.DatePreset.Type",
+        "in.UserFilter.Email",
         "in.UserFilter.ExpiresAt.After",
         "in.UserFilter.ExpiresAt.Before",
         "in.UserFilter.ExpiresAt.DatePreset.Type",
@@ -539,9 +532,7 @@
           "INTERNAL_DEVUSERS_INVITATIONS_LIST",
           "INTERNAL_DEV_ORGS_INVITES_COUNT"
         ],
-        "fields_set": [
-          "Email"
-        ],
+        "fields_set": null,
         "statuses": [
           201
         ],
@@ -696,5 +687,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListDevOrgInvite` (HTTP operation `DevOrgsInvitesList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.PageParams.SortBy\n  - in.SearchQuery\n  - in.UserFilter.CreatedByAgentId\n  - in.UserFilter.CreatedByAgentIdOp\n  - in.UserFilter.CreatedById\n  - in.UserFilter.CreatedByIdOp\n  - in.UserFilter.CreatedDate.After\n  - in.UserFilter.CreatedDate.Before\n  - in.UserFilter.CreatedDate.DatePreset.Type\n  - in.UserFilter.ExpiresAt.After\n  - in.UserFilter.ExpiresAt.Before\n  - in.UserFilter.ExpiresAt.DatePreset.Type\n  - in.UserFilter.GroupIds\n  - in.UserFilter.ModifiedById\n  - in.UserFilter.ModifiedByIdOp\n  - in.UserFilter.ModifiedDate.After\n  - in.UserFilter.ModifiedDate.Before\n  - in.UserFilter.ModifiedDate.DatePreset.Type\n  - in.UserFilter.State\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserFilter.CreatedDate != nil\n  - in.UserFilter.CreatedByIdOp == 4\n  - in.UserFilter.CreatedByIdOp == 3\n  - in.UserFilter.CreatedByIdOp == 4\n  - in.UserFilter.CreatedByIdOp == 2\n  - in.UserFilter.CreatedByIdOp == 5\n  - in.UserFilter.CreatedByIdOp == 2\n  - in.UserFilter.CreatedByIdOp == 1\n  - in.UserFilter.CreatedByIdOp == 3\n  - in.UserFilter.CreatedDate.After != nil\n  - in.UserFilter.CreatedDate.Before != nil\n  - in.UserFilter.CreatedDate.DatePreset != nil\n  - in.UserFilter.CreatedDate.After != nil\n  - in.UserFilter.CreatedDate.DatePreset.Type\n  - in.UserFilter.CreatedDate.Before != nil\n  - in.UserFilter.ModifiedDate != nil\n  - in.UserFilter.ModifiedByIdOp == 4\n  - in.UserFilter.ModifiedByIdOp == 3\n  - in.UserFilter.ModifiedByIdOp == 4\n  - in.UserFilter.ModifiedByIdOp == 2\n  - in.UserFilter.ModifiedByIdOp == 5\n  - in.UserFilter.ModifiedByIdOp == 2\n  - in.UserFilter.ModifiedByIdOp == 1\n  - in.UserFilter.ModifiedByIdOp == 3\n  - in.UserFilter.ModifiedDate.After != nil\n  - in.UserFilter.ModifiedDate.Before != nil\n  - in.UserFilter.ModifiedDate.DatePreset != nil\n  - in.UserFilter.ModifiedDate.After != nil\n  - in.UserFilter.ModifiedDate.DatePreset.Type\n  - in.UserFilter.ModifiedDate.Before != nil\n  - in.UserFilter.CreatedByAgentIdOp == 4\n  - in.UserFilter.CreatedByAgentIdOp == 3\n  - in.UserFilter.CreatedByAgentIdOp == 4\n  - in.UserFilter.CreatedByAgentIdOp == 2\n  - in.UserFilter.CreatedByAgentIdOp == 5\n  - in.UserFilter.CreatedByAgentIdOp == 2\n  - in.UserFilter.CreatedByAgentIdOp == 1\n  - in.UserFilter.CreatedByAgentIdOp == 3\n  - in.UserFilter.ExpiresAt != nil\n  - in.UserFilter.ExpiresAt.After != nil\n  - (+7 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidSortByInputField\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListDevOrgInvite` (HTTP operation `DevOrgsInvitesList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.PageParams.SortBy\n  - in.SearchQuery\n  - in.UserFilter.CreatedByAgentId\n  - in.UserFilter.CreatedByAgentIdOp\n  - in.UserFilter.CreatedById\n  - in.UserFilter.CreatedByIdOp\n  - in.UserFilter.CreatedDate.After\n  - in.UserFilter.CreatedDate.Before\n  - in.UserFilter.CreatedDate.DatePreset.Type\n  - in.UserFilter.Email\n  - in.UserFilter.ExpiresAt.After\n  - in.UserFilter.ExpiresAt.Before\n  - in.UserFilter.ExpiresAt.DatePreset.Type\n  - in.UserFilter.GroupIds\n  - in.UserFilter.ModifiedById\n  - in.UserFilter.ModifiedByIdOp\n  - in.UserFilter.ModifiedDate.After\n  - in.UserFilter.ModifiedDate.Before\n  - in.UserFilter.ModifiedDate.DatePreset.Type\n  - in.UserFilter.State\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserFilter.CreatedDate != nil\n  - in.UserFilter.CreatedByIdOp == 4\n  - in.UserFilter.CreatedByIdOp == 3\n  - in.UserFilter.CreatedByIdOp == 4\n  - in.UserFilter.CreatedByIdOp == 2\n  - in.UserFilter.CreatedByIdOp == 5\n  - in.UserFilter.CreatedByIdOp == 2\n  - in.UserFilter.CreatedByIdOp == 1\n  - in.UserFilter.CreatedByIdOp == 3\n  - in.UserFilter.CreatedDate.After != nil\n  - in.UserFilter.CreatedDate.Before != nil\n  - in.UserFilter.CreatedDate.DatePreset != nil\n  - in.UserFilter.CreatedDate.After != nil\n  - in.UserFilter.CreatedDate.DatePreset.Type\n  - in.UserFilter.CreatedDate.Before != nil\n  - in.UserFilter.ModifiedDate != nil\n  - in.UserFilter.ModifiedByIdOp == 4\n  - in.UserFilter.ModifiedByIdOp == 3\n  - in.UserFilter.ModifiedByIdOp == 4\n  - in.UserFilter.ModifiedByIdOp == 2\n  - in.UserFilter.ModifiedByIdOp == 5\n  - in.UserFilter.ModifiedByIdOp == 2\n  - in.UserFilter.ModifiedByIdOp == 1\n  - in.UserFilter.ModifiedByIdOp == 3\n  - in.UserFilter.ModifiedDate.After != nil\n  - in.UserFilter.ModifiedDate.Before != nil\n  - in.UserFilter.ModifiedDate.DatePreset != nil\n  - in.UserFilter.ModifiedDate.After != nil\n  - in.UserFilter.ModifiedDate.DatePreset.Type\n  - in.UserFilter.ModifiedDate.Before != nil\n  - in.UserFilter.CreatedByAgentIdOp == 4\n  - in.UserFilter.CreatedByAgentIdOp == 3\n  - in.UserFilter.CreatedByAgentIdOp == 4\n  - in.UserFilter.CreatedByAgentIdOp == 2\n  - in.UserFilter.CreatedByAgentIdOp == 5\n  - in.UserFilter.CreatedByAgentIdOp == 2\n  - in.UserFilter.CreatedByAgentIdOp == 1\n  - in.UserFilter.CreatedByAgentIdOp == 3\n  - in.UserFilter.ExpiresAt != nil\n  - in.UserFilter.ExpiresAt.After != nil\n  - (+7 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidSortByInputField\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

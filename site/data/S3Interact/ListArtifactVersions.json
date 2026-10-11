@@ -36,7 +36,7 @@
       "leaf_fields_read_by_rpc": 1,
       "covered_count": 1,
       "coverage_pct": 100,
-      "request_fields_set_by_tests": 14,
+      "request_fields_set_by_tests": 1,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -142,60 +142,7 @@
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": [
-        {
-          "field": "appliestoparts",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "articletype",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "configurationset",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "filename",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "filesize",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "filetype",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "ownedby",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "parent",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "publishedversion",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "resource",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "status",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "title",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "version",
-          "fuzzy_suggestions": null
-        }
-      ]
+      "unmatched_test_fields": null
     },
     "test_facts": [
       {
@@ -222,8 +169,6 @@
           "INTERNAL_ARTIFACTS_VERSIONS_LIST"
         ],
         "fields_set": [
-          "FileName",
-          "FileType",
           "Id"
         ],
         "statuses": [
@@ -245,10 +190,7 @@
           "INTERNAL_ARTIFACTS_VERSIONS_DELETE"
         ],
         "fields_set": [
-          "FileName",
-          "FileType",
-          "Id",
-          "Version"
+          "Id"
         ],
         "statuses": [
           200,
@@ -273,14 +215,7 @@
           "POSITIVE"
         ],
         "fields_set": [
-          "AppliesToParts",
-          "Id",
-          "OwnedBy",
-          "Parent",
-          "PublishedVersion",
-          "Resource",
-          "Status",
-          "Title"
+          "Id"
         ],
         "statuses": [
           200,
@@ -307,18 +242,7 @@
           "INTERNAL_ARTIFACTS_PREPARE"
         ],
         "fields_set": [
-          "AppliesToParts",
-          "ArticleType",
-          "ConfigurationSet",
-          "FileName",
-          "FileSize",
-          "FileType",
-          "Id",
-          "OwnedBy",
-          "Resource",
-          "Status",
-          "Title",
-          "Version"
+          "Id"
         ],
         "statuses": [
           200,
@@ -345,18 +269,7 @@
           "INTERNAL_ARTIFACTS_PREPARE"
         ],
         "fields_set": [
-          "AppliesToParts",
-          "ArticleType",
-          "ConfigurationSet",
-          "FileName",
-          "FileSize",
-          "FileType",
-          "Id",
-          "OwnedBy",
-          "Resource",
-          "Status",
-          "Title",
-          "Version"
+          "Id"
         ],
         "statuses": [
           200,
@@ -383,18 +296,7 @@
           "INTERNAL_ARTIFACTS_PREPARE"
         ],
         "fields_set": [
-          "AppliesToParts",
-          "ArticleType",
-          "ConfigurationSet",
-          "FileName",
-          "FileSize",
-          "FileType",
-          "Id",
-          "OwnedBy",
-          "Resource",
-          "Status",
-          "Title",
-          "Version"
+          "Id"
         ],
         "statuses": [
           200,
@@ -428,5 +330,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListArtifactVersions` (HTTP operation `ArtifactsVersionsList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - none\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestoparts` -> suggestions []\n  - test field `articletype` -> suggestions []\n  - test field `configurationset` -> suggestions []\n  - test field `filename` -> suggestions []\n  - test field `filesize` -> suggestions []\n  - test field `filetype` -> suggestions []\n  - test field `ownedby` -> suggestions []\n  - test field `parent` -> suggestions []\n  - test field `publishedversion` -> suggestions []\n  - test field `resource` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `version` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListArtifactVersions` (HTTP operation `ArtifactsVersionsList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - none\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

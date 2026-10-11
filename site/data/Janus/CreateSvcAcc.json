@@ -34,7 +34,7 @@
       "leaf_fields_read_by_rpc": 1,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 22,
+      "request_fields_set_by_tests": 2,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -138,91 +138,11 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
-          "field": "actas",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "clientid",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "customfields",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "customschemaspec",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "description",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "displayname",
           "fuzzy_suggestions": null
         },
         {
-          "field": "expiresin",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "genkeyring",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "granttype",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "group",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "id",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "leaftype",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "member",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "name",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "object",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "principal",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "requestedtokentype",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "requestkind",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "revorg",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "rolesetassignmentinfo",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "uniquekey",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "userprompt",
           "fuzzy_suggestions": null
         }
       ]
@@ -236,10 +156,7 @@
           "INTERNAL_AUTH_TOKENS_CREATE"
         ],
         "fields_set": [
-          "ActAs",
-          "DisplayName",
-          "GrantType",
-          "RequestedTokenType"
+          "DisplayName"
         ],
         "statuses": [
           201,
@@ -260,18 +177,8 @@
         "file": "api/v2_internal/metis/respond_to_object_test.go",
         "labels": null,
         "fields_set": [
-          "ClientId",
           "DisplayName",
-          "ExpiresIn",
-          "GenKeyring",
-          "GrantType",
-          "Group",
-          "Id",
-          "Member",
-          "Object",
-          "RequestKind",
-          "RequestedTokenType",
-          "UserPrompt"
+          "GenKeyring"
         ],
         "statuses": null,
         "asserts_success": true,
@@ -290,9 +197,7 @@
           "INTERNAL_ROLE_SETS_CREATE"
         ],
         "fields_set": [
-          "DisplayName",
-          "Principal",
-          "RoleSetAssignmentInfo"
+          "DisplayName"
         ],
         "statuses": [
           200,
@@ -316,9 +221,7 @@
           "NON_LOCAL"
         ],
         "fields_set": [
-          "DisplayName",
-          "Principal",
-          "RoleSetAssignmentInfo"
+          "DisplayName"
         ],
         "statuses": [
           201,
@@ -341,13 +244,7 @@
           "INTERNAL_ROLE_SETS_CREATE"
         ],
         "fields_set": [
-          "CustomFields",
-          "CustomSchemaSpec",
-          "DisplayName",
-          "LeafType",
-          "Principal",
-          "RoleSetAssignmentInfo",
-          "UniqueKey"
+          "DisplayName"
         ],
         "statuses": [
           201,
@@ -368,14 +265,7 @@
           "INTERNAL_ROLE_SETS_CREATE"
         ],
         "fields_set": [
-          "CustomFields",
-          "CustomSchemaSpec",
-          "DisplayName",
-          "Id",
-          "LeafType",
-          "Principal",
-          "RoleSetAssignmentInfo",
-          "UniqueKey"
+          "DisplayName"
         ],
         "statuses": [
           200,
@@ -399,16 +289,7 @@
           "INTERNAL_AUTH_TOKENS_CREATE"
         ],
         "fields_set": [
-          "ActAs",
-          "Description",
-          "DisplayName",
-          "ExpiresIn",
-          "GrantType",
-          "Name",
-          "Principal",
-          "RequestedTokenType",
-          "RevOrg",
-          "RoleSetAssignmentInfo"
+          "DisplayName"
         ],
         "statuses": [
           200,
@@ -433,10 +314,7 @@
           "INTERNAL_ROLE_SETS_CREATE"
         ],
         "fields_set": [
-          "DisplayName",
-          "Principal",
-          "RevOrg",
-          "RoleSetAssignmentInfo"
+          "DisplayName"
         ],
         "statuses": [
           200,
@@ -459,10 +337,7 @@
           "INTERNAL_ROLE_SETS_CREATE"
         ],
         "fields_set": [
-          "DisplayName",
-          "Id",
-          "Principal",
-          "RoleSetAssignmentInfo"
+          "DisplayName"
         ],
         "statuses": [
           200,
@@ -486,10 +361,7 @@
           "INTERNAL_ROLE_SETS_CREATE"
         ],
         "fields_set": [
-          "DisplayName",
-          "Id",
-          "Principal",
-          "RoleSetAssignmentInfo"
+          "DisplayName"
         ],
         "statuses": [
           200,
@@ -561,5 +433,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateSvcAcc` (HTTP operation `ServiceAccountsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ServiceAccount.State\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ServiceAccount == nil\n  - in.ServiceAccount.State == 0\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContext\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `actas` -> suggestions []\n  - test field `clientid` -> suggestions []\n  - test field `customfields` -> suggestions []\n  - test field `customschemaspec` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `displayname` -> suggestions []\n  - test field `expiresin` -> suggestions []\n  - test field `genkeyring` -> suggestions []\n  - test field `granttype` -> suggestions []\n  - test field `group` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `leaftype` -> suggestions []\n  - test field `member` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `requestedtokentype` -> suggestions []\n  - test field `requestkind` -> suggestions []\n  - test field `revorg` -> suggestions []\n  - test field `rolesetassignmentinfo` -> suggestions []\n  - test field `uniquekey` -> suggestions []\n  - test field `userprompt` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateSvcAcc` (HTTP operation `ServiceAccountsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ServiceAccount.State\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ServiceAccount == nil\n  - in.ServiceAccount.State == 0\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContext\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `displayname` -> suggestions []\n  - test field `genkeyring` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

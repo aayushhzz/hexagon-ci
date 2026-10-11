@@ -32,11 +32,11 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 78,
-      "covered_count": 8,
-      "coverage_pct": 10.3,
-      "request_fields_set_by_tests": 48,
-      "set_by_positive_tests": 8,
-      "set_by_negative_tests": 2,
+      "covered_count": 5,
+      "coverage_pct": 6.4,
+      "request_fields_set_by_tests": 12,
+      "set_by_positive_tests": 4,
+      "set_by_negative_tests": 1,
       "by_depth": {
         "top_level": {
           "total": 3,
@@ -45,37 +45,28 @@
         },
         "nested": {
           "total": 46,
-          "set": 7,
-          "pct": 15.2
+          "set": 5,
+          "pct": 10.9
         },
         "deep": {
           "total": 29,
-          "set": 1,
-          "pct": 3.4
+          "set": 0,
+          "pct": 0
         }
       },
       "representative": {
         "units": 77,
-        "covered": 8,
-        "pct": 10.4,
+        "covered": 5,
+        "pct": 6.5,
         "collapsed_types": [
           "api.CustomSchemaSpec"
         ]
       },
       "covered": [
         {
-          "path": "in.Conversation.AiResolutionStatus",
-          "match": "exact",
-          "by_tests": [
-            "Should allow AI resolution status update when the entitlement flag is disabled",
-            "Should require AGENT_RESOLUTION entitlement to update AI resolution status when the flag is enabled"
-          ]
-        },
-        {
           "path": "in.Conversation.Description",
           "match": "exact",
           "by_tests": [
-            "Submits a survey and checks if response is present",
             "rev user should be able to create and update a conversation, and retain access"
           ]
         },
@@ -86,13 +77,6 @@
             "Should respond on a plug conversation served by the deployed agent's workflow",
             "Timeline Entry By Agent",
             "Timeline Entry By Agent on new conversation"
-          ]
-        },
-        {
-          "path": "in.Conversation.OwnedByIds",
-          "match": "exact",
-          "by_tests": [
-            "Should batch update conversation owners"
           ]
         },
         {
@@ -115,14 +99,6 @@
           ]
         },
         {
-          "path": "in.Conversation.Stage.Name",
-          "match": "exact",
-          "by_tests": [
-            "Should successfully convert a conversation to a ticket",
-            "Submits a survey and checks if response is present"
-          ]
-        },
-        {
           "path": "in.Conversation.Tags",
           "match": "exact",
           "by_tests": [
@@ -135,8 +111,6 @@
           "path": "in.Conversation.Title",
           "match": "exact",
           "by_tests": [
-            "RevUser must able to update conversation title",
-            "Should allow unrelated conversation updates when the entitlement flag is enabled",
             "Should handle internal discussion notes in conversation timeline",
             "Should preserve timeline comments when converting conversation to ticket with revuser and sysuser alternating comments",
             "Should respond on a plug conversation served by the deployed agent's workflow",
@@ -158,6 +132,7 @@
       "gaps": [
         "in.ActorId",
         "in.Conversation.AccountId",
+        "in.Conversation.AiResolutionStatus",
         "in.Conversation.AppliesToPartIds",
         "in.Conversation.BrandId",
         "in.Conversation.BroadcastChannels",
@@ -187,6 +162,7 @@
         "in.Conversation.MemberIds",
         "in.Conversation.Metadata.UrlContext",
         "in.Conversation.OwnedByAgentId",
+        "in.Conversation.OwnedByIds",
         "in.Conversation.ParticipantOids",
         "in.Conversation.ParticipantUids",
         "in.Conversation.Priority",
@@ -198,6 +174,7 @@
         "in.Conversation.SourceChannelV2",
         "in.Conversation.SourceChannelV2Instance",
         "in.Conversation.SpaceId",
+        "in.Conversation.Stage.Name",
         "in.Conversation.Stage.Notes",
         "in.Conversation.Stage.StageId",
         "in.Conversation.StagedInfo.IsStaged",
@@ -232,20 +209,20 @@
       "total": 233,
       "happy_path_reached": true,
       "reachable_on_happy_path": 41,
-      "present_arm_exercised": 21,
-      "present_arm_pct": 9,
+      "present_arm_exercised": 15,
+      "present_arm_pct": 6.4,
       "absent_arm_exercised": 41,
       "absent_arm_pct": 100,
-      "negative_arm_exercised": 14,
-      "negative_arm_pct": 6,
+      "negative_arm_exercised": 10,
+      "negative_arm_pct": 4.3,
       "both_arms_exercised": 0,
-      "coverage_pct": 9,
+      "coverage_pct": 6.4,
       "by_origin": {
         "service": {
           "total": 106,
           "reachable_on_happy_path": 15,
-          "present_arm_exercised": 13,
-          "present_arm_pct": 12.3,
+          "present_arm_exercised": 11,
+          "present_arm_pct": 10.4,
           "negative_arm_exercised": 8,
           "negative_arm_pct": 7.5,
           "absent_arm_exercised": 15
@@ -262,10 +239,10 @@
         "library": {
           "total": 56,
           "reachable_on_happy_path": 18,
-          "present_arm_exercised": 4,
-          "present_arm_pct": 7.1,
-          "negative_arm_exercised": 4,
-          "negative_arm_pct": 7.1,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
+          "negative_arm_exercised": 0,
+          "negative_arm_pct": 0,
           "absent_arm_exercised": 18
         }
       },
@@ -1335,6 +1312,38 @@
           ]
         },
         {
+          "id": "b138",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/archetype/archetype/unified_enum.go:145",
+          "cond": "in.Conversation.AiResolutionStatus == nil",
+          "predicate_paths": [
+            "in.Conversation.AiResolutionStatus"
+          ]
+        },
+        {
+          "id": "b139",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/go/archetype/archetype/unified_enum.go:160",
+          "cond": "*t23 == in.Conversation.AiResolutionStatus",
+          "predicate_paths": [
+            "in.Conversation.AiResolutionStatus"
+          ]
+        },
+        {
+          "id": "b140",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260701100938-401162ec7707/lib/gen_deps/unified_enum.go:31",
+          "cond": "in.Conversation.AiResolutionStatus == nil",
+          "predicate_paths": [
+            "in.Conversation.AiResolutionStatus"
+          ]
+        },
+        {
+          "id": "b141",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260701100938-401162ec7707/lib/gen_deps/unified_enum.go:63",
+          "cond": "**t50 == in.Conversation.AiResolutionStatus",
+          "predicate_paths": [
+            "in.Conversation.AiResolutionStatus"
+          ]
+        },
+        {
           "id": "b142",
           "at": "internal/collectionv2/legacy_stage.gen.go:323",
           "cond": "in.Conversation.Stage.StageId != nil",
@@ -1599,6 +1608,14 @@
           ]
         },
         {
+          "id": "b175",
+          "at": "internal/collectionv2/conversation.gen.go:3639",
+          "cond": "in.Conversation.OwnedByIds != nil",
+          "predicate_paths": [
+            "in.Conversation.OwnedByIds"
+          ]
+        },
+        {
           "id": "b176",
           "at": "internal/collectionv2/conversation.gen.go:3653",
           "cond": "in.Conversation.Group != nil",
@@ -1815,6 +1832,14 @@
           ]
         },
         {
+          "id": "b208",
+          "at": "internal/serverv2/create_conversation.go:935",
+          "cond": "in.Conversation.Stage.Name != nil",
+          "predicate_paths": [
+            "in.Conversation.Stage.Name"
+          ]
+        },
+        {
           "id": "b209",
           "at": "internal/serverv2/create_conversation.go:923",
           "cond": "in.ActorId",
@@ -1994,84 +2019,10 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
-          "field": "actionid",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "actions",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "actiontype",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "appliestoparts",
           "fuzzy_suggestions": [
             "in.Conversation.AppliesToPartIds"
           ]
-        },
-        {
-          "field": "baseobject",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "channel",
-          "fuzzy_suggestions": [
-            "in.Conversation.BroadcastChannels",
-            "in.Conversation.Channels",
-            "in.Conversation.ChannelsInstances",
-            "in.Conversation.SourceChannel",
-            "in.Conversation.SourceChannelV2",
-            "in.Conversation.SourceChannelV2Instance"
-          ]
-        },
-        {
-          "field": "collections",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "convertto",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "dispatchedchannels",
-          "fuzzy_suggestions": [
-            "in.Conversation.Channels"
-          ]
-        },
-        {
-          "field": "dispatchedto",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "dispatchid",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "first",
-          "fuzzy_suggestions": [
-            "in.Conversation.FirstResponseTime",
-            "in.Conversation.FirstUnrepliedRevMessageDate"
-          ]
-        },
-        {
-          "field": "groupby",
-          "fuzzy_suggestions": [
-            "in.Conversation.Group"
-          ]
-        },
-        {
-          "field": "id",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "items",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "manifest",
-          "fuzzy_suggestions": null
         },
         {
           "field": "members",
@@ -2088,67 +2039,7 @@
           "fuzzy_suggestions": null
         },
         {
-          "field": "mode",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "object",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "recipient",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "response",
-          "fuzzy_suggestions": [
-            "in.Conversation.FirstResponseTime"
-          ]
-        },
-        {
-          "field": "responsechannel",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "responsescore",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "slug",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "snapin",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "snapinactionname",
-          "fuzzy_suggestions": [
-            "in.Conversation.Stage.Name"
-          ]
-        },
-        {
-          "field": "snapinpackage",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "snapinversion",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "snapkitbody",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "source",
-          "fuzzy_suggestions": [
-            "in.Conversation.SourceChannel",
-            "in.Conversation.SourceChannelV2",
-            "in.Conversation.SourceChannelV2Instance"
-          ]
-        },
-        {
-          "field": "sourcecodeartifact",
           "fuzzy_suggestions": null
         },
         {
@@ -2159,39 +2050,11 @@
           ]
         },
         {
-          "field": "stagename",
-          "fuzzy_suggestions": [
-            "in.Conversation.Stage.Name"
-          ]
-        },
-        {
-          "field": "survey",
-          "fuzzy_suggestions": [
-            "in.Conversation.SurveysAggregation"
-          ]
-        },
-        {
-          "field": "surveys",
-          "fuzzy_suggestions": [
-            "in.Conversation.SurveysAggregation"
-          ]
-        },
-        {
-          "field": "timestamp",
-          "fuzzy_suggestions": [
-            "in.Conversation.LastMessageTimestamp"
-          ]
-        },
-        {
           "field": "type",
           "fuzzy_suggestions": [
             "in.Conversation.ConversationType",
             "in.Conversation.SyncMetadata.ExternalRecordType"
           ]
-        },
-        {
-          "field": "visibility",
-          "fuzzy_suggestions": null
         }
       ]
     },
@@ -2283,8 +2146,6 @@
           "POSITIVE"
         ],
         "fields_set": [
-          "ConvertTo",
-          "Id",
           "Members",
           "Messages",
           "SourceChannel",
@@ -2306,10 +2167,7 @@
           "POSITIVE"
         ],
         "fields_set": [
-          "ConvertTo",
-          "Id",
           "Messages",
-          "Object",
           "SourceChannel",
           "Stage",
           "Title",
@@ -2337,7 +2195,6 @@
           "Members",
           "Messages",
           "Stage",
-          "StageName",
           "Type"
         ],
         "statuses": [
@@ -2397,11 +2254,9 @@
           "NON_LOCAL"
         ],
         "fields_set": [
-          "First",
           "Members",
           "Messages",
           "Stage",
-          "StageName",
           "Type"
         ],
         "statuses": null,
@@ -2461,7 +2316,6 @@
           "GINKGO_PR_SANITY"
         ],
         "fields_set": [
-          "Id",
           "Messages",
           "Type"
         ],
@@ -2481,7 +2335,6 @@
           "NON_LOCAL"
         ],
         "fields_set": [
-          "Id",
           "Messages",
           "Type"
         ],
@@ -2501,7 +2354,6 @@
           "NON_LOCAL"
         ],
         "fields_set": [
-          "Id",
           "Messages",
           "Type"
         ],
@@ -2521,7 +2373,6 @@
           "NON_LOCAL"
         ],
         "fields_set": [
-          "Id",
           "Messages",
           "Type"
         ],
@@ -2540,11 +2391,9 @@
           "POSITIVE"
         ],
         "fields_set": [
-          "GroupBy",
           "Members",
           "Messages",
           "Stage",
-          "StageName",
           "Type"
         ],
         "statuses": [
@@ -2566,11 +2415,9 @@
           "NEGATIVE"
         ],
         "fields_set": [
-          "GroupBy",
           "Members",
           "Messages",
           "Stage",
-          "StageName",
           "Type"
         ],
         "statuses": [
@@ -2589,7 +2436,6 @@
         ],
         "fields_set": [
           "Description",
-          "Id",
           "Title"
         ],
         "statuses": null,
@@ -2607,9 +2453,7 @@
           "NON_LOCAL"
         ],
         "fields_set": [
-          "Id",
           "Messages",
-          "Title",
           "Type"
         ],
         "statuses": [
@@ -2630,9 +2474,7 @@
           "NON_LOCAL"
         ],
         "fields_set": [
-          "Id",
           "Messages",
-          "Stage",
           "Type"
         ],
         "statuses": [
@@ -2654,8 +2496,6 @@
           "NON_LOCAL"
         ],
         "fields_set": [
-          "AiResolutionStatus",
-          "Id",
           "Messages",
           "Type"
         ],
@@ -2673,8 +2513,6 @@
           "NON_LOCAL"
         ],
         "fields_set": [
-          "AiResolutionStatus",
-          "Id",
           "Messages",
           "Type"
         ],
@@ -2692,9 +2530,7 @@
           "NON_LOCAL"
         ],
         "fields_set": [
-          "Id",
           "Messages",
-          "Title",
           "Type"
         ],
         "statuses": [
@@ -2711,9 +2547,7 @@
           "NON_LOCAL"
         ],
         "fields_set": [
-          "Id",
           "Messages",
-          "Stage",
           "Type"
         ],
         "statuses": [
@@ -2732,9 +2566,7 @@
           "NON_LOCAL"
         ],
         "fields_set": [
-          "Id",
           "Messages",
-          "Stage",
           "Type"
         ],
         "statuses": [
@@ -2793,10 +2625,8 @@
           "INTERNAL_TIMELINE_ENTRIES_CREATE"
         ],
         "fields_set": [
-          "Id",
           "Members",
           "Messages",
-          "Stage",
           "Type"
         ],
         "statuses": [
@@ -2818,10 +2648,8 @@
           "INTERNAL_TIMELINE_ENTRIES_CREATE"
         ],
         "fields_set": [
-          "Id",
           "Members",
           "Messages",
-          "Stage",
           "Type"
         ],
         "statuses": [
@@ -2904,34 +2732,6 @@
           "FUNCTIONAL"
         ],
         "fields_set": [
-          "ActionId",
-          "ActionType",
-          "Actions",
-          "BaseObject",
-          "Channel",
-          "Description",
-          "DispatchId",
-          "DispatchedChannels",
-          "DispatchedTo",
-          "Id",
-          "Manifest",
-          "Name",
-          "Object",
-          "Recipient",
-          "Response",
-          "ResponseChannel",
-          "ResponseScore",
-          "Slug",
-          "SnapIn",
-          "SnapInActionName",
-          "SnapInPackage",
-          "SnapInVersion",
-          "SnapKitBody",
-          "SourceCodeArtifact",
-          "Stage",
-          "Survey",
-          "Surveys",
-          "Timestamp",
           "Type"
         ],
         "statuses": [
@@ -2964,22 +2764,6 @@
         "file": "api/v2_internal/surveys/crud/survey_responses_crud_test.go",
         "labels": null,
         "fields_set": [
-          "ActionId",
-          "ActionType",
-          "Actions",
-          "BaseObject",
-          "Channel",
-          "DispatchId",
-          "DispatchedTo",
-          "Id",
-          "Object",
-          "Response",
-          "ResponseScore",
-          "SnapIn",
-          "SnapInActionName",
-          "SnapKitBody",
-          "Survey",
-          "Timestamp",
           "Type"
         ],
         "statuses": [
@@ -3003,9 +2787,6 @@
           "INVALID"
         ],
         "fields_set": [
-          "Object",
-          "Response",
-          "Survey",
           "Type"
         ],
         "statuses": [
@@ -3025,9 +2806,6 @@
         "file": "api/v2_internal/surveys/crud/survey_responses_crud_test.go",
         "labels": null,
         "fields_set": [
-          "Object",
-          "Response",
-          "Survey",
           "Type"
         ],
         "statuses": [
@@ -3049,9 +2827,6 @@
         "file": "api/v2_internal/surveys/crud/survey_responses_crud_test.go",
         "labels": null,
         "fields_set": [
-          "Object",
-          "Response",
-          "Survey",
           "Type"
         ],
         "statuses": [
@@ -3099,13 +2874,9 @@
           "NON_LOCAL"
         ],
         "fields_set": [
-          "Collections",
           "Members",
           "Messages",
-          "Mode",
-          "Object",
-          "Type",
-          "Visibility"
+          "Type"
         ],
         "statuses": [
           200,
@@ -3127,7 +2898,6 @@
         ],
         "fields_set": [
           "Messages",
-          "Source",
           "Type"
         ],
         "statuses": [
@@ -3200,7 +2970,6 @@
         ],
         "fields_set": [
           "AppliesToParts",
-          "Id",
           "Messages",
           "Title",
           "Type"
@@ -3261,8 +3030,6 @@
         ],
         "fields_set": [
           "AppliesToParts",
-          "ConvertTo",
-          "Id",
           "Messages",
           "SourceChannel",
           "Title",
@@ -3308,9 +3075,7 @@
         ],
         "fields_set": [
           "AppliesToParts",
-          "Id",
           "Messages",
-          "Stage",
           "Title",
           "Type"
         ],
@@ -3333,10 +3098,7 @@
           "UAT_TEMP"
         ],
         "fields_set": [
-          "Id",
-          "Items",
           "Messages",
-          "OwnedByIds",
           "Type"
         ],
         "statuses": [
@@ -3356,10 +3118,7 @@
           "UAT_TEMP"
         ],
         "fields_set": [
-          "Id",
-          "Items",
           "Messages",
-          "Stage",
           "Type"
         ],
         "statuses": [
@@ -3382,7 +3141,6 @@
           "UAT_TEMP"
         ],
         "fields_set": [
-          "First",
           "Messages",
           "Title",
           "Type"
@@ -3401,7 +3159,6 @@
           "UAT_TEMP"
         ],
         "fields_set": [
-          "First",
           "Messages",
           "Title",
           "Type"
@@ -3439,7 +3196,6 @@
         ],
         "fields_set": [
           "Messages",
-          "Object",
           "Title",
           "Type"
         ],
@@ -3464,11 +3220,8 @@
         ],
         "fields_set": [
           "AppliesToParts",
-          "ConvertTo",
-          "Id",
           "Members",
           "Messages",
-          "Name",
           "SourceChannel",
           "Stage",
           "Tags",
@@ -3714,5 +3467,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateConversation` (HTTP operation `ConversationsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.Conversation.AccountId\n  - in.Conversation.AppliesToPartIds\n  - in.Conversation.BrandId\n  - in.Conversation.BroadcastChannels\n  - in.Conversation.Channels\n  - in.Conversation.ChannelsInstances\n  - in.Conversation.ConversationType\n  - in.Conversation.CustomFields\n  - in.Conversation.DevrevCopy.LastSyncedDate\n  - in.Conversation.DevrevCopy.OriginId\n  - in.Conversation.DevrevCopy.OriginOrgId\n  - in.Conversation.ExternalSourceData.ClosedDate\n  - in.Conversation.ExternalSourceData.CreatedById\n  - in.Conversation.ExternalSourceData.CreatedDate\n  - in.Conversation.ExternalSourceData.ModifiedById\n  - in.Conversation.ExternalSourceData.ModifiedDate\n  - in.Conversation.FirstResponseTime\n  - in.Conversation.FirstUnrepliedRevMessageDate\n  - in.Conversation.Group\n  - in.Conversation.IsCreatorVerified\n  - in.Conversation.IsFrozen\n  - in.Conversation.LastExternalMessageDate\n  - in.Conversation.LastExternalMessageId\n  - in.Conversation.LastInternalMessageDate\n  - in.Conversation.LastInternalMessageId\n  - in.Conversation.LastMessageId\n  - in.Conversation.LastMessageTimestamp\n  - in.Conversation.MemberIds\n  - in.Conversation.Metadata.UrlContext\n  - in.Conversation.OwnedByAgentId\n  - in.Conversation.ParticipantOids\n  - in.Conversation.ParticipantUids\n  - in.Conversation.Priority\n  - in.Conversation.Sentiment\n  - in.Conversation.SentimentModifiedDate\n  - in.Conversation.SentimentSummary\n  - in.Conversation.Sessions\n  - in.Conversation.SlaId\n  - in.Conversation.SourceChannelV2\n  - in.Conversation.SourceChannelV2Instance\n  - in.Conversation.SpaceId\n  - in.Conversation.Stage.Notes\n  - in.Conversation.Stage.StageId\n  - in.Conversation.StagedInfo.IsStaged\n  - in.Conversation.StagedInfo.SyncInUnresolvedFields\n  - in.Conversation.StagedInfo.SyncOutUnresolvedFields\n  - in.Conversation.StagedInfo.UnresolvedFields\n  - in.Conversation.StartedById\n  - in.Conversation.Status\n  - in.Conversation.SurveysAggregation\n  - in.Conversation.SyncMetadata.ExternalRecordId\n  - in.Conversation.SyncMetadata.ExternalRecordType\n  - in.Conversation.SyncMetadata.ExternalReference\n  - in.Conversation.SyncMetadata.LastSyncIn.Status\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncDate\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.Conversation.SyncMetadata.LastSyncOut.Status\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncDate\n  - (+10 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId\n  - in.ActorId\n  - in.ActorId\n  - in.DevOid == nil\n  - in.Conversation.SourceChannelV2 == nil\n  - in.Conversation.SourceChannelV2Instance == nil\n  - in.Conversation.Group == nil\n  - in.Conversation.StartedById == nil\n  - in.Conversation.StartedById\n  - in.Conversation.StartedById\n  - in.Conversation.StartedById\n  - in.Conversation.AccountId == nil\n  - in.Conversation.LastExternalMessageId == nil\n  - in.Conversation.LastInternalMessageId == nil\n  - in.Conversation.LastMessageId == nil\n  - in.Conversation.OwnedByAgentId == nil\n  - in.Conversation.Stage.StageId == nil\n  - in.Conversation.Stage.StageId != nil\n  - in.Conversation.Stage.StageId\n  - in.Conversation.SlaId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId == nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId == nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncIn != nil\n  - in.Conversation.SyncMetadata.LastSyncIn != nil\n  - in.Conversation.SyncMetadata.LastSyncOut != nil\n  - in.Conversation.SyncMetadata.LastSyncOut != nil\n  - in.Conversation.ExternalSourceData.CreatedById == nil\n  - in.Conversation.ExternalSourceData.CreatedById\n  - in.Conversation.ExternalSourceData.CreatedById\n  - (+172 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `actionid` -> suggestions []\n  - test field `actions` -> suggestions []\n  - test field `actiontype` -> suggestions []\n  - test field `appliestoparts` -> suggestions ['in.Conversation.AppliesToPartIds']\n  - test field `baseobject` -> suggestions []\n  - test field `channel` -> suggestions ['in.Conversation.BroadcastChannels', 'in.Conversation.Channels', 'in.Conversation.ChannelsInstances', 'in.Conversation.SourceChannel', 'in.Conversation.SourceChannelV2', 'in.Conversation.SourceChannelV2Instance']\n  - test field `collections` -> suggestions []\n  - test field `convertto` -> suggestions []\n  - test field `dispatchedchannels` -> suggestions ['in.Conversation.Channels']\n  - test field `dispatchedto` -> suggestions []\n  - test field `dispatchid` -> suggestions []\n  - test field `first` -> suggestions ['in.Conversation.FirstResponseTime', 'in.Conversation.FirstUnrepliedRevMessageDate']\n  - test field `groupby` -> suggestions ['in.Conversation.Group']\n  - test field `id` -> suggestions []\n  - test field `items` -> suggestions []\n  - test field `manifest` -> suggestions []\n  - test field `members` -> suggestions ['in.Conversation.MemberIds']\n  - test field `messages` -> suggestions []\n  - test field `metadata` -> suggestions []\n  - test field `mode` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `recipient` -> suggestions []\n  - test field `response` -> suggestions ['in.Conversation.FirstResponseTime']\n  - test field `responsechannel` -> suggestions []\n  - test field `responsescore` -> suggestions []\n  - test field `slug` -> suggestions []\n  - test field `snapin` -> suggestions []\n  - test field `snapinactionname` -> suggestions ['in.Conversation.Stage.Name']\n  - test field `snapinpackage` -> suggestions []\n  - test field `snapinversion` -> suggestions []\n  - test field `snapkitbody` -> suggestions []\n  - test field `source` -> suggestions ['in.Conversation.SourceChannel', 'in.Conversation.SourceChannelV2', 'in.Conversation.SourceChannelV2Instance']\n  - test field `sourcecodeartifact` -> suggestions []\n  - test field `stage` -> suggestions ['in.Conversation.Stage.StageId', 'in.Conversation.StagedInfo.IsStaged']\n  - test field `stagename` -> suggestions ['in.Conversation.Stage.Name']\n  - test field `survey` -> suggestions ['in.Conversation.SurveysAggregation']\n  - test field `surveys` -> suggestions ['in.Conversation.SurveysAggregation']\n  - test field `timestamp` -> suggestions ['in.Conversation.LastMessageTimestamp']\n  - test field `type` -> suggestions ['in.Conversation.ConversationType', 'in.Conversation.SyncMetadata.ExternalRecordType']\n  - test field `visibility` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateConversation` (HTTP operation `ConversationsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.Conversation.AccountId\n  - in.Conversation.AiResolutionStatus\n  - in.Conversation.AppliesToPartIds\n  - in.Conversation.BrandId\n  - in.Conversation.BroadcastChannels\n  - in.Conversation.Channels\n  - in.Conversation.ChannelsInstances\n  - in.Conversation.ConversationType\n  - in.Conversation.CustomFields\n  - in.Conversation.DevrevCopy.LastSyncedDate\n  - in.Conversation.DevrevCopy.OriginId\n  - in.Conversation.DevrevCopy.OriginOrgId\n  - in.Conversation.ExternalSourceData.ClosedDate\n  - in.Conversation.ExternalSourceData.CreatedById\n  - in.Conversation.ExternalSourceData.CreatedDate\n  - in.Conversation.ExternalSourceData.ModifiedById\n  - in.Conversation.ExternalSourceData.ModifiedDate\n  - in.Conversation.FirstResponseTime\n  - in.Conversation.FirstUnrepliedRevMessageDate\n  - in.Conversation.Group\n  - in.Conversation.IsCreatorVerified\n  - in.Conversation.IsFrozen\n  - in.Conversation.LastExternalMessageDate\n  - in.Conversation.LastExternalMessageId\n  - in.Conversation.LastInternalMessageDate\n  - in.Conversation.LastInternalMessageId\n  - in.Conversation.LastMessageId\n  - in.Conversation.LastMessageTimestamp\n  - in.Conversation.MemberIds\n  - in.Conversation.Metadata.UrlContext\n  - in.Conversation.OwnedByAgentId\n  - in.Conversation.OwnedByIds\n  - in.Conversation.ParticipantOids\n  - in.Conversation.ParticipantUids\n  - in.Conversation.Priority\n  - in.Conversation.Sentiment\n  - in.Conversation.SentimentModifiedDate\n  - in.Conversation.SentimentSummary\n  - in.Conversation.Sessions\n  - in.Conversation.SlaId\n  - in.Conversation.SourceChannelV2\n  - in.Conversation.SourceChannelV2Instance\n  - in.Conversation.SpaceId\n  - in.Conversation.Stage.Name\n  - in.Conversation.Stage.Notes\n  - in.Conversation.Stage.StageId\n  - in.Conversation.StagedInfo.IsStaged\n  - in.Conversation.StagedInfo.SyncInUnresolvedFields\n  - in.Conversation.StagedInfo.SyncOutUnresolvedFields\n  - in.Conversation.StagedInfo.UnresolvedFields\n  - in.Conversation.StartedById\n  - in.Conversation.Status\n  - in.Conversation.SurveysAggregation\n  - in.Conversation.SyncMetadata.ExternalRecordId\n  - in.Conversation.SyncMetadata.ExternalRecordType\n  - in.Conversation.SyncMetadata.ExternalReference\n  - in.Conversation.SyncMetadata.LastSyncIn.Status\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncDate\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId\n  - (+13 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId\n  - in.ActorId\n  - in.ActorId\n  - in.DevOid == nil\n  - in.Conversation.SourceChannelV2 == nil\n  - in.Conversation.SourceChannelV2Instance == nil\n  - in.Conversation.Group == nil\n  - in.Conversation.StartedById == nil\n  - in.Conversation.StartedById\n  - in.Conversation.StartedById\n  - in.Conversation.StartedById\n  - in.Conversation.AccountId == nil\n  - in.Conversation.LastExternalMessageId == nil\n  - in.Conversation.LastInternalMessageId == nil\n  - in.Conversation.LastMessageId == nil\n  - in.Conversation.OwnedByAgentId == nil\n  - in.Conversation.Stage.StageId == nil\n  - in.Conversation.Stage.StageId != nil\n  - in.Conversation.Stage.StageId\n  - in.Conversation.SlaId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId == nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId == nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncIn != nil\n  - in.Conversation.SyncMetadata.LastSyncIn != nil\n  - in.Conversation.SyncMetadata.LastSyncOut != nil\n  - in.Conversation.SyncMetadata.LastSyncOut != nil\n  - in.Conversation.ExternalSourceData.CreatedById == nil\n  - in.Conversation.ExternalSourceData.CreatedById\n  - in.Conversation.ExternalSourceData.CreatedById\n  - (+178 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestoparts` -> suggestions ['in.Conversation.AppliesToPartIds']\n  - test field `members` -> suggestions ['in.Conversation.MemberIds']\n  - test field `messages` -> suggestions []\n  - test field `metadata` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `stage` -> suggestions ['in.Conversation.Stage.StageId', 'in.Conversation.StagedInfo.IsStaged']\n  - test field `type` -> suggestions ['in.Conversation.ConversationType', 'in.Conversation.SyncMetadata.ExternalRecordType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

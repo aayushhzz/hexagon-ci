@@ -20,7 +20,7 @@
       "leaf_fields_read_by_rpc": 8,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 7,
+      "request_fields_set_by_tests": 1,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -450,31 +450,7 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
-          "field": "browser",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "browserlanguage",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "description",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "displayname",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "externalref",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "id",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "revuserid",
           "fuzzy_suggestions": null
         }
       ]
@@ -526,9 +502,6 @@
         "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
         "labels": null,
         "fields_set": [
-          "Description",
-          "DisplayName",
-          "ExternalRef",
           "Id"
         ],
         "statuses": [
@@ -543,11 +516,7 @@
         "name": "MissingId",
         "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
         "labels": null,
-        "fields_set": [
-          "Description",
-          "DisplayName",
-          "ExternalRef"
-        ],
+        "fields_set": null,
         "statuses": [
           400
         ],
@@ -561,9 +530,6 @@
         "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
         "labels": null,
         "fields_set": [
-          "Description",
-          "DisplayName",
-          "ExternalRef",
           "Id"
         ],
         "statuses": [
@@ -579,9 +545,6 @@
         "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
         "labels": null,
         "fields_set": [
-          "Description",
-          "DisplayName",
-          "ExternalRef",
           "Id"
         ],
         "statuses": [
@@ -597,9 +560,6 @@
         "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
         "labels": null,
         "fields_set": [
-          "Description",
-          "DisplayName",
-          "ExternalRef",
           "Id"
         ],
         "statuses": [
@@ -682,10 +642,7 @@
           "INTERNAL_REVUSERS_SELF_UPDATE",
           "GINKGO_PR_SANITY"
         ],
-        "fields_set": [
-          "Browser",
-          "BrowserLanguage"
-        ],
+        "fields_set": null,
         "statuses": null,
         "asserts_success": true,
         "response_fields_asserted": [
@@ -700,10 +657,7 @@
           "INTERNAL_REVUSERS_IDENTIFY",
           "INTERNAL_REVUSERS_SELF_GET"
         ],
-        "fields_set": [
-          "Id",
-          "RevUserId"
-        ],
+        "fields_set": null,
         "statuses": null,
         "asserts_success": true,
         "response_fields_asserted": [
@@ -794,5 +748,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetRevUser` (HTTP operation `RevUsersGet,RevUsersGetPost,RevUsersSelfGetPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IncludeArchived\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n  - in.ResolvePrimary\n  - in.UserIdentifier.UserDon\n  - in.UserIdentifier.UserExternalId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon\n  - in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgDon\n  - in.UserIdentifier == nil\n  - in.UserIdentifier != nil\n  - in.OrgIdentifier != nil\n  - in.OrgIdentifier != nil\n  - in.UserIdentifier.UserDon == \"\"\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.OrgIdentifier.OrgExternalIdIssuer\n  - in.UserIdentifier.UserDon != nil\n  - in.ResolvePrimary\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier != nil\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon == nil\n  - in != nil\n  - in.ResolvePrimary\n  - in.UserIdentifier.UserDon != nil\n  - in.IncludeArchived\n  - in.OrgIdentifier != nil\n  - in.UserIdentifier.UserDon != tools.GetDevOidFromDON()\n  - in.OrgIdentifier == nil\n  - in.ResolvePrimary\n  - in.IncludeArchived\n  - in.OrgIdentifier.OrgDisplayId != \"\"\n  - in.IncludeArchived\n  - in.OrgIdentifier.OrgExternalId != \"\"\n  - in.OrgIdentifier.OrgDon != nil\n  - in.ResolvePrimary\n  - in.IncludeArchived\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInvalidRevOrgFilter\n  - errRevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `browser` -> suggestions []\n  - test field `browserlanguage` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `displayname` -> suggestions []\n  - test field `externalref` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `revuserid` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetRevUser` (HTTP operation `RevUsersGet,RevUsersGetPost,RevUsersSelfGetPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IncludeArchived\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n  - in.ResolvePrimary\n  - in.UserIdentifier.UserDon\n  - in.UserIdentifier.UserExternalId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon\n  - in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgDon\n  - in.UserIdentifier == nil\n  - in.UserIdentifier != nil\n  - in.OrgIdentifier != nil\n  - in.OrgIdentifier != nil\n  - in.UserIdentifier.UserDon == \"\"\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.OrgIdentifier.OrgExternalIdIssuer\n  - in.UserIdentifier.UserDon != nil\n  - in.ResolvePrimary\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier != nil\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon == nil\n  - in != nil\n  - in.ResolvePrimary\n  - in.UserIdentifier.UserDon != nil\n  - in.IncludeArchived\n  - in.OrgIdentifier != nil\n  - in.UserIdentifier.UserDon != tools.GetDevOidFromDON()\n  - in.OrgIdentifier == nil\n  - in.ResolvePrimary\n  - in.IncludeArchived\n  - in.OrgIdentifier.OrgDisplayId != \"\"\n  - in.IncludeArchived\n  - in.OrgIdentifier.OrgExternalId != \"\"\n  - in.OrgIdentifier.OrgDon != nil\n  - in.ResolvePrimary\n  - in.IncludeArchived\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInvalidRevOrgFilter\n  - errRevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

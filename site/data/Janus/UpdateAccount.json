@@ -38,7 +38,7 @@
       "leaf_fields_read_by_rpc": 11,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 21,
+      "request_fields_set_by_tests": 8,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -253,49 +253,7 @@
           "fuzzy_suggestions": null
         },
         {
-          "field": "inputvalues",
-          "fuzzy_suggestions": [
-            "in.Account.DisplayName.Value",
-            "in.Account.SharedWith.Values",
-            "in.Account.Tags.Values"
-          ]
-        },
-        {
-          "field": "name",
-          "fuzzy_suggestions": [
-            "in.UniqueDisplayNameSuffix"
-          ]
-        },
-        {
-          "field": "object",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "operation",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "previoussteps",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "principal",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "referencekey",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "rolesetassignmentinfo",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "sharedwith",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "status",
           "fuzzy_suggestions": null
         },
         {
@@ -303,23 +261,7 @@
           "fuzzy_suggestions": null
         },
         {
-          "field": "title",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "type",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "uimetadata",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "websites",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "workflow",
           "fuzzy_suggestions": null
         }
       ]
@@ -456,9 +398,7 @@
         ],
         "fields_set": [
           "DisplayName",
-          "Id",
-          "Principal",
-          "RoleSetAssignmentInfo"
+          "Id"
         ],
         "statuses": [
           200,
@@ -501,18 +441,7 @@
         ],
         "fields_set": [
           "Description",
-          "Id",
-          "InputValues",
-          "Name",
-          "Object",
-          "Operation",
-          "PreviousSteps",
-          "ReferenceKey",
-          "Status",
-          "Title",
-          "Type",
-          "UiMetadata",
-          "Workflow"
+          "Id"
         ],
         "statuses": [
           200,
@@ -598,5 +527,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateAccount` (HTTP operation `AccountsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 404, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Account.DisplayName.Value\n  - in.Account.Domains.StringValues\n  - in.Account.ExternalRefs.StringValues\n  - in.Account.PhoneNumbers.StringValues\n  - in.Account.SharedWith.Values\n  - in.Account.Tags.Values\n  - in.Account.Websites.StringValues\n  - in.AccountIdentifier.AccountDon\n  - in.AccountIdentifier.Domain\n  - in.AccountIdentifier.ExternalRef\n  - in.UniqueDisplayNameSuffix\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountIdentifier.AccountDon == nil\n  - in.AccountIdentifier == nil\n  - in.AccountIdentifier.AccountDon != nil\n  - in.AccountIdentifier.Domain != \"\"\n  - in.AccountIdentifier.ExternalRef != nil\n  - in.Account.Websites.StringValues\n  - in.Account.Domains.StringValues\n  - in.Account.ExternalRefs.StringValues\n  - in.UniqueDisplayNameSuffix == nil\n  - in.UniqueDisplayNameSuffix != nil\n  - in\n\nError symbols this RPC can return (candidate negative assertions):\n  - errAccountDisplayNameAlreadyExists\n  - errAccountEmptyDisplayName\n  - errAccountNotFound\n  - errDomainAlreadyExists\n  - errEmptyExternalRefs\n  - errInputContainsDuplicateDomains\n  - errInputContainsDuplicateExternalRefs\n  - errInputContainsDuplicateWebsites\n  - errInputContainsNotAcceptableDomains\n  - errInputContainsNotAcceptableWebsites\n  - errPhoneNumberInvalid\n  - errWebsiteAlreadyExists\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `displayname` -> suggestions ['in.UniqueDisplayNameSuffix']\n  - test field `domains` -> suggestions ['in.AccountIdentifier.Domain']\n  - test field `externalrefs` -> suggestions ['in.AccountIdentifier.ExternalRef']\n  - test field `id` -> suggestions []\n  - test field `inputvalues` -> suggestions ['in.Account.DisplayName.Value', 'in.Account.SharedWith.Values', 'in.Account.Tags.Values']\n  - test field `name` -> suggestions ['in.UniqueDisplayNameSuffix']\n  - test field `object` -> suggestions []\n  - test field `operation` -> suggestions []\n  - test field `previoussteps` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `referencekey` -> suggestions []\n  - test field `rolesetassignmentinfo` -> suggestions []\n  - test field `sharedwith` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `tier` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions []\n  - test field `uimetadata` -> suggestions []\n  - test field `websites` -> suggestions []\n  - test field `workflow` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateAccount` (HTTP operation `AccountsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 404, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Account.DisplayName.Value\n  - in.Account.Domains.StringValues\n  - in.Account.ExternalRefs.StringValues\n  - in.Account.PhoneNumbers.StringValues\n  - in.Account.SharedWith.Values\n  - in.Account.Tags.Values\n  - in.Account.Websites.StringValues\n  - in.AccountIdentifier.AccountDon\n  - in.AccountIdentifier.Domain\n  - in.AccountIdentifier.ExternalRef\n  - in.UniqueDisplayNameSuffix\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountIdentifier.AccountDon == nil\n  - in.AccountIdentifier == nil\n  - in.AccountIdentifier.AccountDon != nil\n  - in.AccountIdentifier.Domain != \"\"\n  - in.AccountIdentifier.ExternalRef != nil\n  - in.Account.Websites.StringValues\n  - in.Account.Domains.StringValues\n  - in.Account.ExternalRefs.StringValues\n  - in.UniqueDisplayNameSuffix == nil\n  - in.UniqueDisplayNameSuffix != nil\n  - in\n\nError symbols this RPC can return (candidate negative assertions):\n  - errAccountDisplayNameAlreadyExists\n  - errAccountEmptyDisplayName\n  - errAccountNotFound\n  - errDomainAlreadyExists\n  - errEmptyExternalRefs\n  - errInputContainsDuplicateDomains\n  - errInputContainsDuplicateExternalRefs\n  - errInputContainsDuplicateWebsites\n  - errInputContainsNotAcceptableDomains\n  - errInputContainsNotAcceptableWebsites\n  - errPhoneNumberInvalid\n  - errWebsiteAlreadyExists\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `displayname` -> suggestions ['in.UniqueDisplayNameSuffix']\n  - test field `domains` -> suggestions ['in.AccountIdentifier.Domain']\n  - test field `externalrefs` -> suggestions ['in.AccountIdentifier.ExternalRef']\n  - test field `id` -> suggestions []\n  - test field `sharedwith` -> suggestions []\n  - test field `tier` -> suggestions []\n  - test field `websites` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

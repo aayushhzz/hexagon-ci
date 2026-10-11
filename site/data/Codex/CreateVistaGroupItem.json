@@ -33,11 +33,11 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 61,
-      "covered_count": 6,
-      "coverage_pct": 9.8,
-      "request_fields_set_by_tests": 10,
-      "set_by_positive_tests": 6,
-      "set_by_negative_tests": 5,
+      "covered_count": 3,
+      "coverage_pct": 4.9,
+      "request_fields_set_by_tests": 2,
+      "set_by_positive_tests": 3,
+      "set_by_negative_tests": 3,
       "by_depth": {
         "top_level": {
           "total": 6,
@@ -46,31 +46,24 @@
         },
         "nested": {
           "total": 15,
-          "set": 4,
-          "pct": 26.7
+          "set": 2,
+          "pct": 13.3
         },
         "deep": {
           "total": 40,
-          "set": 2,
-          "pct": 5
+          "set": 1,
+          "pct": 2.5
         }
       },
       "representative": {
         "units": 61,
-        "covered": 6,
-        "pct": 9.8,
+        "covered": 3,
+        "pct": 4.9,
         "collapsed_types": [
           "structpb.Struct"
         ]
       },
       "covered": [
-        {
-          "path": "in.VistaGroupItem.Items",
-          "match": "exact",
-          "by_tests": [
-            "Successfully moved items between vista groups"
-          ]
-        },
         {
           "path": "in.VistaGroupItem.Name",
           "match": "exact",
@@ -78,16 +71,6 @@
             "Successfully created vista group item with required fields only",
             "Successfully deleted vista group item",
             "Successfully listed vista group items",
-            "Successfully moved items between vista groups",
-            "Successfully retrieved vista group item",
-            "Successfully updated vista group item"
-          ]
-        },
-        {
-          "path": "in.VistaGroupItem.Parent.Id",
-          "match": "exact",
-          "by_tests": [
-            "Successfully deleted vista group item",
             "Successfully moved items between vista groups",
             "Successfully retrieved vista group item",
             "Successfully updated vista group item"
@@ -107,18 +90,6 @@
         },
         {
           "path": "in.VistaGroupItem.ParentId",
-          "match": "exact",
-          "by_tests": [
-            "Successfully created vista group item with required fields only",
-            "Successfully deleted vista group item",
-            "Successfully listed vista group items",
-            "Successfully moved items between vista groups",
-            "Successfully retrieved vista group item",
-            "Successfully updated vista group item"
-          ]
-        },
-        {
-          "path": "in.VistaGroupItem.Type",
           "match": "exact",
           "by_tests": [
             "Successfully created vista group item with required fields only",
@@ -161,10 +132,12 @@
         "in.VistaGroupItem.IconType",
         "in.VistaGroupItem.InferredParts",
         "in.VistaGroupItem.IsSystem",
+        "in.VistaGroupItem.Items",
         "in.VistaGroupItem.NameTranslated.ContentData",
         "in.VistaGroupItem.NameTranslated.ContentKey",
         "in.VistaGroupItem.NameTranslated.ContentNamespace",
         "in.VistaGroupItem.Parent.Flavor",
+        "in.VistaGroupItem.Parent.Id",
         "in.VistaGroupItem.Parent.IsArchived",
         "in.VistaGroupItem.StagedInfo.IsStaged",
         "in.VistaGroupItem.StagedInfo.SyncInUnresolvedFields",
@@ -185,6 +158,7 @@
         "in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId",
         "in.VistaGroupItem.SyncMetadata.OriginSystem",
         "in.VistaGroupItem.SyncMetadata.SyncedByDevUsers",
+        "in.VistaGroupItem.Type",
         "in.VistaGroupItem.ViewType"
       ]
     },
@@ -192,22 +166,22 @@
       "total": 85,
       "happy_path_reached": true,
       "reachable_on_happy_path": 12,
-      "present_arm_exercised": 18,
-      "present_arm_pct": 21.2,
+      "present_arm_exercised": 13,
+      "present_arm_pct": 15.3,
       "absent_arm_exercised": 12,
       "absent_arm_pct": 100,
-      "negative_arm_exercised": 17,
-      "negative_arm_pct": 20,
+      "negative_arm_exercised": 13,
+      "negative_arm_pct": 15.3,
       "both_arms_exercised": 0,
-      "coverage_pct": 21.2,
+      "coverage_pct": 15.3,
       "by_origin": {
         "service": {
           "total": 56,
           "reachable_on_happy_path": 5,
-          "present_arm_exercised": 7,
-          "present_arm_pct": 12.5,
-          "negative_arm_exercised": 6,
-          "negative_arm_pct": 10.7,
+          "present_arm_exercised": 3,
+          "present_arm_pct": 5.4,
+          "negative_arm_exercised": 3,
+          "negative_arm_pct": 5.4,
           "absent_arm_exercised": 5
         },
         "generated": {
@@ -222,10 +196,10 @@
         "library": {
           "total": 29,
           "reachable_on_happy_path": 7,
-          "present_arm_exercised": 11,
-          "present_arm_pct": 37.9,
-          "negative_arm_exercised": 11,
-          "negative_arm_pct": 37.9,
+          "present_arm_exercised": 10,
+          "present_arm_pct": 34.5,
+          "negative_arm_exercised": 10,
+          "negative_arm_pct": 34.5,
           "absent_arm_exercised": 7
         }
       },
@@ -364,6 +338,22 @@
           "cond": "in.VistaGroupItem.CustomView.GroupByAttributes != nil",
           "predicate_paths": [
             "in.VistaGroupItem.CustomView.GroupByAttributes"
+          ]
+        },
+        {
+          "id": "b30",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260716124312-2d588e6574ab/donv2/don.go:611",
+          "cond": "in.VistaGroupItem.Parent.Id == nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Parent.Id"
+          ]
+        },
+        {
+          "id": "b31",
+          "at": "internal/collectionv2/vista_group_item_parent_composite.gen.go:252",
+          "cond": "in.VistaGroupItem.Parent.Id != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Parent.Id"
           ]
         },
         {
@@ -615,6 +605,14 @@
           ]
         },
         {
+          "id": "b64",
+          "at": "internal/collectionv2/vista_group_item.gen.go:1545",
+          "cond": "in.VistaGroupItem.Items != nil",
+          "predicate_paths": [
+            "in.VistaGroupItem.Items"
+          ]
+        },
+        {
           "id": "b65",
           "at": "internal/collectionv2/vista_group_item.gen.go:1555",
           "cond": "in.VistaGroupItem.StartDate != nil",
@@ -751,6 +749,14 @@
           ]
         },
         {
+          "id": "b82",
+          "at": "internal/serverv2/create_vista_group_item.go:243",
+          "cond": "in.VistaGroupItem.Type",
+          "predicate_paths": [
+            "in.VistaGroupItem.Type"
+          ]
+        },
+        {
           "id": "b83",
           "at": "internal/serverv2/create_vista_group_item.go:244",
           "cond": "in.SprintOverlapValidationDisabled",
@@ -764,6 +770,14 @@
           "cond": "in.CustomId != nil",
           "predicate_paths": [
             "in.CustomId"
+          ]
+        },
+        {
+          "id": "b85",
+          "at": "internal/serverv2/create_vista_group_item.go:311",
+          "cond": "in.VistaGroupItem.Type",
+          "predicate_paths": [
+            "in.VistaGroupItem.Type"
           ]
         }
       ]
@@ -788,28 +802,7 @@
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": [
-        {
-          "field": "appliestopart",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "ownedby",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "source",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "target",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "title",
-          "fuzzy_suggestions": null
-        }
-      ]
+      "unmatched_test_fields": null
     },
     "test_facts": [
       {
@@ -818,8 +811,7 @@
         "labels": null,
         "fields_set": [
           "Name",
-          "ParentId",
-          "Type"
+          "ParentId"
         ],
         "statuses": [
           201
@@ -834,10 +826,8 @@
         "file": "api/v2_internal/vista_groups/vistas_groups_delete_test.go",
         "labels": null,
         "fields_set": [
-          "Id",
           "Name",
-          "ParentId",
-          "Type"
+          "ParentId"
         ],
         "statuses": [
           200,
@@ -853,10 +843,8 @@
         "file": "api/v2_internal/vista_groups/vistas_groups_get_test.go",
         "labels": null,
         "fields_set": [
-          "Id",
           "Name",
-          "ParentId",
-          "Type"
+          "ParentId"
         ],
         "statuses": [
           200
@@ -872,8 +860,7 @@
         "labels": null,
         "fields_set": [
           "Name",
-          "ParentId",
-          "Type"
+          "ParentId"
         ],
         "statuses": [
           200
@@ -888,16 +875,8 @@
         "file": "api/v2_internal/vista_groups/vistas_groups_move_test.go",
         "labels": null,
         "fields_set": [
-          "AppliesToPart",
-          "Id",
-          "Items",
           "Name",
-          "OwnedBy",
-          "ParentId",
-          "Source",
-          "Target",
-          "Title",
-          "Type"
+          "ParentId"
         ],
         "statuses": [
           200
@@ -913,10 +892,8 @@
         "file": "api/v2_internal/vista_groups/vistas_groups_update_test.go",
         "labels": null,
         "fields_set": [
-          "Id",
           "Name",
-          "ParentId",
-          "Type"
+          "ParentId"
         ],
         "statuses": [
           200
@@ -1172,5 +1149,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateVistaGroupItem` (HTTP operation `VistasGroupsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.CustomId\n  - in.DevOid\n  - in.SprintArchivalValidationDisabled\n  - in.SprintOverlapValidationDisabled\n  - in.VistaGroupItem.CustomView.GroupByAttributes\n  - in.VistaGroupItem.CustomView.KanbanCardAttributes\n  - in.VistaGroupItem.CustomView.ShowGroups\n  - in.VistaGroupItem.CustomView.TableColumns\n  - in.VistaGroupItem.Description\n  - in.VistaGroupItem.DescriptionTranslated.ContentData\n  - in.VistaGroupItem.DescriptionTranslated.ContentKey\n  - in.VistaGroupItem.DescriptionTranslated.ContentNamespace\n  - in.VistaGroupItem.DevrevCopy.LastSyncedDate\n  - in.VistaGroupItem.DevrevCopy.OriginId\n  - in.VistaGroupItem.DevrevCopy.OriginOrgId\n  - in.VistaGroupItem.EndDate\n  - in.VistaGroupItem.ExternalSourceData.ClosedDate\n  - in.VistaGroupItem.ExternalSourceData.CreatedById\n  - in.VistaGroupItem.ExternalSourceData.CreatedDate\n  - in.VistaGroupItem.ExternalSourceData.ModifiedById\n  - in.VistaGroupItem.ExternalSourceData.ModifiedDate\n  - in.VistaGroupItem.Filter.Fields\n  - in.VistaGroupItem.Goals\n  - in.VistaGroupItem.GoalsDocumentId\n  - in.VistaGroupItem.GroupObjectType\n  - in.VistaGroupItem.IconType\n  - in.VistaGroupItem.InferredParts\n  - in.VistaGroupItem.IsSystem\n  - in.VistaGroupItem.NameTranslated.ContentData\n  - in.VistaGroupItem.NameTranslated.ContentKey\n  - in.VistaGroupItem.NameTranslated.ContentNamespace\n  - in.VistaGroupItem.Parent.Flavor\n  - in.VistaGroupItem.Parent.IsArchived\n  - in.VistaGroupItem.StagedInfo.IsStaged\n  - in.VistaGroupItem.StagedInfo.SyncInUnresolvedFields\n  - in.VistaGroupItem.StagedInfo.SyncOutUnresolvedFields\n  - in.VistaGroupItem.StagedInfo.UnresolvedFields\n  - in.VistaGroupItem.StartDate\n  - in.VistaGroupItem.State\n  - in.VistaGroupItem.SyncMetadata.ExternalRecordId\n  - in.VistaGroupItem.SyncMetadata.ExternalRecordType\n  - in.VistaGroupItem.SyncMetadata.ExternalReference\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.Status\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncDate\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.Status\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncDate\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId\n  - in.VistaGroupItem.SyncMetadata.OriginSystem\n  - in.VistaGroupItem.SyncMetadata.SyncedByDevUsers\n  - in.VistaGroupItem.ViewType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.VistaGroupItem.Filter != nil\n  - in.DevOid == nil\n  - in.ActorId == nil\n  - in.VistaGroupItem.Filter != nil\n  - in.VistaGroupItem.Filter != nil\n  - in.VistaGroupItem.Filter == nil\n  - in.VistaGroupItem == nil\n  - in.VistaGroupItem.CustomView == nil\n  - in.VistaGroupItem.Filter == nil\n  - in.VistaGroupItem.Filter.Fields == nil\n  - in.CustomId == nil\n  - in.VistaGroupItem.NameTranslated.ContentData != nil\n  - in.VistaGroupItem.DescriptionTranslated.ContentData != nil\n  - in.VistaGroupItem.CustomView.TableColumns != nil\n  - in.VistaGroupItem.CustomView.KanbanCardAttributes != nil\n  - in.VistaGroupItem.CustomView.GroupByAttributes != nil\n  - in.VistaGroupItem.GoalsDocumentId == nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId == nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId == nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncDate != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId == nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId == nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncDate != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - in.VistaGroupItem.SyncMetadata.SyncedByDevUsers != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut != nil\n  - in.VistaGroupItem.StagedInfo.UnresolvedFields != nil\n  - in.VistaGroupItem.StagedInfo.SyncInUnresolvedFields != nil\n  - in.VistaGroupItem.StagedInfo.SyncOutUnresolvedFields != nil\n  - in.VistaGroupItem.ExternalSourceData.CreatedById == nil\n  - in.VistaGroupItem.ExternalSourceData.ModifiedById == nil\n  - in.VistaGroupItem.ExternalSourceData.CreatedDate != nil\n  - in.VistaGroupItem.ExternalSourceData.ModifiedDate != nil\n  - in.VistaGroupItem.ExternalSourceData.ClosedDate != nil\n  - in.VistaGroupItem.ExternalSourceData.CreatedById != nil\n  - (+27 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions []\n  - test field `ownedby` -> suggestions []\n  - test field `source` -> suggestions []\n  - test field `target` -> suggestions []\n  - test field `title` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateVistaGroupItem` (HTTP operation `VistasGroupsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.CustomId\n  - in.DevOid\n  - in.SprintArchivalValidationDisabled\n  - in.SprintOverlapValidationDisabled\n  - in.VistaGroupItem.CustomView.GroupByAttributes\n  - in.VistaGroupItem.CustomView.KanbanCardAttributes\n  - in.VistaGroupItem.CustomView.ShowGroups\n  - in.VistaGroupItem.CustomView.TableColumns\n  - in.VistaGroupItem.Description\n  - in.VistaGroupItem.DescriptionTranslated.ContentData\n  - in.VistaGroupItem.DescriptionTranslated.ContentKey\n  - in.VistaGroupItem.DescriptionTranslated.ContentNamespace\n  - in.VistaGroupItem.DevrevCopy.LastSyncedDate\n  - in.VistaGroupItem.DevrevCopy.OriginId\n  - in.VistaGroupItem.DevrevCopy.OriginOrgId\n  - in.VistaGroupItem.EndDate\n  - in.VistaGroupItem.ExternalSourceData.ClosedDate\n  - in.VistaGroupItem.ExternalSourceData.CreatedById\n  - in.VistaGroupItem.ExternalSourceData.CreatedDate\n  - in.VistaGroupItem.ExternalSourceData.ModifiedById\n  - in.VistaGroupItem.ExternalSourceData.ModifiedDate\n  - in.VistaGroupItem.Filter.Fields\n  - in.VistaGroupItem.Goals\n  - in.VistaGroupItem.GoalsDocumentId\n  - in.VistaGroupItem.GroupObjectType\n  - in.VistaGroupItem.IconType\n  - in.VistaGroupItem.InferredParts\n  - in.VistaGroupItem.IsSystem\n  - in.VistaGroupItem.Items\n  - in.VistaGroupItem.NameTranslated.ContentData\n  - in.VistaGroupItem.NameTranslated.ContentKey\n  - in.VistaGroupItem.NameTranslated.ContentNamespace\n  - in.VistaGroupItem.Parent.Flavor\n  - in.VistaGroupItem.Parent.Id\n  - in.VistaGroupItem.Parent.IsArchived\n  - in.VistaGroupItem.StagedInfo.IsStaged\n  - in.VistaGroupItem.StagedInfo.SyncInUnresolvedFields\n  - in.VistaGroupItem.StagedInfo.SyncOutUnresolvedFields\n  - in.VistaGroupItem.StagedInfo.UnresolvedFields\n  - in.VistaGroupItem.StartDate\n  - in.VistaGroupItem.State\n  - in.VistaGroupItem.SyncMetadata.ExternalRecordId\n  - in.VistaGroupItem.SyncMetadata.ExternalRecordType\n  - in.VistaGroupItem.SyncMetadata.ExternalReference\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.Status\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncDate\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.Status\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncDate\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId\n  - in.VistaGroupItem.SyncMetadata.OriginSystem\n  - in.VistaGroupItem.SyncMetadata.SyncedByDevUsers\n  - in.VistaGroupItem.Type\n  - in.VistaGroupItem.ViewType\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.VistaGroupItem.Filter != nil\n  - in.DevOid == nil\n  - in.ActorId == nil\n  - in.VistaGroupItem.Filter != nil\n  - in.VistaGroupItem.Filter != nil\n  - in.VistaGroupItem.Filter == nil\n  - in.VistaGroupItem == nil\n  - in.VistaGroupItem.CustomView == nil\n  - in.VistaGroupItem.Filter == nil\n  - in.VistaGroupItem.Filter.Fields == nil\n  - in.CustomId == nil\n  - in.VistaGroupItem.NameTranslated.ContentData != nil\n  - in.VistaGroupItem.DescriptionTranslated.ContentData != nil\n  - in.VistaGroupItem.CustomView.TableColumns != nil\n  - in.VistaGroupItem.CustomView.KanbanCardAttributes != nil\n  - in.VistaGroupItem.CustomView.GroupByAttributes != nil\n  - in.VistaGroupItem.Parent.Id == nil\n  - in.VistaGroupItem.Parent.Id != nil\n  - in.VistaGroupItem.GoalsDocumentId == nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId == nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId == nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncDate != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId == nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId == nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncDate != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - in.VistaGroupItem.SyncMetadata.SyncedByDevUsers != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncIn != nil\n  - in.VistaGroupItem.SyncMetadata.LastSyncOut != nil\n  - in.VistaGroupItem.StagedInfo.UnresolvedFields != nil\n  - in.VistaGroupItem.StagedInfo.SyncInUnresolvedFields != nil\n  - in.VistaGroupItem.StagedInfo.SyncOutUnresolvedFields != nil\n  - in.VistaGroupItem.ExternalSourceData.CreatedById == nil\n  - in.VistaGroupItem.ExternalSourceData.ModifiedById == nil\n  - in.VistaGroupItem.ExternalSourceData.CreatedDate != nil\n  - in.VistaGroupItem.ExternalSourceData.ModifiedDate != nil\n  - (+32 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

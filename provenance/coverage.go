@@ -281,24 +281,28 @@ func collectTests(f *ast.File, file string, ops map[string]*opFacts, ri *repoInd
 		if body == nil {
 			return true
 		}
-		calledOps, fields, statuses, success := scanItBody(body)
-		// Follow the request object handed to MakeRequest across the test module
-		// (enclosing setup, same-package and cross-package helpers), which both
-		// discovers the operation a helper issues and the fields set on the
-		// object before it is sent.
+		bodyOps, bodyFields, statuses, success := scanItBody(body)
 		setup := enclosingSetup(body, parents)
-		extraOps, extraFields := ri.traceIt(body, setup, f)
-		calledOps = mergeOps(calledOps, extraOps)
+		// Fields are attributed per operation: the fields of the request object
+		// that operation's MakeRequest actually sends, traced across the test
+		// module (enclosing setup, same-package and cross-package helpers).
+		var calledOps []string
+		var opFields map[string][]string
+		if ri != nil {
+			calledOps, opFields = ri.analyzeIt(body, setup, f)
+			calledOps = mergeOps(calledOps, bodyOps)
+		} else {
+			calledOps = bodyOps
+			opFields = map[string][]string{}
+			for _, op := range bodyOps {
+				opFields[op] = bodyFields
+			}
+		}
 		if len(calledOps) == 0 {
 			return true // not a request-issuing test
 		}
-		fields = append(fields, extraFields...)
 		respFields := scanResponseFields(body)
-		tf := testFact{Name: name, File: file, Labels: labels, Fields: sortedUniq(fields), Status: sortedUniqInt(statuses), Success: success, RespFields: sortedUniq(respFields)}
-		// A single It may issue several requests: an action plus verification
-		// calls. Link the test to every operation it invokes, so a test is never
-		// dropped just because its target is not the last request in the block.
-		// Repeating a shared verification operation across many tests is expected.
+		sortedResp := sortedUniq(respFields)
 		for _, op := range calledOps {
 			of := ops[op]
 			if of == nil {
@@ -308,8 +312,12 @@ func collectTests(f *ast.File, file string, ops map[string]*opFacts, ri *repoInd
 			if success {
 				of.success = true
 			}
-			of.Tests = append(of.Tests, tf)
-			for _, fld := range fields {
+			of.Tests = append(of.Tests, testFact{
+				Name: name, File: file, Labels: labels,
+				Fields: sortedUniq(opFields[op]), Status: sortedUniqInt(statuses),
+				Success: success, RespFields: sortedResp,
+			})
+			for _, fld := range opFields[op] {
 				leaf := strings.ToLower(fld)
 				if of.fieldsSet[leaf] == nil {
 					of.fieldsSet[leaf] = map[string]bool{}

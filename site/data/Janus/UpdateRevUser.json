@@ -18,7 +18,7 @@
       "leaf_fields_read_by_rpc": 8,
       "covered_count": 1,
       "coverage_pct": 12.5,
-      "request_fields_set_by_tests": 27,
+      "request_fields_set_by_tests": 9,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -235,18 +235,6 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
-          "field": "applicableprincipaltype",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "assign",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "body",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "browser",
           "fuzzy_suggestions": null
         },
@@ -255,19 +243,11 @@
           "fuzzy_suggestions": null
         },
         {
-          "field": "createroles",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "customfields",
           "fuzzy_suggestions": null
         },
         {
           "field": "customschemaspec",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "description",
           "fuzzy_suggestions": null
         },
         {
@@ -283,59 +263,7 @@
           "fuzzy_suggestions": null
         },
         {
-          "field": "inputvalues",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "name",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "operation",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "previoussteps",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "principal",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "referencekey",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "revoke",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "role",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "sharedwith",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "status",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "title",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "type",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "uimetadata",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "workflow",
           "fuzzy_suggestions": null
         }
       ]
@@ -405,21 +333,10 @@
           "INTERNAL_ROLE_SETS_UPDATE"
         ],
         "fields_set": [
-          "ApplicablePrincipalType",
-          "Assign",
-          "Body",
-          "CreateRoles",
           "CustomFields",
           "CustomSchemaSpec",
-          "Description",
           "Email",
-          "Id",
-          "Name",
-          "Principal",
-          "Revoke",
-          "Role",
-          "Title",
-          "Type"
+          "Id"
         ],
         "statuses": [
           200,
@@ -441,18 +358,8 @@
           "UAT"
         ],
         "fields_set": [
-          "Description",
           "DisplayName",
-          "Id",
-          "InputValues",
-          "Name",
-          "Operation",
-          "PreviousSteps",
-          "ReferenceKey",
-          "Status",
-          "Title",
-          "UiMetadata",
-          "Workflow"
+          "Id"
         ],
         "statuses": [
           200,
@@ -483,5 +390,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateRevUser` (HTTP operation `RevUsersSelfUpdate,RevUsersUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsJanusAsyncFlow\n  - in.RevUser.ExternalRefs.StringValues\n  - in.RevUser.ExternalUid\n  - in.RevUser.State\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.UserIdentifier.UserDon\n  - in.UserIdentifier.UserExternalId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon == nil\n  - in.RevUser.State != 0\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.IsJanusAsyncFlow\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.ExternalUid != nil\n  - in.RevUser.ExternalRefs != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errRevUserEmailUpdateForbidden\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `applicableprincipaltype` -> suggestions []\n  - test field `assign` -> suggestions []\n  - test field `body` -> suggestions []\n  - test field `browser` -> suggestions []\n  - test field `browserlanguage` -> suggestions []\n  - test field `createroles` -> suggestions []\n  - test field `customfields` -> suggestions []\n  - test field `customschemaspec` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `displayname` -> suggestions []\n  - test field `externalref` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `inputvalues` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `operation` -> suggestions []\n  - test field `previoussteps` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `referencekey` -> suggestions []\n  - test field `revoke` -> suggestions []\n  - test field `role` -> suggestions []\n  - test field `sharedwith` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions []\n  - test field `uimetadata` -> suggestions []\n  - test field `workflow` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateRevUser` (HTTP operation `RevUsersSelfUpdate,RevUsersUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsJanusAsyncFlow\n  - in.RevUser.ExternalRefs.StringValues\n  - in.RevUser.ExternalUid\n  - in.RevUser.State\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.UserIdentifier.UserDon\n  - in.UserIdentifier.UserExternalId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon == nil\n  - in.RevUser.State != 0\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.IsJanusAsyncFlow\n  - in.RevUser.UnsetFieldMask.Paths\n  - in.RevUser.ExternalUid != nil\n  - in.RevUser.ExternalRefs != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errRevUserEmailUpdateForbidden\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `browser` -> suggestions []\n  - test field `browserlanguage` -> suggestions []\n  - test field `customfields` -> suggestions []\n  - test field `customschemaspec` -> suggestions []\n  - test field `displayname` -> suggestions []\n  - test field `externalref` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `sharedwith` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

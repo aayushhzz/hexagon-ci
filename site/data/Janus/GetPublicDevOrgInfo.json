@@ -34,16 +34,16 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 2,
-      "covered_count": 1,
-      "coverage_pct": 50,
-      "request_fields_set_by_tests": 9,
-      "set_by_positive_tests": 1,
-      "set_by_negative_tests": 1,
+      "covered_count": 0,
+      "coverage_pct": 0,
+      "request_fields_set_by_tests": 1,
+      "set_by_positive_tests": 0,
+      "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
           "total": 2,
-          "set": 1,
-          "pct": 50
+          "set": 0,
+          "pct": 0
         },
         "nested": {
           "total": 0,
@@ -58,21 +58,14 @@
       },
       "representative": {
         "units": 2,
-        "covered": 1,
-        "pct": 50,
+        "covered": 0,
+        "pct": 0,
         "collapsed_types": []
       },
-      "covered": [
-        {
-          "path": "in.DevSlug",
-          "match": "exact",
-          "by_tests": [
-            "CreateDevOrg across region"
-          ]
-        }
-      ],
+      "covered": null,
       "gaps": [
-        "in.Auth0OrgId"
+        "in.Auth0OrgId",
+        "in.DevSlug"
       ]
     },
     "branches": {
@@ -131,38 +124,10 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
-          "field": "displayname",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "environment",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "expiresin",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "givedomainaccess",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "granttype",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "requestedtokentype",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "slug",
           "fuzzy_suggestions": [
             "in.DevSlug"
           ]
-        },
-        {
-          "field": "tokenhint",
-          "fuzzy_suggestions": null
         }
       ]
     },
@@ -177,15 +142,7 @@
           "INTERNAL_DEVUSERS_POST_LOGIN"
         ],
         "fields_set": [
-          "DevSlug",
-          "DisplayName",
-          "Environment",
-          "ExpiresIn",
-          "GiveDomainAccess",
-          "GrantType",
-          "RequestedTokenType",
-          "Slug",
-          "TokenHint"
+          "Slug"
         ],
         "statuses": [
           409
@@ -235,5 +192,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetPublicDevOrgInfo` (HTTP operation `DevOrgPublicInfo`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Auth0OrgId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - none\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `displayname` -> suggestions []\n  - test field `environment` -> suggestions []\n  - test field `expiresin` -> suggestions []\n  - test field `givedomainaccess` -> suggestions []\n  - test field `granttype` -> suggestions []\n  - test field `requestedtokentype` -> suggestions []\n  - test field `slug` -> suggestions ['in.DevSlug']\n  - test field `tokenhint` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetPublicDevOrgInfo` (HTTP operation `DevOrgPublicInfo`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Auth0OrgId\n  - in.DevSlug\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - none\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `slug` -> suggestions ['in.DevSlug']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

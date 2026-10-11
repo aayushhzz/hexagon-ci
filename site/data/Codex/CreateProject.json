@@ -33,7 +33,7 @@
       "leaf_fields_read_by_rpc": 15,
       "covered_count": 2,
       "coverage_pct": 13.3,
-      "request_fields_set_by_tests": 6,
+      "request_fields_set_by_tests": 5,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -364,8 +364,8 @@
       "service_count": 1,
       "call_count": 2,
       "reached_by_test": true,
-      "deps_result_used_in_response": 18,
-      "deps_result_checked_by_test": 18,
+      "deps_result_used_in_response": 17,
+      "deps_result_checked_by_test": 17,
       "response_links": [
         {
           "dep": "schemaregistry:GetCustomStage",
@@ -457,17 +457,6 @@
         },
         {
           "dep": "schemaregistry:GetCustomStage",
-          "path": "out.Project.IsDeleted",
-          "checked_by": [
-            "Creates a project with required fields and returns a well-formed DON at the start stage",
-            "Persists a custom field across Create \u2192 Get",
-            "Rejects a custom field with an unknown schema key",
-            "Updates a custom field via ProjectsUpdate"
-          ],
-          "checked": true
-        },
-        {
-          "dep": "schemaregistry:GetCustomState",
           "path": "out.Project.IsDeleted",
           "checked_by": [
             "Creates a project with required fields and returns a well-formed DON at the start stage",
@@ -574,10 +563,6 @@
           "fuzzy_suggestions": null
         },
         {
-          "field": "id",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "ownedby",
           "fuzzy_suggestions": [
             "in.Project.OwnedByIds"
@@ -642,7 +627,6 @@
         "file": "api/v2_internal/projects/crud/project_custom_fields_test.go",
         "labels": null,
         "fields_set": [
-          "Id",
           "Name",
           "OwnedBy"
         ],
@@ -660,7 +644,6 @@
         "file": "api/v2_internal/projects/crud/project_custom_fields_test.go",
         "labels": null,
         "fields_set": [
-          "Id",
           "Name",
           "OwnedBy"
         ],
@@ -744,5 +727,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateProject` (HTTP operation `ProjectsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomSchemaSpec.Drop\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.Project.Description\n  - in.Project.Health\n  - in.Project.MemberIds\n  - in.Project.OwnedByIds\n  - in.Project.ProjectSettings.AllowedObjectTypes\n  - in.Project.Stage.Notes\n  - in.Project.Stage.StageId\n  - in.Project.TagIds\n  - in.Project.TargetCloseDate\n  - in.Project.TargetStartDate\n  - in.StageValidationOptions\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in == nil\n  - in.Project == nil\n  - in.Project.Stage.StageId == nil\n  - in.Project.Stage.StageId == nil\n  - in.Project.Stage.StageId\n  - in.Project.Description != nil\n  - in.Project.ProjectSettings != nil\n  - in.Project.ProjectSettings != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.Project != nil\n  - in.Project != nil\n  - in.Project.Health == nil\n  - *t23 == in.Project.Health\n  - in.Project.Health == nil\n  - **t50 == in.Project.Health\n  - in.Project.ProjectSettings.AllowedObjectTypes != nil\n  - in.Project.Stage.StageId != nil\n  - in.Project.TargetStartDate != nil\n  - in.Project.TargetCloseDate != nil\n  - in.Project.OwnedByIds != nil\n  - in.Project.MemberIds != nil\n  - in.Project.TagIds != nil\n  - in.Project.ProjectSettings != nil\n  - in.Project|in.Project.Description|in.Project.Name|in.Project.ProjectSettings|in.Project.Stage|in.Project.Stage.Notes|in.Project.Stage.StageId == nil\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `customschemaspec` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Project.OwnedByIds']\n  - test field `stage` -> suggestions ['in.Project.Stage.StageId', 'in.StageValidationOptions']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateProject` (HTTP operation `ProjectsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomSchemaSpec.Drop\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.Project.Description\n  - in.Project.Health\n  - in.Project.MemberIds\n  - in.Project.OwnedByIds\n  - in.Project.ProjectSettings.AllowedObjectTypes\n  - in.Project.Stage.Notes\n  - in.Project.Stage.StageId\n  - in.Project.TagIds\n  - in.Project.TargetCloseDate\n  - in.Project.TargetStartDate\n  - in.StageValidationOptions\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in == nil\n  - in.Project == nil\n  - in.Project.Stage.StageId == nil\n  - in.Project.Stage.StageId == nil\n  - in.Project.Stage.StageId\n  - in.Project.Description != nil\n  - in.Project.ProjectSettings != nil\n  - in.Project.ProjectSettings != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.Project != nil\n  - in.Project != nil\n  - in.Project.Health == nil\n  - *t23 == in.Project.Health\n  - in.Project.Health == nil\n  - **t50 == in.Project.Health\n  - in.Project.ProjectSettings.AllowedObjectTypes != nil\n  - in.Project.Stage.StageId != nil\n  - in.Project.TargetStartDate != nil\n  - in.Project.TargetCloseDate != nil\n  - in.Project.OwnedByIds != nil\n  - in.Project.MemberIds != nil\n  - in.Project.TagIds != nil\n  - in.Project.ProjectSettings != nil\n  - in.Project|in.Project.Description|in.Project.Name|in.Project.ProjectSettings|in.Project.Stage|in.Project.Stage.Notes|in.Project.Stage.StageId == nil\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `customschemaspec` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Project.OwnedByIds']\n  - test field `stage` -> suggestions ['in.Project.Stage.StageId', 'in.StageValidationOptions']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

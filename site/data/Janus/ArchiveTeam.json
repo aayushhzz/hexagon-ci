@@ -36,7 +36,7 @@
       "leaf_fields_read_by_rpc": 1,
       "covered_count": 1,
       "coverage_pct": 100,
-      "request_fields_set_by_tests": 4,
+      "request_fields_set_by_tests": 1,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 1,
       "by_depth": {
@@ -155,20 +155,7 @@
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": [
-        {
-          "field": "group",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "isarchived",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "key",
-          "fuzzy_suggestions": null
-        }
-      ]
+      "unmatched_test_fields": null
     },
     "test_facts": [
       {
@@ -176,9 +163,7 @@
         "file": "api/v2_internal/teams/teams_crud_test.go",
         "labels": null,
         "fields_set": [
-          "Group",
-          "Id",
-          "Key"
+          "Id"
         ],
         "statuses": [
           200,
@@ -197,9 +182,7 @@
         "file": "api/v2_internal/teams/teams_crud_test.go",
         "labels": null,
         "fields_set": [
-          "Group",
-          "Id",
-          "Key"
+          "Id"
         ],
         "statuses": [
           200,
@@ -221,9 +204,7 @@
         "file": "api/v2_internal/teams/teams_crud_test.go",
         "labels": null,
         "fields_set": [
-          "Group",
-          "Id",
-          "Key"
+          "Id"
         ],
         "statuses": [
           200,
@@ -243,10 +224,7 @@
         "file": "api/v2_internal/teams/teams_crud_test.go",
         "labels": null,
         "fields_set": [
-          "Group",
-          "Id",
-          "IsArchived",
-          "Key"
+          "Id"
         ],
         "statuses": [
           200,
@@ -265,9 +243,7 @@
         "file": "api/v2_internal/teams/teams_crud_test.go",
         "labels": null,
         "fields_set": [
-          "Group",
-          "Id",
-          "Key"
+          "Id"
         ],
         "statuses": [
           200,
@@ -286,9 +262,7 @@
         "file": "api/v2_internal/teams/teams_crud_test.go",
         "labels": null,
         "fields_set": [
-          "Group",
-          "Id",
-          "Key"
+          "Id"
         ],
         "statuses": [
           200,
@@ -337,9 +311,7 @@
         "file": "api/v2_internal/teams/teams_crud_test.go",
         "labels": null,
         "fields_set": [
-          "Group",
-          "Id",
-          "Key"
+          "Id"
         ],
         "statuses": [
           201,
@@ -357,9 +329,7 @@
         "file": "api/v2_internal/teams/teams_crud_test.go",
         "labels": null,
         "fields_set": [
-          "Group",
-          "Id",
-          "Key"
+          "Id"
         ],
         "statuses": [
           201,
@@ -377,9 +347,7 @@
         "file": "api/v2_internal/teams/teams_crud_test.go",
         "labels": null,
         "fields_set": [
-          "Group",
-          "Id",
-          "Key"
+          "Id"
         ],
         "statuses": [
           201,
@@ -453,5 +421,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ArchiveTeam` (HTTP operation `TeamsArchive`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - none\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errCacheUnavailable\n  - errInternalCacheTransientError\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `group` -> suggestions []\n  - test field `isarchived` -> suggestions []\n  - test field `key` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ArchiveTeam` (HTTP operation `TeamsArchive`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - none\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errCacheUnavailable\n  - errInternalCacheTransientError\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

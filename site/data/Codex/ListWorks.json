@@ -16,10 +16,10 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 126,
-      "covered_count": 2,
-      "coverage_pct": 1.6,
-      "request_fields_set_by_tests": 37,
-      "set_by_positive_tests": 1,
+      "covered_count": 1,
+      "coverage_pct": 0.8,
+      "request_fields_set_by_tests": 14,
+      "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
@@ -29,8 +29,8 @@
         },
         "nested": {
           "total": 35,
-          "set": 1,
-          "pct": 2.9
+          "set": 0,
+          "pct": 0
         },
         "deep": {
           "total": 79,
@@ -40,26 +40,14 @@
       },
       "representative": {
         "units": 16,
-        "covered": 2,
-        "pct": 12.5,
+        "covered": 1,
+        "pct": 6.3,
         "collapsed_types": [
           "apiv2.CustomListWorksFilter",
           "apiv2.ListWorksFilter"
         ]
       },
       "covered": [
-        {
-          "path": "in.Filter.Tags",
-          "match": "exact",
-          "by_tests": [
-            "Should successfully export tickets to CSV and JSON",
-            "WorksExport",
-            "lists issues filtered by space id",
-            "lists issues with space hierarchy include_children include_parents include_global",
-            "lists tickets filtered by space id",
-            "lists tickets with space hierarchy include_children include_parents include_global"
-          ]
-        },
         {
           "path": "in.SortBy",
           "match": "exact",
@@ -154,6 +142,7 @@
         "in.Filter.StagedInfo",
         "in.Filter.SyncMetadata",
         "in.Filter.SyncMetadataOp",
+        "in.Filter.Tags",
         "in.Filter.TagsOp",
         "in.Filter.TargetCloseDateOp",
         "in.Filter.TaskFilter.AppliesToPartId",
@@ -1796,32 +1785,11 @@
           ]
         },
         {
-          "field": "body",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "caveats",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "createsubtype",
-          "fuzzy_suggestions": [
-            "in.Filter.IssueFilter.Subtype",
-            "in.Filter.OpportunityFilter.Subtype",
-            "in.Filter.TaskFilter.Subtype",
-            "in.Filter.TicketFilter.Subtype"
-          ]
-        },
-        {
           "field": "cursor",
           "fuzzy_suggestions": null
         },
         {
           "field": "customfields",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "description",
           "fuzzy_suggestions": null
         },
         {
@@ -1833,52 +1801,14 @@
           "fuzzy_suggestions": null
         },
         {
-          "field": "groupby",
-          "fuzzy_suggestions": [
-            "in.Filter.TicketFilter.Group"
-          ]
-        },
-        {
-          "field": "id",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "issue",
           "fuzzy_suggestions": [
             "in.CustomFilter.IssueFilters"
           ]
         },
         {
-          "field": "labels",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "limit",
           "fuzzy_suggestions": null
-        },
-        {
-          "field": "mergewith",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "mfzusertype",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "name",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "object",
-          "fuzzy_suggestions": [
-            "in.ObjectTypes"
-          ]
-        },
-        {
-          "field": "objecttype",
-          "fuzzy_suggestions": [
-            "in.ObjectTypes"
-          ]
         },
         {
           "field": "opportunity",
@@ -1893,48 +1823,9 @@
           ]
         },
         {
-          "field": "privileges",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "revorg",
-          "fuzzy_suggestions": [
-            "in.Filter.IssueFilter.RevOrgIds",
-            "in.Filter.IssueFilter.RevOrgIdsOp"
-          ]
-        },
-        {
-          "field": "revuser",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "rolecategory",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "stagenames",
           "fuzzy_suggestions": [
             "in.Filter.Stage"
-          ]
-        },
-        {
-          "field": "superdevorg",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "surveys",
-          "fuzzy_suggestions": [
-            "in.Filter.TicketFilter.SurveysAggregation",
-            "in.Filter.TicketFilter.SurveysAggregationOp"
-          ]
-        },
-        {
-          "field": "targetsubtype",
-          "fuzzy_suggestions": [
-            "in.Filter.IssueFilter.Subtype",
-            "in.Filter.OpportunityFilter.Subtype",
-            "in.Filter.TaskFilter.Subtype",
-            "in.Filter.TicketFilter.Subtype"
           ]
         },
         {
@@ -1942,10 +1833,6 @@
           "fuzzy_suggestions": [
             "in.CustomFilter.TicketFilters"
           ]
-        },
-        {
-          "field": "title",
-          "fuzzy_suggestions": null
         },
         {
           "field": "type",
@@ -1961,14 +1848,6 @@
             "in.Filter.WorkType",
             "in.ObjectTypes"
           ]
-        },
-        {
-          "field": "user",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "visibility",
-          "fuzzy_suggestions": null
         }
       ]
     },
@@ -1980,13 +1859,7 @@
           "INTERNAL_WORKS_EXPORT",
           "POSITIVE"
         ],
-        "fields_set": [
-          "AppliesToPart",
-          "OwnedBy",
-          "Tags",
-          "Title",
-          "Type"
-        ],
+        "fields_set": null,
         "statuses": null,
         "asserts_success": true,
         "response_fields_asserted": [
@@ -2007,13 +1880,8 @@
         ],
         "fields_set": [
           "AppliesToPart",
-          "Body",
           "First",
-          "Id",
-          "Name",
           "OwnedBy",
-          "Tags",
-          "Title",
           "Type"
         ],
         "statuses": null,
@@ -2190,12 +2058,7 @@
           "UAT_TEMP"
         ],
         "fields_set": [
-          "AppliesToPart",
-          "Body",
-          "GroupBy",
-          "Limit",
           "OwnedBy",
-          "Title",
           "Type"
         ],
         "statuses": [
@@ -2216,12 +2079,7 @@
         ],
         "fields_set": [
           "AppliesToPart",
-          "Body",
-          "Id",
-          "MergeWith",
-          "Name",
           "OwnedBy",
-          "Title",
           "Type"
         ],
         "statuses": [
@@ -2241,12 +2099,7 @@
         ],
         "fields_set": [
           "AppliesToPart",
-          "Body",
-          "Id",
-          "MergeWith",
-          "Name",
           "OwnedBy",
-          "Title",
           "Type"
         ],
         "statuses": [
@@ -2266,12 +2119,7 @@
         ],
         "fields_set": [
           "AppliesToPart",
-          "Body",
-          "Id",
-          "MergeWith",
-          "Name",
           "OwnedBy",
-          "Title",
           "Type"
         ],
         "statuses": [
@@ -2291,16 +2139,8 @@
         ],
         "fields_set": [
           "AppliesToPart",
-          "Body",
-          "Id",
-          "Labels",
-          "MergeWith",
-          "Name",
-          "Object",
           "OwnedBy",
-          "Title",
-          "Type",
-          "Visibility"
+          "Type"
         ],
         "statuses": [
           200,
@@ -2322,13 +2162,7 @@
         ],
         "fields_set": [
           "AppliesToPart",
-          "Body",
-          "Id",
-          "MergeWith",
-          "Name",
           "OwnedBy",
-          "Surveys",
-          "Title",
           "Type"
         ],
         "statuses": [
@@ -2352,14 +2186,7 @@
         ],
         "fields_set": [
           "AppliesToPart",
-          "Body",
-          "First",
-          "Id",
-          "Name",
-          "OwnedBy",
-          "Tags",
-          "Title",
-          "Type"
+          "OwnedBy"
         ],
         "statuses": null,
         "asserts_success": true,
@@ -2375,14 +2202,8 @@
         "file": "api/v2_internal/work/issues/crud/custom_objects/list_issue_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2393,14 +2214,8 @@
         "file": "api/v2_internal/work/issues/crud/custom_objects/list_issue_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2411,14 +2226,8 @@
         "file": "api/v2_internal/work/issues/crud/custom_objects/list_issue_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2429,14 +2238,8 @@
         "file": "api/v2_internal/work/issues/crud/custom_objects/list_issue_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2447,14 +2250,8 @@
         "file": "api/v2_internal/work/issues/crud/custom_objects/list_issue_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2465,15 +2262,8 @@
         "file": "api/v2_internal/work/issues/crud/custom_objects/list_issue_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2484,15 +2274,8 @@
         "file": "api/v2_internal/work/issues/crud/custom_objects/list_issue_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2507,11 +2290,7 @@
           "INTERNAL_WORKS_LIST"
         ],
         "fields_set": [
-          "AppliesToPart",
           "Issue",
-          "OwnedBy",
-          "Tags",
-          "Title",
           "Type"
         ],
         "statuses": [
@@ -2529,14 +2308,7 @@
           "ADMIN",
           "INTERNAL_WORKS_LIST"
         ],
-        "fields_set": [
-          "AppliesToPart",
-          "Issue",
-          "OwnedBy",
-          "Tags",
-          "Title",
-          "Type"
-        ],
+        "fields_set": null,
         "statuses": [
           200,
           201
@@ -2587,11 +2359,7 @@
           "NEGATIVE"
         ],
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2613,14 +2381,8 @@
         "file": "api/v2_internal/work/opportunities/custom_objects/list_opportunity_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2631,14 +2393,8 @@
         "file": "api/v2_internal/work/opportunities/custom_objects/list_opportunity_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2649,14 +2405,8 @@
         "file": "api/v2_internal/work/opportunities/custom_objects/list_opportunity_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2667,14 +2417,8 @@
         "file": "api/v2_internal/work/opportunities/custom_objects/list_opportunity_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2685,14 +2429,8 @@
         "file": "api/v2_internal/work/opportunities/custom_objects/list_opportunity_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2703,15 +2441,8 @@
         "file": "api/v2_internal/work/opportunities/custom_objects/list_opportunity_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2765,12 +2496,7 @@
         "labels": [
           "NEGATIVE"
         ],
-        "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "SuperDevOrg",
-          "User"
-        ],
+        "fields_set": null,
         "statuses": null,
         "asserts_success": false,
         "response_fields_asserted": null
@@ -2789,14 +2515,8 @@
         "file": "api/v2_internal/work/tickets/crud/custom_objects/list_ticket_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2807,14 +2527,8 @@
         "file": "api/v2_internal/work/tickets/crud/custom_objects/list_ticket_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2825,14 +2539,8 @@
         "file": "api/v2_internal/work/tickets/crud/custom_objects/list_ticket_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2843,14 +2551,8 @@
         "file": "api/v2_internal/work/tickets/crud/custom_objects/list_ticket_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2861,14 +2563,8 @@
         "file": "api/v2_internal/work/tickets/crud/custom_objects/list_ticket_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2879,15 +2575,8 @@
         "file": "api/v2_internal/work/tickets/crud/custom_objects/list_ticket_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2898,15 +2587,8 @@
         "file": "api/v2_internal/work/tickets/crud/custom_objects/list_ticket_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2917,15 +2599,8 @@
         "file": "api/v2_internal/work/tickets/crud/custom_objects/list_ticket_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2936,15 +2611,8 @@
         "file": "api/v2_internal/work/tickets/crud/custom_objects/list_ticket_custom_object_mfz_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RoleCategory",
           "SortBy",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -2956,12 +2624,7 @@
         "labels": [
           "NEGATIVE"
         ],
-        "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "SuperDevOrg",
-          "User"
-        ],
+        "fields_set": null,
         "statuses": null,
         "asserts_success": false,
         "response_fields_asserted": null
@@ -2989,7 +2652,6 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
           "Type"
         ],
         "statuses": null,
@@ -3001,7 +2663,6 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
           "Type"
         ],
         "statuses": null,
@@ -3013,15 +2674,7 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RevOrg",
-          "RevUser",
-          "RoleCategory",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -3032,16 +2685,7 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RevOrg",
-          "RevUser",
-          "RoleCategory",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -3052,16 +2696,7 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RevOrg",
-          "RevUser",
-          "RoleCategory",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -3072,16 +2707,7 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RevOrg",
-          "RevUser",
-          "RoleCategory",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -3092,16 +2718,7 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RevOrg",
-          "RevUser",
-          "RoleCategory",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -3112,16 +2729,7 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RevOrg",
-          "RevUser",
-          "RoleCategory",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -3132,16 +2740,7 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RevOrg",
-          "RevUser",
-          "RoleCategory",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -3152,16 +2751,7 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RevOrg",
-          "RevUser",
-          "RoleCategory",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -3172,16 +2762,7 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RevOrg",
-          "RevUser",
-          "RoleCategory",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -3192,16 +2773,7 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RevOrg",
-          "RevUser",
-          "RoleCategory",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -3212,16 +2784,7 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RevOrg",
-          "RevUser",
-          "RoleCategory",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -3232,16 +2795,7 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RevOrg",
-          "RevUser",
-          "RoleCategory",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -3252,16 +2806,7 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RevOrg",
-          "RevUser",
-          "RoleCategory",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -3272,16 +2817,7 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RevOrg",
-          "RevUser",
-          "RoleCategory",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -3292,16 +2828,7 @@
         "file": "api/v2_internal/work/tickets/crud/revuser_mfz/list_ticket_mfz_revuser_test.go",
         "labels": null,
         "fields_set": [
-          "Caveats",
-          "MFZUserType",
-          "ObjectType",
-          "Privileges",
-          "RevOrg",
-          "RevUser",
-          "RoleCategory",
-          "SuperDevOrg",
-          "Type",
-          "User"
+          "Type"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -3316,11 +2843,7 @@
           "INTERNAL_WORKS_LIST"
         ],
         "fields_set": [
-          "AppliesToPart",
-          "OwnedBy",
-          "Tags",
           "Ticket",
-          "Title",
           "Type"
         ],
         "statuses": [
@@ -3338,14 +2861,7 @@
           "ADMIN",
           "INTERNAL_WORKS_LIST"
         ],
-        "fields_set": [
-          "AppliesToPart",
-          "OwnedBy",
-          "Tags",
-          "Ticket",
-          "Title",
-          "Type"
-        ],
+        "fields_set": null,
         "statuses": [
           200,
           201
@@ -3403,13 +2919,7 @@
           "INTERNAL_WORKS_UPDATE"
         ],
         "fields_set": [
-          "AppliesToPart",
-          "Body",
-          "Description",
-          "Id",
           "Limit",
-          "Name",
-          "Title",
           "Type"
         ],
         "statuses": [
@@ -3432,14 +2942,7 @@
           "PUBLIC_WORKS_UPDATE"
         ],
         "fields_set": [
-          "AppliesToPart",
-          "Body",
-          "Description",
-          "Id",
-          "Limit",
-          "Name",
-          "Title",
-          "Type"
+          "Limit"
         ],
         "statuses": [
           200
@@ -3459,9 +2962,7 @@
           "INTERNAL_WORKS_COUNT"
         ],
         "fields_set": [
-          "GroupBy",
-          "Limit",
-          "Type"
+          "Limit"
         ],
         "statuses": [
           200
@@ -3520,13 +3021,7 @@
           "DEV_USER"
         ],
         "fields_set": [
-          "CreateSubType",
-          "Description",
-          "GroupBy",
-          "Name",
-          "ObjectType",
           "OwnedBy",
-          "TargetSubtype",
           "Ticket",
           "Type"
         ],
@@ -4460,5 +3955,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListWorks` (HTTP operation `WorksExport,WorksList,WorksListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomFilter.IssueFilters\n  - in.CustomFilter.TaskFilters\n  - in.CustomFilter.TicketFilters\n  - in.DevOid\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SearchQuery\n  - in.ExcludeWorkIds\n  - in.Filter.ActualCloseDateOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.DeprecatedCreatedByAgentId\n  - in.Filter.DeprecatedCreatedByAgentIdOp\n  - in.Filter.ExternalSourceData\n  - in.Filter.IssueFilter.AccountIds\n  - in.Filter.IssueFilter.AccountIdsOp\n  - in.Filter.IssueFilter.ActualStartDateOp\n  - in.Filter.IssueFilter.AppliesToPartId\n  - in.Filter.IssueFilter.AppliesToPartIdOp\n  - in.Filter.IssueFilter.AppliesToVersionIds\n  - in.Filter.IssueFilter.Apps\n  - in.Filter.IssueFilter.AppsOp\n  - in.Filter.IssueFilter.DevelopedWith\n  - in.Filter.IssueFilter.LastCodeActivityOp\n  - in.Filter.IssueFilter.MilestoneId\n  - in.Filter.IssueFilter.MilestoneIdOp\n  - in.Filter.IssueFilter.Priority\n  - in.Filter.IssueFilter.ProjectId\n  - in.Filter.IssueFilter.ProjectIdOp\n  - in.Filter.IssueFilter.ReleaseVersionIds\n  - in.Filter.IssueFilter.RevOrgIds\n  - in.Filter.IssueFilter.RevOrgIdsOp\n  - in.Filter.IssueFilter.SlaId\n  - in.Filter.IssueFilter.SlaSummary\n  - in.Filter.IssueFilter.SprintId\n  - in.Filter.IssueFilter.SprintIdOp\n  - in.Filter.IssueFilter.SprintState\n  - in.Filter.IssueFilter.SprintStateOp\n  - in.Filter.IssueFilter.Subtype\n  - in.Filter.IssueFilter.SubtypeOp\n  - in.Filter.IssueFilter.TargetStartDateOp\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.OpportunityFilter.AccountId\n  - in.Filter.OpportunityFilter.AccountIdOp\n  - in.Filter.OpportunityFilter.AnnualContractValue\n  - in.Filter.OpportunityFilter.Apps\n  - in.Filter.OpportunityFilter.AppsOp\n  - in.Filter.OpportunityFilter.Budget\n  - in.Filter.OpportunityFilter.ContactIds\n  - in.Filter.OpportunityFilter.ContactIdsOp\n  - in.Filter.OpportunityFilter.ForecastCategory\n  - in.Filter.OpportunityFilter.Priority\n  - in.Filter.OpportunityFilter.SpacesFilter.SpaceId\n  - in.Filter.OpportunityFilter.Subtype\n  - in.Filter.OpportunityFilter.SubtypeOp\n  - in.Filter.OpportunityFilter.Value\n  - (+64 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.SortBy == nil\n  - in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.SortBy != 0\n  - in.DevOid|in.SortBy == nil\n  - in.Filter.TicketFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.TicketFilter.RevOidOp|in.SortBy != nil\n  - in.Filter.TicketFilter.AccountIdOp|in.SortBy != nil\n  - in.Filter.TicketFilter.GroupOp|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsOp|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsV2Op|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsV2InstancesOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SurveysAggregationOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SentimentOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.TicketFilter.AppsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.RevOrgIdsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AccountIdsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SprintIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SprintStateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.ProjectIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.MilestoneIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.TargetStartDateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.ActualStartDateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.LastCodeActivityOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AppsOp|in.SortBy != nil\n  - in.Filter.TaskFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.TaskFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.TaskFilter.AppsOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.AccountIdOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.ContactIdsOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.AppsOp|in.SortBy != nil\n  - in.Filter.CreatedByIdOp|in.SortBy != nil\n  - in.Filter.ModifiedByIdOp|in.SortBy != nil\n  - in.Filter.CreatedByAgentIdOp|in.SortBy != nil\n  - in.Filter.ReportedByIdsOp|in.SortBy != nil\n  - in.Filter.OwnedByIdsOp|in.SortBy != nil\n  - in.Filter.TargetCloseDateOp|in.SortBy != nil\n  - in.Filter.ActualCloseDateOp|in.SortBy != nil\n  - (+140 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `ancestorpart` -> suggestions []\n  - test field `appliestopart` -> suggestions ['in.Filter.IssueFilter.AppliesToPartId', 'in.Filter.IssueFilter.AppliesToPartIdOp', 'in.Filter.TaskFilter.AppliesToPartId', 'in.Filter.TaskFilter.AppliesToPartIdOp', 'in.Filter.TicketFilter.AppliesToPartId', 'in.Filter.TicketFilter.AppliesToPartIdOp']\n  - test field `body` -> suggestions []\n  - test field `caveats` -> suggestions []\n  - test field `createsubtype` -> suggestions ['in.Filter.IssueFilter.Subtype', 'in.Filter.OpportunityFilter.Subtype', 'in.Filter.TaskFilter.Subtype', 'in.Filter.TicketFilter.Subtype']\n  - test field `cursor` -> suggestions []\n  - test field `customfields` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `externalref` -> suggestions []\n  - test field `first` -> suggestions []\n  - test field `groupby` -> suggestions ['in.Filter.TicketFilter.Group']\n  - test field `id` -> suggestions []\n  - test field `issue` -> suggestions ['in.CustomFilter.IssueFilters']\n  - test field `labels` -> suggestions []\n  - test field `limit` -> suggestions []\n  - test field `mergewith` -> suggestions []\n  - test field `mfzusertype` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `object` -> suggestions ['in.ObjectTypes']\n  - test field `objecttype` -> suggestions ['in.ObjectTypes']\n  - test field `opportunity` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Filter.OwnedByIds', 'in.Filter.OwnedByIdsOp', 'in.Filter.TicketFilter.OwnedByAgentId']\n  - test field `privileges` -> suggestions []\n  - test field `revorg` -> suggestions ['in.Filter.IssueFilter.RevOrgIds', 'in.Filter.IssueFilter.RevOrgIdsOp']\n  - test field `revuser` -> suggestions []\n  - test field `rolecategory` -> suggestions []\n  - test field `stagenames` -> suggestions ['in.Filter.Stage']\n  - test field `superdevorg` -> suggestions []\n  - test field `surveys` -> suggestions ['in.Filter.TicketFilter.SurveysAggregation', 'in.Filter.TicketFilter.SurveysAggregationOp']\n  - test field `targetsubtype` -> suggestions ['in.Filter.IssueFilter.Subtype', 'in.Filter.OpportunityFilter.Subtype', 'in.Filter.TaskFilter.Subtype', 'in.Filter.TicketFilter.Subtype']\n  - test field `ticket` -> suggestions ['in.CustomFilter.TicketFilters']\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions ['in.Filter.IssueFilter.Subtype', 'in.Filter.IssueFilter.SubtypeOp', 'in.Filter.OpportunityFilter.Subtype', 'in.Filter.OpportunityFilter.SubtypeOp', 'in.Filter.TaskFilter.Subtype', 'in.Filter.TaskFilter.SubtypeOp', 'in.Filter.TicketFilter.Subtype', 'in.Filter.TicketFilter.SubtypeOp', 'in.Filter.WorkType', 'in.ObjectTypes']\n  - test field `user` -> suggestions []\n  - test field `visibility` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListWorks` (HTTP operation `WorksExport,WorksList,WorksListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomFilter.IssueFilters\n  - in.CustomFilter.TaskFilters\n  - in.CustomFilter.TicketFilters\n  - in.DevOid\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SearchQuery\n  - in.ExcludeWorkIds\n  - in.Filter.ActualCloseDateOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.DeprecatedCreatedByAgentId\n  - in.Filter.DeprecatedCreatedByAgentIdOp\n  - in.Filter.ExternalSourceData\n  - in.Filter.IssueFilter.AccountIds\n  - in.Filter.IssueFilter.AccountIdsOp\n  - in.Filter.IssueFilter.ActualStartDateOp\n  - in.Filter.IssueFilter.AppliesToPartId\n  - in.Filter.IssueFilter.AppliesToPartIdOp\n  - in.Filter.IssueFilter.AppliesToVersionIds\n  - in.Filter.IssueFilter.Apps\n  - in.Filter.IssueFilter.AppsOp\n  - in.Filter.IssueFilter.DevelopedWith\n  - in.Filter.IssueFilter.LastCodeActivityOp\n  - in.Filter.IssueFilter.MilestoneId\n  - in.Filter.IssueFilter.MilestoneIdOp\n  - in.Filter.IssueFilter.Priority\n  - in.Filter.IssueFilter.ProjectId\n  - in.Filter.IssueFilter.ProjectIdOp\n  - in.Filter.IssueFilter.ReleaseVersionIds\n  - in.Filter.IssueFilter.RevOrgIds\n  - in.Filter.IssueFilter.RevOrgIdsOp\n  - in.Filter.IssueFilter.SlaId\n  - in.Filter.IssueFilter.SlaSummary\n  - in.Filter.IssueFilter.SprintId\n  - in.Filter.IssueFilter.SprintIdOp\n  - in.Filter.IssueFilter.SprintState\n  - in.Filter.IssueFilter.SprintStateOp\n  - in.Filter.IssueFilter.Subtype\n  - in.Filter.IssueFilter.SubtypeOp\n  - in.Filter.IssueFilter.TargetStartDateOp\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.OpportunityFilter.AccountId\n  - in.Filter.OpportunityFilter.AccountIdOp\n  - in.Filter.OpportunityFilter.AnnualContractValue\n  - in.Filter.OpportunityFilter.Apps\n  - in.Filter.OpportunityFilter.AppsOp\n  - in.Filter.OpportunityFilter.Budget\n  - in.Filter.OpportunityFilter.ContactIds\n  - in.Filter.OpportunityFilter.ContactIdsOp\n  - in.Filter.OpportunityFilter.ForecastCategory\n  - in.Filter.OpportunityFilter.Priority\n  - in.Filter.OpportunityFilter.SpacesFilter.SpaceId\n  - in.Filter.OpportunityFilter.Subtype\n  - in.Filter.OpportunityFilter.SubtypeOp\n  - in.Filter.OpportunityFilter.Value\n  - (+65 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter|in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.SortBy == nil\n  - in.Filter.DeprecatedCreatedByAgentId|in.Filter.DeprecatedCreatedByAgentIdOp|in.SortBy != 0\n  - in.DevOid|in.SortBy == nil\n  - in.Filter.TicketFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.TicketFilter.RevOidOp|in.SortBy != nil\n  - in.Filter.TicketFilter.AccountIdOp|in.SortBy != nil\n  - in.Filter.TicketFilter.GroupOp|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsOp|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsV2Op|in.SortBy != nil\n  - in.Filter.TicketFilter.ChannelsV2InstancesOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SurveysAggregationOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SentimentOp|in.SortBy != nil\n  - in.Filter.TicketFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.TicketFilter.AppsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.RevOrgIdsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AccountIdsOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SprintIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SprintStateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.ProjectIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.MilestoneIdOp|in.SortBy != nil\n  - in.Filter.IssueFilter.TargetStartDateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.ActualStartDateOp|in.SortBy != nil\n  - in.Filter.IssueFilter.LastCodeActivityOp|in.SortBy != nil\n  - in.Filter.IssueFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.IssueFilter.AppsOp|in.SortBy != nil\n  - in.Filter.TaskFilter.AppliesToPartIdOp|in.SortBy != nil\n  - in.Filter.TaskFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.TaskFilter.AppsOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.AccountIdOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.ContactIdsOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.SubtypeOp|in.SortBy != nil\n  - in.Filter.OpportunityFilter.AppsOp|in.SortBy != nil\n  - in.Filter.CreatedByIdOp|in.SortBy != nil\n  - in.Filter.ModifiedByIdOp|in.SortBy != nil\n  - in.Filter.CreatedByAgentIdOp|in.SortBy != nil\n  - in.Filter.ReportedByIdsOp|in.SortBy != nil\n  - in.Filter.OwnedByIdsOp|in.SortBy != nil\n  - in.Filter.TargetCloseDateOp|in.SortBy != nil\n  - in.Filter.ActualCloseDateOp|in.SortBy != nil\n  - (+140 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `ancestorpart` -> suggestions []\n  - test field `appliestopart` -> suggestions ['in.Filter.IssueFilter.AppliesToPartId', 'in.Filter.IssueFilter.AppliesToPartIdOp', 'in.Filter.TaskFilter.AppliesToPartId', 'in.Filter.TaskFilter.AppliesToPartIdOp', 'in.Filter.TicketFilter.AppliesToPartId', 'in.Filter.TicketFilter.AppliesToPartIdOp']\n  - test field `cursor` -> suggestions []\n  - test field `customfields` -> suggestions []\n  - test field `externalref` -> suggestions []\n  - test field `first` -> suggestions []\n  - test field `issue` -> suggestions ['in.CustomFilter.IssueFilters']\n  - test field `limit` -> suggestions []\n  - test field `opportunity` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Filter.OwnedByIds', 'in.Filter.OwnedByIdsOp', 'in.Filter.TicketFilter.OwnedByAgentId']\n  - test field `stagenames` -> suggestions ['in.Filter.Stage']\n  - test field `ticket` -> suggestions ['in.CustomFilter.TicketFilters']\n  - test field `type` -> suggestions ['in.Filter.IssueFilter.Subtype', 'in.Filter.IssueFilter.SubtypeOp', 'in.Filter.OpportunityFilter.Subtype', 'in.Filter.OpportunityFilter.SubtypeOp', 'in.Filter.TaskFilter.Subtype', 'in.Filter.TaskFilter.SubtypeOp', 'in.Filter.TicketFilter.Subtype', 'in.Filter.TicketFilter.SubtypeOp', 'in.Filter.WorkType', 'in.ObjectTypes']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

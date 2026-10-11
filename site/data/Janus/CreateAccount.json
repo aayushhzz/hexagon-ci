@@ -34,11 +34,11 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 41,
-      "covered_count": 12,
-      "coverage_pct": 29.3,
-      "request_fields_set_by_tests": 31,
-      "set_by_positive_tests": 12,
-      "set_by_negative_tests": 7,
+      "covered_count": 7,
+      "coverage_pct": 17.1,
+      "request_fields_set_by_tests": 7,
+      "set_by_positive_tests": 7,
+      "set_by_negative_tests": 2,
       "by_depth": {
         "top_level": {
           "total": 2,
@@ -52,14 +52,14 @@
         },
         "deep": {
           "total": 20,
-          "set": 5,
-          "pct": 25
+          "set": 0,
+          "pct": 0
         }
       },
       "representative": {
         "units": 32,
-        "covered": 10,
-        "pct": 31.3,
+        "covered": 7,
+        "pct": 21.9,
         "collapsed_types": [
           "api.CreateDevrevCopy",
           "api.CreateExternalSourceDataComp",
@@ -74,28 +74,6 @@
           "match": "exact",
           "by_tests": [
             "Create account",
-            "should create a workflow that assigns SDR when an opportunity is created",
-            "should create workflow triggered by opportunity creation with automatic timestamp update"
-          ]
-        },
-        {
-          "path": "in.Account.DevrevCopy.OriginId.Id",
-          "match": "exact",
-          "by_tests": [
-            "Get subscribers with rev user token",
-            "account:all scope required for AccountsDelete",
-            "account:write scope required for AccountsCreate and AccountsUpdate",
-            "should create a workflow that assigns SDR when an opportunity is created",
-            "should create workflow triggered by opportunity creation with automatic timestamp update"
-          ]
-        },
-        {
-          "path": "in.Account.DevrevCopy.OriginOrgId.Id",
-          "match": "exact",
-          "by_tests": [
-            "Get subscribers with rev user token",
-            "account:all scope required for AccountsDelete",
-            "account:write scope required for AccountsCreate and AccountsUpdate",
             "should create a workflow that assigns SDR when an opportunity is created",
             "should create workflow triggered by opportunity creation with automatic timestamp update"
           ]
@@ -132,43 +110,10 @@
           ]
         },
         {
-          "path": "in.Account.ExternalSourceData.CreatedById.Id",
-          "match": "exact",
-          "by_tests": [
-            "Get subscribers with rev user token",
-            "account:all scope required for AccountsDelete",
-            "account:write scope required for AccountsCreate and AccountsUpdate",
-            "should create a workflow that assigns SDR when an opportunity is created",
-            "should create workflow triggered by opportunity creation with automatic timestamp update"
-          ]
-        },
-        {
-          "path": "in.Account.ExternalSourceData.ModifiedById.Id",
-          "match": "exact",
-          "by_tests": [
-            "Get subscribers with rev user token",
-            "account:all scope required for AccountsDelete",
-            "account:write scope required for AccountsCreate and AccountsUpdate",
-            "should create a workflow that assigns SDR when an opportunity is created",
-            "should create workflow triggered by opportunity creation with automatic timestamp update"
-          ]
-        },
-        {
           "path": "in.Account.PhoneNumbers",
           "match": "exact",
           "by_tests": [
             "Create account"
-          ]
-        },
-        {
-          "path": "in.Account.Stage.StageId.Id",
-          "match": "exact",
-          "by_tests": [
-            "Get subscribers with rev user token",
-            "account:all scope required for AccountsDelete",
-            "account:write scope required for AccountsCreate and AccountsUpdate",
-            "should create a workflow that assigns SDR when an opportunity is created",
-            "should create workflow triggered by opportunity creation with automatic timestamp update"
           ]
         },
         {
@@ -192,9 +137,13 @@
         "in.Account.CustomFields.Fields",
         "in.Account.CustomSchemaFragmentIds",
         "in.Account.DevrevCopy.LastSyncedDate",
+        "in.Account.DevrevCopy.OriginId.Id",
+        "in.Account.DevrevCopy.OriginOrgId.Id",
         "in.Account.EmployeeCount",
         "in.Account.ExternalSourceData.ClosedDate",
+        "in.Account.ExternalSourceData.CreatedById.Id",
         "in.Account.ExternalSourceData.CreatedDate",
+        "in.Account.ExternalSourceData.ModifiedById.Id",
         "in.Account.ExternalSourceData.ModifiedDate",
         "in.Account.Industry",
         "in.Account.IngestionChannel",
@@ -204,6 +153,7 @@
         "in.Account.Revenue.Currency",
         "in.Account.SharedWith",
         "in.Account.Stage.Notes",
+        "in.Account.Stage.StageId.Id",
         "in.Account.Stage.StageId.IsDeprecated",
         "in.Account.Stage.StageId.IsStart",
         "in.Account.StagedInfo.IsStaged",
@@ -223,14 +173,14 @@
       "total": 72,
       "happy_path_reached": true,
       "reachable_on_happy_path": 5,
-      "present_arm_exercised": 16,
-      "present_arm_pct": 22.2,
+      "present_arm_exercised": 10,
+      "present_arm_pct": 13.9,
       "absent_arm_exercised": 5,
       "absent_arm_pct": 100,
-      "negative_arm_exercised": 8,
-      "negative_arm_pct": 11.1,
-      "both_arms_exercised": 2,
-      "coverage_pct": 22.2,
+      "negative_arm_exercised": 4,
+      "negative_arm_pct": 5.6,
+      "both_arms_exercised": 0,
+      "coverage_pct": 13.9,
       "by_origin": {
         "service": {
           "total": 46,
@@ -253,10 +203,10 @@
         "library": {
           "total": 26,
           "reachable_on_happy_path": 2,
-          "present_arm_exercised": 9,
-          "present_arm_pct": 34.6,
-          "negative_arm_exercised": 7,
-          "negative_arm_pct": 26.9,
+          "present_arm_exercised": 3,
+          "present_arm_pct": 11.5,
+          "negative_arm_exercised": 3,
+          "negative_arm_pct": 11.5,
           "absent_arm_exercised": 2
         }
       },
@@ -616,6 +566,14 @@
           ]
         },
         {
+          "id": "b55",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:30",
+          "cond": "proto.Id).GetId() == in.Account.Stage.StageId.Id",
+          "predicate_paths": [
+            "in.Account.Stage.StageId.Id"
+          ]
+        },
+        {
           "id": "b56",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:166",
           "cond": "in.Account.Stage.StageId == nil",
@@ -632,6 +590,14 @@
           ]
         },
         {
+          "id": "b58",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:193",
+          "cond": "proto.Id).GetId() == in.Account.Stage.StageId.Id",
+          "predicate_paths": [
+            "in.Account.Stage.StageId.Id"
+          ]
+        },
+        {
           "id": "b59",
           "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:200",
           "cond": "in.Account.Stage.StageId.IsStart",
@@ -645,6 +611,22 @@
           "cond": "in.Account.Stage.StageId.IsDeprecated",
           "predicate_paths": [
             "in.Account.Stage.StageId.IsDeprecated"
+          ]
+        },
+        {
+          "id": "b61",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:239",
+          "cond": "proto.Id).GetId() == in.Account.Stage.StageId.Id",
+          "predicate_paths": [
+            "in.Account.Stage.StageId.Id"
+          ]
+        },
+        {
+          "id": "b62",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20260928180803-239c1633e9bf/donv2/don.go:593",
+          "cond": "in.Account.Stage.StageId.Id == nil",
+          "predicate_paths": [
+            "in.Account.Stage.StageId.Id"
           ]
         },
         {
@@ -710,6 +692,22 @@
           "predicate_paths": [
             "in.Account.Stage.Notes"
           ]
+        },
+        {
+          "id": "b71",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/validation.go:862",
+          "cond": "in.Account|in.Account.Description|in.Account.DevrevCopy|in.Account.DevrevCopy.OriginId.Id|in.Account.DevrevCopy.OriginOrgId.Id|in.Account.EmployeeCount|in.Account.ExternalSourceData|in.Account.ExternalSourceData.CreatedById.Id|in.Account.ExternalSourceData.ModifiedById.Id|in.Account.Industry|in.Account.LeadSource|in.Account.Revenue|in.Account.Revenue.Amount|in.Account.Revenue.Currency|in.Account.Stage|in.Account.Stage.Notes|in.Account.Stage.StageId.Id|in.Account.StagedInfo|in.Account.StagedInfo.IsStaged|in.Account.SyncMetadata|in.Account.Tier|in.Account.TotalRevenue != nil",
+          "predicate_paths": [
+            "in.Account"
+          ]
+        },
+        {
+          "id": "b72",
+          "at": "/Users/asd/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_fields.go:160",
+          "cond": "in.Account|in.Account.Description|in.Account.DevrevCopy|in.Account.DevrevCopy.OriginId.Id|in.Account.DevrevCopy.OriginOrgId.Id|in.Account.EmployeeCount|in.Account.ExternalSourceData|in.Account.ExternalSourceData.CreatedById.Id|in.Account.ExternalSourceData.ModifiedById.Id|in.Account.Industry|in.Account.LeadSource|in.Account.Revenue|in.Account.Revenue.Amount|in.Account.Revenue.Currency|in.Account.Stage|in.Account.Stage.Notes|in.Account.Stage.StageId.Id|in.Account.StagedInfo|in.Account.StagedInfo.IsStaged|in.Account.SyncMetadata|in.Account.Tier|in.Account.TotalRevenue != nil",
+          "predicate_paths": [
+            "in.Account"
+          ]
         }
       ]
     },
@@ -738,105 +736,7 @@
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": [
-        {
-          "field": "account",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "appliestopart",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "body",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "email",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "expiresin",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "externalref",
-          "fuzzy_suggestions": [
-            "in.Account.ExternalRefs"
-          ]
-        },
-        {
-          "field": "inputvalues",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "name",
-          "fuzzy_suggestions": [
-            "in.Account.DisplayName",
-            "in.UniqueDisplayNameSuffix"
-          ]
-        },
-        {
-          "field": "operation",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "previoussteps",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "principal",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "referencekey",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "reportedby",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "requestedtokentype",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "revorg",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "rolesetassignmentinfo",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "status",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "subscribers",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "title",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "tokenhint",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "type",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "uimetadata",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "workflow",
-          "fuzzy_suggestions": null
-        }
-      ]
+      "unmatched_test_fields": null
     },
     "test_facts": [
       {
@@ -931,10 +831,7 @@
           "INTERNAL_ROLE_SETS_CREATE"
         ],
         "fields_set": [
-          "DisplayName",
-          "Principal",
-          "RevOrg",
-          "RoleSetAssignmentInfo"
+          "DisplayName"
         ],
         "statuses": [
           200,
@@ -957,10 +854,7 @@
           "INTERNAL_ROLE_SETS_CREATE"
         ],
         "fields_set": [
-          "DisplayName",
-          "Id",
-          "Principal",
-          "RoleSetAssignmentInfo"
+          "DisplayName"
         ],
         "statuses": [
           200,
@@ -984,10 +878,7 @@
           "INTERNAL_ROLE_SETS_CREATE"
         ],
         "fields_set": [
-          "DisplayName",
-          "Id",
-          "Principal",
-          "RoleSetAssignmentInfo"
+          "DisplayName"
         ],
         "statuses": [
           200,
@@ -1010,21 +901,8 @@
           "NEGATIVE"
         ],
         "fields_set": [
-          "Account",
-          "AppliesToPart",
-          "Body",
           "DisplayName",
-          "Email",
-          "ExpiresIn",
-          "ExternalRef",
-          "ExternalRefs",
-          "Id",
-          "ReportedBy",
-          "RequestedTokenType",
-          "Subscribers",
-          "Title",
-          "TokenHint",
-          "Type"
+          "ExternalRefs"
         ],
         "statuses": null,
         "asserts_success": true,
@@ -1065,17 +943,7 @@
         ],
         "fields_set": [
           "Description",
-          "DisplayName",
-          "Id",
-          "InputValues",
-          "Name",
-          "Operation",
-          "PreviousSteps",
-          "ReferenceKey",
-          "Status",
-          "Title",
-          "UiMetadata",
-          "Workflow"
+          "DisplayName"
         ],
         "statuses": [
           200,
@@ -1101,17 +969,7 @@
         ],
         "fields_set": [
           "Description",
-          "DisplayName",
-          "Id",
-          "InputValues",
-          "Name",
-          "Operation",
-          "PreviousSteps",
-          "ReferenceKey",
-          "Status",
-          "Title",
-          "UiMetadata",
-          "Workflow"
+          "DisplayName"
         ],
         "statuses": [
           200,
@@ -1266,5 +1124,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateAccount` (HTTP operation `AccountsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Account.ArtifactIds\n  - in.Account.CustomFields.Fields\n  - in.Account.CustomSchemaFragmentIds\n  - in.Account.DevrevCopy.LastSyncedDate\n  - in.Account.EmployeeCount\n  - in.Account.ExternalSourceData.ClosedDate\n  - in.Account.ExternalSourceData.CreatedDate\n  - in.Account.ExternalSourceData.ModifiedDate\n  - in.Account.Industry\n  - in.Account.IngestionChannel\n  - in.Account.LeadSource\n  - in.Account.OwnedBy\n  - in.Account.Revenue.Amount\n  - in.Account.Revenue.Currency\n  - in.Account.SharedWith\n  - in.Account.Stage.Notes\n  - in.Account.Stage.StageId.IsDeprecated\n  - in.Account.Stage.StageId.IsStart\n  - in.Account.StagedInfo.IsStaged\n  - in.Account.StagedInfo.SyncInUnresolvedFields\n  - in.Account.StagedInfo.SyncOutUnresolvedFields\n  - in.Account.StagedInfo.UnresolvedFields\n  - in.Account.SyncMetadata.SyncedByDevUsers\n  - in.Account.Tags\n  - in.Account.TotalRevenue\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.SkipStageTransitionValidation\n  - in.UniqueDisplayNameSuffix\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Account.DisplayName|in.UniqueDisplayNameSuffix == nil\n  - in.UniqueDisplayNameSuffix != nil\n  - in\n  - in.Account.CustomFields == nil\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec == nil\n  - in.Account.CustomFields|in.Account.CustomSchemaFragmentIds\n  - in.Account.Stage.StageId != nil\n  - in.Account.Revenue.Amount == nil\n  - in.Account.Revenue.Amount == \"\"\n  - in.Account.Revenue.Amount == \"NaN\"\n  - in.Account.Revenue.Amount == \"Inf\"\n  - in.Account.Revenue.Amount == \"nan\"\n  - in.Account.Revenue.Amount == \"inf\"\n  - in.Account.Revenue.Amount != nil\n  - in.Account.SyncMetadata.SyncedByDevUsers != nil\n  - in.Account.StagedInfo.UnresolvedFields != nil\n  - in.Account.StagedInfo.SyncInUnresolvedFields != nil\n  - in.Account.StagedInfo.SyncOutUnresolvedFields != nil\n  - in.Account.ExternalSourceData.CreatedDate != nil\n  - in.Account.ExternalSourceData.ModifiedDate != nil\n  - in.Account.ExternalSourceData.ClosedDate != nil\n  - in.Account.ExternalSourceData.CreatedById != nil\n  - in.Account.ExternalSourceData.ModifiedById != nil\n  - in.Account.DevrevCopy.OriginId != nil\n  - in.Account.DevrevCopy.OriginOrgId != nil\n  - in.Account.DevrevCopy.LastSyncedDate != nil\n  - in.Account.Industry == *t4\n  - in.Account.Industry == nil\n  - in.Account.Industry\n  - in.Account.LeadSource == *t4\n  - in.Account.LeadSource == nil\n  - in.Account.LeadSource\n  - in.Account.OwnedBy != nil\n  - in.Account.Tags != nil\n  - in.Account.ArtifactIds != nil\n  - in.Account.Stage != nil\n  - in.Account.Revenue != nil\n  - in.Account.SyncMetadata != nil\n  - in.Account.StagedInfo != nil\n  - (+16 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - dNaN\n  - dNegInf\n  - dPosInf\n  - errAccountDisplayNameAlreadyExists\n  - errAccountEmptyDisplayName\n  - errDomainAlreadyExists\n  - errInputContainsDuplicateDomains\n  - errInputContainsDuplicateExternalRefs\n  - errInputContainsDuplicateWebsites\n  - errInputContainsNotAcceptableDomains\n  - errInputContainsNotAcceptableWebsites\n  - errOldVersionOfSchemaFragments\n  - errPhoneNumberInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n  - errWebsiteAlreadyExists\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `account` -> suggestions []\n  - test field `appliestopart` -> suggestions []\n  - test field `body` -> suggestions []\n  - test field `email` -> suggestions []\n  - test field `expiresin` -> suggestions []\n  - test field `externalref` -> suggestions ['in.Account.ExternalRefs']\n  - test field `inputvalues` -> suggestions []\n  - test field `name` -> suggestions ['in.Account.DisplayName', 'in.UniqueDisplayNameSuffix']\n  - test field `operation` -> suggestions []\n  - test field `previoussteps` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `referencekey` -> suggestions []\n  - test field `reportedby` -> suggestions []\n  - test field `requestedtokentype` -> suggestions []\n  - test field `revorg` -> suggestions []\n  - test field `rolesetassignmentinfo` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `subscribers` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `tokenhint` -> suggestions []\n  - test field `type` -> suggestions []\n  - test field `uimetadata` -> suggestions []\n  - test field `workflow` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateAccount` (HTTP operation `AccountsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Account.ArtifactIds\n  - in.Account.CustomFields.Fields\n  - in.Account.CustomSchemaFragmentIds\n  - in.Account.DevrevCopy.LastSyncedDate\n  - in.Account.DevrevCopy.OriginId.Id\n  - in.Account.DevrevCopy.OriginOrgId.Id\n  - in.Account.EmployeeCount\n  - in.Account.ExternalSourceData.ClosedDate\n  - in.Account.ExternalSourceData.CreatedById.Id\n  - in.Account.ExternalSourceData.CreatedDate\n  - in.Account.ExternalSourceData.ModifiedById.Id\n  - in.Account.ExternalSourceData.ModifiedDate\n  - in.Account.Industry\n  - in.Account.IngestionChannel\n  - in.Account.LeadSource\n  - in.Account.OwnedBy\n  - in.Account.Revenue.Amount\n  - in.Account.Revenue.Currency\n  - in.Account.SharedWith\n  - in.Account.Stage.Notes\n  - in.Account.Stage.StageId.Id\n  - in.Account.Stage.StageId.IsDeprecated\n  - in.Account.Stage.StageId.IsStart\n  - in.Account.StagedInfo.IsStaged\n  - in.Account.StagedInfo.SyncInUnresolvedFields\n  - in.Account.StagedInfo.SyncOutUnresolvedFields\n  - in.Account.StagedInfo.UnresolvedFields\n  - in.Account.SyncMetadata.SyncedByDevUsers\n  - in.Account.Tags\n  - in.Account.TotalRevenue\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.SkipStageTransitionValidation\n  - in.UniqueDisplayNameSuffix\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Account.DisplayName|in.UniqueDisplayNameSuffix == nil\n  - in.UniqueDisplayNameSuffix != nil\n  - in\n  - in.Account.CustomFields == nil\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec == nil\n  - in.Account.CustomFields|in.Account.CustomSchemaFragmentIds\n  - in.Account.Stage.StageId != nil\n  - in.Account.Revenue.Amount == nil\n  - in.Account.Revenue.Amount == \"\"\n  - in.Account.Revenue.Amount == \"NaN\"\n  - in.Account.Revenue.Amount == \"Inf\"\n  - in.Account.Revenue.Amount == \"nan\"\n  - in.Account.Revenue.Amount == \"inf\"\n  - in.Account.Revenue.Amount != nil\n  - in.Account.SyncMetadata.SyncedByDevUsers != nil\n  - in.Account.StagedInfo.UnresolvedFields != nil\n  - in.Account.StagedInfo.SyncInUnresolvedFields != nil\n  - in.Account.StagedInfo.SyncOutUnresolvedFields != nil\n  - in.Account.ExternalSourceData.CreatedDate != nil\n  - in.Account.ExternalSourceData.ModifiedDate != nil\n  - in.Account.ExternalSourceData.ClosedDate != nil\n  - in.Account.ExternalSourceData.CreatedById != nil\n  - in.Account.ExternalSourceData.ModifiedById != nil\n  - in.Account.DevrevCopy.OriginId != nil\n  - in.Account.DevrevCopy.OriginOrgId != nil\n  - in.Account.DevrevCopy.LastSyncedDate != nil\n  - in.Account.Industry == *t4\n  - in.Account.Industry == nil\n  - in.Account.Industry\n  - in.Account.LeadSource == *t4\n  - in.Account.LeadSource == nil\n  - in.Account.LeadSource\n  - in.Account.OwnedBy != nil\n  - in.Account.Tags != nil\n  - in.Account.ArtifactIds != nil\n  - in.Account.Stage != nil\n  - in.Account.Revenue != nil\n  - in.Account.SyncMetadata != nil\n  - in.Account.StagedInfo != nil\n  - (+22 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - dNaN\n  - dNegInf\n  - dPosInf\n  - errAccountDisplayNameAlreadyExists\n  - errAccountEmptyDisplayName\n  - errDomainAlreadyExists\n  - errInputContainsDuplicateDomains\n  - errInputContainsDuplicateExternalRefs\n  - errInputContainsDuplicateWebsites\n  - errInputContainsNotAcceptableDomains\n  - errInputContainsNotAcceptableWebsites\n  - errOldVersionOfSchemaFragments\n  - errPhoneNumberInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n  - errWebsiteAlreadyExists\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

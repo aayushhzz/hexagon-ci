@@ -36,7 +36,7 @@
       "leaf_fields_read_by_rpc": 71,
       "covered_count": 6,
       "coverage_pct": 8.5,
-      "request_fields_set_by_tests": 13,
+      "request_fields_set_by_tests": 7,
       "set_by_positive_tests": 5,
       "set_by_negative_tests": 4,
       "by_depth": {
@@ -97,7 +97,6 @@
             "Should allow unrelated conversation updates when the entitlement flag is enabled",
             "Should require AGENT_RESOLUTION entitlement to update AI resolution status when the flag is enabled",
             "Should verify complete conversation stage transition workflow",
-            "rev user should be able to create and update a conversation, and retain access",
             "should verify sorting conversations by modified date"
           ]
         },
@@ -119,8 +118,6 @@
           "by_tests": [
             "RevUser must able to update conversation title",
             "Should allow unrelated conversation updates when the entitlement flag is enabled",
-            "Should verify complete conversation stage transition workflow",
-            "rev user should be able to create and update a conversation, and retain access",
             "should verify sorting conversations by modified date"
           ]
         },
@@ -140,7 +137,6 @@
             "Should allow unrelated conversation updates when the entitlement flag is enabled",
             "Should require AGENT_RESOLUTION entitlement to update AI resolution status when the flag is enabled",
             "Should verify complete conversation stage transition workflow",
-            "rev user should be able to create and update a conversation, and retain access",
             "should verify sorting conversations by modified date"
           ]
         }
@@ -1813,23 +1809,7 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
-          "field": "appliestoparts",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "memberids",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "members",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "messages",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "object",
           "fuzzy_suggestions": null
         },
         {
@@ -1837,17 +1817,6 @@
           "fuzzy_suggestions": [
             "in.Conversation.OwnedByAgentId"
           ]
-        },
-        {
-          "field": "type",
-          "fuzzy_suggestions": [
-            "in.Conversation.LastMessage.UserType",
-            "in.TagOpType"
-          ]
-        },
-        {
-          "field": "visibility",
-          "fuzzy_suggestions": null
         }
       ]
     },
@@ -1859,9 +1828,7 @@
           "INTERNAL_CONVERSATIONS_CREATE"
         ],
         "fields_set": [
-          "Description",
-          "Id",
-          "Title"
+          "Description"
         ],
         "statuses": null,
         "asserts_success": false,
@@ -1879,9 +1846,7 @@
         ],
         "fields_set": [
           "Id",
-          "Messages",
-          "Title",
-          "Type"
+          "Title"
         ],
         "statuses": [
           200
@@ -1902,9 +1867,7 @@
         ],
         "fields_set": [
           "Id",
-          "Messages",
-          "Stage",
-          "Type"
+          "Stage"
         ],
         "statuses": [
           200
@@ -1926,9 +1889,7 @@
         ],
         "fields_set": [
           "AiResolutionStatus",
-          "Id",
-          "Messages",
-          "Type"
+          "Id"
         ],
         "statuses": [
           200
@@ -1945,9 +1906,7 @@
         ],
         "fields_set": [
           "AiResolutionStatus",
-          "Id",
-          "Messages",
-          "Type"
+          "Id"
         ],
         "statuses": [
           403
@@ -1964,9 +1923,7 @@
         ],
         "fields_set": [
           "Id",
-          "Messages",
-          "Title",
-          "Type"
+          "Title"
         ],
         "statuses": [
           200
@@ -1983,9 +1940,7 @@
         ],
         "fields_set": [
           "Id",
-          "Messages",
-          "Stage",
-          "Type"
+          "Stage"
         ],
         "statuses": [
           400
@@ -2004,9 +1959,7 @@
         ],
         "fields_set": [
           "Id",
-          "Messages",
-          "Stage",
-          "Type"
+          "Stage"
         ],
         "statuses": [
           403
@@ -2025,10 +1978,7 @@
         ],
         "fields_set": [
           "Id",
-          "Members",
-          "Messages",
-          "Stage",
-          "Type"
+          "Stage"
         ],
         "statuses": [
           200,
@@ -2050,10 +2000,7 @@
         ],
         "fields_set": [
           "Id",
-          "Members",
-          "Messages",
-          "Stage",
-          "Type"
+          "Stage"
         ],
         "statuses": [
           200,
@@ -2072,10 +2019,7 @@
         "labels": null,
         "fields_set": [
           "Id",
-          "MemberIds",
-          "Object",
-          "Type",
-          "Visibility"
+          "MemberIds"
         ],
         "statuses": null,
         "asserts_success": true,
@@ -2092,9 +2036,7 @@
         "labels": null,
         "fields_set": [
           "Id",
-          "Object",
-          "OwnedByAgent",
-          "Type"
+          "OwnedByAgent"
         ],
         "statuses": null,
         "asserts_success": true,
@@ -2108,11 +2050,8 @@
           "UAT_TEMP"
         ],
         "fields_set": [
-          "AppliesToParts",
           "Id",
-          "Messages",
-          "Title",
-          "Type"
+          "Title"
         ],
         "statuses": [
           200,
@@ -2129,12 +2068,8 @@
           "UAT_TEMP"
         ],
         "fields_set": [
-          "AppliesToParts",
           "Id",
-          "Messages",
-          "Stage",
-          "Title",
-          "Type"
+          "Stage"
         ],
         "statuses": [
           200,
@@ -2232,5 +2167,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateConversation` (HTTP operation `ConversationsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.Conversation.AccountId\n  - in.Conversation.AppliesToPartIds.IdValues\n  - in.Conversation.BrandId\n  - in.Conversation.BroadcastChannels\n  - in.Conversation.Channels.IdValues\n  - in.Conversation.ChannelsInstances.IdValues\n  - in.Conversation.CustomFields\n  - in.Conversation.DevrevCopy\n  - in.Conversation.ExternalSourceData.CreatedById\n  - in.Conversation.ExternalSourceData.ModifiedById\n  - in.Conversation.ExternalSourceData.ModifiedDate\n  - in.Conversation.FirstResponseTime\n  - in.Conversation.FirstUnrepliedRevMessageDate\n  - in.Conversation.Group\n  - in.Conversation.IsCreatorVerified\n  - in.Conversation.IsFrozen\n  - in.Conversation.IsSpam\n  - in.Conversation.LastExternalMessageDate\n  - in.Conversation.LastExternalMessageId\n  - in.Conversation.LastInternalMessageDate\n  - in.Conversation.LastInternalMessageId\n  - in.Conversation.LastMessage.CreatedById\n  - in.Conversation.LastMessage.UserType\n  - in.Conversation.LastMessageId\n  - in.Conversation.LastMessageTimestamp\n  - in.Conversation.MemberIds.IdValues\n  - in.Conversation.Metadata\n  - in.Conversation.OwnedByAgentId\n  - in.Conversation.OwnedByIds.IdValues\n  - in.Conversation.ParticipantOids.IdValues\n  - in.Conversation.ParticipantUids.IdValues\n  - in.Conversation.Priority\n  - in.Conversation.Sentiment\n  - in.Conversation.SentimentModifiedDate\n  - in.Conversation.SentimentSummary.Value\n  - in.Conversation.Sessions.Values\n  - in.Conversation.SlaId\n  - in.Conversation.SlaSummary.OrgScheduleId\n  - in.Conversation.SlaSummary.SlaTrackerId\n  - in.Conversation.SlaTrackerId\n  - in.Conversation.SourceChannel\n  - in.Conversation.SourceChannelV2\n  - in.Conversation.SourceChannelV2Instance\n  - in.Conversation.Stage.StageId\n  - in.Conversation.StagedInfo.SyncInUnresolvedFields.Values\n  - in.Conversation.StagedInfo.SyncOutUnresolvedFields.Values\n  - in.Conversation.StartedById\n  - in.Conversation.Status\n  - in.Conversation.SurveysAggregation.Values\n  - in.Conversation.SyncMetadata.LastSyncIn.Status\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.Conversation.SyncMetadata.LastSyncOut.Status\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId\n  - in.Conversation.SyncMetadata.SyncedByDevUsers.IdValues\n  - in.Conversation.Tags.Values\n  - in.Conversation.TargetLocale.Value\n  - in.Conversation.TuringActive\n  - (+5 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId\n  - in.ActorId\n  - in.ActorId\n  - in.DevOid == nil\n  - in.Conversation.SourceChannelV2 == nil\n  - in.Conversation.SourceChannelV2Instance == nil\n  - in.Conversation.Group == nil\n  - in.Conversation.StartedById == nil\n  - in.Conversation.StartedById\n  - in.Conversation.StartedById\n  - in.Conversation.StartedById\n  - in.Conversation.AccountId == nil\n  - in.Conversation.LastMessage.CreatedById == nil\n  - in.Conversation.LastMessage.CreatedById != nil\n  - in.Conversation.LastExternalMessageId == nil\n  - in.Conversation.LastInternalMessageId == nil\n  - in.Conversation.LastMessageId == nil\n  - in.Conversation.OwnedByAgentId == nil\n  - in.Conversation.Stage.StageId == nil\n  - in.Conversation.Stage.StageId != nil\n  - in.Conversation.Stage.StageId\n  - in.Conversation.SlaSummary.SlaTrackerId == nil\n  - in.Conversation.SlaSummary.OrgScheduleId == nil\n  - in.Conversation.SlaSummary.SlaTrackerId != nil\n  - in.Conversation.SlaSummary.SlaTrackerId\n  - in.Conversation.SlaSummary.OrgScheduleId != nil\n  - in.Conversation.SlaSummary.OrgScheduleId\n  - in.Conversation.SlaId == nil\n  - in.Conversation.SlaTrackerId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId == nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId == nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - (+152 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestoparts` -> suggestions []\n  - test field `memberids` -> suggestions []\n  - test field `members` -> suggestions []\n  - test field `messages` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `ownedbyagent` -> suggestions ['in.Conversation.OwnedByAgentId']\n  - test field `type` -> suggestions ['in.Conversation.LastMessage.UserType', 'in.TagOpType']\n  - test field `visibility` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateConversation` (HTTP operation `ConversationsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.Conversation.AccountId\n  - in.Conversation.AppliesToPartIds.IdValues\n  - in.Conversation.BrandId\n  - in.Conversation.BroadcastChannels\n  - in.Conversation.Channels.IdValues\n  - in.Conversation.ChannelsInstances.IdValues\n  - in.Conversation.CustomFields\n  - in.Conversation.DevrevCopy\n  - in.Conversation.ExternalSourceData.CreatedById\n  - in.Conversation.ExternalSourceData.ModifiedById\n  - in.Conversation.ExternalSourceData.ModifiedDate\n  - in.Conversation.FirstResponseTime\n  - in.Conversation.FirstUnrepliedRevMessageDate\n  - in.Conversation.Group\n  - in.Conversation.IsCreatorVerified\n  - in.Conversation.IsFrozen\n  - in.Conversation.IsSpam\n  - in.Conversation.LastExternalMessageDate\n  - in.Conversation.LastExternalMessageId\n  - in.Conversation.LastInternalMessageDate\n  - in.Conversation.LastInternalMessageId\n  - in.Conversation.LastMessage.CreatedById\n  - in.Conversation.LastMessage.UserType\n  - in.Conversation.LastMessageId\n  - in.Conversation.LastMessageTimestamp\n  - in.Conversation.MemberIds.IdValues\n  - in.Conversation.Metadata\n  - in.Conversation.OwnedByAgentId\n  - in.Conversation.OwnedByIds.IdValues\n  - in.Conversation.ParticipantOids.IdValues\n  - in.Conversation.ParticipantUids.IdValues\n  - in.Conversation.Priority\n  - in.Conversation.Sentiment\n  - in.Conversation.SentimentModifiedDate\n  - in.Conversation.SentimentSummary.Value\n  - in.Conversation.Sessions.Values\n  - in.Conversation.SlaId\n  - in.Conversation.SlaSummary.OrgScheduleId\n  - in.Conversation.SlaSummary.SlaTrackerId\n  - in.Conversation.SlaTrackerId\n  - in.Conversation.SourceChannel\n  - in.Conversation.SourceChannelV2\n  - in.Conversation.SourceChannelV2Instance\n  - in.Conversation.Stage.StageId\n  - in.Conversation.StagedInfo.SyncInUnresolvedFields.Values\n  - in.Conversation.StagedInfo.SyncOutUnresolvedFields.Values\n  - in.Conversation.StartedById\n  - in.Conversation.Status\n  - in.Conversation.SurveysAggregation.Values\n  - in.Conversation.SyncMetadata.LastSyncIn.Status\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.Conversation.SyncMetadata.LastSyncOut.Status\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId\n  - in.Conversation.SyncMetadata.SyncedByDevUsers.IdValues\n  - in.Conversation.Tags.Values\n  - in.Conversation.TargetLocale.Value\n  - in.Conversation.TuringActive\n  - (+5 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId\n  - in.ActorId\n  - in.ActorId\n  - in.DevOid == nil\n  - in.Conversation.SourceChannelV2 == nil\n  - in.Conversation.SourceChannelV2Instance == nil\n  - in.Conversation.Group == nil\n  - in.Conversation.StartedById == nil\n  - in.Conversation.StartedById\n  - in.Conversation.StartedById\n  - in.Conversation.StartedById\n  - in.Conversation.AccountId == nil\n  - in.Conversation.LastMessage.CreatedById == nil\n  - in.Conversation.LastMessage.CreatedById != nil\n  - in.Conversation.LastExternalMessageId == nil\n  - in.Conversation.LastInternalMessageId == nil\n  - in.Conversation.LastMessageId == nil\n  - in.Conversation.OwnedByAgentId == nil\n  - in.Conversation.Stage.StageId == nil\n  - in.Conversation.Stage.StageId != nil\n  - in.Conversation.Stage.StageId\n  - in.Conversation.SlaSummary.SlaTrackerId == nil\n  - in.Conversation.SlaSummary.OrgScheduleId == nil\n  - in.Conversation.SlaSummary.SlaTrackerId != nil\n  - in.Conversation.SlaSummary.SlaTrackerId\n  - in.Conversation.SlaSummary.OrgScheduleId != nil\n  - in.Conversation.SlaSummary.OrgScheduleId\n  - in.Conversation.SlaId == nil\n  - in.Conversation.SlaTrackerId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId == nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId == nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - (+152 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `memberids` -> suggestions []\n  - test field `ownedbyagent` -> suggestions ['in.Conversation.OwnedByAgentId']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

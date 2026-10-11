@@ -35,7 +35,7 @@
       "leaf_fields_read_by_rpc": 13,
       "covered_count": 2,
       "coverage_pct": 15.4,
-      "request_fields_set_by_tests": 9,
+      "request_fields_set_by_tests": 4,
       "set_by_positive_tests": 2,
       "set_by_negative_tests": 2,
       "by_depth": {
@@ -200,29 +200,7 @@
           "fuzzy_suggestions": null
         },
         {
-          "field": "expiresin",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "givedomainaccess",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "granttype",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "requestedtokentype",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "slug",
-          "fuzzy_suggestions": [
-            "in.DevOrg.DevSlug"
-          ]
-        },
-        {
-          "field": "tokenhint",
           "fuzzy_suggestions": null
         }
       ]
@@ -241,12 +219,7 @@
           "DevSlug",
           "DisplayName",
           "Environment",
-          "ExpiresIn",
-          "GiveDomainAccess",
-          "GrantType",
-          "RequestedTokenType",
-          "Slug",
-          "TokenHint"
+          "GiveDomainAccess"
         ],
         "statuses": [
           409
@@ -316,5 +289,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateDevOrg` (HTTP operation `DevOrgsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOrg.AllowedEmailDomain\n  - in.DevOrg.AllowedEmailDomains\n  - in.DevOrg.PhoneNumbers\n  - in.DevOrg.PlatformRevOrgMetadata.AccountDeDupDomain\n  - in.DevOrgIdPrefix\n  - in.ServicePlan.ServicePlanLineItems\n  - in.Utm.Campaign\n  - in.Utm.Content\n  - in.Utm.Medium\n  - in.Utm.Source\n  - in.Utm.Term\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOrg == nil\n  - in.ServicePlan != nil\n  - in.DevOrg.AllowedEmailDomains\n  - in.DevOrg.AllowedEmailDomain != \"\"\n  - in.Utm != nil\n  - in.DevOrgIdPrefix != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevSlugInvalid\n  - errDisplayNameLengthTooShort\n  - errDomainBasedAccessNotAllowed\n  - errInternalServiceError\n  - errInvalidAuthContextEmail\n  - errInvalidJWTToken\n  - errMaxDevOrgsPerUserReached\n  - errPhoneNumberInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `environment` -> suggestions []\n  - test field `expiresin` -> suggestions []\n  - test field `givedomainaccess` -> suggestions []\n  - test field `granttype` -> suggestions []\n  - test field `requestedtokentype` -> suggestions []\n  - test field `slug` -> suggestions ['in.DevOrg.DevSlug']\n  - test field `tokenhint` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateDevOrg` (HTTP operation `DevOrgsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOrg.AllowedEmailDomain\n  - in.DevOrg.AllowedEmailDomains\n  - in.DevOrg.PhoneNumbers\n  - in.DevOrg.PlatformRevOrgMetadata.AccountDeDupDomain\n  - in.DevOrgIdPrefix\n  - in.ServicePlan.ServicePlanLineItems\n  - in.Utm.Campaign\n  - in.Utm.Content\n  - in.Utm.Medium\n  - in.Utm.Source\n  - in.Utm.Term\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOrg == nil\n  - in.ServicePlan != nil\n  - in.DevOrg.AllowedEmailDomains\n  - in.DevOrg.AllowedEmailDomain != \"\"\n  - in.Utm != nil\n  - in.DevOrgIdPrefix != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevSlugInvalid\n  - errDisplayNameLengthTooShort\n  - errDomainBasedAccessNotAllowed\n  - errInternalServiceError\n  - errInvalidAuthContextEmail\n  - errInvalidJWTToken\n  - errMaxDevOrgsPerUserReached\n  - errPhoneNumberInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `environment` -> suggestions []\n  - test field `givedomainaccess` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

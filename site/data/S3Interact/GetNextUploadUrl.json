@@ -33,7 +33,7 @@
       "leaf_fields_read_by_rpc": 3,
       "covered_count": 1,
       "coverage_pct": 33.3,
-      "request_fields_set_by_tests": 6,
+      "request_fields_set_by_tests": 3,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -216,18 +216,6 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
-          "field": "configurationset",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "filename",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "filetype",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "id",
           "fuzzy_suggestions": null
         },
@@ -249,8 +237,6 @@
         ],
         "fields_set": [
           "Cursor",
-          "FileName",
-          "FileType",
           "Id",
           "PartSize"
         ],
@@ -279,8 +265,6 @@
         ],
         "fields_set": [
           "Cursor",
-          "FileName",
-          "FileType",
           "Id",
           "PartSize"
         ],
@@ -311,8 +295,6 @@
         ],
         "fields_set": [
           "Cursor",
-          "FileName",
-          "FileType",
           "Id",
           "PartSize"
         ],
@@ -341,8 +323,6 @@
         ],
         "fields_set": [
           "Cursor",
-          "FileName",
-          "FileType",
           "Id",
           "PartSize"
         ],
@@ -381,8 +361,6 @@
         ],
         "fields_set": [
           "Cursor",
-          "FileName",
-          "FileType",
           "Id",
           "PartSize"
         ],
@@ -407,8 +385,6 @@
         ],
         "fields_set": [
           "Cursor",
-          "FileName",
-          "FileType",
           "Id",
           "PartSize"
         ],
@@ -432,8 +408,6 @@
         ],
         "fields_set": [
           "Cursor",
-          "FileName",
-          "FileType",
           "Id",
           "PartSize"
         ],
@@ -458,8 +432,6 @@
         ],
         "fields_set": [
           "Cursor",
-          "FileName",
-          "FileType",
           "Id",
           "PartSize"
         ],
@@ -484,8 +456,6 @@
         ],
         "fields_set": [
           "Cursor",
-          "FileName",
-          "FileType",
           "Id",
           "PartSize"
         ],
@@ -511,8 +481,6 @@
         ],
         "fields_set": [
           "Cursor",
-          "FileName",
-          "FileType",
           "Id",
           "PartSize"
         ],
@@ -535,10 +503,7 @@
           "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
         ],
         "fields_set": [
-          "ConfigurationSet",
           "Cursor",
-          "FileName",
-          "FileType",
           "Id",
           "PartSize"
         ],
@@ -563,8 +528,6 @@
         ],
         "fields_set": [
           "Cursor",
-          "FileName",
-          "FileType",
           "Id",
           "PartSize"
         ],
@@ -589,8 +552,6 @@
         ],
         "fields_set": [
           "Cursor",
-          "FileName",
-          "FileType",
           "Id",
           "PartSize"
         ],
@@ -614,8 +575,6 @@
         ],
         "fields_set": [
           "Cursor",
-          "FileName",
-          "FileType",
           "Id",
           "PartSize"
         ],
@@ -645,5 +604,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetNextUploadUrl` (HTTP operation `ArtifactsUploadNext`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ArtifactId\n  - in.ChunkSize\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ArtifactId == nil\n  - in.ArtifactId == *ObjectTypeArtifact\n  - in.ArtifactId == nil\n  - in.ArtifactId\n  - in.ChunkSize >= 0\n  - in.ChunkSize <= 0\n  - in.ArtifactId != objType\n  - in.ArtifactId\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `configurationset` -> suggestions []\n  - test field `filename` -> suggestions []\n  - test field `filetype` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `partsize` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetNextUploadUrl` (HTTP operation `ArtifactsUploadNext`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ArtifactId\n  - in.ChunkSize\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ArtifactId == nil\n  - in.ArtifactId == *ObjectTypeArtifact\n  - in.ArtifactId == nil\n  - in.ArtifactId\n  - in.ChunkSize >= 0\n  - in.ChunkSize <= 0\n  - in.ArtifactId != objType\n  - in.ArtifactId\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n  - test field `partsize` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

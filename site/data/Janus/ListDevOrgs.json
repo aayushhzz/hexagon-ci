@@ -36,7 +36,7 @@
       "leaf_fields_read_by_rpc": 2,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 9,
+      "request_fields_set_by_tests": 0,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -191,44 +191,7 @@
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": [
-        {
-          "field": "devslug",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "displayname",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "environment",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "expiresin",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "givedomainaccess",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "granttype",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "requestedtokentype",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "slug",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "tokenhint",
-          "fuzzy_suggestions": null
-        }
-      ]
+      "unmatched_test_fields": null
     },
     "test_facts": [
       {
@@ -240,17 +203,7 @@
           "INTERNAL_DEV_ORGS_LIST",
           "INTERNAL_DEVUSERS_POST_LOGIN"
         ],
-        "fields_set": [
-          "DevSlug",
-          "DisplayName",
-          "Environment",
-          "ExpiresIn",
-          "GiveDomainAccess",
-          "GrantType",
-          "RequestedTokenType",
-          "Slug",
-          "TokenHint"
-        ],
+        "fields_set": null,
         "statuses": [
           409
         ],
@@ -359,5 +312,5 @@
     "errors": [],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListDevOrgs` (HTTP operation `DevOrgsList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.PageParams.SortBy\n  - in.UeSyncState\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.PageParams != nil\n  - in.PageParams != nil\n  - in.UeSyncState != nil\n  - in != nil\n  - in.PageParams == nil\n  - in.UeSyncState != nil\n  - in.UeSyncState != nil\n  - *t184 != in.UeSyncState\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `devslug` -> suggestions []\n  - test field `displayname` -> suggestions []\n  - test field `environment` -> suggestions []\n  - test field `expiresin` -> suggestions []\n  - test field `givedomainaccess` -> suggestions []\n  - test field `granttype` -> suggestions []\n  - test field `requestedtokentype` -> suggestions []\n  - test field `slug` -> suggestions []\n  - test field `tokenhint` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListDevOrgs` (HTTP operation `DevOrgsList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.PageParams.SortBy\n  - in.UeSyncState\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.PageParams != nil\n  - in.PageParams != nil\n  - in.UeSyncState != nil\n  - in != nil\n  - in.PageParams == nil\n  - in.UeSyncState != nil\n  - in.UeSyncState != nil\n  - *t184 != in.UeSyncState\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

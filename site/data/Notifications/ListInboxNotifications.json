@@ -20,7 +20,7 @@
       "leaf_fields_read_by_rpc": 14,
       "covered_count": 2,
       "coverage_pct": 14.3,
-      "request_fields_set_by_tests": 12,
+      "request_fields_set_by_tests": 4,
       "set_by_positive_tests": 2,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -85,20 +85,20 @@
       "total": 13,
       "happy_path_reached": true,
       "reachable_on_happy_path": 3,
-      "present_arm_exercised": 2,
-      "present_arm_pct": 15.4,
+      "present_arm_exercised": 0,
+      "present_arm_pct": 0,
       "absent_arm_exercised": 3,
       "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
-      "both_arms_exercised": 2,
-      "coverage_pct": 15.4,
+      "both_arms_exercised": 0,
+      "coverage_pct": 0,
       "by_origin": {
         "service": {
           "total": 8,
           "reachable_on_happy_path": 3,
-          "present_arm_exercised": 2,
-          "present_arm_pct": 25,
+          "present_arm_exercised": 0,
+          "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 3
@@ -123,6 +123,14 @@
         }
       },
       "gaps": [
+        {
+          "id": "b1",
+          "at": "internal/infra/db/notification_repository.go:291",
+          "cond": "in.Filter == nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
         {
           "id": "b2",
           "at": "internal/infra/db/notification_repository.go:369",
@@ -204,6 +212,14 @@
           ]
         },
         {
+          "id": "b12",
+          "at": "internal/infra/db/notification_repository.go:243",
+          "cond": "in.Filter != nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
           "id": "b13",
           "at": "internal/service/inbox/service.go:100",
           "cond": "in.UserDon == nil",
@@ -228,49 +244,11 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
-          "field": "body",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "filter",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "id",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "mode",
           "fuzzy_suggestions": null
         },
         {
-          "field": "object",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "ownedbyids",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "parentids",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "state",
-          "fuzzy_suggestions": [
-            "in.Filter.States"
-          ]
-        },
-        {
-          "field": "type",
-          "fuzzy_suggestions": [
-            "in.Filter.ParentTypeOp",
-            "in.Filter.ParentTypes",
-            "in.Filter.Types"
-          ]
-        },
-        {
-          "field": "visibility",
           "fuzzy_suggestions": null
         }
       ]
@@ -390,14 +368,8 @@
         "file": "api/v2_internal/notifications/notifications_mark_test.go",
         "labels": null,
         "fields_set": [
-          "Body",
-          "Filter",
-          "Id",
-          "OwnedByIds",
           "ParentIds",
-          "State",
-          "States",
-          "Type"
+          "States"
         ],
         "statuses": [
           200,
@@ -414,14 +386,8 @@
         "file": "api/v2_internal/notifications/notifications_mark_test.go",
         "labels": null,
         "fields_set": [
-          "Body",
-          "Filter",
-          "Id",
-          "OwnedByIds",
           "ParentIds",
-          "State",
           "States",
-          "Type",
           "Types"
         ],
         "statuses": [
@@ -439,10 +405,7 @@
         "file": "api/v2_internal/notifications/notifications_multiworkspace_test.go",
         "labels": null,
         "fields_set": [
-          "Object",
-          "ParentIds",
-          "Type",
-          "Visibility"
+          "ParentIds"
         ],
         "statuses": [
           200,
@@ -473,5 +436,5 @@
     "errors": [],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListInboxNotifications` (HTTP operation `NotificationsList,NotificationsListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Filter.ActorDons\n  - in.Filter.LastNotificationTimestamp.TimestampFrom\n  - in.Filter.LastNotificationTimestamp.TimestampTo\n  - in.Filter.NotificationIds\n  - in.Filter.ParentDons\n  - in.Filter.ParentTypeOp\n  - in.Filter.ParentTypes\n  - in.Filter.Priorities\n  - in.Filter.UserParticipationFilter.Activities\n  - in.Filter.UserParticipationFilter.Visibilities\n  - in.SortBy\n  - in.UserDon\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter.ParentTypeOp == 1\n  - in.Filter.LastNotificationTimestamp != nil\n  - in.Filter.LastNotificationTimestamp.TimestampFrom >= 0\n  - in.Filter.UserParticipationFilter != nil\n  - in.Filter.LastNotificationTimestamp.TimestampTo > 0\n  - in < 0\n  - in == 0\n  - in != 0\n  - in < 0\n  - in > *t73\n  - in.UserDon == nil\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `body` -> suggestions []\n  - test field `filter` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `mode` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `ownedbyids` -> suggestions []\n  - test field `parentids` -> suggestions []\n  - test field `state` -> suggestions ['in.Filter.States']\n  - test field `type` -> suggestions ['in.Filter.ParentTypeOp', 'in.Filter.ParentTypes', 'in.Filter.Types']\n  - test field `visibility` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListInboxNotifications` (HTTP operation `NotificationsList,NotificationsListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Filter.ActorDons\n  - in.Filter.LastNotificationTimestamp.TimestampFrom\n  - in.Filter.LastNotificationTimestamp.TimestampTo\n  - in.Filter.NotificationIds\n  - in.Filter.ParentDons\n  - in.Filter.ParentTypeOp\n  - in.Filter.ParentTypes\n  - in.Filter.Priorities\n  - in.Filter.UserParticipationFilter.Activities\n  - in.Filter.UserParticipationFilter.Visibilities\n  - in.SortBy\n  - in.UserDon\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter == nil\n  - in.Filter.ParentTypeOp == 1\n  - in.Filter.LastNotificationTimestamp != nil\n  - in.Filter.LastNotificationTimestamp.TimestampFrom >= 0\n  - in.Filter.UserParticipationFilter != nil\n  - in.Filter.LastNotificationTimestamp.TimestampTo > 0\n  - in < 0\n  - in == 0\n  - in != 0\n  - in < 0\n  - in > *t73\n  - in.Filter != nil\n  - in.UserDon == nil\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `mode` -> suggestions []\n  - test field `parentids` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

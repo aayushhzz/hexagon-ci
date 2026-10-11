@@ -34,7 +34,7 @@
       "leaf_fields_read_by_rpc": 28,
       "covered_count": 2,
       "coverage_pct": 7.1,
-      "request_fields_set_by_tests": 9,
+      "request_fields_set_by_tests": 7,
       "set_by_positive_tests": 2,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -76,8 +76,7 @@
           "match": "exact",
           "by_tests": [
             "DryRunCreateValid",
-            "FilterByKey",
-            "ListFiltersByArchivedStatus"
+            "FilterByKey"
           ]
         }
       ],
@@ -862,10 +861,6 @@
           ]
         },
         {
-          "field": "dryrun",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "group",
           "fuzzy_suggestions": [
             "in.Filter.GroupId",
@@ -874,10 +869,6 @@
         },
         {
           "field": "groupop",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "id",
           "fuzzy_suggestions": null
         },
         {
@@ -896,8 +887,6 @@
         "file": "api/v2_internal/teams/teams_crud_test.go",
         "labels": null,
         "fields_set": [
-          "DryRun",
-          "Group",
           "Key"
         ],
         "statuses": [
@@ -1023,10 +1012,7 @@
         "file": "api/v2_internal/teams/teams_crud_test.go",
         "labels": null,
         "fields_set": [
-          "Group",
-          "Id",
-          "IsArchived",
-          "Key"
+          "IsArchived"
         ],
         "statuses": [
           200,
@@ -1161,5 +1147,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListTeams` (HTTP operation `TeamsListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CursorParams\n  - in.Filter.Apps\n  - in.Filter.AppsOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CustomFields.Fields\n  - in.Filter.EnabledFeatures\n  - in.Filter.ExternalSourceData\n  - in.Filter.GroupId\n  - in.Filter.GroupIdOp\n  - in.Filter.IsDefault\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.SpacesFilter\n  - in.Filter.Subtype\n  - in.Filter.SubtypeOp\n  - in.Filter.SyncMetadata\n  - in.Filter.SyncMetadataOp\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.GroupIdOp != nil\n  - in.Filter.SyncMetadataOp != nil\n  - in.Filter.SubtypeOp != nil\n  - in.Filter.AppsOp != nil\n  - in.CursorParams != nil\n  - in.CursorParams != nil\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Filter.CustomFields == nil\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 5\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 1\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.ModifiedDate != nil\n  - in.Filter.ModifiedByIdOp == 4\n  - in.Filter.ModifiedByIdOp == 3\n  - in.Filter.ModifiedByIdOp == 4\n  - in.Filter.ModifiedByIdOp == 2\n  - in.Filter.ModifiedByIdOp == 5\n  - in.Filter.ModifiedByIdOp == 2\n  - in.Filter.ModifiedByIdOp == 1\n  - in.Filter.ModifiedByIdOp == 3\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.Before != nil\n  - in.Filter.ModifiedDate.DatePreset != nil\n  - in.Filter.ModifiedDate.After != nil\n  - (+45 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `cursor` -> suggestions ['in.CursorParams']\n  - test field `dryrun` -> suggestions []\n  - test field `group` -> suggestions ['in.Filter.GroupId', 'in.Filter.GroupIdOp']\n  - test field `groupop` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `limit` -> suggestions []\n  - test field `mode` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListTeams` (HTTP operation `TeamsListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CursorParams\n  - in.Filter.Apps\n  - in.Filter.AppsOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CustomFields.Fields\n  - in.Filter.EnabledFeatures\n  - in.Filter.ExternalSourceData\n  - in.Filter.GroupId\n  - in.Filter.GroupIdOp\n  - in.Filter.IsDefault\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.SpacesFilter\n  - in.Filter.Subtype\n  - in.Filter.SubtypeOp\n  - in.Filter.SyncMetadata\n  - in.Filter.SyncMetadataOp\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.GroupIdOp != nil\n  - in.Filter.SyncMetadataOp != nil\n  - in.Filter.SubtypeOp != nil\n  - in.Filter.AppsOp != nil\n  - in.CursorParams != nil\n  - in.CursorParams != nil\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Filter.CustomFields == nil\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 5\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 1\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.ModifiedDate != nil\n  - in.Filter.ModifiedByIdOp == 4\n  - in.Filter.ModifiedByIdOp == 3\n  - in.Filter.ModifiedByIdOp == 4\n  - in.Filter.ModifiedByIdOp == 2\n  - in.Filter.ModifiedByIdOp == 5\n  - in.Filter.ModifiedByIdOp == 2\n  - in.Filter.ModifiedByIdOp == 1\n  - in.Filter.ModifiedByIdOp == 3\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.Before != nil\n  - in.Filter.ModifiedDate.DatePreset != nil\n  - in.Filter.ModifiedDate.After != nil\n  - (+45 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `cursor` -> suggestions ['in.CursorParams']\n  - test field `group` -> suggestions ['in.Filter.GroupId', 'in.Filter.GroupIdOp']\n  - test field `groupop` -> suggestions []\n  - test field `limit` -> suggestions []\n  - test field `mode` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

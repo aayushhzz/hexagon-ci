@@ -34,7 +34,7 @@
       "leaf_fields_read_by_rpc": 2,
       "covered_count": 1,
       "coverage_pct": 50,
-      "request_fields_set_by_tests": 3,
+      "request_fields_set_by_tests": 2,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -191,12 +191,6 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
-          "field": "highlight",
-          "fuzzy_suggestions": [
-            "in.HighlightId"
-          ]
-        },
-        {
           "field": "id",
           "fuzzy_suggestions": null
         }
@@ -212,7 +206,6 @@
           "INTERNAL_DEVUSERS_SELF"
         ],
         "fields_set": [
-          "Highlight",
           "HighlightId",
           "Id"
         ],
@@ -342,5 +335,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteDevUserHighlight` (HTTP operation `DevUsersHighlightDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUserId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUserId == nil\n  - in.DevUserId == nil\n  - in.DevUserId\n  - in.DevUserId == \"\"\n  - in != nil\n  - in.DevUserId != *t13\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errCacheUnavailable\n  - errInternalCacheTransientError\n  - errReadingMongoCollection\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `highlight` -> suggestions ['in.HighlightId']\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteDevUserHighlight` (HTTP operation `DevUsersHighlightDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUserId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUserId == nil\n  - in.DevUserId == nil\n  - in.DevUserId\n  - in.DevUserId == \"\"\n  - in != nil\n  - in.DevUserId != *t13\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errCacheUnavailable\n  - errInternalCacheTransientError\n  - errReadingMongoCollection\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }
