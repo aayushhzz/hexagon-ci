@@ -2,40 +2,23 @@
   "service": "Janus",
   "coverage": {
     "rpc": "GetDevUser",
-    "operation": "DevUsersGetPost",
-    "tests": 1,
+    "operation": "DevUsersGet,DevUsersGetPost,DevUsersSelfPost",
+    "tests": 20,
     "status": {
-      "documented": [
-        200,
-        400,
-        401,
-        403,
-        404,
-        413,
-        429,
-        500,
-        503
-      ],
+      "documented": null,
       "asserted": [
-        200
+        200,
+        201,
+        403
       ],
-      "missing": [
-        400,
-        401,
-        403,
-        404,
-        413,
-        429,
-        500,
-        503
-      ],
-      "coverage_pct": 11.1
+      "missing": [],
+      "coverage_pct": 0
     },
     "fields": {
       "leaf_fields_read_by_rpc": 2,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 1,
+      "request_fields_set_by_tests": 10,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -176,12 +159,105 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
+          "field": "devuser",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "displayname",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "email",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "fullname",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "id",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "issuer",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "jobtitle",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "primaryuser",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "secondaryuser",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "termsconditionsaccepted",
           "fuzzy_suggestions": null
         }
       ]
     },
     "test_facts": [
+      {
+        "name": "Manages team member access for project collaboration",
+        "file": "e2e/smoke_test_case/identity_management/dev_users_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_DEVUSERS_GET"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevUser",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Validates dev user data integrity across multiple team members",
+        "file": "e2e/smoke_test_case/identity_management/dev_users_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_DEVUSERS_GET"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevUser",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Validates team member data integrity and access patterns",
+        "file": "e2e/smoke_test_case/identity_management/dev_users_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_DEVUSERS_GET"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevUser",
+          "StatusCode"
+        ]
+      },
       {
         "name": "GetDevUser",
         "file": "api/v2_internal/dev_users/crud/devusers_crud_test.go",
@@ -197,6 +273,277 @@
         ],
         "asserts_success": true,
         "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Update New DevUser",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEVUSERS_UPDATE",
+          "INTERNAL_DEVUSERS_GET"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevUser",
+          "DevUser.DisplayName",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "DevUsers Deactivate",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEVUSERS_DEACTIVATE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevUser",
+          "DevUser.State",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "DevUsers Activate",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEVUSERS_ACTIVATE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevUser",
+          "DevUser.State",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "DevUsers Merge",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEVUSERS_MERGE"
+        ],
+        "fields_set": [
+          "Id",
+          "PrimaryUser",
+          "SecondaryUser"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevUser",
+          "DevUser.State",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "DevUsers Email Update",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEVUSERS_EMAIL_UPDATE"
+        ],
+        "fields_set": [
+          "Email",
+          "Id"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevUser",
+          "DevUser.Email",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should allow regular PAT to access any endpoint regardless of aat_allowed",
+        "file": "api/v2_internal/gateway/aat_allowlist_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should allow dev-users.self without captcha header",
+        "file": "api/v2_internal/gateway/captcha_validation_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should allow request when org has no IP allowlist configured",
+        "file": "api/v2_internal/gateway/ip_allowlist_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should allow request when source IP is in the allowlist",
+        "file": "api/v2_internal/gateway/ip_allowlist_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should block request when source IP is not in org allowlist",
+        "file": "api/v2_internal/gateway/ip_allowlist_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          403
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should confirm enforcement is active by comparing allow and deny orgs",
+        "file": "api/v2_internal/gateway/ip_allowlist_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200,
+          403
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should allow PAT from non-denylisted user to access dev-users.self",
+        "file": "api/v2_internal/gateway/token_denylist_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should allow multiple sequential requests from non-denylisted user",
+        "file": "api/v2_internal/gateway/token_denylist_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should not block org owner PAT regardless of deny list",
+        "file": "api/v2_internal/gateway/token_denylist_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevUser",
+          "DevUser.Email",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Update self DevUser",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEVUSERS_SELF_UPDATE",
+          "INTERNAL_DEVUSERS_SELF"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "FullName",
+          "JobTitle",
+          "TermsConditionsAccepted"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevUser",
+          "DevUser.DisplayName",
+          "DevUser.FullName",
+          "DevUser.JobTitle",
+          "DevUser.TermsConditionsAccepted",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Link Unlink Identities",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEVUSERS_IDENTITIES_LINK",
+          "INTERNAL_DEVUSERS_IDENTITIES_UNLINK"
+        ],
+        "fields_set": [
+          "DevUser",
+          "DisplayName",
+          "Id",
+          "Issuer"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevUser",
+          "DevUser.ExternalIdentities",
+          "DevUser.ExternalIdentities.Issuer",
           "StatusCode"
         ]
       }
@@ -278,5 +625,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetDevUser` (HTTP operation `DevUsersGetPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUid\n  - in.ResolvePrimary\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUid\n  - in.DevUid == \"\"\n  - in.DevUid != \"\"\n  - in.DevUid == \"\"\n  - in.ResolvePrimary\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidIdInput\n  - errSchemaRegistryUnimplementedEnvironment\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetDevUser` (HTTP operation `DevUsersGet,DevUsersGetPost,DevUsersSelfPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUid\n  - in.ResolvePrimary\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUid\n  - in.DevUid == \"\"\n  - in.DevUid != \"\"\n  - in.DevUid == \"\"\n  - in.ResolvePrimary\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidIdInput\n  - errSchemaRegistryUnimplementedEnvironment\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `devuser` -> suggestions []\n  - test field `displayname` -> suggestions []\n  - test field `email` -> suggestions []\n  - test field `fullname` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `issuer` -> suggestions []\n  - test field `jobtitle` -> suggestions []\n  - test field `primaryuser` -> suggestions []\n  - test field `secondaryuser` -> suggestions []\n  - test field `termsconditionsaccepted` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

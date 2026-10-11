@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "ListArtifacts",
     "operation": "ArtifactsListPost",
-    "tests": 5,
+    "tests": 6,
     "status": {
       "documented": [
         200,
@@ -69,6 +69,7 @@
             "Another org's owner cannot LIST artifacts of a parent in another org",
             "List artifacts for non-existent parent should return 403",
             "ListArtifacts",
+            "Validates artifacts API with authentication",
             "parent_id on complete attaches artifact to parent"
           ]
         }
@@ -321,6 +322,25 @@
         ],
         "asserts_success": true,
         "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Validates artifacts API with authentication",
+        "file": "e2e/smoke_test_case/artifacts_test/artifacts_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_ARTIFACTS_LIST"
+        ],
+        "fields_set": [
+          "ParentId"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Artifacts",
           "StatusCode"
         ]
       }

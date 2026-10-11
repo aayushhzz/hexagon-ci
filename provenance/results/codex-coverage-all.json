@@ -1472,7 +1472,7 @@
     {
       "rpc": "CountWorks",
       "operation": "WorksCountPost",
-      "tests": 5,
+      "tests": 9,
       "status": {
         "documented": [
           200,
@@ -1502,7 +1502,7 @@
         "leaf_fields_read_by_rpc": 121,
         "covered_count": 0,
         "coverage_pct": 0,
-        "request_fields_set_by_tests": 1,
+        "request_fields_set_by_tests": 2,
         "set_by_positive_tests": 0,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -2379,6 +2379,10 @@
       "anomalies": {
         "unmatched_test_fields": [
           {
+            "field": "limit",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "type",
             "fuzzy_suggestions": [
               "in.Filter.IssueFilter.Subtype",
@@ -2398,6 +2402,21 @@
         {
           "name": "Filter by wrong type",
           "file": "api/v2_internal/work/issues/crud/count_issue_test.go",
+          "labels": null,
+          "fields_set": [
+            "Type"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Filter by wrong type",
+          "file": "api/v2_internal/work/opportunities/count_opportunity_test.go",
           "labels": null,
           "fields_set": [
             "Type"
@@ -2473,26 +2492,103 @@
             "Count",
             "StatusCode"
           ]
+        },
+        {
+          "name": "Developer manages issues throughout development lifecycle",
+          "file": "e2e/smoke_test_case/works_management/works_issues_test.go",
+          "labels": [
+            "SMOKE",
+            "INTERNAL_WORKS_LIST",
+            "INTERNAL_WORKS_COUNT",
+            "INTERNAL_WORKS_GROUP"
+          ],
+          "fields_set": [
+            "Limit"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "GetCount",
+            "StatusCode",
+            "Works"
+          ]
+        },
+        {
+          "name": "Validates API reliability and data consistency for issue operations",
+          "file": "e2e/smoke_test_case/works_management/works_issues_test.go",
+          "labels": [
+            "SMOKE",
+            "INTERNAL_WORKS_LIST",
+            "INTERNAL_WORKS_COUNT"
+          ],
+          "fields_set": [
+            "Limit"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "GetCount",
+            "Works"
+          ]
+        },
+        {
+          "name": "System handles ticket operations reliably under load",
+          "file": "e2e/smoke_test_case/works_management/works_tickets_test.go",
+          "labels": [
+            "SMOKE",
+            "INTERNAL_WORKS_LIST",
+            "INTERNAL_WORKS_COUNT"
+          ],
+          "fields_set": [
+            "Limit"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "GetCount",
+            "Works"
+          ]
         }
       ]
     },
     {
       "rpc": "CreateCodeChange",
-      "operation": "",
-      "tests": 0,
+      "operation": "CodeChangesCreate",
+      "tests": 2,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200,
+          400
+        ],
+        "missing": [
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 25
       },
       "fields": {
         "leaf_fields_read_by_rpc": 20,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
-        "set_by_positive_tests": 0,
-        "set_by_negative_tests": 0,
+        "covered_count": 6,
+        "coverage_pct": 30,
+        "request_fields_set_by_tests": 6,
+        "set_by_positive_tests": 6,
+        "set_by_negative_tests": 6,
         "by_depth": {
           "top_level": {
             "total": 0,
@@ -2501,8 +2597,8 @@
           },
           "nested": {
             "total": 12,
-            "set": 0,
-            "pct": 0
+            "set": 6,
+            "pct": 50
           },
           "deep": {
             "total": 8,
@@ -2512,28 +2608,71 @@
         },
         "representative": {
           "units": 19,
-          "covered": 0,
-          "pct": 0,
+          "covered": 6,
+          "pct": 31.6,
           "collapsed_types": [
             "api.CustomSchemaSpec"
           ]
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.CodeChange.Branch",
+            "match": "exact",
+            "by_tests": [
+              "CreateCodeChange",
+              "CreateCodeChangeNegative"
+            ]
+          },
+          {
+            "path": "in.CodeChange.Description",
+            "match": "exact",
+            "by_tests": [
+              "CreateCodeChange",
+              "CreateCodeChangeNegative"
+            ]
+          },
+          {
+            "path": "in.CodeChange.ExternalIdentifier",
+            "match": "exact",
+            "by_tests": [
+              "CreateCodeChange",
+              "CreateCodeChangeNegative"
+            ]
+          },
+          {
+            "path": "in.CodeChange.RepoUrl",
+            "match": "exact",
+            "by_tests": [
+              "CreateCodeChange",
+              "CreateCodeChangeNegative"
+            ]
+          },
+          {
+            "path": "in.CodeChange.Source",
+            "match": "exact",
+            "by_tests": [
+              "CreateCodeChange",
+              "CreateCodeChangeNegative"
+            ]
+          },
+          {
+            "path": "in.CodeChange.Title",
+            "match": "exact",
+            "by_tests": [
+              "CreateCodeChange",
+              "CreateCodeChangeNegative"
+            ]
+          }
+        ],
         "gaps": [
-          "in.CodeChange.Branch",
           "in.CodeChange.ClosedDate",
           "in.CodeChange.CommitId",
           "in.CodeChange.CustomFields",
-          "in.CodeChange.Description",
-          "in.CodeChange.ExternalIdentifier",
           "in.CodeChange.FilteredLoc.FileCount",
           "in.CodeChange.FilteredLoc.LinesAdded",
           "in.CodeChange.FilteredLoc.LinesDeleted",
           "in.CodeChange.FilteredLoc.LinesModified",
-          "in.CodeChange.RepoUrl",
-          "in.CodeChange.Source",
           "in.CodeChange.TargetBranch",
-          "in.CodeChange.Title",
           "in.CodeChange.TotalLoc.FileCount",
           "in.CodeChange.TotalLoc.LinesAdded",
           "in.CodeChange.TotalLoc.LinesDeleted",
@@ -2544,62 +2683,46 @@
       },
       "branches": {
         "total": 23,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 5,
-        "present_arm_exercised": 0,
-        "present_arm_pct": 0,
-        "absent_arm_exercised": 0,
-        "absent_arm_pct": 0,
-        "negative_arm_exercised": 0,
-        "negative_arm_pct": 0,
+        "present_arm_exercised": 8,
+        "present_arm_pct": 34.8,
+        "absent_arm_exercised": 5,
+        "absent_arm_pct": 100,
+        "negative_arm_exercised": 8,
+        "negative_arm_pct": 34.8,
         "both_arms_exercised": 0,
-        "coverage_pct": 0,
+        "coverage_pct": 34.8,
         "by_origin": {
           "service": {
             "total": 6,
             "reachable_on_happy_path": 0,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
-            "negative_arm_exercised": 0,
-            "negative_arm_pct": 0,
+            "present_arm_exercised": 2,
+            "present_arm_pct": 33.3,
+            "negative_arm_exercised": 2,
+            "negative_arm_pct": 33.3,
             "absent_arm_exercised": 0
           },
           "generated": {
             "total": 16,
-            "reachable_on_happy_path": 0,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
-            "negative_arm_exercised": 0,
-            "negative_arm_pct": 0,
-            "absent_arm_exercised": 0
+            "reachable_on_happy_path": 4,
+            "present_arm_exercised": 6,
+            "present_arm_pct": 37.5,
+            "negative_arm_exercised": 6,
+            "negative_arm_pct": 37.5,
+            "absent_arm_exercised": 4
           },
           "library": {
             "total": 1,
-            "reachable_on_happy_path": 0,
+            "reachable_on_happy_path": 1,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 0
+            "absent_arm_exercised": 1
           }
         },
         "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:787",
-            "cond": "in.CodeChange.RepoUrl != nil",
-            "predicate_paths": [
-              "in.CodeChange.RepoUrl"
-            ]
-          },
-          {
-            "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:790",
-            "cond": "in.CodeChange.Branch != nil",
-            "predicate_paths": [
-              "in.CodeChange.Branch"
-            ]
-          },
           {
             "id": "b3",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:793",
@@ -2630,38 +2753,6 @@
             "cond": "in.CodeChange.FilteredLoc != nil",
             "predicate_paths": [
               "in.CodeChange.FilteredLoc"
-            ]
-          },
-          {
-            "id": "b7",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:803",
-            "cond": "in.CodeChange.Title == nil",
-            "predicate_paths": [
-              "in.CodeChange.Title"
-            ]
-          },
-          {
-            "id": "b8",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:809",
-            "cond": "in.CodeChange.Title != nil",
-            "predicate_paths": [
-              "in.CodeChange.Title"
-            ]
-          },
-          {
-            "id": "b9",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:812",
-            "cond": "in.CodeChange.Description != nil",
-            "predicate_paths": [
-              "in.CodeChange.Description"
-            ]
-          },
-          {
-            "id": "b10",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:815",
-            "cond": "in.CodeChange.ExternalIdentifier != nil",
-            "predicate_paths": [
-              "in.CodeChange.ExternalIdentifier"
             ]
           },
           {
@@ -2737,22 +2828,6 @@
             ]
           },
           {
-            "id": "b20",
-            "at": "internal/serverv2/create_code_change.go:25",
-            "cond": "in.CodeChange.ExternalIdentifier == nil",
-            "predicate_paths": [
-              "in.CodeChange.ExternalIdentifier"
-            ]
-          },
-          {
-            "id": "b21",
-            "at": "internal/serverv2/create_code_change.go:25",
-            "cond": "in.CodeChange.ExternalIdentifier == \"\"",
-            "predicate_paths": [
-              "in.CodeChange.ExternalIdentifier"
-            ]
-          },
-          {
             "id": "b22",
             "at": "/Users/devrev/go/pkg/mod/github.com/imdario/mergo@v0.3.16/mergo.go:66",
             "cond": "in.CodeChange|in.CodeChange.Branch|in.CodeChange.CommitId|in.CodeChange.Description|in.CodeChange.ExternalIdentifier|in.CodeChange.FilteredLoc|in.CodeChange.FilteredLoc.FileCount|in.CodeChange.FilteredLoc.LinesAdded|in.CodeChange.FilteredLoc.LinesDeleted|in.CodeChange.FilteredLoc.LinesModified|in.CodeChange.RepoUrl|in.CodeChange.TargetBranch|in.CodeChange.Title|in.CodeChange.TotalLoc|in.CodeChange.TotalLoc.FileCount|in.CodeChange.TotalLoc.LinesAdded|in.CodeChange.TotalLoc.LinesDeleted|in.CodeChange.TotalLoc.LinesModified == nil",
@@ -2782,7 +2857,7 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 1,
-        "reached_by_test": false,
+        "reached_by_test": true,
         "deps_result_used_in_response": 0,
         "deps_result_checked_by_test": 0,
         "response_links": null
@@ -2790,25 +2865,93 @@
       "anomalies": {
         "unmatched_test_fields": null
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "CreateCodeChange",
+          "file": "api/v2_internal/code_change/code_changes_test.go",
+          "labels": [
+            "INTERNAL_CODE_CHANGES_CREATE",
+            "POSITIVE"
+          ],
+          "fields_set": [
+            "Branch",
+            "Description",
+            "ExternalIdentifier",
+            "RepoUrl",
+            "Source",
+            "Title"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "CodeChange",
+            "CodeChange.Description",
+            "CodeChange.Id",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "CreateCodeChangeNegative",
+          "file": "api/v2_internal/code_change/code_changes_test.go",
+          "labels": [
+            "INTERNAL_CODE_CHANGES_CREATE",
+            "NEGATIVE"
+          ],
+          "fields_set": [
+            "Branch",
+            "Description",
+            "ExternalIdentifier",
+            "RepoUrl",
+            "Source",
+            "Title"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        }
+      ]
     },
     {
       "rpc": "CreateConversation",
-      "operation": "",
-      "tests": 0,
+      "operation": "ConversationsCreate",
+      "tests": 6,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          201,
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          201
+        ],
+        "missing": [
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 12.5
       },
       "fields": {
         "leaf_fields_read_by_rpc": 81,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
-        "set_by_positive_tests": 0,
+        "covered_count": 5,
+        "coverage_pct": 6.2,
+        "request_fields_set_by_tests": 8,
+        "set_by_positive_tests": 5,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
@@ -2818,24 +2961,72 @@
           },
           "nested": {
             "total": 46,
-            "set": 0,
-            "pct": 0
+            "set": 4,
+            "pct": 8.7
           },
           "deep": {
             "total": 32,
-            "set": 0,
-            "pct": 0
+            "set": 1,
+            "pct": 3.1
           }
         },
         "representative": {
           "units": 80,
-          "covered": 0,
-          "pct": 0,
+          "covered": 5,
+          "pct": 6.3,
           "collapsed_types": [
             "api.CustomSchemaSpec"
           ]
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.Conversation.IsSpam",
+            "match": "exact",
+            "by_tests": [
+              "Should respond on a plug conversation served by the deployed agent's workflow",
+              "Timeline Entry By Agent",
+              "Timeline Entry By Agent on new conversation"
+            ]
+          },
+          {
+            "path": "in.Conversation.Metadata.InitiationContext.Type",
+            "match": "exact",
+            "by_tests": [
+              "CreateConversationsFor2ndRevUser",
+              "Should be able to create conversation object",
+              "Should post a comment and get a turing answer in suggestion",
+              "Should respond on a plug conversation served by the deployed agent's workflow",
+              "Timeline Entry By Agent",
+              "Timeline Entry By Agent on new conversation"
+            ]
+          },
+          {
+            "path": "in.Conversation.SourceChannel",
+            "match": "exact",
+            "by_tests": [
+              "Should respond on a plug conversation served by the deployed agent's workflow",
+              "Timeline Entry By Agent",
+              "Timeline Entry By Agent on new conversation"
+            ]
+          },
+          {
+            "path": "in.Conversation.Tags",
+            "match": "exact",
+            "by_tests": [
+              "Timeline Entry By Agent",
+              "Timeline Entry By Agent on new conversation"
+            ]
+          },
+          {
+            "path": "in.Conversation.Title",
+            "match": "exact",
+            "by_tests": [
+              "Should respond on a plug conversation served by the deployed agent's workflow",
+              "Timeline Entry By Agent",
+              "Timeline Entry By Agent on new conversation"
+            ]
+          }
+        ],
         "gaps": [
           "in.ActorId",
           "in.Conversation.AccountId",
@@ -2861,7 +3052,6 @@
           "in.Conversation.Group",
           "in.Conversation.IsCreatorVerified",
           "in.Conversation.IsFrozen",
-          "in.Conversation.IsSpam",
           "in.Conversation.LastExternalMessageDate",
           "in.Conversation.LastExternalMessageId",
           "in.Conversation.LastInternalMessageDate",
@@ -2870,7 +3060,6 @@
           "in.Conversation.LastMessageTimestamp",
           "in.Conversation.MemberIds",
           "in.Conversation.Metadata.InitiationContext.Nudge.WidgetId",
-          "in.Conversation.Metadata.InitiationContext.Type",
           "in.Conversation.Metadata.UrlContext",
           "in.Conversation.OwnedByAgentId",
           "in.Conversation.OwnedByIds",
@@ -2882,7 +3071,6 @@
           "in.Conversation.SentimentSummary",
           "in.Conversation.Sessions",
           "in.Conversation.SlaId",
-          "in.Conversation.SourceChannel",
           "in.Conversation.SourceChannelV2",
           "in.Conversation.SourceChannelV2Instance",
           "in.Conversation.SpaceId",
@@ -2910,9 +3098,7 @@
           "in.Conversation.SyncMetadata.OriginSystem",
           "in.Conversation.SyncMetadata.OriginSystemInstanceId",
           "in.Conversation.SyncMetadata.SyncedByDevUsers",
-          "in.Conversation.Tags",
           "in.Conversation.TargetLocale",
-          "in.Conversation.Title",
           "in.Conversation.TuringActive",
           "in.CustomSchemaSpec.Drop",
           "in.CustomSchemaSpec.ValidateRequiredFields",
@@ -2922,43 +3108,43 @@
       },
       "branches": {
         "total": 248,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 41,
-        "present_arm_exercised": 0,
-        "present_arm_pct": 0,
-        "absent_arm_exercised": 0,
-        "absent_arm_pct": 0,
+        "present_arm_exercised": 11,
+        "present_arm_pct": 4.4,
+        "absent_arm_exercised": 41,
+        "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 0,
+        "coverage_pct": 4.4,
         "by_origin": {
           "service": {
             "total": 110,
-            "reachable_on_happy_path": 0,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
+            "reachable_on_happy_path": 15,
+            "present_arm_exercised": 5,
+            "present_arm_pct": 4.5,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 0
+            "absent_arm_exercised": 15
           },
           "generated": {
             "total": 77,
-            "reachable_on_happy_path": 0,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
+            "reachable_on_happy_path": 8,
+            "present_arm_exercised": 2,
+            "present_arm_pct": 2.6,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 0
+            "absent_arm_exercised": 8
           },
           "library": {
             "total": 61,
-            "reachable_on_happy_path": 0,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
+            "reachable_on_happy_path": 18,
+            "present_arm_exercised": 4,
+            "present_arm_pct": 6.6,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 0
+            "absent_arm_exercised": 18
           }
         },
         "gaps": [
@@ -3555,22 +3741,6 @@
             ]
           },
           {
-            "id": "b75",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:5296",
-            "cond": "in.Conversation.Metadata != nil",
-            "predicate_paths": [
-              "in.Conversation.Metadata"
-            ]
-          },
-          {
-            "id": "b76",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:5297",
-            "cond": "in.Conversation.Metadata != nil",
-            "predicate_paths": [
-              "in.Conversation.Metadata"
-            ]
-          },
-          {
             "id": "b77",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:5301",
             "cond": "in.Conversation.LastExternalMessageId != nil",
@@ -4107,38 +4277,6 @@
             ]
           },
           {
-            "id": "b144",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/go/archetype/archetype/unified_enum.go:179",
-            "cond": "in.Conversation.Metadata.InitiationContext.Type == nil",
-            "predicate_paths": [
-              "in.Conversation.Metadata.InitiationContext.Type"
-            ]
-          },
-          {
-            "id": "b145",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/go/archetype/archetype/unified_enum.go:189",
-            "cond": "*t19 == in.Conversation.Metadata.InitiationContext.Type",
-            "predicate_paths": [
-              "in.Conversation.Metadata.InitiationContext.Type"
-            ]
-          },
-          {
-            "id": "b146",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/gen_deps/unified_enum.go:108",
-            "cond": "in.Conversation.Metadata.InitiationContext.Type == nil",
-            "predicate_paths": [
-              "in.Conversation.Metadata.InitiationContext.Type"
-            ]
-          },
-          {
-            "id": "b147",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/gen_deps/unified_enum.go:141",
-            "cond": "**t51 == in.Conversation.Metadata.InitiationContext.Type",
-            "predicate_paths": [
-              "in.Conversation.Metadata.InitiationContext.Type"
-            ]
-          },
-          {
             "id": "b148",
             "at": "internal/collectionv2/nudge_initiation_context.gen.go:182",
             "cond": "in.Conversation.Metadata.InitiationContext.Nudge.WidgetId != nil",
@@ -4499,14 +4637,6 @@
             ]
           },
           {
-            "id": "b193",
-            "at": "internal/collectionv2/conversation.gen.go:3766",
-            "cond": "in.Conversation.Tags != nil",
-            "predicate_paths": [
-              "in.Conversation.Tags"
-            ]
-          },
-          {
             "id": "b194",
             "at": "internal/collectionv2/conversation.gen.go:3776",
             "cond": "in.Conversation.AppliesToPartIds != nil",
@@ -4520,14 +4650,6 @@
             "cond": "in.Conversation.FirstResponseTime != nil",
             "predicate_paths": [
               "in.Conversation.FirstResponseTime"
-            ]
-          },
-          {
-            "id": "b196",
-            "at": "internal/collectionv2/conversation.gen.go:3794",
-            "cond": "in.Conversation.Metadata != nil",
-            "predicate_paths": [
-              "in.Conversation.Metadata"
             ]
           },
           {
@@ -4803,22 +4925,6 @@
             ]
           },
           {
-            "id": "b231",
-            "at": "internal/serverv2/create_conversation.go:272",
-            "cond": "in.Conversation.SourceChannel == nil",
-            "predicate_paths": [
-              "in.Conversation.SourceChannel"
-            ]
-          },
-          {
-            "id": "b232",
-            "at": "internal/serverv2/create_conversation.go:272",
-            "cond": "in.Conversation.SourceChannel == \"\"",
-            "predicate_paths": [
-              "in.Conversation.SourceChannel"
-            ]
-          },
-          {
             "id": "b233",
             "at": "internal/serverv2/create_conversation.go:281",
             "cond": "in.Conversation.SourceChannelV2 != nil",
@@ -4880,14 +4986,6 @@
             "cond": "in.ActorId == *ObjectTypeRevUser",
             "predicate_paths": [
               "in.ActorId"
-            ]
-          },
-          {
-            "id": "b241",
-            "at": "internal/serverv2/create_conversation.go:440",
-            "cond": "in.Conversation.IsSpam == nil",
-            "predicate_paths": [
-              "in.Conversation.IsSpam"
             ]
           },
           {
@@ -4971,16 +5069,154 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 12,
-        "reached_by_test": false,
+        "reached_by_test": true,
         "deps_result_used_in_response": 0,
         "deps_result_checked_by_test": 0,
         "response_links": null
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "members",
+            "fuzzy_suggestions": [
+              "in.Conversation.MemberIds"
+            ]
+          },
+          {
+            "field": "messages",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "metadata",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "Should be able to create conversation object",
+          "file": "api/v2_internal/conversations/create_conversations_test.go",
+          "labels": [
+            "POSITIVE",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "Messages",
+            "Type"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "CreateConversationsFor2ndRevUser",
+          "file": "api/v2_internal/conversations/create_conversations_test.go",
+          "labels": [
+            "POSITIVE",
+            "NON_LOCAL",
+            "GINKGO_PR_SANITY"
+          ],
+          "fields_set": [
+            "Messages",
+            "Type"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Timeline Entry By Agent on new conversation",
+          "file": "api/v2_internal/plug_agent/conversation_created_dev_user_suspend_exit_path_test.go",
+          "labels": null,
+          "fields_set": [
+            "IsSpam",
+            "Messages",
+            "Metadata",
+            "SourceChannel",
+            "Tags",
+            "Title",
+            "Type"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Conversation",
+            "Conversation.Id"
+          ]
+        },
+        {
+          "name": "Timeline Entry By Agent",
+          "file": "api/v2_internal/plug_agent/conversation_created_escalate_conv_exit_path_test.go",
+          "labels": null,
+          "fields_set": [
+            "IsSpam",
+            "Messages",
+            "Metadata",
+            "SourceChannel",
+            "Tags",
+            "Title",
+            "Type"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Conversation",
+            "Conversation.Id"
+          ]
+        },
+        {
+          "name": "Should respond on a plug conversation served by the deployed agent's workflow",
+          "file": "api/v2_internal/plug_agent_template_deploy/template_deploy_conversation_test.go",
+          "labels": [
+            "INTERNAL_AI_AGENTS_DEPLOY"
+          ],
+          "fields_set": [
+            "IsSpam",
+            "Messages",
+            "Metadata",
+            "SourceChannel",
+            "Title",
+            "Type"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Conversation",
+            "Conversation.Id",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Should post a comment and get a turing answer in suggestion",
+          "file": "api/v2_internal/turing_answers/turing_answers_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_CONVERSATIONS_CREATE",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "Members",
+            "Messages",
+            "Type"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "GetConversation",
+            "StatusCode"
+          ]
+        }
+      ]
     },
     {
       "rpc": "CreateMilestone",
@@ -5685,8 +5921,8 @@
         "service_count": 1,
         "call_count": 2,
         "reached_by_test": true,
-        "deps_result_used_in_response": 17,
-        "deps_result_checked_by_test": 17,
+        "deps_result_used_in_response": 18,
+        "deps_result_checked_by_test": 18,
         "response_links": [
           {
             "dep": "schemaregistry:GetCustomStage",
@@ -5708,6 +5944,15 @@
           },
           {
             "dep": "schemaregistry:GetCustomStage",
+            "path": "out.Project.Description",
+            "checked_by": [
+              "Creates a project with required fields and returns a well-formed DON at the start stage",
+              "Rejects a custom field with an unknown schema key"
+            ],
+            "checked": true
+          },
+          {
+            "dep": "schemaregistry:GetCustomState",
             "path": "out.Project.Description",
             "checked_by": [
               "Creates a project with required fields and returns a well-formed DON at the start stage",
@@ -6739,7 +6984,7 @@
     {
       "rpc": "CreateWork",
       "operation": "WorksCreate",
-      "tests": 21,
+      "tests": 29,
       "status": {
         "documented": [
           201,
@@ -6768,10 +7013,10 @@
       },
       "fields": {
         "leaf_fields_read_by_rpc": 190,
-        "covered_count": 7,
-        "coverage_pct": 3.7,
-        "request_fields_set_by_tests": 7,
-        "set_by_positive_tests": 7,
+        "covered_count": 20,
+        "coverage_pct": 10.5,
+        "request_fields_set_by_tests": 17,
+        "set_by_positive_tests": 20,
         "set_by_negative_tests": 6,
         "by_depth": {
           "top_level": {
@@ -6781,19 +7026,19 @@
           },
           "nested": {
             "total": 35,
-            "set": 2,
-            "pct": 5.7
+            "set": 3,
+            "pct": 8.6
           },
           "deep": {
             "total": 147,
-            "set": 4,
-            "pct": 2.7
+            "set": 16,
+            "pct": 10.9
           }
         },
         "representative": {
           "units": 190,
-          "covered": 7,
-          "pct": 3.7,
+          "covered": 20,
+          "pct": 10.5,
           "collapsed_types": [
             "api.CustomSchemaSpec"
           ]
@@ -6803,7 +7048,20 @@
             "path": "in.Id",
             "match": "exact",
             "by_tests": [
-              "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation"
+              "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation",
+              "should create and activate the workflow as per the template"
+            ]
+          },
+          {
+            "path": "in.Ticket.Body",
+            "match": "exact",
+            "by_tests": [
+              "Should create a test issue manually for retrieval tests",
+              "Should create a test ticket manually for retrieval tests",
+              "rev user should be able to create a ticket without login",
+              "rev user should not be able to create a ticket without token",
+              "should create an issue with estimated effort as 20 to test the approval config",
+              "should create and activate the workflow as per the template"
             ]
           },
           {
@@ -6833,16 +7091,49 @@
               "Create with email source channel and channel",
               "Create with only required fields",
               "CreateTicket",
+              "Emits create event",
               "Fails WorksCreate with milestone from a different Enhancement",
               "OwnedByMissing",
               "PartsMissing",
+              "Should create a test issue manually for retrieval tests",
+              "Should create a test ticket manually for retrieval tests",
               "Type",
               "WithOnlyRequiredFields",
               "Without Applies To Part",
               "Without Owned By",
               "Without Type",
               "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation",
-              "sets space on create"
+              "rev user should be able to create a ticket without login",
+              "rev user should not be able to create a ticket without token",
+              "sets space on create",
+              "should create an issue with estimated effort as 20 to test the approval config",
+              "should create and activate the workflow as per the template"
+            ]
+          },
+          {
+            "path": "in.WorkOneof.Issue.Body",
+            "match": "exact",
+            "by_tests": [
+              "Should create a test issue manually for retrieval tests",
+              "Should create a test ticket manually for retrieval tests",
+              "rev user should be able to create a ticket without login",
+              "rev user should not be able to create a ticket without token",
+              "should create an issue with estimated effort as 20 to test the approval config",
+              "should create and activate the workflow as per the template"
+            ]
+          },
+          {
+            "path": "in.WorkOneof.Issue.SyncMetadata.LastSyncIn.Status",
+            "match": "exact",
+            "by_tests": [
+              "should create and activate the workflow as per the template"
+            ]
+          },
+          {
+            "path": "in.WorkOneof.Issue.SyncMetadata.LastSyncOut.Status",
+            "match": "exact",
+            "by_tests": [
+              "should create and activate the workflow as per the template"
             ]
           },
           {
@@ -6854,16 +7145,49 @@
               "Create with email source channel and channel",
               "Create with only required fields",
               "CreateTicket",
+              "Emits create event",
               "Fails WorksCreate with milestone from a different Enhancement",
               "OwnedByMissing",
               "PartsMissing",
+              "Should create a test issue manually for retrieval tests",
+              "Should create a test ticket manually for retrieval tests",
               "Type",
               "WithOnlyRequiredFields",
               "Without Applies To Part",
               "Without Owned By",
               "Without Type",
               "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation",
-              "sets space on create"
+              "rev user should be able to create a ticket without login",
+              "rev user should not be able to create a ticket without token",
+              "sets space on create",
+              "should create an issue with estimated effort as 20 to test the approval config",
+              "should create and activate the workflow as per the template"
+            ]
+          },
+          {
+            "path": "in.WorkOneof.Opportunity.Body",
+            "match": "exact",
+            "by_tests": [
+              "Should create a test issue manually for retrieval tests",
+              "Should create a test ticket manually for retrieval tests",
+              "rev user should be able to create a ticket without login",
+              "rev user should not be able to create a ticket without token",
+              "should create an issue with estimated effort as 20 to test the approval config",
+              "should create and activate the workflow as per the template"
+            ]
+          },
+          {
+            "path": "in.WorkOneof.Opportunity.SyncMetadata.LastSyncIn.Status",
+            "match": "exact",
+            "by_tests": [
+              "should create and activate the workflow as per the template"
+            ]
+          },
+          {
+            "path": "in.WorkOneof.Opportunity.SyncMetadata.LastSyncOut.Status",
+            "match": "exact",
+            "by_tests": [
+              "should create and activate the workflow as per the template"
             ]
           },
           {
@@ -6875,16 +7199,49 @@
               "Create with email source channel and channel",
               "Create with only required fields",
               "CreateTicket",
+              "Emits create event",
               "Fails WorksCreate with milestone from a different Enhancement",
               "OwnedByMissing",
               "PartsMissing",
+              "Should create a test issue manually for retrieval tests",
+              "Should create a test ticket manually for retrieval tests",
               "Type",
               "WithOnlyRequiredFields",
               "Without Applies To Part",
               "Without Owned By",
               "Without Type",
               "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation",
-              "sets space on create"
+              "rev user should be able to create a ticket without login",
+              "rev user should not be able to create a ticket without token",
+              "sets space on create",
+              "should create an issue with estimated effort as 20 to test the approval config",
+              "should create and activate the workflow as per the template"
+            ]
+          },
+          {
+            "path": "in.WorkOneof.Task.Body",
+            "match": "exact",
+            "by_tests": [
+              "Should create a test issue manually for retrieval tests",
+              "Should create a test ticket manually for retrieval tests",
+              "rev user should be able to create a ticket without login",
+              "rev user should not be able to create a ticket without token",
+              "should create an issue with estimated effort as 20 to test the approval config",
+              "should create and activate the workflow as per the template"
+            ]
+          },
+          {
+            "path": "in.WorkOneof.Task.SyncMetadata.LastSyncIn.Status",
+            "match": "exact",
+            "by_tests": [
+              "should create and activate the workflow as per the template"
+            ]
+          },
+          {
+            "path": "in.WorkOneof.Task.SyncMetadata.LastSyncOut.Status",
+            "match": "exact",
+            "by_tests": [
+              "should create and activate the workflow as per the template"
             ]
           },
           {
@@ -6896,16 +7253,49 @@
               "Create with email source channel and channel",
               "Create with only required fields",
               "CreateTicket",
+              "Emits create event",
               "Fails WorksCreate with milestone from a different Enhancement",
               "OwnedByMissing",
               "PartsMissing",
+              "Should create a test issue manually for retrieval tests",
+              "Should create a test ticket manually for retrieval tests",
               "Type",
               "WithOnlyRequiredFields",
               "Without Applies To Part",
               "Without Owned By",
               "Without Type",
               "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation",
-              "sets space on create"
+              "rev user should be able to create a ticket without login",
+              "rev user should not be able to create a ticket without token",
+              "sets space on create",
+              "should create an issue with estimated effort as 20 to test the approval config",
+              "should create and activate the workflow as per the template"
+            ]
+          },
+          {
+            "path": "in.WorkOneof.Ticket.Body",
+            "match": "exact",
+            "by_tests": [
+              "Should create a test issue manually for retrieval tests",
+              "Should create a test ticket manually for retrieval tests",
+              "rev user should be able to create a ticket without login",
+              "rev user should not be able to create a ticket without token",
+              "should create an issue with estimated effort as 20 to test the approval config",
+              "should create and activate the workflow as per the template"
+            ]
+          },
+          {
+            "path": "in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.Status",
+            "match": "exact",
+            "by_tests": [
+              "should create and activate the workflow as per the template"
+            ]
+          },
+          {
+            "path": "in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.Status",
+            "match": "exact",
+            "by_tests": [
+              "should create and activate the workflow as per the template"
             ]
           },
           {
@@ -6917,16 +7307,23 @@
               "Create with email source channel and channel",
               "Create with only required fields",
               "CreateTicket",
+              "Emits create event",
               "Fails WorksCreate with milestone from a different Enhancement",
               "OwnedByMissing",
               "PartsMissing",
+              "Should create a test issue manually for retrieval tests",
+              "Should create a test ticket manually for retrieval tests",
               "Type",
               "WithOnlyRequiredFields",
               "Without Applies To Part",
               "Without Owned By",
               "Without Type",
               "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation",
-              "sets space on create"
+              "rev user should be able to create a ticket without login",
+              "rev user should not be able to create a ticket without token",
+              "sets space on create",
+              "should create an issue with estimated effort as 20 to test the approval config",
+              "should create and activate the workflow as per the template"
             ]
           }
         ],
@@ -6951,7 +7348,6 @@
           "in.Ticket.AccountId",
           "in.Ticket.AppliesToPartId",
           "in.Ticket.ArtifactIds",
-          "in.Ticket.Body",
           "in.Ticket.BrandId",
           "in.Ticket.Channels",
           "in.Ticket.ChannelsV2",
@@ -6974,7 +7370,6 @@
           "in.WorkOneof.Issue.AppliesToPartId",
           "in.WorkOneof.Issue.AppliesToVersionIds",
           "in.WorkOneof.Issue.ArtifactIds",
-          "in.WorkOneof.Issue.Body",
           "in.WorkOneof.Issue.DevelopedWith",
           "in.WorkOneof.Issue.DevrevCopy.OriginId",
           "in.WorkOneof.Issue.DevrevCopy.OriginOrgId",
@@ -6998,10 +7393,8 @@
           "in.WorkOneof.Issue.Stage.StageId",
           "in.WorkOneof.Issue.StagedInfo.SyncInUnresolvedFields",
           "in.WorkOneof.Issue.StagedInfo.SyncOutUnresolvedFields",
-          "in.WorkOneof.Issue.SyncMetadata.LastSyncIn.Status",
           "in.WorkOneof.Issue.SyncMetadata.LastSyncIn.SyncHistoryId",
           "in.WorkOneof.Issue.SyncMetadata.LastSyncIn.SyncUnitId",
-          "in.WorkOneof.Issue.SyncMetadata.LastSyncOut.Status",
           "in.WorkOneof.Issue.SyncMetadata.LastSyncOut.SyncHistoryId",
           "in.WorkOneof.Issue.SyncMetadata.LastSyncOut.SyncUnitId",
           "in.WorkOneof.Issue.SyncMetadata.SyncedByDevUsers",
@@ -7010,7 +7403,6 @@
           "in.WorkOneof.Opportunity.AnnualContractValue.Amount",
           "in.WorkOneof.Opportunity.AnnualContractValue.Currency",
           "in.WorkOneof.Opportunity.ArtifactIds",
-          "in.WorkOneof.Opportunity.Body",
           "in.WorkOneof.Opportunity.Budget.Amount",
           "in.WorkOneof.Opportunity.Budget.Currency",
           "in.WorkOneof.Opportunity.ContactIds",
@@ -7033,10 +7425,8 @@
           "in.WorkOneof.Opportunity.Stage.StageId",
           "in.WorkOneof.Opportunity.StagedInfo.SyncInUnresolvedFields",
           "in.WorkOneof.Opportunity.StagedInfo.SyncOutUnresolvedFields",
-          "in.WorkOneof.Opportunity.SyncMetadata.LastSyncIn.Status",
           "in.WorkOneof.Opportunity.SyncMetadata.LastSyncIn.SyncHistoryId",
           "in.WorkOneof.Opportunity.SyncMetadata.LastSyncIn.SyncUnitId",
-          "in.WorkOneof.Opportunity.SyncMetadata.LastSyncOut.Status",
           "in.WorkOneof.Opportunity.SyncMetadata.LastSyncOut.SyncHistoryId",
           "in.WorkOneof.Opportunity.SyncMetadata.LastSyncOut.SyncUnitId",
           "in.WorkOneof.Opportunity.SyncMetadata.SyncedByDevUsers",
@@ -7046,7 +7436,6 @@
           "in.WorkOneof.Task.AppliesToPartId",
           "in.WorkOneof.Task.AppliesToVersionIds",
           "in.WorkOneof.Task.ArtifactIds",
-          "in.WorkOneof.Task.Body",
           "in.WorkOneof.Task.DevrevCopy.OriginId",
           "in.WorkOneof.Task.DevrevCopy.OriginOrgId",
           "in.WorkOneof.Task.EventContext.Source",
@@ -7061,10 +7450,8 @@
           "in.WorkOneof.Task.Stage.StageId",
           "in.WorkOneof.Task.StagedInfo.SyncInUnresolvedFields",
           "in.WorkOneof.Task.StagedInfo.SyncOutUnresolvedFields",
-          "in.WorkOneof.Task.SyncMetadata.LastSyncIn.Status",
           "in.WorkOneof.Task.SyncMetadata.LastSyncIn.SyncHistoryId",
           "in.WorkOneof.Task.SyncMetadata.LastSyncIn.SyncUnitId",
-          "in.WorkOneof.Task.SyncMetadata.LastSyncOut.Status",
           "in.WorkOneof.Task.SyncMetadata.LastSyncOut.SyncHistoryId",
           "in.WorkOneof.Task.SyncMetadata.LastSyncOut.SyncUnitId",
           "in.WorkOneof.Task.SyncMetadata.SyncedByDevUsers",
@@ -7073,7 +7460,6 @@
           "in.WorkOneof.Ticket.AppliesToPartId",
           "in.WorkOneof.Ticket.AppliesToVersionIds",
           "in.WorkOneof.Ticket.ArtifactIds",
-          "in.WorkOneof.Ticket.Body",
           "in.WorkOneof.Ticket.BrandId",
           "in.WorkOneof.Ticket.Channels",
           "in.WorkOneof.Ticket.ChannelsV2",
@@ -7105,10 +7491,8 @@
           "in.WorkOneof.Ticket.StagedInfo.SyncInUnresolvedFields",
           "in.WorkOneof.Ticket.StagedInfo.SyncOutUnresolvedFields",
           "in.WorkOneof.Ticket.SurveysAggregation",
-          "in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.Status",
           "in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.SyncHistoryId",
           "in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.SyncUnitId",
-          "in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.Status",
           "in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.SyncHistoryId",
           "in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.SyncUnitId",
           "in.WorkOneof.Ticket.SyncMetadata.SyncedByDevUsers",
@@ -7120,20 +7504,20 @@
         "total": 753,
         "happy_path_reached": true,
         "reachable_on_happy_path": 75,
-        "present_arm_exercised": 32,
-        "present_arm_pct": 4.2,
+        "present_arm_exercised": 41,
+        "present_arm_pct": 5.4,
         "absent_arm_exercised": 75,
         "absent_arm_pct": 100,
         "negative_arm_exercised": 17,
         "negative_arm_pct": 2.3,
         "both_arms_exercised": 15,
-        "coverage_pct": 4.2,
+        "coverage_pct": 5.4,
         "by_origin": {
           "service": {
             "total": 94,
             "reachable_on_happy_path": 24,
-            "present_arm_exercised": 3,
-            "present_arm_pct": 3.2,
+            "present_arm_exercised": 4,
+            "present_arm_pct": 4.3,
             "negative_arm_exercised": 1,
             "negative_arm_pct": 1.1,
             "absent_arm_exercised": 24
@@ -7141,8 +7525,8 @@
           "generated": {
             "total": 465,
             "reachable_on_happy_path": 17,
-            "present_arm_exercised": 20,
-            "present_arm_pct": 4.3,
+            "present_arm_exercised": 28,
+            "present_arm_pct": 6,
             "negative_arm_exercised": 16,
             "negative_arm_pct": 3.4,
             "absent_arm_exercised": 17
@@ -8266,14 +8650,6 @@
             ]
           },
           {
-            "id": "b151",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:10622",
-            "cond": "in.WorkOneof.Ticket.Body != nil",
-            "predicate_paths": [
-              "in.WorkOneof.Ticket.Body"
-            ]
-          },
-          {
             "id": "b152",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:10629",
             "cond": "in.WorkOneof.Ticket.ReportedById != nil",
@@ -9018,14 +9394,6 @@
             ]
           },
           {
-            "id": "b247",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:12538",
-            "cond": "in.WorkOneof.Issue.Body != nil",
-            "predicate_paths": [
-              "in.WorkOneof.Issue.Body"
-            ]
-          },
-          {
             "id": "b248",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:12545",
             "cond": "in.WorkOneof.Issue.ReportedById != nil",
@@ -9607,14 +9975,6 @@
             "cond": "in.WorkOneof.Task.AppliesToPartId == *ObjectTypeApiParameter",
             "predicate_paths": [
               "in.WorkOneof.Task.AppliesToPartId"
-            ]
-          },
-          {
-            "id": "b323",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:13914",
-            "cond": "in.WorkOneof.Task.Body != nil",
-            "predicate_paths": [
-              "in.WorkOneof.Task.Body"
             ]
           },
           {
@@ -10370,14 +10730,6 @@
             ]
           },
           {
-            "id": "b420",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:15057",
-            "cond": "in.WorkOneof.Opportunity.Body != nil",
-            "predicate_paths": [
-              "in.WorkOneof.Opportunity.Body"
-            ]
-          },
-          {
             "id": "b421",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:15064",
             "cond": "in.WorkOneof.Opportunity.ReportedById != nil",
@@ -10815,14 +11167,6 @@
             "cond": "in.WorkOneof.Ticket.DevrevCopy.OriginOrgId",
             "predicate_paths": [
               "in.WorkOneof.Ticket.DevrevCopy.OriginOrgId"
-            ]
-          },
-          {
-            "id": "b480",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:1896",
-            "cond": "in.WorkOneof.Ticket.Body != nil",
-            "predicate_paths": [
-              "in.WorkOneof.Ticket.Body"
             ]
           },
           {
@@ -11338,14 +11682,6 @@
             ]
           },
           {
-            "id": "b547",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:2959",
-            "cond": "in.WorkOneof.Issue.Body != nil",
-            "predicate_paths": [
-              "in.WorkOneof.Issue.Body"
-            ]
-          },
-          {
             "id": "b548",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:2962",
             "cond": "in.WorkOneof.Issue.ReportedById != nil",
@@ -11735,14 +12071,6 @@
             "cond": "in.WorkOneof.Task.DevrevCopy.OriginOrgId",
             "predicate_paths": [
               "in.WorkOneof.Task.DevrevCopy.OriginOrgId"
-            ]
-          },
-          {
-            "id": "b599",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:3726",
-            "cond": "in.WorkOneof.Task.Body != nil",
-            "predicate_paths": [
-              "in.WorkOneof.Task.Body"
             ]
           },
           {
@@ -12199,14 +12527,6 @@
             "cond": "in.WorkOneof.Opportunity.AnnualContractValue.Currency",
             "predicate_paths": [
               "in.WorkOneof.Opportunity.AnnualContractValue.Currency"
-            ]
-          },
-          {
-            "id": "b659",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:4387",
-            "cond": "in.WorkOneof.Opportunity.Body != nil",
-            "predicate_paths": [
-              "in.WorkOneof.Opportunity.Body"
             ]
           },
           {
@@ -12691,14 +13011,6 @@
             ]
           },
           {
-            "id": "b722",
-            "at": "internal/serverv2/create_work.go:298",
-            "cond": "in.Ticket.Body == \"\"",
-            "predicate_paths": [
-              "in.Ticket.Body"
-            ]
-          },
-          {
             "id": "b724",
             "at": "internal/serverv2/create_work.go:304",
             "cond": "in.Ticket.AppliesToPartId == nil",
@@ -13015,6 +13327,22 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "description",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "inputvalues",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "name",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "operation",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "ownedby",
             "fuzzy_suggestions": [
               "in.Issue.OwnedByIds",
@@ -13027,6 +13355,14 @@
             ]
           },
           {
+            "field": "previoussteps",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "referencekey",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "type",
             "fuzzy_suggestions": [
               "in.WorkOneof.Issue.WorkType",
@@ -13034,10 +13370,60 @@
               "in.WorkOneof.Task.WorkType",
               "in.WorkOneof.Ticket.WorkType"
             ]
+          },
+          {
+            "field": "uimetadata",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "workflow",
+            "fuzzy_suggestions": null
           }
         ]
       },
       "test_facts": [
+        {
+          "name": "Should create a test issue manually for retrieval tests",
+          "file": "api/v2_internal/ai_agent_versions/crud/agent_versions_scopes_execution_test.go",
+          "labels": [
+            "INTERNAL_WORKS_CREATE"
+          ],
+          "fields_set": [
+            "AppliesToPart",
+            "Body",
+            "Title",
+            "Type"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "GetWork",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Should create a test ticket manually for retrieval tests",
+          "file": "api/v2_internal/ai_agent_versions/crud/agent_versions_scopes_execution_test.go",
+          "labels": [
+            "INTERNAL_WORKS_CREATE"
+          ],
+          "fields_set": [
+            "AppliesToPart",
+            "Body",
+            "Title",
+            "Type"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "GetWork",
+            "StatusCode"
+          ]
+        },
         {
           "name": "Create with email source channel",
           "file": "api/v2_internal/email/tickets_test.go",
@@ -13120,6 +13506,27 @@
             "StatusCode",
             "Work",
             "Work.AsTicket"
+          ]
+        },
+        {
+          "name": "should create an issue with estimated effort as 20 to test the approval config",
+          "file": "api/v2_internal/schemaregistry/approvals_test.go",
+          "labels": null,
+          "fields_set": [
+            "AppliesToPart",
+            "Body",
+            "OwnedBy",
+            "Title",
+            "Type"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsIssue"
           ]
         },
         {
@@ -13271,6 +13678,23 @@
           "response_fields_asserted": null
         },
         {
+          "name": "should create an issue with a masked custom field as admin",
+          "file": "api/v2_internal/work/issues/crud/masking/issues_masking_test.go",
+          "labels": [
+            "INTERNAL_WORKS_CREATE"
+          ],
+          "fields_set": null,
+          "statuses": [
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsIssue"
+          ]
+        },
+        {
           "name": "Create with only required fields",
           "file": "api/v2_internal/work/tickets/crud/create_ticket_test.go",
           "labels": [
@@ -13317,6 +13741,42 @@
             "Part",
             "Part.ValueByDiscriminator",
             "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
+        },
+        {
+          "name": "rev user should be able to create a ticket without login",
+          "file": "api/v2_internal/work/tickets/crud/public_ticket/create_public_ticket_test.go",
+          "labels": [
+            "INTERNAL_WORKS_CREATE"
+          ],
+          "fields_set": [
+            "Body",
+            "Title",
+            "Type"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "Work",
+            "Work.AsTicket"
+          ]
+        },
+        {
+          "name": "rev user should not be able to create a ticket without token",
+          "file": "api/v2_internal/work/tickets/crud/public_ticket/create_public_ticket_test.go",
+          "labels": [
+            "INTERNAL_WORKS_CREATE"
+          ],
+          "fields_set": [
+            "Body",
+            "Title",
+            "Type"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": [
             "Work",
             "Work.AsTicket"
           ]
@@ -13485,31 +13945,108 @@
             "Work",
             "Work.AsTicket"
           ]
+        },
+        {
+          "name": "Emits create event",
+          "file": "e2e/transformers/codex/codex_test.go",
+          "labels": [
+            "POSITIVE",
+            "FUNCTIONAL"
+          ],
+          "fields_set": [
+            "AppliesToPart",
+            "Title"
+          ],
+          "statuses": [
+            201
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsIssue"
+          ]
+        },
+        {
+          "name": "should create and activate the workflow as per the template",
+          "file": "e2e/workflow_uat_automation/workflow_uat_test.go",
+          "labels": [
+            "UAT"
+          ],
+          "fields_set": [
+            "Body",
+            "Description",
+            "Id",
+            "InputValues",
+            "Name",
+            "Operation",
+            "OwnedBy",
+            "PreviousSteps",
+            "ReferenceKey",
+            "Status",
+            "Title",
+            "Type",
+            "UiMetadata",
+            "Workflow"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsOpportunity",
+            "Workflow",
+            "Workflow.Id",
+            "WorkflowStep",
+            "WorkflowStep.Id"
+          ]
         }
       ]
     },
     {
       "rpc": "DeleteCodeChange",
-      "operation": "",
-      "tests": 0,
+      "operation": "CodeChangesDelete",
+      "tests": 1,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200
+        ],
+        "missing": [
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 12.5
       },
       "fields": {
         "leaf_fields_read_by_rpc": 1,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
-        "set_by_positive_tests": 0,
+        "covered_count": 1,
+        "coverage_pct": 100,
+        "request_fields_set_by_tests": 1,
+        "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
             "total": 1,
-            "set": 0,
-            "pct": 0
+            "set": 1,
+            "pct": 100
           },
           "nested": {
             "total": 0,
@@ -13524,27 +14061,33 @@
         },
         "representative": {
           "units": 1,
-          "covered": 0,
-          "pct": 0,
+          "covered": 1,
+          "pct": 100,
           "collapsed_types": []
         },
-        "covered": null,
-        "gaps": [
-          "in.Id"
-        ]
+        "covered": [
+          {
+            "path": "in.Id",
+            "match": "exact",
+            "by_tests": [
+              "DeleteCodeChange"
+            ]
+          }
+        ],
+        "gaps": null
       },
       "branches": {
         "total": 3,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 2,
-        "present_arm_exercised": 0,
-        "present_arm_pct": 0,
+        "present_arm_exercised": 2,
+        "present_arm_pct": 66.7,
         "absent_arm_exercised": 0,
         "absent_arm_pct": 0,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 0,
+        "coverage_pct": 66.7,
         "by_origin": {
           "service": {
             "total": 1,
@@ -13557,40 +14100,24 @@
           },
           "generated": {
             "total": 1,
-            "reachable_on_happy_path": 0,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
+            "reachable_on_happy_path": 1,
+            "present_arm_exercised": 1,
+            "present_arm_pct": 100,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 0
           },
           "library": {
             "total": 1,
-            "reachable_on_happy_path": 0,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
+            "reachable_on_happy_path": 1,
+            "present_arm_exercised": 1,
+            "present_arm_pct": 100,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 0
           }
         },
         "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
-            "cond": "in.Id == nil",
-            "predicate_paths": [
-              "in.Id"
-            ]
-          },
-          {
-            "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/code_change.pb.validator.go:79",
-            "cond": "in.Id != nil",
-            "predicate_paths": [
-              "in.Id"
-            ]
-          },
           {
             "id": "b3",
             "at": "internal/serverv2/delete_code_change.go:18",
@@ -13606,7 +14133,7 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false,
+        "reached_by_test": true,
         "deps_result_used_in_response": 0,
         "deps_result_checked_by_test": 0,
         "response_links": null
@@ -13614,8 +14141,25 @@
       "anomalies": {
         "unmatched_test_fields": null
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "DeleteCodeChange",
+          "file": "api/v2_internal/code_change/code_changes_test.go",
+          "labels": [
+            "INTERNAL_CODE_CHANGES_DELETE"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        }
+      ]
     },
     {
       "rpc": "DeleteConversation",
@@ -14436,7 +14980,7 @@
     {
       "rpc": "DeleteWork",
       "operation": "WorksDelete",
-      "tests": 11,
+      "tests": 17,
       "status": {
         "documented": [
           200,
@@ -14451,26 +14995,28 @@
         ],
         "asserted": [
           200,
-          400
+          201,
+          202,
+          400,
+          403
         ],
         "missing": [
           401,
-          403,
           404,
           413,
           429,
           500,
           503
         ],
-        "coverage_pct": 22.2
+        "coverage_pct": 33.3
       },
       "fields": {
         "leaf_fields_read_by_rpc": 2,
         "covered_count": 1,
         "coverage_pct": 50,
-        "request_fields_set_by_tests": 1,
+        "request_fields_set_by_tests": 17,
         "set_by_positive_tests": 1,
-        "set_by_negative_tests": 0,
+        "set_by_negative_tests": 1,
         "by_depth": {
           "top_level": {
             "total": 2,
@@ -14504,7 +15050,12 @@
               "Delete by id",
               "DeleteTicket1",
               "DeleteTicket2",
-              "DeleteTicket3"
+              "DeleteTicket3",
+              "MetricActionExecute on Frozen Ticket",
+              "Should list entries for a ticket the user has read access to",
+              "Should not list entries for a ticket the user has no role on",
+              "Workflow runs termination: using exit signal",
+              "should handle search for recently deleted items"
             ]
           }
         ],
@@ -14520,8 +15071,8 @@
         "present_arm_pct": 62.5,
         "absent_arm_exercised": 15,
         "absent_arm_pct": 100,
-        "negative_arm_exercised": 0,
-        "negative_arm_pct": 0,
+        "negative_arm_exercised": 10,
+        "negative_arm_pct": 62.5,
         "both_arms_exercised": 10,
         "coverage_pct": 62.5,
         "by_origin": {
@@ -14539,8 +15090,8 @@
             "reachable_on_happy_path": 4,
             "present_arm_exercised": 2,
             "present_arm_pct": 50,
-            "negative_arm_exercised": 0,
-            "negative_arm_pct": 0,
+            "negative_arm_exercised": 2,
+            "negative_arm_pct": 50,
             "absent_arm_exercised": 4
           },
           "library": {
@@ -14548,8 +15099,8 @@
             "reachable_on_happy_path": 10,
             "present_arm_exercised": 8,
             "present_arm_pct": 80,
-            "negative_arm_exercised": 0,
-            "negative_arm_pct": 0,
+            "negative_arm_exercised": 8,
+            "negative_arm_pct": 80,
             "absent_arm_exercised": 10
           }
         },
@@ -14629,9 +15180,121 @@
         "response_links": null
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "action",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "appliestopart",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "body",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "contentdescriptor",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "eventdate",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "metric",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "name",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "object",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "ownedby",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "payload",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "reason",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "status",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "text",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "title",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "type",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "usecase",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
       "test_facts": [
+        {
+          "name": "Should list entries for a ticket the user has read access to",
+          "file": "api/v2_internal/dogmatix/knowledge_store_test.go",
+          "labels": [
+            "POSITIVE"
+          ],
+          "fields_set": [
+            "ContentDescriptor",
+            "Id",
+            "Object",
+            "Text",
+            "Type",
+            "UseCase"
+          ],
+          "statuses": [
+            200,
+            202
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "DevUsers",
+            "Entries",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Should not list entries for a ticket the user has no role on",
+          "file": "api/v2_internal/dogmatix/knowledge_store_test.go",
+          "labels": [
+            "NEGATIVE"
+          ],
+          "fields_set": [
+            "ContentDescriptor",
+            "Id",
+            "Object",
+            "Text",
+            "UseCase"
+          ],
+          "statuses": [
+            202,
+            403
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
         {
           "name": "DeleteTicket1",
           "file": "api/v2_internal/rools/rule_execution/part_based_routing_test.go",
@@ -14701,6 +15364,38 @@
           ]
         },
         {
+          "name": "MetricActionExecute on Frozen Ticket",
+          "file": "api/v2_internal/slas/trackers_test.go",
+          "labels": [
+            "INTERNAL_METRIC_ACTION_EXECUTE",
+            "POSITIVE"
+          ],
+          "fields_set": [
+            "Action",
+            "AppliesToPart",
+            "EventDate",
+            "Id",
+            "Metric",
+            "Object",
+            "OwnedBy",
+            "Title",
+            "Type"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "AccessToken",
+            "Part",
+            "Part.AsProduct",
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
+        },
+        {
           "name": "Admin - Should be able to delete an issue",
           "file": "api/v2_internal/work/issues/crud/delete_works_test.go",
           "labels": [
@@ -14752,6 +15447,92 @@
           ]
         },
         {
+          "name": "Workflow runs termination: using exit signal",
+          "file": "api/v2_internal/workflows/workflows_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_WORKFLOWS_TEMPLATES_INSTANTIATE",
+            "INTERNAL_WORKFLOW_RUNS_SIGNAL",
+            "INTERNAL_WORKFLOW_RUNS_GET",
+            "INTERNAL_WORKFLOWS_UPDATE_STATUS",
+            "INTERNAL_WORKFLOWS_TRIGGER"
+          ],
+          "fields_set": [
+            "AppliesToPart",
+            "Body",
+            "Id",
+            "Name",
+            "OwnedBy",
+            "Payload",
+            "Reason",
+            "Status",
+            "Title",
+            "Type"
+          ],
+          "statuses": [
+            200,
+            201,
+            400,
+            403
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket",
+            "Workflow",
+            "Workflow.Id",
+            "Workflow.WorkflowVersion",
+            "Workflow.WorkflowVersion.AsWorkflowVersionSummary",
+            "WorkflowRun",
+            "WorkflowRun.Status",
+            "WorkflowRunId"
+          ]
+        },
+        {
+          "name": "Workflow runs termination: using exit signal",
+          "file": "api/v2_internal/workflows/workflows_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_WORKFLOWS_TEMPLATES_INSTANTIATE",
+            "INTERNAL_WORKFLOW_RUNS_SIGNAL",
+            "INTERNAL_WORKFLOW_RUNS_GET",
+            "INTERNAL_WORKFLOWS_UPDATE_STATUS",
+            "INTERNAL_WORKFLOWS_TRIGGER"
+          ],
+          "fields_set": [
+            "AppliesToPart",
+            "Body",
+            "Id",
+            "Name",
+            "OwnedBy",
+            "Payload",
+            "Reason",
+            "Status",
+            "Title",
+            "Type"
+          ],
+          "statuses": [
+            200,
+            201,
+            400,
+            403
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket",
+            "Workflow",
+            "Workflow.Id",
+            "Workflow.WorkflowVersion",
+            "Workflow.WorkflowVersion.AsWorkflowVersionSummary",
+            "WorkflowRun",
+            "WorkflowRun.Status",
+            "WorkflowRunId"
+          ]
+        },
+        {
           "name": "DefaultDelete",
           "file": "api/v2_public/works/crud/delete_works_test.go",
           "labels": [
@@ -14789,31 +15570,65 @@
           "response_fields_asserted": [
             "StatusCode"
           ]
+        },
+        {
+          "name": "should handle search for recently deleted items",
+          "file": "e2e/computer_user_journey/computer_user_journey_negative_test.go",
+          "labels": null,
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
     {
       "rpc": "GetCodeChange",
-      "operation": "",
-      "tests": 0,
+      "operation": "CodeChangesGet",
+      "tests": 1,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200
+        ],
+        "missing": [
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 12.5
       },
       "fields": {
         "leaf_fields_read_by_rpc": 1,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
-        "set_by_positive_tests": 0,
+        "covered_count": 1,
+        "coverage_pct": 100,
+        "request_fields_set_by_tests": 1,
+        "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
             "total": 1,
-            "set": 0,
-            "pct": 0
+            "set": 1,
+            "pct": 100
           },
           "nested": {
             "total": 0,
@@ -14828,27 +15643,33 @@
         },
         "representative": {
           "units": 1,
-          "covered": 0,
-          "pct": 0,
+          "covered": 1,
+          "pct": 100,
           "collapsed_types": []
         },
-        "covered": null,
-        "gaps": [
-          "in.Id"
-        ]
+        "covered": [
+          {
+            "path": "in.Id",
+            "match": "exact",
+            "by_tests": [
+              "GetCodeChange"
+            ]
+          }
+        ],
+        "gaps": null
       },
       "branches": {
         "total": 3,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 2,
-        "present_arm_exercised": 0,
-        "present_arm_pct": 0,
+        "present_arm_exercised": 2,
+        "present_arm_pct": 66.7,
         "absent_arm_exercised": 0,
         "absent_arm_pct": 0,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 0,
+        "coverage_pct": 66.7,
         "by_origin": {
           "service": {
             "total": 1,
@@ -14861,40 +15682,24 @@
           },
           "generated": {
             "total": 1,
-            "reachable_on_happy_path": 0,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
+            "reachable_on_happy_path": 1,
+            "present_arm_exercised": 1,
+            "present_arm_pct": 100,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 0
           },
           "library": {
             "total": 1,
-            "reachable_on_happy_path": 0,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
+            "reachable_on_happy_path": 1,
+            "present_arm_exercised": 1,
+            "present_arm_pct": 100,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 0
           }
         },
         "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
-            "cond": "in.Id == nil",
-            "predicate_paths": [
-              "in.Id"
-            ]
-          },
-          {
-            "id": "b2",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/code_change.pb.validator.go:37",
-            "cond": "in.Id != nil",
-            "predicate_paths": [
-              "in.Id"
-            ]
-          },
           {
             "id": "b3",
             "at": "internal/serverv2/get_code_change.go:40",
@@ -14918,7 +15723,7 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 2,
-        "reached_by_test": false,
+        "reached_by_test": true,
         "deps_result_used_in_response": 0,
         "deps_result_checked_by_test": 0,
         "response_links": null
@@ -14926,13 +15731,30 @@
       "anomalies": {
         "unmatched_test_fields": null
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "GetCodeChange",
+          "file": "api/v2_internal/code_change/code_changes_test.go",
+          "labels": [
+            "INTERNAL_CODE_CHANGES_GET"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        }
+      ]
     },
     {
       "rpc": "GetConversation",
       "operation": "ConversationsGet",
-      "tests": 1,
+      "tests": 5,
       "status": {
         "documented": [
           200,
@@ -14946,27 +15768,27 @@
           503
         ],
         "asserted": [
-          200
+          200,
+          403
         ],
         "missing": [
           400,
           401,
-          403,
           404,
           413,
           429,
           500,
           503
         ],
-        "coverage_pct": 11.1
+        "coverage_pct": 22.2
       },
       "fields": {
         "leaf_fields_read_by_rpc": 3,
         "covered_count": 1,
         "coverage_pct": 33.3,
-        "request_fields_set_by_tests": 1,
+        "request_fields_set_by_tests": 3,
         "set_by_positive_tests": 1,
-        "set_by_negative_tests": 0,
+        "set_by_negative_tests": 1,
         "by_depth": {
           "top_level": {
             "total": 3,
@@ -14995,7 +15817,11 @@
             "path": "in.Id",
             "match": "exact",
             "by_tests": [
-              "Dev User should able to get all conversations"
+              "Dev User should able to get all conversations",
+              "Other Rev User from same RevOrg should not able to get conversation",
+              "Should be able to get conversation object for 1st RevUser",
+              "Should be able to get conversation object for 2nd RevUser",
+              "rev user should be able to create and update a conversation, and retain access"
             ]
           }
         ],
@@ -15012,8 +15838,8 @@
         "present_arm_pct": 33.3,
         "absent_arm_exercised": 5,
         "absent_arm_pct": 62.5,
-        "negative_arm_exercised": 0,
-        "negative_arm_pct": 0,
+        "negative_arm_exercised": 3,
+        "negative_arm_pct": 33.3,
         "both_arms_exercised": 0,
         "coverage_pct": 33.3,
         "by_origin": {
@@ -15031,8 +15857,8 @@
             "reachable_on_happy_path": 4,
             "present_arm_exercised": 2,
             "present_arm_pct": 50,
-            "negative_arm_exercised": 0,
-            "negative_arm_pct": 0,
+            "negative_arm_exercised": 2,
+            "negative_arm_pct": 50,
             "absent_arm_exercised": 2
           },
           "library": {
@@ -15040,8 +15866,8 @@
             "reachable_on_happy_path": 2,
             "present_arm_exercised": 1,
             "present_arm_pct": 50,
-            "negative_arm_exercised": 0,
-            "negative_arm_pct": 0,
+            "negative_arm_exercised": 1,
+            "negative_arm_pct": 50,
             "absent_arm_exercised": 1
           }
         },
@@ -15117,44 +15943,118 @@
         "call_count": 3,
         "reached_by_test": true,
         "deps_result_used_in_response": 5,
-        "deps_result_checked_by_test": 0,
+        "deps_result_checked_by_test": 5,
         "response_links": [
           {
             "dep": "schemaregistry:GetUpgradeInstructionsV2",
             "path": "out.Conversation",
-            "checked_by": null,
-            "checked": false
+            "checked_by": [
+              "rev user should be able to create and update a conversation, and retain access"
+            ],
+            "checked": true
           },
           {
             "dep": "schemaregistry:GetUpgradeInstructionsV2",
             "path": "out.Conversation.DevOid",
-            "checked_by": null,
-            "checked": false
+            "checked_by": [
+              "rev user should be able to create and update a conversation, and retain access"
+            ],
+            "checked": true
           },
           {
             "dep": "schemaregistry:GetUpgradeInstructionsV2",
             "path": "out.Conversation.DisplayId",
-            "checked_by": null,
-            "checked": false
+            "checked_by": [
+              "rev user should be able to create and update a conversation, and retain access"
+            ],
+            "checked": true
           },
           {
             "dep": "schemaregistry:GetUpgradeInstructionsV2",
             "path": "out.Conversation.ObjectType",
-            "checked_by": null,
-            "checked": false
+            "checked_by": [
+              "rev user should be able to create and update a conversation, and retain access"
+            ],
+            "checked": true
           },
           {
             "dep": "schemaregistry:GetUpgradeInstructionsV2",
             "path": "out.Conversation.ObjectVersion",
-            "checked_by": null,
-            "checked": false
+            "checked_by": [
+              "rev user should be able to create and update a conversation, and retain access"
+            ],
+            "checked": true
           }
         ]
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "description",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "title",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
       "test_facts": [
+        {
+          "name": "Should be able to get conversation object for 1st RevUser",
+          "file": "api/v2_internal/conversations/get_conversation_test.go",
+          "labels": [
+            "POSITIVE",
+            "NON_LOCAL",
+            "GINKGO_PR_SANITY"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Should be able to get conversation object for 2nd RevUser",
+          "file": "api/v2_internal/conversations/get_conversation_test.go",
+          "labels": [
+            "POSITIVE",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Other Rev User from same RevOrg should not able to get conversation",
+          "file": "api/v2_internal/conversations/get_conversation_test.go",
+          "labels": [
+            "NEGATIVE",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            403
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
         {
           "name": "Dev User should able to get all conversations",
           "file": "api/v2_internal/conversations/get_conversation_test.go",
@@ -15171,6 +16071,24 @@
           "asserts_success": true,
           "response_fields_asserted": [
             "StatusCode"
+          ]
+        },
+        {
+          "name": "rev user should be able to create and update a conversation, and retain access",
+          "file": "api/v2_internal/conversations/mfz/conversation_revuser_access_test.go",
+          "labels": [
+            "INTERNAL_CONVERSATIONS_CREATE"
+          ],
+          "fields_set": [
+            "Description",
+            "Id",
+            "Title"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "Conversation",
+            "Conversation.Id"
           ]
         }
       ]
@@ -15918,41 +16836,24 @@
     },
     {
       "rpc": "GetWork",
-      "operation": "WorksGet",
-      "tests": 14,
+      "operation": "WebhooksFetch,WorksGet,WorksGetPost",
+      "tests": 29,
       "status": {
-        "documented": [
-          200,
-          400,
-          401,
-          403,
-          404,
-          413,
-          429,
-          500,
-          503
-        ],
+        "documented": null,
         "asserted": [
           200,
           201,
+          400,
           404
         ],
-        "missing": [
-          400,
-          401,
-          403,
-          413,
-          429,
-          500,
-          503
-        ],
-        "coverage_pct": 22.2
+        "missing": [],
+        "coverage_pct": 0
       },
       "fields": {
         "leaf_fields_read_by_rpc": 3,
         "covered_count": 1,
         "coverage_pct": 33.3,
-        "request_fields_set_by_tests": 5,
+        "request_fields_set_by_tests": 41,
         "set_by_positive_tests": 1,
         "set_by_negative_tests": 1,
         "by_depth": {
@@ -15993,9 +16894,23 @@
               "CreateTicketPart2",
               "CreateTicketPart3",
               "DefaultGet",
+              "Delete issue with shared_with set — returns 200; members can no longer get it",
+              "Delete opportunity with shared_with set — returns 200; members can no longer get it",
+              "Delete ticket with shared_with set — returns 200; members can no longer get it",
+              "FetchWebhook",
               "Get by id",
               "Platform user should be able to perform all CRUD operations",
-              "Unsets milestone on all referencing issues when milestone is deleted"
+              "Team coordinates work management through comprehensive operations",
+              "Unsets milestone on all referencing issues when milestone is deleted",
+              "Updates survey aggregation on a frozen ticket using service account context",
+              "Validates works operations reliability through repeated API testing",
+              "With Id",
+              "With invalid id",
+              "should create and activate the TCD notifier workflow with group membership check",
+              "should create and activate the TSE Logic workflow",
+              "should create ticket tag automation workflow when ticket stage is changed",
+              "should return masked custom field value when the masked user reads the issue",
+              "should return unmasked custom field value when admin reads the issue"
             ]
           }
         ],
@@ -16135,7 +17050,143 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "baseobject",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "body",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "channel",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "description",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "dispatchedchannels",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "dispatchedto",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "dispatchid",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "group",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "inputvalues",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "manifest",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "member",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "membertype",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "name",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "object",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "operation",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "ownedby",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "owner",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "previoussteps",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "recipient",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "referencekey",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "response",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "responsechannel",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "responsescore",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "schema",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "slug",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "snapin",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "snapinactionname",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "snapinpackage",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "snapinversion",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "snapkitbody",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "sourcecodeartifact",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "stage",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "status",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "survey",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "targetclosedate",
             "fuzzy_suggestions": null
           },
           {
@@ -16145,10 +17196,36 @@
           {
             "field": "type",
             "fuzzy_suggestions": null
+          },
+          {
+            "field": "uimetadata",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "workflow",
+            "fuzzy_suggestions": null
           }
         ]
       },
       "test_facts": [
+        {
+          "name": "FetchWebhook",
+          "file": "api/v2_internal/webhooks/webhooks_test.go",
+          "labels": [
+            "INTERNAL_WEBHOOKS_FETCH"
+          ],
+          "fields_set": [
+            "Id",
+            "Object"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
         {
           "name": "Unsets milestone on all referencing issues when milestone is deleted",
           "file": "api/v2_internal/milestones/crud/milestone_interaction_test.go",
@@ -16350,6 +17427,97 @@
           ]
         },
         {
+          "name": "With Id",
+          "file": "api/v2_internal/work/opportunities/get_opportunity_test.go",
+          "labels": [
+            "POSITIVE",
+            "GINKGO_PR_SANITY"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsOpportunity"
+          ]
+        },
+        {
+          "name": "With invalid id",
+          "file": "api/v2_internal/work/opportunities/get_opportunity_test.go",
+          "labels": [
+            "POSITIVE"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Without id",
+          "file": "api/v2_internal/work/opportunities/get_opportunity_test.go",
+          "labels": [
+            "POSITIVE"
+          ],
+          "fields_set": null,
+          "statuses": [
+            400
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Delete opportunity with shared_with set — returns 200; members can no longer get it",
+          "file": "api/v2_internal/work/opportunities/shared_with/opportunity_shared_with_test.go",
+          "labels": null,
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Delete issue with shared_with set — returns 200; members can no longer get it",
+          "file": "api/v2_internal/work/shared_with/issue_shared_with_test.go",
+          "labels": null,
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Delete ticket with shared_with set — returns 200; members can no longer get it",
+          "file": "api/v2_internal/work/shared_with/ticket_shared_with_test.go",
+          "labels": null,
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": null,
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
           "name": "Get by id",
           "file": "api/v2_internal/work/tickets/crud/get_ticket_test.go",
           "labels": [
@@ -16407,6 +17575,52 @@
           ]
         },
         {
+          "name": "Team coordinates work management through comprehensive operations",
+          "file": "e2e/smoke_test_case/works_management/works_test.go",
+          "labels": [
+            "SMOKE",
+            "INTERNAL_WORKS_GET",
+            "INTERNAL_WORKS_UPDATE"
+          ],
+          "fields_set": [
+            "Body",
+            "Id",
+            "Type"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
+        },
+        {
+          "name": "Validates works operations reliability through repeated API testing",
+          "file": "e2e/smoke_test_case/works_management/works_test.go",
+          "labels": [
+            "SMOKE",
+            "INTERNAL_WORKS_GET",
+            "INTERNAL_WORKS_UPDATE"
+          ],
+          "fields_set": [
+            "Body",
+            "Id",
+            "Type"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
+        },
+        {
           "name": "Platform user should be able to perform all CRUD operations",
           "file": "e2e/ticktes_user_journey/mfz_tickets_test/mfz_tickets_test.go",
           "labels": [
@@ -16422,6 +17636,221 @@
           "asserts_success": true,
           "response_fields_asserted": [
             "StatusCode"
+          ]
+        },
+        {
+          "name": "should create ticket tag automation workflow when ticket stage is changed",
+          "file": "e2e/workflow_uat_automation/workflow_node_test.go",
+          "labels": [
+            "UAT"
+          ],
+          "fields_set": [
+            "Body",
+            "Description",
+            "Id",
+            "InputValues",
+            "Name",
+            "Operation",
+            "PreviousSteps",
+            "ReferenceKey",
+            "Status",
+            "Title",
+            "Type",
+            "UiMetadata",
+            "Workflow"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Tag",
+            "Tag.Id",
+            "Work",
+            "Work.AsTicket",
+            "Workflow",
+            "Workflow.Id",
+            "WorkflowStep",
+            "WorkflowStep.Id"
+          ]
+        },
+        {
+          "name": "should create and activate the TSE Logic workflow",
+          "file": "e2e/workflow_uat_automation/workflow_uat_test.go",
+          "labels": [
+            "INVALID"
+          ],
+          "fields_set": [
+            "AppliesToPart",
+            "Body",
+            "Description",
+            "Id",
+            "InputValues",
+            "Name",
+            "Operation",
+            "OwnedBy",
+            "PreviousSteps",
+            "ReferenceKey",
+            "Status",
+            "Title",
+            "Type",
+            "UiMetadata",
+            "Workflow"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket",
+            "Workflow",
+            "Workflow.Id",
+            "WorkflowStep",
+            "WorkflowStep.Id"
+          ]
+        },
+        {
+          "name": "should create and activate the TCD notifier workflow with group membership check",
+          "file": "e2e/workflow_uat_automation/workflow_uat_test.go",
+          "labels": [
+            "UAT"
+          ],
+          "fields_set": [
+            "AppliesToPart",
+            "Body",
+            "Description",
+            "Group",
+            "Id",
+            "InputValues",
+            "Member",
+            "MemberType",
+            "Name",
+            "Operation",
+            "OwnedBy",
+            "Owner",
+            "PreviousSteps",
+            "ReferenceKey",
+            "Status",
+            "TargetCloseDate",
+            "Title",
+            "Type",
+            "UiMetadata",
+            "Workflow"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Group",
+            "Group.Id",
+            "StatusCode",
+            "Work",
+            "Work.AsTicket",
+            "Workflow",
+            "Workflow.Id",
+            "WorkflowStep",
+            "WorkflowStep.Id"
+          ]
+        },
+        {
+          "name": "Updates survey aggregation on a frozen ticket using service account context",
+          "file": "api/v2_internal/surveys/crud/survey_service_account_test.go",
+          "labels": [
+            "POSITIVE",
+            "FUNCTIONAL",
+            "INTERNAL_SURVEYS_SUBMIT",
+            "INTERNAL_SURVEYS_RESPONSES_UPDATE",
+            "INTERNAL_SNAP_KIT_ACTION_CREATE_DEFERRED"
+          ],
+          "fields_set": [
+            "AppliesToPart",
+            "BaseObject",
+            "Channel",
+            "Description",
+            "DispatchId",
+            "DispatchedChannels",
+            "DispatchedTo",
+            "Id",
+            "Manifest",
+            "Name",
+            "Object",
+            "Recipient",
+            "Response",
+            "ResponseChannel",
+            "ResponseScore",
+            "Schema",
+            "Slug",
+            "SnapIn",
+            "SnapInActionName",
+            "SnapInPackage",
+            "SnapInVersion",
+            "SnapKitBody",
+            "SourceCodeArtifact",
+            "Stage",
+            "Survey",
+            "Title",
+            "Type"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Execution",
+            "Execution.Id",
+            "GetSurvey",
+            "SnapIn",
+            "SnapIn.Id",
+            "SnapInPackage",
+            "SnapInPackage.Id",
+            "SnapInVersion",
+            "SnapInVersion.Id",
+            "SnapInVersion.State",
+            "StatusCode",
+            "Work",
+            "Work.AsTicket"
+          ]
+        },
+        {
+          "name": "should return masked custom field value when the masked user reads the issue",
+          "file": "api/v2_internal/work/issues/crud/masking/issues_masking_test.go",
+          "labels": null,
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsIssue"
+          ]
+        },
+        {
+          "name": "should return unmasked custom field value when admin reads the issue",
+          "file": "api/v2_internal/work/issues/crud/masking/issues_masking_test.go",
+          "labels": null,
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsIssue"
           ]
         }
       ]
@@ -19921,7 +21350,7 @@
     {
       "rpc": "GroupWorks",
       "operation": "WorksGroupPost",
-      "tests": 4,
+      "tests": 6,
       "status": {
         "documented": [
           200,
@@ -19986,6 +21415,8 @@
             "path": "in.GroupBy",
             "match": "exact",
             "by_tests": [
+              "Development team coordinates issue resolution",
+              "Support team manages customer tickets throughout resolution process",
               "should create tickets and group by parts without sorting",
               "should create tickets with multiple owners, group them, and verify group order",
               "should create tickets, group by parts, and sort by created date",
@@ -21694,6 +23125,8 @@
             "dep": "wisp:GroupSearch",
             "path": "out.Groups",
             "checked_by": [
+              "Development team coordinates issue resolution",
+              "Support team manages customer tickets throughout resolution process",
               "should create tickets and group by parts without sorting",
               "should create tickets with multiple owners, group them, and verify group order",
               "should create tickets, group by parts, and sort by created date",
@@ -21779,6 +23212,52 @@
         ]
       },
       "test_facts": [
+        {
+          "name": "Development team coordinates issue resolution",
+          "file": "e2e/smoke_test_case/works_management/works_issues_test.go",
+          "labels": [
+            "SMOKE",
+            "INTERNAL_WORKS_COUNT",
+            "INTERNAL_WORKS_GROUP"
+          ],
+          "fields_set": [
+            "GroupBy",
+            "Type"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "GetCount",
+            "Groups",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Support team manages customer tickets throughout resolution process",
+          "file": "e2e/smoke_test_case/works_management/works_tickets_test.go",
+          "labels": [
+            "SMOKE",
+            "INTERNAL_WORKS_LIST",
+            "INTERNAL_WORKS_COUNT"
+          ],
+          "fields_set": [
+            "GroupBy",
+            "Limit",
+            "Type"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "GetCount",
+            "Groups",
+            "StatusCode",
+            "Works"
+          ]
+        },
         {
           "name": "should groupby stage and verify tickets",
           "file": "e2e/ticktes_user_journey/tickets_grouping_userjourney_test.go",
@@ -22452,13 +23931,32 @@
     },
     {
       "rpc": "ListCodeChanges",
-      "operation": "",
-      "tests": 0,
+      "operation": "CodeChangesList",
+      "tests": 2,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200
+        ],
+        "missing": [
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 12.5
       },
       "fields": {
         "leaf_fields_read_by_rpc": 30,
@@ -22529,12 +24027,12 @@
       },
       "branches": {
         "total": 81,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 4,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
-        "absent_arm_exercised": 0,
-        "absent_arm_pct": 0,
+        "absent_arm_exercised": 4,
+        "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
@@ -22542,21 +24040,21 @@
         "by_origin": {
           "service": {
             "total": 72,
-            "reachable_on_happy_path": 0,
+            "reachable_on_happy_path": 2,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 0
+            "absent_arm_exercised": 2
           },
           "generated": {
             "total": 8,
-            "reachable_on_happy_path": 0,
+            "reachable_on_happy_path": 2,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 0
+            "absent_arm_exercised": 2
           },
           "library": {
             "total": 1,
@@ -23226,7 +24724,7 @@
         ],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false,
+        "reached_by_test": true,
         "deps_result_used_in_response": 0,
         "deps_result_checked_by_test": 0,
         "response_links": null
@@ -23234,13 +24732,45 @@
       "anomalies": {
         "unmatched_test_fields": null
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "ListCodeChanges",
+          "file": "api/v2_internal/code_change/code_changes_test.go",
+          "labels": [
+            "INTERNAL_CODE_CHANGES_LIST"
+          ],
+          "fields_set": null,
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "CodeChanges",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "ListCodeChanges",
+          "file": "api/v2_internal/code_change/code_changes_test.go",
+          "labels": [
+            "INTERNAL_CODE_CHANGES_LIST"
+          ],
+          "fields_set": null,
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "CodeChanges",
+            "StatusCode"
+          ]
+        }
+      ]
     },
     {
       "rpc": "ListConversations",
-      "operation": "ConversationsCount,ConversationsList,ConversationsListPost,LobbiesList",
-      "tests": 10,
+      "operation": "ConversationsCount,ConversationsCountPost,ConversationsList,ConversationsListPost,LobbiesList",
+      "tests": 12,
       "status": {
         "documented": null,
         "asserted": [
@@ -26370,6 +27900,22 @@
           ]
         },
         {
+          "name": "Creates conversations, counts them, and deletes all",
+          "file": "e2e/smoke_test_case/conversations/conversations_test.go",
+          "labels": [
+            "INTERNAL_CONVERSATIONS_COUNT"
+          ],
+          "fields_set": null,
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Count",
+            "StatusCode"
+          ]
+        },
+        {
           "name": "should create conversations and group by members without sorting",
           "file": "e2e/conversation_user_journey/conversation_group_test.go",
           "labels": [
@@ -26451,6 +27997,22 @@
           "response_fields_asserted": [
             "Conversation",
             "Conversation.Id",
+            "Conversations",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Creates conversations, lists them, and deletes all",
+          "file": "e2e/smoke_test_case/conversations/conversations_test.go",
+          "labels": [
+            "INTERNAL_CONVERSATIONS_LIST"
+          ],
+          "fields_set": null,
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
             "Conversations",
             "StatusCode"
           ]
@@ -27628,7 +29190,7 @@
     {
       "rpc": "ListWorks",
       "operation": "WorksExport,WorksList,WorksListPost",
-      "tests": 15,
+      "tests": 20,
       "status": {
         "documented": null,
         "asserted": [
@@ -27643,7 +29205,7 @@
         "leaf_fields_read_by_rpc": 133,
         "covered_count": 1,
         "coverage_pct": 0.8,
-        "request_fields_set_by_tests": 12,
+        "request_fields_set_by_tests": 15,
         "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -29461,11 +31023,23 @@
             ]
           },
           {
+            "field": "body",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "cursor",
             "fuzzy_suggestions": null
           },
           {
             "field": "customfields",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "externalref",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "id",
             "fuzzy_suggestions": null
           },
           {
@@ -29749,6 +31323,42 @@
           "response_fields_asserted": null
         },
         {
+          "name": "should return masked custom field value in LIST response for the masked user",
+          "file": "api/v2_internal/work/issues/crud/masking/issues_masking_test.go",
+          "labels": null,
+          "fields_set": [
+            "ExternalRef",
+            "Type"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Works",
+            "Works.AsIssue"
+          ]
+        },
+        {
+          "name": "should allow admin to filter on the masked field",
+          "file": "api/v2_internal/work/issues/crud/masking/issues_masking_test.go",
+          "labels": null,
+          "fields_set": [
+            "CustomFields",
+            "Type"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Works",
+            "Works.AsIssue"
+          ]
+        },
+        {
           "name": "lists tickets filtered by space id",
           "file": "api/v2_internal/work/tickets/crud/ticket_spaces_test.go",
           "labels": [
@@ -29793,6 +31403,76 @@
           ],
           "asserts_success": true,
           "response_fields_asserted": null
+        },
+        {
+          "name": "User retrieves and manages individual work items throughout project lifecycle",
+          "file": "e2e/smoke_test_case/works_management/works_test.go",
+          "labels": [
+            "SMOKE",
+            "INTERNAL_WORKS_GET",
+            "PUBLIC_WORKS_LIST",
+            "INTERNAL_WORKS_UPDATE"
+          ],
+          "fields_set": [
+            "Body",
+            "Id",
+            "Limit",
+            "Title",
+            "Type"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsTicket",
+            "Works"
+          ]
+        },
+        {
+          "name": "External stakeholders access works through public API for project visibility",
+          "file": "e2e/smoke_test_case/works_management/works_test.go",
+          "labels": [
+            "SMOKE",
+            "PUBLIC_WORKS_LIST",
+            "PUBLIC_WORKS_UPDATE"
+          ],
+          "fields_set": [
+            "Body",
+            "Id",
+            "Limit",
+            "Type"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Works"
+          ]
+        },
+        {
+          "name": "Customer support coordinates ticket resolution across teams",
+          "file": "e2e/smoke_test_case/works_management/works_tickets_test.go",
+          "labels": [
+            "SMOKE",
+            "PUBLIC_WORKS_LIST",
+            "INTERNAL_WORKS_LIST"
+          ],
+          "fields_set": [
+            "Limit"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Works"
+          ]
         }
       ]
     },
@@ -34749,19 +36429,38 @@
     },
     {
       "rpc": "UpdateCodeChange",
-      "operation": "",
-      "tests": 0,
+      "operation": "CodeChangesUpdate",
+      "tests": 1,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200
+        ],
+        "missing": [
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 12.5
       },
       "fields": {
         "leaf_fields_read_by_rpc": 16,
         "covered_count": 0,
         "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
+        "request_fields_set_by_tests": 2,
         "set_by_positive_tests": 0,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -34812,54 +36511,46 @@
       },
       "branches": {
         "total": 21,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 9,
-        "present_arm_exercised": 0,
-        "present_arm_pct": 0,
-        "absent_arm_exercised": 0,
-        "absent_arm_pct": 0,
+        "present_arm_exercised": 6,
+        "present_arm_pct": 28.6,
+        "absent_arm_exercised": 4,
+        "absent_arm_pct": 44.4,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 0,
+        "coverage_pct": 28.6,
         "by_origin": {
           "service": {
             "total": 2,
-            "reachable_on_happy_path": 0,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
+            "reachable_on_happy_path": 1,
+            "present_arm_exercised": 1,
+            "present_arm_pct": 50,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 0
           },
           "generated": {
             "total": 16,
-            "reachable_on_happy_path": 0,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
+            "reachable_on_happy_path": 5,
+            "present_arm_exercised": 2,
+            "present_arm_pct": 12.5,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 0
+            "absent_arm_exercised": 4
           },
           "library": {
             "total": 3,
-            "reachable_on_happy_path": 0,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
+            "reachable_on_happy_path": 3,
+            "present_arm_exercised": 3,
+            "present_arm_pct": 100,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 0
           }
         },
         "gaps": [
-          {
-            "id": "b1",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
-            "cond": "in.Id == nil",
-            "predicate_paths": [
-              "in.Id"
-            ]
-          },
           {
             "id": "b2",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:821",
@@ -34917,14 +36608,6 @@
             ]
           },
           {
-            "id": "b9",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:849",
-            "cond": "in.CodeChange.Description != nil",
-            "predicate_paths": [
-              "in.CodeChange.Description"
-            ]
-          },
-          {
             "id": "b10",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:854",
             "cond": "in.CodeChange.ExternalIdentifier != nil",
@@ -34946,14 +36629,6 @@
             "cond": "in.CustomSchemaSpec.Drop != nil",
             "predicate_paths": [
               "in.CustomSchemaSpec.Drop"
-            ]
-          },
-          {
-            "id": "b13",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/code_change.pb.validator.go:53",
-            "cond": "in.Id != nil",
-            "predicate_paths": [
-              "in.Id"
             ]
           },
           {
@@ -34989,30 +36664,6 @@
             ]
           },
           {
-            "id": "b18",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:195",
-            "cond": "in.Id == \"\"",
-            "predicate_paths": [
-              "in.Id"
-            ]
-          },
-          {
-            "id": "b19",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:248",
-            "cond": "in.Id != nil",
-            "predicate_paths": [
-              "in.Id"
-            ]
-          },
-          {
-            "id": "b20",
-            "at": "internal/serverv2/work_crud_helpers.go:935",
-            "cond": "in.Id != nil",
-            "predicate_paths": [
-              "in.Id"
-            ]
-          },
-          {
             "id": "b21",
             "at": "internal/serverv2/update_code_change.go:17",
             "cond": "in != nil",
@@ -35041,21 +36692,50 @@
         "datastore_calls": [],
         "service_count": 2,
         "call_count": 3,
-        "reached_by_test": false,
+        "reached_by_test": true,
         "deps_result_used_in_response": 0,
         "deps_result_checked_by_test": 0,
         "response_links": null
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "description",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "id",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "UpdateCodeChange",
+          "file": "api/v2_internal/code_change/code_changes_test.go",
+          "labels": [
+            "INTERNAL_CODE_CHANGES_UPDATE"
+          ],
+          "fields_set": [
+            "Description",
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "CodeChange",
+            "CodeChange.Description",
+            "StatusCode"
+          ]
+        }
+      ]
     },
     {
       "rpc": "UpdateConversation",
       "operation": "ConversationsUpdate",
-      "tests": 2,
+      "tests": 11,
       "status": {
         "documented": [
           200,
@@ -35070,27 +36750,27 @@
         ],
         "asserted": [
           200,
-          201
+          201,
+          400,
+          403
         ],
         "missing": [
-          400,
           401,
-          403,
           404,
           413,
           429,
           500,
           503
         ],
-        "coverage_pct": 11.1
+        "coverage_pct": 33.3
       },
       "fields": {
         "leaf_fields_read_by_rpc": 71,
-        "covered_count": 4,
-        "coverage_pct": 5.6,
-        "request_fields_set_by_tests": 6,
-        "set_by_positive_tests": 4,
-        "set_by_negative_tests": 0,
+        "covered_count": 5,
+        "coverage_pct": 7,
+        "request_fields_set_by_tests": 8,
+        "set_by_positive_tests": 5,
+        "set_by_negative_tests": 4,
         "by_depth": {
           "top_level": {
             "total": 5,
@@ -35099,8 +36779,8 @@
           },
           "nested": {
             "total": 33,
-            "set": 1,
-            "pct": 3
+            "set": 2,
+            "pct": 6.1
           },
           "deep": {
             "total": 33,
@@ -35110,8 +36790,8 @@
         },
         "representative": {
           "units": 71,
-          "covered": 4,
-          "pct": 5.6,
+          "covered": 5,
+          "pct": 7,
           "collapsed_types": [
             "api.CustomSchemaSpec",
             "wrapperspb.StringValue"
@@ -35119,9 +36799,26 @@
         },
         "covered": [
           {
+            "path": "in.Conversation.AiResolutionStatus",
+            "match": "exact",
+            "by_tests": [
+              "Should allow AI resolution status update when the entitlement flag is disabled",
+              "Should require AGENT_RESOLUTION entitlement to update AI resolution status when the flag is enabled"
+            ]
+          },
+          {
             "path": "in.Conversation.LastMessage.Id",
             "match": "exact",
             "by_tests": [
+              "Create a first conversation with comments",
+              "Create a second conversation with comments",
+              "DevUser must able to update conversation stage",
+              "DevUser must not able to update conversation with invalid stage",
+              "Other RevUser from the same RevOrg must not able to update the conversation",
+              "RevUser must able to update conversation title",
+              "Should allow AI resolution status update when the entitlement flag is disabled",
+              "Should allow unrelated conversation updates when the entitlement flag is enabled",
+              "Should require AGENT_RESOLUTION entitlement to update AI resolution status when the flag is enabled",
               "Should verify complete conversation stage transition workflow",
               "should verify sorting conversations by modified date"
             ]
@@ -35130,6 +36827,11 @@
             "path": "in.Conversation.SlaSummary.Stage",
             "match": "exact",
             "by_tests": [
+              "Create a first conversation with comments",
+              "Create a second conversation with comments",
+              "DevUser must able to update conversation stage",
+              "DevUser must not able to update conversation with invalid stage",
+              "Other RevUser from the same RevOrg must not able to update the conversation",
               "Should verify complete conversation stage transition workflow"
             ]
           },
@@ -35137,6 +36839,8 @@
             "path": "in.Conversation.Title",
             "match": "exact",
             "by_tests": [
+              "RevUser must able to update conversation title",
+              "Should allow unrelated conversation updates when the entitlement flag is enabled",
               "Should verify complete conversation stage transition workflow",
               "should verify sorting conversations by modified date"
             ]
@@ -35145,6 +36849,15 @@
             "path": "in.Id",
             "match": "exact",
             "by_tests": [
+              "Create a first conversation with comments",
+              "Create a second conversation with comments",
+              "DevUser must able to update conversation stage",
+              "DevUser must not able to update conversation with invalid stage",
+              "Other RevUser from the same RevOrg must not able to update the conversation",
+              "RevUser must able to update conversation title",
+              "Should allow AI resolution status update when the entitlement flag is disabled",
+              "Should allow unrelated conversation updates when the entitlement flag is enabled",
+              "Should require AGENT_RESOLUTION entitlement to update AI resolution status when the flag is enabled",
               "Should verify complete conversation stage transition workflow",
               "should verify sorting conversations by modified date"
             ]
@@ -35153,7 +36866,6 @@
         "gaps": [
           "in.ActorId",
           "in.Conversation.AccountId",
-          "in.Conversation.AiResolutionStatus",
           "in.Conversation.AppliesToPartIds.IdValues",
           "in.Conversation.BrandId",
           "in.Conversation.BroadcastChannels",
@@ -35224,22 +36936,22 @@
         "total": 221,
         "happy_path_reached": true,
         "reachable_on_happy_path": 29,
-        "present_arm_exercised": 12,
-        "present_arm_pct": 5.4,
+        "present_arm_exercised": 14,
+        "present_arm_pct": 6.3,
         "absent_arm_exercised": 26,
         "absent_arm_pct": 89.7,
-        "negative_arm_exercised": 0,
-        "negative_arm_pct": 0,
+        "negative_arm_exercised": 13,
+        "negative_arm_pct": 5.9,
         "both_arms_exercised": 0,
-        "coverage_pct": 5.4,
+        "coverage_pct": 6.3,
         "by_origin": {
           "service": {
             "total": 20,
             "reachable_on_happy_path": 8,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
-            "negative_arm_exercised": 0,
-            "negative_arm_pct": 0,
+            "present_arm_exercised": 1,
+            "present_arm_pct": 5,
+            "negative_arm_exercised": 1,
+            "negative_arm_pct": 5,
             "absent_arm_exercised": 8
           },
           "generated": {
@@ -35247,17 +36959,17 @@
             "reachable_on_happy_path": 11,
             "present_arm_exercised": 6,
             "present_arm_pct": 5.8,
-            "negative_arm_exercised": 0,
-            "negative_arm_pct": 0,
+            "negative_arm_exercised": 6,
+            "negative_arm_pct": 5.8,
             "absent_arm_exercised": 9
           },
           "library": {
             "total": 97,
             "reachable_on_happy_path": 10,
-            "present_arm_exercised": 6,
-            "present_arm_pct": 6.2,
-            "negative_arm_exercised": 0,
-            "negative_arm_pct": 0,
+            "present_arm_exercised": 7,
+            "present_arm_pct": 7.2,
+            "negative_arm_exercised": 6,
+            "negative_arm_pct": 6.2,
             "absent_arm_exercised": 9
           }
         },
@@ -36719,14 +38431,6 @@
             ]
           },
           {
-            "id": "b194",
-            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/proto_helpers.gen.go:850",
-            "cond": "in.Conversation.AiResolutionStatus != nil",
-            "predicate_paths": [
-              "in.Conversation.AiResolutionStatus"
-            ]
-          },
-          {
             "id": "b195",
             "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/proto_helpers.gen.go:853",
             "cond": "in.Conversation.TargetLocale != nil",
@@ -36879,14 +38583,6 @@
             ]
           },
           {
-            "id": "b215",
-            "at": "internal/serverv2/update_conversation.go:104",
-            "cond": "in.Conversation.AiResolutionStatus != nil",
-            "predicate_paths": [
-              "in.Conversation.AiResolutionStatus"
-            ]
-          },
-          {
             "id": "b216",
             "at": "internal/serverv2/update_conversation.go:105",
             "cond": "in.Conversation.UnsetFieldMask",
@@ -36967,6 +38663,10 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "members",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "messages",
             "fuzzy_suggestions": null
           },
@@ -36980,6 +38680,188 @@
         ]
       },
       "test_facts": [
+        {
+          "name": "RevUser must able to update conversation title",
+          "file": "api/v2_internal/conversations/update_conversation_test.go",
+          "labels": [
+            "POSITIVE",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "Id",
+            "Title"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Conversation",
+            "Conversation.Title",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "DevUser must able to update conversation stage",
+          "file": "api/v2_internal/conversations/update_conversation_test.go",
+          "labels": [
+            "POSITIVE",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "Id",
+            "Stage"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Conversation",
+            "Conversation.Stage",
+            "Conversation.Stage.Name",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Should allow AI resolution status update when the entitlement flag is disabled",
+          "file": "api/v2_internal/conversations/update_conversation_test.go",
+          "labels": [
+            "POSITIVE",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "AiResolutionStatus",
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "Should require AGENT_RESOLUTION entitlement to update AI resolution status when the flag is enabled",
+          "file": "api/v2_internal/conversations/update_conversation_test.go",
+          "labels": [
+            "NEGATIVE",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "AiResolutionStatus",
+            "Id"
+          ],
+          "statuses": [
+            403
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "Should allow unrelated conversation updates when the entitlement flag is enabled",
+          "file": "api/v2_internal/conversations/update_conversation_test.go",
+          "labels": [
+            "POSITIVE",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "Id",
+            "Title"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "DevUser must not able to update conversation with invalid stage",
+          "file": "api/v2_internal/conversations/update_conversation_test.go",
+          "labels": [
+            "NEGATIVE",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "Id",
+            "Stage"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Other RevUser from the same RevOrg must not able to update the conversation",
+          "file": "api/v2_internal/conversations/update_conversation_test.go",
+          "labels": [
+            "NEGATIVE",
+            "NON_LOCAL"
+          ],
+          "fields_set": [
+            "Id",
+            "Stage"
+          ],
+          "statuses": [
+            403
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Create a first conversation with comments",
+          "file": "api/v2_internal/plug/question_answer/question_answer_generation_test.go",
+          "labels": [
+            "INTERNAL_CONVERSATIONS_CREATE",
+            "INTERNAL_TIMELINE_ENTRIES_CREATE"
+          ],
+          "fields_set": [
+            "Id",
+            "Members",
+            "Messages",
+            "Stage",
+            "Type"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Conversation",
+            "Conversation.Id",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Create a second conversation with comments",
+          "file": "api/v2_internal/plug/question_answer/question_answer_generation_test.go",
+          "labels": [
+            "INTERNAL_CONVERSATIONS_CREATE",
+            "INTERNAL_TIMELINE_ENTRIES_CREATE"
+          ],
+          "fields_set": [
+            "Id",
+            "Members",
+            "Messages",
+            "Stage",
+            "Type"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Conversation",
+            "Conversation.Id",
+            "StatusCode"
+          ]
+        },
         {
           "name": "should verify sorting conversations by modified date",
           "file": "e2e/conversation_user_journey/conversation_group_test.go",
@@ -37972,7 +39854,7 @@
     {
       "rpc": "UpdateWork",
       "operation": "WorksUpdate",
-      "tests": 9,
+      "tests": 23,
       "status": {
         "documented": [
           200,
@@ -37987,27 +39869,27 @@
         ],
         "asserted": [
           200,
-          201
+          201,
+          400,
+          403
         ],
         "missing": [
-          400,
           401,
-          403,
           404,
           413,
           429,
           500,
           503
         ],
-        "coverage_pct": 11.1
+        "coverage_pct": 33.3
       },
       "fields": {
         "leaf_fields_read_by_rpc": 176,
         "covered_count": 5,
         "coverage_pct": 2.8,
-        "request_fields_set_by_tests": 8,
+        "request_fields_set_by_tests": 9,
         "set_by_positive_tests": 5,
-        "set_by_negative_tests": 0,
+        "set_by_negative_tests": 1,
         "by_depth": {
           "top_level": {
             "total": 8,
@@ -38039,14 +39921,27 @@
             "match": "exact",
             "by_tests": [
               "Assigns milestone on WorksUpdate",
+              "Emits update event",
               "Fails WorksUpdate with milestone from a different Enhancement",
               "Unassigns milestone via WorksUpdate with null",
               "Update with email channel",
               "Update with only required fields",
               "Update with required fields",
+              "Use a ticket role on an issue shared_with — expect 400",
+              "Use an issue role on a ticket shared_with — expect 400",
+              "Use an issue role on an opportunity shared_with — expect 400",
+              "With account, amount and forecast category",
+              "With invalid account",
+              "With invalid fields",
+              "With owners",
               "WorksUpdate rejects incompatible subtype changes",
               "WorksUpdate rejects incompatible subtype or space changes",
-              "sets display_id_alias from space key on create and updates prefix when space changes"
+              "does not scope an opportunity to a space through the REST create or update path",
+              "sets display_id_alias from space key on create and updates prefix when space changes",
+              "should allow admin to update the masked field",
+              "should allow the masked user to update non-masked fields",
+              "should error out when non-admin user tries to update the masked field",
+              "should update title as admin to generate a timeline event"
             ]
           },
           {
@@ -38274,11 +40169,11 @@
         "reachable_on_happy_path": 60,
         "present_arm_exercised": 23,
         "present_arm_pct": 2.9,
-        "absent_arm_exercised": 48,
-        "absent_arm_pct": 80,
-        "negative_arm_exercised": 0,
-        "negative_arm_pct": 0,
-        "both_arms_exercised": 3,
+        "absent_arm_exercised": 60,
+        "absent_arm_pct": 100,
+        "negative_arm_exercised": 15,
+        "negative_arm_pct": 1.9,
+        "both_arms_exercised": 15,
         "coverage_pct": 2.9,
         "by_origin": {
           "service": {
@@ -38295,18 +40190,18 @@
             "reachable_on_happy_path": 21,
             "present_arm_exercised": 15,
             "present_arm_pct": 2.7,
-            "negative_arm_exercised": 0,
-            "negative_arm_pct": 0,
-            "absent_arm_exercised": 17
+            "negative_arm_exercised": 7,
+            "negative_arm_pct": 1.2,
+            "absent_arm_exercised": 21
           },
           "library": {
             "total": 174,
             "reachable_on_happy_path": 18,
             "present_arm_exercised": 8,
             "present_arm_pct": 4.6,
-            "negative_arm_exercised": 0,
-            "negative_arm_pct": 0,
-            "absent_arm_exercised": 10
+            "negative_arm_exercised": 8,
+            "negative_arm_pct": 4.6,
+            "absent_arm_exercised": 18
           }
         },
         "gaps": [
@@ -44539,6 +46434,10 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "customfields",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "customschemaspec",
             "fuzzy_suggestions": null
           },
@@ -44639,6 +46538,23 @@
           ]
         },
         {
+          "name": "should update title as admin to generate a timeline event",
+          "file": "api/v2_internal/timeline/field_acl/timeline_field_acl_stock_test.go",
+          "labels": null,
+          "fields_set": [
+            "Id",
+            "Title",
+            "Type"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
           "name": "sets display_id_alias from space key on create and updates prefix when space changes",
           "file": "api/v2_internal/work/issues/crud/issue_spaces_test.go",
           "labels": [
@@ -44686,6 +46602,67 @@
           "response_fields_asserted": null
         },
         {
+          "name": "should error out when non-admin user tries to update the masked field",
+          "file": "api/v2_internal/work/issues/crud/masking/issues_masking_test.go",
+          "labels": null,
+          "fields_set": [
+            "CustomFields",
+            "CustomSchemaSpec",
+            "Id",
+            "Type"
+          ],
+          "statuses": [
+            403
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "should allow admin to update the masked field",
+          "file": "api/v2_internal/work/issues/crud/masking/issues_masking_test.go",
+          "labels": [
+            "INTERNAL_WORKS_UPDATE"
+          ],
+          "fields_set": [
+            "CustomFields",
+            "CustomSchemaSpec",
+            "Id",
+            "Type"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsIssue"
+          ]
+        },
+        {
+          "name": "should allow the masked user to update non-masked fields",
+          "file": "api/v2_internal/work/issues/crud/masking/issues_masking_test.go",
+          "labels": [
+            "INTERNAL_WORKS_UPDATE"
+          ],
+          "fields_set": [
+            "Id",
+            "Title",
+            "Type"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode",
+            "Work",
+            "Work.AsIssue"
+          ]
+        },
+        {
           "name": "Update with only required fields",
           "file": "api/v2_internal/work/issues/crud/update_work_test.go",
           "labels": [
@@ -44712,6 +46689,156 @@
             "Work",
             "Work.AsIssue",
             "Work.Type"
+          ]
+        },
+        {
+          "name": "does not scope an opportunity to a space through the REST create or update path",
+          "file": "api/v2_internal/work/opportunities/opportunity_spaces_test.go",
+          "labels": [
+            "NEGATIVE",
+            "ADMIN",
+            "INTERNAL_WORKS_CREATE",
+            "INTERNAL_WORKS_UPDATE"
+          ],
+          "fields_set": [
+            "Id",
+            "OwnedBy",
+            "Title",
+            "Type"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": null
+        },
+        {
+          "name": "Use an issue role on an opportunity shared_with — expect 400",
+          "file": "api/v2_internal/work/opportunities/shared_with/opportunity_shared_with_test.go",
+          "labels": null,
+          "fields_set": [
+            "Id",
+            "Type"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "With account, amount and forecast category",
+          "file": "api/v2_internal/work/opportunities/update_opportunity_test.go",
+          "labels": [
+            "POSITIVE",
+            "GINKGO_PR_SANITY"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "With owners",
+          "file": "api/v2_internal/work/opportunities/update_opportunity_test.go",
+          "labels": [
+            "POSITIVE"
+          ],
+          "fields_set": [
+            "Id",
+            "OwnedBy",
+            "Type"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Without required fields",
+          "file": "api/v2_internal/work/opportunities/update_opportunity_test.go",
+          "labels": [
+            "NEGATIVE"
+          ],
+          "fields_set": null,
+          "statuses": [
+            400
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "With invalid account",
+          "file": "api/v2_internal/work/opportunities/update_opportunity_test.go",
+          "labels": [
+            "NEGATIVE"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "With invalid fields",
+          "file": "api/v2_internal/work/opportunities/update_opportunity_test.go",
+          "labels": [
+            "NEGATIVE"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Use a ticket role on an issue shared_with — expect 400",
+          "file": "api/v2_internal/work/shared_with/issue_shared_with_test.go",
+          "labels": null,
+          "fields_set": [
+            "Id",
+            "Type"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Use an issue role on a ticket shared_with — expect 400",
+          "file": "api/v2_internal/work/shared_with/ticket_shared_with_test.go",
+          "labels": null,
+          "fields_set": [
+            "Id",
+            "Type"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
           ]
         },
         {
@@ -44763,6 +46890,25 @@
             "Work",
             "Work.AsTicket",
             "Work.Type"
+          ]
+        },
+        {
+          "name": "Emits update event",
+          "file": "e2e/transformers/codex/codex_test.go",
+          "labels": [
+            "POSITIVE",
+            "FUNCTIONAL"
+          ],
+          "fields_set": [
+            "Id",
+            "Title"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
           ]
         }
       ]

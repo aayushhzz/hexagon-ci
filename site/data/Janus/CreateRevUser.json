@@ -35,7 +35,7 @@
       "leaf_fields_read_by_rpc": 11,
       "covered_count": 1,
       "coverage_pct": 9.1,
-      "request_fields_set_by_tests": 5,
+      "request_fields_set_by_tests": 6,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -68,7 +68,7 @@
           "path": "in.RevUser.Email",
           "match": "exact",
           "by_tests": [
-            "Create a session rev act as with AAT Token"
+            "Create RevUser"
           ]
         }
       ],
@@ -214,48 +214,62 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
+          "field": "account",
+          "fuzzy_suggestions": [
+            "in.AccountId"
+          ]
+        },
+        {
+          "field": "association",
+          "fuzzy_suggestions": [
+            "in.RevUserAssociation"
+          ]
+        },
+        {
           "field": "displayname",
           "fuzzy_suggestions": null
         },
         {
-          "field": "granttype",
+          "field": "externalref",
           "fuzzy_suggestions": null
         },
         {
-          "field": "requestedtokentype",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "revinfo",
+          "field": "revorg",
           "fuzzy_suggestions": null
         }
       ]
     },
     "test_facts": [
       {
-        "name": "Create a session rev act as with AAT Token",
-        "file": "api/v2_internal/auth_tokens/auth_act_as_tokens_test.go",
+        "name": "Create RevUser",
+        "file": "api/v2_internal/identity_flows/rev_users_api_test.go",
         "labels": [
-          "POSITIVE",
-          "INTERNAL_AUTH_TOKENS_CREATE"
+          "INTERNAL_REVUSERS_CREATE"
         ],
         "fields_set": [
+          "Account",
+          "Association",
           "Email",
-          "GrantType",
-          "RequestedTokenType",
-          "RevInfo"
+          "ExternalRef",
+          "RevOrg"
         ],
-        "statuses": [
-          201
-        ],
+        "statuses": null,
         "asserts_success": true,
         "response_fields_asserted": [
-          "GetAccessToken",
-          "GetExpiresIn",
-          "GetTokenType",
           "RevUser",
+          "RevUser.AssociationsMetadata",
+          "RevUser.AssociationsMetadata.FirstAssociation",
+          "RevUser.AssociationsMetadata.FirstAssociation.AsAccountSummary",
+          "RevUser.AssociationsMetadata.GetFirstAssociation",
+          "RevUser.AssociationsMetadata.GetTotal",
+          "RevUser.DisplayName",
+          "RevUser.Email",
+          "RevUser.ExternalRef",
+          "RevUser.GetId",
           "RevUser.Id",
-          "StatusCode"
+          "RevUser.RevOid",
+          "RevUser.RevOrg",
+          "RevUser.RevOrg.AsRevOrgSummary"
         ]
       },
       {
@@ -363,5 +377,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateRevUser` (HTTP operation `RevUsersCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountId\n  - in.AggregateErrors\n  - in.CustomSchemaSpec\n  - in.IsJanusAsyncFlow\n  - in.IsSystemCreate\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevUserAssociation\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountId|in.OrgIdentifier.OrgDon == nil\n  - in.AccountId|in.OrgIdentifier == nil\n  - in.AccountId|in.OrgIdentifier.OrgDon != nil\n  - in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer\n  - in.AccountId != nil\n  - in.AccountId|in.OrgIdentifier != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errAccountNotFound\n  - errEmailAlreadyExists\n  - errInvalidInputEmail\n  - errInvalidRevOrgFilter\n  - errPhoneNumberInvalid\n  - errRevOrgNotFound\n  - errRevUserAlreadyExists\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `displayname` -> suggestions []\n  - test field `granttype` -> suggestions []\n  - test field `requestedtokentype` -> suggestions []\n  - test field `revinfo` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateRevUser` (HTTP operation `RevUsersCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountId\n  - in.AggregateErrors\n  - in.CustomSchemaSpec\n  - in.IsJanusAsyncFlow\n  - in.IsSystemCreate\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevUserAssociation\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountId|in.OrgIdentifier.OrgDon == nil\n  - in.AccountId|in.OrgIdentifier == nil\n  - in.AccountId|in.OrgIdentifier.OrgDon != nil\n  - in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.AccountId|in.OrgIdentifier.OrgExternalIdIssuer\n  - in.AccountId != nil\n  - in.AccountId|in.OrgIdentifier != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errAccountNotFound\n  - errEmailAlreadyExists\n  - errInvalidInputEmail\n  - errInvalidRevOrgFilter\n  - errPhoneNumberInvalid\n  - errRevOrgNotFound\n  - errRevUserAlreadyExists\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `account` -> suggestions ['in.AccountId']\n  - test field `association` -> suggestions ['in.RevUserAssociation']\n  - test field `displayname` -> suggestions []\n  - test field `externalref` -> suggestions []\n  - test field `revorg` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

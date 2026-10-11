@@ -2,11 +2,15 @@
   "service": "Notifications",
   "coverage": {
     "rpc": "MarkInboxNotifications",
-    "operation": "",
-    "tests": 0,
+    "operation": "NotificationsMark,UserInteractionsUpdate",
+    "tests": 3,
     "status": {
       "documented": null,
-      "asserted": [],
+      "asserted": [
+        400,
+        401,
+        403
+      ],
       "missing": [],
       "coverage_pct": 0
     },
@@ -14,7 +18,7 @@
       "leaf_fields_read_by_rpc": 2,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
+      "request_fields_set_by_tests": 3,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -48,7 +52,7 @@
     },
     "branches": {
       "total": 1,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 0,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
@@ -110,16 +114,83 @@
       "datastore_calls": [],
       "service_count": 1,
       "call_count": 1,
-      "reached_by_test": false,
+      "reached_by_test": true,
       "deps_result_used_in_response": 0,
       "deps_result_checked_by_test": 0,
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "filter",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "recordid",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "state",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "Fails as a priority is wrong",
+        "file": "api/v2_internal/notifications/notifications_mark_test.go",
+        "labels": null,
+        "fields_set": [
+          "Filter",
+          "State"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Updates user interactions via internal API",
+        "file": "e2e/smoke_test_case/user_interactions_test/user_interactions_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_USER_INTERACTIONS_UPDATE"
+        ],
+        "fields_set": [
+          "RecordId"
+        ],
+        "statuses": [
+          401,
+          403
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Validates user interactions API with authentication",
+        "file": "e2e/smoke_test_case/user_interactions_test/user_interactions_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_USER_INTERACTIONS_UPDATE"
+        ],
+        "fields_set": [
+          "RecordId"
+        ],
+        "statuses": [
+          401,
+          403
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/notifications/internal/server.GRPCServer).MarkInboxNotifications",
@@ -146,5 +217,5 @@
     "errors": [],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MarkInboxNotifications` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Entries\n  - in.UserDon\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in == nil\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `MarkInboxNotifications` (HTTP operation `NotificationsMark,UserInteractionsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Entries\n  - in.UserDon\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in == nil\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `filter` -> suggestions []\n  - test field `recordid` -> suggestions []\n  - test field `state` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

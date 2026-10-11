@@ -2,19 +2,38 @@
   "service": "Janus",
   "coverage": {
     "rpc": "DeleteDevOrgAuthConnection",
-    "operation": "",
-    "tests": 0,
+    "operation": "DevOrgAuthConnectionsDelete",
+    "tests": 2,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        400
+      ],
+      "missing": [
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 12.5
     },
     "fields": {
       "leaf_fields_read_by_rpc": 1,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
+      "request_fields_set_by_tests": 1,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -51,8 +70,8 @@
       "reachable_on_happy_path": 4,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
+      "absent_arm_exercised": 4,
+      "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
@@ -60,12 +79,12 @@
       "by_origin": {
         "service": {
           "total": 3,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 3,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 3
         },
         "generated": {
           "total": 0,
@@ -78,12 +97,12 @@
         },
         "library": {
           "total": 1,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 1,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 1
         }
       },
       "gaps": [
@@ -139,10 +158,39 @@
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "Delete connection with invalid id",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Delete connection with empty id",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": null
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/janus/internal/service.Janus).DeleteDevOrgAuthConnection",
@@ -167,5 +215,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteDevOrgAuthConnection` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ConnectionId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ConnectionId == *t4\n  - in.ConnectionId\n  - **t66 == in.ConnectionId\n  - *t108 != in.ConnectionId\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContextDevOid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteDevOrgAuthConnection` (HTTP operation `DevOrgAuthConnectionsDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ConnectionId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ConnectionId == *t4\n  - in.ConnectionId\n  - **t66 == in.ConnectionId\n  - *t108 != in.ConnectionId\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContextDevOid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "CreateRevOrg",
     "operation": "RevOrgsCreate",
-    "tests": 10,
+    "tests": 13,
     "status": {
       "documented": [
         201,
@@ -18,25 +18,25 @@
       ],
       "asserted": [
         201,
-        400
+        400,
+        401,
+        500
       ],
       "missing": [
-        401,
         403,
         409,
         413,
         429,
-        500,
         503
       ],
-      "coverage_pct": 22.2
+      "coverage_pct": 44.4
     },
     "fields": {
       "leaf_fields_read_by_rpc": 5,
-      "covered_count": 0,
-      "coverage_pct": 0,
-      "request_fields_set_by_tests": 4,
-      "set_by_positive_tests": 0,
+      "covered_count": 1,
+      "coverage_pct": 20,
+      "request_fields_set_by_tests": 5,
+      "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
@@ -46,8 +46,8 @@
         },
         "nested": {
           "total": 4,
-          "set": 0,
-          "pct": 0
+          "set": 1,
+          "pct": 25
         },
         "deep": {
           "total": 0,
@@ -57,14 +57,21 @@
       },
       "representative": {
         "units": 5,
-        "covered": 0,
-        "pct": 0,
+        "covered": 1,
+        "pct": 20,
         "collapsed_types": []
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.RevOrg.Account",
+          "match": "exact",
+          "by_tests": [
+            "Create RevOrg"
+          ]
+        }
+      ],
       "gaps": [
         "in.IsJanusAsyncFlow",
-        "in.RevOrg.Account",
         "in.RevOrg.ExternalOidIssuer",
         "in.RevOrg.PhoneNumbers",
         "in.RevOrg.SharedWith"
@@ -74,20 +81,20 @@
       "total": 4,
       "happy_path_reached": true,
       "reachable_on_happy_path": 1,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
+      "present_arm_exercised": 1,
+      "present_arm_pct": 25,
       "absent_arm_exercised": 1,
       "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 25,
       "by_origin": {
         "service": {
           "total": 4,
           "reachable_on_happy_path": 1,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 25,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 1
@@ -135,14 +142,6 @@
           "predicate_paths": [
             "in.RevOrg.ExternalOidIssuer"
           ]
-        },
-        {
-          "id": "b4",
-          "at": "internal/service/revorg.go:142",
-          "cond": "in.RevOrg.Account == nil",
-          "predicate_paths": [
-            "in.RevOrg.Account"
-          ]
         }
       ]
     },
@@ -177,6 +176,30 @@
       ]
     },
     "test_facts": [
+      {
+        "name": "Create RevOrg",
+        "file": "api/v2_internal/identity_flows/revorg_apis_test.go",
+        "labels": [
+          "INTERNAL_REVORGS_CREATE"
+        ],
+        "fields_set": [
+          "Account",
+          "Description",
+          "DisplayName",
+          "ExternalRef"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "RevOrg",
+          "RevOrg.Account",
+          "RevOrg.Account.GetId",
+          "RevOrg.Description",
+          "RevOrg.DisplayName",
+          "RevOrg.ExternalRef",
+          "RevOrg.GetId"
+        ]
+      },
       {
         "name": "WithOnlyRequiredFields",
         "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
@@ -348,6 +371,36 @@
         "response_fields_asserted": [
           "StatusCode"
         ]
+      },
+      {
+        "name": "401WrongPat",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          401
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "500ByInvalidPat",
+        "file": "api/v2_public/rev_orgs/crud/create_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          500
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
       }
     ]
   },
@@ -365,5 +418,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateRevOrg` (HTTP operation `RevOrgsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsJanusAsyncFlow\n  - in.RevOrg.Account\n  - in.RevOrg.ExternalOidIssuer\n  - in.RevOrg.PhoneNumbers\n  - in.RevOrg.SharedWith\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.RevOrg.ExternalOidIssuer != nil\n  - in.IsJanusAsyncFlow\n  - in.RevOrg.ExternalOidIssuer\n  - in.RevOrg.Account == nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errPhoneNumberInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `displayname` -> suggestions []\n  - test field `environment` -> suggestions []\n  - test field `externalref` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateRevOrg` (HTTP operation `RevOrgsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [403, 409, 413, 429, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IsJanusAsyncFlow\n  - in.RevOrg.ExternalOidIssuer\n  - in.RevOrg.PhoneNumbers\n  - in.RevOrg.SharedWith\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.RevOrg.ExternalOidIssuer != nil\n  - in.IsJanusAsyncFlow\n  - in.RevOrg.ExternalOidIssuer\n\nError symbols this RPC can return (candidate negative assertions):\n  - errPhoneNumberInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `displayname` -> suggestions []\n  - test field `environment` -> suggestions []\n  - test field `externalref` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

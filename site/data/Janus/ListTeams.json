@@ -2,20 +2,40 @@
   "service": "Janus",
   "coverage": {
     "rpc": "ListTeams",
-    "operation": "",
-    "tests": 0,
+    "operation": "TeamsListPost",
+    "tests": 9,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200,
+        201,
+        400
+      ],
+      "missing": [
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 25
     },
     "fields": {
       "leaf_fields_read_by_rpc": 28,
-      "covered_count": 0,
-      "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
-      "set_by_positive_tests": 0,
+      "covered_count": 2,
+      "coverage_pct": 7.1,
+      "request_fields_set_by_tests": 9,
+      "set_by_positive_tests": 2,
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
@@ -25,8 +45,8 @@
         },
         "nested": {
           "total": 20,
-          "set": 0,
-          "pct": 0
+          "set": 2,
+          "pct": 10
         },
         "deep": {
           "total": 7,
@@ -36,14 +56,31 @@
       },
       "representative": {
         "units": 24,
-        "covered": 0,
-        "pct": 0,
+        "covered": 2,
+        "pct": 8.3,
         "collapsed_types": [
           "proto.DateFilter",
           "structpb.Struct"
         ]
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.Filter.IsArchived",
+          "match": "exact",
+          "by_tests": [
+            "ListFiltersByArchivedStatus"
+          ]
+        },
+        {
+          "path": "in.Filter.Key",
+          "match": "exact",
+          "by_tests": [
+            "DryRunCreateValid",
+            "FilterByKey",
+            "ListFiltersByArchivedStatus"
+          ]
+        }
+      ],
       "gaps": [
         "in.CursorParams",
         "in.Filter.Apps",
@@ -60,9 +97,7 @@
         "in.Filter.ExternalSourceData",
         "in.Filter.GroupId",
         "in.Filter.GroupIdOp",
-        "in.Filter.IsArchived",
         "in.Filter.IsDefault",
-        "in.Filter.Key",
         "in.Filter.ModifiedById",
         "in.Filter.ModifiedByIdOp",
         "in.Filter.ModifiedDate.After",
@@ -77,12 +112,12 @@
     },
     "branches": {
       "total": 85,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 5,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
+      "absent_arm_exercised": 5,
+      "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
@@ -90,21 +125,21 @@
       "by_origin": {
         "service": {
           "total": 73,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 1,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 1
         },
         "generated": {
           "total": 11,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 4,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 4
         },
         "library": {
           "total": 1,
@@ -813,16 +848,199 @@
       ],
       "service_count": 1,
       "call_count": 1,
-      "reached_by_test": false,
+      "reached_by_test": true,
       "deps_result_used_in_response": 0,
       "deps_result_checked_by_test": 0,
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "cursor",
+          "fuzzy_suggestions": [
+            "in.CursorParams"
+          ]
+        },
+        {
+          "field": "dryrun",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "group",
+          "fuzzy_suggestions": [
+            "in.Filter.GroupId",
+            "in.Filter.GroupIdOp"
+          ]
+        },
+        {
+          "field": "groupop",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "limit",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "mode",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "DryRunCreateValid",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "DryRun",
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Teams"
+        ]
+      },
+      {
+        "name": "ListAll",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Teams"
+        ]
+      },
+      {
+        "name": "FilterByKey",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Key"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Teams"
+        ]
+      },
+      {
+        "name": "FilterByGroup",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Teams"
+        ]
+      },
+      {
+        "name": "FilterByGroupNotAny",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "GroupOp"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Teams"
+        ]
+      },
+      {
+        "name": "ListWithPagination",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Cursor",
+          "Limit",
+          "Mode"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "NextCursor",
+          "StatusCode",
+          "Teams"
+        ]
+      },
+      {
+        "name": "RegularUserCanList",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "ListFailsWhenSpaceManagementDisabled",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "ListFiltersByArchivedStatus",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Id",
+          "IsArchived",
+          "Key"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Id",
+          "Teams"
+        ]
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/janus/internal/service.Janus).ListTeams",
@@ -943,5 +1161,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListTeams` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CursorParams\n  - in.Filter.Apps\n  - in.Filter.AppsOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CustomFields.Fields\n  - in.Filter.EnabledFeatures\n  - in.Filter.ExternalSourceData\n  - in.Filter.GroupId\n  - in.Filter.GroupIdOp\n  - in.Filter.IsArchived\n  - in.Filter.IsDefault\n  - in.Filter.Key\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.SpacesFilter\n  - in.Filter.Subtype\n  - in.Filter.SubtypeOp\n  - in.Filter.SyncMetadata\n  - in.Filter.SyncMetadataOp\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.GroupIdOp != nil\n  - in.Filter.SyncMetadataOp != nil\n  - in.Filter.SubtypeOp != nil\n  - in.Filter.AppsOp != nil\n  - in.CursorParams != nil\n  - in.CursorParams != nil\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Filter.CustomFields == nil\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 5\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 1\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.ModifiedDate != nil\n  - in.Filter.ModifiedByIdOp == 4\n  - in.Filter.ModifiedByIdOp == 3\n  - in.Filter.ModifiedByIdOp == 4\n  - in.Filter.ModifiedByIdOp == 2\n  - in.Filter.ModifiedByIdOp == 5\n  - in.Filter.ModifiedByIdOp == 2\n  - in.Filter.ModifiedByIdOp == 1\n  - in.Filter.ModifiedByIdOp == 3\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.Before != nil\n  - in.Filter.ModifiedDate.DatePreset != nil\n  - in.Filter.ModifiedDate.After != nil\n  - (+45 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListTeams` (HTTP operation `TeamsListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CursorParams\n  - in.Filter.Apps\n  - in.Filter.AppsOp\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CustomFields.Fields\n  - in.Filter.EnabledFeatures\n  - in.Filter.ExternalSourceData\n  - in.Filter.GroupId\n  - in.Filter.GroupIdOp\n  - in.Filter.IsDefault\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.ModifiedDate.DatePreset.Type\n  - in.Filter.SpacesFilter\n  - in.Filter.Subtype\n  - in.Filter.SubtypeOp\n  - in.Filter.SyncMetadata\n  - in.Filter.SyncMetadataOp\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.GroupIdOp != nil\n  - in.Filter.SyncMetadataOp != nil\n  - in.Filter.SubtypeOp != nil\n  - in.Filter.AppsOp != nil\n  - in.CursorParams != nil\n  - in.CursorParams != nil\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Filter.CustomFields == nil\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 5\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 1\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.DatePreset.Type\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.ModifiedDate != nil\n  - in.Filter.ModifiedByIdOp == 4\n  - in.Filter.ModifiedByIdOp == 3\n  - in.Filter.ModifiedByIdOp == 4\n  - in.Filter.ModifiedByIdOp == 2\n  - in.Filter.ModifiedByIdOp == 5\n  - in.Filter.ModifiedByIdOp == 2\n  - in.Filter.ModifiedByIdOp == 1\n  - in.Filter.ModifiedByIdOp == 3\n  - in.Filter.ModifiedDate.After != nil\n  - in.Filter.ModifiedDate.Before != nil\n  - in.Filter.ModifiedDate.DatePreset != nil\n  - in.Filter.ModifiedDate.After != nil\n  - (+45 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `cursor` -> suggestions ['in.CursorParams']\n  - test field `dryrun` -> suggestions []\n  - test field `group` -> suggestions ['in.Filter.GroupId', 'in.Filter.GroupIdOp']\n  - test field `groupop` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `limit` -> suggestions []\n  - test field `mode` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

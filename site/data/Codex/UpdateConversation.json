@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "UpdateConversation",
     "operation": "ConversationsUpdate",
-    "tests": 2,
+    "tests": 11,
     "status": {
       "documented": [
         200,
@@ -18,27 +18,27 @@
       ],
       "asserted": [
         200,
-        201
+        201,
+        400,
+        403
       ],
       "missing": [
-        400,
         401,
-        403,
         404,
         413,
         429,
         500,
         503
       ],
-      "coverage_pct": 11.1
+      "coverage_pct": 33.3
     },
     "fields": {
       "leaf_fields_read_by_rpc": 71,
-      "covered_count": 4,
-      "coverage_pct": 5.6,
-      "request_fields_set_by_tests": 6,
-      "set_by_positive_tests": 4,
-      "set_by_negative_tests": 0,
+      "covered_count": 5,
+      "coverage_pct": 7,
+      "request_fields_set_by_tests": 8,
+      "set_by_positive_tests": 5,
+      "set_by_negative_tests": 4,
       "by_depth": {
         "top_level": {
           "total": 5,
@@ -47,8 +47,8 @@
         },
         "nested": {
           "total": 33,
-          "set": 1,
-          "pct": 3
+          "set": 2,
+          "pct": 6.1
         },
         "deep": {
           "total": 33,
@@ -58,8 +58,8 @@
       },
       "representative": {
         "units": 71,
-        "covered": 4,
-        "pct": 5.6,
+        "covered": 5,
+        "pct": 7,
         "collapsed_types": [
           "api.CustomSchemaSpec",
           "wrapperspb.StringValue"
@@ -67,9 +67,26 @@
       },
       "covered": [
         {
+          "path": "in.Conversation.AiResolutionStatus",
+          "match": "exact",
+          "by_tests": [
+            "Should allow AI resolution status update when the entitlement flag is disabled",
+            "Should require AGENT_RESOLUTION entitlement to update AI resolution status when the flag is enabled"
+          ]
+        },
+        {
           "path": "in.Conversation.LastMessage.Id",
           "match": "exact",
           "by_tests": [
+            "Create a first conversation with comments",
+            "Create a second conversation with comments",
+            "DevUser must able to update conversation stage",
+            "DevUser must not able to update conversation with invalid stage",
+            "Other RevUser from the same RevOrg must not able to update the conversation",
+            "RevUser must able to update conversation title",
+            "Should allow AI resolution status update when the entitlement flag is disabled",
+            "Should allow unrelated conversation updates when the entitlement flag is enabled",
+            "Should require AGENT_RESOLUTION entitlement to update AI resolution status when the flag is enabled",
             "Should verify complete conversation stage transition workflow",
             "should verify sorting conversations by modified date"
           ]
@@ -78,6 +95,11 @@
           "path": "in.Conversation.SlaSummary.Stage",
           "match": "exact",
           "by_tests": [
+            "Create a first conversation with comments",
+            "Create a second conversation with comments",
+            "DevUser must able to update conversation stage",
+            "DevUser must not able to update conversation with invalid stage",
+            "Other RevUser from the same RevOrg must not able to update the conversation",
             "Should verify complete conversation stage transition workflow"
           ]
         },
@@ -85,6 +107,8 @@
           "path": "in.Conversation.Title",
           "match": "exact",
           "by_tests": [
+            "RevUser must able to update conversation title",
+            "Should allow unrelated conversation updates when the entitlement flag is enabled",
             "Should verify complete conversation stage transition workflow",
             "should verify sorting conversations by modified date"
           ]
@@ -93,6 +117,15 @@
           "path": "in.Id",
           "match": "exact",
           "by_tests": [
+            "Create a first conversation with comments",
+            "Create a second conversation with comments",
+            "DevUser must able to update conversation stage",
+            "DevUser must not able to update conversation with invalid stage",
+            "Other RevUser from the same RevOrg must not able to update the conversation",
+            "RevUser must able to update conversation title",
+            "Should allow AI resolution status update when the entitlement flag is disabled",
+            "Should allow unrelated conversation updates when the entitlement flag is enabled",
+            "Should require AGENT_RESOLUTION entitlement to update AI resolution status when the flag is enabled",
             "Should verify complete conversation stage transition workflow",
             "should verify sorting conversations by modified date"
           ]
@@ -101,7 +134,6 @@
       "gaps": [
         "in.ActorId",
         "in.Conversation.AccountId",
-        "in.Conversation.AiResolutionStatus",
         "in.Conversation.AppliesToPartIds.IdValues",
         "in.Conversation.BrandId",
         "in.Conversation.BroadcastChannels",
@@ -172,22 +204,22 @@
       "total": 221,
       "happy_path_reached": true,
       "reachable_on_happy_path": 29,
-      "present_arm_exercised": 12,
-      "present_arm_pct": 5.4,
+      "present_arm_exercised": 14,
+      "present_arm_pct": 6.3,
       "absent_arm_exercised": 26,
       "absent_arm_pct": 89.7,
-      "negative_arm_exercised": 0,
-      "negative_arm_pct": 0,
+      "negative_arm_exercised": 13,
+      "negative_arm_pct": 5.9,
       "both_arms_exercised": 0,
-      "coverage_pct": 5.4,
+      "coverage_pct": 6.3,
       "by_origin": {
         "service": {
           "total": 20,
           "reachable_on_happy_path": 8,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 5,
+          "negative_arm_exercised": 1,
+          "negative_arm_pct": 5,
           "absent_arm_exercised": 8
         },
         "generated": {
@@ -195,17 +227,17 @@
           "reachable_on_happy_path": 11,
           "present_arm_exercised": 6,
           "present_arm_pct": 5.8,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "negative_arm_exercised": 6,
+          "negative_arm_pct": 5.8,
           "absent_arm_exercised": 9
         },
         "library": {
           "total": 97,
           "reachable_on_happy_path": 10,
-          "present_arm_exercised": 6,
-          "present_arm_pct": 6.2,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "present_arm_exercised": 7,
+          "present_arm_pct": 7.2,
+          "negative_arm_exercised": 6,
+          "negative_arm_pct": 6.2,
           "absent_arm_exercised": 9
         }
       },
@@ -1667,14 +1699,6 @@
           ]
         },
         {
-          "id": "b194",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/proto_helpers.gen.go:850",
-          "cond": "in.Conversation.AiResolutionStatus != nil",
-          "predicate_paths": [
-            "in.Conversation.AiResolutionStatus"
-          ]
-        },
-        {
           "id": "b195",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/proto_helpers.gen.go:853",
           "cond": "in.Conversation.TargetLocale != nil",
@@ -1827,14 +1851,6 @@
           ]
         },
         {
-          "id": "b215",
-          "at": "internal/serverv2/update_conversation.go:104",
-          "cond": "in.Conversation.AiResolutionStatus != nil",
-          "predicate_paths": [
-            "in.Conversation.AiResolutionStatus"
-          ]
-        },
-        {
           "id": "b216",
           "at": "internal/serverv2/update_conversation.go:105",
           "cond": "in.Conversation.UnsetFieldMask",
@@ -1915,6 +1931,10 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "members",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "messages",
           "fuzzy_suggestions": null
         },
@@ -1928,6 +1948,188 @@
       ]
     },
     "test_facts": [
+      {
+        "name": "RevUser must able to update conversation title",
+        "file": "api/v2_internal/conversations/update_conversation_test.go",
+        "labels": [
+          "POSITIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "Id",
+          "Title"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversation.Title",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "DevUser must able to update conversation stage",
+        "file": "api/v2_internal/conversations/update_conversation_test.go",
+        "labels": [
+          "POSITIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "Id",
+          "Stage"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversation.Stage",
+          "Conversation.Stage.Name",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should allow AI resolution status update when the entitlement flag is disabled",
+        "file": "api/v2_internal/conversations/update_conversation_test.go",
+        "labels": [
+          "POSITIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "AiResolutionStatus",
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should require AGENT_RESOLUTION entitlement to update AI resolution status when the flag is enabled",
+        "file": "api/v2_internal/conversations/update_conversation_test.go",
+        "labels": [
+          "NEGATIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "AiResolutionStatus",
+          "Id"
+        ],
+        "statuses": [
+          403
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Should allow unrelated conversation updates when the entitlement flag is enabled",
+        "file": "api/v2_internal/conversations/update_conversation_test.go",
+        "labels": [
+          "POSITIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "Id",
+          "Title"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "DevUser must not able to update conversation with invalid stage",
+        "file": "api/v2_internal/conversations/update_conversation_test.go",
+        "labels": [
+          "NEGATIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "Id",
+          "Stage"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Other RevUser from the same RevOrg must not able to update the conversation",
+        "file": "api/v2_internal/conversations/update_conversation_test.go",
+        "labels": [
+          "NEGATIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "Id",
+          "Stage"
+        ],
+        "statuses": [
+          403
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Create a first conversation with comments",
+        "file": "api/v2_internal/plug/question_answer/question_answer_generation_test.go",
+        "labels": [
+          "INTERNAL_CONVERSATIONS_CREATE",
+          "INTERNAL_TIMELINE_ENTRIES_CREATE"
+        ],
+        "fields_set": [
+          "Id",
+          "Members",
+          "Messages",
+          "Stage",
+          "Type"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversation.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Create a second conversation with comments",
+        "file": "api/v2_internal/plug/question_answer/question_answer_generation_test.go",
+        "labels": [
+          "INTERNAL_CONVERSATIONS_CREATE",
+          "INTERNAL_TIMELINE_ENTRIES_CREATE"
+        ],
+        "fields_set": [
+          "Id",
+          "Members",
+          "Messages",
+          "Stage",
+          "Type"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversation.Id",
+          "StatusCode"
+        ]
+      },
       {
         "name": "should verify sorting conversations by modified date",
         "file": "e2e/conversation_user_journey/conversation_group_test.go",
@@ -2032,5 +2234,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateConversation` (HTTP operation `ConversationsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.Conversation.AccountId\n  - in.Conversation.AiResolutionStatus\n  - in.Conversation.AppliesToPartIds.IdValues\n  - in.Conversation.BrandId\n  - in.Conversation.BroadcastChannels\n  - in.Conversation.Channels.IdValues\n  - in.Conversation.ChannelsInstances.IdValues\n  - in.Conversation.CustomFields\n  - in.Conversation.Description\n  - in.Conversation.DevrevCopy\n  - in.Conversation.ExternalSourceData.CreatedById\n  - in.Conversation.ExternalSourceData.ModifiedById\n  - in.Conversation.ExternalSourceData.ModifiedDate\n  - in.Conversation.FirstResponseTime\n  - in.Conversation.FirstUnrepliedRevMessageDate\n  - in.Conversation.Group\n  - in.Conversation.IsCreatorVerified\n  - in.Conversation.IsFrozen\n  - in.Conversation.IsSpam\n  - in.Conversation.LastExternalMessageDate\n  - in.Conversation.LastExternalMessageId\n  - in.Conversation.LastInternalMessageDate\n  - in.Conversation.LastInternalMessageId\n  - in.Conversation.LastMessage.CreatedById\n  - in.Conversation.LastMessage.UserType\n  - in.Conversation.LastMessageId\n  - in.Conversation.LastMessageTimestamp\n  - in.Conversation.MemberIds.IdValues\n  - in.Conversation.Metadata.InitiationContext.Nudge.WidgetId\n  - in.Conversation.OwnedByAgentId\n  - in.Conversation.OwnedByIds.IdValues\n  - in.Conversation.ParticipantOids.IdValues\n  - in.Conversation.ParticipantUids.IdValues\n  - in.Conversation.Priority\n  - in.Conversation.Sentiment\n  - in.Conversation.SentimentModifiedDate\n  - in.Conversation.SentimentSummary.Value\n  - in.Conversation.Sessions.Values\n  - in.Conversation.SlaId\n  - in.Conversation.SlaSummary.OrgScheduleId\n  - in.Conversation.SlaSummary.SlaTrackerId\n  - in.Conversation.SlaTrackerId\n  - in.Conversation.SourceChannel\n  - in.Conversation.SourceChannelV2\n  - in.Conversation.SourceChannelV2Instance\n  - in.Conversation.Stage.StageId\n  - in.Conversation.StagedInfo.SyncInUnresolvedFields.Values\n  - in.Conversation.StagedInfo.SyncOutUnresolvedFields.Values\n  - in.Conversation.StartedById\n  - in.Conversation.Status\n  - in.Conversation.SurveysAggregation.Values\n  - in.Conversation.SyncMetadata.LastSyncIn.Status\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.Conversation.SyncMetadata.LastSyncOut.Status\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId\n  - in.Conversation.SyncMetadata.SyncedByDevUsers.IdValues\n  - in.Conversation.Tags.Values\n  - (+7 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId\n  - in.ActorId\n  - in.ActorId\n  - in.DevOid == nil\n  - in.Conversation.SourceChannelV2 == nil\n  - in.Conversation.SourceChannelV2Instance == nil\n  - in.Conversation.Group == nil\n  - in.Conversation.StartedById == nil\n  - in.Conversation.StartedById\n  - in.Conversation.StartedById\n  - in.Conversation.StartedById\n  - in.Conversation.AccountId == nil\n  - in.Conversation.LastMessage.CreatedById == nil\n  - in.Conversation.LastMessage.CreatedById != nil\n  - in.Conversation.Metadata.InitiationContext.Nudge.WidgetId == nil\n  - in.Conversation.Metadata.InitiationContext.Nudge.WidgetId != nil\n  - in.Conversation.Metadata.InitiationContext.Nudge.WidgetId\n  - in.Conversation.Metadata.InitiationContext.Nudge != nil\n  - in.Conversation.Metadata.InitiationContext.Nudge != nil\n  - in.Conversation.Metadata.InitiationContext != nil\n  - in.Conversation.Metadata.InitiationContext != nil\n  - in.Conversation.LastExternalMessageId == nil\n  - in.Conversation.LastInternalMessageId == nil\n  - in.Conversation.LastMessageId == nil\n  - in.Conversation.OwnedByAgentId == nil\n  - in.Conversation.Stage.StageId == nil\n  - in.Conversation.Stage.StageId != nil\n  - in.Conversation.Stage.StageId\n  - in.Conversation.SlaSummary.SlaTrackerId == nil\n  - in.Conversation.SlaSummary.OrgScheduleId == nil\n  - in.Conversation.SlaSummary.SlaTrackerId != nil\n  - in.Conversation.SlaSummary.SlaTrackerId\n  - in.Conversation.SlaSummary.OrgScheduleId != nil\n  - in.Conversation.SlaSummary.OrgScheduleId\n  - in.Conversation.SlaId == nil\n  - in.Conversation.SlaTrackerId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - (+169 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestoparts` -> suggestions []\n  - test field `messages` -> suggestions []\n  - test field `type` -> suggestions ['in.Conversation.LastMessage.UserType', 'in.TagOpType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateConversation` (HTTP operation `ConversationsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.Conversation.AccountId\n  - in.Conversation.AppliesToPartIds.IdValues\n  - in.Conversation.BrandId\n  - in.Conversation.BroadcastChannels\n  - in.Conversation.Channels.IdValues\n  - in.Conversation.ChannelsInstances.IdValues\n  - in.Conversation.CustomFields\n  - in.Conversation.Description\n  - in.Conversation.DevrevCopy\n  - in.Conversation.ExternalSourceData.CreatedById\n  - in.Conversation.ExternalSourceData.ModifiedById\n  - in.Conversation.ExternalSourceData.ModifiedDate\n  - in.Conversation.FirstResponseTime\n  - in.Conversation.FirstUnrepliedRevMessageDate\n  - in.Conversation.Group\n  - in.Conversation.IsCreatorVerified\n  - in.Conversation.IsFrozen\n  - in.Conversation.IsSpam\n  - in.Conversation.LastExternalMessageDate\n  - in.Conversation.LastExternalMessageId\n  - in.Conversation.LastInternalMessageDate\n  - in.Conversation.LastInternalMessageId\n  - in.Conversation.LastMessage.CreatedById\n  - in.Conversation.LastMessage.UserType\n  - in.Conversation.LastMessageId\n  - in.Conversation.LastMessageTimestamp\n  - in.Conversation.MemberIds.IdValues\n  - in.Conversation.Metadata.InitiationContext.Nudge.WidgetId\n  - in.Conversation.OwnedByAgentId\n  - in.Conversation.OwnedByIds.IdValues\n  - in.Conversation.ParticipantOids.IdValues\n  - in.Conversation.ParticipantUids.IdValues\n  - in.Conversation.Priority\n  - in.Conversation.Sentiment\n  - in.Conversation.SentimentModifiedDate\n  - in.Conversation.SentimentSummary.Value\n  - in.Conversation.Sessions.Values\n  - in.Conversation.SlaId\n  - in.Conversation.SlaSummary.OrgScheduleId\n  - in.Conversation.SlaSummary.SlaTrackerId\n  - in.Conversation.SlaTrackerId\n  - in.Conversation.SourceChannel\n  - in.Conversation.SourceChannelV2\n  - in.Conversation.SourceChannelV2Instance\n  - in.Conversation.Stage.StageId\n  - in.Conversation.StagedInfo.SyncInUnresolvedFields.Values\n  - in.Conversation.StagedInfo.SyncOutUnresolvedFields.Values\n  - in.Conversation.StartedById\n  - in.Conversation.Status\n  - in.Conversation.SurveysAggregation.Values\n  - in.Conversation.SyncMetadata.LastSyncIn.Status\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId\n  - in.Conversation.SyncMetadata.LastSyncOut.Status\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncHistoryId\n  - in.Conversation.SyncMetadata.LastSyncOut.SyncUnitId\n  - in.Conversation.SyncMetadata.SyncedByDevUsers.IdValues\n  - in.Conversation.Tags.Values\n  - in.Conversation.TargetLocale.Value\n  - (+6 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId\n  - in.ActorId\n  - in.ActorId\n  - in.DevOid == nil\n  - in.Conversation.SourceChannelV2 == nil\n  - in.Conversation.SourceChannelV2Instance == nil\n  - in.Conversation.Group == nil\n  - in.Conversation.StartedById == nil\n  - in.Conversation.StartedById\n  - in.Conversation.StartedById\n  - in.Conversation.StartedById\n  - in.Conversation.AccountId == nil\n  - in.Conversation.LastMessage.CreatedById == nil\n  - in.Conversation.LastMessage.CreatedById != nil\n  - in.Conversation.Metadata.InitiationContext.Nudge.WidgetId == nil\n  - in.Conversation.Metadata.InitiationContext.Nudge.WidgetId != nil\n  - in.Conversation.Metadata.InitiationContext.Nudge.WidgetId\n  - in.Conversation.Metadata.InitiationContext.Nudge != nil\n  - in.Conversation.Metadata.InitiationContext.Nudge != nil\n  - in.Conversation.Metadata.InitiationContext != nil\n  - in.Conversation.Metadata.InitiationContext != nil\n  - in.Conversation.LastExternalMessageId == nil\n  - in.Conversation.LastInternalMessageId == nil\n  - in.Conversation.LastMessageId == nil\n  - in.Conversation.OwnedByAgentId == nil\n  - in.Conversation.Stage.StageId == nil\n  - in.Conversation.Stage.StageId != nil\n  - in.Conversation.Stage.StageId\n  - in.Conversation.SlaSummary.SlaTrackerId == nil\n  - in.Conversation.SlaSummary.OrgScheduleId == nil\n  - in.Conversation.SlaSummary.SlaTrackerId != nil\n  - in.Conversation.SlaSummary.SlaTrackerId\n  - in.Conversation.SlaSummary.OrgScheduleId != nil\n  - in.Conversation.SlaSummary.OrgScheduleId\n  - in.Conversation.SlaId == nil\n  - in.Conversation.SlaTrackerId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncHistoryId == nil\n  - in.Conversation.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - (+167 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestoparts` -> suggestions []\n  - test field `members` -> suggestions []\n  - test field `messages` -> suggestions []\n  - test field `type` -> suggestions ['in.Conversation.LastMessage.UserType', 'in.TagOpType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "CountRevOrgs",
     "operation": "RevOrgsCount",
-    "tests": 1,
+    "tests": 2,
     "status": {
       "documented": [
         200,
@@ -31,10 +31,10 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 64,
-      "covered_count": 0,
-      "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
-      "set_by_positive_tests": 0,
+      "covered_count": 1,
+      "coverage_pct": 1.6,
+      "request_fields_set_by_tests": 2,
+      "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
@@ -49,19 +49,27 @@
         },
         "deep": {
           "total": 54,
-          "set": 0,
-          "pct": 0
+          "set": 1,
+          "pct": 1.9
         }
       },
       "representative": {
         "units": 1,
-        "covered": 0,
-        "pct": 0,
+        "covered": 1,
+        "pct": 100,
         "collapsed_types": [
           "api.ListOrgsFilter"
         ]
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.Filters.RevOrgFilter.Account",
+          "match": "exact",
+          "by_tests": [
+            "List & Count RevOrgs"
+          ]
+        }
+      ],
       "gaps": [
         "in.Filters.AccountFilter.Apps",
         "in.Filters.AccountFilter.AppsOp",
@@ -107,7 +115,6 @@
         "in.Filters.ModifiedDate.After",
         "in.Filters.ModifiedDate.Before",
         "in.Filters.ModifiedDate.DatePreset.Type",
-        "in.Filters.RevOrgFilter.Account",
         "in.Filters.RevOrgFilter.AccountOp",
         "in.Filters.RevOrgFilter.Apps",
         "in.Filters.RevOrgFilter.AppsOp",
@@ -1570,6 +1577,7 @@
           "dep": "schemaregistry:GetAggregatedSchema",
           "path": "out.Total",
           "checked_by": [
+            "List & Count RevOrgs",
             "RevOrgsCount"
           ],
           "checked": true
@@ -1577,9 +1585,35 @@
       ]
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "externalref",
+          "fuzzy_suggestions": [
+            "in.Filters.AccountFilter.ExternalRefs",
+            "in.Filters.AccountFilter.ExternalRefsOp"
+          ]
+        }
+      ]
     },
     "test_facts": [
+      {
+        "name": "List & Count RevOrgs",
+        "file": "api/v2_internal/identity_flows/revorg_apis_test.go",
+        "labels": [
+          "INTERNAL_REVORGS_LIST",
+          "INTERNAL_REVORGS_COUNT"
+        ],
+        "fields_set": [
+          "Account",
+          "ExternalRef"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Count",
+          "RevOrgs"
+        ]
+      },
       {
         "name": "RevOrgsCount",
         "file": "devorg_sanity_check/entities_count_test.go",
@@ -1650,5 +1684,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CountRevOrgs` (HTTP operation `RevOrgsCount`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Filters.AccountFilter.Apps\n  - in.Filters.AccountFilter.AppsOp\n  - in.Filters.AccountFilter.CustomFields.Fields\n  - in.Filters.AccountFilter.Domains\n  - in.Filters.AccountFilter.DomainsOp\n  - in.Filters.AccountFilter.ExternalRefs\n  - in.Filters.AccountFilter.ExternalRefsOp\n  - in.Filters.AccountFilter.ExternalSourceData\n  - in.Filters.AccountFilter.Industry\n  - in.Filters.AccountFilter.IndustryOp\n  - in.Filters.AccountFilter.IngestionChannel\n  - in.Filters.AccountFilter.LeadSource\n  - in.Filters.AccountFilter.LeadSourceOp\n  - in.Filters.AccountFilter.OwnedBy\n  - in.Filters.AccountFilter.OwnedByOp\n  - in.Filters.AccountFilter.SharedWith\n  - in.Filters.AccountFilter.Stage\n  - in.Filters.AccountFilter.StagedInfo\n  - in.Filters.AccountFilter.Subtype\n  - in.Filters.AccountFilter.SubtypeOp\n  - in.Filters.AccountFilter.SyncMetadata\n  - in.Filters.AccountFilter.Tags\n  - in.Filters.AccountFilter.TagsOp\n  - in.Filters.AccountFilter.Tier\n  - in.Filters.AccountFilter.TierOp\n  - in.Filters.AccountFilter.TotalRevenue\n  - in.Filters.AccountFilter.Websites\n  - in.Filters.AccountFilter.WebsitesOp\n  - in.Filters.CreatedByAgentId\n  - in.Filters.CreatedByAgentIdOp\n  - in.Filters.CreatedById\n  - in.Filters.CreatedByIdOp\n  - in.Filters.CreatedDate.After\n  - in.Filters.CreatedDate.Before\n  - in.Filters.CreatedDate.DatePreset.Type\n  - in.Filters.DevOrgFilter.UeSyncState\n  - in.Filters.DisplayName\n  - in.Filters.Environment\n  - in.Filters.EnvironmentOp\n  - in.Filters.ModifiedById\n  - in.Filters.ModifiedByIdOp\n  - in.Filters.ModifiedDate.After\n  - in.Filters.ModifiedDate.Before\n  - in.Filters.ModifiedDate.DatePreset.Type\n  - in.Filters.RevOrgFilter.Account\n  - in.Filters.RevOrgFilter.AccountOp\n  - in.Filters.RevOrgFilter.Apps\n  - in.Filters.RevOrgFilter.AppsOp\n  - in.Filters.RevOrgFilter.CustomFields.Fields\n  - in.Filters.RevOrgFilter.ExternalOid\n  - in.Filters.RevOrgFilter.ExternalOidIssuer\n  - in.Filters.RevOrgFilter.ExternalOidOp\n  - in.Filters.RevOrgFilter.ExternalSourceData\n  - in.Filters.RevOrgFilter.SharedWith\n  - in.Filters.RevOrgFilter.SlaId\n  - in.Filters.RevOrgFilter.StagedInfo\n  - in.Filters.RevOrgFilter.Subtype\n  - in.Filters.RevOrgFilter.SubtypeOp\n  - in.Filters.RevOrgFilter.SyncMetadata\n  - in.Filters.RevOrgFilter.Tags\n  - (+4 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filters.RevOrgFilter.CustomFields == nil\n  - in.Filters.RevOrgFilter.ExternalOidOp == 3\n  - in.Filters.RevOrgFilter.ExternalOidOp == 4\n  - in.Filters.RevOrgFilter.ExternalOidOp == 2\n  - in.Filters.RevOrgFilter.ExternalOidOp == 4\n  - in.Filters.RevOrgFilter.ExternalOidOp == 5\n  - in.Filters.RevOrgFilter.ExternalOidOp == 2\n  - in.Filters.RevOrgFilter.ExternalOidOp == 1\n  - in.Filters.RevOrgFilter.ExternalOidOp == 3\n  - in.Filters.RevOrgFilter.TagsOp == 3\n  - in.Filters.RevOrgFilter.TagsOp == 4\n  - in.Filters.RevOrgFilter.TagsOp == 2\n  - in.Filters.RevOrgFilter.TagsOp == 4\n  - in.Filters.RevOrgFilter.TagsOp == 5\n  - in.Filters.RevOrgFilter.TagsOp == 2\n  - in.Filters.RevOrgFilter.TagsOp == 1\n  - in.Filters.RevOrgFilter.TagsOp == 3\n  - in.Filters.RevOrgFilter.AccountOp == 4\n  - in.Filters.RevOrgFilter.AccountOp == 3\n  - in.Filters.RevOrgFilter.AccountOp == 4\n  - in.Filters.RevOrgFilter.AccountOp == 2\n  - in.Filters.RevOrgFilter.AccountOp == 5\n  - in.Filters.RevOrgFilter.AccountOp == 2\n  - in.Filters.RevOrgFilter.AccountOp == 1\n  - in.Filters.RevOrgFilter.AccountOp == 3\n  - in.Filters.RevOrgFilter.SubtypeOp == 4\n  - in.Filters.RevOrgFilter.SubtypeOp == 3\n  - in.Filters.RevOrgFilter.SubtypeOp == 4\n  - in.Filters.RevOrgFilter.SubtypeOp == 2\n  - in.Filters.RevOrgFilter.SubtypeOp == 5\n  - in.Filters.RevOrgFilter.SubtypeOp == 2\n  - in.Filters.RevOrgFilter.SubtypeOp == 1\n  - in.Filters.RevOrgFilter.SubtypeOp == 3\n  - in.Filters.RevOrgFilter != nil\n  - in.Filters.RevOrgFilter.AppsOp == 4\n  - in.Filters.RevOrgFilter.AppsOp == 3\n  - in.Filters.RevOrgFilter.AppsOp == 2\n  - in.Filters.RevOrgFilter.AppsOp == 4\n  - in.Filters.RevOrgFilter.AppsOp == 5\n  - in.Filters.RevOrgFilter.AppsOp == 2\n  - (+133 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CountRevOrgs` (HTTP operation `RevOrgsCount`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Filters.AccountFilter.Apps\n  - in.Filters.AccountFilter.AppsOp\n  - in.Filters.AccountFilter.CustomFields.Fields\n  - in.Filters.AccountFilter.Domains\n  - in.Filters.AccountFilter.DomainsOp\n  - in.Filters.AccountFilter.ExternalRefs\n  - in.Filters.AccountFilter.ExternalRefsOp\n  - in.Filters.AccountFilter.ExternalSourceData\n  - in.Filters.AccountFilter.Industry\n  - in.Filters.AccountFilter.IndustryOp\n  - in.Filters.AccountFilter.IngestionChannel\n  - in.Filters.AccountFilter.LeadSource\n  - in.Filters.AccountFilter.LeadSourceOp\n  - in.Filters.AccountFilter.OwnedBy\n  - in.Filters.AccountFilter.OwnedByOp\n  - in.Filters.AccountFilter.SharedWith\n  - in.Filters.AccountFilter.Stage\n  - in.Filters.AccountFilter.StagedInfo\n  - in.Filters.AccountFilter.Subtype\n  - in.Filters.AccountFilter.SubtypeOp\n  - in.Filters.AccountFilter.SyncMetadata\n  - in.Filters.AccountFilter.Tags\n  - in.Filters.AccountFilter.TagsOp\n  - in.Filters.AccountFilter.Tier\n  - in.Filters.AccountFilter.TierOp\n  - in.Filters.AccountFilter.TotalRevenue\n  - in.Filters.AccountFilter.Websites\n  - in.Filters.AccountFilter.WebsitesOp\n  - in.Filters.CreatedByAgentId\n  - in.Filters.CreatedByAgentIdOp\n  - in.Filters.CreatedById\n  - in.Filters.CreatedByIdOp\n  - in.Filters.CreatedDate.After\n  - in.Filters.CreatedDate.Before\n  - in.Filters.CreatedDate.DatePreset.Type\n  - in.Filters.DevOrgFilter.UeSyncState\n  - in.Filters.DisplayName\n  - in.Filters.Environment\n  - in.Filters.EnvironmentOp\n  - in.Filters.ModifiedById\n  - in.Filters.ModifiedByIdOp\n  - in.Filters.ModifiedDate.After\n  - in.Filters.ModifiedDate.Before\n  - in.Filters.ModifiedDate.DatePreset.Type\n  - in.Filters.RevOrgFilter.AccountOp\n  - in.Filters.RevOrgFilter.Apps\n  - in.Filters.RevOrgFilter.AppsOp\n  - in.Filters.RevOrgFilter.CustomFields.Fields\n  - in.Filters.RevOrgFilter.ExternalOid\n  - in.Filters.RevOrgFilter.ExternalOidIssuer\n  - in.Filters.RevOrgFilter.ExternalOidOp\n  - in.Filters.RevOrgFilter.ExternalSourceData\n  - in.Filters.RevOrgFilter.SharedWith\n  - in.Filters.RevOrgFilter.SlaId\n  - in.Filters.RevOrgFilter.StagedInfo\n  - in.Filters.RevOrgFilter.Subtype\n  - in.Filters.RevOrgFilter.SubtypeOp\n  - in.Filters.RevOrgFilter.SyncMetadata\n  - in.Filters.RevOrgFilter.Tags\n  - in.Filters.RevOrgFilter.TagsOp\n  - (+3 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filters.RevOrgFilter.CustomFields == nil\n  - in.Filters.RevOrgFilter.ExternalOidOp == 3\n  - in.Filters.RevOrgFilter.ExternalOidOp == 4\n  - in.Filters.RevOrgFilter.ExternalOidOp == 2\n  - in.Filters.RevOrgFilter.ExternalOidOp == 4\n  - in.Filters.RevOrgFilter.ExternalOidOp == 5\n  - in.Filters.RevOrgFilter.ExternalOidOp == 2\n  - in.Filters.RevOrgFilter.ExternalOidOp == 1\n  - in.Filters.RevOrgFilter.ExternalOidOp == 3\n  - in.Filters.RevOrgFilter.TagsOp == 3\n  - in.Filters.RevOrgFilter.TagsOp == 4\n  - in.Filters.RevOrgFilter.TagsOp == 2\n  - in.Filters.RevOrgFilter.TagsOp == 4\n  - in.Filters.RevOrgFilter.TagsOp == 5\n  - in.Filters.RevOrgFilter.TagsOp == 2\n  - in.Filters.RevOrgFilter.TagsOp == 1\n  - in.Filters.RevOrgFilter.TagsOp == 3\n  - in.Filters.RevOrgFilter.AccountOp == 4\n  - in.Filters.RevOrgFilter.AccountOp == 3\n  - in.Filters.RevOrgFilter.AccountOp == 4\n  - in.Filters.RevOrgFilter.AccountOp == 2\n  - in.Filters.RevOrgFilter.AccountOp == 5\n  - in.Filters.RevOrgFilter.AccountOp == 2\n  - in.Filters.RevOrgFilter.AccountOp == 1\n  - in.Filters.RevOrgFilter.AccountOp == 3\n  - in.Filters.RevOrgFilter.SubtypeOp == 4\n  - in.Filters.RevOrgFilter.SubtypeOp == 3\n  - in.Filters.RevOrgFilter.SubtypeOp == 4\n  - in.Filters.RevOrgFilter.SubtypeOp == 2\n  - in.Filters.RevOrgFilter.SubtypeOp == 5\n  - in.Filters.RevOrgFilter.SubtypeOp == 2\n  - in.Filters.RevOrgFilter.SubtypeOp == 1\n  - in.Filters.RevOrgFilter.SubtypeOp == 3\n  - in.Filters.RevOrgFilter != nil\n  - in.Filters.RevOrgFilter.AppsOp == 4\n  - in.Filters.RevOrgFilter.AppsOp == 3\n  - in.Filters.RevOrgFilter.AppsOp == 2\n  - in.Filters.RevOrgFilter.AppsOp == 4\n  - in.Filters.RevOrgFilter.AppsOp == 5\n  - in.Filters.RevOrgFilter.AppsOp == 2\n  - (+133 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `externalref` -> suggestions ['in.Filters.AccountFilter.ExternalRefs', 'in.Filters.AccountFilter.ExternalRefsOp']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

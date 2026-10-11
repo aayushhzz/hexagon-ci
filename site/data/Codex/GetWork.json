@@ -2,41 +2,24 @@
   "service": "Codex",
   "coverage": {
     "rpc": "GetWork",
-    "operation": "WorksGet",
-    "tests": 14,
+    "operation": "WebhooksFetch,WorksGet,WorksGetPost",
+    "tests": 29,
     "status": {
-      "documented": [
-        200,
-        400,
-        401,
-        403,
-        404,
-        413,
-        429,
-        500,
-        503
-      ],
+      "documented": null,
       "asserted": [
         200,
         201,
+        400,
         404
       ],
-      "missing": [
-        400,
-        401,
-        403,
-        413,
-        429,
-        500,
-        503
-      ],
-      "coverage_pct": 22.2
+      "missing": [],
+      "coverage_pct": 0
     },
     "fields": {
       "leaf_fields_read_by_rpc": 3,
       "covered_count": 1,
       "coverage_pct": 33.3,
-      "request_fields_set_by_tests": 5,
+      "request_fields_set_by_tests": 41,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 1,
       "by_depth": {
@@ -77,9 +60,23 @@
             "CreateTicketPart2",
             "CreateTicketPart3",
             "DefaultGet",
+            "Delete issue with shared_with set \u2014 returns 200; members can no longer get it",
+            "Delete opportunity with shared_with set \u2014 returns 200; members can no longer get it",
+            "Delete ticket with shared_with set \u2014 returns 200; members can no longer get it",
+            "FetchWebhook",
             "Get by id",
             "Platform user should be able to perform all CRUD operations",
-            "Unsets milestone on all referencing issues when milestone is deleted"
+            "Team coordinates work management through comprehensive operations",
+            "Unsets milestone on all referencing issues when milestone is deleted",
+            "Updates survey aggregation on a frozen ticket using service account context",
+            "Validates works operations reliability through repeated API testing",
+            "With Id",
+            "With invalid id",
+            "should create and activate the TCD notifier workflow with group membership check",
+            "should create and activate the TSE Logic workflow",
+            "should create ticket tag automation workflow when ticket stage is changed",
+            "should return masked custom field value when the masked user reads the issue",
+            "should return unmasked custom field value when admin reads the issue"
           ]
         }
       ],
@@ -219,7 +216,143 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "baseobject",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "body",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "channel",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "description",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "dispatchedchannels",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "dispatchedto",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "dispatchid",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "group",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "inputvalues",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "manifest",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "member",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "membertype",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "name",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "object",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "operation",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "ownedby",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "owner",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "previoussteps",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "recipient",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "referencekey",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "response",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "responsechannel",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "responsescore",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "schema",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "slug",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "snapin",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "snapinactionname",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "snapinpackage",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "snapinversion",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "snapkitbody",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "sourcecodeartifact",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "stage",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "status",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "survey",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "targetclosedate",
           "fuzzy_suggestions": null
         },
         {
@@ -229,10 +362,36 @@
         {
           "field": "type",
           "fuzzy_suggestions": null
+        },
+        {
+          "field": "uimetadata",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "workflow",
+          "fuzzy_suggestions": null
         }
       ]
     },
     "test_facts": [
+      {
+        "name": "FetchWebhook",
+        "file": "api/v2_internal/webhooks/webhooks_test.go",
+        "labels": [
+          "INTERNAL_WEBHOOKS_FETCH"
+        ],
+        "fields_set": [
+          "Id",
+          "Object"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
       {
         "name": "Unsets milestone on all referencing issues when milestone is deleted",
         "file": "api/v2_internal/milestones/crud/milestone_interaction_test.go",
@@ -434,6 +593,97 @@
         ]
       },
       {
+        "name": "With Id",
+        "file": "api/v2_internal/work/opportunities/get_opportunity_test.go",
+        "labels": [
+          "POSITIVE",
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsOpportunity"
+        ]
+      },
+      {
+        "name": "With invalid id",
+        "file": "api/v2_internal/work/opportunities/get_opportunity_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Without id",
+        "file": "api/v2_internal/work/opportunities/get_opportunity_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": null,
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Delete opportunity with shared_with set \u2014 returns 200; members can no longer get it",
+        "file": "api/v2_internal/work/opportunities/shared_with/opportunity_shared_with_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Delete issue with shared_with set \u2014 returns 200; members can no longer get it",
+        "file": "api/v2_internal/work/shared_with/issue_shared_with_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Delete ticket with shared_with set \u2014 returns 200; members can no longer get it",
+        "file": "api/v2_internal/work/shared_with/ticket_shared_with_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
         "name": "Get by id",
         "file": "api/v2_internal/work/tickets/crud/get_ticket_test.go",
         "labels": [
@@ -491,6 +741,52 @@
         ]
       },
       {
+        "name": "Team coordinates work management through comprehensive operations",
+        "file": "e2e/smoke_test_case/works_management/works_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_WORKS_GET",
+          "INTERNAL_WORKS_UPDATE"
+        ],
+        "fields_set": [
+          "Body",
+          "Id",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsTicket"
+        ]
+      },
+      {
+        "name": "Validates works operations reliability through repeated API testing",
+        "file": "e2e/smoke_test_case/works_management/works_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_WORKS_GET",
+          "INTERNAL_WORKS_UPDATE"
+        ],
+        "fields_set": [
+          "Body",
+          "Id",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsTicket"
+        ]
+      },
+      {
         "name": "Platform user should be able to perform all CRUD operations",
         "file": "e2e/ticktes_user_journey/mfz_tickets_test/mfz_tickets_test.go",
         "labels": [
@@ -506,6 +802,221 @@
         "asserts_success": true,
         "response_fields_asserted": [
           "StatusCode"
+        ]
+      },
+      {
+        "name": "should create ticket tag automation workflow when ticket stage is changed",
+        "file": "e2e/workflow_uat_automation/workflow_node_test.go",
+        "labels": [
+          "UAT"
+        ],
+        "fields_set": [
+          "Body",
+          "Description",
+          "Id",
+          "InputValues",
+          "Name",
+          "Operation",
+          "PreviousSteps",
+          "ReferenceKey",
+          "Status",
+          "Title",
+          "Type",
+          "UiMetadata",
+          "Workflow"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Tag",
+          "Tag.Id",
+          "Work",
+          "Work.AsTicket",
+          "Workflow",
+          "Workflow.Id",
+          "WorkflowStep",
+          "WorkflowStep.Id"
+        ]
+      },
+      {
+        "name": "should create and activate the TSE Logic workflow",
+        "file": "e2e/workflow_uat_automation/workflow_uat_test.go",
+        "labels": [
+          "INVALID"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Description",
+          "Id",
+          "InputValues",
+          "Name",
+          "Operation",
+          "OwnedBy",
+          "PreviousSteps",
+          "ReferenceKey",
+          "Status",
+          "Title",
+          "Type",
+          "UiMetadata",
+          "Workflow"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsTicket",
+          "Workflow",
+          "Workflow.Id",
+          "WorkflowStep",
+          "WorkflowStep.Id"
+        ]
+      },
+      {
+        "name": "should create and activate the TCD notifier workflow with group membership check",
+        "file": "e2e/workflow_uat_automation/workflow_uat_test.go",
+        "labels": [
+          "UAT"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Description",
+          "Group",
+          "Id",
+          "InputValues",
+          "Member",
+          "MemberType",
+          "Name",
+          "Operation",
+          "OwnedBy",
+          "Owner",
+          "PreviousSteps",
+          "ReferenceKey",
+          "Status",
+          "TargetCloseDate",
+          "Title",
+          "Type",
+          "UiMetadata",
+          "Workflow"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Group",
+          "Group.Id",
+          "StatusCode",
+          "Work",
+          "Work.AsTicket",
+          "Workflow",
+          "Workflow.Id",
+          "WorkflowStep",
+          "WorkflowStep.Id"
+        ]
+      },
+      {
+        "name": "Updates survey aggregation on a frozen ticket using service account context",
+        "file": "api/v2_internal/surveys/crud/survey_service_account_test.go",
+        "labels": [
+          "POSITIVE",
+          "FUNCTIONAL",
+          "INTERNAL_SURVEYS_SUBMIT",
+          "INTERNAL_SURVEYS_RESPONSES_UPDATE",
+          "INTERNAL_SNAP_KIT_ACTION_CREATE_DEFERRED"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "BaseObject",
+          "Channel",
+          "Description",
+          "DispatchId",
+          "DispatchedChannels",
+          "DispatchedTo",
+          "Id",
+          "Manifest",
+          "Name",
+          "Object",
+          "Recipient",
+          "Response",
+          "ResponseChannel",
+          "ResponseScore",
+          "Schema",
+          "Slug",
+          "SnapIn",
+          "SnapInActionName",
+          "SnapInPackage",
+          "SnapInVersion",
+          "SnapKitBody",
+          "SourceCodeArtifact",
+          "Stage",
+          "Survey",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Execution",
+          "Execution.Id",
+          "GetSurvey",
+          "SnapIn",
+          "SnapIn.Id",
+          "SnapInPackage",
+          "SnapInPackage.Id",
+          "SnapInVersion",
+          "SnapInVersion.Id",
+          "SnapInVersion.State",
+          "StatusCode",
+          "Work",
+          "Work.AsTicket"
+        ]
+      },
+      {
+        "name": "should return masked custom field value when the masked user reads the issue",
+        "file": "api/v2_internal/work/issues/crud/masking/issues_masking_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsIssue"
+        ]
+      },
+      {
+        "name": "should return unmasked custom field value when admin reads the issue",
+        "file": "api/v2_internal/work/issues/crud/masking/issues_masking_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsIssue"
         ]
       }
     ]
@@ -565,5 +1076,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetWork` (HTTP operation `WorksGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions []\n  - test field `ownedby` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetWork` (HTTP operation `WebhooksFetch,WorksGet,WorksGetPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions []\n  - test field `baseobject` -> suggestions []\n  - test field `body` -> suggestions []\n  - test field `channel` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `dispatchedchannels` -> suggestions []\n  - test field `dispatchedto` -> suggestions []\n  - test field `dispatchid` -> suggestions []\n  - test field `group` -> suggestions []\n  - test field `inputvalues` -> suggestions []\n  - test field `manifest` -> suggestions []\n  - test field `member` -> suggestions []\n  - test field `membertype` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `object` -> suggestions []\n  - test field `operation` -> suggestions []\n  - test field `ownedby` -> suggestions []\n  - test field `owner` -> suggestions []\n  - test field `previoussteps` -> suggestions []\n  - test field `recipient` -> suggestions []\n  - test field `referencekey` -> suggestions []\n  - test field `response` -> suggestions []\n  - test field `responsechannel` -> suggestions []\n  - test field `responsescore` -> suggestions []\n  - test field `schema` -> suggestions []\n  - test field `slug` -> suggestions []\n  - test field `snapin` -> suggestions []\n  - test field `snapinactionname` -> suggestions []\n  - test field `snapinpackage` -> suggestions []\n  - test field `snapinversion` -> suggestions []\n  - test field `snapkitbody` -> suggestions []\n  - test field `sourcecodeartifact` -> suggestions []\n  - test field `stage` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `survey` -> suggestions []\n  - test field `targetclosedate` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions []\n  - test field `uimetadata` -> suggestions []\n  - test field `workflow` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

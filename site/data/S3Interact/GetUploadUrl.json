@@ -17,7 +17,7 @@
       "leaf_fields_read_by_rpc": 10,
       "covered_count": 3,
       "coverage_pct": 30,
-      "request_fields_set_by_tests": 7,
+      "request_fields_set_by_tests": 6,
       "set_by_positive_tests": 3,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -57,7 +57,6 @@
           "path": "in.FileName",
           "match": "exact",
           "by_tests": [
-            "Another member cursor cannot advance a different upload",
             "Create with negative part_size should fail",
             "Download artifact with access key",
             "Download public artifact with access key",
@@ -65,6 +64,7 @@
             "Invalid extension",
             "Invalid headers on create should fail",
             "PUT body does not match part_size",
+            "Tests artifacts APIs for smoke validation",
             "TextArtifact",
             "Unauthenticated download of public article artifact without key should succeed",
             "UnknownTypeArtifact"
@@ -74,7 +74,6 @@
           "path": "in.FileType",
           "match": "exact",
           "by_tests": [
-            "Another member cursor cannot advance a different upload",
             "Create with empty file name should fail",
             "Create with negative part_size should fail",
             "Download artifact with access key",
@@ -83,6 +82,7 @@
             "Invalid extension",
             "Invalid headers on create should fail",
             "PUT body does not match part_size",
+            "Tests artifacts APIs for smoke validation",
             "TextArtifact",
             "Unauthenticated download of public article artifact without key should succeed"
           ]
@@ -323,10 +323,6 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
-          "field": "cursor",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "headers",
           "fuzzy_suggestions": null
         },
@@ -556,6 +552,27 @@
         ]
       },
       {
+        "name": "Tests artifacts APIs for smoke validation",
+        "file": "e2e/smoke_test_case/artifacts_test/artifacts_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_ARTIFACTS_PREPARE"
+        ],
+        "fields_set": [
+          "FileName",
+          "FileType"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "GetUrl",
+          "Id",
+          "StatusCode"
+        ]
+      },
+      {
         "name": "Create with negative part_size should fail",
         "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
         "labels": [
@@ -629,31 +646,6 @@
         ]
       },
       {
-        "name": "Another member cursor cannot advance a different upload",
-        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
-        "labels": [
-          "NEGATIVE",
-          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
-          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
-        ],
-        "fields_set": [
-          "Cursor",
-          "FileName",
-          "FileType",
-          "Id",
-          "PartSize"
-        ],
-        "statuses": [
-          200
-        ],
-        "asserts_success": true,
-        "response_fields_asserted": [
-          "Cursor",
-          "Id",
-          "StatusCode"
-        ]
-      },
-      {
         "name": "PUT body does not match part_size",
         "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
         "labels": [
@@ -721,5 +713,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetUploadUrl` (HTTP operation `ArtifactsPrepare,ArtifactsUploadCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.DevOid\n  - in.FileEncoding\n  - in.FileSize\n  - in.Headers.ContentDisposition\n  - in.IsChunkedUpload\n  - in.SkipFileConstrains\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId\n  - in.ActorId\n  - in.ActorId\n  - in.DevOid == nil\n  - in.ActorId == nil\n  - in.ActorId\n  - in.DevOid == nil\n  - in.DevOid\n  - in.FileSize >= 0\n  - in.FileSize <= 0\n  - in.FileSize > *t11 * 1024 * 1024\n  - in.FileSize < t38 * 1024 * 1024\n  - in.ActorId\n  - in.FileEncoding != \"\"\n  - in != nil\n  - in.IsChunkedUpload\n  - in.SkipFileConstrains\n  - in.ActorId != *ObjectTypeRevUser\n  - in.FileEncoding != \"\"\n  - in.IsChunkedUpload\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrInvalidMediaParameter\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n  - errDuplicateParamName\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `cursor` -> suggestions []\n  - test field `headers` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `partsize` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetUploadUrl` (HTTP operation `ArtifactsPrepare,ArtifactsUploadCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.DevOid\n  - in.FileEncoding\n  - in.FileSize\n  - in.Headers.ContentDisposition\n  - in.IsChunkedUpload\n  - in.SkipFileConstrains\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ActorId == nil\n  - in.ActorId\n  - in.ActorId\n  - in.ActorId\n  - in.DevOid == nil\n  - in.ActorId == nil\n  - in.ActorId\n  - in.DevOid == nil\n  - in.DevOid\n  - in.FileSize >= 0\n  - in.FileSize <= 0\n  - in.FileSize > *t11 * 1024 * 1024\n  - in.FileSize < t38 * 1024 * 1024\n  - in.ActorId\n  - in.FileEncoding != \"\"\n  - in != nil\n  - in.IsChunkedUpload\n  - in.SkipFileConstrains\n  - in.ActorId != *ObjectTypeRevUser\n  - in.FileEncoding != \"\"\n  - in.IsChunkedUpload\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrInvalidMediaParameter\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n  - errDuplicateParamName\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `headers` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `partsize` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

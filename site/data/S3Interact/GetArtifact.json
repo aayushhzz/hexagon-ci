@@ -2,13 +2,14 @@
   "service": "S3Interact",
   "coverage": {
     "rpc": "GetArtifact",
-    "operation": "ArtifactsDownload,ArtifactsGet",
-    "tests": 24,
+    "operation": "ArtifactsDownload,ArtifactsGet,ArtifactsGetPost",
+    "tests": 31,
     "status": {
       "documented": null,
       "asserted": [
         200,
-        201
+        201,
+        403
       ],
       "missing": [],
       "coverage_pct": 0
@@ -19,7 +20,7 @@
       "coverage_pct": 16.7,
       "request_fields_set_by_tests": 7,
       "set_by_positive_tests": 1,
-      "set_by_negative_tests": 0,
+      "set_by_negative_tests": 1,
       "by_depth": {
         "top_level": {
           "total": 4,
@@ -52,6 +53,7 @@
             "Actor field does not override created_by",
             "Another org's owner cannot DOWNLOAD an artifact",
             "Another org's owner cannot GET an artifact",
+            "DevUser should be able to fetch the source code artifact",
             "Download artifact with empty key should return 403",
             "Download artifact with invalid key should return 403",
             "Download artifact with no key and no auth should return 403",
@@ -67,7 +69,13 @@
             "Get non-existent artifact should return 404",
             "Get with malformed artifact ID should return 400",
             "RevUser cannot download artifact not in their conversation",
-            "Unauthenticated download of private (unpublished) article artifact should return 403"
+            "RevUser should NOT be able to fetch the source code artifact",
+            "Unauthenticated download of private (unpublished) article artifact should return 403",
+            "creator can get artifact on own private filesystem",
+            "non-creator member can get artifact on shared filesystem",
+            "non-creator member cannot get artifact on another users private filesystem",
+            "non-member cannot get artifact on private filesystem",
+            "non-member cannot get artifact on shared filesystem"
           ]
         }
       ],
@@ -87,8 +95,8 @@
       "present_arm_pct": 23.8,
       "absent_arm_exercised": 13,
       "absent_arm_pct": 100,
-      "negative_arm_exercised": 0,
-      "negative_arm_pct": 0,
+      "negative_arm_exercised": 5,
+      "negative_arm_pct": 23.8,
       "both_arms_exercised": 5,
       "coverage_pct": 23.8,
       "by_origin": {
@@ -106,8 +114,8 @@
           "reachable_on_happy_path": 4,
           "present_arm_exercised": 2,
           "present_arm_pct": 33.3,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "negative_arm_exercised": 2,
+          "negative_arm_pct": 33.3,
           "absent_arm_exercised": 4
         },
         "library": {
@@ -115,8 +123,8 @@
           "reachable_on_happy_path": 3,
           "present_arm_exercised": 3,
           "present_arm_pct": 42.9,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "negative_arm_exercised": 3,
+          "negative_arm_pct": 42.9,
           "absent_arm_exercised": 3
         }
       },
@@ -680,6 +688,81 @@
         ]
       },
       {
+        "name": "non-member cannot get artifact on shared filesystem",
+        "file": "api/v2_internal/filesystems/mfz/filesystems_mfz_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "non-member cannot get artifact on private filesystem",
+        "file": "api/v2_internal/filesystems/mfz/filesystems_mfz_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "non-creator member can get artifact on shared filesystem",
+        "file": "api/v2_internal/filesystems/mfz/filesystems_mfz_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "creator can get artifact on own private filesystem",
+        "file": "api/v2_internal/filesystems/mfz/filesystems_mfz_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "non-creator member cannot get artifact on another users private filesystem",
+        "file": "api/v2_internal/filesystems/mfz/filesystems_mfz_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
         "name": "Get non-existent artifact should return 404",
         "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
         "labels": [
@@ -735,6 +818,40 @@
           "Work",
           "Work.AsIssue"
         ]
+      },
+      {
+        "name": "DevUser should be able to fetch the source code artifact",
+        "file": "api/v2_internal/snap_in/package/mfz/mfz_test.go",
+        "labels": [
+          "POSITIVE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "RevUser should NOT be able to fetch the source code artifact",
+        "file": "api/v2_internal/snap_in/package/mfz/mfz_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          403
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
       }
     ]
   },
@@ -752,5 +869,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetArtifact` (HTTP operation `ArtifactsDownload,ArtifactsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccessToken\n  - in.RequireVersionInformation\n  - in.SkipPresignedUrlGeneration\n  - in.Version.ModifiedBy\n  - in.Version.VersionId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Version.ModifiedBy == nil\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy != nil\n  - in.Version.ModifiedBy\n  - in.Version != nil\n  - in.Version != nil\n  - in != nil\n  - in.RequireVersionInformation != nil\n  - in.AccessToken != \"\"\n  - in.AccessToken == api.Artifact).GetAccessToken()\n  - in.Version != nil\n  - in.AccessToken == api.File).GetKey()\n  - in.SkipPresignedUrlGeneration\n  - in.Version.VersionId != \"\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `actor` -> suggestions []\n  - test field `cursor` -> suggestions []\n  - test field `filename` -> suggestions []\n  - test field `filetype` -> suggestions []\n  - test field `key` -> suggestions []\n  - test field `partsize` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetArtifact` (HTTP operation `ArtifactsDownload,ArtifactsGet,ArtifactsGetPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccessToken\n  - in.RequireVersionInformation\n  - in.SkipPresignedUrlGeneration\n  - in.Version.ModifiedBy\n  - in.Version.VersionId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Version.ModifiedBy == nil\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy != nil\n  - in.Version.ModifiedBy\n  - in.Version != nil\n  - in.Version != nil\n  - in != nil\n  - in.RequireVersionInformation != nil\n  - in.AccessToken != \"\"\n  - in.AccessToken == api.Artifact).GetAccessToken()\n  - in.Version != nil\n  - in.AccessToken == api.File).GetKey()\n  - in.SkipPresignedUrlGeneration\n  - in.Version.VersionId != \"\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `actor` -> suggestions []\n  - test field `cursor` -> suggestions []\n  - test field `filename` -> suggestions []\n  - test field `filetype` -> suggestions []\n  - test field `key` -> suggestions []\n  - test field `partsize` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

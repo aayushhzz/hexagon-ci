@@ -3,23 +3,24 @@
   "coverage": {
     "rpc": "UpdateDevUser",
     "operation": "DevUsersSelfUpdate,DevUsersUpdate",
-    "tests": 4,
+    "tests": 7,
     "status": {
       "documented": null,
       "asserted": [
         200,
-        201
+        201,
+        403
       ],
       "missing": [],
       "coverage_pct": 0
     },
     "fields": {
       "leaf_fields_read_by_rpc": 28,
-      "covered_count": 5,
-      "coverage_pct": 17.9,
-      "request_fields_set_by_tests": 12,
-      "set_by_positive_tests": 5,
-      "set_by_negative_tests": 0,
+      "covered_count": 7,
+      "coverage_pct": 25,
+      "request_fields_set_by_tests": 14,
+      "set_by_positive_tests": 7,
+      "set_by_negative_tests": 3,
       "by_depth": {
         "top_level": {
           "total": 2,
@@ -28,8 +29,8 @@
         },
         "nested": {
           "total": 17,
-          "set": 2,
-          "pct": 11.8
+          "set": 4,
+          "pct": 23.5
         },
         "deep": {
           "total": 9,
@@ -39,8 +40,8 @@
       },
       "representative": {
         "units": 28,
-        "covered": 5,
-        "pct": 17.9,
+        "covered": 7,
+        "pct": 25,
         "collapsed_types": [
           "proto.Id",
           "proto.StringList",
@@ -66,6 +67,7 @@
           "path": "in.Updates.DisplayName",
           "match": "exact",
           "by_tests": [
+            "Non-admin update call",
             "selfUpdateDevUser",
             "updateDevUserDisplayHandle",
             "updateDevUserDisplayName"
@@ -76,8 +78,24 @@
           "match": "exact",
           "by_tests": [
             "Creates group roles with stock and custom actor caveats through role set create and update",
+            "Non-admin update call",
             "updateDevUserDisplayHandle",
             "updateDevUserDisplayName"
+          ]
+        },
+        {
+          "path": "in.Updates.FullName",
+          "match": "exact",
+          "by_tests": [
+            "Non-admin update call"
+          ]
+        },
+        {
+          "path": "in.Updates.JobFunction",
+          "match": "exact",
+          "by_tests": [
+            "should set job function to Engineering to trigger CustomizePersonalComputerWorkflow",
+            "should set job function to Sales to trigger CustomizePersonalComputerWorkflow"
           ]
         },
         {
@@ -96,8 +114,6 @@
         "in.Updates.Email",
         "in.Updates.ExperienceStartDate",
         "in.Updates.ExternalSourceData",
-        "in.Updates.FullName",
-        "in.Updates.JobFunction",
         "in.Updates.JobHistory.Values",
         "in.Updates.JobTitle",
         "in.Updates.PhoneNumbers.StringValues",
@@ -118,22 +134,22 @@
       "total": 45,
       "happy_path_reached": true,
       "reachable_on_happy_path": 8,
-      "present_arm_exercised": 5,
-      "present_arm_pct": 11.1,
+      "present_arm_exercised": 7,
+      "present_arm_pct": 15.6,
       "absent_arm_exercised": 8,
       "absent_arm_pct": 100,
-      "negative_arm_exercised": 0,
-      "negative_arm_pct": 0,
+      "negative_arm_exercised": 5,
+      "negative_arm_pct": 11.1,
       "both_arms_exercised": 1,
-      "coverage_pct": 11.1,
+      "coverage_pct": 15.6,
       "by_origin": {
         "service": {
           "total": 39,
           "reachable_on_happy_path": 8,
-          "present_arm_exercised": 5,
-          "present_arm_pct": 12.8,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "present_arm_exercised": 7,
+          "present_arm_pct": 17.9,
+          "negative_arm_exercised": 5,
+          "negative_arm_pct": 12.8,
           "absent_arm_exercised": 8
         },
         "generated": {
@@ -156,22 +172,6 @@
         }
       },
       "gaps": [
-        {
-          "id": "b1",
-          "at": "internal/service/utils.go:70",
-          "cond": "in.Updates.FullName == \"\"",
-          "predicate_paths": [
-            "in.Updates.FullName"
-          ]
-        },
-        {
-          "id": "b2",
-          "at": "internal/service/utils.go:74",
-          "cond": "in.Updates.FullName",
-          "predicate_paths": [
-            "in.Updates.FullName"
-          ]
-        },
         {
           "id": "b5",
           "at": "internal/service/devuser_validations.go:190",
@@ -567,6 +567,36 @@
         ]
       },
       {
+        "name": "should set job function to Engineering to trigger CustomizePersonalComputerWorkflow",
+        "file": "e2e/personal_computer/computer_agent_test.go",
+        "labels": null,
+        "fields_set": [
+          "JobFunction"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should set job function to Sales to trigger CustomizePersonalComputerWorkflow",
+        "file": "e2e/personal_computer/computer_agent_test.go",
+        "labels": null,
+        "fields_set": [
+          "JobFunction"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
         "name": "updateDevUserDisplayHandle",
         "file": "api/v2_internal/dev_users/crud/devusers_crud_test.go",
         "labels": [
@@ -635,6 +665,25 @@
           "Group.Id",
           "RoleSet",
           "RoleSet.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Non-admin update call",
+        "file": "api/v2_internal/security/security_test.go",
+        "labels": [
+          "NEGATIVE"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "FullName",
+          "Id"
+        ],
+        "statuses": [
+          403
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
           "StatusCode"
         ]
       }
@@ -1097,5 +1146,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateDevUser` (HTTP operation `DevUsersSelfUpdate,DevUsersUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AggregateErrors\n  - in.DevUid.Value\n  - in.Updates.Availability.Int64Values\n  - in.Updates.AvailabilityModes.Int64Values\n  - in.Updates.Email\n  - in.Updates.ExperienceStartDate\n  - in.Updates.ExternalSourceData\n  - in.Updates.FullName\n  - in.Updates.JobFunction\n  - in.Updates.JobHistory.Values\n  - in.Updates.JobTitle\n  - in.Updates.PhoneNumbers.StringValues\n  - in.Updates.PlatformRevUserMetadata\n  - in.Updates.ReportsToId\n  - in.Updates.Skills.Values\n  - in.Updates.StagedInfo\n  - in.Updates.State\n  - in.Updates.Status.ExpiresAt\n  - in.Updates.SyncMetadata\n  - in.Updates.TermsConditionsAccepted\n  - in.Updates.Timezone\n  - in.Updates.UnsetFieldMask.Paths\n  - in.Updates.UserAttributionMetadata\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Updates.FullName == \"\"\n  - in.Updates.FullName\n  - in.AggregateErrors\n  - in.AggregateErrors\n  - in.Updates.AvailabilityModes == nil\n  - in.AggregateErrors\n  - in\n  - in.Updates == nil\n  - in.Updates.Timezone\n  - in.Updates.Status == nil\n  - in.Updates.Status.ExpiresAt != nil\n  - in.Updates.Skills == nil\n  - in.Updates.JobHistory == nil\n  - in.Updates.Skills != nil\n  - in.Updates.JobHistory != nil\n  - in.Updates.AvailabilityModes == nil\n  - in.Updates.UnsetFieldMask == nil\n  - in.Updates.ReportsToId == nil\n  - in.Updates.ReportsToId != nil\n  - in.Updates.TermsConditionsAccepted\n  - in.Updates.DisplayPicture != nil\n  - in.DevUid.Value\n  - in.DevUid.Value == \"\"\n  - in.DevUid.Value\n  - in.DevUid.Value == nil\n  - in.DevUid.Value == nil\n  - **t25 != in.DevUid.Value\n  - in.DevUid != nil\n  - in.Updates.TermsConditionsAccepted != nil\n  - in.DevUid != *t54\n  - in.Updates.Timezone != nil\n  - in.Updates.TermsConditionsAccepted\n  - in.Updates.TermsConditionsAccepted != nil\n  - in.Updates != nil\n  - in.Updates.Email != nil\n  - in.Updates.AvailabilityModes != nil\n  - in.Updates.PlatformRevUserMetadata != nil\n  - in.Updates.Availability == nil\n  - in.Updates.UserAttributionMetadata != nil\n  - in.Updates.Availability != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - errCacheUnavailable\n  - errEmailAlreadyExists\n  - errInternalCacheTransientError\n  - errInvalidInputEmail\n  - errInvalidStatusDescription\n  - errInvalidStatusExpiry\n  - errOldVersionOfSchemaFragments\n  - errPhoneNumberInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n  - errStateIssueForEmailUpdate\n  - errTermsAndConditionsResetError\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `applicableprincipaltype` -> suggestions []\n  - test field `createroles` -> suggestions []\n  - test field `membertype` -> suggestions []\n  - test field `name` -> suggestions ['in.Updates.DisplayName', 'in.Updates.FullName']\n  - test field `principal` -> suggestions []\n  - test field `reportsto` -> suggestions ['in.Updates.ReportsToId']\n  - test field `role` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateDevUser` (HTTP operation `DevUsersSelfUpdate,DevUsersUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AggregateErrors\n  - in.DevUid.Value\n  - in.Updates.Availability.Int64Values\n  - in.Updates.AvailabilityModes.Int64Values\n  - in.Updates.Email\n  - in.Updates.ExperienceStartDate\n  - in.Updates.ExternalSourceData\n  - in.Updates.JobHistory.Values\n  - in.Updates.JobTitle\n  - in.Updates.PhoneNumbers.StringValues\n  - in.Updates.PlatformRevUserMetadata\n  - in.Updates.ReportsToId\n  - in.Updates.Skills.Values\n  - in.Updates.StagedInfo\n  - in.Updates.State\n  - in.Updates.Status.ExpiresAt\n  - in.Updates.SyncMetadata\n  - in.Updates.TermsConditionsAccepted\n  - in.Updates.Timezone\n  - in.Updates.UnsetFieldMask.Paths\n  - in.Updates.UserAttributionMetadata\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AggregateErrors\n  - in.AggregateErrors\n  - in.Updates.AvailabilityModes == nil\n  - in.AggregateErrors\n  - in\n  - in.Updates == nil\n  - in.Updates.Timezone\n  - in.Updates.Status == nil\n  - in.Updates.Status.ExpiresAt != nil\n  - in.Updates.Skills == nil\n  - in.Updates.JobHistory == nil\n  - in.Updates.Skills != nil\n  - in.Updates.JobHistory != nil\n  - in.Updates.AvailabilityModes == nil\n  - in.Updates.UnsetFieldMask == nil\n  - in.Updates.ReportsToId == nil\n  - in.Updates.ReportsToId != nil\n  - in.Updates.TermsConditionsAccepted\n  - in.Updates.DisplayPicture != nil\n  - in.DevUid.Value\n  - in.DevUid.Value == \"\"\n  - in.DevUid.Value\n  - in.DevUid.Value == nil\n  - in.DevUid.Value == nil\n  - **t25 != in.DevUid.Value\n  - in.DevUid != nil\n  - in.Updates.TermsConditionsAccepted != nil\n  - in.DevUid != *t54\n  - in.Updates.Timezone != nil\n  - in.Updates.TermsConditionsAccepted\n  - in.Updates.TermsConditionsAccepted != nil\n  - in.Updates != nil\n  - in.Updates.Email != nil\n  - in.Updates.AvailabilityModes != nil\n  - in.Updates.PlatformRevUserMetadata != nil\n  - in.Updates.Availability == nil\n  - in.Updates.UserAttributionMetadata != nil\n  - in.Updates.Availability != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - errCacheUnavailable\n  - errEmailAlreadyExists\n  - errInternalCacheTransientError\n  - errInvalidInputEmail\n  - errInvalidStatusDescription\n  - errInvalidStatusExpiry\n  - errOldVersionOfSchemaFragments\n  - errPhoneNumberInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n  - errStateIssueForEmailUpdate\n  - errTermsAndConditionsResetError\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `applicableprincipaltype` -> suggestions []\n  - test field `createroles` -> suggestions []\n  - test field `membertype` -> suggestions []\n  - test field `name` -> suggestions ['in.Updates.DisplayName', 'in.Updates.FullName']\n  - test field `principal` -> suggestions []\n  - test field `reportsto` -> suggestions ['in.Updates.ReportsToId']\n  - test field `role` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

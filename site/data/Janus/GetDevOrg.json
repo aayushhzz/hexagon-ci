@@ -2,13 +2,34 @@
   "service": "Janus",
   "coverage": {
     "rpc": "GetDevOrg",
-    "operation": "",
-    "tests": 0,
+    "operation": "DevOrgsGetPost",
+    "tests": 4,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 11.1
     },
     "fields": {
       "leaf_fields_read_by_rpc": 1,
@@ -47,12 +68,12 @@
     },
     "branches": {
       "total": 5,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 5,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
+      "absent_arm_exercised": 5,
+      "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
@@ -60,12 +81,12 @@
       "by_origin": {
         "service": {
           "total": 3,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 3,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 3
         },
         "generated": {
           "total": 0,
@@ -78,12 +99,12 @@
         },
         "library": {
           "total": 2,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 2,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 2
         }
       },
       "gaps": [
@@ -138,7 +159,7 @@
       ],
       "service_count": 0,
       "call_count": 0,
-      "reached_by_test": false,
+      "reached_by_test": true,
       "deps_result_used_in_response": 0,
       "deps_result_checked_by_test": 0,
       "response_links": null
@@ -146,8 +167,70 @@
     "anomalies": {
       "unmatched_test_fields": null
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "Dev orgs get by revuser",
+        "file": "api/v2_internal/rev_users/crudl_revu_actor/dev_orgs_get_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Manages organization information and settings",
+        "file": "e2e/smoke_test_case/identity_management/dev_orgs_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_DEV_ORGS_GET"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevOrg",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Validates organization metadata and configuration integrity",
+        "file": "e2e/smoke_test_case/identity_management/dev_orgs_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_DEV_ORGS_GET"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevOrg",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Validates API reliability through repeated access patterns",
+        "file": "e2e/smoke_test_case/identity_management/dev_orgs_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_DEV_ORGS_GET"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevOrg",
+          "StatusCode"
+        ]
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/janus/internal/service.Janus).GetDevOrg",
@@ -206,5 +289,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetDevOrg` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid\n  - in.DevOid == \"\"\n  - in.DevOid != \"\"\n  - in.DevOid == \"\"\n  - *t36 != in.DevOid\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevOrgNotFound\n  - errInvalidAuthContextDevOid\n  - errInvalidJWTToken\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetDevOrg` (HTTP operation `DevOrgsGetPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid\n  - in.DevOid == \"\"\n  - in.DevOid != \"\"\n  - in.DevOid == \"\"\n  - *t36 != in.DevOid\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevOrgNotFound\n  - errInvalidAuthContextDevOid\n  - errInvalidJWTToken\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

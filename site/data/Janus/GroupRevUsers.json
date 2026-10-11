@@ -2,21 +2,40 @@
   "service": "Janus",
   "coverage": {
     "rpc": "GroupRevUsers",
-    "operation": "",
-    "tests": 0,
+    "operation": "RevUsersGroup",
+    "tests": 1,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200,
+        400
+      ],
+      "missing": [
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 25
     },
     "fields": {
       "leaf_fields_read_by_rpc": 84,
-      "covered_count": 0,
-      "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
-      "set_by_positive_tests": 0,
-      "set_by_negative_tests": 0,
+      "covered_count": 2,
+      "coverage_pct": 2.4,
+      "request_fields_set_by_tests": 4,
+      "set_by_positive_tests": 2,
+      "set_by_negative_tests": 2,
       "by_depth": {
         "top_level": {
           "total": 3,
@@ -25,31 +44,45 @@
         },
         "nested": {
           "total": 23,
-          "set": 0,
-          "pct": 0
+          "set": 1,
+          "pct": 4.3
         },
         "deep": {
           "total": 58,
-          "set": 0,
-          "pct": 0
+          "set": 1,
+          "pct": 1.7
         }
       },
       "representative": {
         "units": 6,
-        "covered": 0,
-        "pct": 0,
+        "covered": 2,
+        "pct": 33.3,
         "collapsed_types": [
           "api.GroupPaginationParams",
           "api.ListUsersFilter",
           "dql.DevrevQuery"
         ]
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.GroupPageParams.GroupBy",
+          "match": "exact",
+          "by_tests": [
+            "Group RevUsers"
+          ]
+        },
+        {
+          "path": "in.UserFilter.RevUserFilter.Associations",
+          "match": "exact",
+          "by_tests": [
+            "Group RevUsers"
+          ]
+        }
+      ],
       "gaps": [
         "in.AccountIdFilter",
         "in.DqlQuery.SearchExpression",
         "in.DqlQuery.SearchQuery",
-        "in.GroupPageParams.GroupBy",
         "in.GroupPageParams.PerGroup",
         "in.GroupPageParams.SortBy",
         "in.GroupPageParams.SortGroupKeyBy",
@@ -97,7 +130,6 @@
         "in.UserFilter.PrimaryIdentityOp",
         "in.UserFilter.RevUserFilter.Apps",
         "in.UserFilter.RevUserFilter.AppsOp",
-        "in.UserFilter.RevUserFilter.Associations",
         "in.UserFilter.RevUserFilter.AssociationsOp",
         "in.UserFilter.RevUserFilter.CustomFields.Fields",
         "in.UserFilter.RevUserFilter.ExternalRefs",
@@ -134,25 +166,25 @@
     },
     "branches": {
       "total": 232,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 19,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
-      "negative_arm_exercised": 0,
-      "negative_arm_pct": 0,
+      "present_arm_exercised": 8,
+      "present_arm_pct": 3.4,
+      "absent_arm_exercised": 19,
+      "absent_arm_pct": 100,
+      "negative_arm_exercised": 8,
+      "negative_arm_pct": 3.4,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 3.4,
       "by_origin": {
         "service": {
           "total": 220,
-          "reachable_on_happy_path": 0,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "reachable_on_happy_path": 19,
+          "present_arm_exercised": 8,
+          "present_arm_pct": 3.6,
+          "negative_arm_exercised": 8,
+          "negative_arm_pct": 3.6,
+          "absent_arm_exercised": 19
         },
         "generated": {
           "total": 0,
@@ -252,22 +284,6 @@
           "cond": "in.GroupPageParams == nil",
           "predicate_paths": [
             "in.GroupPageParams"
-          ]
-        },
-        {
-          "id": "b11",
-          "at": "internal/service/revuser_dql.go:431",
-          "cond": "in.GroupPageParams.GroupBy == nil",
-          "predicate_paths": [
-            "in.GroupPageParams.GroupBy"
-          ]
-        },
-        {
-          "id": "b12",
-          "at": "internal/service/revuser_dql.go:431",
-          "cond": "in.GroupPageParams.GroupBy == \"\"",
-          "predicate_paths": [
-            "in.GroupPageParams.GroupBy"
           ]
         },
         {
@@ -1919,22 +1935,6 @@
           ]
         },
         {
-          "id": "b219",
-          "at": "internal/service/revuser_dql.go:431",
-          "cond": "in.GroupPageParams.GroupBy|in.UserFilter == nil",
-          "predicate_paths": [
-            "in.GroupPageParams.GroupBy"
-          ]
-        },
-        {
-          "id": "b220",
-          "at": "internal/service/revuser_dql.go:431",
-          "cond": "in.GroupPageParams.GroupBy|in.UserFilter == \"\"",
-          "predicate_paths": [
-            "in.GroupPageParams.GroupBy"
-          ]
-        },
-        {
           "id": "b221",
           "at": "internal/service/revuser_dql.go:330",
           "cond": "in.DqlQuery|in.UserFilter == nil",
@@ -1991,43 +1991,11 @@
           ]
         },
         {
-          "id": "b228",
-          "at": "internal/service/revuser.go:2341",
-          "cond": "in.GroupPageParams.GroupBy|in.UserFilter == \"\"",
-          "predicate_paths": [
-            "in.GroupPageParams.GroupBy"
-          ]
-        },
-        {
-          "id": "b229",
-          "at": "internal/service/revuser.go:2354",
-          "cond": "in.GroupPageParams.GroupBy|in.UserFilter != \"\"",
-          "predicate_paths": [
-            "in.GroupPageParams.GroupBy"
-          ]
-        },
-        {
           "id": "b230",
           "at": "internal/service/revuser.go:2362",
           "cond": "in.AccountIdFilter|in.UserFilter != nil",
           "predicate_paths": [
             "in.AccountIdFilter"
-          ]
-        },
-        {
-          "id": "b231",
-          "at": "internal/service/revuser.go:2356",
-          "cond": "in.GroupPageParams.GroupBy|in.UserFilter",
-          "predicate_paths": [
-            "in.GroupPageParams.GroupBy"
-          ]
-        },
-        {
-          "id": "b232",
-          "at": "internal/service/revuser.go:2371",
-          "cond": "in.GroupPageParams.GroupBy|in.UserFilter == \"external_refs\"",
-          "predicate_paths": [
-            "in.GroupPageParams.GroupBy"
           ]
         }
       ]
@@ -2046,16 +2014,48 @@
       ],
       "service_count": 1,
       "call_count": 1,
-      "reached_by_test": false,
+      "reached_by_test": true,
       "deps_result_used_in_response": 0,
       "deps_result_checked_by_test": 0,
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "limit",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "limitpergroup",
+          "fuzzy_suggestions": [
+            "in.GroupPageParams.PerGroup"
+          ]
+        }
+      ]
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "Group RevUsers",
+        "file": "api/v2_internal/identity_flows/rev_users_api_test.go",
+        "labels": [
+          "INTERNAL_REVUSERS_GROUP"
+        ],
+        "fields_set": [
+          "Associations",
+          "GroupBy",
+          "Limit",
+          "LimitPerGroup"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Groups",
+          "StatusCode"
+        ]
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/janus/internal/service.Janus).GroupRevUsers",
@@ -2257,5 +2257,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GroupRevUsers` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountIdFilter\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SearchQuery\n  - in.GroupPageParams.GroupBy\n  - in.GroupPageParams.PerGroup\n  - in.GroupPageParams.SortBy\n  - in.GroupPageParams.SortGroupKeyBy\n  - in.SkipItemsInGroup\n  - in.SkipTotalGroups\n  - in.UserFilter.CreatedByAgentId\n  - in.UserFilter.CreatedByAgentIdOp\n  - in.UserFilter.CreatedById\n  - in.UserFilter.CreatedByIdOp\n  - in.UserFilter.CreatedDate.After\n  - in.UserFilter.CreatedDate.Before\n  - in.UserFilter.CreatedDate.DatePreset.Type\n  - in.UserFilter.DevUserFilter.Apps\n  - in.UserFilter.DevUserFilter.AppsOp\n  - in.UserFilter.DevUserFilter.Availability\n  - in.UserFilter.DevUserFilter.AvailabilityModes\n  - in.UserFilter.DevUserFilter.AvailabilityModesOp\n  - in.UserFilter.DevUserFilter.AvailabilityOp\n  - in.UserFilter.DevUserFilter.CustomFields.Fields\n  - in.UserFilter.DevUserFilter.ExternalIdentities\n  - in.UserFilter.DevUserFilter.ExternalSourceData\n  - in.UserFilter.DevUserFilter.IsInvited\n  - in.UserFilter.DevUserFilter.JobHistory\n  - in.UserFilter.DevUserFilter.JobHistoryOp\n  - in.UserFilter.DevUserFilter.JobTitle\n  - in.UserFilter.DevUserFilter.ProfileId\n  - in.UserFilter.DevUserFilter.ReportsToId\n  - in.UserFilter.DevUserFilter.StagedInfo\n  - in.UserFilter.DevUserFilter.Subtype\n  - in.UserFilter.DevUserFilter.SubtypeOp\n  - in.UserFilter.DevUserFilter.SyncMetadata\n  - in.UserFilter.DevUserFilter.Timezone\n  - in.UserFilter.DevrevProfileFilter\n  - in.UserFilter.DisplayName\n  - in.UserFilter.Email\n  - in.UserFilter.EmailOp\n  - in.UserFilter.ModifiedById\n  - in.UserFilter.ModifiedByIdOp\n  - in.UserFilter.ModifiedDate.After\n  - in.UserFilter.ModifiedDate.Before\n  - in.UserFilter.ModifiedDate.DatePreset.Type\n  - in.UserFilter.PhoneNumbers\n  - in.UserFilter.PhoneNumbersOp\n  - in.UserFilter.PrimaryIdentity\n  - in.UserFilter.PrimaryIdentityOp\n  - in.UserFilter.RevUserFilter.Apps\n  - in.UserFilter.RevUserFilter.AppsOp\n  - in.UserFilter.RevUserFilter.Associations\n  - in.UserFilter.RevUserFilter.AssociationsOp\n  - in.UserFilter.RevUserFilter.CustomFields.Fields\n  - in.UserFilter.RevUserFilter.ExternalRefs\n  - in.UserFilter.RevUserFilter.ExternalRefsOp\n  - in.UserFilter.RevUserFilter.ExternalSourceData\n  - in.UserFilter.RevUserFilter.ExternalUid\n  - in.UserFilter.RevUserFilter.ExternalUidIssuer\n  - in.UserFilter.RevUserFilter.ExternalUidOp\n  - (+24 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DqlQuery == nil\n  - in.DqlQuery.SearchQuery != \"\"\n  - in.DqlQuery == nil\n  - in.DqlQuery == nil\n  - in.GroupPageParams.PerGroup < 0\n  - in.GroupPageParams.PerGroup != 0\n  - in.GroupPageParams.PerGroup < 0\n  - in.GroupPageParams.PerGroup > *maxItemsPerGroup\n  - call() * in.GroupPageParams.PerGroup > *maxTotalGroupItems\n  - in.GroupPageParams == nil\n  - in.GroupPageParams.GroupBy == nil\n  - in.GroupPageParams.GroupBy == \"\"\n  - in.DqlQuery == nil\n  - in.DqlQuery\n  - in.AccountIdFilter == nil\n  - in.UserFilter == nil\n  - in.UserFilter.RevUserFilter == nil\n  - in.UserFilter|in.UserFilter.DevUserFilter.CustomFields == nil\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityModesOp == 3\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityModesOp == 4\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityModesOp == 2\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityModesOp == 4\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityModesOp == 5\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityModesOp == 2\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityModesOp == 1\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityModesOp == 3\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityOp == 3\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityOp == 4\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityOp == 2\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityOp == 4\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityOp == 5\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityOp == 2\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityOp == 1\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityOp == 3\n  - in.UserFilter|in.UserFilter.DevUserFilter.JobHistoryOp == 3\n  - in.UserFilter|in.UserFilter.DevUserFilter.JobHistoryOp == 4\n  - in.UserFilter|in.UserFilter.DevUserFilter.JobHistoryOp == 2\n  - in.UserFilter|in.UserFilter.DevUserFilter.JobHistoryOp == 4\n  - in.UserFilter|in.UserFilter.DevUserFilter.JobHistoryOp == 5\n  - in.UserFilter|in.UserFilter.DevUserFilter.JobHistoryOp == 2\n  - (+192 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidGroupByInputField\n  - errInvalidGroupParams\n  - errInvalidSortByInputField\n  - orgStateEnumReverseMap\n  - userStateEnumReverseMap\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GroupRevUsers` (HTTP operation `RevUsersGroup`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountIdFilter\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SearchQuery\n  - in.GroupPageParams.PerGroup\n  - in.GroupPageParams.SortBy\n  - in.GroupPageParams.SortGroupKeyBy\n  - in.SkipItemsInGroup\n  - in.SkipTotalGroups\n  - in.UserFilter.CreatedByAgentId\n  - in.UserFilter.CreatedByAgentIdOp\n  - in.UserFilter.CreatedById\n  - in.UserFilter.CreatedByIdOp\n  - in.UserFilter.CreatedDate.After\n  - in.UserFilter.CreatedDate.Before\n  - in.UserFilter.CreatedDate.DatePreset.Type\n  - in.UserFilter.DevUserFilter.Apps\n  - in.UserFilter.DevUserFilter.AppsOp\n  - in.UserFilter.DevUserFilter.Availability\n  - in.UserFilter.DevUserFilter.AvailabilityModes\n  - in.UserFilter.DevUserFilter.AvailabilityModesOp\n  - in.UserFilter.DevUserFilter.AvailabilityOp\n  - in.UserFilter.DevUserFilter.CustomFields.Fields\n  - in.UserFilter.DevUserFilter.ExternalIdentities\n  - in.UserFilter.DevUserFilter.ExternalSourceData\n  - in.UserFilter.DevUserFilter.IsInvited\n  - in.UserFilter.DevUserFilter.JobHistory\n  - in.UserFilter.DevUserFilter.JobHistoryOp\n  - in.UserFilter.DevUserFilter.JobTitle\n  - in.UserFilter.DevUserFilter.ProfileId\n  - in.UserFilter.DevUserFilter.ReportsToId\n  - in.UserFilter.DevUserFilter.StagedInfo\n  - in.UserFilter.DevUserFilter.Subtype\n  - in.UserFilter.DevUserFilter.SubtypeOp\n  - in.UserFilter.DevUserFilter.SyncMetadata\n  - in.UserFilter.DevUserFilter.Timezone\n  - in.UserFilter.DevrevProfileFilter\n  - in.UserFilter.DisplayName\n  - in.UserFilter.Email\n  - in.UserFilter.EmailOp\n  - in.UserFilter.ModifiedById\n  - in.UserFilter.ModifiedByIdOp\n  - in.UserFilter.ModifiedDate.After\n  - in.UserFilter.ModifiedDate.Before\n  - in.UserFilter.ModifiedDate.DatePreset.Type\n  - in.UserFilter.PhoneNumbers\n  - in.UserFilter.PhoneNumbersOp\n  - in.UserFilter.PrimaryIdentity\n  - in.UserFilter.PrimaryIdentityOp\n  - in.UserFilter.RevUserFilter.Apps\n  - in.UserFilter.RevUserFilter.AppsOp\n  - in.UserFilter.RevUserFilter.AssociationsOp\n  - in.UserFilter.RevUserFilter.CustomFields.Fields\n  - in.UserFilter.RevUserFilter.ExternalRefs\n  - in.UserFilter.RevUserFilter.ExternalRefsOp\n  - in.UserFilter.RevUserFilter.ExternalSourceData\n  - in.UserFilter.RevUserFilter.ExternalUid\n  - in.UserFilter.RevUserFilter.ExternalUidIssuer\n  - in.UserFilter.RevUserFilter.ExternalUidOp\n  - in.UserFilter.RevUserFilter.Gender\n  - in.UserFilter.RevUserFilter.IngestionChannel\n  - (+22 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DqlQuery == nil\n  - in.DqlQuery.SearchQuery != \"\"\n  - in.DqlQuery == nil\n  - in.DqlQuery == nil\n  - in.GroupPageParams.PerGroup < 0\n  - in.GroupPageParams.PerGroup != 0\n  - in.GroupPageParams.PerGroup < 0\n  - in.GroupPageParams.PerGroup > *maxItemsPerGroup\n  - call() * in.GroupPageParams.PerGroup > *maxTotalGroupItems\n  - in.GroupPageParams == nil\n  - in.DqlQuery == nil\n  - in.DqlQuery\n  - in.AccountIdFilter == nil\n  - in.UserFilter == nil\n  - in.UserFilter.RevUserFilter == nil\n  - in.UserFilter|in.UserFilter.DevUserFilter.CustomFields == nil\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityModesOp == 3\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityModesOp == 4\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityModesOp == 2\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityModesOp == 4\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityModesOp == 5\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityModesOp == 2\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityModesOp == 1\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityModesOp == 3\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityOp == 3\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityOp == 4\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityOp == 2\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityOp == 4\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityOp == 5\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityOp == 2\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityOp == 1\n  - in.UserFilter|in.UserFilter.DevUserFilter.AvailabilityOp == 3\n  - in.UserFilter|in.UserFilter.DevUserFilter.JobHistoryOp == 3\n  - in.UserFilter|in.UserFilter.DevUserFilter.JobHistoryOp == 4\n  - in.UserFilter|in.UserFilter.DevUserFilter.JobHistoryOp == 2\n  - in.UserFilter|in.UserFilter.DevUserFilter.JobHistoryOp == 4\n  - in.UserFilter|in.UserFilter.DevUserFilter.JobHistoryOp == 5\n  - in.UserFilter|in.UserFilter.DevUserFilter.JobHistoryOp == 2\n  - in.UserFilter|in.UserFilter.DevUserFilter.JobHistoryOp == 1\n  - in.UserFilter|in.UserFilter.DevUserFilter.JobHistoryOp == 3\n  - (+184 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidGroupByInputField\n  - errInvalidGroupParams\n  - errInvalidSortByInputField\n  - orgStateEnumReverseMap\n  - userStateEnumReverseMap\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `limit` -> suggestions []\n  - test field `limitpergroup` -> suggestions ['in.GroupPageParams.PerGroup']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -2,19 +2,41 @@
   "service": "Janus",
   "coverage": {
     "rpc": "DeleteAccount",
-    "operation": "",
-    "tests": 0,
+    "operation": "AccountsDelete",
+    "tests": 1,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200,
+        201,
+        403
+      ],
+      "missing": [
+        400,
+        401,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 22.2
     },
     "fields": {
       "leaf_fields_read_by_rpc": 2,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
+      "request_fields_set_by_tests": 4,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -48,12 +70,12 @@
     },
     "branches": {
       "total": 8,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 7,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
+      "absent_arm_exercised": 7,
+      "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
@@ -61,30 +83,30 @@
       "by_origin": {
         "service": {
           "total": 3,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 2,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 2
         },
         "generated": {
           "total": 2,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 2,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 2
         },
         "library": {
           "total": 3,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 3,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 3
         }
       },
       "gaps": [
@@ -179,16 +201,60 @@
       "datastore_calls": [],
       "service_count": 3,
       "call_count": 4,
-      "reached_by_test": false,
+      "reached_by_test": true,
       "deps_result_used_in_response": 0,
       "deps_result_checked_by_test": 0,
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "displayname",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "principal",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "rolesetassignmentinfo",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "account:all scope required for AccountsDelete",
+        "file": "api/v2_internal/scopes/crud/scopes_rev_user_account_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ROLE_SETS_CREATE"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "Id",
+          "Principal",
+          "RoleSetAssignmentInfo"
+        ],
+        "statuses": [
+          200,
+          201,
+          403
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Account",
+          "Account.Id",
+          "ServiceAccount",
+          "ServiceAccount.Id",
+          "StatusCode"
+        ]
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/janus/internal/service.Janus).DeleteAccount",
@@ -257,5 +323,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteAccount` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountId\n  - in.IsSystemDelete\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountId == nil\n  - in.AccountId == nil\n  - in.AccountId\n  - in.AccountId == \"\"\n  - in.AccountId != nil\n  - in.AccountId == nil\n  - in.IsSystemDelete\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errAccountNotFound\n  - errInvalidSortByInputField\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteAccount` (HTTP operation `AccountsDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AccountId\n  - in.IsSystemDelete\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.AccountId == nil\n  - in.AccountId == nil\n  - in.AccountId\n  - in.AccountId == \"\"\n  - in.AccountId != nil\n  - in.AccountId == nil\n  - in.IsSystemDelete\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errAccountNotFound\n  - errInvalidSortByInputField\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `displayname` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `rolesetassignmentinfo` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

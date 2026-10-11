@@ -2,8 +2,8 @@
   "service": "Codex",
   "coverage": {
     "rpc": "ListConversations",
-    "operation": "ConversationsCount,ConversationsList,ConversationsListPost,LobbiesList",
-    "tests": 10,
+    "operation": "ConversationsCount,ConversationsCountPost,ConversationsList,ConversationsListPost,LobbiesList",
+    "tests": 12,
     "status": {
       "documented": null,
       "asserted": [
@@ -3133,6 +3133,22 @@
         ]
       },
       {
+        "name": "Creates conversations, counts them, and deletes all",
+        "file": "e2e/smoke_test_case/conversations/conversations_test.go",
+        "labels": [
+          "INTERNAL_CONVERSATIONS_COUNT"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Count",
+          "StatusCode"
+        ]
+      },
+      {
         "name": "should create conversations and group by members without sorting",
         "file": "e2e/conversation_user_journey/conversation_group_test.go",
         "labels": [
@@ -3214,6 +3230,22 @@
         "response_fields_asserted": [
           "Conversation",
           "Conversation.Id",
+          "Conversations",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Creates conversations, lists them, and deletes all",
+        "file": "e2e/smoke_test_case/conversations/conversations_test.go",
+        "labels": [
+          "INTERNAL_CONVERSATIONS_LIST"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
           "Conversations",
           "StatusCode"
         ]
@@ -3535,5 +3567,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListConversations` (HTTP operation `ConversationsCount,ConversationsList,ConversationsListPost,LobbiesList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.DqlQuery\n  - in.Filter.AccountId\n  - in.Filter.AccountIdOp\n  - in.Filter.ActualCloseDate.After\n  - in.Filter.ActualCloseDate.Before\n  - in.Filter.AiResolutionStatus\n  - in.Filter.AppliesToPartIds\n  - in.Filter.Apps\n  - in.Filter.AppsOp\n  - in.Filter.BrandId\n  - in.Filter.BroadcastChannels\n  - in.Filter.Channels\n  - in.Filter.ChannelsInstances\n  - in.Filter.ChannelsInstancesOp\n  - in.Filter.ConversationType\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CustomFields.Fields\n  - in.Filter.ExternalSourceData\n  - in.Filter.FirstResponseTime.After\n  - in.Filter.FirstResponseTime.Before\n  - in.Filter.Group\n  - in.Filter.HasSpaceId\n  - in.Filter.IsCreatorVerified\n  - in.Filter.IsFrozen\n  - in.Filter.IsSpam\n  - in.Filter.LastExternalMessageDate.After\n  - in.Filter.LastExternalMessageDate.Before\n  - in.Filter.LastMessageTimestamp.After\n  - in.Filter.LastMessageTimestamp.Before\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.MemberIds\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.OwnedByAgentId\n  - in.Filter.OwnedByIds\n  - in.Filter.OwnedByIdsOp\n  - in.Filter.ParticipantOids\n  - in.Filter.ParticipantUids\n  - in.Filter.Priority\n  - in.Filter.Sentiment\n  - in.Filter.SentimentOp\n  - in.Filter.Sessions\n  - in.Filter.SlaId\n  - in.Filter.SlaSummary\n  - in.Filter.SourceChannel\n  - in.Filter.SourceChannelOp\n  - in.Filter.SourceChannelV2\n  - in.Filter.SourceChannelV2Instance\n  - in.Filter.SpacesFilter\n  - in.Filter.StagedInfo\n  - in.Filter.State\n  - (+14 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.ChannelsInstancesOp != nil\n  - in.Filter.SourceChannelOp != nil\n  - in.Filter.OwnedByIdsOp != nil\n  - in.Filter.AccountIdOp != nil\n  - in.Filter.TagsOp != nil\n  - in.Filter.LinksOp != nil\n  - in.Filter.SurveysAggregationOp != nil\n  - in.Filter.SyncMetadataOp != nil\n  - in.Filter.SentimentOp != nil\n  - in.Filter.SubtypeOp != nil\n  - in.Filter.AppsOp != nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Page >= 0\n  - in.PerPage >= 0\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n  - in.Filter.CustomFields == nil\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 5\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 1\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.ModifiedDate != nil\n  - (+312 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestoparts` -> suggestions ['in.Filter.AppliesToPartIds']\n  - test field `messages` -> suggestions []\n  - test field `stagename` -> suggestions ['in.Filter.Stage']\n  - test field `title` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListConversations` (HTTP operation `ConversationsCount,ConversationsCountPost,ConversationsList,ConversationsListPost,LobbiesList`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.DqlQuery\n  - in.Filter.AccountId\n  - in.Filter.AccountIdOp\n  - in.Filter.ActualCloseDate.After\n  - in.Filter.ActualCloseDate.Before\n  - in.Filter.AiResolutionStatus\n  - in.Filter.AppliesToPartIds\n  - in.Filter.Apps\n  - in.Filter.AppsOp\n  - in.Filter.BrandId\n  - in.Filter.BroadcastChannels\n  - in.Filter.Channels\n  - in.Filter.ChannelsInstances\n  - in.Filter.ChannelsInstancesOp\n  - in.Filter.ConversationType\n  - in.Filter.CreatedByAgentId\n  - in.Filter.CreatedByAgentIdOp\n  - in.Filter.CreatedById\n  - in.Filter.CreatedByIdOp\n  - in.Filter.CreatedDate.After\n  - in.Filter.CreatedDate.Before\n  - in.Filter.CustomFields.Fields\n  - in.Filter.ExternalSourceData\n  - in.Filter.FirstResponseTime.After\n  - in.Filter.FirstResponseTime.Before\n  - in.Filter.Group\n  - in.Filter.HasSpaceId\n  - in.Filter.IsCreatorVerified\n  - in.Filter.IsFrozen\n  - in.Filter.IsSpam\n  - in.Filter.LastExternalMessageDate.After\n  - in.Filter.LastExternalMessageDate.Before\n  - in.Filter.LastMessageTimestamp.After\n  - in.Filter.LastMessageTimestamp.Before\n  - in.Filter.Links\n  - in.Filter.LinksOp\n  - in.Filter.MemberIds\n  - in.Filter.ModifiedById\n  - in.Filter.ModifiedByIdOp\n  - in.Filter.ModifiedDate.After\n  - in.Filter.ModifiedDate.Before\n  - in.Filter.OwnedByAgentId\n  - in.Filter.OwnedByIds\n  - in.Filter.OwnedByIdsOp\n  - in.Filter.ParticipantOids\n  - in.Filter.ParticipantUids\n  - in.Filter.Priority\n  - in.Filter.Sentiment\n  - in.Filter.SentimentOp\n  - in.Filter.Sessions\n  - in.Filter.SlaId\n  - in.Filter.SlaSummary\n  - in.Filter.SourceChannel\n  - in.Filter.SourceChannelOp\n  - in.Filter.SourceChannelV2\n  - in.Filter.SourceChannelV2Instance\n  - in.Filter.SpacesFilter\n  - in.Filter.StagedInfo\n  - in.Filter.State\n  - (+14 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.Filter.CreatedByIdOp != nil\n  - in.Filter.ModifiedByIdOp != nil\n  - in.Filter.CreatedByAgentIdOp != nil\n  - in.Filter.ChannelsInstancesOp != nil\n  - in.Filter.SourceChannelOp != nil\n  - in.Filter.OwnedByIdsOp != nil\n  - in.Filter.AccountIdOp != nil\n  - in.Filter.TagsOp != nil\n  - in.Filter.LinksOp != nil\n  - in.Filter.SurveysAggregationOp != nil\n  - in.Filter.SyncMetadataOp != nil\n  - in.Filter.SentimentOp != nil\n  - in.Filter.SubtypeOp != nil\n  - in.Filter.AppsOp != nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.Filter != nil\n  - in.Filter != nil\n  - in.Page >= 0\n  - in.PerPage >= 0\n  - in.DevOid == nil\n  - in != nil\n  - in.DevOid != objType\n  - in.Filter.CustomFields == nil\n  - in.Filter.CreatedDate != nil\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedByIdOp == 4\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 5\n  - in.Filter.CreatedByIdOp == 2\n  - in.Filter.CreatedByIdOp == 1\n  - in.Filter.CreatedByIdOp == 3\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.CreatedDate.DatePreset != nil\n  - in.Filter.CreatedDate.After != nil\n  - in.Filter.CreatedDate.Before != nil\n  - in.Filter.ModifiedDate != nil\n  - (+312 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestoparts` -> suggestions ['in.Filter.AppliesToPartIds']\n  - test field `messages` -> suggestions []\n  - test field `stagename` -> suggestions ['in.Filter.Stage']\n  - test field `title` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

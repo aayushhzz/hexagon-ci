@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "UpdateRevOrg",
     "operation": "RevOrgsUpdate",
-    "tests": 8,
+    "tests": 12,
     "status": {
       "documented": [
         200,
@@ -20,27 +20,27 @@
       "asserted": [
         200,
         201,
-        400
+        400,
+        401,
+        409,
+        500
       ],
       "missing": [
-        401,
         403,
         404,
-        409,
         413,
         429,
-        500,
         503
       ],
-      "coverage_pct": 20
+      "coverage_pct": 50
     },
     "fields": {
       "leaf_fields_read_by_rpc": 9,
       "covered_count": 1,
       "coverage_pct": 11.1,
-      "request_fields_set_by_tests": 5,
+      "request_fields_set_by_tests": 6,
       "set_by_positive_tests": 1,
-      "set_by_negative_tests": 0,
+      "set_by_negative_tests": 1,
       "by_depth": {
         "top_level": {
           "total": 0,
@@ -72,6 +72,9 @@
           "path": "in.RevOrg.DisplayName",
           "match": "exact",
           "by_tests": [
+            "401WrongPat",
+            "500ByInvalidPat",
+            "Update RevOrg",
             "WithAllFields",
             "WithDescription",
             "WithExternalRef"
@@ -97,8 +100,8 @@
       "present_arm_pct": 10,
       "absent_arm_exercised": 1,
       "absent_arm_pct": 100,
-      "negative_arm_exercised": 0,
-      "negative_arm_pct": 0,
+      "negative_arm_exercised": 1,
+      "negative_arm_pct": 10,
       "both_arms_exercised": 0,
       "coverage_pct": 10,
       "by_origin": {
@@ -107,8 +110,8 @@
           "reachable_on_happy_path": 1,
           "present_arm_exercised": 1,
           "present_arm_pct": 11.1,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "negative_arm_exercised": 1,
+          "negative_arm_pct": 11.1,
           "absent_arm_exercised": 1
         },
         "generated": {
@@ -232,10 +235,50 @@
         {
           "field": "id",
           "fuzzy_suggestions": null
+        },
+        {
+          "field": "sharedwith",
+          "fuzzy_suggestions": null
         }
       ]
     },
     "test_facts": [
+      {
+        "name": "Update RevOrg",
+        "file": "api/v2_internal/identity_flows/revorg_apis_test.go",
+        "labels": [
+          "INTERNAL_REVORGS_UPDATE"
+        ],
+        "fields_set": [
+          "DisplayName",
+          "ExternalRef",
+          "Id"
+        ],
+        "statuses": [
+          409
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "RevOrg",
+          "RevOrg.DisplayName",
+          "RevOrg.ExternalRef",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Use a rev_user role on a rev org shared_with \u2014 expect 400",
+        "file": "api/v2_internal/rev_orgs/shared_with/rev_org_shared_with_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "SharedWith"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
       {
         "name": "WithAllFields",
         "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
@@ -363,6 +406,38 @@
         "response_fields_asserted": [
           "StatusCode"
         ]
+      },
+      {
+        "name": "401WrongPat",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Id"
+        ],
+        "statuses": [
+          401
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "500ByInvalidPat",
+        "file": "api/v2_public/rev_orgs/crud/update_rev_orgs_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Id"
+        ],
+        "statuses": [
+          500
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
       }
     ]
   },
@@ -395,5 +470,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateRevOrg` (HTTP operation `RevOrgsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 404, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevOrg.Account\n  - in.RevOrg.ExternalOid\n  - in.RevOrg.PhoneNumbers.StringValues\n  - in.RevOrg.SharedWith.Values\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevOrg.ExternalOid != \"\"\n  - in.RevOrg.ExternalOid != nil\n  - in.RevOrg.Account != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidRevOrgFilter\n  - errPhoneNumberInvalid\n  - errRevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `environment` -> suggestions []\n  - test field `externalref` -> suggestions []\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateRevOrg` (HTTP operation `RevOrgsUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [403, 404, 413, 429, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevOrg.Account\n  - in.RevOrg.ExternalOid\n  - in.RevOrg.PhoneNumbers.StringValues\n  - in.RevOrg.SharedWith.Values\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.OrgIdentifier.OrgExternalIdIssuer\n  - in.RevOrg.ExternalOid != \"\"\n  - in.RevOrg.ExternalOid != nil\n  - in.RevOrg.Account != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidRevOrgFilter\n  - errPhoneNumberInvalid\n  - errRevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `environment` -> suggestions []\n  - test field `externalref` -> suggestions []\n  - test field `id` -> suggestions []\n  - test field `sharedwith` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

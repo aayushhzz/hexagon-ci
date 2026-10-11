@@ -2,26 +2,48 @@
   "service": "Janus",
   "coverage": {
     "rpc": "GetPublicDevOrgInfo",
-    "operation": "",
-    "tests": 0,
+    "operation": "DevOrgPublicInfo",
+    "tests": 1,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200,
+        409
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        404,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 11.1
     },
     "fields": {
       "leaf_fields_read_by_rpc": 2,
-      "covered_count": 0,
-      "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
-      "set_by_positive_tests": 0,
-      "set_by_negative_tests": 0,
+      "covered_count": 1,
+      "coverage_pct": 50,
+      "request_fields_set_by_tests": 9,
+      "set_by_positive_tests": 1,
+      "set_by_negative_tests": 1,
       "by_depth": {
         "top_level": {
           "total": 2,
-          "set": 0,
-          "pct": 0
+          "set": 1,
+          "pct": 50
         },
         "nested": {
           "total": 0,
@@ -36,19 +58,26 @@
       },
       "representative": {
         "units": 2,
-        "covered": 0,
-        "pct": 0,
+        "covered": 1,
+        "pct": 50,
         "collapsed_types": []
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.DevSlug",
+          "match": "exact",
+          "by_tests": [
+            "CreateDevOrg across region"
+          ]
+        }
+      ],
       "gaps": [
-        "in.Auth0OrgId",
-        "in.DevSlug"
+        "in.Auth0OrgId"
       ]
     },
     "branches": {
       "total": 0,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 0,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
@@ -87,23 +116,95 @@
           "absent_arm_exercised": 0
         }
       },
-      "gaps": []
+      "gaps": null
     },
     "dependencies": {
       "services": null,
       "datastore_calls": [],
       "service_count": 0,
       "call_count": 0,
-      "reached_by_test": false,
+      "reached_by_test": true,
       "deps_result_used_in_response": 0,
       "deps_result_checked_by_test": 0,
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "displayname",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "environment",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "expiresin",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "givedomainaccess",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "granttype",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "requestedtokentype",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "slug",
+          "fuzzy_suggestions": [
+            "in.DevSlug"
+          ]
+        },
+        {
+          "field": "tokenhint",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "CreateDevOrg across region",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEV_ORGS_CREATE",
+          "INTERNAL_DEV_ORGS_PUBLIC_INFO",
+          "INTERNAL_DEV_ORGS_LIST",
+          "INTERNAL_DEVUSERS_POST_LOGIN"
+        ],
+        "fields_set": [
+          "DevSlug",
+          "DisplayName",
+          "Environment",
+          "ExpiresIn",
+          "GiveDomainAccess",
+          "GrantType",
+          "RequestedTokenType",
+          "Slug",
+          "TokenHint"
+        ],
+        "statuses": [
+          409
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "AccessToken",
+          "Body",
+          "DevOrg",
+          "DevOrg.Auth0OrgId",
+          "DevOrg.DevSlug",
+          "DevOrg.DisplayId",
+          "DevOrg.Id",
+          "DevOrgs",
+          "Id",
+          "StatusCode"
+        ]
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/janus/internal/service.Janus).GetPublicDevOrgInfo",
@@ -134,5 +235,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetPublicDevOrgInfo` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Auth0OrgId\n  - in.DevSlug\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - none\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevOrgNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetPublicDevOrgInfo` (HTTP operation `DevOrgPublicInfo`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Auth0OrgId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - none\n\nError symbols this RPC can return (candidate negative assertions):\n  - errDevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `displayname` -> suggestions []\n  - test field `environment` -> suggestions []\n  - test field `expiresin` -> suggestions []\n  - test field `givedomainaccess` -> suggestions []\n  - test field `granttype` -> suggestions []\n  - test field `requestedtokentype` -> suggestions []\n  - test field `slug` -> suggestions ['in.DevSlug']\n  - test field `tokenhint` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

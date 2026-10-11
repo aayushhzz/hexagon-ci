@@ -1218,9 +1218,13 @@ func isSelName(e ast.Expr, name string) bool {
 	return ok && sel.Sel.Name == name
 }
 
+// isClientRecv reports whether an identifier is a lifejacket API client handle.
+// Receivers vary by role and auth (ClientV2Internal, UserClientInternal,
+// AdminClientInternal, revUserClient, client, ...), so match any identifier
+// whose name contains "client" rather than a single prefix.
 func isClientRecv(e ast.Expr) bool {
 	id, ok := e.(*ast.Ident)
-	return ok && strings.HasPrefix(id.Name, "Client")
+	return ok && strings.Contains(strings.ToLower(id.Name), "client")
 }
 
 // callName returns the function name for an Ident (dot-imported) or SelectorExpr call.

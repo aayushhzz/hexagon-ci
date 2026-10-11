@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "CreateWork",
     "operation": "WorksCreate",
-    "tests": 21,
+    "tests": 29,
     "status": {
       "documented": [
         201,
@@ -32,10 +32,10 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 190,
-      "covered_count": 7,
-      "coverage_pct": 3.7,
-      "request_fields_set_by_tests": 7,
-      "set_by_positive_tests": 7,
+      "covered_count": 20,
+      "coverage_pct": 10.5,
+      "request_fields_set_by_tests": 17,
+      "set_by_positive_tests": 20,
       "set_by_negative_tests": 6,
       "by_depth": {
         "top_level": {
@@ -45,19 +45,19 @@
         },
         "nested": {
           "total": 35,
-          "set": 2,
-          "pct": 5.7
+          "set": 3,
+          "pct": 8.6
         },
         "deep": {
           "total": 147,
-          "set": 4,
-          "pct": 2.7
+          "set": 16,
+          "pct": 10.9
         }
       },
       "representative": {
         "units": 190,
-        "covered": 7,
-        "pct": 3.7,
+        "covered": 20,
+        "pct": 10.5,
         "collapsed_types": [
           "api.CustomSchemaSpec"
         ]
@@ -67,7 +67,20 @@
           "path": "in.Id",
           "match": "exact",
           "by_tests": [
-            "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation"
+            "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation",
+            "should create and activate the workflow as per the template"
+          ]
+        },
+        {
+          "path": "in.Ticket.Body",
+          "match": "exact",
+          "by_tests": [
+            "Should create a test issue manually for retrieval tests",
+            "Should create a test ticket manually for retrieval tests",
+            "rev user should be able to create a ticket without login",
+            "rev user should not be able to create a ticket without token",
+            "should create an issue with estimated effort as 20 to test the approval config",
+            "should create and activate the workflow as per the template"
           ]
         },
         {
@@ -97,16 +110,49 @@
             "Create with email source channel and channel",
             "Create with only required fields",
             "CreateTicket",
+            "Emits create event",
             "Fails WorksCreate with milestone from a different Enhancement",
             "OwnedByMissing",
             "PartsMissing",
+            "Should create a test issue manually for retrieval tests",
+            "Should create a test ticket manually for retrieval tests",
             "Type",
             "WithOnlyRequiredFields",
             "Without Applies To Part",
             "Without Owned By",
             "Without Type",
             "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation",
-            "sets space on create"
+            "rev user should be able to create a ticket without login",
+            "rev user should not be able to create a ticket without token",
+            "sets space on create",
+            "should create an issue with estimated effort as 20 to test the approval config",
+            "should create and activate the workflow as per the template"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Issue.Body",
+          "match": "exact",
+          "by_tests": [
+            "Should create a test issue manually for retrieval tests",
+            "Should create a test ticket manually for retrieval tests",
+            "rev user should be able to create a ticket without login",
+            "rev user should not be able to create a ticket without token",
+            "should create an issue with estimated effort as 20 to test the approval config",
+            "should create and activate the workflow as per the template"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Issue.SyncMetadata.LastSyncIn.Status",
+          "match": "exact",
+          "by_tests": [
+            "should create and activate the workflow as per the template"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Issue.SyncMetadata.LastSyncOut.Status",
+          "match": "exact",
+          "by_tests": [
+            "should create and activate the workflow as per the template"
           ]
         },
         {
@@ -118,16 +164,49 @@
             "Create with email source channel and channel",
             "Create with only required fields",
             "CreateTicket",
+            "Emits create event",
             "Fails WorksCreate with milestone from a different Enhancement",
             "OwnedByMissing",
             "PartsMissing",
+            "Should create a test issue manually for retrieval tests",
+            "Should create a test ticket manually for retrieval tests",
             "Type",
             "WithOnlyRequiredFields",
             "Without Applies To Part",
             "Without Owned By",
             "Without Type",
             "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation",
-            "sets space on create"
+            "rev user should be able to create a ticket without login",
+            "rev user should not be able to create a ticket without token",
+            "sets space on create",
+            "should create an issue with estimated effort as 20 to test the approval config",
+            "should create and activate the workflow as per the template"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Opportunity.Body",
+          "match": "exact",
+          "by_tests": [
+            "Should create a test issue manually for retrieval tests",
+            "Should create a test ticket manually for retrieval tests",
+            "rev user should be able to create a ticket without login",
+            "rev user should not be able to create a ticket without token",
+            "should create an issue with estimated effort as 20 to test the approval config",
+            "should create and activate the workflow as per the template"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Opportunity.SyncMetadata.LastSyncIn.Status",
+          "match": "exact",
+          "by_tests": [
+            "should create and activate the workflow as per the template"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Opportunity.SyncMetadata.LastSyncOut.Status",
+          "match": "exact",
+          "by_tests": [
+            "should create and activate the workflow as per the template"
           ]
         },
         {
@@ -139,16 +218,49 @@
             "Create with email source channel and channel",
             "Create with only required fields",
             "CreateTicket",
+            "Emits create event",
             "Fails WorksCreate with milestone from a different Enhancement",
             "OwnedByMissing",
             "PartsMissing",
+            "Should create a test issue manually for retrieval tests",
+            "Should create a test ticket manually for retrieval tests",
             "Type",
             "WithOnlyRequiredFields",
             "Without Applies To Part",
             "Without Owned By",
             "Without Type",
             "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation",
-            "sets space on create"
+            "rev user should be able to create a ticket without login",
+            "rev user should not be able to create a ticket without token",
+            "sets space on create",
+            "should create an issue with estimated effort as 20 to test the approval config",
+            "should create and activate the workflow as per the template"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Task.Body",
+          "match": "exact",
+          "by_tests": [
+            "Should create a test issue manually for retrieval tests",
+            "Should create a test ticket manually for retrieval tests",
+            "rev user should be able to create a ticket without login",
+            "rev user should not be able to create a ticket without token",
+            "should create an issue with estimated effort as 20 to test the approval config",
+            "should create and activate the workflow as per the template"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Task.SyncMetadata.LastSyncIn.Status",
+          "match": "exact",
+          "by_tests": [
+            "should create and activate the workflow as per the template"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Task.SyncMetadata.LastSyncOut.Status",
+          "match": "exact",
+          "by_tests": [
+            "should create and activate the workflow as per the template"
           ]
         },
         {
@@ -160,16 +272,49 @@
             "Create with email source channel and channel",
             "Create with only required fields",
             "CreateTicket",
+            "Emits create event",
             "Fails WorksCreate with milestone from a different Enhancement",
             "OwnedByMissing",
             "PartsMissing",
+            "Should create a test issue manually for retrieval tests",
+            "Should create a test ticket manually for retrieval tests",
             "Type",
             "WithOnlyRequiredFields",
             "Without Applies To Part",
             "Without Owned By",
             "Without Type",
             "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation",
-            "sets space on create"
+            "rev user should be able to create a ticket without login",
+            "rev user should not be able to create a ticket without token",
+            "sets space on create",
+            "should create an issue with estimated effort as 20 to test the approval config",
+            "should create and activate the workflow as per the template"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Ticket.Body",
+          "match": "exact",
+          "by_tests": [
+            "Should create a test issue manually for retrieval tests",
+            "Should create a test ticket manually for retrieval tests",
+            "rev user should be able to create a ticket without login",
+            "rev user should not be able to create a ticket without token",
+            "should create an issue with estimated effort as 20 to test the approval config",
+            "should create and activate the workflow as per the template"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.Status",
+          "match": "exact",
+          "by_tests": [
+            "should create and activate the workflow as per the template"
+          ]
+        },
+        {
+          "path": "in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.Status",
+          "match": "exact",
+          "by_tests": [
+            "should create and activate the workflow as per the template"
           ]
         },
         {
@@ -181,16 +326,23 @@
             "Create with email source channel and channel",
             "Create with only required fields",
             "CreateTicket",
+            "Emits create event",
             "Fails WorksCreate with milestone from a different Enhancement",
             "OwnedByMissing",
             "PartsMissing",
+            "Should create a test issue manually for retrieval tests",
+            "Should create a test ticket manually for retrieval tests",
             "Type",
             "WithOnlyRequiredFields",
             "Without Applies To Part",
             "Without Owned By",
             "Without Type",
             "assigns sequential team-scoped display_id_alias with no gaps or duplicates including concurrent creation",
-            "sets space on create"
+            "rev user should be able to create a ticket without login",
+            "rev user should not be able to create a ticket without token",
+            "sets space on create",
+            "should create an issue with estimated effort as 20 to test the approval config",
+            "should create and activate the workflow as per the template"
           ]
         }
       ],
@@ -215,7 +367,6 @@
         "in.Ticket.AccountId",
         "in.Ticket.AppliesToPartId",
         "in.Ticket.ArtifactIds",
-        "in.Ticket.Body",
         "in.Ticket.BrandId",
         "in.Ticket.Channels",
         "in.Ticket.ChannelsV2",
@@ -238,7 +389,6 @@
         "in.WorkOneof.Issue.AppliesToPartId",
         "in.WorkOneof.Issue.AppliesToVersionIds",
         "in.WorkOneof.Issue.ArtifactIds",
-        "in.WorkOneof.Issue.Body",
         "in.WorkOneof.Issue.DevelopedWith",
         "in.WorkOneof.Issue.DevrevCopy.OriginId",
         "in.WorkOneof.Issue.DevrevCopy.OriginOrgId",
@@ -262,10 +412,8 @@
         "in.WorkOneof.Issue.Stage.StageId",
         "in.WorkOneof.Issue.StagedInfo.SyncInUnresolvedFields",
         "in.WorkOneof.Issue.StagedInfo.SyncOutUnresolvedFields",
-        "in.WorkOneof.Issue.SyncMetadata.LastSyncIn.Status",
         "in.WorkOneof.Issue.SyncMetadata.LastSyncIn.SyncHistoryId",
         "in.WorkOneof.Issue.SyncMetadata.LastSyncIn.SyncUnitId",
-        "in.WorkOneof.Issue.SyncMetadata.LastSyncOut.Status",
         "in.WorkOneof.Issue.SyncMetadata.LastSyncOut.SyncHistoryId",
         "in.WorkOneof.Issue.SyncMetadata.LastSyncOut.SyncUnitId",
         "in.WorkOneof.Issue.SyncMetadata.SyncedByDevUsers",
@@ -274,7 +422,6 @@
         "in.WorkOneof.Opportunity.AnnualContractValue.Amount",
         "in.WorkOneof.Opportunity.AnnualContractValue.Currency",
         "in.WorkOneof.Opportunity.ArtifactIds",
-        "in.WorkOneof.Opportunity.Body",
         "in.WorkOneof.Opportunity.Budget.Amount",
         "in.WorkOneof.Opportunity.Budget.Currency",
         "in.WorkOneof.Opportunity.ContactIds",
@@ -297,10 +444,8 @@
         "in.WorkOneof.Opportunity.Stage.StageId",
         "in.WorkOneof.Opportunity.StagedInfo.SyncInUnresolvedFields",
         "in.WorkOneof.Opportunity.StagedInfo.SyncOutUnresolvedFields",
-        "in.WorkOneof.Opportunity.SyncMetadata.LastSyncIn.Status",
         "in.WorkOneof.Opportunity.SyncMetadata.LastSyncIn.SyncHistoryId",
         "in.WorkOneof.Opportunity.SyncMetadata.LastSyncIn.SyncUnitId",
-        "in.WorkOneof.Opportunity.SyncMetadata.LastSyncOut.Status",
         "in.WorkOneof.Opportunity.SyncMetadata.LastSyncOut.SyncHistoryId",
         "in.WorkOneof.Opportunity.SyncMetadata.LastSyncOut.SyncUnitId",
         "in.WorkOneof.Opportunity.SyncMetadata.SyncedByDevUsers",
@@ -310,7 +455,6 @@
         "in.WorkOneof.Task.AppliesToPartId",
         "in.WorkOneof.Task.AppliesToVersionIds",
         "in.WorkOneof.Task.ArtifactIds",
-        "in.WorkOneof.Task.Body",
         "in.WorkOneof.Task.DevrevCopy.OriginId",
         "in.WorkOneof.Task.DevrevCopy.OriginOrgId",
         "in.WorkOneof.Task.EventContext.Source",
@@ -325,10 +469,8 @@
         "in.WorkOneof.Task.Stage.StageId",
         "in.WorkOneof.Task.StagedInfo.SyncInUnresolvedFields",
         "in.WorkOneof.Task.StagedInfo.SyncOutUnresolvedFields",
-        "in.WorkOneof.Task.SyncMetadata.LastSyncIn.Status",
         "in.WorkOneof.Task.SyncMetadata.LastSyncIn.SyncHistoryId",
         "in.WorkOneof.Task.SyncMetadata.LastSyncIn.SyncUnitId",
-        "in.WorkOneof.Task.SyncMetadata.LastSyncOut.Status",
         "in.WorkOneof.Task.SyncMetadata.LastSyncOut.SyncHistoryId",
         "in.WorkOneof.Task.SyncMetadata.LastSyncOut.SyncUnitId",
         "in.WorkOneof.Task.SyncMetadata.SyncedByDevUsers",
@@ -337,7 +479,6 @@
         "in.WorkOneof.Ticket.AppliesToPartId",
         "in.WorkOneof.Ticket.AppliesToVersionIds",
         "in.WorkOneof.Ticket.ArtifactIds",
-        "in.WorkOneof.Ticket.Body",
         "in.WorkOneof.Ticket.BrandId",
         "in.WorkOneof.Ticket.Channels",
         "in.WorkOneof.Ticket.ChannelsV2",
@@ -369,10 +510,8 @@
         "in.WorkOneof.Ticket.StagedInfo.SyncInUnresolvedFields",
         "in.WorkOneof.Ticket.StagedInfo.SyncOutUnresolvedFields",
         "in.WorkOneof.Ticket.SurveysAggregation",
-        "in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.Status",
         "in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.SyncHistoryId",
         "in.WorkOneof.Ticket.SyncMetadata.LastSyncIn.SyncUnitId",
-        "in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.Status",
         "in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.SyncHistoryId",
         "in.WorkOneof.Ticket.SyncMetadata.LastSyncOut.SyncUnitId",
         "in.WorkOneof.Ticket.SyncMetadata.SyncedByDevUsers",
@@ -384,20 +523,20 @@
       "total": 753,
       "happy_path_reached": true,
       "reachable_on_happy_path": 75,
-      "present_arm_exercised": 32,
-      "present_arm_pct": 4.2,
+      "present_arm_exercised": 41,
+      "present_arm_pct": 5.4,
       "absent_arm_exercised": 75,
       "absent_arm_pct": 100,
       "negative_arm_exercised": 17,
       "negative_arm_pct": 2.3,
       "both_arms_exercised": 15,
-      "coverage_pct": 4.2,
+      "coverage_pct": 5.4,
       "by_origin": {
         "service": {
           "total": 94,
           "reachable_on_happy_path": 24,
-          "present_arm_exercised": 3,
-          "present_arm_pct": 3.2,
+          "present_arm_exercised": 4,
+          "present_arm_pct": 4.3,
           "negative_arm_exercised": 1,
           "negative_arm_pct": 1.1,
           "absent_arm_exercised": 24
@@ -405,8 +544,8 @@
         "generated": {
           "total": 465,
           "reachable_on_happy_path": 17,
-          "present_arm_exercised": 20,
-          "present_arm_pct": 4.3,
+          "present_arm_exercised": 28,
+          "present_arm_pct": 6,
           "negative_arm_exercised": 16,
           "negative_arm_pct": 3.4,
           "absent_arm_exercised": 17
@@ -1530,14 +1669,6 @@
           ]
         },
         {
-          "id": "b151",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:10622",
-          "cond": "in.WorkOneof.Ticket.Body != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Ticket.Body"
-          ]
-        },
-        {
           "id": "b152",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:10629",
           "cond": "in.WorkOneof.Ticket.ReportedById != nil",
@@ -2282,14 +2413,6 @@
           ]
         },
         {
-          "id": "b247",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:12538",
-          "cond": "in.WorkOneof.Issue.Body != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Issue.Body"
-          ]
-        },
-        {
           "id": "b248",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:12545",
           "cond": "in.WorkOneof.Issue.ReportedById != nil",
@@ -2871,14 +2994,6 @@
           "cond": "in.WorkOneof.Task.AppliesToPartId == *ObjectTypeApiParameter",
           "predicate_paths": [
             "in.WorkOneof.Task.AppliesToPartId"
-          ]
-        },
-        {
-          "id": "b323",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:13914",
-          "cond": "in.WorkOneof.Task.Body != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Task.Body"
           ]
         },
         {
@@ -3634,14 +3749,6 @@
           ]
         },
         {
-          "id": "b420",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:15057",
-          "cond": "in.WorkOneof.Opportunity.Body != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Opportunity.Body"
-          ]
-        },
-        {
           "id": "b421",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:15064",
           "cond": "in.WorkOneof.Opportunity.ReportedById != nil",
@@ -4079,14 +4186,6 @@
           "cond": "in.WorkOneof.Ticket.DevrevCopy.OriginOrgId",
           "predicate_paths": [
             "in.WorkOneof.Ticket.DevrevCopy.OriginOrgId"
-          ]
-        },
-        {
-          "id": "b480",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:1896",
-          "cond": "in.WorkOneof.Ticket.Body != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Ticket.Body"
           ]
         },
         {
@@ -4602,14 +4701,6 @@
           ]
         },
         {
-          "id": "b547",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:2959",
-          "cond": "in.WorkOneof.Issue.Body != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Issue.Body"
-          ]
-        },
-        {
           "id": "b548",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:2962",
           "cond": "in.WorkOneof.Issue.ReportedById != nil",
@@ -4999,14 +5090,6 @@
           "cond": "in.WorkOneof.Task.DevrevCopy.OriginOrgId",
           "predicate_paths": [
             "in.WorkOneof.Task.DevrevCopy.OriginOrgId"
-          ]
-        },
-        {
-          "id": "b599",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:3726",
-          "cond": "in.WorkOneof.Task.Body != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Task.Body"
           ]
         },
         {
@@ -5463,14 +5546,6 @@
           "cond": "in.WorkOneof.Opportunity.AnnualContractValue.Currency",
           "predicate_paths": [
             "in.WorkOneof.Opportunity.AnnualContractValue.Currency"
-          ]
-        },
-        {
-          "id": "b659",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:4387",
-          "cond": "in.WorkOneof.Opportunity.Body != nil",
-          "predicate_paths": [
-            "in.WorkOneof.Opportunity.Body"
           ]
         },
         {
@@ -5955,14 +6030,6 @@
           ]
         },
         {
-          "id": "b722",
-          "at": "internal/serverv2/create_work.go:298",
-          "cond": "in.Ticket.Body == \"\"",
-          "predicate_paths": [
-            "in.Ticket.Body"
-          ]
-        },
-        {
           "id": "b724",
           "at": "internal/serverv2/create_work.go:304",
           "cond": "in.Ticket.AppliesToPartId == nil",
@@ -6279,6 +6346,22 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "description",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "inputvalues",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "name",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "operation",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "ownedby",
           "fuzzy_suggestions": [
             "in.Issue.OwnedByIds",
@@ -6291,6 +6374,14 @@
           ]
         },
         {
+          "field": "previoussteps",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "referencekey",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "type",
           "fuzzy_suggestions": [
             "in.WorkOneof.Issue.WorkType",
@@ -6298,10 +6389,60 @@
             "in.WorkOneof.Task.WorkType",
             "in.WorkOneof.Ticket.WorkType"
           ]
+        },
+        {
+          "field": "uimetadata",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "workflow",
+          "fuzzy_suggestions": null
         }
       ]
     },
     "test_facts": [
+      {
+        "name": "Should create a test issue manually for retrieval tests",
+        "file": "api/v2_internal/ai_agent_versions/crud/agent_versions_scopes_execution_test.go",
+        "labels": [
+          "INTERNAL_WORKS_CREATE"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "GetWork",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should create a test ticket manually for retrieval tests",
+        "file": "api/v2_internal/ai_agent_versions/crud/agent_versions_scopes_execution_test.go",
+        "labels": [
+          "INTERNAL_WORKS_CREATE"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "GetWork",
+          "StatusCode"
+        ]
+      },
       {
         "name": "Create with email source channel",
         "file": "api/v2_internal/email/tickets_test.go",
@@ -6384,6 +6525,27 @@
           "StatusCode",
           "Work",
           "Work.AsTicket"
+        ]
+      },
+      {
+        "name": "should create an issue with estimated effort as 20 to test the approval config",
+        "file": "api/v2_internal/schemaregistry/approvals_test.go",
+        "labels": null,
+        "fields_set": [
+          "AppliesToPart",
+          "Body",
+          "OwnedBy",
+          "Title",
+          "Type"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsIssue"
         ]
       },
       {
@@ -6535,6 +6697,23 @@
         "response_fields_asserted": null
       },
       {
+        "name": "should create an issue with a masked custom field as admin",
+        "file": "api/v2_internal/work/issues/crud/masking/issues_masking_test.go",
+        "labels": [
+          "INTERNAL_WORKS_CREATE"
+        ],
+        "fields_set": null,
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsIssue"
+        ]
+      },
+      {
         "name": "Create with only required fields",
         "file": "api/v2_internal/work/tickets/crud/create_ticket_test.go",
         "labels": [
@@ -6581,6 +6760,42 @@
           "Part",
           "Part.ValueByDiscriminator",
           "StatusCode",
+          "Work",
+          "Work.AsTicket"
+        ]
+      },
+      {
+        "name": "rev user should be able to create a ticket without login",
+        "file": "api/v2_internal/work/tickets/crud/public_ticket/create_public_ticket_test.go",
+        "labels": [
+          "INTERNAL_WORKS_CREATE"
+        ],
+        "fields_set": [
+          "Body",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "Work",
+          "Work.AsTicket"
+        ]
+      },
+      {
+        "name": "rev user should not be able to create a ticket without token",
+        "file": "api/v2_internal/work/tickets/crud/public_ticket/create_public_ticket_test.go",
+        "labels": [
+          "INTERNAL_WORKS_CREATE"
+        ],
+        "fields_set": [
+          "Body",
+          "Title",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": [
           "Work",
           "Work.AsTicket"
         ]
@@ -6748,6 +6963,64 @@
           "Part.ValueByDiscriminator",
           "Work",
           "Work.AsTicket"
+        ]
+      },
+      {
+        "name": "Emits create event",
+        "file": "e2e/transformers/codex/codex_test.go",
+        "labels": [
+          "POSITIVE",
+          "FUNCTIONAL"
+        ],
+        "fields_set": [
+          "AppliesToPart",
+          "Title"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsIssue"
+        ]
+      },
+      {
+        "name": "should create and activate the workflow as per the template",
+        "file": "e2e/workflow_uat_automation/workflow_uat_test.go",
+        "labels": [
+          "UAT"
+        ],
+        "fields_set": [
+          "Body",
+          "Description",
+          "Id",
+          "InputValues",
+          "Name",
+          "Operation",
+          "OwnedBy",
+          "PreviousSteps",
+          "ReferenceKey",
+          "Status",
+          "Title",
+          "Type",
+          "UiMetadata",
+          "Workflow"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Work",
+          "Work.AsOpportunity",
+          "Workflow",
+          "Workflow.Id",
+          "WorkflowStep",
+          "WorkflowStep.Id"
         ]
       }
     ]
@@ -7518,5 +7791,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateWork` (HTTP operation `WorksCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.CreateEmbeddedTasks\n  - in.CreateLinks\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.IsSystemUpdate\n  - in.Issue.DisplayIdAlias\n  - in.Issue.OwnedByIds\n  - in.Issue.SpaceId\n  - in.Issue.SprintState\n  - in.Issue.Stage\n  - in.Opportunity.DisplayIdAlias\n  - in.Opportunity.SpaceId\n  - in.Opportunity.Stage\n  - in.StageValidationOptions\n  - in.Task.Stage\n  - in.Ticket.AccountId\n  - in.Ticket.AppliesToPartId\n  - in.Ticket.ArtifactIds\n  - in.Ticket.Body\n  - in.Ticket.BrandId\n  - in.Ticket.Channels\n  - in.Ticket.ChannelsV2\n  - in.Ticket.CustomFields\n  - in.Ticket.CustomSchemaFragmentIds\n  - in.Ticket.Group\n  - in.Ticket.IsFrozen\n  - in.Ticket.IsSpam\n  - in.Ticket.NeedsResponse\n  - in.Ticket.OwnedByIds\n  - in.Ticket.ReportedByIds\n  - in.Ticket.RevOid\n  - in.Ticket.SlaId\n  - in.Ticket.SourceChannel\n  - in.Ticket.SourceChannelV2\n  - in.Ticket.SourceChannelV2Instance\n  - in.Ticket.SpaceId\n  - in.Ticket.Stage\n  - in.Ticket.Visibility\n  - in.WorkOneof.Issue.AppliesToPartId\n  - in.WorkOneof.Issue.AppliesToVersionIds\n  - in.WorkOneof.Issue.ArtifactIds\n  - in.WorkOneof.Issue.Body\n  - in.WorkOneof.Issue.DevelopedWith\n  - in.WorkOneof.Issue.DevrevCopy.OriginId\n  - in.WorkOneof.Issue.DevrevCopy.OriginOrgId\n  - in.WorkOneof.Issue.EventContext.Source\n  - in.WorkOneof.Issue.ExternalRef\n  - in.WorkOneof.Issue.ExternalSourceData.CreatedById\n  - in.WorkOneof.Issue.ExternalSourceData.ModifiedById\n  - in.WorkOneof.Issue.MilestoneId\n  - in.WorkOneof.Issue.OwnedByIds\n  - in.WorkOneof.Issue.Priority\n  - in.WorkOneof.Issue.ProjectId\n  - in.WorkOneof.Issue.Reactions\n  - in.WorkOneof.Issue.ReleaseVersionIds\n  - in.WorkOneof.Issue.ReportedById\n  - in.WorkOneof.Issue.ReportedByIds\n  - in.WorkOneof.Issue.SharedWith\n  - (+123 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.WorkOneof\n  - in.WorkOneof.Ticket.WorkType == 5\n  - in.WorkOneof.Issue.WorkType == 2\n  - in.WorkOneof.Task.WorkType == 4\n  - in.WorkOneof.Opportunity.WorkType == 6\n  - in.ActorId == nil\n  - in.DevOid == nil\n  - in.DevOid != objType\n  - in.DevOid == nil\n  - in.DevOid == *ObjectTypeCustomObject\n  - in.DevOid == nil\n  - in.Ticket.ReportedByIds == nil\n  - in.DevOid\n  - in.DevOid|in.Ticket.ReportedByIds == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid != nil\n  - in.DevOid\n  - in.ActorId != *ObjectTypeRevUser\n  - in.Ticket.AppliesToPartId != nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.IsSpam == nil\n  - in.Ticket.IsFrozen == nil\n  - in.Ticket.NeedsResponse == nil\n  - in.Ticket.Visibility == nil\n  - in.Ticket.SourceChannel == nil\n  - in.Ticket.SourceChannel == *t59\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.BrandId|in.Ticket.Group|in.Ticket.SpaceId|in.Ticket.Tags == nil\n  - in.Ticket.BrandId|in.Ticket.SourceChannelV2Instance|in.Ticket.SpaceId == nil\n  - in.Ticket.ChannelsV2 != nil\n  - in.Ticket.Channels != nil\n  - in.Ticket.SourceChannelV2 != nil\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.SourceChannel == *t43\n  - in.Ticket.SourceChannel == *t54\n  - in.Ticket.SourceChannel == *t57\n  - in.Ticket.SourceChannel == *t60\n  - (+681 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - EOF\n  - ErrActAsByNotFound\n  - ErrActAsNotFound\n  - ErrAuth0UserNotFound\n  - ErrAuthContextNotFound\n  - ErrCorruptedDocument\n  - ErrDecodeToNil\n  - ErrDocumentTooLarge\n  - ErrElementNotFound\n  - ErrEmptyKey\n  - ErrEmptyWriteConcern\n  - ErrInconsistent\n  - ErrInvalidDocumentSequenceStyle\n  - ErrNegativeMaxTime\n  - ErrNegativeW\n  - ErrNegativeWTimeout\n  - ErrNilRegistry\n  - ErrNilType\n  - ErrNonDocument\n  - ErrNonPrimaryReadPref\n  - ErrParseServiceContext\n  - ErrParseUserContext\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ErrServiceContextNotFound\n  - ErrSessionEnded\n  - ErrSubjectNotFound\n  - ErrSurfaceIDNotFound\n  - ErrSvcAccNotFound\n  - ErrUserContextNotFound\n  - ErrWrongClient\n  - ObjectTypeInvalid\n  - ObjectTypeIssue\n  - ObjectTypeOpportunity\n  - ObjectTypeTask\n  - ObjectTypeTicket\n  - dNaN\n  - dNegInf\n  - dPosInf\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions ['in.Ticket.AppliesToPartId', 'in.WorkOneof.Issue.AppliesToPartId', 'in.WorkOneof.Task.AppliesToPartId', 'in.WorkOneof.Ticket.AppliesToPartId']\n  - test field `appname` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Issue.OwnedByIds', 'in.Ticket.OwnedByIds', 'in.WorkOneof.Issue.OwnedByIds', 'in.WorkOneof.Opportunity.OwnedByIds', 'in.WorkOneof.Task.OwnedByIds', 'in.WorkOneof.Ticket.OwnedByAgentId', 'in.WorkOneof.Ticket.OwnedByIds']\n  - test field `type` -> suggestions ['in.WorkOneof.Issue.WorkType', 'in.WorkOneof.Opportunity.WorkType', 'in.WorkOneof.Task.WorkType', 'in.WorkOneof.Ticket.WorkType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateWork` (HTTP operation `WorksCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.CreateEmbeddedTasks\n  - in.CreateLinks\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.IsSystemUpdate\n  - in.Issue.DisplayIdAlias\n  - in.Issue.OwnedByIds\n  - in.Issue.SpaceId\n  - in.Issue.SprintState\n  - in.Issue.Stage\n  - in.Opportunity.DisplayIdAlias\n  - in.Opportunity.SpaceId\n  - in.Opportunity.Stage\n  - in.StageValidationOptions\n  - in.Task.Stage\n  - in.Ticket.AccountId\n  - in.Ticket.AppliesToPartId\n  - in.Ticket.ArtifactIds\n  - in.Ticket.BrandId\n  - in.Ticket.Channels\n  - in.Ticket.ChannelsV2\n  - in.Ticket.CustomFields\n  - in.Ticket.CustomSchemaFragmentIds\n  - in.Ticket.Group\n  - in.Ticket.IsFrozen\n  - in.Ticket.IsSpam\n  - in.Ticket.NeedsResponse\n  - in.Ticket.OwnedByIds\n  - in.Ticket.ReportedByIds\n  - in.Ticket.RevOid\n  - in.Ticket.SlaId\n  - in.Ticket.SourceChannel\n  - in.Ticket.SourceChannelV2\n  - in.Ticket.SourceChannelV2Instance\n  - in.Ticket.SpaceId\n  - in.Ticket.Stage\n  - in.Ticket.Visibility\n  - in.WorkOneof.Issue.AppliesToPartId\n  - in.WorkOneof.Issue.AppliesToVersionIds\n  - in.WorkOneof.Issue.ArtifactIds\n  - in.WorkOneof.Issue.DevelopedWith\n  - in.WorkOneof.Issue.DevrevCopy.OriginId\n  - in.WorkOneof.Issue.DevrevCopy.OriginOrgId\n  - in.WorkOneof.Issue.EventContext.Source\n  - in.WorkOneof.Issue.ExternalRef\n  - in.WorkOneof.Issue.ExternalSourceData.CreatedById\n  - in.WorkOneof.Issue.ExternalSourceData.ModifiedById\n  - in.WorkOneof.Issue.MilestoneId\n  - in.WorkOneof.Issue.OwnedByIds\n  - in.WorkOneof.Issue.Priority\n  - in.WorkOneof.Issue.ProjectId\n  - in.WorkOneof.Issue.Reactions\n  - in.WorkOneof.Issue.ReleaseVersionIds\n  - in.WorkOneof.Issue.ReportedById\n  - in.WorkOneof.Issue.ReportedByIds\n  - in.WorkOneof.Issue.SharedWith\n  - in.WorkOneof.Issue.SlaId\n  - in.WorkOneof.Issue.SpaceId\n  - (+110 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.WorkOneof\n  - in.WorkOneof.Ticket.WorkType == 5\n  - in.WorkOneof.Issue.WorkType == 2\n  - in.WorkOneof.Task.WorkType == 4\n  - in.WorkOneof.Opportunity.WorkType == 6\n  - in.ActorId == nil\n  - in.DevOid == nil\n  - in.DevOid != objType\n  - in.DevOid == nil\n  - in.DevOid == *ObjectTypeCustomObject\n  - in.DevOid == nil\n  - in.Ticket.ReportedByIds == nil\n  - in.DevOid\n  - in.DevOid|in.Ticket.ReportedByIds == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid != nil\n  - in.DevOid\n  - in.ActorId != *ObjectTypeRevUser\n  - in.Ticket.AppliesToPartId != nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.IsSpam == nil\n  - in.Ticket.IsFrozen == nil\n  - in.Ticket.NeedsResponse == nil\n  - in.Ticket.Visibility == nil\n  - in.Ticket.SourceChannel == nil\n  - in.Ticket.SourceChannel == *t59\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.BrandId|in.Ticket.Group|in.Ticket.SpaceId|in.Ticket.Tags == nil\n  - in.Ticket.BrandId|in.Ticket.SourceChannelV2Instance|in.Ticket.SpaceId == nil\n  - in.Ticket.ChannelsV2 != nil\n  - in.Ticket.Channels != nil\n  - in.Ticket.SourceChannelV2 != nil\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.SourceChannel == *t43\n  - in.Ticket.SourceChannel == *t54\n  - in.Ticket.SourceChannel == *t57\n  - in.Ticket.SourceChannel == *t60\n  - (+672 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - EOF\n  - ErrActAsByNotFound\n  - ErrActAsNotFound\n  - ErrAuth0UserNotFound\n  - ErrAuthContextNotFound\n  - ErrCorruptedDocument\n  - ErrDecodeToNil\n  - ErrDocumentTooLarge\n  - ErrElementNotFound\n  - ErrEmptyKey\n  - ErrEmptyWriteConcern\n  - ErrInconsistent\n  - ErrInvalidDocumentSequenceStyle\n  - ErrNegativeMaxTime\n  - ErrNegativeW\n  - ErrNegativeWTimeout\n  - ErrNilRegistry\n  - ErrNilType\n  - ErrNonDocument\n  - ErrNonPrimaryReadPref\n  - ErrParseServiceContext\n  - ErrParseUserContext\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ErrServiceContextNotFound\n  - ErrSessionEnded\n  - ErrSubjectNotFound\n  - ErrSurfaceIDNotFound\n  - ErrSvcAccNotFound\n  - ErrUserContextNotFound\n  - ErrWrongClient\n  - ObjectTypeInvalid\n  - ObjectTypeIssue\n  - ObjectTypeOpportunity\n  - ObjectTypeTask\n  - ObjectTypeTicket\n  - dNaN\n  - dNegInf\n  - dPosInf\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions ['in.Ticket.AppliesToPartId', 'in.WorkOneof.Issue.AppliesToPartId', 'in.WorkOneof.Task.AppliesToPartId', 'in.WorkOneof.Ticket.AppliesToPartId']\n  - test field `appname` -> suggestions []\n  - test field `description` -> suggestions []\n  - test field `inputvalues` -> suggestions []\n  - test field `name` -> suggestions []\n  - test field `operation` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Issue.OwnedByIds', 'in.Ticket.OwnedByIds', 'in.WorkOneof.Issue.OwnedByIds', 'in.WorkOneof.Opportunity.OwnedByIds', 'in.WorkOneof.Task.OwnedByIds', 'in.WorkOneof.Ticket.OwnedByAgentId', 'in.WorkOneof.Ticket.OwnedByIds']\n  - test field `previoussteps` -> suggestions []\n  - test field `referencekey` -> suggestions []\n  - test field `type` -> suggestions ['in.WorkOneof.Issue.WorkType', 'in.WorkOneof.Opportunity.WorkType', 'in.WorkOneof.Task.WorkType', 'in.WorkOneof.Ticket.WorkType']\n  - test field `uimetadata` -> suggestions []\n  - test field `workflow` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

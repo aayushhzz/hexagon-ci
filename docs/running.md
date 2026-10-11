@@ -114,6 +114,11 @@ print('mapped %d/%d, aggregate field cov %.1f%%'%(len(m),len(c),100*tc/tl))"
   gateway surface, or operation names the verb+resource derivation does not
   cover). The op->RPC derivation is RPC-set-aware and tries both singular and
   plural resource forms (janus uses `CreateAccount` but `ListAccounts`).
+- A test is linked by the client operation it calls, read from the
+  `MakeRequest(ctx, <client>.<Operation>, ...)` argument. Client handles vary by
+  role and auth (`ClientV2Internal`, `UserClientInternal`, `AdminClientInternal`,
+  `revUserClient`, lowercase `client`, ...), so any receiver whose name contains
+  "client" is treated as a client. A narrower match misses most suites.
 - Identifier RPCs (Get/Delete/Count) take a structured identifier (e.g.
   `GetAccountRequest.AccountIdentifier.AccountDon`) while the HTTP test sets a
   flat `Id`. Map it once in `fieldmap.json`

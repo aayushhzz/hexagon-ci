@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "CompleteUpload",
     "operation": "ArtifactsUploadComplete",
-    "tests": 12,
+    "tests": 14,
     "status": {
       "documented": [
         200,
@@ -64,12 +64,14 @@
           "path": "in.Cursor",
           "match": "exact",
           "by_tests": [
+            "Another member cursor cannot advance a different upload",
             "Another tenant cannot advance upload session",
             "Complete rejects total size over configuration_set limit",
             "Complete with parent_id outside tenant should fail",
             "Complete without uploading all declared parts should fail",
             "Complete without uploading parts should fail",
             "Cursor must match artifact id on next and complete",
+            "Dev user can create and complete upload",
             "Invalid cursor signature is rejected on next and complete",
             "Invalid cursor values are rejected",
             "Missing id or cursor on next complete should fail",
@@ -250,6 +252,32 @@
     },
     "test_facts": [
       {
+        "name": "Dev user can create and complete upload",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "POSITIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "Cursor",
+          "FileName",
+          "FileType",
+          "Id",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
         "name": "Requests without authentication are rejected",
         "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
         "labels": [
@@ -365,6 +393,31 @@
           "Id",
           "StatusCode",
           "Url"
+        ]
+      },
+      {
+        "name": "Another member cursor cannot advance a different upload",
+        "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+        "labels": [
+          "NEGATIVE",
+          "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+          "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+        ],
+        "fields_set": [
+          "Cursor",
+          "FileName",
+          "FileType",
+          "Id",
+          "PartSize"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Cursor",
+          "Id",
+          "StatusCode"
         ]
       },
       {

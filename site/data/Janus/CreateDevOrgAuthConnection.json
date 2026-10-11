@@ -2,26 +2,45 @@
   "service": "Janus",
   "coverage": {
     "rpc": "CreateDevOrgAuthConnection",
-    "operation": "",
-    "tests": 0,
+    "operation": "DevOrgAuthConnectionsCreate",
+    "tests": 7,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        201,
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        201,
+        400
+      ],
+      "missing": [
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 25
     },
     "fields": {
       "leaf_fields_read_by_rpc": 24,
-      "covered_count": 0,
-      "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
-      "set_by_positive_tests": 0,
-      "set_by_negative_tests": 0,
+      "covered_count": 1,
+      "coverage_pct": 4.2,
+      "request_fields_set_by_tests": 2,
+      "set_by_positive_tests": 1,
+      "set_by_negative_tests": 1,
       "by_depth": {
         "top_level": {
           "total": 2,
-          "set": 0,
-          "pct": 0
+          "set": 1,
+          "pct": 50
         },
         "nested": {
           "total": 19,
@@ -36,16 +55,29 @@
       },
       "representative": {
         "units": 24,
-        "covered": 0,
-        "pct": 0,
+        "covered": 1,
+        "pct": 4.2,
         "collapsed_types": []
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.DisplayName",
+          "match": "exact",
+          "by_tests": [
+            "Create Azure AD connection",
+            "Create Google Apps connection",
+            "Create OIDC connection",
+            "Create SAML connection",
+            "Empty Display Name",
+            "Invalid Connection Type",
+            "Invalid connection_name (SAML connection)"
+          ]
+        }
+      ],
       "gaps": [
         "in.AzureAdOptions.ClientId",
         "in.AzureAdOptions.ClientSecret",
         "in.AzureAdOptions.Domain",
-        "in.DisplayName",
         "in.GoogleAppsOptions.ClientId",
         "in.GoogleAppsOptions.ClientSecret",
         "in.GoogleAppsOptions.TenantDomain",
@@ -70,12 +102,12 @@
     },
     "branches": {
       "total": 33,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 17,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
+      "absent_arm_exercised": 17,
+      "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
@@ -83,12 +115,12 @@
       "by_origin": {
         "service": {
           "total": 21,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 17,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 17
         },
         "generated": {
           "total": 12,
@@ -388,16 +420,119 @@
       "datastore_calls": [],
       "service_count": 1,
       "call_count": 1,
-      "reached_by_test": false,
+      "reached_by_test": true,
       "deps_result_used_in_response": 0,
       "deps_result_checked_by_test": 0,
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "type",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "Empty Display Name",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Invalid Connection Type",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Invalid connection_name (SAML connection)",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Type"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Create SAML connection",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "GetAuthConnection"
+        ]
+      },
+      {
+        "name": "Create OIDC connection",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "GetAuthConnection"
+        ]
+      },
+      {
+        "name": "Create Google Apps connection",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "GetAuthConnection"
+        ]
+      },
+      {
+        "name": "Create Azure AD connection",
+        "file": "api/v2_internal/devorg_auth_connections/connections_test.go",
+        "labels": null,
+        "fields_set": [
+          "DisplayName",
+          "Type"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "GetAuthConnection"
+        ]
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/janus/internal/service.Janus).CreateDevOrgAuthConnection",
@@ -507,5 +642,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateDevOrgAuthConnection` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AzureAdOptions.ClientId\n  - in.AzureAdOptions.ClientSecret\n  - in.AzureAdOptions.Domain\n  - in.DisplayName\n  - in.GoogleAppsOptions.ClientId\n  - in.GoogleAppsOptions.ClientSecret\n  - in.GoogleAppsOptions.TenantDomain\n  - in.OidcOptions.ClientId\n  - in.OidcOptions.ClientSecret\n  - in.OidcOptions.Issuer\n  - in.OktaOptions.ClientId\n  - in.OktaOptions.ClientSecret\n  - in.OktaOptions.Domain\n  - in.OptionsOneof.AzureAdOptions\n  - in.OptionsOneof.GoogleAppsOptions\n  - in.OptionsOneof.OidcOptions\n  - in.OptionsOneof.OktaOptions\n  - in.OptionsOneof.SamlOptions.FieldsMap\n  - in.SamlOptions.ConnectionName\n  - in.SamlOptions.FieldsMap.Email\n  - in.SamlOptions.FieldsMap.UserId\n  - in.SamlOptions.SignInEndpoint\n  - in.SamlOptions.SigningCert\n  - in.Strategy\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OptionsOneof.SamlOptions.FieldsMap != nil\n  - in.OptionsOneof.SamlOptions.FieldsMap != nil\n  - in.OptionsOneof\n  - in.OptionsOneof.OidcOptions != nil\n  - in.OptionsOneof.OidcOptions != nil\n  - in.OptionsOneof.SamlOptions != nil\n  - in.OptionsOneof.SamlOptions != nil\n  - in.OptionsOneof.GoogleAppsOptions != nil\n  - in.OptionsOneof.GoogleAppsOptions != nil\n  - in.OptionsOneof.AzureAdOptions != nil\n  - in.OptionsOneof.AzureAdOptions != nil\n  - in.OptionsOneof.OktaOptions != nil\n  - in.OptionsOneof.OktaOptions != nil\n  - in.Strategy == \"oidc\"\n  - in.OidcOptions == nil\n  - in.SamlOptions == nil\n  - in.Strategy == \"samlp\"\n  - in.GoogleAppsOptions == nil\n  - in.Strategy == \"google-apps\"\n  - in.AzureAdOptions == nil\n  - in.Strategy == \"waad\"\n  - in.OktaOptions == nil\n  - in.Strategy == \"okta\"\n  - in != nil\n  - in.Strategy == \"samlp\"\n  - in.Strategy == \"oidc\"\n  - in.SamlOptions.FieldsMap != nil\n  - in.Strategy == \"samlp\"\n  - in.Strategy == \"google-apps\"\n  - in.SamlOptions.FieldsMap.Email != \"\"\n  - in.SamlOptions.FieldsMap.UserId != \"\"\n  - in.Strategy == \"waad\"\n  - in.Strategy == \"okta\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContextDevOid\n  - errInvalidStrategy\n  - errInvalidStrategyOptions\n  - errInvalidStrategyType\n  - errMaxEnterpriseConnectionLimitReached\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateDevOrgAuthConnection` (HTTP operation `DevOrgAuthConnectionsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AzureAdOptions.ClientId\n  - in.AzureAdOptions.ClientSecret\n  - in.AzureAdOptions.Domain\n  - in.GoogleAppsOptions.ClientId\n  - in.GoogleAppsOptions.ClientSecret\n  - in.GoogleAppsOptions.TenantDomain\n  - in.OidcOptions.ClientId\n  - in.OidcOptions.ClientSecret\n  - in.OidcOptions.Issuer\n  - in.OktaOptions.ClientId\n  - in.OktaOptions.ClientSecret\n  - in.OktaOptions.Domain\n  - in.OptionsOneof.AzureAdOptions\n  - in.OptionsOneof.GoogleAppsOptions\n  - in.OptionsOneof.OidcOptions\n  - in.OptionsOneof.OktaOptions\n  - in.OptionsOneof.SamlOptions.FieldsMap\n  - in.SamlOptions.ConnectionName\n  - in.SamlOptions.FieldsMap.Email\n  - in.SamlOptions.FieldsMap.UserId\n  - in.SamlOptions.SignInEndpoint\n  - in.SamlOptions.SigningCert\n  - in.Strategy\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.OptionsOneof.SamlOptions.FieldsMap != nil\n  - in.OptionsOneof.SamlOptions.FieldsMap != nil\n  - in.OptionsOneof\n  - in.OptionsOneof.OidcOptions != nil\n  - in.OptionsOneof.OidcOptions != nil\n  - in.OptionsOneof.SamlOptions != nil\n  - in.OptionsOneof.SamlOptions != nil\n  - in.OptionsOneof.GoogleAppsOptions != nil\n  - in.OptionsOneof.GoogleAppsOptions != nil\n  - in.OptionsOneof.AzureAdOptions != nil\n  - in.OptionsOneof.AzureAdOptions != nil\n  - in.OptionsOneof.OktaOptions != nil\n  - in.OptionsOneof.OktaOptions != nil\n  - in.Strategy == \"oidc\"\n  - in.OidcOptions == nil\n  - in.SamlOptions == nil\n  - in.Strategy == \"samlp\"\n  - in.GoogleAppsOptions == nil\n  - in.Strategy == \"google-apps\"\n  - in.AzureAdOptions == nil\n  - in.Strategy == \"waad\"\n  - in.OktaOptions == nil\n  - in.Strategy == \"okta\"\n  - in != nil\n  - in.Strategy == \"samlp\"\n  - in.Strategy == \"oidc\"\n  - in.SamlOptions.FieldsMap != nil\n  - in.Strategy == \"samlp\"\n  - in.Strategy == \"google-apps\"\n  - in.SamlOptions.FieldsMap.Email != \"\"\n  - in.SamlOptions.FieldsMap.UserId != \"\"\n  - in.Strategy == \"waad\"\n  - in.Strategy == \"okta\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContextDevOid\n  - errInvalidStrategy\n  - errInvalidStrategyOptions\n  - errInvalidStrategyType\n  - errMaxEnterpriseConnectionLimitReached\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `type` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "CreateAccount",
     "operation": "AccountsCreate",
-    "tests": 5,
+    "tests": 7,
     "status": {
       "documented": [
         201,
@@ -17,6 +17,7 @@
         503
       ],
       "asserted": [
+        200,
         201,
         400
       ],
@@ -33,10 +34,10 @@
     },
     "fields": {
       "leaf_fields_read_by_rpc": 41,
-      "covered_count": 7,
-      "coverage_pct": 17.1,
-      "request_fields_set_by_tests": 7,
-      "set_by_positive_tests": 7,
+      "covered_count": 12,
+      "coverage_pct": 29.3,
+      "request_fields_set_by_tests": 17,
+      "set_by_positive_tests": 12,
       "set_by_negative_tests": 2,
       "by_depth": {
         "top_level": {
@@ -51,14 +52,14 @@
         },
         "deep": {
           "total": 20,
-          "set": 0,
-          "pct": 0
+          "set": 5,
+          "pct": 25
         }
       },
       "representative": {
         "units": 32,
-        "covered": 7,
-        "pct": 21.9,
+        "covered": 10,
+        "pct": 31.3,
         "collapsed_types": [
           "api.CreateDevrevCopy",
           "api.CreateExternalSourceDataComp",
@@ -72,7 +73,22 @@
           "path": "in.Account.Description",
           "match": "exact",
           "by_tests": [
-            "Create account"
+            "Create account",
+            "should create workflow triggered by opportunity creation with automatic timestamp update"
+          ]
+        },
+        {
+          "path": "in.Account.DevrevCopy.OriginId.Id",
+          "match": "exact",
+          "by_tests": [
+            "should create workflow triggered by opportunity creation with automatic timestamp update"
+          ]
+        },
+        {
+          "path": "in.Account.DevrevCopy.OriginOrgId.Id",
+          "match": "exact",
+          "by_tests": [
+            "should create workflow triggered by opportunity creation with automatic timestamp update"
           ]
         },
         {
@@ -81,7 +97,9 @@
           "by_tests": [
             "Create account",
             "Create account with invalid fields",
-            "Create account with only required fields"
+            "Create account with only required fields",
+            "Emits create event",
+            "should create workflow triggered by opportunity creation with automatic timestamp update"
           ]
         },
         {
@@ -99,10 +117,31 @@
           ]
         },
         {
+          "path": "in.Account.ExternalSourceData.CreatedById.Id",
+          "match": "exact",
+          "by_tests": [
+            "should create workflow triggered by opportunity creation with automatic timestamp update"
+          ]
+        },
+        {
+          "path": "in.Account.ExternalSourceData.ModifiedById.Id",
+          "match": "exact",
+          "by_tests": [
+            "should create workflow triggered by opportunity creation with automatic timestamp update"
+          ]
+        },
+        {
           "path": "in.Account.PhoneNumbers",
           "match": "exact",
           "by_tests": [
             "Create account"
+          ]
+        },
+        {
+          "path": "in.Account.Stage.StageId.Id",
+          "match": "exact",
+          "by_tests": [
+            "should create workflow triggered by opportunity creation with automatic timestamp update"
           ]
         },
         {
@@ -126,13 +165,9 @@
         "in.Account.CustomFields.Fields",
         "in.Account.CustomSchemaFragmentIds",
         "in.Account.DevrevCopy.LastSyncedDate",
-        "in.Account.DevrevCopy.OriginId.Id",
-        "in.Account.DevrevCopy.OriginOrgId.Id",
         "in.Account.EmployeeCount",
         "in.Account.ExternalSourceData.ClosedDate",
-        "in.Account.ExternalSourceData.CreatedById.Id",
         "in.Account.ExternalSourceData.CreatedDate",
-        "in.Account.ExternalSourceData.ModifiedById.Id",
         "in.Account.ExternalSourceData.ModifiedDate",
         "in.Account.Industry",
         "in.Account.IngestionChannel",
@@ -142,7 +177,6 @@
         "in.Account.Revenue.Currency",
         "in.Account.SharedWith",
         "in.Account.Stage.Notes",
-        "in.Account.Stage.StageId.Id",
         "in.Account.Stage.StageId.IsDeprecated",
         "in.Account.Stage.StageId.IsStart",
         "in.Account.StagedInfo.IsStaged",
@@ -162,14 +196,14 @@
       "total": 72,
       "happy_path_reached": true,
       "reachable_on_happy_path": 5,
-      "present_arm_exercised": 10,
-      "present_arm_pct": 13.9,
+      "present_arm_exercised": 14,
+      "present_arm_pct": 19.4,
       "absent_arm_exercised": 5,
       "absent_arm_pct": 100,
       "negative_arm_exercised": 4,
       "negative_arm_pct": 5.6,
       "both_arms_exercised": 0,
-      "coverage_pct": 13.9,
+      "coverage_pct": 19.4,
       "by_origin": {
         "service": {
           "total": 46,
@@ -192,8 +226,8 @@
         "library": {
           "total": 26,
           "reachable_on_happy_path": 2,
-          "present_arm_exercised": 3,
-          "present_arm_pct": 11.5,
+          "present_arm_exercised": 7,
+          "present_arm_pct": 26.9,
           "negative_arm_exercised": 3,
           "negative_arm_pct": 11.5,
           "absent_arm_exercised": 2
@@ -555,14 +589,6 @@
           ]
         },
         {
-          "id": "b55",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:30",
-          "cond": "proto.Id).GetId() == in.Account.Stage.StageId.Id",
-          "predicate_paths": [
-            "in.Account.Stage.StageId.Id"
-          ]
-        },
-        {
           "id": "b56",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:166",
           "cond": "in.Account.Stage.StageId == nil",
@@ -579,14 +605,6 @@
           ]
         },
         {
-          "id": "b58",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:193",
-          "cond": "proto.Id).GetId() == in.Account.Stage.StageId.Id",
-          "predicate_paths": [
-            "in.Account.Stage.StageId.Id"
-          ]
-        },
-        {
           "id": "b59",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:200",
           "cond": "in.Account.Stage.StageId.IsStart",
@@ -600,22 +618,6 @@
           "cond": "in.Account.Stage.StageId.IsDeprecated",
           "predicate_paths": [
             "in.Account.Stage.StageId.IsDeprecated"
-          ]
-        },
-        {
-          "id": "b61",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/custom_stage.go:239",
-          "cond": "proto.Id).GetId() == in.Account.Stage.StageId.Id",
-          "predicate_paths": [
-            "in.Account.Stage.StageId.Id"
-          ]
-        },
-        {
-          "id": "b62",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261008033640-0bdf25647036/donv2/don.go:593",
-          "cond": "in.Account.Stage.StageId.Id == nil",
-          "predicate_paths": [
-            "in.Account.Stage.StageId.Id"
           ]
         },
         {
@@ -725,7 +727,47 @@
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "inputvalues",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "name",
+          "fuzzy_suggestions": [
+            "in.Account.DisplayName",
+            "in.UniqueDisplayNameSuffix"
+          ]
+        },
+        {
+          "field": "operation",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "previoussteps",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "referencekey",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "status",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "title",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "uimetadata",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "workflow",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
     "test_facts": [
       {
@@ -811,6 +853,61 @@
         ],
         "asserts_success": false,
         "response_fields_asserted": null
+      },
+      {
+        "name": "Emits create event",
+        "file": "e2e/transformers/janus/janus_test.go",
+        "labels": [
+          "POSITIVE",
+          "FUNCTIONAL"
+        ],
+        "fields_set": [
+          "DisplayName"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "Account",
+          "Account.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should create workflow triggered by opportunity creation with automatic timestamp update",
+        "file": "e2e/workflow_uat_automation/workflow_node_test.go",
+        "labels": [
+          "UAT"
+        ],
+        "fields_set": [
+          "Description",
+          "DisplayName",
+          "Id",
+          "InputValues",
+          "Name",
+          "Operation",
+          "PreviousSteps",
+          "ReferenceKey",
+          "Status",
+          "Title",
+          "UiMetadata",
+          "Workflow"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Account",
+          "Account.Id",
+          "StatusCode",
+          "Workflow",
+          "Workflow.Id",
+          "WorkflowStep",
+          "WorkflowStep.Id"
+        ]
       }
     ]
   },
@@ -950,5 +1047,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateAccount` (HTTP operation `AccountsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Account.ArtifactIds\n  - in.Account.CustomFields.Fields\n  - in.Account.CustomSchemaFragmentIds\n  - in.Account.DevrevCopy.LastSyncedDate\n  - in.Account.DevrevCopy.OriginId.Id\n  - in.Account.DevrevCopy.OriginOrgId.Id\n  - in.Account.EmployeeCount\n  - in.Account.ExternalSourceData.ClosedDate\n  - in.Account.ExternalSourceData.CreatedById.Id\n  - in.Account.ExternalSourceData.CreatedDate\n  - in.Account.ExternalSourceData.ModifiedById.Id\n  - in.Account.ExternalSourceData.ModifiedDate\n  - in.Account.Industry\n  - in.Account.IngestionChannel\n  - in.Account.LeadSource\n  - in.Account.OwnedBy\n  - in.Account.Revenue.Amount\n  - in.Account.Revenue.Currency\n  - in.Account.SharedWith\n  - in.Account.Stage.Notes\n  - in.Account.Stage.StageId.Id\n  - in.Account.Stage.StageId.IsDeprecated\n  - in.Account.Stage.StageId.IsStart\n  - in.Account.StagedInfo.IsStaged\n  - in.Account.StagedInfo.SyncInUnresolvedFields\n  - in.Account.StagedInfo.SyncOutUnresolvedFields\n  - in.Account.StagedInfo.UnresolvedFields\n  - in.Account.SyncMetadata.SyncedByDevUsers\n  - in.Account.Tags\n  - in.Account.TotalRevenue\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.SkipStageTransitionValidation\n  - in.UniqueDisplayNameSuffix\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Account.DisplayName|in.UniqueDisplayNameSuffix == nil\n  - in.UniqueDisplayNameSuffix != nil\n  - in\n  - in.Account.CustomFields == nil\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec == nil\n  - in.Account.CustomFields|in.Account.CustomSchemaFragmentIds\n  - in.Account.Stage.StageId != nil\n  - in.Account.Revenue.Amount == nil\n  - in.Account.Revenue.Amount == \"\"\n  - in.Account.Revenue.Amount == \"NaN\"\n  - in.Account.Revenue.Amount == \"Inf\"\n  - in.Account.Revenue.Amount == \"nan\"\n  - in.Account.Revenue.Amount == \"inf\"\n  - in.Account.Revenue.Amount != nil\n  - in.Account.SyncMetadata.SyncedByDevUsers != nil\n  - in.Account.StagedInfo.UnresolvedFields != nil\n  - in.Account.StagedInfo.SyncInUnresolvedFields != nil\n  - in.Account.StagedInfo.SyncOutUnresolvedFields != nil\n  - in.Account.ExternalSourceData.CreatedDate != nil\n  - in.Account.ExternalSourceData.ModifiedDate != nil\n  - in.Account.ExternalSourceData.ClosedDate != nil\n  - in.Account.ExternalSourceData.CreatedById != nil\n  - in.Account.ExternalSourceData.ModifiedById != nil\n  - in.Account.DevrevCopy.OriginId != nil\n  - in.Account.DevrevCopy.OriginOrgId != nil\n  - in.Account.DevrevCopy.LastSyncedDate != nil\n  - in.Account.Industry == *t4\n  - in.Account.Industry == nil\n  - in.Account.Industry\n  - in.Account.LeadSource == *t4\n  - in.Account.LeadSource == nil\n  - in.Account.LeadSource\n  - in.Account.OwnedBy != nil\n  - in.Account.Tags != nil\n  - in.Account.ArtifactIds != nil\n  - in.Account.Stage != nil\n  - in.Account.Revenue != nil\n  - in.Account.SyncMetadata != nil\n  - in.Account.StagedInfo != nil\n  - (+22 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - dNaN\n  - dNegInf\n  - dPosInf\n  - errAccountDisplayNameAlreadyExists\n  - errAccountEmptyDisplayName\n  - errDomainAlreadyExists\n  - errInputContainsDuplicateDomains\n  - errInputContainsDuplicateExternalRefs\n  - errInputContainsDuplicateWebsites\n  - errInputContainsNotAcceptableDomains\n  - errInputContainsNotAcceptableWebsites\n  - errOldVersionOfSchemaFragments\n  - errPhoneNumberInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n  - errWebsiteAlreadyExists\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateAccount` (HTTP operation `AccountsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Account.ArtifactIds\n  - in.Account.CustomFields.Fields\n  - in.Account.CustomSchemaFragmentIds\n  - in.Account.DevrevCopy.LastSyncedDate\n  - in.Account.EmployeeCount\n  - in.Account.ExternalSourceData.ClosedDate\n  - in.Account.ExternalSourceData.CreatedDate\n  - in.Account.ExternalSourceData.ModifiedDate\n  - in.Account.Industry\n  - in.Account.IngestionChannel\n  - in.Account.LeadSource\n  - in.Account.OwnedBy\n  - in.Account.Revenue.Amount\n  - in.Account.Revenue.Currency\n  - in.Account.SharedWith\n  - in.Account.Stage.Notes\n  - in.Account.Stage.StageId.IsDeprecated\n  - in.Account.Stage.StageId.IsStart\n  - in.Account.StagedInfo.IsStaged\n  - in.Account.StagedInfo.SyncInUnresolvedFields\n  - in.Account.StagedInfo.SyncOutUnresolvedFields\n  - in.Account.StagedInfo.UnresolvedFields\n  - in.Account.SyncMetadata.SyncedByDevUsers\n  - in.Account.Tags\n  - in.Account.TotalRevenue\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.SkipStageTransitionValidation\n  - in.UniqueDisplayNameSuffix\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Account.DisplayName|in.UniqueDisplayNameSuffix == nil\n  - in.UniqueDisplayNameSuffix != nil\n  - in\n  - in.Account.CustomFields == nil\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec == nil\n  - in.Account.CustomFields|in.Account.CustomSchemaFragmentIds\n  - in.Account.Stage.StageId != nil\n  - in.Account.Revenue.Amount == nil\n  - in.Account.Revenue.Amount == \"\"\n  - in.Account.Revenue.Amount == \"NaN\"\n  - in.Account.Revenue.Amount == \"Inf\"\n  - in.Account.Revenue.Amount == \"nan\"\n  - in.Account.Revenue.Amount == \"inf\"\n  - in.Account.Revenue.Amount != nil\n  - in.Account.SyncMetadata.SyncedByDevUsers != nil\n  - in.Account.StagedInfo.UnresolvedFields != nil\n  - in.Account.StagedInfo.SyncInUnresolvedFields != nil\n  - in.Account.StagedInfo.SyncOutUnresolvedFields != nil\n  - in.Account.ExternalSourceData.CreatedDate != nil\n  - in.Account.ExternalSourceData.ModifiedDate != nil\n  - in.Account.ExternalSourceData.ClosedDate != nil\n  - in.Account.ExternalSourceData.CreatedById != nil\n  - in.Account.ExternalSourceData.ModifiedById != nil\n  - in.Account.DevrevCopy.OriginId != nil\n  - in.Account.DevrevCopy.OriginOrgId != nil\n  - in.Account.DevrevCopy.LastSyncedDate != nil\n  - in.Account.Industry == *t4\n  - in.Account.Industry == nil\n  - in.Account.Industry\n  - in.Account.LeadSource == *t4\n  - in.Account.LeadSource == nil\n  - in.Account.LeadSource\n  - in.Account.OwnedBy != nil\n  - in.Account.Tags != nil\n  - in.Account.ArtifactIds != nil\n  - in.Account.Stage != nil\n  - in.Account.Revenue != nil\n  - in.Account.SyncMetadata != nil\n  - in.Account.StagedInfo != nil\n  - (+18 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - dNaN\n  - dNegInf\n  - dPosInf\n  - errAccountDisplayNameAlreadyExists\n  - errAccountEmptyDisplayName\n  - errDomainAlreadyExists\n  - errInputContainsDuplicateDomains\n  - errInputContainsDuplicateExternalRefs\n  - errInputContainsDuplicateWebsites\n  - errInputContainsNotAcceptableDomains\n  - errInputContainsNotAcceptableWebsites\n  - errOldVersionOfSchemaFragments\n  - errPhoneNumberInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n  - errWebsiteAlreadyExists\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `inputvalues` -> suggestions []\n  - test field `name` -> suggestions ['in.Account.DisplayName', 'in.UniqueDisplayNameSuffix']\n  - test field `operation` -> suggestions []\n  - test field `previoussteps` -> suggestions []\n  - test field `referencekey` -> suggestions []\n  - test field `status` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `uimetadata` -> suggestions []\n  - test field `workflow` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

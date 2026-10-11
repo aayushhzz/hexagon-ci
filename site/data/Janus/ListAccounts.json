@@ -2,11 +2,14 @@
   "service": "Janus",
   "coverage": {
     "rpc": "ListAccounts",
-    "operation": "",
-    "tests": 0,
+    "operation": "AccountsList,AccountsListPost",
+    "tests": 10,
     "status": {
       "documented": null,
-      "asserted": [],
+      "asserted": [
+        200,
+        403
+      ],
       "missing": [],
       "coverage_pct": 0
     },
@@ -14,7 +17,7 @@
       "leaf_fields_read_by_rpc": 72,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
+      "request_fields_set_by_tests": 1,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -122,12 +125,12 @@
     },
     "branches": {
       "total": 361,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 13,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
+      "absent_arm_exercised": 13,
+      "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
@@ -135,12 +138,12 @@
       "by_origin": {
         "service": {
           "total": 357,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 13,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 13
         },
         "generated": {
           "total": 0,
@@ -3068,7 +3071,7 @@
       ],
       "service_count": 1,
       "call_count": 3,
-      "reached_by_test": false,
+      "reached_by_test": true,
       "deps_result_used_in_response": 4,
       "deps_result_checked_by_test": 0,
       "response_links": [
@@ -3099,10 +3102,158 @@
       ]
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "limit",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "should block Rev User from accessing accounts.list",
+        "file": "api/v2_internal/gateway/rev_user_allowlist_test.go",
+        "labels": null,
+        "fields_set": [
+          "Limit"
+        ],
+        "statuses": [
+          403
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should allow regular Dev User PAT to access any endpoint",
+        "file": "api/v2_internal/gateway/rev_user_allowlist_test.go",
+        "labels": null,
+        "fields_set": [
+          "Limit"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Lists accounts via internal API",
+        "file": "e2e/smoke_test_case/accounts_test/accounts_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_ACCOUNTS_LIST"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Accounts",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Validates accounts list API with authentication",
+        "file": "e2e/smoke_test_case/accounts_test/accounts_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_ACCOUNTS_LIST"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Accounts",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should allow AAT to access accounts.list",
+        "file": "api/v2_internal/gateway/aat_allowlist_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should allow accounts.list without captcha header",
+        "file": "api/v2_internal/gateway/captcha_validation_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should block request to accounts.list when IP not allowed",
+        "file": "api/v2_internal/gateway/ip_allowlist_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          403
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should allow PAT from non-denylisted user to access accounts.list",
+        "file": "api/v2_internal/gateway/token_denylist_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should allow AAT with non-restricted azp",
+        "file": "api/v2_internal/gateway/token_denylist_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "should allow service account token with non-restricted azp",
+        "file": "api/v2_internal/gateway/token_denylist_test.go",
+        "labels": null,
+        "fields_set": null,
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "AccessToken",
+          "StatusCode"
+        ]
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/janus/internal/service.Janus).ListAccounts",
@@ -3324,5 +3475,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListAccounts` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CursorParams\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SearchQuery\n  - in.Filters.AccountFilter.Apps\n  - in.Filters.AccountFilter.AppsOp\n  - in.Filters.AccountFilter.CustomFields.Fields\n  - in.Filters.AccountFilter.Domains\n  - in.Filters.AccountFilter.DomainsOp\n  - in.Filters.AccountFilter.ExternalRefs\n  - in.Filters.AccountFilter.ExternalRefsOp\n  - in.Filters.AccountFilter.ExternalSourceData\n  - in.Filters.AccountFilter.Industry\n  - in.Filters.AccountFilter.IndustryOp\n  - in.Filters.AccountFilter.IngestionChannel\n  - in.Filters.AccountFilter.LeadSource\n  - in.Filters.AccountFilter.LeadSourceOp\n  - in.Filters.AccountFilter.OwnedBy\n  - in.Filters.AccountFilter.OwnedByOp\n  - in.Filters.AccountFilter.SharedWith\n  - in.Filters.AccountFilter.Stage\n  - in.Filters.AccountFilter.StagedInfo\n  - in.Filters.AccountFilter.Subtype\n  - in.Filters.AccountFilter.SubtypeOp\n  - in.Filters.AccountFilter.SyncMetadata\n  - in.Filters.AccountFilter.Tags\n  - in.Filters.AccountFilter.TagsOp\n  - in.Filters.AccountFilter.Tier\n  - in.Filters.AccountFilter.TierOp\n  - in.Filters.AccountFilter.TotalRevenue\n  - in.Filters.AccountFilter.Websites\n  - in.Filters.AccountFilter.WebsitesOp\n  - in.Filters.CreatedByAgentId\n  - in.Filters.CreatedByAgentIdOp\n  - in.Filters.CreatedById\n  - in.Filters.CreatedByIdOp\n  - in.Filters.CreatedDate.After\n  - in.Filters.CreatedDate.Before\n  - in.Filters.CreatedDate.DatePreset.Type\n  - in.Filters.DevOrgFilter.UeSyncState\n  - in.Filters.DisplayName\n  - in.Filters.Environment\n  - in.Filters.EnvironmentOp\n  - in.Filters.ModifiedById\n  - in.Filters.ModifiedByIdOp\n  - in.Filters.ModifiedDate.After\n  - in.Filters.ModifiedDate.Before\n  - in.Filters.ModifiedDate.DatePreset.Type\n  - in.Filters.RevOrgFilter.Account\n  - in.Filters.RevOrgFilter.AccountOp\n  - in.Filters.RevOrgFilter.Apps\n  - in.Filters.RevOrgFilter.AppsOp\n  - in.Filters.RevOrgFilter.CustomFields.Fields\n  - in.Filters.RevOrgFilter.ExternalOid\n  - in.Filters.RevOrgFilter.ExternalOidIssuer\n  - in.Filters.RevOrgFilter.ExternalOidOp\n  - in.Filters.RevOrgFilter.ExternalSourceData\n  - in.Filters.RevOrgFilter.SharedWith\n  - in.Filters.RevOrgFilter.SlaId\n  - in.Filters.RevOrgFilter.StagedInfo\n  - in.Filters.RevOrgFilter.Subtype\n  - (+12 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DqlQuery == nil\n  - in.DqlQuery.SearchQuery != \"\"\n  - in.DqlQuery == nil\n  - in.DqlQuery.SearchQuery != \"\"\n  - in.DqlQuery == nil\n  - in.DqlQuery == nil\n  - in.PageParams != nil\n  - in.DqlQuery == nil\n  - in.DqlQuery\n  - in.Filters.RevOrgFilter.TagsOp == 3\n  - in.Filters.RevOrgFilter.TagsOp == 2\n  - in.Filters.RevOrgFilter.TagsOp == 4\n  - in.Filters.RevOrgFilter.CustomFields == nil\n  - in.Filters.RevOrgFilter.ExternalOidOp == 4\n  - in.Filters.RevOrgFilter.ExternalOidOp == 3\n  - in.Filters.RevOrgFilter.ExternalOidOp == 2\n  - in.Filters.RevOrgFilter.ExternalOidOp == 4\n  - in.Filters.RevOrgFilter.ExternalOidOp == 5\n  - in.Filters.RevOrgFilter.ExternalOidOp == 2\n  - in.Filters.RevOrgFilter.ExternalOidOp == 1\n  - in.Filters.RevOrgFilter.ExternalOidOp == 3\n  - in.Filters.RevOrgFilter.TagsOp == 4\n  - in.Filters.RevOrgFilter.TagsOp == 5\n  - in.Filters.RevOrgFilter.TagsOp == 2\n  - in.Filters.RevOrgFilter.TagsOp == 1\n  - in.Filters.RevOrgFilter.TagsOp == 3\n  - in.Filters.RevOrgFilter.AccountOp == 4\n  - in.Filters.RevOrgFilter.AccountOp == 3\n  - in.Filters.RevOrgFilter.AccountOp == 2\n  - in.Filters.RevOrgFilter.AccountOp == 4\n  - in.Filters.RevOrgFilter.AccountOp == 5\n  - in.Filters.RevOrgFilter.AccountOp == 2\n  - in.Filters.RevOrgFilter.AccountOp == 1\n  - in.Filters.RevOrgFilter.AccountOp == 3\n  - in.Filters.RevOrgFilter.SubtypeOp == 4\n  - in.Filters.RevOrgFilter.SubtypeOp == 3\n  - in.Filters.RevOrgFilter.SubtypeOp == 2\n  - in.Filters.RevOrgFilter.SubtypeOp == 4\n  - in.Filters.RevOrgFilter.SubtypeOp == 5\n  - in.Filters.RevOrgFilter.SubtypeOp == 2\n  - (+321 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidSortByInputField\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ListAccounts` (HTTP operation `AccountsList,AccountsListPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CursorParams\n  - in.DqlQuery.SearchExpression\n  - in.DqlQuery.SearchQuery\n  - in.Filters.AccountFilter.Apps\n  - in.Filters.AccountFilter.AppsOp\n  - in.Filters.AccountFilter.CustomFields.Fields\n  - in.Filters.AccountFilter.Domains\n  - in.Filters.AccountFilter.DomainsOp\n  - in.Filters.AccountFilter.ExternalRefs\n  - in.Filters.AccountFilter.ExternalRefsOp\n  - in.Filters.AccountFilter.ExternalSourceData\n  - in.Filters.AccountFilter.Industry\n  - in.Filters.AccountFilter.IndustryOp\n  - in.Filters.AccountFilter.IngestionChannel\n  - in.Filters.AccountFilter.LeadSource\n  - in.Filters.AccountFilter.LeadSourceOp\n  - in.Filters.AccountFilter.OwnedBy\n  - in.Filters.AccountFilter.OwnedByOp\n  - in.Filters.AccountFilter.SharedWith\n  - in.Filters.AccountFilter.Stage\n  - in.Filters.AccountFilter.StagedInfo\n  - in.Filters.AccountFilter.Subtype\n  - in.Filters.AccountFilter.SubtypeOp\n  - in.Filters.AccountFilter.SyncMetadata\n  - in.Filters.AccountFilter.Tags\n  - in.Filters.AccountFilter.TagsOp\n  - in.Filters.AccountFilter.Tier\n  - in.Filters.AccountFilter.TierOp\n  - in.Filters.AccountFilter.TotalRevenue\n  - in.Filters.AccountFilter.Websites\n  - in.Filters.AccountFilter.WebsitesOp\n  - in.Filters.CreatedByAgentId\n  - in.Filters.CreatedByAgentIdOp\n  - in.Filters.CreatedById\n  - in.Filters.CreatedByIdOp\n  - in.Filters.CreatedDate.After\n  - in.Filters.CreatedDate.Before\n  - in.Filters.CreatedDate.DatePreset.Type\n  - in.Filters.DevOrgFilter.UeSyncState\n  - in.Filters.DisplayName\n  - in.Filters.Environment\n  - in.Filters.EnvironmentOp\n  - in.Filters.ModifiedById\n  - in.Filters.ModifiedByIdOp\n  - in.Filters.ModifiedDate.After\n  - in.Filters.ModifiedDate.Before\n  - in.Filters.ModifiedDate.DatePreset.Type\n  - in.Filters.RevOrgFilter.Account\n  - in.Filters.RevOrgFilter.AccountOp\n  - in.Filters.RevOrgFilter.Apps\n  - in.Filters.RevOrgFilter.AppsOp\n  - in.Filters.RevOrgFilter.CustomFields.Fields\n  - in.Filters.RevOrgFilter.ExternalOid\n  - in.Filters.RevOrgFilter.ExternalOidIssuer\n  - in.Filters.RevOrgFilter.ExternalOidOp\n  - in.Filters.RevOrgFilter.ExternalSourceData\n  - in.Filters.RevOrgFilter.SharedWith\n  - in.Filters.RevOrgFilter.SlaId\n  - in.Filters.RevOrgFilter.StagedInfo\n  - in.Filters.RevOrgFilter.Subtype\n  - (+12 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DqlQuery == nil\n  - in.DqlQuery.SearchQuery != \"\"\n  - in.DqlQuery == nil\n  - in.DqlQuery.SearchQuery != \"\"\n  - in.DqlQuery == nil\n  - in.DqlQuery == nil\n  - in.PageParams != nil\n  - in.DqlQuery == nil\n  - in.DqlQuery\n  - in.Filters.RevOrgFilter.TagsOp == 3\n  - in.Filters.RevOrgFilter.TagsOp == 2\n  - in.Filters.RevOrgFilter.TagsOp == 4\n  - in.Filters.RevOrgFilter.CustomFields == nil\n  - in.Filters.RevOrgFilter.ExternalOidOp == 4\n  - in.Filters.RevOrgFilter.ExternalOidOp == 3\n  - in.Filters.RevOrgFilter.ExternalOidOp == 2\n  - in.Filters.RevOrgFilter.ExternalOidOp == 4\n  - in.Filters.RevOrgFilter.ExternalOidOp == 5\n  - in.Filters.RevOrgFilter.ExternalOidOp == 2\n  - in.Filters.RevOrgFilter.ExternalOidOp == 1\n  - in.Filters.RevOrgFilter.ExternalOidOp == 3\n  - in.Filters.RevOrgFilter.TagsOp == 4\n  - in.Filters.RevOrgFilter.TagsOp == 5\n  - in.Filters.RevOrgFilter.TagsOp == 2\n  - in.Filters.RevOrgFilter.TagsOp == 1\n  - in.Filters.RevOrgFilter.TagsOp == 3\n  - in.Filters.RevOrgFilter.AccountOp == 4\n  - in.Filters.RevOrgFilter.AccountOp == 3\n  - in.Filters.RevOrgFilter.AccountOp == 2\n  - in.Filters.RevOrgFilter.AccountOp == 4\n  - in.Filters.RevOrgFilter.AccountOp == 5\n  - in.Filters.RevOrgFilter.AccountOp == 2\n  - in.Filters.RevOrgFilter.AccountOp == 1\n  - in.Filters.RevOrgFilter.AccountOp == 3\n  - in.Filters.RevOrgFilter.SubtypeOp == 4\n  - in.Filters.RevOrgFilter.SubtypeOp == 3\n  - in.Filters.RevOrgFilter.SubtypeOp == 2\n  - in.Filters.RevOrgFilter.SubtypeOp == 4\n  - in.Filters.RevOrgFilter.SubtypeOp == 5\n  - in.Filters.RevOrgFilter.SubtypeOp == 2\n  - (+321 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDQLQueryNil\n  - ErrInvalidPeriod\n  - ErrInvalidQuarter\n  - ErrInvalidRelativePeriod\n  - ErrTimeBeforeFiscalStart\n  - errInvalidSortByInputField\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `limit` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

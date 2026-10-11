@@ -353,7 +353,7 @@
     {
       "rpc": "CompleteUpload",
       "operation": "ArtifactsUploadComplete",
-      "tests": 12,
+      "tests": 14,
       "status": {
         "documented": [
           200,
@@ -414,12 +414,14 @@
             "path": "in.Cursor",
             "match": "exact",
             "by_tests": [
+              "Another member cursor cannot advance a different upload",
               "Another tenant cannot advance upload session",
               "Complete rejects total size over configuration_set limit",
               "Complete with parent_id outside tenant should fail",
               "Complete without uploading all declared parts should fail",
               "Complete without uploading parts should fail",
               "Cursor must match artifact id on next and complete",
+              "Dev user can create and complete upload",
               "Invalid cursor signature is rejected on next and complete",
               "Invalid cursor values are rejected",
               "Missing id or cursor on next complete should fail",
@@ -600,6 +602,32 @@
       },
       "test_facts": [
         {
+          "name": "Dev user can create and complete upload",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "POSITIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_CREATE",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
           "name": "Requests without authentication are rejected",
           "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
           "labels": [
@@ -715,6 +743,31 @@
             "Id",
             "StatusCode",
             "Url"
+          ]
+        },
+        {
+          "name": "Another member cursor cannot advance a different upload",
+          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
+          "labels": [
+            "NEGATIVE",
+            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
+            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
+          ],
+          "fields_set": [
+            "Cursor",
+            "FileName",
+            "FileType",
+            "Id",
+            "PartSize"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Cursor",
+            "Id",
+            "StatusCode"
           ]
         },
         {
@@ -2363,13 +2416,14 @@
     },
     {
       "rpc": "GetArtifact",
-      "operation": "ArtifactsDownload,ArtifactsGet",
-      "tests": 24,
+      "operation": "ArtifactsDownload,ArtifactsGet,ArtifactsGetPost",
+      "tests": 31,
       "status": {
         "documented": null,
         "asserted": [
           200,
-          201
+          201,
+          403
         ],
         "missing": [],
         "coverage_pct": 0
@@ -2380,7 +2434,7 @@
         "coverage_pct": 16.7,
         "request_fields_set_by_tests": 7,
         "set_by_positive_tests": 1,
-        "set_by_negative_tests": 0,
+        "set_by_negative_tests": 1,
         "by_depth": {
           "top_level": {
             "total": 4,
@@ -2413,6 +2467,7 @@
               "Actor field does not override created_by",
               "Another org's owner cannot DOWNLOAD an artifact",
               "Another org's owner cannot GET an artifact",
+              "DevUser should be able to fetch the source code artifact",
               "Download artifact with empty key should return 403",
               "Download artifact with invalid key should return 403",
               "Download artifact with no key and no auth should return 403",
@@ -2428,7 +2483,13 @@
               "Get non-existent artifact should return 404",
               "Get with malformed artifact ID should return 400",
               "RevUser cannot download artifact not in their conversation",
-              "Unauthenticated download of private (unpublished) article artifact should return 403"
+              "RevUser should NOT be able to fetch the source code artifact",
+              "Unauthenticated download of private (unpublished) article artifact should return 403",
+              "creator can get artifact on own private filesystem",
+              "non-creator member can get artifact on shared filesystem",
+              "non-creator member cannot get artifact on another users private filesystem",
+              "non-member cannot get artifact on private filesystem",
+              "non-member cannot get artifact on shared filesystem"
             ]
           }
         ],
@@ -2448,8 +2509,8 @@
         "present_arm_pct": 23.8,
         "absent_arm_exercised": 13,
         "absent_arm_pct": 100,
-        "negative_arm_exercised": 0,
-        "negative_arm_pct": 0,
+        "negative_arm_exercised": 5,
+        "negative_arm_pct": 23.8,
         "both_arms_exercised": 5,
         "coverage_pct": 23.8,
         "by_origin": {
@@ -2467,8 +2528,8 @@
             "reachable_on_happy_path": 4,
             "present_arm_exercised": 2,
             "present_arm_pct": 33.3,
-            "negative_arm_exercised": 0,
-            "negative_arm_pct": 0,
+            "negative_arm_exercised": 2,
+            "negative_arm_pct": 33.3,
             "absent_arm_exercised": 4
           },
           "library": {
@@ -2476,8 +2537,8 @@
             "reachable_on_happy_path": 3,
             "present_arm_exercised": 3,
             "present_arm_pct": 42.9,
-            "negative_arm_exercised": 0,
-            "negative_arm_pct": 0,
+            "negative_arm_exercised": 3,
+            "negative_arm_pct": 42.9,
             "absent_arm_exercised": 3
           }
         },
@@ -3041,6 +3102,81 @@
           ]
         },
         {
+          "name": "non-member cannot get artifact on shared filesystem",
+          "file": "api/v2_internal/filesystems/mfz/filesystems_mfz_test.go",
+          "labels": [
+            "NEGATIVE"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "non-member cannot get artifact on private filesystem",
+          "file": "api/v2_internal/filesystems/mfz/filesystems_mfz_test.go",
+          "labels": [
+            "NEGATIVE"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "non-creator member can get artifact on shared filesystem",
+          "file": "api/v2_internal/filesystems/mfz/filesystems_mfz_test.go",
+          "labels": [
+            "POSITIVE"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "creator can get artifact on own private filesystem",
+          "file": "api/v2_internal/filesystems/mfz/filesystems_mfz_test.go",
+          "labels": [
+            "POSITIVE"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "non-creator member cannot get artifact on another users private filesystem",
+          "file": "api/v2_internal/filesystems/mfz/filesystems_mfz_test.go",
+          "labels": [
+            "NEGATIVE"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
           "name": "Get non-existent artifact should return 404",
           "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
           "labels": [
@@ -3096,46 +3232,61 @@
             "Work",
             "Work.AsIssue"
           ]
+        },
+        {
+          "name": "DevUser should be able to fetch the source code artifact",
+          "file": "api/v2_internal/snap_in/package/mfz/mfz_test.go",
+          "labels": [
+            "POSITIVE"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "RevUser should NOT be able to fetch the source code artifact",
+          "file": "api/v2_internal/snap_in/package/mfz/mfz_test.go",
+          "labels": [
+            "NEGATIVE"
+          ],
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            403
+          ],
+          "asserts_success": false,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
         }
       ]
     },
     {
       "rpc": "GetDownloadUrl",
-      "operation": "ArtifactsLocate",
-      "tests": 13,
+      "operation": "ArtifactsLocate,QuotesGeneratePdf",
+      "tests": 16,
       "status": {
-        "documented": [
-          200,
-          400,
-          401,
-          403,
-          404,
-          413,
-          429,
-          500,
-          503
-        ],
+        "documented": null,
         "asserted": [
           200,
           201
         ],
-        "missing": [
-          400,
-          401,
-          403,
-          404,
-          413,
-          429,
-          500,
-          503
-        ],
-        "coverage_pct": 11.1
+        "missing": [],
+        "coverage_pct": 0
       },
       "fields": {
         "leaf_fields_read_by_rpc": 6,
         "covered_count": 1,
         "coverage_pct": 16.7,
-        "request_fields_set_by_tests": 6,
+        "request_fields_set_by_tests": 11,
         "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -3176,7 +3327,9 @@
               "Single-part upload create PUT complete",
               "Three-part upload create next next complete",
               "Version Creation",
-              "Version delete"
+              "Version delete",
+              "should extract content from a PDF article",
+              "should persist and recall a preference across conversations"
             ]
           }
         ],
@@ -3341,6 +3494,10 @@
       "anomalies": {
         "unmatched_test_fields": [
           {
+            "field": "accountid",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "cursor",
             "fuzzy_suggestions": null
           },
@@ -3355,7 +3512,23 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "opportunityid",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "partsize",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "pricebookid",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "space",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "surfaceid",
             "fuzzy_suggestions": null
           },
           {
@@ -3640,6 +3813,26 @@
           ]
         },
         {
+          "name": "should extract content from a PDF article",
+          "file": "api/v2_internal/dogmatix/glm_ocr_extraction_test.go",
+          "labels": null,
+          "fields_set": [
+            "Id"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.ExtractedContent",
+            "Body",
+            "Body.Close",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
           "name": "Locate non-existent artifact should return 404",
           "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
           "labels": [
@@ -3674,6 +3867,43 @@
           "response_fields_asserted": [
             "Id",
             "StatusCode"
+          ]
+        },
+        {
+          "name": "should persist and recall a preference across conversations",
+          "file": "e2e/personal_computer_memory/personal_computer_memory_suite_test.go",
+          "labels": null,
+          "fields_set": [
+            "Id",
+            "Space",
+            "SurfaceId"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Agent",
+            "AiAgentMemories",
+            "AiAssistantSurface",
+            "AiAssistantSurface.AiAgents",
+            "AiAssistantSurface.AiAgents.Id",
+            "StatusCode",
+            "Url"
+          ]
+        },
+        {
+          "name": "WithAllFields",
+          "file": "api/v2_internal/enact/quotes/crud/create_quote_test.go",
+          "labels": null,
+          "fields_set": [
+            "AccountId",
+            "OpportunityId",
+            "PriceBookId"
+          ],
+          "statuses": null,
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Quote",
+            "Quote.Id"
           ]
         }
       ]
@@ -3941,7 +4171,7 @@
         "leaf_fields_read_by_rpc": 10,
         "covered_count": 3,
         "coverage_pct": 30,
-        "request_fields_set_by_tests": 7,
+        "request_fields_set_by_tests": 6,
         "set_by_positive_tests": 3,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -3981,7 +4211,6 @@
             "path": "in.FileName",
             "match": "exact",
             "by_tests": [
-              "Another member cursor cannot advance a different upload",
               "Create with negative part_size should fail",
               "Download artifact with access key",
               "Download public artifact with access key",
@@ -3989,6 +4218,7 @@
               "Invalid extension",
               "Invalid headers on create should fail",
               "PUT body does not match part_size",
+              "Tests artifacts APIs for smoke validation",
               "TextArtifact",
               "Unauthenticated download of public article artifact without key should succeed",
               "UnknownTypeArtifact"
@@ -3998,7 +4228,6 @@
             "path": "in.FileType",
             "match": "exact",
             "by_tests": [
-              "Another member cursor cannot advance a different upload",
               "Create with empty file name should fail",
               "Create with negative part_size should fail",
               "Download artifact with access key",
@@ -4007,6 +4236,7 @@
               "Invalid extension",
               "Invalid headers on create should fail",
               "PUT body does not match part_size",
+              "Tests artifacts APIs for smoke validation",
               "TextArtifact",
               "Unauthenticated download of public article artifact without key should succeed"
             ]
@@ -4247,10 +4477,6 @@
       "anomalies": {
         "unmatched_test_fields": [
           {
-            "field": "cursor",
-            "fuzzy_suggestions": null
-          },
-          {
             "field": "headers",
             "fuzzy_suggestions": null
           },
@@ -4480,6 +4706,27 @@
           ]
         },
         {
+          "name": "Tests artifacts APIs for smoke validation",
+          "file": "e2e/smoke_test_case/artifacts_test/artifacts_test.go",
+          "labels": [
+            "SMOKE",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "FileName",
+            "FileType"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "GetUrl",
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
           "name": "Create with negative part_size should fail",
           "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
           "labels": [
@@ -4553,31 +4800,6 @@
           ]
         },
         {
-          "name": "Another member cursor cannot advance a different upload",
-          "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
-          "labels": [
-            "NEGATIVE",
-            "INTERNAL_ARTIFACTS_UPLOAD_NEXT",
-            "INTERNAL_ARTIFACTS_UPLOAD_COMPLETE"
-          ],
-          "fields_set": [
-            "Cursor",
-            "FileName",
-            "FileType",
-            "Id",
-            "PartSize"
-          ],
-          "statuses": [
-            200
-          ],
-          "asserts_success": true,
-          "response_fields_asserted": [
-            "Cursor",
-            "Id",
-            "StatusCode"
-          ]
-        },
-        {
           "name": "PUT body does not match part_size",
           "file": "api/v2_internal/artifacts/crud/artifacts_upload_test.go",
           "labels": [
@@ -4604,7 +4826,7 @@
     {
       "rpc": "HardDeleteArtifactVersion",
       "operation": "ArtifactsHardDeleteVersion",
-      "tests": 3,
+      "tests": 8,
       "status": {
         "documented": [
           200,
@@ -4617,7 +4839,8 @@
           503
         ],
         "asserted": [
-          200
+          200,
+          201
         ],
         "missing": [
           400,
@@ -4634,7 +4857,7 @@
         "leaf_fields_read_by_rpc": 2,
         "covered_count": 1,
         "coverage_pct": 50,
-        "request_fields_set_by_tests": 12,
+        "request_fields_set_by_tests": 18,
         "set_by_positive_tests": 1,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -4666,7 +4889,12 @@
             "match": "exact",
             "by_tests": [
               "Hard delete version for non-existent artifact should return 404",
-              "Should verify file attachment content matches original using SHA256"
+              "Should create and verify content block article",
+              "Should handle article images ",
+              "Should verify artifact versioning with SHA256 hash verification",
+              "Should verify file attachment content matches original using SHA256",
+              "Should verify markdown file content and bold text formatting",
+              "Should verify uploaded file content matches original using SHA256"
             ]
           }
         ],
@@ -4751,6 +4979,14 @@
             "fuzzy_suggestions": null
           },
           {
+            "field": "appliestoparts",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "articletype",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "artifacts",
             "fuzzy_suggestions": null
           },
@@ -4760,6 +4996,10 @@
           },
           {
             "field": "configurationset",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "description",
             "fuzzy_suggestions": null
           },
           {
@@ -4776,6 +5016,18 @@
           },
           {
             "field": "ownedby",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "parent",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "resource",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "status",
             "fuzzy_suggestions": null
           },
           {
@@ -4826,6 +5078,194 @@
           "statuses": null,
           "asserts_success": true,
           "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Should handle article images ",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "Artifacts",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Parent",
+            "Resource",
+            "Status",
+            "Title"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Article.Resource",
+            "Article.Resource.Artifacts",
+            "Id",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Should verify uploaded file content matches original using SHA256",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should verify artifact versioning with SHA256 hash verification",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should verify markdown file content and bold text formatting",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Status",
+            "Title",
+            "Version"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.Id",
+            "Body",
+            "Body.Close",
+            "Id",
+            "StatusCode",
+            "Url",
+            "Versions"
+          ]
+        },
+        {
+          "name": "Should create and verify content block article",
+          "file": "e2e/collections/collection_test.go",
+          "labels": [
+            "UAT",
+            "UAT_TEMP",
+            "INTERNAL_ARTIFACTS_PREPARE"
+          ],
+          "fields_set": [
+            "AppliesToParts",
+            "ArticleType",
+            "ConfigurationSet",
+            "Description",
+            "FileName",
+            "FileSize",
+            "FileType",
+            "Id",
+            "OwnedBy",
+            "Resource",
+            "Title"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Article",
+            "Article.ArticleType",
+            "Article.Description",
+            "Article.Id",
+            "Article.Resource",
+            "Article.Resource.Artifacts",
+            "Id",
             "StatusCode"
           ]
         },
@@ -5196,7 +5636,7 @@
     {
       "rpc": "ListArtifacts",
       "operation": "ArtifactsListPost",
-      "tests": 5,
+      "tests": 6,
       "status": {
         "documented": [
           200,
@@ -5262,6 +5702,7 @@
               "Another org's owner cannot LIST artifacts of a parent in another org",
               "List artifacts for non-existent parent should return 403",
               "ListArtifacts",
+              "Validates artifacts API with authentication",
               "parent_id on complete attaches artifact to parent"
             ]
           }
@@ -5514,6 +5955,25 @@
           ],
           "asserts_success": true,
           "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Validates artifacts API with authentication",
+          "file": "e2e/smoke_test_case/artifacts_test/artifacts_test.go",
+          "labels": [
+            "SMOKE",
+            "INTERNAL_ARTIFACTS_LIST"
+          ],
+          "fields_set": [
+            "ParentId"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Artifacts",
             "StatusCode"
           ]
         }

@@ -2,31 +2,50 @@
   "coverage": [
     {
       "rpc": "CountInboxNotifications",
-      "operation": "",
-      "tests": 0,
+      "operation": "NotificationsCountPost",
+      "tests": 2,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200,
+          400
+        ],
+        "missing": [
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 25
       },
       "fields": {
         "leaf_fields_read_by_rpc": 14,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
-        "set_by_positive_tests": 0,
-        "set_by_negative_tests": 0,
+        "covered_count": 2,
+        "coverage_pct": 14.3,
+        "request_fields_set_by_tests": 3,
+        "set_by_positive_tests": 2,
+        "set_by_negative_tests": 1,
         "by_depth": {
           "top_level": {
             "total": 2,
-            "set": 0,
-            "pct": 0
+            "set": 1,
+            "pct": 50
           },
           "nested": {
             "total": 8,
-            "set": 0,
-            "pct": 0
+            "set": 1,
+            "pct": 12.5
           },
           "deep": {
             "total": 4,
@@ -36,13 +55,29 @@
         },
         "representative": {
           "units": 3,
-          "covered": 0,
-          "pct": 0,
+          "covered": 2,
+          "pct": 66.7,
           "collapsed_types": [
             "api.ListInboxNotificationsFilter"
           ]
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.Filter.Types",
+            "match": "exact",
+            "by_tests": [
+              "Has a notification"
+            ]
+          },
+          {
+            "path": "in.GroupBy",
+            "match": "exact",
+            "by_tests": [
+              "Fails to provide a response",
+              "Has a notification"
+            ]
+          }
+        ],
         "gaps": [
           "in.Filter.ActorDons",
           "in.Filter.LastNotificationTimestamp.TimestampFrom",
@@ -53,34 +88,32 @@
           "in.Filter.ParentTypes",
           "in.Filter.Priorities",
           "in.Filter.States",
-          "in.Filter.Types",
           "in.Filter.UserParticipationFilter.Activities",
           "in.Filter.UserParticipationFilter.Visibilities",
-          "in.GroupBy",
           "in.UserDon"
         ]
       },
       "branches": {
         "total": 8,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 3,
-        "present_arm_exercised": 0,
-        "present_arm_pct": 0,
-        "absent_arm_exercised": 0,
-        "absent_arm_pct": 0,
-        "negative_arm_exercised": 0,
-        "negative_arm_pct": 0,
+        "present_arm_exercised": 2,
+        "present_arm_pct": 25,
+        "absent_arm_exercised": 1,
+        "absent_arm_pct": 33.3,
+        "negative_arm_exercised": 2,
+        "negative_arm_pct": 25,
         "both_arms_exercised": 0,
-        "coverage_pct": 0,
+        "coverage_pct": 25,
         "by_origin": {
           "service": {
             "total": 8,
-            "reachable_on_happy_path": 0,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
-            "negative_arm_exercised": 0,
-            "negative_arm_pct": 0,
-            "absent_arm_exercised": 0
+            "reachable_on_happy_path": 3,
+            "present_arm_exercised": 2,
+            "present_arm_pct": 25,
+            "negative_arm_exercised": 2,
+            "negative_arm_pct": 25,
+            "absent_arm_exercised": 1
           },
           "generated": {
             "total": 0,
@@ -149,22 +182,6 @@
             "predicate_paths": [
               "in.Filter.LastNotificationTimestamp.TimestampTo"
             ]
-          },
-          {
-            "id": "b7",
-            "at": "internal/infra/db/notification_repository.go:1408",
-            "cond": "in.GroupBy != \"\"",
-            "predicate_paths": [
-              "in.GroupBy"
-            ]
-          },
-          {
-            "id": "b8",
-            "at": "internal/infra/db/notification_repository.go:1422",
-            "cond": "in.GroupBy != \"\"",
-            "predicate_paths": [
-              "in.GroupBy"
-            ]
           }
         ]
       },
@@ -173,16 +190,54 @@
         "datastore_calls": [],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false,
+        "reached_by_test": true,
         "deps_result_used_in_response": 0,
         "deps_result_checked_by_test": 0,
         "response_links": null
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "parentids",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "Fails to provide a response",
+          "file": "api/v2_internal/notifications/notifications_count_test.go",
+          "labels": null,
+          "fields_set": [
+            "GroupBy"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Has a notification",
+          "file": "api/v2_internal/notifications/notifications_count_test.go",
+          "labels": null,
+          "fields_set": [
+            "GroupBy",
+            "ParentIds",
+            "Types"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "GetTotal",
+            "StatusCode"
+          ]
+        }
+      ]
     },
     {
       "rpc": "CreateInboxNotifications",
@@ -519,31 +574,50 @@
     },
     {
       "rpc": "GroupInboxNotifications",
-      "operation": "",
-      "tests": 0,
+      "operation": "NotificationsGroupPost",
+      "tests": 6,
       "status": {
-        "documented": null,
-        "asserted": [],
-        "missing": [],
-        "coverage_pct": 0
+        "documented": [
+          200,
+          400,
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "asserted": [
+          200,
+          400
+        ],
+        "missing": [
+          401,
+          403,
+          413,
+          429,
+          500,
+          503
+        ],
+        "coverage_pct": 25
       },
       "fields": {
         "leaf_fields_read_by_rpc": 17,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
-        "set_by_positive_tests": 0,
+        "covered_count": 4,
+        "coverage_pct": 23.5,
+        "request_fields_set_by_tests": 5,
+        "set_by_positive_tests": 4,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
             "total": 5,
-            "set": 0,
-            "pct": 0
+            "set": 1,
+            "pct": 20
           },
           "nested": {
             "total": 8,
-            "set": 0,
-            "pct": 0
+            "set": 3,
+            "pct": 37.5
           },
           "deep": {
             "total": 4,
@@ -553,13 +627,45 @@
         },
         "representative": {
           "units": 6,
-          "covered": 0,
-          "pct": 0,
+          "covered": 2,
+          "pct": 33.3,
           "collapsed_types": [
             "api.ListInboxNotificationsFilter"
           ]
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.Filter.Priorities",
+            "match": "exact",
+            "by_tests": [
+              "Should have a notification for the User"
+            ]
+          },
+          {
+            "path": "in.Filter.States",
+            "match": "exact",
+            "by_tests": [
+              "Should have a notification for the User"
+            ]
+          },
+          {
+            "path": "in.Filter.Types",
+            "match": "exact",
+            "by_tests": [
+              "Has a notification",
+              "Should have a notification for the User"
+            ]
+          },
+          {
+            "path": "in.GroupBy",
+            "match": "exact",
+            "by_tests": [
+              "Has a notification",
+              "Has multiple notifications",
+              "Should have a notification for the User"
+            ]
+          }
+        ],
         "gaps": [
           "in.Filter.ActorDons",
           "in.Filter.LastNotificationTimestamp.TimestampFrom",
@@ -568,12 +674,8 @@
           "in.Filter.ParentDons",
           "in.Filter.ParentTypeOp",
           "in.Filter.ParentTypes",
-          "in.Filter.Priorities",
-          "in.Filter.States",
-          "in.Filter.Types",
           "in.Filter.UserParticipationFilter.Activities",
           "in.Filter.UserParticipationFilter.Visibilities",
-          "in.GroupBy",
           "in.GroupSortBy",
           "in.PerGroup",
           "in.SortBy",
@@ -582,25 +684,25 @@
       },
       "branches": {
         "total": 19,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 9,
-        "present_arm_exercised": 0,
-        "present_arm_pct": 0,
-        "absent_arm_exercised": 0,
-        "absent_arm_pct": 0,
+        "present_arm_exercised": 1,
+        "present_arm_pct": 5.3,
+        "absent_arm_exercised": 9,
+        "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
-        "both_arms_exercised": 0,
-        "coverage_pct": 0,
+        "both_arms_exercised": 1,
+        "coverage_pct": 5.3,
         "by_origin": {
           "service": {
             "total": 9,
-            "reachable_on_happy_path": 0,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
+            "reachable_on_happy_path": 4,
+            "present_arm_exercised": 1,
+            "present_arm_pct": 11.1,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 0
+            "absent_arm_exercised": 4
           },
           "generated": {
             "total": 0,
@@ -613,12 +715,12 @@
           },
           "library": {
             "total": 10,
-            "reachable_on_happy_path": 0,
+            "reachable_on_happy_path": 5,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 0
+            "absent_arm_exercised": 5
           }
         },
         "gaps": [
@@ -766,14 +868,6 @@
             "predicate_paths": [
               "in.UserDon"
             ]
-          },
-          {
-            "id": "b19",
-            "at": "internal/service/inbox/service.go:110",
-            "cond": "in.GroupBy == \"\"",
-            "predicate_paths": [
-              "in.GroupBy"
-            ]
           }
         ]
       },
@@ -784,52 +878,147 @@
         ],
         "service_count": 0,
         "call_count": 0,
-        "reached_by_test": false,
+        "reached_by_test": true,
         "deps_result_used_in_response": 0,
         "deps_result_checked_by_test": 0,
         "response_links": null
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "parentids",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "Should have a notification for the User",
+          "file": "api/v2_internal/caterpillar/web_crawler_job_completion_test.go",
+          "labels": null,
+          "fields_set": [
+            "GroupBy",
+            "Priorities",
+            "States",
+            "Types"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Groups",
+            "Groups.Notifications",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Fails to provide a response",
+          "file": "api/v2_internal/notifications/notifications_group_test.go",
+          "labels": null,
+          "fields_set": null,
+          "statuses": [
+            400
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Has a notification",
+          "file": "api/v2_internal/notifications/notifications_group_test.go",
+          "labels": null,
+          "fields_set": [
+            "GroupBy",
+            "ParentIds",
+            "Types"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Groups",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Has a notification",
+          "file": "api/v2_internal/notifications/notifications_group_test.go",
+          "labels": null,
+          "fields_set": [
+            "GroupBy",
+            "ParentIds",
+            "Types"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Groups",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Has a notification",
+          "file": "api/v2_internal/notifications/notifications_group_test.go",
+          "labels": null,
+          "fields_set": [
+            "GroupBy",
+            "ParentIds",
+            "Types"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Groups",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Has multiple notifications",
+          "file": "api/v2_internal/notifications/notifications_group_test.go",
+          "labels": null,
+          "fields_set": [
+            "GroupBy",
+            "ParentIds"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Groups",
+            "StatusCode"
+          ]
+        }
+      ]
     },
     {
       "rpc": "ListInboxNotifications",
-      "operation": "NotificationsListPost",
-      "tests": 1,
+      "operation": "NotificationsList,NotificationsListPost",
+      "tests": 9,
       "status": {
-        "documented": [
-          200,
-          400,
-          401,
-          403,
-          413,
-          429,
-          500,
-          503
-        ],
+        "documented": null,
         "asserted": [
-          200
+          200,
+          201,
+          204,
+          400
         ],
-        "missing": [
-          400,
-          401,
-          403,
-          413,
-          429,
-          500,
-          503
-        ],
-        "coverage_pct": 12.5
+        "missing": [],
+        "coverage_pct": 0
       },
       "fields": {
         "leaf_fields_read_by_rpc": 14,
-        "covered_count": 0,
-        "coverage_pct": 0,
-        "request_fields_set_by_tests": 1,
-        "set_by_positive_tests": 0,
+        "covered_count": 2,
+        "coverage_pct": 14.3,
+        "request_fields_set_by_tests": 9,
+        "set_by_positive_tests": 2,
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
@@ -839,8 +1028,8 @@
           },
           "nested": {
             "total": 8,
-            "set": 0,
-            "pct": 0
+            "set": 2,
+            "pct": 25
           },
           "deep": {
             "total": 4,
@@ -850,13 +1039,30 @@
         },
         "representative": {
           "units": 3,
-          "covered": 0,
-          "pct": 0,
+          "covered": 1,
+          "pct": 33.3,
           "collapsed_types": [
             "api.ListInboxNotificationsFilter"
           ]
         },
-        "covered": null,
+        "covered": [
+          {
+            "path": "in.Filter.States",
+            "match": "exact",
+            "by_tests": [
+              "Marks all notification read based on parent id.",
+              "Marks only few notifications as read."
+            ]
+          },
+          {
+            "path": "in.Filter.Types",
+            "match": "exact",
+            "by_tests": [
+              "Has a notification",
+              "Marks only few notifications as read."
+            ]
+          }
+        ],
         "gaps": [
           "in.Filter.ActorDons",
           "in.Filter.LastNotificationTimestamp.TimestampFrom",
@@ -866,8 +1072,6 @@
           "in.Filter.ParentTypeOp",
           "in.Filter.ParentTypes",
           "in.Filter.Priorities",
-          "in.Filter.States",
-          "in.Filter.Types",
           "in.Filter.UserParticipationFilter.Activities",
           "in.Filter.UserParticipationFilter.Visibilities",
           "in.SortBy",
@@ -878,20 +1082,20 @@
         "total": 13,
         "happy_path_reached": true,
         "reachable_on_happy_path": 3,
-        "present_arm_exercised": 0,
-        "present_arm_pct": 0,
+        "present_arm_exercised": 2,
+        "present_arm_pct": 15.4,
         "absent_arm_exercised": 3,
         "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
-        "both_arms_exercised": 0,
-        "coverage_pct": 0,
+        "both_arms_exercised": 2,
+        "coverage_pct": 15.4,
         "by_origin": {
           "service": {
             "total": 8,
             "reachable_on_happy_path": 3,
-            "present_arm_exercised": 0,
-            "present_arm_pct": 0,
+            "present_arm_exercised": 2,
+            "present_arm_pct": 25,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
             "absent_arm_exercised": 3
@@ -916,14 +1120,6 @@
           }
         },
         "gaps": [
-          {
-            "id": "b1",
-            "at": "internal/infra/db/notification_repository.go:291",
-            "cond": "in.Filter == nil",
-            "predicate_paths": [
-              "in.Filter"
-            ]
-          },
           {
             "id": "b2",
             "at": "internal/infra/db/notification_repository.go:369",
@@ -1005,14 +1201,6 @@
             ]
           },
           {
-            "id": "b12",
-            "at": "internal/infra/db/notification_repository.go:243",
-            "cond": "in.Filter != nil",
-            "predicate_paths": [
-              "in.Filter"
-            ]
-          },
-          {
             "id": "b13",
             "at": "internal/service/inbox/service.go:100",
             "cond": "in.UserDon == nil",
@@ -1037,12 +1225,55 @@
       "anomalies": {
         "unmatched_test_fields": [
           {
+            "field": "filter",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "mode",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "object",
+            "fuzzy_suggestions": null
+          },
+          {
             "field": "parentids",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "state",
+            "fuzzy_suggestions": [
+              "in.Filter.States"
+            ]
+          },
+          {
+            "field": "type",
+            "fuzzy_suggestions": [
+              "in.Filter.ParentTypeOp",
+              "in.Filter.ParentTypes",
+              "in.Filter.Types"
+            ]
+          },
+          {
+            "field": "visibility",
             "fuzzy_suggestions": null
           }
         ]
       },
       "test_facts": [
+        {
+          "name": "should allow Rev User to access notifications.list",
+          "file": "api/v2_internal/gateway/rev_user_allowlist_test.go",
+          "labels": null,
+          "fields_set": null,
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
         {
           "name": "should get notification for submission",
           "file": "api/v2_internal/marketplace_consumer/marketplace_consumer_test.go",
@@ -1058,16 +1289,147 @@
             "Notifications",
             "StatusCode"
           ]
+        },
+        {
+          "name": "Fails to provide a response",
+          "file": "api/v2_internal/notifications/notifications_list_test.go",
+          "labels": null,
+          "fields_set": [
+            "Mode"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Has a notification",
+          "file": "api/v2_internal/notifications/notifications_list_test.go",
+          "labels": null,
+          "fields_set": [
+            "ParentIds",
+            "Types"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Notifications",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Has a notification",
+          "file": "api/v2_internal/notifications/notifications_list_test.go",
+          "labels": null,
+          "fields_set": [
+            "ParentIds",
+            "Types"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Notifications",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Has a notification",
+          "file": "api/v2_internal/notifications/notifications_list_test.go",
+          "labels": null,
+          "fields_set": [
+            "ParentIds",
+            "Types"
+          ],
+          "statuses": [
+            200
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Notifications",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Marks all notification read based on parent id.",
+          "file": "api/v2_internal/notifications/notifications_mark_test.go",
+          "labels": null,
+          "fields_set": [
+            "Filter",
+            "ParentIds",
+            "State",
+            "States"
+          ],
+          "statuses": [
+            200,
+            204
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Notifications",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Marks only few notifications as read.",
+          "file": "api/v2_internal/notifications/notifications_mark_test.go",
+          "labels": null,
+          "fields_set": [
+            "Filter",
+            "ParentIds",
+            "State",
+            "States",
+            "Types"
+          ],
+          "statuses": [
+            200,
+            204
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Notifications",
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Rev user should receive notifications for comments on all 4 tickets across workspaces",
+          "file": "api/v2_internal/notifications/notifications_multiworkspace_test.go",
+          "labels": null,
+          "fields_set": [
+            "Object",
+            "ParentIds",
+            "Type",
+            "Visibility"
+          ],
+          "statuses": [
+            200,
+            201
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "Notifications",
+            "StatusCode"
+          ]
         }
       ]
     },
     {
       "rpc": "MarkInboxNotifications",
-      "operation": "",
-      "tests": 0,
+      "operation": "NotificationsMark,UserInteractionsUpdate",
+      "tests": 3,
       "status": {
         "documented": null,
-        "asserted": [],
+        "asserted": [
+          400,
+          401,
+          403
+        ],
         "missing": [],
         "coverage_pct": 0
       },
@@ -1075,7 +1437,7 @@
         "leaf_fields_read_by_rpc": 2,
         "covered_count": 0,
         "coverage_pct": 0,
-        "request_fields_set_by_tests": 0,
+        "request_fields_set_by_tests": 3,
         "set_by_positive_tests": 0,
         "set_by_negative_tests": 0,
         "by_depth": {
@@ -1109,7 +1471,7 @@
       },
       "branches": {
         "total": 1,
-        "happy_path_reached": false,
+        "happy_path_reached": true,
         "reachable_on_happy_path": 0,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
@@ -1171,16 +1533,83 @@
         "datastore_calls": [],
         "service_count": 1,
         "call_count": 1,
-        "reached_by_test": false,
+        "reached_by_test": true,
         "deps_result_used_in_response": 0,
         "deps_result_checked_by_test": 0,
         "response_links": null
       },
       "anomalies": {
-        "unmatched_test_fields": null
+        "unmatched_test_fields": [
+          {
+            "field": "filter",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "recordid",
+            "fuzzy_suggestions": null
+          },
+          {
+            "field": "state",
+            "fuzzy_suggestions": null
+          }
+        ]
       },
-      "test_facts": null,
-      "unmapped": true
+      "test_facts": [
+        {
+          "name": "Fails as a priority is wrong",
+          "file": "api/v2_internal/notifications/notifications_mark_test.go",
+          "labels": null,
+          "fields_set": [
+            "Filter",
+            "State"
+          ],
+          "statuses": [
+            400
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Updates user interactions via internal API",
+          "file": "e2e/smoke_test_case/user_interactions_test/user_interactions_test.go",
+          "labels": [
+            "SMOKE",
+            "INTERNAL_USER_INTERACTIONS_UPDATE"
+          ],
+          "fields_set": [
+            "RecordId"
+          ],
+          "statuses": [
+            401,
+            403
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        },
+        {
+          "name": "Validates user interactions API with authentication",
+          "file": "e2e/smoke_test_case/user_interactions_test/user_interactions_test.go",
+          "labels": [
+            "SMOKE",
+            "INTERNAL_USER_INTERACTIONS_UPDATE"
+          ],
+          "fields_set": [
+            "RecordId"
+          ],
+          "statuses": [
+            401,
+            403
+          ],
+          "asserts_success": true,
+          "response_fields_asserted": [
+            "StatusCode"
+          ]
+        }
+      ]
     },
     {
       "rpc": "UpdateInboxNotifications",

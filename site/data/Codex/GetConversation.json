@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "GetConversation",
     "operation": "ConversationsGet",
-    "tests": 1,
+    "tests": 5,
     "status": {
       "documented": [
         200,
@@ -17,27 +17,27 @@
         503
       ],
       "asserted": [
-        200
+        200,
+        403
       ],
       "missing": [
         400,
         401,
-        403,
         404,
         413,
         429,
         500,
         503
       ],
-      "coverage_pct": 11.1
+      "coverage_pct": 22.2
     },
     "fields": {
       "leaf_fields_read_by_rpc": 3,
       "covered_count": 1,
       "coverage_pct": 33.3,
-      "request_fields_set_by_tests": 1,
+      "request_fields_set_by_tests": 3,
       "set_by_positive_tests": 1,
-      "set_by_negative_tests": 0,
+      "set_by_negative_tests": 1,
       "by_depth": {
         "top_level": {
           "total": 3,
@@ -66,7 +66,11 @@
           "path": "in.Id",
           "match": "exact",
           "by_tests": [
-            "Dev User should able to get all conversations"
+            "Dev User should able to get all conversations",
+            "Other Rev User from same RevOrg should not able to get conversation",
+            "Should be able to get conversation object for 1st RevUser",
+            "Should be able to get conversation object for 2nd RevUser",
+            "rev user should be able to create and update a conversation, and retain access"
           ]
         }
       ],
@@ -83,8 +87,8 @@
       "present_arm_pct": 33.3,
       "absent_arm_exercised": 5,
       "absent_arm_pct": 62.5,
-      "negative_arm_exercised": 0,
-      "negative_arm_pct": 0,
+      "negative_arm_exercised": 3,
+      "negative_arm_pct": 33.3,
       "both_arms_exercised": 0,
       "coverage_pct": 33.3,
       "by_origin": {
@@ -102,8 +106,8 @@
           "reachable_on_happy_path": 4,
           "present_arm_exercised": 2,
           "present_arm_pct": 50,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "negative_arm_exercised": 2,
+          "negative_arm_pct": 50,
           "absent_arm_exercised": 2
         },
         "library": {
@@ -111,8 +115,8 @@
           "reachable_on_happy_path": 2,
           "present_arm_exercised": 1,
           "present_arm_pct": 50,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "negative_arm_exercised": 1,
+          "negative_arm_pct": 50,
           "absent_arm_exercised": 1
         }
       },
@@ -188,44 +192,118 @@
       "call_count": 3,
       "reached_by_test": true,
       "deps_result_used_in_response": 5,
-      "deps_result_checked_by_test": 0,
+      "deps_result_checked_by_test": 5,
       "response_links": [
         {
           "dep": "schemaregistry:GetUpgradeInstructionsV2",
           "path": "out.Conversation",
-          "checked_by": null,
-          "checked": false
+          "checked_by": [
+            "rev user should be able to create and update a conversation, and retain access"
+          ],
+          "checked": true
         },
         {
           "dep": "schemaregistry:GetUpgradeInstructionsV2",
           "path": "out.Conversation.DevOid",
-          "checked_by": null,
-          "checked": false
+          "checked_by": [
+            "rev user should be able to create and update a conversation, and retain access"
+          ],
+          "checked": true
         },
         {
           "dep": "schemaregistry:GetUpgradeInstructionsV2",
           "path": "out.Conversation.DisplayId",
-          "checked_by": null,
-          "checked": false
+          "checked_by": [
+            "rev user should be able to create and update a conversation, and retain access"
+          ],
+          "checked": true
         },
         {
           "dep": "schemaregistry:GetUpgradeInstructionsV2",
           "path": "out.Conversation.ObjectType",
-          "checked_by": null,
-          "checked": false
+          "checked_by": [
+            "rev user should be able to create and update a conversation, and retain access"
+          ],
+          "checked": true
         },
         {
           "dep": "schemaregistry:GetUpgradeInstructionsV2",
           "path": "out.Conversation.ObjectVersion",
-          "checked_by": null,
-          "checked": false
+          "checked_by": [
+            "rev user should be able to create and update a conversation, and retain access"
+          ],
+          "checked": true
         }
       ]
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "description",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "title",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
     "test_facts": [
+      {
+        "name": "Should be able to get conversation object for 1st RevUser",
+        "file": "api/v2_internal/conversations/get_conversation_test.go",
+        "labels": [
+          "POSITIVE",
+          "NON_LOCAL",
+          "GINKGO_PR_SANITY"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Should be able to get conversation object for 2nd RevUser",
+        "file": "api/v2_internal/conversations/get_conversation_test.go",
+        "labels": [
+          "POSITIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Other Rev User from same RevOrg should not able to get conversation",
+        "file": "api/v2_internal/conversations/get_conversation_test.go",
+        "labels": [
+          "NEGATIVE",
+          "NON_LOCAL"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          403
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
       {
         "name": "Dev User should able to get all conversations",
         "file": "api/v2_internal/conversations/get_conversation_test.go",
@@ -242,6 +320,24 @@
         "asserts_success": true,
         "response_fields_asserted": [
           "StatusCode"
+        ]
+      },
+      {
+        "name": "rev user should be able to create and update a conversation, and retain access",
+        "file": "api/v2_internal/conversations/mfz/conversation_revuser_access_test.go",
+        "labels": [
+          "INTERNAL_CONVERSATIONS_CREATE"
+        ],
+        "fields_set": [
+          "Description",
+          "Id",
+          "Title"
+        ],
+        "statuses": null,
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "Conversation",
+          "Conversation.Id"
         ]
       }
     ]
@@ -392,5 +488,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetConversation` (HTTP operation `ConversationsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in != nil\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetConversation` (HTTP operation `ConversationsGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevOid\n  - in.UpdateCache\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevOid == nil\n  - in.DevOid == nil\n  - in.DevOid\n  - in.DevOid == nil\n  - in != nil\n  - in.UpdateCache\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `title` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

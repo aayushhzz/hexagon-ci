@@ -2,26 +2,46 @@
   "service": "Janus",
   "coverage": {
     "rpc": "DeleteDevUserHighlight",
-    "operation": "",
-    "tests": 0,
+    "operation": "DevUsersHighlightDelete",
+    "tests": 1,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        201,
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200,
+        201
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 12.5
     },
     "fields": {
       "leaf_fields_read_by_rpc": 2,
-      "covered_count": 0,
-      "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
-      "set_by_positive_tests": 0,
+      "covered_count": 1,
+      "coverage_pct": 50,
+      "request_fields_set_by_tests": 3,
+      "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
           "total": 2,
-          "set": 0,
-          "pct": 0
+          "set": 1,
+          "pct": 50
         },
         "nested": {
           "total": 0,
@@ -36,55 +56,62 @@
       },
       "representative": {
         "units": 2,
-        "covered": 0,
-        "pct": 0,
+        "covered": 1,
+        "pct": 50,
         "collapsed_types": []
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.HighlightId",
+          "match": "exact",
+          "by_tests": [
+            "Create and Delete DevUser highlights"
+          ]
+        }
+      ],
       "gaps": [
-        "in.DevUserId",
-        "in.HighlightId"
+        "in.DevUserId"
       ]
     },
     "branches": {
       "total": 7,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 6,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
+      "present_arm_exercised": 1,
+      "present_arm_pct": 14.3,
+      "absent_arm_exercised": 5,
+      "absent_arm_pct": 83.3,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 14.3,
       "by_origin": {
         "service": {
           "total": 3,
-          "reachable_on_happy_path": 0,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 2,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 33.3,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 1
         },
         "generated": {
           "total": 2,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 2,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 2
         },
         "library": {
           "total": 2,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 2,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 2
         }
       },
       "gaps": [
@@ -135,14 +162,6 @@
           "predicate_paths": [
             "in.DevUserId"
           ]
-        },
-        {
-          "id": "b7",
-          "at": "internal/service/devuser.go:3756",
-          "cond": "**t73 != in.HighlightId",
-          "predicate_paths": [
-            "in.HighlightId"
-          ]
         }
       ]
     },
@@ -164,16 +183,52 @@
       ],
       "service_count": 1,
       "call_count": 2,
-      "reached_by_test": false,
+      "reached_by_test": true,
       "deps_result_used_in_response": 0,
       "deps_result_checked_by_test": 0,
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "highlight",
+          "fuzzy_suggestions": [
+            "in.HighlightId"
+          ]
+        },
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "Create and Delete DevUser highlights",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEVUSERS_HIGHLIGHTS_CREATE",
+          "INTERNAL_DEVUSERS_HIGHLIGHTS_DELETE",
+          "INTERNAL_DEVUSERS_SELF"
+        ],
+        "fields_set": [
+          "Highlight",
+          "HighlightId",
+          "Id"
+        ],
+        "statuses": [
+          200,
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevUser",
+          "DevUser.Highlights",
+          "DevUser.Highlights.Message",
+          "StatusCode"
+        ]
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/janus/internal/service.Janus).DeleteDevUserHighlight",
@@ -287,5 +342,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteDevUserHighlight` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUserId\n  - in.HighlightId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUserId == nil\n  - in.DevUserId == nil\n  - in.DevUserId\n  - in.DevUserId == \"\"\n  - in != nil\n  - in.DevUserId != *t13\n  - **t73 != in.HighlightId\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errCacheUnavailable\n  - errInternalCacheTransientError\n  - errReadingMongoCollection\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeleteDevUserHighlight` (HTTP operation `DevUsersHighlightDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUserId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUserId == nil\n  - in.DevUserId == nil\n  - in.DevUserId\n  - in.DevUserId == \"\"\n  - in != nil\n  - in.DevUserId != *t13\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errCacheUnavailable\n  - errInternalCacheTransientError\n  - errReadingMongoCollection\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `highlight` -> suggestions ['in.HighlightId']\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

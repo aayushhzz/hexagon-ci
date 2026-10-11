@@ -2,26 +2,45 @@
   "service": "Janus",
   "coverage": {
     "rpc": "CreateShadowDevUser",
-    "operation": "",
-    "tests": 0,
+    "operation": "DevUsersCreate",
+    "tests": 1,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        201,
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        201
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 12.5
     },
     "fields": {
       "leaf_fields_read_by_rpc": 18,
-      "covered_count": 0,
-      "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
-      "set_by_positive_tests": 0,
+      "covered_count": 3,
+      "coverage_pct": 16.7,
+      "request_fields_set_by_tests": 3,
+      "set_by_positive_tests": 3,
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
           "total": 10,
-          "set": 0,
-          "pct": 0
+          "set": 3,
+          "pct": 30
         },
         "nested": {
           "total": 4,
@@ -36,15 +55,37 @@
       },
       "representative": {
         "units": 16,
-        "covered": 0,
-        "pct": 0,
+        "covered": 3,
+        "pct": 18.8,
         "collapsed_types": [
           "api.CreateDevrevCopy",
           "api.CreateExternalSourceDataComp",
           "api.CustomSchemaSpec"
         ]
       },
-      "covered": null,
+      "covered": [
+        {
+          "path": "in.Email",
+          "match": "exact",
+          "by_tests": [
+            "DevUsers Create"
+          ]
+        },
+        {
+          "path": "in.FullName",
+          "match": "exact",
+          "by_tests": [
+            "DevUsers Create"
+          ]
+        },
+        {
+          "path": "in.State",
+          "match": "exact",
+          "by_tests": [
+            "DevUsers Create"
+          ]
+        }
+      ],
       "gaps": [
         "in.AggregateErrors",
         "in.CustomSchemaSpec.Drop",
@@ -52,59 +93,56 @@
         "in.DevrevCopy.OriginId.Id",
         "in.DevrevCopy.OriginOrgId.Id",
         "in.DisplayNamePrefix",
-        "in.Email",
         "in.ExternalIdentities",
         "in.ExternalSourceData.CreatedById.Id",
         "in.ExternalSourceData.ModifiedById.Id",
-        "in.FullName",
         "in.IngestionSource",
         "in.PhoneNumbers",
         "in.ReportsToId",
         "in.StagedInfo.SyncInUnresolvedFields",
         "in.StagedInfo.SyncOutUnresolvedFields",
-        "in.State",
         "in.SyncMetadata.SyncedByDevUsers"
       ]
     },
     "branches": {
       "total": 44,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 27,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
+      "present_arm_exercised": 7,
+      "present_arm_pct": 15.9,
+      "absent_arm_exercised": 20,
+      "absent_arm_pct": 74.1,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 15.9,
       "by_origin": {
         "service": {
           "total": 16,
-          "reachable_on_happy_path": 0,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 14,
+          "present_arm_exercised": 7,
+          "present_arm_pct": 43.8,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 7
         },
         "generated": {
           "total": 21,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 12,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 12
         },
         "library": {
           "total": 7,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 1,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 1
         }
       },
       "gaps": [
@@ -333,22 +371,6 @@
           ]
         },
         {
-          "id": "b29",
-          "at": "internal/service/utils.go:70",
-          "cond": "in.FullName == \"\"",
-          "predicate_paths": [
-            "in.FullName"
-          ]
-        },
-        {
-          "id": "b30",
-          "at": "internal/service/utils.go:74",
-          "cond": "in.FullName",
-          "predicate_paths": [
-            "in.FullName"
-          ]
-        },
-        {
           "id": "b31",
           "at": "internal/service/utils.go:70",
           "cond": "in.DisplayNamePrefix == \"\"",
@@ -389,14 +411,6 @@
           ]
         },
         {
-          "id": "b36",
-          "at": "internal/service/devuser_validations.go:252",
-          "cond": "in.Email == \"\"",
-          "predicate_paths": [
-            "in.Email"
-          ]
-        },
-        {
           "id": "b37",
           "at": "internal/service/devuser_validations.go:271",
           "cond": "in.AggregateErrors",
@@ -413,43 +427,11 @@
           ]
         },
         {
-          "id": "b39",
-          "at": "internal/service/devuser.go:1042",
-          "cond": "in.State == 6",
-          "predicate_paths": [
-            "in.State"
-          ]
-        },
-        {
-          "id": "b40",
-          "at": "internal/service/devuser.go:1043",
-          "cond": "in.State == 5",
-          "predicate_paths": [
-            "in.State"
-          ]
-        },
-        {
           "id": "b41",
           "at": "internal/service/devuser.go:733",
           "cond": "in != nil",
           "predicate_paths": [
             "in"
-          ]
-        },
-        {
-          "id": "b42",
-          "at": "internal/service/devuser.go:846",
-          "cond": "in.State",
-          "predicate_paths": [
-            "in.State"
-          ]
-        },
-        {
-          "id": "b43",
-          "at": "internal/service/devuser.go:853",
-          "cond": "in.FullName != \"\"",
-          "predicate_paths": [
-            "in.FullName"
           ]
         },
         {
@@ -478,7 +460,7 @@
       ],
       "service_count": 1,
       "call_count": 1,
-      "reached_by_test": false,
+      "reached_by_test": true,
       "deps_result_used_in_response": 0,
       "deps_result_checked_by_test": 0,
       "response_links": null
@@ -486,8 +468,32 @@
     "anomalies": {
       "unmatched_test_fields": null
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "DevUsers Create",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEVUSERS_CREATE"
+        ],
+        "fields_set": [
+          "Email",
+          "FullName",
+          "State"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "DevUser",
+          "DevUser.Email",
+          "DevUser.FullName",
+          "DevUser.Id",
+          "DevUser.State",
+          "StatusCode"
+        ]
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/janus/internal/service.Janus).CreateShadowDevUser",
@@ -622,5 +628,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateShadowDevUser` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AggregateErrors\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.DevrevCopy.OriginId.Id\n  - in.DevrevCopy.OriginOrgId.Id\n  - in.DisplayNamePrefix\n  - in.Email\n  - in.ExternalIdentities\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.FullName\n  - in.IngestionSource\n  - in.PhoneNumbers\n  - in.ReportsToId\n  - in.StagedInfo.SyncInUnresolvedFields\n  - in.StagedInfo.SyncOutUnresolvedFields\n  - in.State\n  - in.SyncMetadata.SyncedByDevUsers\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.CreatedById != nil\n  - in.ExternalSourceData.ModifiedById != nil\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.ReportsToId == nil\n  - in.DevrevCopy.OriginId != nil\n  - in.DevrevCopy.OriginOrgId != nil\n  - in.DevrevCopy.OriginOrgId.Id\n  - in.SyncMetadata != nil\n  - in.SyncMetadata != nil\n  - in.StagedInfo != nil\n  - in.StagedInfo != nil\n  - in.ExternalSourceData != nil\n  - in.ExternalSourceData != nil\n  - in.CustomSchemaSpec != nil\n  - in.CustomSchemaSpec != nil\n  - in.ReportsToId != nil\n  - in.DevrevCopy != nil\n  - in.ReportsToId\n  - in.DevrevCopy != nil\n  - in.FullName == \"\"\n  - in.FullName\n  - in.DisplayNamePrefix == \"\"\n  - in.DisplayNamePrefix\n  - in.AggregateErrors\n  - in.DevOid == \"\"\n  - in.AggregateErrors\n  - in.Email == \"\"\n  - in.AggregateErrors\n  - in\n  - in.State == 6\n  - in.State == 5\n  - (+4 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrAuthContextNotFound\n  - ErrParseServiceContext\n  - ErrParseUserContext\n  - ErrServiceContextNotFound\n  - ErrUserContextNotFound\n  - ObjectTypeInvalid\n  - errDevOrgNotFound\n  - errInternalServiceError\n  - errInvalidAuthContextDevOid\n  - errInvalidInputEmail\n  - errInvalidRequestBody\n  - errInvalidStateForShadowUserCreation\n  - errPhoneNumberInvalid\n  - errUserNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateShadowDevUser` (HTTP operation `DevUsersCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.AggregateErrors\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.DevrevCopy.OriginId.Id\n  - in.DevrevCopy.OriginOrgId.Id\n  - in.DisplayNamePrefix\n  - in.ExternalIdentities\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.IngestionSource\n  - in.PhoneNumbers\n  - in.ReportsToId\n  - in.StagedInfo.SyncInUnresolvedFields\n  - in.StagedInfo.SyncOutUnresolvedFields\n  - in.SyncMetadata.SyncedByDevUsers\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.ExternalSourceData.CreatedById != nil\n  - in.ExternalSourceData.ModifiedById != nil\n  - in.ExternalSourceData.CreatedById.Id\n  - in.ExternalSourceData.ModifiedById.Id\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.ReportsToId == nil\n  - in.DevrevCopy.OriginId != nil\n  - in.DevrevCopy.OriginOrgId != nil\n  - in.DevrevCopy.OriginOrgId.Id\n  - in.SyncMetadata != nil\n  - in.SyncMetadata != nil\n  - in.StagedInfo != nil\n  - in.StagedInfo != nil\n  - in.ExternalSourceData != nil\n  - in.ExternalSourceData != nil\n  - in.CustomSchemaSpec != nil\n  - in.CustomSchemaSpec != nil\n  - in.ReportsToId != nil\n  - in.DevrevCopy != nil\n  - in.ReportsToId\n  - in.DevrevCopy != nil\n  - in.DisplayNamePrefix == \"\"\n  - in.DisplayNamePrefix\n  - in.AggregateErrors\n  - in.DevOid == \"\"\n  - in.AggregateErrors\n  - in.AggregateErrors\n  - in\n  - in != nil\n  - in.ReportsToId != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrAuthContextNotFound\n  - ErrParseServiceContext\n  - ErrParseUserContext\n  - ErrServiceContextNotFound\n  - ErrUserContextNotFound\n  - ObjectTypeInvalid\n  - errDevOrgNotFound\n  - errInternalServiceError\n  - errInvalidAuthContextDevOid\n  - errInvalidInputEmail\n  - errInvalidRequestBody\n  - errInvalidStateForShadowUserCreation\n  - errPhoneNumberInvalid\n  - errUserNotFound\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

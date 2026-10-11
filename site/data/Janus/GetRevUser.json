@@ -2,34 +2,19 @@
   "service": "Janus",
   "coverage": {
     "rpc": "GetRevUser",
-    "operation": "RevUsersGet",
-    "tests": 3,
+    "operation": "RevUsersGet,RevUsersGetPost",
+    "tests": 11,
     "status": {
-      "documented": [
+      "documented": null,
+      "asserted": [
         200,
         400,
         401,
         403,
-        404,
-        413,
-        429,
-        500,
-        503
+        404
       ],
-      "asserted": [
-        200,
-        400
-      ],
-      "missing": [
-        401,
-        403,
-        404,
-        413,
-        429,
-        500,
-        503
-      ],
-      "coverage_pct": 22.2
+      "missing": [],
+      "coverage_pct": 0
     },
     "fields": {
       "leaf_fields_read_by_rpc": 8,
@@ -472,6 +457,47 @@
     },
     "test_facts": [
       {
+        "name": "Get a RevUser",
+        "file": "api/v2_internal/identity_flows/rev_users_api_test.go",
+        "labels": [
+          "INTERNAL_REVUSERS_GET"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "RevUser",
+          "RevUser.AssociationsMetadata",
+          "RevUser.AssociationsMetadata.FirstAssociation",
+          "RevUser.AssociationsMetadata.FirstAssociation.AsAccountSummary",
+          "RevUser.GetId",
+          "RevUser.RevOrg",
+          "RevUser.RevOrg.AsRevOrgSummary",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Delete a RevUser",
+        "file": "api/v2_internal/identity_flows/rev_users_api_test.go",
+        "labels": [
+          "INTERNAL_REVUSERS_DELETE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          404
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
         "name": "WithOnlyRequiredFields",
         "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
         "labels": null,
@@ -513,6 +539,100 @@
         "response_fields_asserted": [
           "StatusCode"
         ]
+      },
+      {
+        "name": "401WrongPat",
+        "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          401
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "401ByInvalidPat",
+        "file": "api/v2_internal/rev_users/crud/get_rev_users_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          401
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Delete rev user with shared_with set \u2014 returns 200; members can no longer get it",
+        "file": "api/v2_internal/rev_users/shared_with/rev_user_shared_with_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Manages rev users through API operations",
+        "file": "e2e/smoke_test_case/identity_management/rev_users_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_REVUSERS_GET",
+          "INTERNAL_REVUSERS_IDENTIFY",
+          "INTERNAL_REVUSERS_SELF_GET",
+          "INTERNAL_REVUSERS_SELF_UPDATE"
+        ],
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "RevUser",
+          "RevUser.Id",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Rev users get by revuser with default revorg token",
+        "file": "api/v2_internal/rev_users/crudl_revu_actor/rev_users_get_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200,
+          403
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": null
+      },
+      {
+        "name": "Rev users get by revuser with non default revorg token",
+        "file": "api/v2_internal/rev_users/crudl_revu_actor/rev_users_get_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200,
+          403
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": null
       }
     ]
   },
@@ -589,5 +709,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetRevUser` (HTTP operation `RevUsersGet`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IncludeArchived\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n  - in.ResolvePrimary\n  - in.UserIdentifier.UserDon\n  - in.UserIdentifier.UserExternalId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon\n  - in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgDon\n  - in.UserIdentifier == nil\n  - in.UserIdentifier != nil\n  - in.OrgIdentifier != nil\n  - in.OrgIdentifier != nil\n  - in.UserIdentifier.UserDon == \"\"\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.OrgIdentifier.OrgExternalIdIssuer\n  - in.UserIdentifier.UserDon != nil\n  - in.ResolvePrimary\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier != nil\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon == nil\n  - in != nil\n  - in.ResolvePrimary\n  - in.UserIdentifier.UserDon != nil\n  - in.IncludeArchived\n  - in.OrgIdentifier != nil\n  - in.UserIdentifier.UserDon != tools.GetDevOidFromDON()\n  - in.OrgIdentifier == nil\n  - in.ResolvePrimary\n  - in.IncludeArchived\n  - in.OrgIdentifier.OrgDisplayId != \"\"\n  - in.IncludeArchived\n  - in.OrgIdentifier.OrgExternalId != \"\"\n  - in.OrgIdentifier.OrgDon != nil\n  - in.ResolvePrimary\n  - in.IncludeArchived\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInvalidRevOrgFilter\n  - errRevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetRevUser` (HTTP operation `RevUsersGet,RevUsersGetPost`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.IncludeArchived\n  - in.OrgIdentifier.OrgDisplayId\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier.OrgExternalId\n  - in.OrgIdentifier.OrgExternalIdIssuer\n  - in.ResolvePrimary\n  - in.UserIdentifier.UserDon\n  - in.UserIdentifier.UserExternalId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon != nil\n  - in.UserIdentifier.UserDon\n  - in.OrgIdentifier.OrgDon == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgDon\n  - in.UserIdentifier == nil\n  - in.UserIdentifier != nil\n  - in.OrgIdentifier != nil\n  - in.OrgIdentifier != nil\n  - in.UserIdentifier.UserDon == \"\"\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier == nil\n  - in.OrgIdentifier.OrgDon != nil\n  - in.OrgIdentifier.OrgExternalIdIssuer != \"\"\n  - **t51 == in.OrgIdentifier.OrgExternalIdIssuer\n  - **t68 == in.OrgIdentifier.OrgExternalIdIssuer\n  - in.UserIdentifier.UserDon != nil\n  - in.ResolvePrimary\n  - in.OrgIdentifier.OrgDon\n  - in.OrgIdentifier != nil\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon == nil\n  - in != nil\n  - in.ResolvePrimary\n  - in.UserIdentifier.UserDon != nil\n  - in.IncludeArchived\n  - in.OrgIdentifier != nil\n  - in.UserIdentifier.UserDon != tools.GetDevOidFromDON()\n  - in.OrgIdentifier == nil\n  - in.ResolvePrimary\n  - in.IncludeArchived\n  - in.OrgIdentifier.OrgDisplayId != \"\"\n  - in.IncludeArchived\n  - in.OrgIdentifier.OrgExternalId != \"\"\n  - in.OrgIdentifier.OrgDon != nil\n  - in.ResolvePrimary\n  - in.IncludeArchived\n  - in.UserIdentifier.UserDon == nil\n  - in.UserIdentifier.UserDon != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errInvalidRevOrgFilter\n  - errRevOrgNotFound\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

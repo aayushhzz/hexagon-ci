@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "GroupWorks",
     "operation": "WorksGroupPost",
-    "tests": 4,
+    "tests": 6,
     "status": {
       "documented": [
         200,
@@ -68,6 +68,8 @@
           "path": "in.GroupBy",
           "match": "exact",
           "by_tests": [
+            "Development team coordinates issue resolution",
+            "Support team manages customer tickets throughout resolution process",
             "should create tickets and group by parts without sorting",
             "should create tickets with multiple owners, group them, and verify group order",
             "should create tickets, group by parts, and sort by created date",
@@ -1776,6 +1778,8 @@
           "dep": "wisp:GroupSearch",
           "path": "out.Groups",
           "checked_by": [
+            "Development team coordinates issue resolution",
+            "Support team manages customer tickets throughout resolution process",
             "should create tickets and group by parts without sorting",
             "should create tickets with multiple owners, group them, and verify group order",
             "should create tickets, group by parts, and sort by created date",
@@ -1861,6 +1865,52 @@
       ]
     },
     "test_facts": [
+      {
+        "name": "Development team coordinates issue resolution",
+        "file": "e2e/smoke_test_case/works_management/works_issues_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_WORKS_COUNT",
+          "INTERNAL_WORKS_GROUP"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "GetCount",
+          "Groups",
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "Support team manages customer tickets throughout resolution process",
+        "file": "e2e/smoke_test_case/works_management/works_tickets_test.go",
+        "labels": [
+          "SMOKE",
+          "INTERNAL_WORKS_LIST",
+          "INTERNAL_WORKS_COUNT"
+        ],
+        "fields_set": [
+          "GroupBy",
+          "Limit",
+          "Type"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "GetCount",
+          "Groups",
+          "StatusCode",
+          "Works"
+        ]
+      },
       {
         "name": "should groupby stage and verify tickets",
         "file": "e2e/ticktes_user_journey/tickets_grouping_userjourney_test.go",

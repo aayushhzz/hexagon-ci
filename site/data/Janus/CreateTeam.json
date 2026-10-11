@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "CreateTeam",
     "operation": "TeamsCreate",
-    "tests": 1,
+    "tests": 13,
     "status": {
       "documented": [
         201,
@@ -17,37 +17,37 @@
         503
       ],
       "asserted": [
-        201
+        201,
+        400,
+        403,
+        409
       ],
       "missing": [
-        400,
         401,
-        403,
-        409,
         413,
         429,
         500,
         503
       ],
-      "coverage_pct": 11.1
+      "coverage_pct": 44.4
     },
     "fields": {
       "leaf_fields_read_by_rpc": 35,
-      "covered_count": 1,
-      "coverage_pct": 2.9,
-      "request_fields_set_by_tests": 2,
-      "set_by_positive_tests": 1,
-      "set_by_negative_tests": 0,
+      "covered_count": 4,
+      "coverage_pct": 11.4,
+      "request_fields_set_by_tests": 5,
+      "set_by_positive_tests": 3,
+      "set_by_negative_tests": 2,
       "by_depth": {
         "top_level": {
           "total": 1,
-          "set": 0,
-          "pct": 0
+          "set": 1,
+          "pct": 100
         },
         "nested": {
           "total": 7,
-          "set": 1,
-          "pct": 14.3
+          "set": 3,
+          "pct": 42.9
         },
         "deep": {
           "total": 27,
@@ -57,8 +57,8 @@
       },
       "representative": {
         "units": 27,
-        "covered": 1,
-        "pct": 3.7,
+        "covered": 4,
+        "pct": 14.8,
         "collapsed_types": [
           "api.CreateDevrevCopy",
           "api.CreateExternalSourceDataComp",
@@ -69,10 +69,43 @@
       },
       "covered": [
         {
+          "path": "in.DryRun",
+          "match": "exact",
+          "by_tests": [
+            "DryRunCreateInvalidKey"
+          ]
+        },
+        {
+          "path": "in.Team.Description",
+          "match": "exact",
+          "by_tests": [
+            "WithNameAndDescription"
+          ]
+        },
+        {
           "path": "in.Team.Key",
           "match": "exact",
           "by_tests": [
-            "GroupCanBecomeTeamAfterHierarchyEstablished"
+            "CreateFailsWhenSpaceManagementDisabled",
+            "DryRunCreateInvalidKey",
+            "GroupCanBecomeTeamAfterHierarchyEstablished",
+            "NoAccessUserCannotCreate",
+            "RegularUserCannotCreate",
+            "WithDuplicateGroup",
+            "WithDuplicateKey",
+            "WithGroupID",
+            "WithInvalidKeyFormatLowercase",
+            "WithInvalidKeyFormatTooLong",
+            "WithInvalidKeyFormatTooShort",
+            "WithMissingGroup",
+            "WithNameAndDescription"
+          ]
+        },
+        {
+          "path": "in.Team.Name",
+          "match": "exact",
+          "by_tests": [
+            "WithNameAndDescription"
           ]
         }
       ],
@@ -80,9 +113,7 @@
         "in.CustomSchemaSpec.Drop",
         "in.CustomSchemaSpec.TenantFragment",
         "in.CustomSchemaSpec.ValidateRequiredFields",
-        "in.DryRun",
         "in.Team.CustomFields.Fields",
-        "in.Team.Description",
         "in.Team.DevrevCopy.LastSyncedDate",
         "in.Team.DevrevCopy.OriginId.Id",
         "in.Team.DevrevCopy.OriginOrgId.Id",
@@ -96,7 +127,6 @@
         "in.Team.Icon.ArtifactId.Id",
         "in.Team.Icon.Stock.PaletteColor",
         "in.Team.Icon.Stock.Shape",
-        "in.Team.Name",
         "in.Team.SyncMetadata.ExternalRecordId",
         "in.Team.SyncMetadata.ExternalRecordType",
         "in.Team.SyncMetadata.ExternalReference",
@@ -117,22 +147,22 @@
       "total": 107,
       "happy_path_reached": true,
       "reachable_on_happy_path": 13,
-      "present_arm_exercised": 9,
-      "present_arm_pct": 8.4,
+      "present_arm_exercised": 15,
+      "present_arm_pct": 14,
       "absent_arm_exercised": 13,
       "absent_arm_pct": 100,
-      "negative_arm_exercised": 0,
-      "negative_arm_pct": 0,
-      "both_arms_exercised": 0,
-      "coverage_pct": 8.4,
+      "negative_arm_exercised": 13,
+      "negative_arm_pct": 12.1,
+      "both_arms_exercised": 4,
+      "coverage_pct": 14,
       "by_origin": {
         "service": {
           "total": 55,
           "reachable_on_happy_path": 6,
-          "present_arm_exercised": 6,
-          "present_arm_pct": 10.9,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "present_arm_exercised": 12,
+          "present_arm_pct": 21.8,
+          "negative_arm_exercised": 10,
+          "negative_arm_pct": 18.2,
           "absent_arm_exercised": 6
         },
         "generated": {
@@ -140,8 +170,8 @@
           "reachable_on_happy_path": 4,
           "present_arm_exercised": 3,
           "present_arm_pct": 7.1,
-          "negative_arm_exercised": 0,
-          "negative_arm_pct": 0,
+          "negative_arm_exercised": 3,
+          "negative_arm_pct": 7.1,
           "absent_arm_exercised": 4
         },
         "library": {
@@ -532,35 +562,11 @@
           ]
         },
         {
-          "id": "b52",
-          "at": "internal/service/team_validations.go:130",
-          "cond": "in.Team.Name != nil",
-          "predicate_paths": [
-            "in.Team.Name"
-          ]
-        },
-        {
           "id": "b53",
           "at": "internal/service/team_validations.go:129",
           "cond": "in.Team.GroupId.Id",
           "predicate_paths": [
             "in.Team.GroupId.Id"
-          ]
-        },
-        {
-          "id": "b54",
-          "at": "internal/service/team_validations.go:131",
-          "cond": "in.Team.Description != nil",
-          "predicate_paths": [
-            "in.Team.Description"
-          ]
-        },
-        {
-          "id": "b55",
-          "at": "internal/service/team_validations.go:148",
-          "cond": "in.DryRun",
-          "predicate_paths": [
-            "in.DryRun"
           ]
         },
         {
@@ -628,14 +634,6 @@
           ]
         },
         {
-          "id": "b66",
-          "at": "internal/service/team_validations.go:407",
-          "cond": "in.DryRun",
-          "predicate_paths": [
-            "in.DryRun"
-          ]
-        },
-        {
           "id": "b69",
           "at": "internal/service/team_validations.go:450",
           "cond": "in.Team.GroupId != nil",
@@ -649,14 +647,6 @@
           "cond": "in.Team.GroupId.Id != \"\"",
           "predicate_paths": [
             "in.Team.GroupId.Id"
-          ]
-        },
-        {
-          "id": "b72",
-          "at": "internal/service/team_validations.go:35",
-          "cond": "in.DryRun",
-          "predicate_paths": [
-            "in.DryRun"
           ]
         },
         {
@@ -924,14 +914,6 @@
           ]
         },
         {
-          "id": "b106",
-          "at": "internal/service/team.go:247",
-          "cond": "in.DryRun",
-          "predicate_paths": [
-            "in.DryRun"
-          ]
-        },
-        {
           "id": "b107",
           "at": "internal/service/team.go:277",
           "cond": "in.Team|in.Team.Description|in.Team.DevrevCopy|in.Team.DevrevCopy.OriginId.Id|in.Team.DevrevCopy.OriginOrgId.Id|in.Team.ExternalSourceData|in.Team.ExternalSourceData.CreatedById.Id|in.Team.ExternalSourceData.ModifiedById.Id|in.Team.GroupId.Id|in.Team.Icon|in.Team.Icon.ArtifactId.Id|in.Team.Icon.Stock|in.Team.Key|in.Team.Name|in.Team.SyncMetadata|in.Team.SyncMetadata.ExternalRecordId|in.Team.SyncMetadata.ExternalRecordType|in.Team.SyncMetadata.ExternalReference|in.Team.SyncMetadata.LastSyncIn|in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id|in.Team.SyncMetadata.LastSyncOut|in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id|in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id|in.Team.SyncMetadata.OriginSystem|in.Team.SyncMetadata.OriginSystemInstanceId != nil",
@@ -1011,6 +993,226 @@
           "Team.Group.Id",
           "Team.Space",
           "Team.Space.Id"
+        ]
+      },
+      {
+        "name": "WithGroupID",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Description",
+          "Team.Group",
+          "Team.Group.Id",
+          "Team.Icon",
+          "Team.Icon.ArtifactId",
+          "Team.Icon.Stock",
+          "Team.Id",
+          "Team.Key",
+          "Team.Name",
+          "Team.Space",
+          "Team.Space.Id"
+        ]
+      },
+      {
+        "name": "WithNameAndDescription",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Description",
+          "Key",
+          "Name"
+        ],
+        "statuses": [
+          201
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode",
+          "Team",
+          "Team.Description",
+          "Team.Group",
+          "Team.Group.Name",
+          "Team.Icon",
+          "Team.Icon.ArtifactId",
+          "Team.Icon.Stock",
+          "Team.Id",
+          "Team.Key",
+          "Team.Name",
+          "Team.Space",
+          "Team.Space.Id"
+        ]
+      },
+      {
+        "name": "WithMissingGroup",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithInvalidKeyFormatLowercase",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithInvalidKeyFormatTooShort",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithInvalidKeyFormatTooLong",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithDuplicateKey",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          201,
+          409
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "WithDuplicateGroup",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          201,
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "DryRunCreateInvalidKey",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "DryRun",
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "RegularUserCannotCreate",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          403
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "NoAccessUserCannotCreate",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          403
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      },
+      {
+        "name": "CreateFailsWhenSpaceManagementDisabled",
+        "file": "api/v2_internal/teams/teams_crud_test.go",
+        "labels": null,
+        "fields_set": [
+          "Group",
+          "Key"
+        ],
+        "statuses": [
+          400
+        ],
+        "asserts_success": false,
+        "response_fields_asserted": [
+          "StatusCode"
         ]
       }
     ]
@@ -1525,5 +1727,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateTeam` (HTTP operation `TeamsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 409, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomSchemaSpec.Drop\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.DryRun\n  - in.Team.CustomFields.Fields\n  - in.Team.Description\n  - in.Team.DevrevCopy.LastSyncedDate\n  - in.Team.DevrevCopy.OriginId.Id\n  - in.Team.DevrevCopy.OriginOrgId.Id\n  - in.Team.EnabledFeatures\n  - in.Team.ExternalSourceData.ClosedDate\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.CreatedDate\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.ExternalSourceData.ModifiedDate\n  - in.Team.GroupId.Id\n  - in.Team.Icon.ArtifactId.Id\n  - in.Team.Icon.Stock.PaletteColor\n  - in.Team.Icon.Stock.Shape\n  - in.Team.Name\n  - in.Team.SyncMetadata.ExternalRecordId\n  - in.Team.SyncMetadata.ExternalRecordType\n  - in.Team.SyncMetadata.ExternalReference\n  - in.Team.SyncMetadata.LastSyncIn.Status\n  - in.Team.SyncMetadata.LastSyncIn.SyncDate\n  - in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id\n  - in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id\n  - in.Team.SyncMetadata.LastSyncOut.Status\n  - in.Team.SyncMetadata.LastSyncOut.SyncDate\n  - in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id\n  - in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id\n  - in.Team.SyncMetadata.OriginSystem\n  - in.Team.SyncMetadata.OriginSystemInstanceId\n  - in.Team.SyncMetadata.SyncedByDevUsers\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Team.Icon.ArtifactId.Id == *ObjectTypeArtifact\n  - in.Team.Icon.Stock != nil\n  - in.Team.Icon.Stock != nil\n  - in.Team.Icon.ArtifactId != nil\n  - in.Team.Icon.ArtifactId.Id\n  - in.Team.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.Team.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id\n  - in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id\n  - in.Team.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.Team.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id\n  - in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id\n  - in.Team.SyncMetadata.LastSyncIn != nil\n  - in.Team.SyncMetadata.LastSyncIn != nil\n  - in.Team.SyncMetadata.LastSyncOut != nil\n  - in.Team.SyncMetadata.LastSyncOut != nil\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.ExternalSourceData.CreatedById != nil\n  - in.Team.ExternalSourceData.ModifiedById != nil\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.DevrevCopy.OriginId != nil\n  - in.Team.DevrevCopy.OriginOrgId != nil\n  - in.Team.DevrevCopy.OriginOrgId.Id\n  - in.Team.GroupId != nil\n  - in.Team.Icon != nil\n  - in.Team.GroupId.Id\n  - in.Team.Icon != nil\n  - in.Team.SyncMetadata != nil\n  - in.Team.SyncMetadata != nil\n  - in.Team.ExternalSourceData != nil\n  - in.Team.ExternalSourceData != nil\n  - in.Team.DevrevCopy != nil\n  - in.Team.DevrevCopy != nil\n  - (+58 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errOldVersionOfSchemaFragments\n  - errSchemaRegistryUnimplementedEnvironment\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `group` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateTeam` (HTTP operation `TeamsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CustomSchemaSpec.Drop\n  - in.CustomSchemaSpec.TenantFragment\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.Team.CustomFields.Fields\n  - in.Team.DevrevCopy.LastSyncedDate\n  - in.Team.DevrevCopy.OriginId.Id\n  - in.Team.DevrevCopy.OriginOrgId.Id\n  - in.Team.EnabledFeatures\n  - in.Team.ExternalSourceData.ClosedDate\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.CreatedDate\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.ExternalSourceData.ModifiedDate\n  - in.Team.GroupId.Id\n  - in.Team.Icon.ArtifactId.Id\n  - in.Team.Icon.Stock.PaletteColor\n  - in.Team.Icon.Stock.Shape\n  - in.Team.SyncMetadata.ExternalRecordId\n  - in.Team.SyncMetadata.ExternalRecordType\n  - in.Team.SyncMetadata.ExternalReference\n  - in.Team.SyncMetadata.LastSyncIn.Status\n  - in.Team.SyncMetadata.LastSyncIn.SyncDate\n  - in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id\n  - in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id\n  - in.Team.SyncMetadata.LastSyncOut.Status\n  - in.Team.SyncMetadata.LastSyncOut.SyncDate\n  - in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id\n  - in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id\n  - in.Team.SyncMetadata.OriginSystem\n  - in.Team.SyncMetadata.OriginSystemInstanceId\n  - in.Team.SyncMetadata.SyncedByDevUsers\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Team.Icon.ArtifactId.Id == *ObjectTypeArtifact\n  - in.Team.Icon.Stock != nil\n  - in.Team.Icon.Stock != nil\n  - in.Team.Icon.ArtifactId != nil\n  - in.Team.Icon.ArtifactId.Id\n  - in.Team.SyncMetadata.LastSyncIn.SyncUnitId != nil\n  - in.Team.SyncMetadata.LastSyncIn.SyncHistoryId != nil\n  - in.Team.SyncMetadata.LastSyncIn.SyncUnitId.Id\n  - in.Team.SyncMetadata.LastSyncIn.SyncHistoryId.Id\n  - in.Team.SyncMetadata.LastSyncOut.SyncUnitId != nil\n  - in.Team.SyncMetadata.LastSyncOut.SyncHistoryId != nil\n  - in.Team.SyncMetadata.LastSyncOut.SyncUnitId.Id\n  - in.Team.SyncMetadata.LastSyncOut.SyncHistoryId.Id\n  - in.Team.SyncMetadata.LastSyncIn != nil\n  - in.Team.SyncMetadata.LastSyncIn != nil\n  - in.Team.SyncMetadata.LastSyncOut != nil\n  - in.Team.SyncMetadata.LastSyncOut != nil\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.ExternalSourceData.CreatedById != nil\n  - in.Team.ExternalSourceData.ModifiedById != nil\n  - in.Team.ExternalSourceData.CreatedById.Id\n  - in.Team.ExternalSourceData.ModifiedById.Id\n  - in.Team.DevrevCopy.OriginId != nil\n  - in.Team.DevrevCopy.OriginOrgId != nil\n  - in.Team.DevrevCopy.OriginOrgId.Id\n  - in.Team.GroupId != nil\n  - in.Team.Icon != nil\n  - in.Team.GroupId.Id\n  - in.Team.Icon != nil\n  - in.Team.SyncMetadata != nil\n  - in.Team.SyncMetadata != nil\n  - in.Team.ExternalSourceData != nil\n  - in.Team.ExternalSourceData != nil\n  - in.Team.DevrevCopy != nil\n  - in.Team.DevrevCopy != nil\n  - (+52 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n  - errOldVersionOfSchemaFragments\n  - errSchemaRegistryUnimplementedEnvironment\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `group` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

@@ -2,13 +2,32 @@
   "service": "Janus",
   "coverage": {
     "rpc": "DeactivateDevUser",
-    "operation": "",
-    "tests": 0,
+    "operation": "DevUsersSelfDelete",
+    "tests": 1,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200,
+        400
+      ],
+      "missing": [
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 25
     },
     "fields": {
       "leaf_fields_read_by_rpc": 1,
@@ -49,12 +68,12 @@
     },
     "branches": {
       "total": 4,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 1,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
+      "absent_arm_exercised": 1,
+      "absent_arm_pct": 100,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
@@ -62,12 +81,12 @@
       "by_origin": {
         "service": {
           "total": 2,
-          "reachable_on_happy_path": 0,
+          "reachable_on_happy_path": 1,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 1
         },
         "generated": {
           "total": 0,
@@ -151,7 +170,7 @@
       ],
       "service_count": 2,
       "call_count": 7,
-      "reached_by_test": false,
+      "reached_by_test": true,
       "deps_result_used_in_response": 0,
       "deps_result_checked_by_test": 0,
       "response_links": null
@@ -159,8 +178,24 @@
     "anomalies": {
       "unmatched_test_fields": null
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "DevUser self delete",
+        "file": "api/v2_internal/identity_flows/devuser_onboarding_test.go",
+        "labels": [
+          "INTERNAL_DEVUSERS_SELF_DELETE"
+        ],
+        "fields_set": null,
+        "statuses": [
+          200,
+          400
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "StatusCode"
+        ]
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/janus/internal/service.Janus).DeactivateDevUser",
@@ -371,5 +406,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeactivateDevUser` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUid.Value\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUid.Value\n  - in.DevUid.Value == \"\"\n  - in.DevUid != nil\n  - in.DevUid.Value != *t35\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - errCacheUnavailable\n  - errDeleteOrDeactivateCallForLastActiveUser\n  - errEmailAlreadyExists\n  - errInternalCacheTransientError\n  - errInvalidInputEmail\n  - errInvalidStatusDescription\n  - errInvalidStatusExpiry\n  - errOldVersionOfSchemaFragments\n  - errPhoneNumberInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n  - errStateIssueForEmailUpdate\n  - errTermsAndConditionsResetError\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `DeactivateDevUser` (HTTP operation `DevUsersSelfDelete`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.DevUid.Value\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.DevUid.Value\n  - in.DevUid.Value == \"\"\n  - in.DevUid != nil\n  - in.DevUid.Value != *t35\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - errCacheUnavailable\n  - errDeleteOrDeactivateCallForLastActiveUser\n  - errEmailAlreadyExists\n  - errInternalCacheTransientError\n  - errInvalidInputEmail\n  - errInvalidStatusDescription\n  - errInvalidStatusExpiry\n  - errOldVersionOfSchemaFragments\n  - errPhoneNumberInvalid\n  - errSchemaRegistryUnimplementedEnvironment\n  - errStateIssueForEmailUpdate\n  - errTermsAndConditionsResetError\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

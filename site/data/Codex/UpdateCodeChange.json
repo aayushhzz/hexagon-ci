@@ -2,19 +2,38 @@
   "service": "Codex",
   "coverage": {
     "rpc": "UpdateCodeChange",
-    "operation": "",
-    "tests": 0,
+    "operation": "CodeChangesUpdate",
+    "tests": 1,
     "status": {
-      "documented": null,
-      "asserted": [],
-      "missing": [],
-      "coverage_pct": 0
+      "documented": [
+        200,
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "asserted": [
+        200
+      ],
+      "missing": [
+        400,
+        401,
+        403,
+        413,
+        429,
+        500,
+        503
+      ],
+      "coverage_pct": 12.5
     },
     "fields": {
       "leaf_fields_read_by_rpc": 16,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 0,
+      "request_fields_set_by_tests": 2,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -65,54 +84,46 @@
     },
     "branches": {
       "total": 21,
-      "happy_path_reached": false,
+      "happy_path_reached": true,
       "reachable_on_happy_path": 9,
-      "present_arm_exercised": 0,
-      "present_arm_pct": 0,
-      "absent_arm_exercised": 0,
-      "absent_arm_pct": 0,
+      "present_arm_exercised": 6,
+      "present_arm_pct": 28.6,
+      "absent_arm_exercised": 4,
+      "absent_arm_pct": 44.4,
       "negative_arm_exercised": 0,
       "negative_arm_pct": 0,
       "both_arms_exercised": 0,
-      "coverage_pct": 0,
+      "coverage_pct": 28.6,
       "by_origin": {
         "service": {
           "total": 2,
-          "reachable_on_happy_path": 0,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 1,
+          "present_arm_exercised": 1,
+          "present_arm_pct": 50,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 0
         },
         "generated": {
           "total": 16,
-          "reachable_on_happy_path": 0,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 5,
+          "present_arm_exercised": 2,
+          "present_arm_pct": 12.5,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 0
+          "absent_arm_exercised": 4
         },
         "library": {
           "total": 3,
-          "reachable_on_happy_path": 0,
-          "present_arm_exercised": 0,
-          "present_arm_pct": 0,
+          "reachable_on_happy_path": 3,
+          "present_arm_exercised": 3,
+          "present_arm_pct": 100,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
           "absent_arm_exercised": 0
         }
       },
       "gaps": [
-        {
-          "id": "b1",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:625",
-          "cond": "in.Id == nil",
-          "predicate_paths": [
-            "in.Id"
-          ]
-        },
         {
           "id": "b2",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:821",
@@ -170,14 +181,6 @@
           ]
         },
         {
-          "id": "b9",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:849",
-          "cond": "in.CodeChange.Description != nil",
-          "predicate_paths": [
-            "in.CodeChange.Description"
-          ]
-        },
-        {
           "id": "b10",
           "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/schema.pb.validator.go:854",
           "cond": "in.CodeChange.ExternalIdentifier != nil",
@@ -199,14 +202,6 @@
           "cond": "in.CustomSchemaSpec.Drop != nil",
           "predicate_paths": [
             "in.CustomSchemaSpec.Drop"
-          ]
-        },
-        {
-          "id": "b13",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/codex-client@v0.0.0-20261006164200-05404b38bc84/apiv2/code_change.pb.validator.go:53",
-          "cond": "in.Id != nil",
-          "predicate_paths": [
-            "in.Id"
           ]
         },
         {
@@ -242,30 +237,6 @@
           ]
         },
         {
-          "id": "b18",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:195",
-          "cond": "in.Id == \"\"",
-          "predicate_paths": [
-            "in.Id"
-          ]
-        },
-        {
-          "id": "b19",
-          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/schemaregistry-client@v0.0.0-20260907104543-fb82e0c585d9/lib/get_aggregated_schema_helper.go:248",
-          "cond": "in.Id != nil",
-          "predicate_paths": [
-            "in.Id"
-          ]
-        },
-        {
-          "id": "b20",
-          "at": "internal/serverv2/work_crud_helpers.go:935",
-          "cond": "in.Id != nil",
-          "predicate_paths": [
-            "in.Id"
-          ]
-        },
-        {
           "id": "b21",
           "at": "internal/serverv2/update_code_change.go:17",
           "cond": "in != nil",
@@ -294,16 +265,45 @@
       "datastore_calls": [],
       "service_count": 2,
       "call_count": 3,
-      "reached_by_test": false,
+      "reached_by_test": true,
       "deps_result_used_in_response": 0,
       "deps_result_checked_by_test": 0,
       "response_links": null
     },
     "anomalies": {
-      "unmatched_test_fields": null
+      "unmatched_test_fields": [
+        {
+          "field": "description",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "id",
+          "fuzzy_suggestions": null
+        }
+      ]
     },
-    "test_facts": null,
-    "unmapped": true
+    "test_facts": [
+      {
+        "name": "UpdateCodeChange",
+        "file": "api/v2_internal/code_change/code_changes_test.go",
+        "labels": [
+          "INTERNAL_CODE_CHANGES_UPDATE"
+        ],
+        "fields_set": [
+          "Description",
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "CodeChange",
+          "CodeChange.Description",
+          "StatusCode"
+        ]
+      }
+    ]
   },
   "provenance": {
     "func": "(*github.com/devrev/codex/internal/serverv2.Codex).UpdateCodeChange",
@@ -365,5 +365,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateCodeChange` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CodeChange.Branch.Value\n  - in.CodeChange.Description.Value\n  - in.CodeChange.ExternalIdentifier.Value\n  - in.CodeChange.FilteredLoc\n  - in.CodeChange.RepoUrl.Value\n  - in.CodeChange.Title.Value\n  - in.CodeChange.TotalLoc\n  - in.CustomSchemaSpec.Drop\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.Id.CustomCompositeSchemas\n  - in.Id.CustomFields\n  - in.Id.StockCompositeSchemas\n  - in.Id.StockFields\n  - in.Id.UnselectedFields\n  - in.Id.compositeTypes\n  - in.Id.customFieldMap\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Id == nil\n  - in.CodeChange.RepoUrl != nil\n  - in.CodeChange.Branch != nil\n  - in.CodeChange.TotalLoc != nil\n  - in.CodeChange.TotalLoc != nil\n  - in.CodeChange.FilteredLoc != nil\n  - in.CodeChange.FilteredLoc != nil\n  - in.CodeChange.Title != nil\n  - in.CodeChange.Description != nil\n  - in.CodeChange.ExternalIdentifier != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.Id != nil\n  - in.CodeChange != nil\n  - in.CodeChange != nil\n  - in.CustomSchemaSpec != nil\n  - in.CustomSchemaSpec != nil\n  - in.Id == \"\"\n  - in.Id != nil\n  - in.Id != nil\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `UpdateCodeChange` (HTTP operation `CodeChangesUpdate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.CodeChange.Branch.Value\n  - in.CodeChange.Description.Value\n  - in.CodeChange.ExternalIdentifier.Value\n  - in.CodeChange.FilteredLoc\n  - in.CodeChange.RepoUrl.Value\n  - in.CodeChange.Title.Value\n  - in.CodeChange.TotalLoc\n  - in.CustomSchemaSpec.Drop\n  - in.CustomSchemaSpec.ValidateRequiredFields\n  - in.Id.CustomCompositeSchemas\n  - in.Id.CustomFields\n  - in.Id.StockCompositeSchemas\n  - in.Id.StockFields\n  - in.Id.UnselectedFields\n  - in.Id.compositeTypes\n  - in.Id.customFieldMap\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.CodeChange.RepoUrl != nil\n  - in.CodeChange.Branch != nil\n  - in.CodeChange.TotalLoc != nil\n  - in.CodeChange.TotalLoc != nil\n  - in.CodeChange.FilteredLoc != nil\n  - in.CodeChange.FilteredLoc != nil\n  - in.CodeChange.Title != nil\n  - in.CodeChange.ExternalIdentifier != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CustomSchemaSpec.Drop != nil\n  - in.CodeChange != nil\n  - in.CodeChange != nil\n  - in.CustomSchemaSpec != nil\n  - in.CustomSchemaSpec != nil\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrDifferentArgumentsTypes\n  - ErrNilArguments\n  - ErrNonPointerArgument\n  - ErrNotSupported\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `description` -> suggestions []\n  - test field `id` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

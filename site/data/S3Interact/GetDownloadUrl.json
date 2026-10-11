@@ -2,41 +2,22 @@
   "service": "S3Interact",
   "coverage": {
     "rpc": "GetDownloadUrl",
-    "operation": "ArtifactsLocate",
-    "tests": 13,
+    "operation": "ArtifactsLocate,QuotesGeneratePdf",
+    "tests": 16,
     "status": {
-      "documented": [
-        200,
-        400,
-        401,
-        403,
-        404,
-        413,
-        429,
-        500,
-        503
-      ],
+      "documented": null,
       "asserted": [
         200,
         201
       ],
-      "missing": [
-        400,
-        401,
-        403,
-        404,
-        413,
-        429,
-        500,
-        503
-      ],
-      "coverage_pct": 11.1
+      "missing": [],
+      "coverage_pct": 0
     },
     "fields": {
       "leaf_fields_read_by_rpc": 6,
       "covered_count": 1,
       "coverage_pct": 16.7,
-      "request_fields_set_by_tests": 6,
+      "request_fields_set_by_tests": 11,
       "set_by_positive_tests": 1,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -77,7 +58,9 @@
             "Single-part upload create PUT complete",
             "Three-part upload create next next complete",
             "Version Creation",
-            "Version delete"
+            "Version delete",
+            "should extract content from a PDF article",
+            "should persist and recall a preference across conversations"
           ]
         }
       ],
@@ -242,6 +225,10 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
+          "field": "accountid",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "cursor",
           "fuzzy_suggestions": null
         },
@@ -256,7 +243,23 @@
           "fuzzy_suggestions": null
         },
         {
+          "field": "opportunityid",
+          "fuzzy_suggestions": null
+        },
+        {
           "field": "partsize",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "pricebookid",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "space",
+          "fuzzy_suggestions": null
+        },
+        {
+          "field": "surfaceid",
           "fuzzy_suggestions": null
         },
         {
@@ -541,6 +544,26 @@
         ]
       },
       {
+        "name": "should extract content from a PDF article",
+        "file": "api/v2_internal/dogmatix/glm_ocr_extraction_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id"
+        ],
+        "statuses": [
+          200
+        ],
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Article",
+          "Article.ExtractedContent",
+          "Body",
+          "Body.Close",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
         "name": "Locate non-existent artifact should return 404",
         "file": "api/v2_public/artifacts/crud/artifacts_crud_test.go",
         "labels": [
@@ -576,6 +599,43 @@
           "Id",
           "StatusCode"
         ]
+      },
+      {
+        "name": "should persist and recall a preference across conversations",
+        "file": "e2e/personal_computer_memory/personal_computer_memory_suite_test.go",
+        "labels": null,
+        "fields_set": [
+          "Id",
+          "Space",
+          "SurfaceId"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Agent",
+          "AiAgentMemories",
+          "AiAssistantSurface",
+          "AiAssistantSurface.AiAgents",
+          "AiAssistantSurface.AiAgents.Id",
+          "StatusCode",
+          "Url"
+        ]
+      },
+      {
+        "name": "WithAllFields",
+        "file": "api/v2_internal/enact/quotes/crud/create_quote_test.go",
+        "labels": null,
+        "fields_set": [
+          "AccountId",
+          "OpportunityId",
+          "PriceBookId"
+        ],
+        "statuses": null,
+        "asserts_success": true,
+        "response_fields_asserted": [
+          "Quote",
+          "Quote.Id"
+        ]
       }
     ]
   },
@@ -593,5 +653,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetDownloadUrl` (HTTP operation `ArtifactsLocate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 404, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Name\n  - in.PreferDownload\n  - in.Preview\n  - in.Version.ModifiedBy\n  - in.Version.VersionId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Version.ModifiedBy == nil\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy != nil\n  - in.Version.ModifiedBy\n  - in != nil\n  - in.Name == \"\"\n  - in.Preview\n  - in.Name == **t53\n  - in.Name == **t74\n  - in.Version.VersionId != \"\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `cursor` -> suggestions []\n  - test field `filename` -> suggestions ['in.Name']\n  - test field `filetype` -> suggestions []\n  - test field `partsize` -> suggestions []\n  - test field `version` -> suggestions ['in.Version.VersionId']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `GetDownloadUrl` (HTTP operation `ArtifactsLocate,QuotesGeneratePdf`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Name\n  - in.PreferDownload\n  - in.Preview\n  - in.Version.ModifiedBy\n  - in.Version.VersionId\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Version.ModifiedBy == nil\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy\n  - in.Version.ModifiedBy != nil\n  - in.Version.ModifiedBy\n  - in != nil\n  - in.Name == \"\"\n  - in.Preview\n  - in.Name == **t53\n  - in.Name == **t74\n  - in.Version.VersionId != \"\"\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `accountid` -> suggestions []\n  - test field `cursor` -> suggestions []\n  - test field `filename` -> suggestions ['in.Name']\n  - test field `filetype` -> suggestions []\n  - test field `opportunityid` -> suggestions []\n  - test field `partsize` -> suggestions []\n  - test field `pricebookid` -> suggestions []\n  - test field `space` -> suggestions []\n  - test field `surfaceid` -> suggestions []\n  - test field `version` -> suggestions ['in.Version.VersionId']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

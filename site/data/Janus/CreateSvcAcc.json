@@ -3,7 +3,7 @@
   "coverage": {
     "rpc": "CreateSvcAcc",
     "operation": "ServiceAccountsCreate",
-    "tests": 4,
+    "tests": 2,
     "status": {
       "documented": [
         201,
@@ -16,24 +16,24 @@
         503
       ],
       "asserted": [
-        201,
-        403
+        201
       ],
       "missing": [
         400,
         401,
+        403,
         413,
         429,
         500,
         503
       ],
-      "coverage_pct": 25
+      "coverage_pct": 12.5
     },
     "fields": {
       "leaf_fields_read_by_rpc": 1,
       "covered_count": 0,
       "coverage_pct": 0,
-      "request_fields_set_by_tests": 7,
+      "request_fields_set_by_tests": 2,
       "set_by_positive_tests": 0,
       "set_by_negative_tests": 0,
       "by_depth": {
@@ -137,89 +137,16 @@
     "anomalies": {
       "unmatched_test_fields": [
         {
-          "field": "actas",
-          "fuzzy_suggestions": null
-        },
-        {
           "field": "displayname",
           "fuzzy_suggestions": null
         },
         {
           "field": "genkeyring",
           "fuzzy_suggestions": null
-        },
-        {
-          "field": "granttype",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "principal",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "requestedtokentype",
-          "fuzzy_suggestions": null
-        },
-        {
-          "field": "rolesetassignmentinfo",
-          "fuzzy_suggestions": null
         }
       ]
     },
     "test_facts": [
-      {
-        "name": "Creating an AAT using AAT token with act-as functionality for devuser[0] after adding service account to Systems Users group",
-        "file": "api/v2_internal/auth_tokens/auth_act_as_tokens_test.go",
-        "labels": [
-          "POSITIVE",
-          "INTERNAL_AUTH_TOKENS_CREATE"
-        ],
-        "fields_set": [
-          "ActAs",
-          "DisplayName",
-          "GrantType",
-          "RequestedTokenType"
-        ],
-        "statuses": [
-          201,
-          403
-        ],
-        "asserts_success": true,
-        "response_fields_asserted": [
-          "GetAccessToken",
-          "GetExpiresIn",
-          "GetTokenType",
-          "ServiceAccount",
-          "ServiceAccount.Id",
-          "StatusCode"
-        ]
-      },
-      {
-        "name": "CreateRoleSetViaApplyRoleSet - Fail",
-        "file": "api/v2_internal/role_sets/crud/role_set_test.go",
-        "labels": [
-          "NEGATIVE",
-          "INTERNAL_ROLE_SETS_CREATE",
-          "NON_LOCAL"
-        ],
-        "fields_set": [
-          "DisplayName",
-          "Principal",
-          "RoleSetAssignmentInfo"
-        ],
-        "statuses": [
-          201,
-          403
-        ],
-        "asserts_success": true,
-        "response_fields_asserted": [
-          "Role",
-          "Role.Id",
-          "ServiceAccount",
-          "ServiceAccount.Id",
-          "StatusCode"
-        ]
-      },
       {
         "name": "Creating a service account with a keyring",
         "file": "api/v2_internal/service_accounts/service_accounts_test.go",
@@ -276,5 +203,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateSvcAcc` (HTTP operation `ServiceAccountsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ServiceAccount.State\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ServiceAccount == nil\n  - in.ServiceAccount.State == 0\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContext\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `actas` -> suggestions []\n  - test field `displayname` -> suggestions []\n  - test field `genkeyring` -> suggestions []\n  - test field `granttype` -> suggestions []\n  - test field `principal` -> suggestions []\n  - test field `requestedtokentype` -> suggestions []\n  - test field `rolesetassignmentinfo` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateSvcAcc` (HTTP operation `ServiceAccountsCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ServiceAccount.State\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ServiceAccount == nil\n  - in.ServiceAccount.State == 0\n\nError symbols this RPC can return (candidate negative assertions):\n  - errInvalidAuthContext\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `displayname` -> suggestions []\n  - test field `genkeyring` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }
