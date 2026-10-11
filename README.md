@@ -22,6 +22,16 @@ The function-oriented `PlanGitDiff` and `PlanGitDiffCompact` APIs accept old/new
 
 This library API does not change the existing file-based `plan` command.
 
+For GitHub Actions experiments, `cmd/ci-impact` accepts head and base repository checkouts plus a zero-context unified diff. It builds both graphs, maps the diff, runs the candidate test roots with `go test -count=1 -v`, and writes the candidate count, total head-graph test roots, selection reason, and selected root names to the Actions step summary. The candidate run is diagnostic: keep the repository's full-suite CI job as the correctness baseline.
+
+```sh
+go run ./cmd/ci-impact \
+  --repository "$GITHUB_WORKSPACE" \
+  --base-repository "$RUNNER_TEMP/base" \
+  --diff "$RUNNER_TEMP/change.diff" \
+  --summary "$GITHUB_STEP_SUMMARY"
+```
+
 ```go
 plan, err := hexagon.PlanGitDiff(headGraph, gitDiff, baseGraph)
 if err != nil {
