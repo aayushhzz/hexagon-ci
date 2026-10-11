@@ -517,16 +517,13 @@
             "service": "this service",
             "calls": [
               "CreateJob",
-              "GetDevOid",
-              "GetTags",
-              "SetError",
-              "SetTags"
+              "SetError"
             ]
           }
         ],
         "datastore_calls": [],
         "service_count": 2,
-        "call_count": 7,
+        "call_count": 4,
         "reached_by_test": true,
         "deps_result_used_in_response": 1,
         "deps_result_checked_by_test": 0,
@@ -5688,8 +5685,8 @@
         "service_count": 1,
         "call_count": 2,
         "reached_by_test": true,
-        "deps_result_used_in_response": 18,
-        "deps_result_checked_by_test": 18,
+        "deps_result_used_in_response": 17,
+        "deps_result_checked_by_test": 17,
         "response_links": [
           {
             "dep": "schemaregistry:GetCustomStage",
@@ -5711,15 +5708,6 @@
           },
           {
             "dep": "schemaregistry:GetCustomStage",
-            "path": "out.Project.Description",
-            "checked_by": [
-              "Creates a project with required fields and returns a well-formed DON at the start stage",
-              "Rejects a custom field with an unknown schema key"
-            ],
-            "checked": true
-          },
-          {
-            "dep": "schemaregistry:GetCustomState",
             "path": "out.Project.Description",
             "checked_by": [
               "Creates a project with required fields and returns a well-formed DON at the start stage",
@@ -6088,17 +6076,17 @@
         ]
       },
       "branches": {
-        "total": 83,
+        "total": 85,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 10,
+        "reachable_on_happy_path": 12,
         "present_arm_exercised": 13,
-        "present_arm_pct": 15.7,
-        "absent_arm_exercised": 10,
+        "present_arm_pct": 15.3,
+        "absent_arm_exercised": 12,
         "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
         "both_arms_exercised": 0,
-        "coverage_pct": 15.7,
+        "coverage_pct": 15.3,
         "by_origin": {
           "service": {
             "total": 56,
@@ -6119,13 +6107,13 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 27,
-            "reachable_on_happy_path": 5,
+            "total": 29,
+            "reachable_on_happy_path": 7,
             "present_arm_exercised": 10,
-            "present_arm_pct": 37,
+            "present_arm_pct": 34.5,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 5
+            "absent_arm_exercised": 7
           }
         },
         "gaps": [
@@ -6643,6 +6631,22 @@
           },
           {
             "id": "b78",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/db/mongo_metrics.go:117",
+            "cond": "in.VistaGroupItem|in.VistaGroupItem.CustomView|in.VistaGroupItem.CustomView.ShowGroups|in.VistaGroupItem.Description|in.VistaGroupItem.DescriptionTranslated|in.VistaGroupItem.DescriptionTranslated.ContentData|in.VistaGroupItem.DescriptionTranslated.ContentKey|in.VistaGroupItem.DescriptionTranslated.ContentNamespace|in.VistaGroupItem.DevrevCopy|in.VistaGroupItem.DevrevCopy.OriginId|in.VistaGroupItem.DevrevCopy.OriginOrgId|in.VistaGroupItem.ExternalSourceData|in.VistaGroupItem.ExternalSourceData.CreatedById|in.VistaGroupItem.ExternalSourceData.ModifiedById|in.VistaGroupItem.Goals|in.VistaGroupItem.GoalsDocumentId|in.VistaGroupItem.IconType|in.VistaGroupItem.IsSystem|in.VistaGroupItem.Name|in.VistaGroupItem.NameTranslated|in.VistaGroupItem.NameTranslated.ContentData|in.VistaGroupItem.NameTranslated.ContentKey|in.VistaGroupItem.NameTranslated.ContentNamespace|in.VistaGroupItem.Parent|in.VistaGroupItem.Parent.Id|in.VistaGroupItem.Parent.IsArchived|in.VistaGroupItem.Parent.Name|in.VistaGroupItem.ParentId|in.VistaGroupItem.StagedInfo|in.VistaGroupItem.StagedInfo.IsStaged|in.VistaGroupItem.SyncMetadata|in.VistaGroupItem.SyncMetadata.ExternalRecordId|in.VistaGroupItem.SyncMetadata.ExternalRecordType|in.VistaGroupItem.SyncMetadata.ExternalReference|in.VistaGroupItem.SyncMetadata.LastSyncIn|in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId|in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId|in.VistaGroupItem.SyncMetadata.LastSyncOut|in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId|in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId|in.VistaGroupItem.SyncMetadata.OriginSystem|in.VistaGroupItem.SyncMetadata.OriginSystemInstanceId == nil",
+            "predicate_paths": [
+              "in.VistaGroupItem"
+            ]
+          },
+          {
+            "id": "b79",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/db/mongo_metrics.go:125",
+            "cond": "in.VistaGroupItem|in.VistaGroupItem.CustomView|in.VistaGroupItem.CustomView.ShowGroups|in.VistaGroupItem.Description|in.VistaGroupItem.DescriptionTranslated|in.VistaGroupItem.DescriptionTranslated.ContentData|in.VistaGroupItem.DescriptionTranslated.ContentKey|in.VistaGroupItem.DescriptionTranslated.ContentNamespace|in.VistaGroupItem.DevrevCopy|in.VistaGroupItem.DevrevCopy.OriginId|in.VistaGroupItem.DevrevCopy.OriginOrgId|in.VistaGroupItem.ExternalSourceData|in.VistaGroupItem.ExternalSourceData.CreatedById|in.VistaGroupItem.ExternalSourceData.ModifiedById|in.VistaGroupItem.Goals|in.VistaGroupItem.GoalsDocumentId|in.VistaGroupItem.IconType|in.VistaGroupItem.IsSystem|in.VistaGroupItem.Name|in.VistaGroupItem.NameTranslated|in.VistaGroupItem.NameTranslated.ContentData|in.VistaGroupItem.NameTranslated.ContentKey|in.VistaGroupItem.NameTranslated.ContentNamespace|in.VistaGroupItem.Parent|in.VistaGroupItem.Parent.Id|in.VistaGroupItem.Parent.IsArchived|in.VistaGroupItem.Parent.Name|in.VistaGroupItem.ParentId|in.VistaGroupItem.StagedInfo|in.VistaGroupItem.StagedInfo.IsStaged|in.VistaGroupItem.SyncMetadata|in.VistaGroupItem.SyncMetadata.ExternalRecordId|in.VistaGroupItem.SyncMetadata.ExternalRecordType|in.VistaGroupItem.SyncMetadata.ExternalReference|in.VistaGroupItem.SyncMetadata.LastSyncIn|in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncHistoryId|in.VistaGroupItem.SyncMetadata.LastSyncIn.SyncUnitId|in.VistaGroupItem.SyncMetadata.LastSyncOut|in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncHistoryId|in.VistaGroupItem.SyncMetadata.LastSyncOut.SyncUnitId|in.VistaGroupItem.SyncMetadata.OriginSystem|in.VistaGroupItem.SyncMetadata.OriginSystemInstanceId == nil",
+            "predicate_paths": [
+              "in.VistaGroupItem"
+            ]
+          },
+          {
+            "id": "b80",
             "at": "internal/serverv2/create_vista_group_item.go:166",
             "cond": "in.SprintArchivalValidationDisabled",
             "predicate_paths": [
@@ -6650,7 +6654,7 @@
             ]
           },
           {
-            "id": "b79",
+            "id": "b81",
             "at": "internal/serverv2/create_vista_group_item.go:234",
             "cond": "in|in.VistaGroupItem.Type != nil",
             "predicate_paths": [
@@ -6658,7 +6662,7 @@
             ]
           },
           {
-            "id": "b80",
+            "id": "b82",
             "at": "internal/serverv2/create_vista_group_item.go:243",
             "cond": "in.VistaGroupItem.Type",
             "predicate_paths": [
@@ -6666,7 +6670,7 @@
             ]
           },
           {
-            "id": "b81",
+            "id": "b83",
             "at": "internal/serverv2/create_vista_group_item.go:244",
             "cond": "in.SprintOverlapValidationDisabled",
             "predicate_paths": [
@@ -6674,7 +6678,7 @@
             ]
           },
           {
-            "id": "b82",
+            "id": "b84",
             "at": "internal/serverv2/create_vista_group_item.go:294",
             "cond": "in.CustomId != nil",
             "predicate_paths": [
@@ -6682,7 +6686,7 @@
             ]
           },
           {
-            "id": "b83",
+            "id": "b85",
             "at": "internal/serverv2/create_vista_group_item.go:311",
             "cond": "in.VistaGroupItem.Type",
             "predicate_paths": [
@@ -7113,26 +7117,26 @@
         ]
       },
       "branches": {
-        "total": 746,
+        "total": 753,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 72,
+        "reachable_on_happy_path": 75,
         "present_arm_exercised": 32,
-        "present_arm_pct": 4.3,
-        "absent_arm_exercised": 72,
+        "present_arm_pct": 4.2,
+        "absent_arm_exercised": 75,
         "absent_arm_pct": 100,
         "negative_arm_exercised": 17,
         "negative_arm_pct": 2.3,
         "both_arms_exercised": 15,
-        "coverage_pct": 4.3,
+        "coverage_pct": 4.2,
         "by_origin": {
           "service": {
-            "total": 88,
-            "reachable_on_happy_path": 22,
+            "total": 94,
+            "reachable_on_happy_path": 24,
             "present_arm_exercised": 3,
-            "present_arm_pct": 3.4,
+            "present_arm_pct": 3.2,
             "negative_arm_exercised": 1,
             "negative_arm_pct": 1.1,
-            "absent_arm_exercised": 22
+            "absent_arm_exercised": 24
           },
           "generated": {
             "total": 465,
@@ -7144,13 +7148,13 @@
             "absent_arm_exercised": 17
           },
           "library": {
-            "total": 193,
-            "reachable_on_happy_path": 33,
+            "total": 194,
+            "reachable_on_happy_path": 34,
             "present_arm_exercised": 9,
-            "present_arm_pct": 4.7,
+            "present_arm_pct": 4.6,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 33
+            "absent_arm_exercised": 34
           }
         },
         "gaps": [
@@ -12599,6 +12603,62 @@
           },
           {
             "id": "b711",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:593",
+            "cond": "in.ActorId|in.DevOid == nil",
+            "predicate_paths": [
+              "in.DevOid"
+            ]
+          },
+          {
+            "id": "b712",
+            "at": "internal/serverv2/works_helper.go:1264",
+            "cond": "in.ActorId|in.DevOid|in.Ticket.ReportedByIds == nil",
+            "predicate_paths": [
+              "in.Ticket.ReportedByIds"
+            ]
+          },
+          {
+            "id": "b713",
+            "at": "internal/serverv2/works_helper.go:1195",
+            "cond": "in.ActorId|in.DevOid|in.Ticket.RevOid == nil",
+            "predicate_paths": [
+              "in.Ticket.RevOid"
+            ]
+          },
+          {
+            "id": "b714",
+            "at": "internal/serverv2/works_helper.go:1227",
+            "cond": "in.ActorId|in.DevOid|in.Ticket.RevOid == nil",
+            "predicate_paths": [
+              "in.Ticket.RevOid"
+            ]
+          },
+          {
+            "id": "b715",
+            "at": "internal/serverv2/works_helper.go:1206",
+            "cond": "in.ActorId|in.DevOid|in.Ticket.RevOid == nil",
+            "predicate_paths": [
+              "in.Ticket.RevOid"
+            ]
+          },
+          {
+            "id": "b716",
+            "at": "internal/serverv2/works_helper.go:1200",
+            "cond": "in.ActorId|in.DevOid != nil",
+            "predicate_paths": [
+              "in.DevOid"
+            ]
+          },
+          {
+            "id": "b717",
+            "at": "internal/serverv2/work_crud_helpers.go:62",
+            "cond": "in.ActorId|in.DevOid == nil",
+            "predicate_paths": [
+              "in.ActorId"
+            ]
+          },
+          {
+            "id": "b718",
             "at": "internal/serverv2/create_work.go:222",
             "cond": "in.DevOid != nil",
             "predicate_paths": [
@@ -12606,7 +12666,7 @@
             ]
           },
           {
-            "id": "b712",
+            "id": "b719",
             "at": "internal/serverv2/create_work.go:261",
             "cond": "in.Ticket != nil",
             "predicate_paths": [
@@ -12614,7 +12674,7 @@
             ]
           },
           {
-            "id": "b713",
+            "id": "b720",
             "at": "internal/serverv2/create_work.go:471",
             "cond": "in.Issue != nil",
             "predicate_paths": [
@@ -12622,7 +12682,7 @@
             ]
           },
           {
-            "id": "b714",
+            "id": "b721",
             "at": "internal/serverv2/create_work.go:365",
             "cond": "in.ActorId|in.DevOid|in.Ticket != nil",
             "predicate_paths": [
@@ -12631,7 +12691,7 @@
             ]
           },
           {
-            "id": "b715",
+            "id": "b722",
             "at": "internal/serverv2/create_work.go:298",
             "cond": "in.Ticket.Body == \"\"",
             "predicate_paths": [
@@ -12639,7 +12699,7 @@
             ]
           },
           {
-            "id": "b717",
+            "id": "b724",
             "at": "internal/serverv2/create_work.go:304",
             "cond": "in.Ticket.AppliesToPartId == nil",
             "predicate_paths": [
@@ -12647,7 +12707,7 @@
             ]
           },
           {
-            "id": "b718",
+            "id": "b725",
             "at": "internal/serverv2/create_work.go:307",
             "cond": "in.Ticket.Channels == nil",
             "predicate_paths": [
@@ -12655,7 +12715,7 @@
             ]
           },
           {
-            "id": "b719",
+            "id": "b726",
             "at": "internal/serverv2/create_work.go:310",
             "cond": "in.Ticket.ChannelsV2 == nil",
             "predicate_paths": [
@@ -12663,7 +12723,7 @@
             ]
           },
           {
-            "id": "b720",
+            "id": "b727",
             "at": "internal/serverv2/create_work.go:313",
             "cond": "in.Ticket.SourceChannelV2 == nil",
             "predicate_paths": [
@@ -12671,7 +12731,7 @@
             ]
           },
           {
-            "id": "b721",
+            "id": "b728",
             "at": "internal/serverv2/create_work.go:316",
             "cond": "in.Ticket.AccountId == nil",
             "predicate_paths": [
@@ -12679,7 +12739,7 @@
             ]
           },
           {
-            "id": "b722",
+            "id": "b729",
             "at": "internal/serverv2/create_work.go:329",
             "cond": "in.Ticket.RevOid == nil",
             "predicate_paths": [
@@ -12687,7 +12747,7 @@
             ]
           },
           {
-            "id": "b723",
+            "id": "b730",
             "at": "internal/serverv2/create_work.go:332",
             "cond": "in.Ticket.ReportedByIds == nil",
             "predicate_paths": [
@@ -12695,7 +12755,7 @@
             ]
           },
           {
-            "id": "b724",
+            "id": "b731",
             "at": "internal/serverv2/create_work.go:337",
             "cond": "in.Ticket.CustomFields == nil",
             "predicate_paths": [
@@ -12703,7 +12763,7 @@
             ]
           },
           {
-            "id": "b725",
+            "id": "b732",
             "at": "internal/serverv2/create_work.go:344",
             "cond": "in.Ticket.ArtifactIds == nil",
             "predicate_paths": [
@@ -12711,7 +12771,7 @@
             ]
           },
           {
-            "id": "b726",
+            "id": "b733",
             "at": "internal/serverv2/create_work.go:369",
             "cond": "in.ActorId == *ObjectTypeRevUser",
             "predicate_paths": [
@@ -12719,7 +12779,7 @@
             ]
           },
           {
-            "id": "b727",
+            "id": "b734",
             "at": "internal/serverv2/create_work.go:383",
             "cond": "in|in.ActorId|in.DevOid != nil",
             "predicate_paths": [
@@ -12727,15 +12787,15 @@
             ]
           },
           {
-            "id": "b728",
+            "id": "b735",
             "at": "internal/serverv2/create_work.go:375",
-            "cond": "in.DevOid != nil",
+            "cond": "in.ActorId|in.DevOid != nil",
             "predicate_paths": [
               "in.DevOid"
             ]
           },
           {
-            "id": "b729",
+            "id": "b736",
             "at": "internal/serverv2/create_work.go:405",
             "cond": "in.Ticket.SourceChannel == \"\"",
             "predicate_paths": [
@@ -12743,7 +12803,7 @@
             ]
           },
           {
-            "id": "b730",
+            "id": "b737",
             "at": "internal/serverv2/create_work.go:405",
             "cond": "in.Ticket.SourceChannelV2 == nil",
             "predicate_paths": [
@@ -12751,7 +12811,7 @@
             ]
           },
           {
-            "id": "b731",
+            "id": "b738",
             "at": "internal/serverv2/create_work.go:426",
             "cond": "in|in.ActorId|in.DevOid != nil",
             "predicate_paths": [
@@ -12759,7 +12819,7 @@
             ]
           },
           {
-            "id": "b732",
+            "id": "b739",
             "at": "internal/serverv2/create_work.go:431",
             "cond": "in.ActorId|in.DevOid|in.Ticket != nil",
             "predicate_paths": [
@@ -12768,7 +12828,7 @@
             ]
           },
           {
-            "id": "b733",
+            "id": "b740",
             "at": "internal/serverv2/create_work.go:437",
             "cond": "in.Ticket.SpaceId != nil",
             "predicate_paths": [
@@ -12776,7 +12836,7 @@
             ]
           },
           {
-            "id": "b734",
+            "id": "b741",
             "at": "internal/serverv2/create_work.go:472",
             "cond": "in.Issue.DisplayIdAlias != \"\"",
             "predicate_paths": [
@@ -12784,7 +12844,7 @@
             ]
           },
           {
-            "id": "b735",
+            "id": "b742",
             "at": "internal/serverv2/create_work.go:532",
             "cond": "in.Opportunity != nil",
             "predicate_paths": [
@@ -12792,7 +12852,7 @@
             ]
           },
           {
-            "id": "b736",
+            "id": "b743",
             "at": "internal/serverv2/create_work.go:494",
             "cond": "in|in.ActorId|in.DevOid != nil",
             "predicate_paths": [
@@ -12800,7 +12860,7 @@
             ]
           },
           {
-            "id": "b737",
+            "id": "b744",
             "at": "internal/serverv2/create_work.go:498",
             "cond": "in.Issue.SprintState != 0",
             "predicate_paths": [
@@ -12808,7 +12868,7 @@
             ]
           },
           {
-            "id": "b738",
+            "id": "b745",
             "at": "internal/serverv2/create_work.go:506",
             "cond": "in.Issue.SpaceId != nil",
             "predicate_paths": [
@@ -12816,7 +12876,7 @@
             ]
           },
           {
-            "id": "b739",
+            "id": "b746",
             "at": "internal/serverv2/create_work.go:533",
             "cond": "in.Opportunity.DisplayIdAlias != \"\"",
             "predicate_paths": [
@@ -12824,7 +12884,7 @@
             ]
           },
           {
-            "id": "b740",
+            "id": "b747",
             "at": "internal/serverv2/create_work.go:543",
             "cond": "in|in.ActorId|in.DevOid != nil",
             "predicate_paths": [
@@ -12832,7 +12892,7 @@
             ]
           },
           {
-            "id": "b741",
+            "id": "b748",
             "at": "internal/serverv2/create_work.go:549",
             "cond": "in|in.ActorId|in.DevOid != nil",
             "predicate_paths": [
@@ -12840,7 +12900,7 @@
             ]
           },
           {
-            "id": "b742",
+            "id": "b749",
             "at": "internal/serverv2/create_work.go:554",
             "cond": "in.Opportunity.SpaceId != nil",
             "predicate_paths": [
@@ -12848,7 +12908,7 @@
             ]
           },
           {
-            "id": "b744",
+            "id": "b751",
             "at": "internal/serverv2/create_work.go:673",
             "cond": "in.IsSystemUpdate",
             "predicate_paths": [
@@ -12856,7 +12916,7 @@
             ]
           },
           {
-            "id": "b745",
+            "id": "b752",
             "at": "internal/serverv2/create_work.go:682",
             "cond": "in.ActorId|in.DevOid|in.Id != nil",
             "predicate_paths": [
@@ -12865,7 +12925,7 @@
             ]
           },
           {
-            "id": "b746",
+            "id": "b753",
             "at": "internal/serverv2/create_work.go:758",
             "cond": "in|in.ActorId|in.DevOid != nil",
             "predicate_paths": [
@@ -15048,16 +15108,13 @@
           {
             "service": "this service",
             "calls": [
-              "GetDevOid",
-              "GetTags",
-              "SetError",
-              "SetTags"
+              "SetError"
             ]
           }
         ],
         "datastore_calls": [],
         "service_count": 2,
-        "call_count": 6,
+        "call_count": 3,
         "reached_by_test": true,
         "deps_result_used_in_response": 5,
         "deps_result_checked_by_test": 0,

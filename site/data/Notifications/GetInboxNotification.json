@@ -108,7 +108,9 @@
     },
     "dependencies": {
       "services": null,
-      "datastore_calls": [],
+      "datastore_calls": [
+        "ReadWithFilter"
+      ],
       "service_count": 0,
       "call_count": 0,
       "reached_by_test": false,
@@ -128,13 +130,13 @@
     "response_type": "api.GetInboxNotificationResponse",
     "sinks": [
       {
-        "kind": "dispatch",
-        "target": "GetInboxNotification",
+        "kind": "db",
+        "target": "ReadWithFilter",
         "via_paths": [
           "in.Id",
           "in.UserDon"
         ],
-        "at": "internal/service/inbox/service.go:92"
+        "at": "internal/infra/db/notification_repository.go:976"
       }
     ],
     "errors": [],

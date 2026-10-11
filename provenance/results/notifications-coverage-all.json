@@ -11,7 +11,7 @@
         "coverage_pct": 0
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 0,
+        "leaf_fields_read_by_rpc": 14,
         "covered_count": 0,
         "coverage_pct": 0,
         "request_fields_set_by_tests": 0,
@@ -19,34 +19,51 @@
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 0,
+            "total": 2,
             "set": 0,
             "pct": 0
           },
           "nested": {
-            "total": 0,
+            "total": 8,
             "set": 0,
             "pct": 0
           },
           "deep": {
-            "total": 0,
+            "total": 4,
             "set": 0,
             "pct": 0
           }
         },
         "representative": {
-          "units": 0,
+          "units": 3,
           "covered": 0,
           "pct": 0,
-          "collapsed_types": []
+          "collapsed_types": [
+            "api.ListInboxNotificationsFilter"
+          ]
         },
         "covered": null,
-        "gaps": null
+        "gaps": [
+          "in.Filter.ActorDons",
+          "in.Filter.LastNotificationTimestamp.TimestampFrom",
+          "in.Filter.LastNotificationTimestamp.TimestampTo",
+          "in.Filter.NotificationIds",
+          "in.Filter.ParentDons",
+          "in.Filter.ParentTypeOp",
+          "in.Filter.ParentTypes",
+          "in.Filter.Priorities",
+          "in.Filter.States",
+          "in.Filter.Types",
+          "in.Filter.UserParticipationFilter.Activities",
+          "in.Filter.UserParticipationFilter.Visibilities",
+          "in.GroupBy",
+          "in.UserDon"
+        ]
       },
       "branches": {
-        "total": 0,
+        "total": 8,
         "happy_path_reached": false,
-        "reachable_on_happy_path": 0,
+        "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
         "absent_arm_exercised": 0,
@@ -57,7 +74,7 @@
         "coverage_pct": 0,
         "by_origin": {
           "service": {
-            "total": 0,
+            "total": 8,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -84,7 +101,72 @@
             "absent_arm_exercised": 0
           }
         },
-        "gaps": []
+        "gaps": [
+          {
+            "id": "b1",
+            "at": "internal/infra/db/notification_repository.go:291",
+            "cond": "in.Filter == nil",
+            "predicate_paths": [
+              "in.Filter"
+            ]
+          },
+          {
+            "id": "b2",
+            "at": "internal/infra/db/notification_repository.go:369",
+            "cond": "in.Filter.ParentTypeOp == 1",
+            "predicate_paths": [
+              "in.Filter.ParentTypeOp"
+            ]
+          },
+          {
+            "id": "b3",
+            "at": "internal/infra/db/notification_repository.go:432",
+            "cond": "in.Filter.LastNotificationTimestamp != nil",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp"
+            ]
+          },
+          {
+            "id": "b4",
+            "at": "internal/infra/db/notification_repository.go:439",
+            "cond": "in.Filter.LastNotificationTimestamp.TimestampFrom \u003e= 0",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp.TimestampFrom"
+            ]
+          },
+          {
+            "id": "b5",
+            "at": "internal/infra/db/notification_repository.go:454",
+            "cond": "in.Filter.UserParticipationFilter != nil",
+            "predicate_paths": [
+              "in.Filter.UserParticipationFilter"
+            ]
+          },
+          {
+            "id": "b6",
+            "at": "internal/infra/db/notification_repository.go:445",
+            "cond": "in.Filter.LastNotificationTimestamp.TimestampTo \u003e 0",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp.TimestampTo"
+            ]
+          },
+          {
+            "id": "b7",
+            "at": "internal/infra/db/notification_repository.go:1408",
+            "cond": "in.GroupBy != \"\"",
+            "predicate_paths": [
+              "in.GroupBy"
+            ]
+          },
+          {
+            "id": "b8",
+            "at": "internal/infra/db/notification_repository.go:1422",
+            "cond": "in.GroupBy != \"\"",
+            "predicate_paths": [
+              "in.GroupBy"
+            ]
+          }
+        ]
       },
       "dependencies": {
         "services": null,
@@ -295,7 +377,9 @@
       },
       "dependencies": {
         "services": null,
-        "datastore_calls": [],
+        "datastore_calls": [
+          "DeleteMany"
+        ],
         "service_count": 0,
         "call_count": 0,
         "reached_by_test": false,
@@ -417,7 +501,9 @@
       },
       "dependencies": {
         "services": null,
-        "datastore_calls": [],
+        "datastore_calls": [
+          "ReadWithFilter"
+        ],
         "service_count": 0,
         "call_count": 0,
         "reached_by_test": false,
@@ -442,7 +528,7 @@
         "coverage_pct": 0
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 2,
+        "leaf_fields_read_by_rpc": 17,
         "covered_count": 0,
         "coverage_pct": 0,
         "request_fields_set_by_tests": 0,
@@ -450,37 +536,54 @@
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 2,
+            "total": 5,
             "set": 0,
             "pct": 0
           },
           "nested": {
-            "total": 0,
+            "total": 8,
             "set": 0,
             "pct": 0
           },
           "deep": {
-            "total": 0,
+            "total": 4,
             "set": 0,
             "pct": 0
           }
         },
         "representative": {
-          "units": 2,
+          "units": 6,
           "covered": 0,
           "pct": 0,
-          "collapsed_types": []
+          "collapsed_types": [
+            "api.ListInboxNotificationsFilter"
+          ]
         },
         "covered": null,
         "gaps": [
+          "in.Filter.ActorDons",
+          "in.Filter.LastNotificationTimestamp.TimestampFrom",
+          "in.Filter.LastNotificationTimestamp.TimestampTo",
+          "in.Filter.NotificationIds",
+          "in.Filter.ParentDons",
+          "in.Filter.ParentTypeOp",
+          "in.Filter.ParentTypes",
+          "in.Filter.Priorities",
+          "in.Filter.States",
+          "in.Filter.Types",
+          "in.Filter.UserParticipationFilter.Activities",
+          "in.Filter.UserParticipationFilter.Visibilities",
           "in.GroupBy",
+          "in.GroupSortBy",
+          "in.PerGroup",
+          "in.SortBy",
           "in.UserDon"
         ]
       },
       "branches": {
-        "total": 2,
+        "total": 19,
         "happy_path_reached": false,
-        "reachable_on_happy_path": 2,
+        "reachable_on_happy_path": 9,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
         "absent_arm_exercised": 0,
@@ -491,7 +594,7 @@
         "coverage_pct": 0,
         "by_origin": {
           "service": {
-            "total": 2,
+            "total": 9,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -509,7 +612,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 0,
+            "total": 10,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -521,6 +624,143 @@
         "gaps": [
           {
             "id": "b1",
+            "at": "internal/infra/db/notification_repository.go:291",
+            "cond": "in.Filter == nil",
+            "predicate_paths": [
+              "in.Filter"
+            ]
+          },
+          {
+            "id": "b2",
+            "at": "internal/infra/db/notification_repository.go:369",
+            "cond": "in.Filter.ParentTypeOp == 1",
+            "predicate_paths": [
+              "in.Filter.ParentTypeOp"
+            ]
+          },
+          {
+            "id": "b3",
+            "at": "internal/infra/db/notification_repository.go:432",
+            "cond": "in.Filter.LastNotificationTimestamp != nil",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp"
+            ]
+          },
+          {
+            "id": "b4",
+            "at": "internal/infra/db/notification_repository.go:439",
+            "cond": "in.Filter.LastNotificationTimestamp.TimestampFrom \u003e= 0",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp.TimestampFrom"
+            ]
+          },
+          {
+            "id": "b5",
+            "at": "internal/infra/db/notification_repository.go:454",
+            "cond": "in.Filter.UserParticipationFilter != nil",
+            "predicate_paths": [
+              "in.Filter.UserParticipationFilter"
+            ]
+          },
+          {
+            "id": "b6",
+            "at": "internal/infra/db/notification_repository.go:445",
+            "cond": "in.Filter.LastNotificationTimestamp.TimestampTo \u003e 0",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp.TimestampTo"
+            ]
+          },
+          {
+            "id": "b7",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261009232733-ce709132b122/db/group_item_helpers.go:96",
+            "cond": "in.PerGroup \u003c 0",
+            "predicate_paths": [
+              "in.PerGroup"
+            ]
+          },
+          {
+            "id": "b8",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261009232733-ce709132b122/db/group_item_helpers.go:99",
+            "cond": "in.PerGroup != 0",
+            "predicate_paths": [
+              "in.PerGroup"
+            ]
+          },
+          {
+            "id": "b9",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261009232733-ce709132b122/db/group_item_helpers.go:100",
+            "cond": "in.PerGroup \u003c 0",
+            "predicate_paths": [
+              "in.PerGroup"
+            ]
+          },
+          {
+            "id": "b10",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261009232733-ce709132b122/db/group_item_helpers.go:100",
+            "cond": "in.PerGroup \u003e *maxItemsPerGroup",
+            "predicate_paths": [
+              "in.PerGroup"
+            ]
+          },
+          {
+            "id": "b11",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261009232733-ce709132b122/db/group_item_helpers.go:118",
+            "cond": "in \u003c 0",
+            "predicate_paths": [
+              "in"
+            ]
+          },
+          {
+            "id": "b12",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261009232733-ce709132b122/db/group_item_helpers.go:121",
+            "cond": "in == 0",
+            "predicate_paths": [
+              "in"
+            ]
+          },
+          {
+            "id": "b13",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261009232733-ce709132b122/db/group_item_helpers.go:126",
+            "cond": "in != 0",
+            "predicate_paths": [
+              "in"
+            ]
+          },
+          {
+            "id": "b14",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261009232733-ce709132b122/db/group_item_helpers.go:127",
+            "cond": "in \u003c= 0",
+            "predicate_paths": [
+              "in"
+            ]
+          },
+          {
+            "id": "b15",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261009232733-ce709132b122/db/group_item_helpers.go:134",
+            "cond": "in * in.PerGroup \u003e *maxTotalGroupItems",
+            "predicate_paths": [
+              "in",
+              "in.PerGroup"
+            ]
+          },
+          {
+            "id": "b16",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261009232733-ce709132b122/db/group_item_helpers.go:127",
+            "cond": "in \u003e *maxGroupsPerPage",
+            "predicate_paths": [
+              "in"
+            ]
+          },
+          {
+            "id": "b17",
+            "at": "internal/infra/db/notification_repository.go:243",
+            "cond": "in.Filter != nil",
+            "predicate_paths": [
+              "in.Filter"
+            ]
+          },
+          {
+            "id": "b18",
             "at": "internal/service/inbox/service.go:107",
             "cond": "in.UserDon == nil",
             "predicate_paths": [
@@ -528,7 +768,7 @@
             ]
           },
           {
-            "id": "b2",
+            "id": "b19",
             "at": "internal/service/inbox/service.go:110",
             "cond": "in.GroupBy == \"\"",
             "predicate_paths": [
@@ -539,7 +779,9 @@
       },
       "dependencies": {
         "services": null,
-        "datastore_calls": [],
+        "datastore_calls": [
+          "Aggregate"
+        ],
         "service_count": 0,
         "call_count": 0,
         "reached_by_test": false,
@@ -583,7 +825,7 @@
         "coverage_pct": 12.5
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 1,
+        "leaf_fields_read_by_rpc": 14,
         "covered_count": 0,
         "coverage_pct": 0,
         "request_fields_set_by_tests": 1,
@@ -591,39 +833,54 @@
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 1,
+            "total": 2,
             "set": 0,
             "pct": 0
           },
           "nested": {
-            "total": 0,
+            "total": 8,
             "set": 0,
             "pct": 0
           },
           "deep": {
-            "total": 0,
+            "total": 4,
             "set": 0,
             "pct": 0
           }
         },
         "representative": {
-          "units": 1,
+          "units": 3,
           "covered": 0,
           "pct": 0,
-          "collapsed_types": []
+          "collapsed_types": [
+            "api.ListInboxNotificationsFilter"
+          ]
         },
         "covered": null,
         "gaps": [
+          "in.Filter.ActorDons",
+          "in.Filter.LastNotificationTimestamp.TimestampFrom",
+          "in.Filter.LastNotificationTimestamp.TimestampTo",
+          "in.Filter.NotificationIds",
+          "in.Filter.ParentDons",
+          "in.Filter.ParentTypeOp",
+          "in.Filter.ParentTypes",
+          "in.Filter.Priorities",
+          "in.Filter.States",
+          "in.Filter.Types",
+          "in.Filter.UserParticipationFilter.Activities",
+          "in.Filter.UserParticipationFilter.Visibilities",
+          "in.SortBy",
           "in.UserDon"
         ]
       },
       "branches": {
-        "total": 1,
+        "total": 13,
         "happy_path_reached": true,
-        "reachable_on_happy_path": 1,
+        "reachable_on_happy_path": 3,
         "present_arm_exercised": 0,
         "present_arm_pct": 0,
-        "absent_arm_exercised": 1,
+        "absent_arm_exercised": 3,
         "absent_arm_pct": 100,
         "negative_arm_exercised": 0,
         "negative_arm_pct": 0,
@@ -631,13 +888,13 @@
         "coverage_pct": 0,
         "by_origin": {
           "service": {
-            "total": 1,
-            "reachable_on_happy_path": 1,
+            "total": 8,
+            "reachable_on_happy_path": 3,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
             "negative_arm_exercised": 0,
             "negative_arm_pct": 0,
-            "absent_arm_exercised": 1
+            "absent_arm_exercised": 3
           },
           "generated": {
             "total": 0,
@@ -649,7 +906,7 @@
             "absent_arm_exercised": 0
           },
           "library": {
-            "total": 0,
+            "total": 5,
             "reachable_on_happy_path": 0,
             "present_arm_exercised": 0,
             "present_arm_pct": 0,
@@ -661,6 +918,102 @@
         "gaps": [
           {
             "id": "b1",
+            "at": "internal/infra/db/notification_repository.go:291",
+            "cond": "in.Filter == nil",
+            "predicate_paths": [
+              "in.Filter"
+            ]
+          },
+          {
+            "id": "b2",
+            "at": "internal/infra/db/notification_repository.go:369",
+            "cond": "in.Filter.ParentTypeOp == 1",
+            "predicate_paths": [
+              "in.Filter.ParentTypeOp"
+            ]
+          },
+          {
+            "id": "b3",
+            "at": "internal/infra/db/notification_repository.go:432",
+            "cond": "in.Filter.LastNotificationTimestamp != nil",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp"
+            ]
+          },
+          {
+            "id": "b4",
+            "at": "internal/infra/db/notification_repository.go:439",
+            "cond": "in.Filter.LastNotificationTimestamp.TimestampFrom \u003e= 0",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp.TimestampFrom"
+            ]
+          },
+          {
+            "id": "b5",
+            "at": "internal/infra/db/notification_repository.go:454",
+            "cond": "in.Filter.UserParticipationFilter != nil",
+            "predicate_paths": [
+              "in.Filter.UserParticipationFilter"
+            ]
+          },
+          {
+            "id": "b6",
+            "at": "internal/infra/db/notification_repository.go:445",
+            "cond": "in.Filter.LastNotificationTimestamp.TimestampTo \u003e 0",
+            "predicate_paths": [
+              "in.Filter.LastNotificationTimestamp.TimestampTo"
+            ]
+          },
+          {
+            "id": "b7",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261009232733-ce709132b122/db/list_item_helpers.go:115",
+            "cond": "in \u003c 0",
+            "predicate_paths": [
+              "in"
+            ]
+          },
+          {
+            "id": "b8",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261009232733-ce709132b122/db/list_item_helpers.go:118",
+            "cond": "in == 0",
+            "predicate_paths": [
+              "in"
+            ]
+          },
+          {
+            "id": "b9",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261009232733-ce709132b122/db/list_item_helpers.go:124",
+            "cond": "in != 0",
+            "predicate_paths": [
+              "in"
+            ]
+          },
+          {
+            "id": "b10",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261009232733-ce709132b122/db/list_item_helpers.go:125",
+            "cond": "in \u003c 0",
+            "predicate_paths": [
+              "in"
+            ]
+          },
+          {
+            "id": "b11",
+            "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261009232733-ce709132b122/db/list_item_helpers.go:125",
+            "cond": "in \u003e *t73",
+            "predicate_paths": [
+              "in"
+            ]
+          },
+          {
+            "id": "b12",
+            "at": "internal/infra/db/notification_repository.go:243",
+            "cond": "in.Filter != nil",
+            "predicate_paths": [
+              "in.Filter"
+            ]
+          },
+          {
+            "id": "b13",
             "at": "internal/service/inbox/service.go:100",
             "cond": "in.UserDon == nil",
             "predicate_paths": [
@@ -671,7 +1024,9 @@
       },
       "dependencies": {
         "services": null,
-        "datastore_calls": [],
+        "datastore_calls": [
+          "Aggregate"
+        ],
         "service_count": 0,
         "call_count": 0,
         "reached_by_test": true,
@@ -717,7 +1072,7 @@
         "coverage_pct": 0
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 0,
+        "leaf_fields_read_by_rpc": 2,
         "covered_count": 0,
         "coverage_pct": 0,
         "request_fields_set_by_tests": 0,
@@ -725,7 +1080,7 @@
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 0,
+            "total": 2,
             "set": 0,
             "pct": 0
           },
@@ -741,13 +1096,16 @@
           }
         },
         "representative": {
-          "units": 0,
+          "units": 2,
           "covered": 0,
           "pct": 0,
           "collapsed_types": []
         },
         "covered": null,
-        "gaps": null
+        "gaps": [
+          "in.Entries",
+          "in.UserDon"
+        ]
       },
       "branches": {
         "total": 1,
@@ -802,10 +1160,17 @@
         ]
       },
       "dependencies": {
-        "services": null,
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "UpdateManyWithFilter"
+            ]
+          }
+        ],
         "datastore_calls": [],
-        "service_count": 0,
-        "call_count": 0,
+        "service_count": 1,
+        "call_count": 1,
         "reached_by_test": false,
         "deps_result_used_in_response": 0,
         "deps_result_checked_by_test": 0,
@@ -828,7 +1193,7 @@
         "coverage_pct": 0
       },
       "fields": {
-        "leaf_fields_read_by_rpc": 0,
+        "leaf_fields_read_by_rpc": 2,
         "covered_count": 0,
         "coverage_pct": 0,
         "request_fields_set_by_tests": 0,
@@ -836,7 +1201,7 @@
         "set_by_negative_tests": 0,
         "by_depth": {
           "top_level": {
-            "total": 0,
+            "total": 2,
             "set": 0,
             "pct": 0
           },
@@ -852,13 +1217,16 @@
           }
         },
         "representative": {
-          "units": 0,
+          "units": 2,
           "covered": 0,
           "pct": 0,
           "collapsed_types": []
         },
         "covered": null,
-        "gaps": null
+        "gaps": [
+          "in.Entries",
+          "in.UserDon"
+        ]
       },
       "branches": {
         "total": 1,
@@ -913,10 +1281,17 @@
         ]
       },
       "dependencies": {
-        "services": null,
+        "services": [
+          {
+            "service": "this service",
+            "calls": [
+              "UpdateManyWithFilter"
+            ]
+          }
+        ],
         "datastore_calls": [],
-        "service_count": 0,
-        "call_count": 0,
+        "service_count": 1,
+        "call_count": 1,
         "reached_by_test": false,
         "deps_result_used_in_response": 0,
         "deps_result_checked_by_test": 0,

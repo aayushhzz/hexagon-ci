@@ -154,16 +154,13 @@
           "service": "this service",
           "calls": [
             "CreateJob",
-            "GetDevOid",
-            "GetTags",
-            "SetError",
-            "SetTags"
+            "SetError"
           ]
         }
       ],
       "datastore_calls": [],
       "service_count": 2,
-      "call_count": 7,
+      "call_count": 4,
       "reached_by_test": true,
       "deps_result_used_in_response": 1,
       "deps_result_checked_by_test": 0,
@@ -274,30 +271,6 @@
       },
       {
         "kind": "rpc",
-        "target": "GetTags",
-        "via_paths": [
-          "in.Id"
-        ],
-        "at": "internal/serverv2/tags.go:131"
-      },
-      {
-        "kind": "rpc",
-        "target": "GetDevOid",
-        "via_paths": [
-          "in.Id"
-        ],
-        "at": "internal/serverv2/tags.go:147"
-      },
-      {
-        "kind": "rpc",
-        "target": "SetTags",
-        "via_paths": [
-          "in.Id"
-        ],
-        "at": "internal/serverv2/tags.go:166"
-      },
-      {
-        "kind": "rpc",
         "target": "SetError",
         "via_paths": [
           "in.Id"
@@ -374,9 +347,44 @@
         "symbol": "ObjectTypeInvalid",
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:446",
         "tainted": false
+      },
+      {
+        "symbol": "ErrRevertFormatNotSupported",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/convert.go:363",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertFormatNotSupported",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/convert.go:369",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertObjectTypeNotSupported",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/convert.go:400",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertObjectTypeNotSupported",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/convert.go:445",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertComponentsNotSupported",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/convert.go:480",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertComponentsNotSupported",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/convert.go:493",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrRevertComponentsNotSupported",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/convert.go:490",
+        "tainted": false
       }
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ConvertConversation` (HTTP operation `ConversationsConvert`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ConvertTo.Ticket\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ConvertTo.Ticket != nil\n  - in.ConvertTo.Ticket != nil\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestoparts` -> suggestions []\n  - test field `convertto` -> suggestions []\n  - test field `messages` -> suggestions []\n  - test field `sourcechannel` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `ConvertConversation` (HTTP operation `ConversationsConvert`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [400, 401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ConvertTo.Ticket\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.ConvertTo.Ticket != nil\n  - in.ConvertTo.Ticket != nil\n  - in != nil\n\nError symbols this RPC can return (candidate negative assertions):\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ObjectTypeInvalid\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestoparts` -> suggestions []\n  - test field `convertto` -> suggestions []\n  - test field `messages` -> suggestions []\n  - test field `sourcechannel` -> suggestions []\n  - test field `title` -> suggestions []\n  - test field `type` -> suggestions []\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

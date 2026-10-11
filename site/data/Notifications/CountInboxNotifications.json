@@ -11,7 +11,7 @@
       "coverage_pct": 0
     },
     "fields": {
-      "leaf_fields_read_by_rpc": 0,
+      "leaf_fields_read_by_rpc": 14,
       "covered_count": 0,
       "coverage_pct": 0,
       "request_fields_set_by_tests": 0,
@@ -19,34 +19,51 @@
       "set_by_negative_tests": 0,
       "by_depth": {
         "top_level": {
-          "total": 0,
+          "total": 2,
           "set": 0,
           "pct": 0
         },
         "nested": {
-          "total": 0,
+          "total": 8,
           "set": 0,
           "pct": 0
         },
         "deep": {
-          "total": 0,
+          "total": 4,
           "set": 0,
           "pct": 0
         }
       },
       "representative": {
-        "units": 0,
+        "units": 3,
         "covered": 0,
         "pct": 0,
-        "collapsed_types": []
+        "collapsed_types": [
+          "api.ListInboxNotificationsFilter"
+        ]
       },
       "covered": null,
-      "gaps": null
+      "gaps": [
+        "in.Filter.ActorDons",
+        "in.Filter.LastNotificationTimestamp.TimestampFrom",
+        "in.Filter.LastNotificationTimestamp.TimestampTo",
+        "in.Filter.NotificationIds",
+        "in.Filter.ParentDons",
+        "in.Filter.ParentTypeOp",
+        "in.Filter.ParentTypes",
+        "in.Filter.Priorities",
+        "in.Filter.States",
+        "in.Filter.Types",
+        "in.Filter.UserParticipationFilter.Activities",
+        "in.Filter.UserParticipationFilter.Visibilities",
+        "in.GroupBy",
+        "in.UserDon"
+      ]
     },
     "branches": {
-      "total": 0,
+      "total": 8,
       "happy_path_reached": false,
-      "reachable_on_happy_path": 0,
+      "reachable_on_happy_path": 3,
       "present_arm_exercised": 0,
       "present_arm_pct": 0,
       "absent_arm_exercised": 0,
@@ -57,7 +74,7 @@
       "coverage_pct": 0,
       "by_origin": {
         "service": {
-          "total": 0,
+          "total": 8,
           "reachable_on_happy_path": 0,
           "present_arm_exercised": 0,
           "present_arm_pct": 0,
@@ -84,7 +101,72 @@
           "absent_arm_exercised": 0
         }
       },
-      "gaps": []
+      "gaps": [
+        {
+          "id": "b1",
+          "at": "internal/infra/db/notification_repository.go:291",
+          "cond": "in.Filter == nil",
+          "predicate_paths": [
+            "in.Filter"
+          ]
+        },
+        {
+          "id": "b2",
+          "at": "internal/infra/db/notification_repository.go:369",
+          "cond": "in.Filter.ParentTypeOp == 1",
+          "predicate_paths": [
+            "in.Filter.ParentTypeOp"
+          ]
+        },
+        {
+          "id": "b3",
+          "at": "internal/infra/db/notification_repository.go:432",
+          "cond": "in.Filter.LastNotificationTimestamp != nil",
+          "predicate_paths": [
+            "in.Filter.LastNotificationTimestamp"
+          ]
+        },
+        {
+          "id": "b4",
+          "at": "internal/infra/db/notification_repository.go:439",
+          "cond": "in.Filter.LastNotificationTimestamp.TimestampFrom >= 0",
+          "predicate_paths": [
+            "in.Filter.LastNotificationTimestamp.TimestampFrom"
+          ]
+        },
+        {
+          "id": "b5",
+          "at": "internal/infra/db/notification_repository.go:454",
+          "cond": "in.Filter.UserParticipationFilter != nil",
+          "predicate_paths": [
+            "in.Filter.UserParticipationFilter"
+          ]
+        },
+        {
+          "id": "b6",
+          "at": "internal/infra/db/notification_repository.go:445",
+          "cond": "in.Filter.LastNotificationTimestamp.TimestampTo > 0",
+          "predicate_paths": [
+            "in.Filter.LastNotificationTimestamp.TimestampTo"
+          ]
+        },
+        {
+          "id": "b7",
+          "at": "internal/infra/db/notification_repository.go:1408",
+          "cond": "in.GroupBy != \"\"",
+          "predicate_paths": [
+            "in.GroupBy"
+          ]
+        },
+        {
+          "id": "b8",
+          "at": "internal/infra/db/notification_repository.go:1422",
+          "cond": "in.GroupBy != \"\"",
+          "predicate_paths": [
+            "in.GroupBy"
+          ]
+        }
+      ]
     },
     "dependencies": {
       "services": null,
@@ -106,18 +188,9 @@
     "func": "(*github.com/devrev/notifications/internal/server.GRPCServer).CountInboxNotifications",
     "request_type": "api.CountInboxNotificationsRequest",
     "response_type": "api.CountInboxNotificationsResponse",
-    "sinks": [
-      {
-        "kind": "dispatch",
-        "target": "CountInboxNotifications",
-        "via_paths": [
-          "in"
-        ],
-        "at": "internal/service/inbox/service.go:147"
-      }
-    ],
+    "sinks": [],
     "errors": [],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CountInboxNotifications` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - none\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - none\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CountInboxNotifications` (HTTP operation ``).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): none\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.Filter.ActorDons\n  - in.Filter.LastNotificationTimestamp.TimestampFrom\n  - in.Filter.LastNotificationTimestamp.TimestampTo\n  - in.Filter.NotificationIds\n  - in.Filter.ParentDons\n  - in.Filter.ParentTypeOp\n  - in.Filter.ParentTypes\n  - in.Filter.Priorities\n  - in.Filter.States\n  - in.Filter.Types\n  - in.Filter.UserParticipationFilter.Activities\n  - in.Filter.UserParticipationFilter.Visibilities\n  - in.GroupBy\n  - in.UserDon\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.Filter == nil\n  - in.Filter.ParentTypeOp == 1\n  - in.Filter.LastNotificationTimestamp != nil\n  - in.Filter.LastNotificationTimestamp.TimestampFrom >= 0\n  - in.Filter.UserParticipationFilter != nil\n  - in.Filter.LastNotificationTimestamp.TimestampTo > 0\n  - in.GroupBy != \"\"\n  - in.GroupBy != \"\"\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

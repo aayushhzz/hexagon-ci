@@ -379,8 +379,9 @@ func (a *analyzer) stepCall(callVal ssa.Value, c *ssa.CallCommon, taint map[ssa.
 		}
 		return taint[callVal].union(ps)
 	}
-	// Interface dispatch (VTA resolution is future work). Record a sink when
-	// the receiver OR any argument is tainted, classified by method/receiver.
+	// Interface dispatch. Prefer single-implementation devirtualization: when
+	// the interface has exactly one concrete implementer, follow that method so
+	// its real DB/RPC sinks are discovered. Otherwise record a dispatch sink.
 	if c.IsInvoke() {
 		via := pathSet{}
 		if ps, ok := taint[c.Value]; ok {
@@ -391,7 +392,24 @@ func (a *analyzer) stepCall(callVal ssa.Value, c *ssa.CallCommon, taint map[ssa.
 				via.union(ps)
 			}
 		}
-		if len(via) > 0 && !isPlumbingMethod(c.Method.Name()) {
+		if len(via) == 0 {
+			return false
+		}
+		if callee := a.l.soleImpl(c); callee != nil && len(callee.Blocks) > 0 {
+			// Invoke args exclude the receiver, so seed param 0 with the
+			// receiver taint and shift the remaining arguments by one.
+			seed := map[int]pathSet{}
+			if ps, ok := taint[c.Value]; ok {
+				seed[0] = ps.clone()
+			}
+			for i, arg := range c.Args {
+				if ps, ok := taint[arg]; ok {
+					seed[i+1] = ps.clone()
+				}
+			}
+			return a.followCallee(callVal, callee, seed, via, tuple, setSingle)
+		}
+		if !isPlumbingMethod(c.Method.Name()) {
 			a.recordSink(classifyInvoke(c), c.Method.Name(), via, callVal.(ssa.Instruction))
 		}
 		return false
@@ -432,6 +450,14 @@ func (a *analyzer) stepCall(callVal ssa.Value, c *ssa.CallCommon, taint map[ssa.
 	for _, ps := range calleeSeed {
 		via.union(ps)
 	}
+	return a.followCallee(callVal, callee, calleeSeed, via, tuple, setSingle)
+}
+
+// followCallee follows a resolved callee (static or devirtualized): it seeds the
+// callee params, recurses, and propagates return taint. calleeSeed is indexed
+// by the callee's own parameter positions (receiver at 0 for methods). via is
+// the union of seeded paths, used for bodyless sinks and constructor fallback.
+func (a *analyzer) followCallee(callVal ssa.Value, callee *ssa.Function, calleeSeed map[int]pathSet, via pathSet, tuple map[ssa.Value]map[int]pathSet, setSingle func(pathSet) bool) bool {
 	if len(callee.Blocks) > 0 {
 		dprintf("follow %s seed=%v\n", callee.Name(), calleeSeed)
 		// Follow repo-local function and propagate its return taint precisely.

@@ -381,26 +381,26 @@
       ]
     },
     "branches": {
-      "total": 746,
+      "total": 753,
       "happy_path_reached": true,
-      "reachable_on_happy_path": 72,
+      "reachable_on_happy_path": 75,
       "present_arm_exercised": 32,
-      "present_arm_pct": 4.3,
-      "absent_arm_exercised": 72,
+      "present_arm_pct": 4.2,
+      "absent_arm_exercised": 75,
       "absent_arm_pct": 100,
       "negative_arm_exercised": 17,
       "negative_arm_pct": 2.3,
       "both_arms_exercised": 15,
-      "coverage_pct": 4.3,
+      "coverage_pct": 4.2,
       "by_origin": {
         "service": {
-          "total": 88,
-          "reachable_on_happy_path": 22,
+          "total": 94,
+          "reachable_on_happy_path": 24,
           "present_arm_exercised": 3,
-          "present_arm_pct": 3.4,
+          "present_arm_pct": 3.2,
           "negative_arm_exercised": 1,
           "negative_arm_pct": 1.1,
-          "absent_arm_exercised": 22
+          "absent_arm_exercised": 24
         },
         "generated": {
           "total": 465,
@@ -412,13 +412,13 @@
           "absent_arm_exercised": 17
         },
         "library": {
-          "total": 193,
-          "reachable_on_happy_path": 33,
+          "total": 194,
+          "reachable_on_happy_path": 34,
           "present_arm_exercised": 9,
-          "present_arm_pct": 4.7,
+          "present_arm_pct": 4.6,
           "negative_arm_exercised": 0,
           "negative_arm_pct": 0,
-          "absent_arm_exercised": 33
+          "absent_arm_exercised": 34
         }
       },
       "gaps": [
@@ -5867,6 +5867,62 @@
         },
         {
           "id": "b711",
+          "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/don.go:593",
+          "cond": "in.ActorId|in.DevOid == nil",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b712",
+          "at": "internal/serverv2/works_helper.go:1264",
+          "cond": "in.ActorId|in.DevOid|in.Ticket.ReportedByIds == nil",
+          "predicate_paths": [
+            "in.Ticket.ReportedByIds"
+          ]
+        },
+        {
+          "id": "b713",
+          "at": "internal/serverv2/works_helper.go:1195",
+          "cond": "in.ActorId|in.DevOid|in.Ticket.RevOid == nil",
+          "predicate_paths": [
+            "in.Ticket.RevOid"
+          ]
+        },
+        {
+          "id": "b714",
+          "at": "internal/serverv2/works_helper.go:1227",
+          "cond": "in.ActorId|in.DevOid|in.Ticket.RevOid == nil",
+          "predicate_paths": [
+            "in.Ticket.RevOid"
+          ]
+        },
+        {
+          "id": "b715",
+          "at": "internal/serverv2/works_helper.go:1206",
+          "cond": "in.ActorId|in.DevOid|in.Ticket.RevOid == nil",
+          "predicate_paths": [
+            "in.Ticket.RevOid"
+          ]
+        },
+        {
+          "id": "b716",
+          "at": "internal/serverv2/works_helper.go:1200",
+          "cond": "in.ActorId|in.DevOid != nil",
+          "predicate_paths": [
+            "in.DevOid"
+          ]
+        },
+        {
+          "id": "b717",
+          "at": "internal/serverv2/work_crud_helpers.go:62",
+          "cond": "in.ActorId|in.DevOid == nil",
+          "predicate_paths": [
+            "in.ActorId"
+          ]
+        },
+        {
+          "id": "b718",
           "at": "internal/serverv2/create_work.go:222",
           "cond": "in.DevOid != nil",
           "predicate_paths": [
@@ -5874,7 +5930,7 @@
           ]
         },
         {
-          "id": "b712",
+          "id": "b719",
           "at": "internal/serverv2/create_work.go:261",
           "cond": "in.Ticket != nil",
           "predicate_paths": [
@@ -5882,7 +5938,7 @@
           ]
         },
         {
-          "id": "b713",
+          "id": "b720",
           "at": "internal/serverv2/create_work.go:471",
           "cond": "in.Issue != nil",
           "predicate_paths": [
@@ -5890,7 +5946,7 @@
           ]
         },
         {
-          "id": "b714",
+          "id": "b721",
           "at": "internal/serverv2/create_work.go:365",
           "cond": "in.ActorId|in.DevOid|in.Ticket != nil",
           "predicate_paths": [
@@ -5899,7 +5955,7 @@
           ]
         },
         {
-          "id": "b715",
+          "id": "b722",
           "at": "internal/serverv2/create_work.go:298",
           "cond": "in.Ticket.Body == \"\"",
           "predicate_paths": [
@@ -5907,7 +5963,7 @@
           ]
         },
         {
-          "id": "b717",
+          "id": "b724",
           "at": "internal/serverv2/create_work.go:304",
           "cond": "in.Ticket.AppliesToPartId == nil",
           "predicate_paths": [
@@ -5915,7 +5971,7 @@
           ]
         },
         {
-          "id": "b718",
+          "id": "b725",
           "at": "internal/serverv2/create_work.go:307",
           "cond": "in.Ticket.Channels == nil",
           "predicate_paths": [
@@ -5923,7 +5979,7 @@
           ]
         },
         {
-          "id": "b719",
+          "id": "b726",
           "at": "internal/serverv2/create_work.go:310",
           "cond": "in.Ticket.ChannelsV2 == nil",
           "predicate_paths": [
@@ -5931,7 +5987,7 @@
           ]
         },
         {
-          "id": "b720",
+          "id": "b727",
           "at": "internal/serverv2/create_work.go:313",
           "cond": "in.Ticket.SourceChannelV2 == nil",
           "predicate_paths": [
@@ -5939,7 +5995,7 @@
           ]
         },
         {
-          "id": "b721",
+          "id": "b728",
           "at": "internal/serverv2/create_work.go:316",
           "cond": "in.Ticket.AccountId == nil",
           "predicate_paths": [
@@ -5947,7 +6003,7 @@
           ]
         },
         {
-          "id": "b722",
+          "id": "b729",
           "at": "internal/serverv2/create_work.go:329",
           "cond": "in.Ticket.RevOid == nil",
           "predicate_paths": [
@@ -5955,7 +6011,7 @@
           ]
         },
         {
-          "id": "b723",
+          "id": "b730",
           "at": "internal/serverv2/create_work.go:332",
           "cond": "in.Ticket.ReportedByIds == nil",
           "predicate_paths": [
@@ -5963,7 +6019,7 @@
           ]
         },
         {
-          "id": "b724",
+          "id": "b731",
           "at": "internal/serverv2/create_work.go:337",
           "cond": "in.Ticket.CustomFields == nil",
           "predicate_paths": [
@@ -5971,7 +6027,7 @@
           ]
         },
         {
-          "id": "b725",
+          "id": "b732",
           "at": "internal/serverv2/create_work.go:344",
           "cond": "in.Ticket.ArtifactIds == nil",
           "predicate_paths": [
@@ -5979,7 +6035,7 @@
           ]
         },
         {
-          "id": "b726",
+          "id": "b733",
           "at": "internal/serverv2/create_work.go:369",
           "cond": "in.ActorId == *ObjectTypeRevUser",
           "predicate_paths": [
@@ -5987,7 +6043,7 @@
           ]
         },
         {
-          "id": "b727",
+          "id": "b734",
           "at": "internal/serverv2/create_work.go:383",
           "cond": "in|in.ActorId|in.DevOid != nil",
           "predicate_paths": [
@@ -5995,15 +6051,15 @@
           ]
         },
         {
-          "id": "b728",
+          "id": "b735",
           "at": "internal/serverv2/create_work.go:375",
-          "cond": "in.DevOid != nil",
+          "cond": "in.ActorId|in.DevOid != nil",
           "predicate_paths": [
             "in.DevOid"
           ]
         },
         {
-          "id": "b729",
+          "id": "b736",
           "at": "internal/serverv2/create_work.go:405",
           "cond": "in.Ticket.SourceChannel == \"\"",
           "predicate_paths": [
@@ -6011,7 +6067,7 @@
           ]
         },
         {
-          "id": "b730",
+          "id": "b737",
           "at": "internal/serverv2/create_work.go:405",
           "cond": "in.Ticket.SourceChannelV2 == nil",
           "predicate_paths": [
@@ -6019,7 +6075,7 @@
           ]
         },
         {
-          "id": "b731",
+          "id": "b738",
           "at": "internal/serverv2/create_work.go:426",
           "cond": "in|in.ActorId|in.DevOid != nil",
           "predicate_paths": [
@@ -6027,7 +6083,7 @@
           ]
         },
         {
-          "id": "b732",
+          "id": "b739",
           "at": "internal/serverv2/create_work.go:431",
           "cond": "in.ActorId|in.DevOid|in.Ticket != nil",
           "predicate_paths": [
@@ -6036,7 +6092,7 @@
           ]
         },
         {
-          "id": "b733",
+          "id": "b740",
           "at": "internal/serverv2/create_work.go:437",
           "cond": "in.Ticket.SpaceId != nil",
           "predicate_paths": [
@@ -6044,7 +6100,7 @@
           ]
         },
         {
-          "id": "b734",
+          "id": "b741",
           "at": "internal/serverv2/create_work.go:472",
           "cond": "in.Issue.DisplayIdAlias != \"\"",
           "predicate_paths": [
@@ -6052,7 +6108,7 @@
           ]
         },
         {
-          "id": "b735",
+          "id": "b742",
           "at": "internal/serverv2/create_work.go:532",
           "cond": "in.Opportunity != nil",
           "predicate_paths": [
@@ -6060,7 +6116,7 @@
           ]
         },
         {
-          "id": "b736",
+          "id": "b743",
           "at": "internal/serverv2/create_work.go:494",
           "cond": "in|in.ActorId|in.DevOid != nil",
           "predicate_paths": [
@@ -6068,7 +6124,7 @@
           ]
         },
         {
-          "id": "b737",
+          "id": "b744",
           "at": "internal/serverv2/create_work.go:498",
           "cond": "in.Issue.SprintState != 0",
           "predicate_paths": [
@@ -6076,7 +6132,7 @@
           ]
         },
         {
-          "id": "b738",
+          "id": "b745",
           "at": "internal/serverv2/create_work.go:506",
           "cond": "in.Issue.SpaceId != nil",
           "predicate_paths": [
@@ -6084,7 +6140,7 @@
           ]
         },
         {
-          "id": "b739",
+          "id": "b746",
           "at": "internal/serverv2/create_work.go:533",
           "cond": "in.Opportunity.DisplayIdAlias != \"\"",
           "predicate_paths": [
@@ -6092,7 +6148,7 @@
           ]
         },
         {
-          "id": "b740",
+          "id": "b747",
           "at": "internal/serverv2/create_work.go:543",
           "cond": "in|in.ActorId|in.DevOid != nil",
           "predicate_paths": [
@@ -6100,7 +6156,7 @@
           ]
         },
         {
-          "id": "b741",
+          "id": "b748",
           "at": "internal/serverv2/create_work.go:549",
           "cond": "in|in.ActorId|in.DevOid != nil",
           "predicate_paths": [
@@ -6108,7 +6164,7 @@
           ]
         },
         {
-          "id": "b742",
+          "id": "b749",
           "at": "internal/serverv2/create_work.go:554",
           "cond": "in.Opportunity.SpaceId != nil",
           "predicate_paths": [
@@ -6116,7 +6172,7 @@
           ]
         },
         {
-          "id": "b744",
+          "id": "b751",
           "at": "internal/serverv2/create_work.go:673",
           "cond": "in.IsSystemUpdate",
           "predicate_paths": [
@@ -6124,7 +6180,7 @@
           ]
         },
         {
-          "id": "b745",
+          "id": "b752",
           "at": "internal/serverv2/create_work.go:682",
           "cond": "in.ActorId|in.DevOid|in.Id != nil",
           "predicate_paths": [
@@ -6133,7 +6189,7 @@
           ]
         },
         {
-          "id": "b746",
+          "id": "b753",
           "at": "internal/serverv2/create_work.go:758",
           "cond": "in|in.ActorId|in.DevOid != nil",
           "predicate_paths": [
@@ -7240,6 +7296,31 @@
         "tainted": false
       },
       {
+        "symbol": "ErrActAsNotFound",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/user/user.go:187",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrSvcAccNotFound",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/user/user.go:126",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrAuth0UserNotFound",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/user/user.go:175",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrActAsByNotFound",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/user/user.go:199",
+        "tainted": false
+      },
+      {
+        "symbol": "ErrSubjectNotFound",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/user/user.go:272",
+        "tainted": false
+      },
+      {
         "symbol": "ErrServiceContextNotFound",
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/go/service/context/context.go:60",
         "tainted": false
@@ -7308,6 +7389,11 @@
         "symbol": "ErrRevertComponentsNotSupported",
         "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/donv2/convert.go:490",
         "tainted": true
+      },
+      {
+        "symbol": "ErrSurfaceIDNotFound",
+        "at": "/Users/devrev/go/pkg/mod/github.com/devrev/shared@v0.1.3-0.20261006223349-2fc30444751a/user/user.go:162",
+        "tainted": false
       },
       {
         "symbol": "ErrWrongClient",
@@ -7432,5 +7518,5 @@
     ],
     "unresolved": []
   },
-  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateWork` (HTTP operation `WorksCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.CreateEmbeddedTasks\n  - in.CreateLinks\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.IsSystemUpdate\n  - in.Issue.DisplayIdAlias\n  - in.Issue.OwnedByIds\n  - in.Issue.SpaceId\n  - in.Issue.SprintState\n  - in.Issue.Stage\n  - in.Opportunity.DisplayIdAlias\n  - in.Opportunity.SpaceId\n  - in.Opportunity.Stage\n  - in.StageValidationOptions\n  - in.Task.Stage\n  - in.Ticket.AccountId\n  - in.Ticket.AppliesToPartId\n  - in.Ticket.ArtifactIds\n  - in.Ticket.Body\n  - in.Ticket.BrandId\n  - in.Ticket.Channels\n  - in.Ticket.ChannelsV2\n  - in.Ticket.CustomFields\n  - in.Ticket.CustomSchemaFragmentIds\n  - in.Ticket.Group\n  - in.Ticket.IsFrozen\n  - in.Ticket.IsSpam\n  - in.Ticket.NeedsResponse\n  - in.Ticket.OwnedByIds\n  - in.Ticket.ReportedByIds\n  - in.Ticket.RevOid\n  - in.Ticket.SlaId\n  - in.Ticket.SourceChannel\n  - in.Ticket.SourceChannelV2\n  - in.Ticket.SourceChannelV2Instance\n  - in.Ticket.SpaceId\n  - in.Ticket.Stage\n  - in.Ticket.Visibility\n  - in.WorkOneof.Issue.AppliesToPartId\n  - in.WorkOneof.Issue.AppliesToVersionIds\n  - in.WorkOneof.Issue.ArtifactIds\n  - in.WorkOneof.Issue.Body\n  - in.WorkOneof.Issue.DevelopedWith\n  - in.WorkOneof.Issue.DevrevCopy.OriginId\n  - in.WorkOneof.Issue.DevrevCopy.OriginOrgId\n  - in.WorkOneof.Issue.EventContext.Source\n  - in.WorkOneof.Issue.ExternalRef\n  - in.WorkOneof.Issue.ExternalSourceData.CreatedById\n  - in.WorkOneof.Issue.ExternalSourceData.ModifiedById\n  - in.WorkOneof.Issue.MilestoneId\n  - in.WorkOneof.Issue.OwnedByIds\n  - in.WorkOneof.Issue.Priority\n  - in.WorkOneof.Issue.ProjectId\n  - in.WorkOneof.Issue.Reactions\n  - in.WorkOneof.Issue.ReleaseVersionIds\n  - in.WorkOneof.Issue.ReportedById\n  - in.WorkOneof.Issue.ReportedByIds\n  - in.WorkOneof.Issue.SharedWith\n  - (+123 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.WorkOneof\n  - in.WorkOneof.Ticket.WorkType == 5\n  - in.WorkOneof.Issue.WorkType == 2\n  - in.WorkOneof.Task.WorkType == 4\n  - in.WorkOneof.Opportunity.WorkType == 6\n  - in.ActorId == nil\n  - in.DevOid == nil\n  - in.DevOid != objType\n  - in.DevOid == nil\n  - in.DevOid == *ObjectTypeCustomObject\n  - in.DevOid == nil\n  - in.Ticket.ReportedByIds == nil\n  - in.DevOid\n  - in.DevOid|in.Ticket.ReportedByIds == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid != nil\n  - in.DevOid\n  - in.ActorId != *ObjectTypeRevUser\n  - in.Ticket.AppliesToPartId != nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.IsSpam == nil\n  - in.Ticket.IsFrozen == nil\n  - in.Ticket.NeedsResponse == nil\n  - in.Ticket.Visibility == nil\n  - in.Ticket.SourceChannel == nil\n  - in.Ticket.SourceChannel == *t59\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.BrandId|in.Ticket.Group|in.Ticket.SpaceId|in.Ticket.Tags == nil\n  - in.Ticket.BrandId|in.Ticket.SourceChannelV2Instance|in.Ticket.SpaceId == nil\n  - in.Ticket.ChannelsV2 != nil\n  - in.Ticket.Channels != nil\n  - in.Ticket.SourceChannelV2 != nil\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.SourceChannel == *t43\n  - in.Ticket.SourceChannel == *t54\n  - in.Ticket.SourceChannel == *t57\n  - in.Ticket.SourceChannel == *t60\n  - (+674 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - EOF\n  - ErrAuthContextNotFound\n  - ErrCorruptedDocument\n  - ErrDecodeToNil\n  - ErrDocumentTooLarge\n  - ErrElementNotFound\n  - ErrEmptyKey\n  - ErrEmptyWriteConcern\n  - ErrInconsistent\n  - ErrInvalidDocumentSequenceStyle\n  - ErrNegativeMaxTime\n  - ErrNegativeW\n  - ErrNegativeWTimeout\n  - ErrNilRegistry\n  - ErrNilType\n  - ErrNonDocument\n  - ErrNonPrimaryReadPref\n  - ErrParseServiceContext\n  - ErrParseUserContext\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ErrServiceContextNotFound\n  - ErrSessionEnded\n  - ErrUserContextNotFound\n  - ErrWrongClient\n  - ObjectTypeInvalid\n  - ObjectTypeIssue\n  - ObjectTypeOpportunity\n  - ObjectTypeTask\n  - ObjectTypeTicket\n  - dNaN\n  - dNegInf\n  - dPosInf\n  - errDatabaseNameEmpty\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions ['in.Ticket.AppliesToPartId', 'in.WorkOneof.Issue.AppliesToPartId', 'in.WorkOneof.Task.AppliesToPartId', 'in.WorkOneof.Ticket.AppliesToPartId']\n  - test field `appname` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Issue.OwnedByIds', 'in.Ticket.OwnedByIds', 'in.WorkOneof.Issue.OwnedByIds', 'in.WorkOneof.Opportunity.OwnedByIds', 'in.WorkOneof.Task.OwnedByIds', 'in.WorkOneof.Ticket.OwnedByAgentId', 'in.WorkOneof.Ticket.OwnedByIds']\n  - test field `type` -> suggestions ['in.WorkOneof.Issue.WorkType', 'in.WorkOneof.Opportunity.WorkType', 'in.WorkOneof.Task.WorkType', 'in.WorkOneof.Ticket.WorkType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
+  "agent_prompt": "Add lifejacket (Ginkgo) tests for the janus RPC `CreateWork` (HTTP operation `WorksCreate`).\n\nContext: this is driven by static provenance+coverage analysis. Goal is to\nclose the specific gaps below. Follow existing patterns in the matching\ntestcases/ package (MakeRequest + Expect on status/error).\n\nUntested HTTP statuses to assert (documented but never asserted): [401, 403, 413, 429, 500, 503]\n\nRequest leaf fields the RPC reads but no test sets (add positive cases that\npopulate these, grouped by depth so nested filters are reached):\n  - in.ActorId\n  - in.AggregateErrors\n  - in.CreateEmbeddedTasks\n  - in.CreateLinks\n  - in.CustomSchemaSpec.Drop\n  - in.DevOid\n  - in.IsSystemUpdate\n  - in.Issue.DisplayIdAlias\n  - in.Issue.OwnedByIds\n  - in.Issue.SpaceId\n  - in.Issue.SprintState\n  - in.Issue.Stage\n  - in.Opportunity.DisplayIdAlias\n  - in.Opportunity.SpaceId\n  - in.Opportunity.Stage\n  - in.StageValidationOptions\n  - in.Task.Stage\n  - in.Ticket.AccountId\n  - in.Ticket.AppliesToPartId\n  - in.Ticket.ArtifactIds\n  - in.Ticket.Body\n  - in.Ticket.BrandId\n  - in.Ticket.Channels\n  - in.Ticket.ChannelsV2\n  - in.Ticket.CustomFields\n  - in.Ticket.CustomSchemaFragmentIds\n  - in.Ticket.Group\n  - in.Ticket.IsFrozen\n  - in.Ticket.IsSpam\n  - in.Ticket.NeedsResponse\n  - in.Ticket.OwnedByIds\n  - in.Ticket.ReportedByIds\n  - in.Ticket.RevOid\n  - in.Ticket.SlaId\n  - in.Ticket.SourceChannel\n  - in.Ticket.SourceChannelV2\n  - in.Ticket.SourceChannelV2Instance\n  - in.Ticket.SpaceId\n  - in.Ticket.Stage\n  - in.Ticket.Visibility\n  - in.WorkOneof.Issue.AppliesToPartId\n  - in.WorkOneof.Issue.AppliesToVersionIds\n  - in.WorkOneof.Issue.ArtifactIds\n  - in.WorkOneof.Issue.Body\n  - in.WorkOneof.Issue.DevelopedWith\n  - in.WorkOneof.Issue.DevrevCopy.OriginId\n  - in.WorkOneof.Issue.DevrevCopy.OriginOrgId\n  - in.WorkOneof.Issue.EventContext.Source\n  - in.WorkOneof.Issue.ExternalRef\n  - in.WorkOneof.Issue.ExternalSourceData.CreatedById\n  - in.WorkOneof.Issue.ExternalSourceData.ModifiedById\n  - in.WorkOneof.Issue.MilestoneId\n  - in.WorkOneof.Issue.OwnedByIds\n  - in.WorkOneof.Issue.Priority\n  - in.WorkOneof.Issue.ProjectId\n  - in.WorkOneof.Issue.Reactions\n  - in.WorkOneof.Issue.ReleaseVersionIds\n  - in.WorkOneof.Issue.ReportedById\n  - in.WorkOneof.Issue.ReportedByIds\n  - in.WorkOneof.Issue.SharedWith\n  - (+123 more)\n\nValidation branches whose present (failure) arm is never exercised. Add\nnegative cases that send invalid values for these and assert the 4xx:\n  - in.WorkOneof\n  - in.WorkOneof.Ticket.WorkType == 5\n  - in.WorkOneof.Issue.WorkType == 2\n  - in.WorkOneof.Task.WorkType == 4\n  - in.WorkOneof.Opportunity.WorkType == 6\n  - in.ActorId == nil\n  - in.DevOid == nil\n  - in.DevOid != objType\n  - in.DevOid == nil\n  - in.DevOid == *ObjectTypeCustomObject\n  - in.DevOid == nil\n  - in.Ticket.ReportedByIds == nil\n  - in.DevOid\n  - in.DevOid|in.Ticket.ReportedByIds == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid|in.Ticket.RevOid == nil\n  - in.DevOid != nil\n  - in.DevOid\n  - in.ActorId != *ObjectTypeRevUser\n  - in.Ticket.AppliesToPartId != nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.AppliesToPartId == nil\n  - in.Ticket.IsSpam == nil\n  - in.Ticket.IsFrozen == nil\n  - in.Ticket.NeedsResponse == nil\n  - in.Ticket.Visibility == nil\n  - in.Ticket.SourceChannel == nil\n  - in.Ticket.SourceChannel == *t59\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.BrandId|in.Ticket.Group|in.Ticket.SpaceId|in.Ticket.Tags == nil\n  - in.Ticket.BrandId|in.Ticket.SourceChannelV2Instance|in.Ticket.SpaceId == nil\n  - in.Ticket.ChannelsV2 != nil\n  - in.Ticket.Channels != nil\n  - in.Ticket.SourceChannelV2 != nil\n  - in.Ticket.SourceChannel != nil\n  - in.Ticket.SourceChannel == *t43\n  - in.Ticket.SourceChannel == *t54\n  - in.Ticket.SourceChannel == *t57\n  - in.Ticket.SourceChannel == *t60\n  - (+681 more)\n\nError symbols this RPC can return (candidate negative assertions):\n  - EOF\n  - ErrActAsByNotFound\n  - ErrActAsNotFound\n  - ErrAuth0UserNotFound\n  - ErrAuthContextNotFound\n  - ErrCorruptedDocument\n  - ErrDecodeToNil\n  - ErrDocumentTooLarge\n  - ErrElementNotFound\n  - ErrEmptyKey\n  - ErrEmptyWriteConcern\n  - ErrInconsistent\n  - ErrInvalidDocumentSequenceStyle\n  - ErrNegativeMaxTime\n  - ErrNegativeW\n  - ErrNegativeWTimeout\n  - ErrNilRegistry\n  - ErrNilType\n  - ErrNonDocument\n  - ErrNonPrimaryReadPref\n  - ErrParseServiceContext\n  - ErrParseUserContext\n  - ErrRevertComponentsNotSupported\n  - ErrRevertFormatNotSupported\n  - ErrRevertObjectTypeNotSupported\n  - ErrServiceContextNotFound\n  - ErrSessionEnded\n  - ErrSubjectNotFound\n  - ErrSurfaceIDNotFound\n  - ErrSvcAccNotFound\n  - ErrUserContextNotFound\n  - ErrWrongClient\n  - ObjectTypeInvalid\n  - ObjectTypeIssue\n  - ObjectTypeOpportunity\n  - ObjectTypeTask\n  - ObjectTypeTicket\n  - dNaN\n  - dNegInf\n  - dPosInf\n\nField name mismatches (HTTP vs RPC) to confirm before writing tests:\n  - test field `appliestopart` -> suggestions ['in.Ticket.AppliesToPartId', 'in.WorkOneof.Issue.AppliesToPartId', 'in.WorkOneof.Task.AppliesToPartId', 'in.WorkOneof.Ticket.AppliesToPartId']\n  - test field `appname` -> suggestions []\n  - test field `ownedby` -> suggestions ['in.Issue.OwnedByIds', 'in.Ticket.OwnedByIds', 'in.WorkOneof.Issue.OwnedByIds', 'in.WorkOneof.Opportunity.OwnedByIds', 'in.WorkOneof.Task.OwnedByIds', 'in.WorkOneof.Ticket.OwnedByAgentId', 'in.WorkOneof.Ticket.OwnedByIds']\n  - test field `type` -> suggestions ['in.WorkOneof.Issue.WorkType', 'in.WorkOneof.Opportunity.WorkType', 'in.WorkOneof.Task.WorkType', 'in.WorkOneof.Ticket.WorkType']\n\nDeliverable: new It() blocks covering the above, each asserting the right\nstatus code, kept deterministic and idempotent."
 }

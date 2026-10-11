@@ -422,8 +422,13 @@ func (oa *outAnalyzer) stepCall(callVal ssa.Value, c *ssa.CallCommon, taint map[
 		}
 		return false
 	}
-	// Interface dispatch to an external service: seed the result as dep data.
+	// Interface dispatch: prefer single-implementation devirtualization so the
+	// followed method's real dependency calls are discovered. Fall back to a
+	// seeded external-dep result when the implementer is ambiguous or bodyless.
 	if c.IsInvoke() {
+		if callee := oa.l.soleImpl(c); callee != nil && len(callee.Blocks) > 0 && analyzableForOutput(callee) {
+			return oa.followInvoke(callVal, c, callee, tupleOut, get, setV)
+		}
 		if dep := invokeDep(c); dep != "" {
 			dv := depval{}
 			dv.add("", dep)
@@ -490,6 +495,47 @@ func (oa *outAnalyzer) stepCall(callVal ssa.Value, c *ssa.CallCommon, taint map[
 	return setV(callVal, summary[0])
 }
 
+// followInvoke follows a devirtualized interface call. Invoke args exclude the
+// receiver, so param 0 is seeded from the receiver and the arguments shift by
+// one. Mirrors the static-callee follow logic for dependency propagation.
+func (oa *outAnalyzer) followInvoke(callVal ssa.Value, c *ssa.CallCommon, callee *ssa.Function,
+	tupleOut map[ssa.Value]map[int]depval, get func(ssa.Value) depval, setV func(ssa.Value, depval) bool) bool {
+	calleeSeed := map[int]depval{}
+	if dv := get(c.Value); !dv.empty() && len(callee.Params) > 0 {
+		calleeSeed[0] = dv
+	}
+	for i, arg := range c.Args {
+		if dv := get(arg); !dv.empty() && i+1 < len(callee.Params) {
+			calleeSeed[i+1] = dv
+		}
+	}
+	if len(calleeSeed) == 0 && !oa.producesDep(callee, map[string]bool{}) {
+		return false
+	}
+	summary := oa.fn(callee, calleeSeed)
+	if len(summary) == 0 {
+		return false
+	}
+	if callee.Signature.Results().Len() > 1 {
+		if tupleOut[callVal] == nil {
+			tupleOut[callVal] = map[int]depval{}
+		}
+		grew := false
+		for i, dv := range summary {
+			if tupleOut[callVal][i] == nil {
+				tupleOut[callVal][i] = depval{}
+			}
+			before := len(tupleOut[callVal][i])
+			tupleOut[callVal][i].merge(dv)
+			if len(tupleOut[callVal][i]) != before {
+				grew = true
+			}
+		}
+		return grew
+	}
+	return setV(callVal, summary[0])
+}
+
 // producesDep reports whether fn can transitively reach an external service
 // call, so its result may carry dependency data. Memoized on the program.
 func (oa *outAnalyzer) producesDep(fn *ssa.Function, stack map[string]bool) bool {
@@ -517,6 +563,8 @@ func (oa *outAnalyzer) producesDep(fn *ssa.Function, stack map[string]bool) bool
 			cc := &c.Call
 			if cc.IsInvoke() {
 				if invokeDep(cc) != "" {
+					result = true
+				} else if impl := oa.l.soleImpl(cc); impl != nil && analyzableForOutput(impl) && oa.producesDep(impl, stack) {
 					result = true
 				}
 				continue

@@ -231,6 +231,20 @@ The downstream work an RPC does beyond validating its own request, derived from
 provenance sinks. Input and branch coverage are blind to this, so a read/enrich
 RPC can look empty while its real behaviour is here.
 
+> **Single-implementation devirtualization.** SSA leaves interface (invoke)
+> calls unresolved. Many services route real work through an interface with
+> exactly one concrete implementer in the analyzed module (for example
+> `db.Database` -> `*dynamoDatabase`, or `api.Timeline` -> `*Service`). When an
+> in-module interface has a single real implementer the analyzer binds the call
+> to that method and keeps following it, recovering DB/RPC sinks that would
+> otherwise read as opaque `dispatch`. Implementers are counted only within the
+> loaded module (so a `*-client/client` stub that implements the same
+> `*-client/api` interface is ignored) and generated mocks/fakes/stubs are
+> excluded. If two or more real implementers remain, the call stays unresolved.
+> For services that forward from a thin gRPC layer into a deeper logic package
+> (notifications), load the whole module with `-patterns ./...` so that package
+> gets an SSA body for the follow to land in.
+
 - `services` external services called, each with the method names (`calls`),
   grouped by service (derived from the dependency module path, e.g.
   `schemaregistry-client` -> `schemaregistry`).

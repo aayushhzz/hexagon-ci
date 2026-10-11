@@ -91,7 +91,9 @@
     },
     "dependencies": {
       "services": null,
-      "datastore_calls": [],
+      "datastore_calls": [
+        "DeleteMany"
+      ],
       "service_count": 0,
       "call_count": 0,
       "reached_by_test": false,
@@ -111,12 +113,12 @@
     "response_type": "api.DeleteInboxNotificationsResponse",
     "sinks": [
       {
-        "kind": "dispatch",
-        "target": "DeleteInboxNotifications",
+        "kind": "db",
+        "target": "DeleteMany",
         "via_paths": [
           "in.UserDon"
         ],
-        "at": "internal/service/inbox/service.go:135"
+        "at": "internal/infra/db/notification_repository.go:1101"
       }
     ],
     "errors": [],

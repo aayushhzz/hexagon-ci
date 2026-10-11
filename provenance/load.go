@@ -19,6 +19,13 @@ type loaded struct {
 	outCache  map[string]map[int]depval // outSignature -> per-result dep paths
 	depMemo   map[string]int            // fn.String() -> 0 unknown, 1 yes, 2 no
 	outBudget int                       // shared step budget for the output pass
+
+	// Single-impl devirtualization index, built lazily and shared.
+	concreteTypes   []*types.Named
+	concreteIndexed bool
+	devirtSeen      map[string]bool
+	devirtCache     map[string]*ssa.Function
+	localPkgs       map[string]bool // package paths matched by the load patterns
 }
 
 // load type-checks the target module at dir and builds SSA. Dependencies are
@@ -62,9 +69,15 @@ func loadMode(dir string, patterns []string, tolerant bool) (*loaded, error) {
 	}
 
 	l := &loaded{
-		prog:     prog,
-		pkgs:     map[string]*packages.Package{},
-		ssaByPkg: map[string]*ssa.Package{},
+		prog:      prog,
+		pkgs:      map[string]*packages.Package{},
+		ssaByPkg:  map[string]*ssa.Package{},
+		localPkgs: map[string]bool{},
+	}
+	for _, p := range initial {
+		if p.PkgPath != "" {
+			l.localPkgs[p.PkgPath] = true
+		}
 	}
 	packages.Visit(initial, nil, func(p *packages.Package) {
 		if p.PkgPath != "" {
