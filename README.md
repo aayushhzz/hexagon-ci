@@ -1,8 +1,89 @@
+<div align="center">
+
+<img src="assets/banner.svg" alt="Hexagon CI — Deterministic source-derived call graphs for Go test impact analysis" width="100%" />
+
 # Hexagon CI
 
-Hexagon CI is a Go CLI for building per-test source graphs, reporting tests that may be affected by file changes, and running Go tests. JSON graphs retain the existing graph v2 contract; a compact Go-specific graph artifact is also available. The plan format is unchanged. The former Python implementation and its tests are preserved under [`python/`](python/) as a runnable reference.
+**Deterministic source-derived call graphs for Go test impact analysis.**
 
-The reusable Go API lives in `github.com/aayushhzz/hexagon-ci/hexagon`; the root CLI delegates to this package. Go integrations can build graphs and plans directly:
+[![CI](https://github.com/aayushhzz/hexagon-ci/actions/workflows/ci.yml/badge.svg)](https://github.com/aayushhzz/hexagon-ci/actions/workflows/ci.yml)
+![Go 1.24+](https://img.shields.io/badge/Go-1.24%2B-00ADD8?logo=go&logoColor=white)
+![Graph v2 & Compact](https://img.shields.io/badge/Graph-v2%20%7C%20.hgc.gz-34D399)
+![Stdlib AST](https://img.shields.io/badge/Analyzer-Stdlib%20AST%20Only-1E293B)
+
+[Architecture](#-architecture) · [Quick Start](#-quick-start-cli) · [Go Library API](#-go-library-api) · [GitHub Actions](#-github-actions-diagnostics) · [Formats & Safety](#-graph-formats--safety-model) · [Benchmarks](#-testing--benchmarks)
+
+</div>
+
+---
+
+Hexagon CI is a Go CLI and reusable Go library (`github.com/aayushhzz/hexagon-ci/hexagon`) that builds per-test source call graphs from Go ASTs without executing or type-checking repository code, maps file or line-level diffs to potentially affected test roots, and runs Go tests with a safe full-suite fallback.
+
+JSON graphs retain the **graph v2** contract; a compact Go-specific `.hgc.gz` artifact is also available for large repositories. The earlier Python implementation and its parity tests are preserved under [`python/`](python/) as a runnable reference.
+
+---
+
+## Architecture
+
+```mermaid
+flowchart LR
+    SRC["Go Repository\n(source + build tags)"] --> AST["Stdlib Go AST Analyzer\n(zero execution / no type-check)"]
+    AST --> GV2["Graph v2\n.json / .json.gz"]
+    AST --> HGC["Compact Go Artifact\n.hgc.gz (gob + gzip)"]
+    GV2 --> PLAN["Impact Planner\nFile / Hunk / Git Diff"]
+    HGC --> PLAN
+    DIFF["Changed Files or\nLine-Level Git Diff"] --> PLAN
+    PLAN --> RUN["Safe Test Runner\n(full-suite fallback by default)"]
+    PLAN --> CI["cmd/ci-impact\n(GitHub Actions Summary)"]
+```
+
+---
+
+## Quick Start (CLI)
+
+Build the CLI and generate a repository call graph:
+
+```sh
+go build -o /tmp/hexagon-ci .
+
+# JSON Graph v2
+/tmp/hexagon-ci graph /path/to/go/repository --output /path/to/graph.json
+
+# Gzipped JSON Graph v2 with explicit Go build tags
+/tmp/hexagon-ci graph /path/to/go/repository --go-tags alt --output /path/to/graph.json.gz
+
+# Compact Go-specific artifact (.hgc.gz)
+/tmp/hexagon-ci graph /path/to/go/repository --output /path/to/graph.hgc.gz
+```
+
+The original positional invocation remains supported:
+
+```sh
+/tmp/hexagon-ci /path/to/go/repository --language go --output /path/to/graph.json
+```
+
+### Generate an Impact Plan & Run Tests
+
+Pass the current graph, changed repository-relative paths, and (when available) the previous graph so deleted files still contribute candidates:
+
+```sh
+/tmp/hexagon-ci plan /path/to/graph.json \
+  --changed-file lib/config.go \
+  --previous-graph /path/to/base-graph.json \
+  --output /path/to/plan.json
+
+/tmp/hexagon-ci test /path/to/go/repository --plan /path/to/plan.json
+```
+
+`plan` accepts either JSON Graph v2 or `.hgc.gz` for both the current and previous snapshots without expanding every compact test view.
+
+---
+
+## Go Library API
+
+The reusable Go API lives in `github.com/aayushhzz/hexagon-ci/hexagon`; the root CLI delegates directly to this package.
+
+### File-Level Impact Planning
 
 ```go
 import "github.com/aayushhzz/hexagon-ci/hexagon"
@@ -16,21 +97,10 @@ func plan(repository string, changedFiles []string, previous *hexagon.Graph) (*h
 }
 ```
 
-For function-level impact, callers can pass parsed structured hunks to `PlanDiff` or `PlanCompactDiff`. These return the existing `ImpactPlan`, map changed lines to functions, walk reverse caller edges to test roots, and preserve the full-suite fallback whenever mapping or graph completeness is uncertain. Raw unified-diff parsing stays outside the library. `RunCandidateTests` is an explicit diagnostic path; ordinary `RunTests` continues to honor the full-suite safety flag.
+### Function & Line-Level Diff Planning
 
-The function-oriented `PlanGitDiff` and `PlanGitDiffCompact` APIs accept old/new paths with 1-based inclusive changed-line ranges. They return `FunctionDiffPlan`: `TestRoots` lists affected tests, while `FunctionsToRun` gives the trace of changed functions, callers, and test roots. Unmappable ranges, missing base graphs, and unresolved calls set `RunFullSuite` and broaden the candidate roots to every current test.
-
-This library API does not change the existing file-based `plan` command.
-
-For GitHub Actions experiments, `cmd/ci-impact` accepts head and base repository checkouts plus a zero-context unified diff. It builds both graphs, maps the diff, runs the candidate test roots with `go test -count=1 -v`, and writes the candidate count, total head-graph test roots, selection reason, and selected root names to the Actions step summary. The candidate run is diagnostic: keep the repository's full-suite CI job as the correctness baseline.
-
-```sh
-go run ./cmd/ci-impact \
-  --repository "$GITHUB_WORKSPACE" \
-  --base-repository "$RUNNER_TEMP/base" \
-  --diff "$RUNNER_TEMP/change.diff" \
-  --summary "$GITHUB_STEP_SUMMARY"
-```
+- **`PlanDiff` / `PlanCompactDiff`** — accept parsed structured hunks, return the standard `ImpactPlan`, map changed lines to functions, walk reverse caller edges to test roots, and preserve the full-suite fallback whenever mapping or graph completeness is uncertain. Raw unified-diff parsing stays outside the library.
+- **`PlanGitDiff` / `PlanGitDiffCompact`** — accept old/new paths with 1-based inclusive changed-line ranges and return a `FunctionDiffPlan` containing `TestRoots` and `FunctionsToRun` (the trace of changed functions, callers, and test roots). Unmappable ranges, missing base graphs, and unresolved calls set `RunFullSuite` and broaden candidate roots to every current test.
 
 ```go
 plan, err := hexagon.PlanGitDiff(headGraph, gitDiff, baseGraph)
@@ -46,53 +116,80 @@ for _, testRoot := range plan.TestRoots {
 }
 ```
 
-Build the CLI and rebuild a Go repository graph:
+### Compact Graph Helpers & Diagnostic Runner
+
+- `BuildCompactGraph`, `RebuildCompactToFile`, `ReadCompactGraph`, and `NewCompactIndex(...).TestGraph(root)` build, read, and lazily expand single test views from `.hgc.gz` artifacts.
+- `RunCandidateTests` provides an explicit diagnostic execution path; ordinary `RunTests` continues to honor the full-suite safety flag.
+
+---
+
+## GitHub Actions Diagnostics
+
+For CI experiments, [`cmd/ci-impact`](cmd/ci-impact/main.go) accepts head and base repository checkouts plus a zero-context unified diff. It builds both graphs, maps the diff, runs the candidate test roots with `go test -count=1 -v`, and writes the candidate count, total head-graph test roots, selection reason, and selected root names to `$GITHUB_STEP_SUMMARY`.
 
 ```sh
-go build -o /tmp/hexagon-ci .
-/tmp/hexagon-ci graph /path/to/go/repository --output /path/to/graph.json
-/tmp/hexagon-ci graph /path/to/go/repository --go-tags alt --output /path/to/graph.json.gz
-/tmp/hexagon-ci graph /path/to/go/repository --output /path/to/graph.hgc.gz
+go run ./cmd/ci-impact \
+  --repository "$GITHUB_WORKSPACE" \
+  --base-repository "$RUNNER_TEMP/base" \
+  --diff "$RUNNER_TEMP/change.diff" \
+  --summary "$GITHUB_STEP_SUMMARY"
 ```
 
-The `.hgc.gz` suffix selects a versioned, gzip-compressed numeric artifact. It stores function names once and test reachability as sorted function IDs, without building all named test views. Go callers can use `BuildCompactGraph`, `RebuildCompactToFile`, `ReadCompactGraph`, and `NewCompactIndex(...).TestGraph(root)` to expand one view on demand. This gob-based format is Go-specific; use JSON graph v2 when another implementation needs to read the graph. The `plan` command accepts either format for the current and previous snapshots without expanding every compact test view.
+> **Note:** The candidate run is diagnostic. Keep your repository's full-suite CI job as the correctness baseline.
 
-The original positional graph invocation remains supported:
+---
 
-```sh
-/tmp/hexagon-ci /path/to/go/repository --language go --output /path/to/graph.json
-```
+## Graph Formats & Safety Model
 
-For an impact plan, pass the current graph, changed repository-relative paths, and (when available) the previous graph so deleted files still contribute candidates:
+| Format | Extension | Contents | Best For |
+| --- | --- | --- | --- |
+| **JSON Graph v2** | `.json`, `.json.gz` | Function nodes, resolved call edges, per-test subgraphs, unresolved calls, package/import metadata, source fingerprints, build context | Cross-language tooling, inspection, Python parity |
+| **Compact Go Graph** | `.hgc.gz` | Versioned, gzip-compressed `gob` artifact storing function names once and test reachability as sorted function IDs | Large Go monorepos, lower memory & disk footprint |
 
-```sh
-/tmp/hexagon-ci plan /path/to/graph.json \
-  --changed-file lib/config.go \
-  --previous-graph /path/to/base-graph.json \
-  --output /path/to/plan.json
-/tmp/hexagon-ci test /path/to/go/repository --plan /path/to/plan.json
-```
+### Safety Invariants
 
-The planner reports call-graph and package-import candidates, but sets `run_full_suite` to `true` and leaves `selection_complete` unset. Static analysis cannot prove that callbacks, interface dispatch, generated code, non-call dependencies, or runtime configuration have no effect on other tests. The runner uses `go test ./...` unless a plan explicitly marks selection complete and its source fingerprint, analyzer, and Go build context still match the checkout. Incomplete, stale, or mismatched plans fall back to the full suite. Build tags from graph analysis are carried into test execution. Go environment flags are rejected unless expressed with `--go-tags`, so the analyzed and executed build contexts stay explicit.
+- **Conservative full-suite fallback:** The planner reports call-graph and package-import candidates, sets `run_full_suite: true`, and leaves `selection_complete` unset. Static AST analysis cannot prove that callbacks, interface dispatch, function values, generated code, external modules, `init()` side effects, or runtime config have no effect on other tests.
+- **Strict runner verification:** `test` runs `go test ./...` unless a plan explicitly marks selection complete **and** its source fingerprint, analyzer, and Go build context still match the checkout. Incomplete, stale, or mismatched plans fall back to the full suite.
+- **Explicit build context:** Build tags from graph analysis carry into test execution; Go environment flags are rejected unless expressed via `--go-tags`.
+- **Integrity & atomicity:** Graph writes are atomic, gzip output is deterministic, parse/source-change failures leave previous outputs intact, and readers reject unsupported graph or plan versions.
 
-Graph v2 includes function nodes, resolved call edges, per-test subgraphs, unresolved calls, selected Go file package/import metadata, source fingerprints, and build context. Readers tolerate additional JSON fields while rejecting unsupported graph versions or languages. Compact artifacts carry the same facts and are checked for version, structure, and compressed-stream integrity on read. Plans use format version 1; the runner rejects an unknown plan version rather than guessing how to execute it. Graph writes are atomic, gzip output is deterministic, and parse/source-change failures leave the previous output intact.
+---
 
-The Go analyzer uses the Go standard library and does not type-check or execute repository code while building the graph. Interface dispatch, function values, callbacks, external modules, unknown receiver types, and package initialization can remain unresolved. Candidate tests are diagnostic until dependency completeness is established, so full-suite fallback remains the safe default.
+## Repository Layout
 
-The Python implementation is retained for reference and parity checks. To run it directly from the repository root:
+| Path | Description |
+| --- | --- |
+| [`main.go`](main.go) | Root CLI entrypoint (`graph`, `plan`, `test`) |
+| [`hexagon/`](hexagon/) | Reusable Go library: AST analyzer, graph v2, compact `.hgc.gz`, file/diff planners, runner |
+| [`cmd/ci-impact/`](cmd/ci-impact/) | GitHub Actions diagnostic diff-to-test runner and step-summary reporter |
+| [`benchmarks/compactgraph/`](benchmarks/compactgraph/) | Compact vs. JSON graph benchmark harness |
+| [`python/`](python/) | Archived Python reference (`test_call_graph`, `graph_v2_reference`, and unit tests) |
+| [`docs/`](docs/) | Benchmark measurements and sanity audits |
 
-```sh
-PYTHONPATH=python python3 -m test_call_graph /path/to/repository --language go --output /tmp/python-graph.json
-PYTHONPATH=python python3 -m unittest discover -s python/tests -v
-```
+---
 
-The archived planner and runner from the earlier Python implementation remain under `python/test_call_graph` and `python/tests`. The graph v2 Python reference used for native-Go parity checks is under `python/graph_v2_reference`.
+## Testing & Benchmarks
 
-Run the Go suite and static checks with:
+### Go Suite & Static Checks
 
 ```sh
 go test ./...
 go vet ./...
 ```
 
-The Go integration tests run the Python reference against shared Go fixtures and compare graph v2 and selector behavior. See [the Prometheus benchmark and sanity audit](docs/prometheus-go-benchmark.md) for observed edges, deterministic rebuilds, and concrete missed-dependency cases, [the Go/Python monolith benchmark](docs/go-monolith-graph-benchmarks.md) for build-time comparisons, and [the compact graph implementation measurements](docs/compact-go-graph-implementation.md) for artifact, memory, and planning costs.
+The Go integration tests execute the Python reference against shared Go fixtures to verify graph v2 and selector parity.
+
+### Archived Python Reference
+
+```sh
+PYTHONPATH=python python3 -m test_call_graph /path/to/repository --language go --output /tmp/python-graph.json
+PYTHONPATH=python python3 -m unittest discover -s python/tests -v
+PYTHONPATH=python/graph_v2_reference python3 -m unittest discover -s python/graph_v2_reference/tests -v
+```
+
+### Benchmark Reports
+
+- [Prometheus Go Benchmark & Sanity Audit](docs/prometheus-go-benchmark.md) — observed edges, deterministic rebuilds, and concrete missed-dependency cases
+- [Go / Python Monolith Graph Benchmarks](docs/go-monolith-graph-benchmarks.md) — build-time comparisons
+- [Compact Go Graph Implementation Measurements](docs/compact-go-graph-implementation.md) — artifact size, memory, and planning costs
+- [Compact Go Graph Benchmark](docs/compact-go-graph-benchmark.md) — benchmark methodology and results
